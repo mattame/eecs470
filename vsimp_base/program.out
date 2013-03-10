@@ -1,6 +1,6 @@
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Mar  9 17:42 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Mar  9 18:26 2013
 @@
 @@
 @@                     0  Asserting System reset......
@@ -76,4 +76,4 @@ $finish at simulation time                66820
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 6682000 ps
 CPU Time:      0.490 seconds;       Data structure size:   0.1Mb
-Sat Mar  9 17:42:58 2013
+Sat Mar  9 18:26:49 2013

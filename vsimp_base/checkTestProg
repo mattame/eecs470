@@ -1,0 +1,20 @@
+#!python
+
+import os
+import sys
+
+if (len(sys.argv)!=2):
+   print "illegal number of arguments"
+   exit(1)
+
+os.system("./vs-asm test_progs/"+sys.argv[1]+" > program.mem")
+os.system("make > /dev/null")
+os.system("./simv > /dev/null")
+os.system("cp writeback.out pwbt.out")
+os.system("cp pipeline.out pplt.out")
+os.system("./simv_gold > /dev/null")
+os.system("cp writeback.out pwbg.out")
+os.system("cp pipeline.out pplg.out")
+print "diff:"
+os.system("diff pwbt.out pwbg.out")
+

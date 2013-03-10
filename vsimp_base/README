@@ -1,7 +1,0 @@
-Example run of assembler:
-
-./vs-asm < test_progs/fib.s > program.mem
-
-That will make program.mem be the assembled version of fib.s
-
-

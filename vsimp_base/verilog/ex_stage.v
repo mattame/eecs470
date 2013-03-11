@@ -293,7 +293,6 @@ module ex_stage(// Inputs
     //
     // instantiate the multiplier
     //
-
   mult mult_0 (// Inputs
                .clock(clock),
                .reset(reset),

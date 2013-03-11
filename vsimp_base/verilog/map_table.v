@@ -36,20 +36,12 @@ module map_table(clock,reset,
 
 
    // combinational assignment of next tag //
-   always @*
-   begin
-      genvar i;
-      generate
-         for (i=0; i<32; i=i+1)
-         begin
-            if (reg1_in==i && write_reg1_tag)
-               n_tag_table[i] = tag1_in;
-            else
-               n_tag_table[i] = tag_table[i];
-
-         end
-      endgenerate
-   end 
+   genvar i;
+   generate
+      for (i=0; i<32; i=i+1)
+         assign n_tag_table[i] = (reg1_in==i && write_reg1_tag) ? n_tag_table[i] = tag1_in  :
+                                ((reg2_in==i && write_reg2_tag) ? n_tag_table[i] = tag2_in) : n_tag_table[i] = tag_table[i];
+   endgenerate
 
 
    // clock synchronous stuff //

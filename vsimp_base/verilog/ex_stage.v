@@ -14,6 +14,97 @@
 `timescale 1ns/100ps
 
 //
+// The Multiplier Stage
+//
+// given the command code CMD and proper operands A and B, compute the
+// result of the instruction
+//
+// This module is 
+//
+
+
+module mult_stage(clock, reset,
+                  product_in,  mplier_in,  mcand_in,  start,
+                  product_out, mplier_out, mcand_out, done);
+
+  input clock, reset, start;
+  input [63:0] product_in, mplier_in, mcand_in;
+
+  output done;
+  output [63:0] product_out, mplier_out, mcand_out;
+
+  reg  [63:0] prod_in_reg, partial_prod_reg;
+  wire [63:0] partial_product, next_mplier, next_mcand;
+
+  reg [63:0] mplier_out, mcand_out;
+  reg done;
+
+  assign product_out = prod_in_reg + partial_prod_reg;
+
+  assign partial_product = mplier_in[15:0] * mcand_in;
+
+  assign next_mplier = {16'b0,mplier_in[63:16]};
+  assign next_mcand = {mcand_in[47:0],16'b0};
+
+  always @(posedge clock)
+  begin
+    prod_in_reg      <= #1 product_in;
+    partial_prod_reg <= #1 partial_product;
+    mplier_out       <= #1 next_mplier;
+    mcand_out        <= #1 next_mcand;
+  end
+
+  always @(posedge clock)
+  begin
+    if(reset)
+      done <= #1 1'b0;
+    else
+      done <= #1 start;
+  end
+
+endmodule                                                                                                                                                                
+
+//
+// The Multiplier
+//
+// given the command code CMD and proper operands A and B, compute the
+// product of A and B
+//
+// This module has four stages, propogating a "done" throughout.
+// When the third stage outputs "done", it signals a stall command
+// which stalls the pipeline behind it and prevents a structural hazard
+// at the end of the EX stage.
+//
+
+
+module mult(clock, reset, mplier, mcand, start, product, stall, done);
+
+  input clock, reset, start;
+  input [63:0] mcand, mplier;
+
+  output [63:0] product;
+  output done, stall;
+
+  wire [63:0] mcand_out, mplier_out;
+  wire [(3*64)-1:0] internal_products, internal_mcands, internal_mpliers;
+  wire [1:0] internal_dones;
+
+  mult_stage mstage [3:0]
+    (.clock(clock),
+     .reset(reset),
+     .product_in({internal_products,64'h0}),
+     .mplier_in({internal_mpliers,mplier}),
+     .mcand_in({internal_mcands,mcand}),
+     .start({stall,internal_dones,start}),
+     .product_out({product,internal_products}),
+     .mplier_out({mplier_out,internal_mpliers}),
+     .mcand_out({mcand_out,internal_mcands}),
+     .done({done,stall,internal_dones})
+    );
+
+endmodule
+
+//
 // The ALU
 //
 // given the command code CMD and proper operands A and B, compute the
@@ -21,6 +112,7 @@
 //
 // This module is purely combinational
 //
+
 module alu(//Inputs
            opa,
            opb,
@@ -197,7 +289,23 @@ module ex_stage(// Inputs
              // Output
              .result(ex_alu_result_out)
             );
+        
+    //
+    // instantiate the multiplier
+    //
 
+  mult mult_0 (// Inputs
+               .clock(clock),
+               .reset(reset),
+               .mplier(opa_mux_out),
+               .mcand(opb_mux_out),
+               .start(),
+           
+               // Outputs
+               .product(),
+               .stall(),
+               .done()
+              );
    //
    // instantiate the branch condition tester
    //

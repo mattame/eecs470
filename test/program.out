@@ -1,0 +1,496 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Red Hat Enterprise Linux Workstation release 6.3 (Santiago)' 
+  is not supported on 'x86_64' officially, assuming linux compatibility by 
+  default. Set VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+                         Chronologic VCS (TM)
+         Version E-2011.03_Full64 -- Mon Mar 11 22:40:40 2013
+               Copyright (c) 1991-2011 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+DirectC Release 1.0 Copyright (c) 1991-2011 by Synopsys Inc.
+Parsing design file 'test.v'
+Parsing design file 'map_table.v'
+Top Level Modules:
+       testbench
+No TimeScale specified
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[5]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[6]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[7]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[8]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[9]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[10]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[11]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[12]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[13]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[14]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[15]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[16]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[17]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[18]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[19]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[20]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[21]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[22]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[23]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[24]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[25]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[26]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[27]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[28]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[29]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[30]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 64
+"n_tag_table[31]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[5]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[6]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[7]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[8]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[9]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[10]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[11]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[12]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[13]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[14]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[15]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[16]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[17]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[18]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[19]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[20]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[21]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[22]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[23]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[24]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[25]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[26]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[27]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[28]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[29]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[30]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+
+Warning-[SIOB] Select index out of bounds
+map_table.v, 48
+"n_tag_table[31]"
+  The select index is out of declared bounds : [0:0].
+  In module instance : mt 
+  In module : map_table.
+
+Starting vcs inline pass...
+1 module and 0 UDP read.
+recompiling module testbench because:
+	This module or some inlined child module(s) has/have been modified.
+make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/csrc'
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/csrc'
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Mar 11 22:40 2013
+
+STARTING TESTBENCH!
+
+  preclock: reset=1 reg1_in=00 reg2_in=00 tag1_in=00 tag2_in=00 write_reg1_tag=0 write_reg2_tag=0 tag1_out=xx tag2_out=xx 
+ postclock: reset=1 reg1_in=00 reg2_in=00 tag1_in=00 tag2_in=00 write_reg1_tag=0 write_reg2_tag=0 tag1_out=00 tag2_out=00 
+  preclock: reset=0 reg1_in=00 reg2_in=00 tag1_in=00 tag2_in=00 write_reg1_tag=0 write_reg2_tag=0 tag1_out=00 tag2_out=00 
+ postclock: reset=0 reg1_in=00 reg2_in=00 tag1_in=00 tag2_in=00 write_reg1_tag=0 write_reg2_tag=0 tag1_out=00 tag2_out=00 
+  preclock: reset=0 reg1_in=00 reg2_in=02 tag1_in=ab tag2_in=cd write_reg1_tag=1 write_reg2_tag=1 tag1_out=00 tag2_out=00 
+ postclock: reset=0 reg1_in=00 reg2_in=02 tag1_in=ab tag2_in=cd write_reg1_tag=1 write_reg2_tag=1 tag1_out=ab tag2_out=cd 
+  preclock: reset=0 reg1_in=00 reg2_in=02 tag1_in=ab tag2_in=cd write_reg1_tag=0 write_reg2_tag=0 tag1_out=ab tag2_out=cd 
+ postclock: reset=0 reg1_in=00 reg2_in=02 tag1_in=ab tag2_in=cd write_reg1_tag=0 write_reg2_tag=0 tag1_out=ab tag2_out=cd 
+  preclock: reset=0 reg1_in=03 reg2_in=02 tag1_in=ab tag2_in=cd write_reg1_tag=0 write_reg2_tag=0 tag1_out=ab tag2_out=cd 
+ postclock: reset=0 reg1_in=03 reg2_in=02 tag1_in=ab tag2_in=cd write_reg1_tag=0 write_reg2_tag=0 tag1_out=00 tag2_out=cd 
+  preclock: reset=0 reg1_in=03 reg2_in=02 tag1_in=ef tag2_in=cd write_reg1_tag=1 write_reg2_tag=0 tag1_out=00 tag2_out=cd 
+ postclock: reset=0 reg1_in=03 reg2_in=02 tag1_in=ef tag2_in=cd write_reg1_tag=1 write_reg2_tag=0 tag1_out=ef tag2_out=cd 
+  preclock: reset=0 reg1_in=03 reg2_in=02 tag1_in=ef tag2_in=cd write_reg1_tag=0 write_reg2_tag=0 tag1_out=ef tag2_out=cd 
+ postclock: reset=0 reg1_in=03 reg2_in=02 tag1_in=ef tag2_in=cd write_reg1_tag=0 write_reg2_tag=0 tag1_out=ef tag2_out=cd 
+  preclock: reset=0 reg1_in=01 reg2_in=02 tag1_in=ef tag2_in=cd write_reg1_tag=0 write_reg2_tag=0 tag1_out=ef tag2_out=cd 
+ postclock: reset=0 reg1_in=01 reg2_in=02 tag1_in=ef tag2_in=cd write_reg1_tag=0 write_reg2_tag=0 tag1_out=00 tag2_out=cd 
+  preclock: reset=1 reg1_in=03 reg2_in=02 tag1_in=ef tag2_in=cd write_reg1_tag=1 write_reg2_tag=0 tag1_out=00 tag2_out=cd 
+ postclock: reset=1 reg1_in=03 reg2_in=02 tag1_in=ef tag2_in=cd write_reg1_tag=1 write_reg2_tag=0 tag1_out=00 tag2_out=00 
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test.v", line 167.
+$finish at simulation time                   90
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 90
+CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
+Mon Mar 11 22:40:41 2013
+CPU time: .159 seconds to compile + .014 seconds to elab + .154 seconds to link + .048 seconds in simulation

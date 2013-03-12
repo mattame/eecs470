@@ -1,0 +1,4 @@
+The testbench in this directory is a good general-case testbench for testing any modules. You simply need to add your module in place of mine, change the internal wires, change the DISPLAY_STATE task, and change the testing assignments in the initial block to use it.
+
+-Mike
+

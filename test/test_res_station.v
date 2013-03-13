@@ -10,20 +10,22 @@ module testbench;
 	// wires for testing the module //
 	reg clock;
 	reg reset;
-        reg [4:0] rs1_dest_in, rs1_cdb_tag;
-        reg [63:0] rs1_cdb_in, rs1_opa_in, rs1_opb_in;
-        reg rs1_cdb_valid, rs1_opa_valid, rs1_opb_valid, rs1_load_in, rs1_use_enable;
-        wire [4:0] rs1_dest_tag_out;
-        wire [63:0] rs1-opa-out, rs1_opb_out;
-        wire rs1_ready_out, rs1_avail_out;
+	reg fill;
+        reg [4:0] dest_reg_in;
+        reg [7:0] waiting_taga_in, waiting_tagb_in, cdb_tag_in;
+        reg [63:0] rega_value_in, regb_value_in, cdb_value_in;
+        
+        wire [2:0]  status_out;
+        wire [4:0]  dest_reg_out;
+        wire [63:0] rega_value_out, regb_value_out;
 
+   
         // module to be tested //	
-        rs1 rs(.clock(clock), .reset(reset),
-                 .rs1_dest_in(rs1_dest_in), .rs1_cdb_tag(rs1_cdb_tag),
-                 .rs1_cdb_in(rs1_cdb_in), .rs1_opa_in(rs1_opa_in), .rs1_opb_in(rs1_opb_in),
-                 .rs1_cdb_valid(rs1_cdb_valid), .rs1_opa_valid(rs1_opa_valid), .rs1_opb_valid(rs1_opb_valid), .rs1_load_in(rs1_load_in), .rs1_use_enable(rs1_use_enable),
-                 .rs1_dest_tag_out(rs1_dest_tag_out), .rs1-opa-out(rs1-opa-out), .rs1_opb_out(rs1_opb_out), 
-                 .rs1_ready_out(rs1_ready_out), .rs1_avail_out(rs1_avail_out));
+        reservation_station rs(.clock(clock), .reset(reset), .fill(fill), 
+                 .dest_reg_in(dest_reg_in), .waiting_taga_in(waiting_taga_in),
+                 .waiting_tagb_in(waiting_tagb_in), .cdb_tag_in(cdb_tag_in), .rega_value_in(rega_value_in),
+                 .regb_value_in(regb_value_in), .cdb_value_in(cdb_value_in), .status_out(status_out), .dest_reg_out(dest_reg_out), .rega_value_out(rega_value_out),
+                 .regb_value_out(regb_value_out)      );
 
 
    // run the clock //
@@ -61,7 +63,6 @@ module testbench;
       end
    endtask
 
-
    // displays the current state of all wires //
    `define PRECLOCK  1'b1
    `define POSTCLOCK 1'b0
@@ -69,9 +70,11 @@ module testbench;
       input preclock;
    begin
       if (preclock==`PRECLOCK)
-         $display("  preclock: reset=%b reg1_in=%h reg2_in=%h tag1_in=%h tag2_in=%h write_reg1_tag=%b write_reg2_tag=%b tag1_out=%h tag2_out=%h ", reset, reg1_in,reg2_in,tag1_in,tag2_in,write_reg1_tag,write_reg2_tag,tag1_out,tag2_out);  
+         $display("  preclock: reset=%b fill=%b dest_reg_in=%h waiting_taga_in=%h waiting_tagb_in=%h cdb_tag_in=%h rega_value_in=%b regb_value_in=%b cdb_value_in=%h status_out=%h dest_reg_out=%h rega_value_out=%h regb_value_out=%h ", reset,
+         fill,dest_reg_in,waiting_taga_in,waiting_tagb_in,cdb_tag_in,rega_value_in,regb_value_in, cdb_value_in, status_out, dest_reg_out, rega_value_out, regb_value_out);  
       else
-         $display(" postclock: reset=%b reg1_in=%h reg2_in=%h tag1_in=%h tag2_in=%h write_reg1_tag=%b write_reg2_tag=%b tag1_out=%h tag2_out=%h ", reset, reg1_in,reg2_in,tag1_in,tag2_in,write_reg1_tag,write_reg2_tag,tag1_out,tag2_out);
+         $display(" postclock: reset=%b fill=%b dest_reg_in=%h waiting_taga_in=%h waiting_tagb_in=%h cdb_tag_in=%h rega_value_in=%b regb_value_in=%b cdb_value_in=%h status_out=%h dest_reg_out=%h rega_value_out=%h regb_value_out=%h ", reset,
+         fill,dest_reg_in,waiting_taga_in,waiting_tagb_in,cdb_tag_in,rega_value_in,regb_value_in, cdb_value_in, status_out, dest_reg_out, rega_value_out, regb_value_out);  
    end
    endtask
 
@@ -85,12 +88,10 @@ module testbench;
 	correct = 1;
 	clock   = 0;
 	reset   = 1;
-	reg1_in = 5'd0;
-        reg2_in = 5'd0;
-        tag1_in = 8'h00;
-        tag2_in = 8'h00;
-        write_reg1_tag = 0;
-        write_reg2_tag = 0;
+	fill    = 0;
+  dest_reg_in = 5'b0;
+  waiting_taga_in, waiting_tagb_in, cdb_tag_in = 8'b0;
+  rega_value_in, regb_value_in, cdb_value_in = 64'b0;
 
 
         // TRANSITION TESTS //
@@ -109,48 +110,46 @@ module testbench;
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
 
-        reg2_in = 5'd2;
-        tag1_in = 8'hAB;
-        tag2_in = 8'hCD;
-        write_reg1_tag = 1;
-        write_reg2_tag = 1;
+        dest_reg_in = 5'd2;
+        waiting_taga_in, waiting_tagb_in = 8'hAB;
+        cdb_tag_in = 8'hCD;
+        
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
 
-        write_reg1_tag = 0;
-        write_reg2_tag = 0;
+        
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
 
-        reg1_in = 5'd3;
+        dest_reg_in = 5'd3;
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);                 
 
-        tag1_in = 8'hEF;
-        write_reg1_tag = 1;
+        waiting_taga_in = 8'hEF;
+     
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
 
-        write_reg1_tag = 0;
+        
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
 
-        reg1_in = 5'd1;
+        dest_reg_in = 5'd1;
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
@@ -158,8 +157,8 @@ module testbench;
         DISPLAY_STATE(`POSTCLOCK);
 
         reset = 1;
-        write_reg1_tag = 1;
-        reg1_in = 5'd3;
+       
+        dest_reg_in = 5'd3;
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);

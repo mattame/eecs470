@@ -1073,11 +1073,6 @@ extern void schedResetRecoveryDbs(U cedges, EBLK* peblkFirst);
 #ifdef __cplusplus
 extern "C" {
 #endif
-void  hsF0_0_0_(UB  * I597, vec32  * I598, U  I707);
-void  hsF0_0_6_(UB  * I597, scalar  val, U  I699);
-void  hsF0_0_7_(UB  * I597, vec32  * val, U  I699, U  I716);
-void  hsF0_0_9_(UB  * I597, vec32  * I598);
-void  hsF0_1_0_(UB  * I597, vec32  * I598, U  I707);
 void  schedNewEvent(struct dummyq_struct * I651, EBLK  * I652, U  I509);
 #ifdef __cplusplus
 }

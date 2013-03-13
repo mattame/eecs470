@@ -70,10 +70,10 @@ module testbench;
       input preclock;
    begin
       if (preclock==`PRECLOCK)
-         $display("  preclock: reset=%b fill=%b dest_reg_in=%h waiting_taga_in=%h waiting_tagb_in=%h cdb_tag_in=%h rega_value_in=%b regb_value_in=%b cdb_value_in=%h status_out=%h dest_reg_out=%h rega_value_out=%h regb_value_out=%h ", reset,
+         $display("  preclock: reset=%b fill=%b dest_reg_in=%h waiting_taga_in=%h waiting_tagb_in=%h cdb_tag_in=%h rega_value_in=%h regb_value_in=%h cdb_value_in=%h status_out=%h dest_reg_out=%h rega_value_out=%h regb_value_out=%h ", reset,
          fill,dest_reg_in,waiting_taga_in,waiting_tagb_in,cdb_tag_in,rega_value_in,regb_value_in, cdb_value_in, status_out, dest_reg_out, rega_value_out, regb_value_out);  
       else
-         $display(" postclock: reset=%b fill=%b dest_reg_in=%h waiting_taga_in=%h waiting_tagb_in=%h cdb_tag_in=%h rega_value_in=%b regb_value_in=%b cdb_value_in=%h status_out=%h dest_reg_out=%h rega_value_out=%h regb_value_out=%h ", reset,
+         $display(" postclock: reset=%b fill=%b dest_reg_in=%h waiting_taga_in=%h waiting_tagb_in=%h cdb_tag_in=%h rega_value_in=%h regb_value_in=%h cdb_value_in=%h status_out=%h dest_reg_out=%h rega_value_out=%h regb_value_out=%h ", reset,
          fill,dest_reg_in,waiting_taga_in,waiting_tagb_in,cdb_tag_in,rega_value_in,regb_value_in, cdb_value_in, status_out, dest_reg_out, rega_value_out, regb_value_out);  
    end
    endtask
@@ -89,9 +89,13 @@ module testbench;
 	clock   = 0;
 	reset   = 1;
 	fill    = 0;
-  dest_reg_in = 5'b0;
-  waiting_taga_in, waiting_tagb_in, cdb_tag_in = 8'b0;
-  rega_value_in, regb_value_in, cdb_value_in = 64'b0;
+  dest_reg_in = 5'd0;
+  waiting_taga_in = 8'd0;
+  waiting_tagb_in = 8'd0;
+  cdb_tag_in = 8'd0;
+  rega_value_in = 64'd0;
+  regb_value_in = 64'd0;
+  cdb_value_in = 64'd0;
 
 
         // TRANSITION TESTS //
@@ -111,38 +115,33 @@ module testbench;
         DISPLAY_STATE(`POSTCLOCK);
 
         dest_reg_in = 5'd2;
-        waiting_taga_in, waiting_tagb_in = 8'hAB;
+        waiting_taga_in = 8'hAA;
+        waiting_tagb_in = 8'hBB;
         cdb_tag_in = 8'hCD;
-        
+        fill = 1; 
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
 
-        
+        fill = 0; 
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
 
-        dest_reg_in = 5'd3;
+        cdb_tag_in = 8'hAA;
+        cdb_value_in = 64'hDEADBEEFBAADBEEF;
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);                 
 
-        waiting_taga_in = 8'hEF;
-     
-
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
-
-        
+        cdb_tag_in = 8'hBB;
+        cdb_value_in = 64'hA000000AA000000A;
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
@@ -150,6 +149,17 @@ module testbench;
         DISPLAY_STATE(`POSTCLOCK);
 
         dest_reg_in = 5'd1;
+        waiting_taga_in = 8'hFF;
+        waiting_tagb_in = 8'hFF;
+        cdb_tag_in      = 8'hFF;
+        cdb_value_in    = 64'hFFFFFFFFFFFFFFFF;
+        fill = 1;
+
+        DISPLAY_STATE(`PRECLOCK);
+        @(posedge clock);
+        @(negedge clock);
+        DISPLAY_STATE(`POSTCLOCK);
+
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
@@ -158,8 +168,6 @@ module testbench;
 
         reset = 1;
        
-        dest_reg_in = 5'd3;
-
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);

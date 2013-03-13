@@ -76,31 +76,31 @@ module reservation_station(clock,reset,fill,                                    
    begin
       if (fill)
       begin
-         case ({ (taga_in_nonnull && ~taga_in_match_cdb_in), (tagb_in_nonnull && ~tagb_in_match_cdb_in) })
-            2'b00: n_status = `RS_READY;
-            2'b10: n_status = `RS_WAITING_A;
-            2'b01: n_status = `RS_WAITING_B;
-            2'b11: n_status = `RS_WAITING_BOTH;
-         endcase
          n_dest_reg     = dest_reg_in;
          n_waiting_taga = (taga_in_match_cdb_in && taga_in_nonnull) ? `RSTAG_NULL  : waiting_taga_in;
          n_waiting_tagb = (tagb_in_match_cdb_in && tagb_in_nonnull) ? `RSTAG_NULL  : waiting_tagb_in;
          n_rega_value   = (taga_in_match_cdb_in && taga_in_nonnull) ? cdb_value_in : rega_value_in;
          n_regb_value   = (tagb_in_match_cdb_in && tagb_in_nonnull) ? cdb_value_in : regb_value_in;
+         case ({ (n_waiting_taga!=`RSTAG_NULL), (n_waiting_tagb!=`RSTAG_NULL) })
+            2'b00: n_status = `RS_READY;
+            2'b10: n_status = `RS_WAITING_A;
+            2'b01: n_status = `RS_WAITING_B;
+            2'b11: n_status = `RS_WAITING_BOTH;
+         endcase
       end
       else
       begin
-         case ()
-            2'b00: n_status = `RS_READY:
-            2'b01: n_status = :
-            2'b10: n_status =
-            2'b11: n_status =
-         endcase n_status       = status_out;   // more to this 
          n_dest_reg     = dest_reg_out;
          n_waiting_taga = (taga_cur_match_cdb_in && taga_cur_nonnull) ? `RSTAG_NULL : waiting_taga;
          n_waiting_tagb = (tagb_cur_match_cdb_in && tagb_cur_nonnull) ? `RSTAG_NULL : waiting_tagb;
          n_rega_value   = (taga_cur_match_cdb_in && taga_cur_nonnull) ? cdb_value_in : rega_value_out;
          n_regb_value   = (tagb_cur_match_cdb_in && tagb_cur_nonnull) ? cdb_value_in : regb_value_out;
+         case ({ (n_waiting_taga!=`RSTAG_NULL), (n_waiting_tagb!=`RSTAG_NULL) })
+            2'b00: n_status = `RS_READY;
+            2'b01: n_status = `RS_WAITING_A;
+            2'b10: n_status = `RS_WAITING_B;
+            2'b11: n_status = `RS_WAITING_BOTH;
+         endcase
       end
    end
 

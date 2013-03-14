@@ -236,9 +236,8 @@ module ex_stage(// Inputs
 				id_ex_dest_reg_1,
                 id_ex_rega_1,
                 id_ex_regb_1,
-                id_ex_opa_1_select,
-                id_ex_opb_1_select,
-				id_ex_opb_2_select,
+                id_ex_opa_select_1,
+                id_ex_opa_select_1,
                 id_ex_alu_func_1,
                 id_ex_cond_branch,
                 id_ex_uncond_branch,
@@ -248,11 +247,12 @@ module ex_stage(// Inputs
 				id_ex_dest_reg_2,
 				id_ex_rega_2,
 				id_ex_regb_2,
-				id_ex_opa_2_select,
+				id_ex_opa_select_2,
+				id_ex_opb_select_2,
 				id_ex_alu_func_2,
                 
                 // Outputs
-                ex_take_branch_out
+                ex_take_branch_out,
 				// ALU 1 Bus
                 ex_alu_result_out_1,
 				ex_alu_valid_out_1,
@@ -270,7 +270,7 @@ module ex_stage(// Inputs
 				ex_mult_NPC_out_2,
 				ex_mult_dest_reg_out_2,
 				ex_mult_result_out_2,
-				ex_mult_valid_out_2,
+				ex_mult_valid_out_2
                );
 
   input         clock;               // system clock

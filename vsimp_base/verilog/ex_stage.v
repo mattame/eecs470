@@ -13,219 +13,6 @@
 
 `timescale 1ns/100ps
 
-//
-// The Multiplier Stage
-//
-// given the command code CMD and proper operands A and B, compute the
-// result of the instruction
-//
-// This module is 
-//
-
-
-module mult_stage(clock, reset,
-                  IR_in, NPC_in, dest_reg_in, product_in,  mplier_in,  mcand_in,  start,
-                  IR_out, NPC_out, dest_reg_out, product_out, mplier_out, mcand_out, done);
-
-  input clock, reset, start;
-  input [63:0] product_in, mplier_in, mcand_in, NPC_in;
-  input [31:0] IR_in;
-  input [4:0]  dest_reg_in;
-
-  output done;
-  output [63:0] product_out, mplier_out, mcand_out;
-  output [31:0] IR_out;
-  output [4:0]  dest_reg_out;
-
-  reg  [63:0] prod_in_reg, partial_prod_reg;
-  wire [63:0] partial_product, next_mplier, next_mcand;
-
-  reg [63:0] mplier_out, mcand_out;
-  reg done;
-
-  assign product_out = prod_in_reg + partial_prod_reg;
-
-  assign partial_product = mplier_in[15:0] * mcand_in;
-
-  assign next_mplier = {16'b0,mplier_in[63:16]};
-  assign next_mcand = {mcand_in[47:0],16'b0};
-
-  always @(posedge clock)
-  begin
-    prod_in_reg      <= #1 product_in;
-    partial_prod_reg <= #1 partial_product;
-    mplier_out       <= #1 next_mplier;
-    mcand_out        <= #1 next_mcand;
-	IR_out			 <= #1 IR_in;
-	NPC_out			 <= #1 NPC_in;
-	dest_reg_out	 <= #1 dest_reg_in;
-  end
-
-  always @(posedge clock)
-  begin
-    if(reset)
-      done <= #1 1'b0;
-    else
-      done <= #1 start;
-  end
-
-endmodule                                                                                                                                                                
-
-//
-// The Multiplier
-//
-// given the command code CMD and proper operands A and B, compute the
-// product of A and B
-//
-// This module has four stages, propogating a "done" throughout.
-// When the third stage outputs "done", it signals a stall command
-// which stalls the pipeline behind it and prevents a structural hazard
-// at the end of the EX stage.
-//
-
-
-module mult(clock, reset, IR_in, NPC_in, dest_reg_in, mplier, mcand, valid_in, IR_out, NPC_out, dest_reg_out, product, valid_out);
-
-  input clock, reset, valid_in;
-  input [63:0] mcand, mplier, NPC_in;
-  input [31:0] IR_in;
-  input [4:0]  dest_reg_in;
-
-  output [63:0] product, NPC_out;
-  output [31:0] IR_out;
-  output [4:0]  dest_reg_out;
-  output valid_out;
-
-  wire [63:0] mcand_out, mplier_out;
-  wire [(3*64)-1:0] internal_products, internal_mcands, internal_mpliers, internal_NPCs;
-  wire [(3*32)-1:0] internal_IRs;
-  wire [(3*5)-1:0]  internal_dest_regs;
-  wire [2:0] internal_dones;
-
-  mult_stage mstage [3:0]
-    (//Input
-	 .clock(clock),
-     .reset(reset),
-	 .IR_in({internal_IRs,IR_in}),
-	 .NPC_in({internal_NPCs,NPC_in}),
-	 .dest_reg_in({internal_dest_regs,dest_reg_in}),
-     .product_in({internal_products,64'h0}),
-     .mplier_in({internal_mpliers,mplier}),
-     .mcand_in({internal_mcands,mcand}),
-     .start({internal_dones,valid_in}),
-	 //Outputs
-	 .IR_out({IR_out,internal_IRs}),
-	 .NPC_out({NPC_out,internal_NPCs}),
-	 .dest_reg_out({dest_reg_out,internal_dest_regs}),
-     .product_out({product,internal_products}),
-     .mplier_out({mplier_out,internal_mpliers}),
-     .mcand_out({mcand_out,internal_mcands}),
-     .done({valid_out,internal_dones})
-    );
-
-endmodule
-
-//
-// The ALU
-//
-// given the command code CMD and proper operands A and B, compute the
-// result of the instruction
-//
-// This module is purely combinational
-//
-
-module alu(//Inputs
-           opa,
-           opb,
-           func,
-           
-           // Output
-           result
-          );
-
-  input  [63:0] opa;
-  input  [63:0] opb;
-  input   [4:0] func;
-  output [63:0] result;
-
-  reg    [63:0] result;
-
-    // This function computes a signed less-than operation
-  function signed_lt;
-    input [63:0] a, b;
-    
-    if (a[63] == b[63]) 
-      signed_lt = (a < b); // signs match: signed compare same as unsigned
-    else
-      signed_lt = a[63];   // signs differ: a is smaller if neg, larger if pos
-  endfunction
-
-  always @*
-  begin
-    case (func)
-      `ALU_ADDQ:   result = opa + opb;
-      `ALU_SUBQ:   result = opa - opb;
-      `ALU_AND:    result = opa & opb;
-      `ALU_BIC:    result = opa & ~opb;
-      `ALU_BIS:    result = opa | opb;
-      `ALU_ORNOT:  result = opa | ~opb;
-      `ALU_XOR:    result = opa ^ opb;
-      `ALU_EQV:    result = opa ^ ~opb;
-      `ALU_SRL:    result = opa >> opb[5:0];
-      `ALU_SLL:    result = opa << opb[5:0];
-      `ALU_SRA:    result = (opa >> opb[5:0]) | ({64{opa[63]}} << (64 -
-                             opb[5:0])); // arithmetic from logical shift
-      // `ALU_MULQ:   result = opa * opb;
-      `ALU_CMPULT: result = { 63'd0, (opa < opb) };
-      `ALU_CMPEQ:  result = { 63'd0, (opa == opb) };
-      `ALU_CMPULE: result = { 63'd0, (opa <= opb) };
-      `ALU_CMPLT:  result = { 63'd0, signed_lt(opa, opb) };
-      `ALU_CMPLE:  result = { 63'd0, (signed_lt(opa, opb) || (opa == opb)) };
-      default:     result = 64'hdeadbeefbaadbeef; // here only to force
-                                                  // a combinational solution
-                                                  // a casex would be better
-    endcase
-  end
-endmodule // alu
-
-//
-// BrCond module
-//
-// Given the instruction code, compute the proper condition for the
-// instruction; for branches this condition will indicate whether the
-// target is taken.
-//
-// This module is purely combinational
-//
-module brcond(// Inputs
-              opa,        // Value to check against condition
-              func,       // Specifies which condition to check
-
-              // Output
-              cond        // 0/1 condition result (False/True)
-             );
-
-  input   [2:0] func;
-  input  [63:0] opa;
-  output        cond;
-  
-  reg           cond;
-
-  always @*
-  begin
-    case (func[1:0]) // 'full-case'  All cases covered, no need for a default
-      2'b00: cond = (opa[0] == 0);  // LBC: (lsb(opa) == 0) ?
-      2'b01: cond = (opa == 0);     // EQ: (opa == 0) ?
-      2'b10: cond = (opa[63] == 1); // LT: (signed(opa) < 0) : check sign bit
-      2'b11: cond = (opa[63] == 1) || (opa == 0); // LE: (signed(opa) <= 0)
-    endcase
-  
-     // negate cond if func[2] is set
-    if (func[2])
-      cond = ~cond;
-  end
-endmodule // brcond
-
 
 module ex_stage(// Inputs
                 clock,
@@ -250,27 +37,20 @@ module ex_stage(// Inputs
 				id_ex_opa_select_2,
 				id_ex_opb_select_2,
 				id_ex_alu_func_2,
-                
-                // Outputs
-                ex_take_branch_out,
-				// ALU 1 Bus
-                ex_alu_result_out_1,
-				ex_alu_valid_out_1,
-				// ALU 2 Bus
-				ex_alu_result_out_2,
-				ex_alu_valid_out_2,
-				// Multiplier 1 Bus
-				ex_mult_IR_out_1,
-				ex_mult_NPC_out_1,
-				ex_mult_dest_reg_out_1,
-				ex_mult_result_out_1,
-				ex_mult_valid_out_1,
-				// Multiplier 2 Bus
-				ex_mult_IR_out_2,
-				ex_mult_NPC_out_2,
-				ex_mult_dest_reg_out_2,
-				ex_mult_result_out_2,
-				ex_mult_valid_out_2
+				
+			    // Outputs
+				// Bus 1
+				ex_IR_out_1,
+				ex_NPC_out_1,
+				ex_dest_reg_out_1,
+				ex_result_out_1,
+				ex_valid_out_1,
+				// Bus 2
+				ex_IR_out_2,
+				ex_NPC_out_2,
+				ex_dest_reg_out_2,
+				ex_result_out_2,
+				ex_valid_out_2
                );
 
   input         clock;               // system clock
@@ -296,25 +76,41 @@ module ex_stage(// Inputs
   input   [1:0] id_ex_opb_select_2;  // opB mux select from decoder
   input   [4:0] id_ex_alu_func_2;    // ALU function select from decoder
   
-  output        ex_take_branch_out;    // is this a taken branch?
+  output        ex_take_branch_out;  // is this a taken branch?
   
-  output [63:0] ex_alu_result_out_1;   // ALU result
-  output 		ex_alu_valid_out_1;    // Valid Output
+				// Bus 1
+  output [31:0]	ex_IR_out_1,		 // 32 bit instruction out
+  output [63:0] ex_NPC_out_1,		 // PC+4
+  output  [4:0] ex_dest_reg_out_1,	 // Destination Reg
+  output [63:0] ex_result_out_1,	 // Bus 1 Result
+  output		ex_valid_out_1,		 // Valid Output
   
-  output [63:0] ex_alu_result_out_2;   // ALU result
-  output 		ex_alu_valid_out_1;	   // Valid Output
+				// Bus 2
+  output [31:0]	ex_IR_out_2,		 // 32 bit instruction
+  output [63:0] ex_NPC_out_2,		 // PC+4
+  output  [4:0] ex_dest_reg_out_2,   // Desitnation Reg
+  output [63:0] ex_result_out_2,	 // Bus 2 result
+  output		ex_valid_out_2,		 // Valid Output
   
-  output [31:0] ex_mult_IR_out_1;	   // 32 bit instruction
-  output [63:0] ex_mult_NPC_out_1;	   // PC+4
-  output  [4:0] ex_mult_dest_reg_out_1;// Destination Reg
-  output [63:0] ex_mult_result_out_1;  // Mult result
-  output 		ex_mult_valid_out_1;   // Valid Output
   
-  output [31:0] ex_mult_IR_out_2;	   // 32 bit instruction
-  output [63:0] ex_mult_NPC_out_2;	   // PC+4
-  output  [4:0] ex_mult_dest_reg_out_2;// Destination Reg
-  output [63:0] ex_mult_result_out_2;  // Mult result
-  output 		ex_mult_valid_out_2;   // Valid Output
+  // Inputs to the arbiter
+  wire [63:0] ex_alu_result_out_1;   // ALU result
+  wire		  ex_alu_valid_out_1;    // Valid Output
+  
+  wire [63:0] ex_alu_result_out_2;   // ALU result
+  wire		  ex_alu_valid_out_1;	 // Valid Output
+  
+  wire [31:0] ex_mult_IR_out_1;	  	 // 32 bit instruction
+  wire [63:0] ex_mult_NPC_out_1;	 // PC+4
+  wire  [4:0] ex_mult_dest_reg_out_1;// Destination Reg
+  wire [63:0] ex_mult_result_out_1;  // Mult result
+  wire 		  ex_mult_valid_out_1;   // Valid Output
+  
+  wire [31:0] ex_mult_IR_out_2;	   	 // 32 bit instruction
+  wire [63:0] ex_mult_NPC_out_2;	 // PC+4
+  wire  [4:0] ex_mult_dest_reg_out_2;// Destination Reg
+  wire [63:0] ex_mult_result_out_2;  // Mult result
+  wire 		  ex_mult_valid_out_2;   // Valid Output
   
   reg    [63:0] opa_mux_out_1, opa_mux_out_2, opb_mux_out_1, opb_mux_out_2;
   wire          brcond_result;
@@ -448,7 +244,45 @@ module ex_stage(// Inputs
                 // Output
                 .cond(brcond_result)
                );
-
+  arbiter arb_0 (// Inputs
+					.ex_alu_IR_out_1(ex_alu_IR_out_1),
+					.ex_alu_NPC_out_1(ex_alu_NPC_out_1),
+					.ex_alu_dest_reg_out_1(ex_alu_dest_reg_out_1),
+					.ex_alu_result_out_1(ex_alu_result_out_1),
+					.ex_alu_valid_out_1(ex_alu_valid_out_1),
+					// ALU 2 Bus
+					.ex_alu_IR_out_2(ex_alu_IR_out_2),
+					.ex_alu_NPC_out_2(ex_alu_NPC_out_2),
+					.ex_alu_dest_reg_out_2(ex_alu_dest_reg_out_2),
+					.ex_alu_result_out_2(ex_alu_result_out_2),
+					.ex_alu_valid_out_2(ex_alu_valid_out_2),
+					// Multiplier 1 Bus
+					.ex_mult_IR_out_1(ex_mult_IR_out_1),
+					.ex_mult_NPC_out_1(ex_mult_NPC_out_1),
+					.ex_mult_dest_reg_out_1(ex_mult_dest_reg_out_1),
+					.ex_mult_result_out_1(ex_mult_result_out_1),
+					.ex_mult_valid_out_1(ex_mult_valid_out_1),
+					// Multiplier 2 Bus
+					.ex_mult_IR_out_2(ex_mult_IR_out_2),
+					.ex_mult_NPC_out_2(ex_mult_NPC_out_2),
+					.ex_mult_dest_reg_out_2(ex_mult_dest_reg_out_2),
+					.ex_mult_result_out_2(ex_mult_result_out_2),
+					.ex_mult_valid_out_2(ex_mult_valid_out_2),
+					
+				   // Outputs
+					// Bus 1
+					.ex_IR_out_1(ex_IR_out_1),
+					.ex_NPC_out_1(ex_NPC_out_1),
+					.ex_dest_reg_out_1(ex_dest_reg_out_1),
+					.ex_result_out_1(ex_result_out_1),
+					.ex_valid_out_1(ex_valid_out_1),
+					// Bus 2
+					.ex_IR_out_2(ex_IR_out_2),
+					.ex_NPC_out_2(ex_NPC_out_2),
+					.ex_dest_reg_out_2(ex_dest_reg_out_2),
+					.ex_result_out_2(ex_result_out_2),
+					.ex_valid_out_2(ex_valid_out_2)
+				  );
    // ultimate "take branch" signal:
    //    unconditional, or conditional and the condition is true
   assign ex_take_branch_out = id_ex_uncond_branch

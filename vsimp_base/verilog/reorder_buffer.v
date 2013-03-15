@@ -13,13 +13,13 @@
 
 
 // rob main module //
-module rob(clock,reset, rob_full, dest_reg, output_value);
+module rob(clock,reset, dest_reg, output_value, rob_full);
 
    // inputs //
    input wire clock;
    input wire reset;
-   input output_value;
-   input output_reg;
+   input [63:0] output_value;
+   input  [4:0] output_reg;
 
 
    // outputs //
@@ -30,8 +30,32 @@ module rob(clock,reset, rob_full, dest_reg, output_value);
 
    // regs for the ROB //
    reg  [4:0] output_regs [31:0];    //Array of output regs for each ROB entry
-   reg [63:0] output_vals [31:0];    //Array of output values for each ROB entry (initialized to zero)
+   reg [63:0] output_vals [31:0];    //Array of output values for each ROB entry (no initialization since we have valid bits)
    reg [31:0] valid_entry;           //Check if ROB entry is valid. If not, use entry
+
+
+   // initializing the registers //
+   rob_full = 0;                     //ROB is initially empty
+   valid_entry[31:0] = 32'b0;       //All ROB entries are initially invalid
+   
+
+always @(posedge clock)
+begin
+   if(reset)
+   begin
+      valid_entry <= 32'b0;
+      rob_full <= 0;
+   end
+
+   else
+   begin
+      
+      
+   
+
+
+
+   
    
 
 

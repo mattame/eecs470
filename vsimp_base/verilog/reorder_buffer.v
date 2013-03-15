@@ -13,7 +13,7 @@
 
 
 // rob main module //
-module rob(clock,reset, output_value, output_reg, rob_full);
+module rob(clock,reset, rob_full, dest_reg, output_value);
 
    // inputs //
    input wire clock;
@@ -24,10 +24,18 @@ module rob(clock,reset, output_value, output_reg, rob_full);
 
    // outputs //
    output rob_full;
-   output 
+   output  [4:0] dest_reg;
+   output [63:0] output_value;
+   
+
+   // regs for the ROB //
+   reg  [4:0] output_regs [31:0];    //Array of output regs for each ROB entry
+   reg [63:0] output_vals [31:0];    //Array of output values for each ROB entry (initialized to zero)
+   reg [31:0] valid_entry;           //Check if ROB entry is valid. If not, use entry
+   
 
 
 
+   
 
 endmodule 
-

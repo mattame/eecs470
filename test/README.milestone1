@@ -1,0 +1,15 @@
+
+----------------
+Team Superscalar
+----------------
+
+Ron, for our milestone 1 we created a superscalar reservation station entry module. Steps to test our reservation station entry module are below.
+
+1) Type make
+
+2) Read output
+
+The testcase will output the current inputs and outputs to the module both before and after a clock edge. It is set up to reset the module, fill the rs entry with two tags to wait on, and broadcast those two tags on the two cdbs to fill rega and regb in the module. Finally, this testcase will attempt to fill the rs entry with tags while the cdbs broadcast those same tags. The result is the values from the cdbs being pulled into the rs entry (reflected on the outputs).
+ 
+In addition to this reservation station entry, we also have started our ROB module, expanded our execute stage to be superscalar and integrated the 4-stage multiplier, created a simple map table and have mapped out our pipeline. 
+

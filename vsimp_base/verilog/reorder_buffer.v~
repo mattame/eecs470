@@ -45,16 +45,16 @@ module rob(clock, reset, rob_full, dest_reg, output_value);
 endmodule 
 
 
-/***
-*   Each ROB Entry needs:
-* Head/Tail bit   (To determine where the head/tail 
-*   Instruction
-*       Valid bit       (Whether or not the entry is valid)
-*       Value           (To know when to retire)
-*       Register 
-*       Complete bit    (To know if it is ready to retire) 
-*       Exception       (Will add more detail later)
-***/
+/*///
+/   Each ROB Entry needs:
+/ Head/Tail bit   (To determine where the head/tail 
+/   Instruction
+/       Valid bit       (Whether or not the entry is valid)
+/       Value           (To know when to retire)
+/       Register 
+/       Complete bit    (To know if it is ready to retire) 
+/       Exception       (Will add more detail later)
+*///
 module rob_entry(
                   //inputs
                   clock, reset, 
@@ -74,8 +74,6 @@ module rob_entry(
   input wire        complete_in;
   input wire        exception_in;
 
-
-/***  WORKING HERE ***/
 
   //internals
   reg [31:0]  n_instruction;

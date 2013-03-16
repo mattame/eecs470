@@ -6,10 +6,6 @@
 // ROB consists of 32 ROB Entries                             //
 ////////////////////////////////////////////////////////////////
 
-/***
-*     TODO:  FINISH ADDING INPUTS/WIRES/OUTPUTS OF INDIVIDUAL ROB ENTRIES
-***/
-
 // parameters //
 `define ROB_ENTRIES 32
 `define ROB_ENTRY_AVAILABLE 1
@@ -22,7 +18,7 @@
 module rob(clock, reset, rob_full, dest_reg, output_value);
 
 /*
-    /*** Leaving this in here but Matt is working on restructure ***
+    /*** Leaving this in here but Matt is working on restructure ***/
 
 module rob(clock,reset, dest_reg, output_value, rob_full);
 
@@ -66,6 +62,16 @@ begin
 */      
    
 
+
+
+   
+   
+>>>>>>> d37cab142687ef712c6a7d1517643b6ddebbf585
+
+
+
+   
+
 endmodule 
 
 
@@ -104,7 +110,7 @@ module rob_entry(
   //internals
   reg [31:0]  n_instruction;
   
-/***  WORKING HERE ***/
+
 
   //outputs
   output reg [31:0] instruction_out;

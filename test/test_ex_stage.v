@@ -31,72 +31,64 @@ module testbench;
 	wire id_ex_opb_select_2;
 	wire id_ex_alu_func_2;
 
-	wire ex_take_branch_out;
-		// ALU 1 Bus
-	wire ex_alu_result_out_1;
-	wire ex_alu_valid_out_1;
-		// ALU 2 Bus
-	wire ex_alu_result_out_2;
-	wire ex_alu_valid_out_2;
-		// Multiplier 1 Bus
-	wire ex_mult_IR_out_1;
-	wire ex_mult_NPC_out_1;
-	wire ex_mult_dest_reg_out_1;
-	wire ex_mult_result_out_1;
-	wire ex_mult_valid_out_1;
-		// Multiplier 2 Bus
-	wire ex_mult_IR_out_2;
-	wire ex_mult_NPC_out_2;
-	wire ex_mult_dest_reg_out_2;
-	wire ex_mult_result_out_2;
-	wire ex_mult_valid_out_2;
+	wire stall_bus_1;
+	wire stall_bus_2;
+	wire ex_branch_taken;
+	
+	wire ex_IR_out_1;
+	wire ex_NPC_out_1;
+	wire ex_dest_reg_out_1;
+	wire ex_result_out_1;
+	wire ex_valid_out_1;
+
+	wire ex_IR_out_2;
+	wire ex_NPC_out_2;
+	wire ex_dest_reg_out_2;
+	wire ex_result_out_2;
+	wire ex_valid_out_2;
 
         // module to be tested //	
-        ex_stage ex_0(	// Inputs
-                		.clock(clock),
-                		.reset(reset),
-			// Input Bus 1 (contains branch logic)
-        		        .id_ex_NPC_1(id_ex_NPC_1),
-        		        .id_ex_IR_1(id_ex_IR_1),
-				.id_ex_dest_reg_1(id_ex_dest_reg_1),
-        		        .id_ex_rega_1(id_ex_rega_1),
-        		        .id_ex_regb_1(id_ex_regb_1),
-        		        .id_ex_opa_select_1(id_ex_opa_select_1),
-        		        .id_ex_opb_select_1(id_ex_opb_select_1),
-                		.id_ex_alu_func_1(id_ex_alu_func_1),
-           		        .id_ex_cond_branch(id_ex_cond_branch),
-          		        .id_ex_uncond_branch(id_ex_uncond_branch),
-			// Input Bus 2
-				.id_ex_NPC_2(id_ex_NPC_2),
-				.id_ex_IR_2(id_ex_IR_2),
-				.id_ex_dest_reg_2(id_ex_dest_reg_2),
-				.id_ex_rega_2(id_ex_rega_2),
-				.id_ex_regb_2(id_ex_regb_2),
-				.id_ex_opa_select_2(id_ex_opa_select_2),
-				.id_ex_opb_select_2(id_ex_opb_select_2),
-				.id_ex_alu_func_2(id_ex_alu_func_2),
-                
-                	// Outputs
-                		.ex_take_branch_out(ex_take_branch_out),
-			// ALU 1 Bus
-                		.ex_alu_result_out_1(ex_alu_result_out_1),
-				.ex_alu_valid_out_1(ex_alu_valid_out_1),
-			// ALU 2 Bus
-				.ex_alu_result_out_2(ex_alu_result_out_2),
-				.ex_alu_valid_out_2(ex_alu_valid_out_2),
-			// Multiplier 1 Bus
-				.ex_mult_IR_out_1(ex_mult_IR_out_1),
-				.ex_mult_NPC_out_1(ex_mult_NPC_out_1),
-				.ex_mult_dest_reg_out_1(ex_mult_dest_reg_out_1),
-				.ex_mult_result_out_1(ex_mult_result_out_1),
-				.ex_mult_valid_out_1(ex_mult_valid_out_1),
-			// Multiplier 2 Bus
-				.ex_mult_IR_out_2(ex_mult_IR_out_2),
-				.ex_mult_NPC_out_2(ex_mult_NPC_out_2),
-				.ex_mult_dest_reg_out_2(ex_mult_dest_reg_out_2),
-				.ex_mult_result_out_2(ex_mult_result_out_2),
-				.ex_mult_valid_out_2(ex_mult_valid_out_2)
-               		);
+	ex_stage ex_0(// Inputs
+                .clock(clock),
+                .reset(reset),
+				// Input Bus 1 (contains branch logic)
+                .id_ex_NPC_1(id_ex_NPC_1),
+                .id_ex_IR_1(id_ex_IR_1),
+		.id_ex_dest_reg_1(id_ex_dest_reg_1),
+                .id_ex_rega_1(id_ex_rega_1),
+                .id_ex_regb_1(id_ex_regb_1),
+                .id_ex_opa_select_1(id_ex_opa_select_1),
+                .id_ex_opb_select_1(id_ex_opb_select_1),
+                .id_ex_alu_func_1(id_ex_alu_func_1),
+                .id_ex_cond_branch(id_ex_cond_branch),
+                .id_ex_uncond_branch(id_ex_uncond_branch),
+				// Input Bus 2
+		.id_ex_NPC_2(id_ex_NPC_2),
+		.id_ex_IR_2(id_ex_IR_2),
+		.id_ex_dest_reg_2(id_ex_dest_reg_2),
+		.id_ex_rega_2(id_ex_rega_2),
+		.id_ex_regb_2(id_ex_regb_2),
+		.id_ex_opa_select_2(id_ex_opa_select_2),
+		.id_ex_opb_select_2(id_ex_opb_select_2),
+		.id_ex_alu_func_2(id_ex_alu_func_2),
+				
+		   	        // Outputs
+		.stall_bus_1(stall_bus_1),
+		.stall_bus_2(stall_bus_2),
+		.ex_branch_taken(ex_branch_taken),
+				// Bus 1
+		.ex_IR_out_1(ex_IR_out_1),
+		.ex_NPC_out_1(ex_NPC_out_1),
+		.ex_dest_reg_out_1(ex_dest_reg_out_1),
+		.ex_result_out_1(ex_result_out_1),
+		.ex_valid_out_1(ex_valid_out_1),
+				// Bus 2
+		.ex_IR_out_2(ex_IR_out_2),
+		.ex_NPC_out_2(ex_NPC_out_2),
+		.ex_dest_reg_out_2(ex_dest_reg_out_2),
+		.ex_result_out_2(ex_result_out_2),
+		.ex_valid_out_2(ex_valid_out_2)
+               );
 
 
    // run the clock //
@@ -141,9 +133,20 @@ module testbench;
       input preclock;
    begin
       if (preclock==`PRECLOCK)
-         $display();  
+	begin
+	 $display("Pre-Clock Input %4.0f", $time); 
+	 $display("COND_BRANCH=%b, UNCOND_BRANCH=%b", id_ex_cond_branch, id_ex_uncond_branch);
+         $display("NPC1=%h, IR1=%h, DREG1=%d, REGA1=%d, REGB1=%d, OPA1=%h, OPB1=%h, FUNC1=%h", id_ex_NPC_1, id_ex_IR_1, id_ex_dest_reg_1, id_ex_rega_1, id_ex_regb_1,
+		id_ex_opa_select_1, id_ex_opb_select_1, id_ex_alu_func_1);  
+         $display("NPC2=%h, IR2=%h, DREG2=%d, REGA2=%d, REGB2=%d, OPA2=%h, OPB2=%h, FUNC2=%h", id_ex_NPC_2, id_ex_IR_2, id_ex_dest_reg_2, id_ex_rega_2, id_ex_regb_2, 
+		id_ex_opa_select_2, id_ex_opb_select_2, id_ex_alu_func_2);  
+      	end
       else
-	 $display();
+	begin
+	 $display("Post-Clock Output %4.0f", $time); 
+	 $display("NPC1=%h, IR1=%h, DREG1=%d, RES1=%d, VALID1=%b", ex_NPC_out_1, ex_IR_out_1, ex_dest_reg_out_1, ex_result_out_1, ex_valid_out_1);
+	 $display("NPC2=%h, IR2=%h, DREG2=%d, RES2=%d, VALID2=%b", ex_NPC_out_2, ex_IR_out_2, ex_dest_reg_out_2, ex_result_out_2, ex_valid_out_2);
+	end
       end
   endtask
 
@@ -175,60 +178,27 @@ module testbench;
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
 
-        dest_reg_in = 5'd2;
-        waiting_taga_in = 8'hAA;
-        waiting_tagb_in = 8'hBB;
-        cdb_tag_in = 8'hCD;
-        fill = 1; 
+		//bus1
+	id_ex_NPC_1 = ;
+	id_ex_IR_1 = ;
+	id_ex_dest_reg_1 = ;
+        id_ex_rega_1 = ;
+        id_ex_regb_1 = ;
+        id_ex_opa_select_1 = ;
+        id_ex_opb_select_1 = ;
+	id_ex_alu_func_1 = ;
+        id_ex_cond_branch = ;
+        id_ex_uncond_branch = ;
+		//bus 2
+	id_ex_NPC_2 = ;
+	id_ex_IR_2 = ;
+	id_ex_dest_reg_2 = ;
+	id_ex_rega_2 = ;
+	id_ex_regb_2 = ;
+	id_ex_opa_select_2 = ;
+	id_ex_opb_select_2 = ;
+	id_ex_alu_func_2 = ;
 
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
-
-        fill = 0; 
-
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
-
-        cdb_tag_in = 8'hAA;
-        cdb_value_in = 64'hDEADBEEFBAADBEEF;
-
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);                 
-
-        cdb_tag_in = 8'hBB;
-        cdb_value_in = 64'hA000000AA000000A;
-
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
-
-        dest_reg_in = 5'd1;
-        waiting_taga_in = 8'hFF;
-        waiting_tagb_in = 8'hFF;
-        cdb_tag_in      = 8'hFF;
-        cdb_value_in    = 64'hFFFFFFFFFFFFFFFF;
-        fill = 1;
-
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
-
-
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
-
-        reset = 1;
-       
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);

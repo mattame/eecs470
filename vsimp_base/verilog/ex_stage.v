@@ -24,7 +24,7 @@ module ex_stage(// Inputs
                 id_ex_rega_1,
                 id_ex_regb_1,
                 id_ex_opa_select_1,
-                id_ex_opa_select_1,
+                id_ex_opb_select_1,
                 id_ex_alu_func_1,
                 id_ex_cond_branch,
                 id_ex_uncond_branch,
@@ -39,6 +39,9 @@ module ex_stage(// Inputs
 				id_ex_alu_func_2,
 				
 			    // Outputs
+				stall_bus_1,
+				stall_bus_2,
+				ex_branch_taken,
 				// Bus 1
 				ex_IR_out_1,
 				ex_NPC_out_1,
@@ -76,6 +79,9 @@ module ex_stage(// Inputs
   input   [1:0] id_ex_opb_select_2;  // opB mux select from decoder
   input   [4:0] id_ex_alu_func_2;    // ALU function select from decoder
   
+
+  output        stall_bus_1;	     // Should input bus 1 stall?
+  output	stall_bus_2;	     // Should input bus 2 stall?
   output        ex_take_branch_out;  // is this a taken branch?
   
 				// Bus 1
@@ -127,16 +133,16 @@ module ex_stage(// Inputs
   wire [63:0] br_disp_2  = { {41{id_ex_IR_2[20]}}, id_ex_IR_2[20:0], 2'b00 };
   wire [63:0] alu_imm_2  = { 56'b0, id_ex_IR_2[20:13] };
   
-  wire mult_valid_in_1, mult_valid_in_2, alu_valid_in_1, alu_valid_in_2;
+  wire mult_valid_in_1, mult_valid_in_2;
    
    //
    // Check if we use the ALU or the Multiplier for each channel
    //
   assign mult_valid_in_1 = (id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1: 1'b0;
-  assign alu_valid_in_1  = ~mult_valid_in_1;
+  assign alu_valid_out_1  = (ex_alu_result_out_1 == 64'hdeadbeefbaadbeef) ? 1'b0: 1'b1;
   
   assign mult_valid_in_2 = (id_ex_alu_func_2 == `ALU_MULQ) ? 1'b1: 1'b0;
-  assign alu_valid_in_2  = ~mult_valid_in_2;
+  assign alu_valid_out_2  = (ex_alu_result_out_2 == 64'hdeadbeefbaadbeef) ? 1'b0: 1'b1;
    
    //
    // ALU opA mux
@@ -170,7 +176,7 @@ module ex_stage(// Inputs
       `ALU_OPB_IS_ALU_IMM: opb_mux_out_1 = alu_imm_1;
       `ALU_OPB_IS_BR_DISP: opb_mux_out_1 = br_disp_1;
     endcase 
-    opb_mux_out = 64'hbaadbeefdeadbeef;
+    opb_mux_out_2 = 64'hbaadbeefdeadbeef;
     case (id_ex_opb_select)
       `ALU_OPB_IS_REGB:    opb_mux_out_2 = id_ex_regb_2;
       `ALU_OPB_IS_ALU_IMM: opb_mux_out_2 = alu_imm_2;
@@ -270,6 +276,8 @@ module ex_stage(// Inputs
 					.ex_mult_valid_out_2(ex_mult_valid_out_2),
 					
 				   // Outputs
+					.stall_bus_1(stall_bus_1),
+					.stall_bus_2(stall_bus_2,
 					// Bus 1
 					.ex_IR_out_1(ex_IR_out_1),
 					.ex_NPC_out_1(ex_NPC_out_1),

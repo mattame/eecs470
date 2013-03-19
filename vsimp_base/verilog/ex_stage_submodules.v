@@ -19,7 +19,10 @@
 //
 // This module is purely combinational
 //
-module arbiter(// Inputs
+module arbiter(		  // Inputs
+				// Branch (on bus 1)
+				ex_branch_valid_out
+				// ALU 1 Bus
 				ex_alu_IR_out_1,
 				ex_alu_NPC_out_1,
 				ex_alu_dest_reg_out_1,
@@ -45,8 +48,8 @@ module arbiter(// Inputs
 				ex_mult_valid_out_2,
 				
 			   // Outputs
-				stall_alu_1,
-				stall_alu_2,
+				stall_bus_1,
+				stall_bus_2,
 				// Bus 1
 				ex_IR_out_1,
 				ex_NPC_out_1,
@@ -85,8 +88,8 @@ module arbiter(// Inputs
 	input [63:0] ex_mult_result_out_2;
 	input		 ex_mult_valid_out_2;
 	
-	output		  stall_alu_1;
-	output		  stall_alu_2;
+	output		  stall_bus_1;
+	output		  stall_bus_2;
 	
 	output [31:0] ex_IR_out_1;
 	output [63:0] ex_NPC_out_1;
@@ -100,8 +103,56 @@ module arbiter(// Inputs
 	output [63:0] ex_result_out_2;
 	output		  ex_valid_out_2;
 	
-	wire	used_bus_1, used_bus_2;
+	always @*
+	begin	
+		//Output mux 1
+		case(ex_mult_valid_out_1)
+			1'b1: 
+			begin
+				ex_IR_out_1 		= ex_mult_IR_out_1;
+				ex_NPC_out_1 		= ex_mult_NPC_out_1;
+				ex_dest_reg_out_1 	= ex_mult_dest_reg_out_1;
+				ex_result_out_1 	= ex_mult_result_out_1;
+				ex_valid_out_1		= 1;
+				stall_bus_1 		= 1;
+			end
+			1'b0:
+			begin
+				
+				ex_IR_out_1 		= ex_alu_IR_out_1;
+				ex_NPC_out_1 		= ex_alu_NPC_out_1;
+				ex_dest_reg_out_1 	= ex_alu_dest_reg_out_1;
+				ex_result_out_1 	= ex_alu_result_out_1;
+				ex_valid_out_1		= ex_alu_valid_out_1;
+				stall_bus_1 		= 0;
+			end
+		endcase
+		//Output mux 2
+		case(ex_mult_valid_out_2)
+			1'b1: 
+			begin
+				ex_IR_out_2 		= ex_mult_IR_out_2;
+				ex_NPC_out_2 		= ex_mult_NPC_out_2;
+				ex_dest_reg_out_2 	= ex_mult_dest_reg_out_2;
+				ex_result_out_2 	= ex_mult_result_out_2;
+				ex_valid_out_2		= 1;
+				stall_bus_2 		= 1;
+			end
+			1'b0:
+			begin
+				ex_IR_out_2 		= ex_alu_IR_out_2;
+				ex_NPC_out_2 		= ex_alu_NPC_out_2;
+				ex_dest_reg_out_2 	= ex_alu_dest_reg_out_2;
+				ex_result_out_2 	= ex_alu_result_out_2;
+				ex_valid_out_2		= ex_alu_valid_out_2;
+				stall_bus_2 		= 0;
+			end
+		endcase
+	end
 	
+
+	/* --- GLOBAL OUTPUT BUSSES
+	wire	used_bus_1, used_bus_2;	
 	// Branch > Load > Multiply > ALU
 	// Currently only Multiply and ALU implemented
 	// Yes I know it's ugly as hell.
@@ -191,10 +242,23 @@ module arbiter(// Inputs
 			}
 		}
 	end
-	
+	*/
+
 	
 endmodule
+/*
+module arbiter_base(req,en,gnt,req_up);
+        input [1:0] req;
+        input en;
+        output [1:0] gnt;
+        output req_up;
 
+        assign req_up = req[1] | req[0];
+        assign gnt[1] = en & req[1];
+        assign gnt[0] = en & req[0] & ~req[1];
+
+endmodule
+*/
 //
 // The Multiplier Stage
 //
@@ -213,14 +277,16 @@ module mult_stage(clock, reset,
   input [4:0]  dest_reg_in;
 
   output done;
-  output [63:0] product_out, mplier_out, mcand_out;
+  output [63:0] product_out, mplier_out, mcand_out, NPC_out;
   output [31:0] IR_out;
   output [4:0]  dest_reg_out;
 
   reg  [63:0] prod_in_reg, partial_prod_reg;
   wire [63:0] partial_product, next_mplier, next_mcand;
 
-  reg [63:0] mplier_out, mcand_out;
+  reg [63:0] mplier_out, mcand_out, NPC_out;
+  reg [31:0] IR_out;
+  reg [4:0]  dest_reg_out;
   reg done;
 
   assign product_out = prod_in_reg + partial_prod_reg;

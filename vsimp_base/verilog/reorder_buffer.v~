@@ -6,11 +6,15 @@
 // ROB consists of 32 ROB Entries                             //
 ////////////////////////////////////////////////////////////////
 
+/***
+*     TODO:  FINISH ADDING INPUTS/WIRES/OUTPUTS OF INDIVIDUAL ROB ENTRIES
+***/
+
 // parameters //
 `define ROB_ENTRIES 32
 `define ROB_ENTRY_AVAILABLE 1
 `define NO_ROB_ENTRY 0
-
+`define SD = 1;
 
 
 // rob main module //
@@ -18,7 +22,7 @@
 module rob(clock, reset, rob_full, dest_reg, output_value);
 
 /*
-    /*** Leaving this in here but Matt is working on restructure ***/
+    /*** Leaving this in here but Matt is working on restructure ***
 
 module rob(clock,reset, dest_reg, output_value, rob_full);
 
@@ -62,16 +66,6 @@ begin
 */      
    
 
-
-
-   
-   
->>>>>>> d37cab142687ef712c6a7d1517643b6ddebbf585
-
-
-
-   
-
 endmodule 
 
 
@@ -88,40 +82,73 @@ endmodule
 module rob_entry(
                   //inputs
                   clock, reset, 
-                  instruction_in, valid_in, head_in, tail_in, value_in, register_in, complete_in, exception_in
+                  instruction_in, valid_in, head_in, tail_in, value_in, complete_in, register_in,
 
                   //outputs
-                  instruction_out, valid_out, head_out, tail_out, value_out, register_out, complete_out, exception_out
+                  instruction_out, valid_out, head_out, tail_out, value_out, register_out, complete_out,
                  );
 
 
-  //inputs
+  /***  inputs  ***/
+  input wire        reset;
+  input wire        clock;
+
   input wire [31:0] instruction_in;
   input wire        valid_in;
   input wire        head_in;
   input wire        tail_in;
   input wire [63:0] value_in;
   input wire        complete_in;
-  input wire        exception_in;
+  input wire        register_in;
 
-
-/***  WORKING HERE ***/
-
-  //internals
+  /***  internals  ***/
   reg [31:0]  n_instruction;
-  
+  reg         n_valid;
+  reg         n_tail
+  reg         n_value;
+  reg [63:0]  n_value;
+  reg         n_complete;
+  reg         n_register;
 
-
-  //outputs
+  /***  outputs  ***/
   output reg [31:0] instruction_out;
   output reg        valid_out;
   output reg        head_out;
   output reg        tail_out;
   output reg [63:0] value_out;
-  output reg        complete_in;
-  output reg        exception_in;
+  output reg        complete_out;
+  output reg        register_out;
 
 
+  // combinational assignments //  
+
+
+  // combinational logic to next state //
+
+
+  // clock synchronous events //
+  always@(posedge clock)
+  begin
+     if (reset)
+     begin
+        instruction_out <= `SD 32'd0;
+        valid_out <= `SD 1'b0;
+        head_out <= `SD 1'b0;
+        tail_out <= `SD 1'b0;
+        value_out <= `SD 64'h0;
+        complete_out <= `SD 1'b0;
+        exception_out <= `SD 1'b0;
+     end
+     else
+     begin
+        instruction_out <= `SD n_instruction;
+        valid_out <= `SD n_valid;
+        head_out <= `SD n_head;
+        tail_out <= `SD n_tail;
+        value_out <= `SD n_value;
+        complete_out <= `SD n_complete;
+        exception_out <= `SD n_exception;
+     end
 
 
 endmodule

@@ -14,13 +14,13 @@ module testbench;
 	wire id_ex_NPC_1;
 	wire id_ex_IR_1;
 	wire id_ex_dest_reg_1;
-        wire id_ex_rega_1;
-        wire id_ex_regb_1;
-        wire id_ex_opa_select_1;
-        wire id_ex_opb_select_1;
+    wire id_ex_rega_1;
+    wire id_ex_regb_1;
+    wire id_ex_opa_select_1;
+    wire id_ex_opb_select_1;
 	wire id_ex_alu_func_1;
-        wire id_ex_cond_branch;
-        wire id_ex_uncond_branch;
+    wire id_ex_cond_branch;
+    wire id_ex_uncond_branch;
 		//bus 2
 	wire id_ex_NPC_2;
 	wire id_ex_IR_2;
@@ -144,6 +144,7 @@ module testbench;
       else
 	begin
 	 $display("Post-Clock Output %4.0f", $time); 
+	 $display("Stall1=%d, Stall2=%d", stall_bus_1, stall_bus_2);
 	 $display("NPC1=%h, IR1=%h, DREG1=%d, RES1=%d, VALID1=%b", ex_NPC_out_1, ex_IR_out_1, ex_dest_reg_out_1, ex_result_out_1, ex_valid_out_1);
 	 $display("NPC2=%h, IR2=%h, DREG2=%d, RES2=%d, VALID2=%b", ex_NPC_out_2, ex_IR_out_2, ex_dest_reg_out_2, ex_result_out_2, ex_valid_out_2);
 	end
@@ -164,46 +165,171 @@ module testbench;
 
         // TRANSITION TESTS //
 
+		//Mult Base
+	id_ex_NPC_1 = 64'h0; // Increase for each instruction to keep track of each one. useless otherwise.
+	id_ex_IR_1 = 32'h0; // Doesn't matter, really. We're not testing whether the ALU can take immediates right now
+	id_ex_dest_reg_1 = 5'h3;
+    id_ex_rega_1 = 32'h20;
+    id_ex_regb_1 = 32'h20;
+    id_ex_opa_select_1 = `ALU_OPA_IS_REGA;
+    id_ex_opb_select_1 = `ALU_OPB_IS_REGB;
+	id_ex_alu_func_1 = `ALU_MULQ;
+    id_ex_cond_branch = 0;
+    id_ex_uncond_branch = 0;
+		//Add Base
+	id_ex_NPC_2 = 64'h0;
+	id_ex_IR_2 = 32'h0;
+	id_ex_dest_reg_2 = 5'h3;
+	id_ex_rega_2 = 32'h20;
+	id_ex_regb_2 = 32'h20;
+	id_ex_opa_select_2 = `ALU_OPA_IS_REGA;
+	id_ex_opb_select_2 = `ALU_OPB_IS_REGB;
+	id_ex_alu_func_2 = `ALU_ADDQ;
+	
 	reset = 1;
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
-
+		
+	//TEST 1 - Simple double add test
+		id_ex_NPC_1 = 64'h1;
+		id_ex_IR_1 = 32'h0;
+		id_ex_dest_reg_1 = 5'h3;
+		id_ex_rega_1 = 32'h20;
+		id_ex_regb_1 = 32'h20;
+		id_ex_opa_select_1 = `ALU_OPA_IS_REGA;
+		id_ex_opb_select_1 = `ALU_OPB_IS_REGB;
+		id_ex_alu_func_1 = `ALU_ADDQ;
+		id_ex_cond_branch = 0;
+		id_ex_uncond_branch = 0;
+		
+		id_ex_NPC_2 = 64'h2;
+		id_ex_IR_2 = 32'h0;
+		id_ex_dest_reg_2 = 5'h3;
+		id_ex_rega_2 = 32'h20;
+		id_ex_regb_2 = 32'h20;
+		id_ex_opa_select_2 = `ALU_OPA_IS_REGA;
+		id_ex_opb_select_2 = `ALU_OPB_IS_REGB;
+		id_ex_alu_func_2 = `ALU_ADDQ;
+	
         reset = 0;
 
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
+		
+	//TEST 2 - Two multiplies, then three adds.
 
-		//bus1
-	id_ex_NPC_1 = ;
-	id_ex_IR_1 = ;
-	id_ex_dest_reg_1 = ;
-        id_ex_rega_1 = ;
-        id_ex_regb_1 = ;
-        id_ex_opa_select_1 = ;
-        id_ex_opb_select_1 = ;
-	id_ex_alu_func_1 = ;
-        id_ex_cond_branch = ;
-        id_ex_uncond_branch = ;
-		//bus 2
-	id_ex_NPC_2 = ;
-	id_ex_IR_2 = ;
-	id_ex_dest_reg_2 = ;
-	id_ex_rega_2 = ;
-	id_ex_regb_2 = ;
-	id_ex_opa_select_2 = ;
-	id_ex_opb_select_2 = ;
-	id_ex_alu_func_2 = ;
-
+		id_ex_NPC_1 = 64'h3;
+		id_ex_IR_1 = 32'h0;
+		id_ex_dest_reg_1 = 5'h3;
+		id_ex_rega_1 = 32'h20;
+		id_ex_regb_1 = 32'h20;
+		id_ex_opa_select_1 = `ALU_OPA_IS_REGA;
+		id_ex_opb_select_1 = `ALU_OPB_IS_REGB;
+		id_ex_alu_func_1 = `ALU_MULQ;
+		id_ex_cond_branch = 0;
+		id_ex_uncond_branch = 0;
+		
+		id_ex_NPC_2 = 64'h4;
+		id_ex_IR_2 = 32'h0;
+		id_ex_dest_reg_2 = 5'h3;
+		id_ex_rega_2 = 32'h20;
+		id_ex_regb_2 = 32'h20;
+		id_ex_opa_select_2 = `ALU_OPA_IS_REGA;
+		id_ex_opb_select_2 = `ALU_OPB_IS_REGB;
+		id_ex_alu_func_2 = `ALU_MULQ;
+	
         DISPLAY_STATE(`PRECLOCK);
         @(posedge clock);
         @(negedge clock);
         DISPLAY_STATE(`POSTCLOCK);
 
+		// 1
+		id_ex_NPC_1 = 64'h5;
+		id_ex_IR_1 = 32'h0;
+		id_ex_dest_reg_1 = 5'h3;
+		id_ex_rega_1 = 32'h20;
+		id_ex_regb_1 = 32'h20;
+		id_ex_opa_select_1 = `ALU_OPA_IS_REGA;
+		id_ex_opb_select_1 = `ALU_OPB_IS_REGB;
+		id_ex_alu_func_1 = `ALU_ADDQ;
+		id_ex_cond_branch = 0;
+		id_ex_uncond_branch = 0;
+		
+		id_ex_NPC_2 = 64'h6;
+		id_ex_IR_2 = 32'h0;
+		id_ex_dest_reg_2 = 5'h3;
+		id_ex_rega_2 = 32'h20;
+		id_ex_regb_2 = 32'h20;
+		id_ex_opa_select_2 = `ALU_OPA_IS_REGA;
+		id_ex_opb_select_2 = `ALU_OPB_IS_REGB;
+		id_ex_alu_func_2 = `ALU_ADDQ;
+		
+	
+        DISPLAY_STATE(`PRECLOCK);
+        @(posedge clock);
+        @(negedge clock);
+        DISPLAY_STATE(`POSTCLOCK);
+		
+		// 2
+		id_ex_NPC_1 = 64'h7;
+		id_ex_IR_1 = 32'h0;
+		id_ex_dest_reg_1 = 5'h3;
+		id_ex_rega_1 = 32'h20;
+		id_ex_regb_1 = 32'h20;
+		id_ex_opa_select_1 = `ALU_OPA_IS_REGA;
+		id_ex_opb_select_1 = `ALU_OPB_IS_REGB;
+		id_ex_alu_func_1 = `ALU_ADDQ;
+		id_ex_cond_branch = 0;
+		id_ex_uncond_branch = 0;
+		
+		id_ex_NPC_2 = 64'h8;
+		id_ex_IR_2 = 32'h0;
+		id_ex_dest_reg_2 = 5'h3;
+		id_ex_rega_2 = 32'h20;
+		id_ex_regb_2 = 32'h20;
+		id_ex_opa_select_2 = `ALU_OPA_IS_REGA;
+		id_ex_opb_select_2 = `ALU_OPB_IS_REGB;
+		id_ex_alu_func_2 = `ALU_ADDQ;
+		
+	
+        DISPLAY_STATE(`PRECLOCK);
+        @(posedge clock);
+        @(negedge clock);
+        DISPLAY_STATE(`POSTCLOCK);
+		
+		// 3
+		id_ex_NPC_1 = 64'h9;
+		id_ex_IR_1 = 32'h0;
+		id_ex_dest_reg_1 = 5'h3;
+		id_ex_rega_1 = 32'h20;
+		id_ex_regb_1 = 32'h20;
+		id_ex_opa_select_1 = `ALU_OPA_IS_REGA;
+		id_ex_opb_select_1 = `ALU_OPB_IS_REGB;
+		id_ex_alu_func_1 = `ALU_ADDQ;
+		id_ex_cond_branch = 0;
+		id_ex_uncond_branch = 0;
+		
+		id_ex_NPC_2 = 64'hA;
+		id_ex_IR_2 = 32'h0;
+		id_ex_dest_reg_2 = 5'h3;
+		id_ex_rega_2 = 32'h20;
+		id_ex_regb_2 = 32'h20;
+		id_ex_opa_select_2 = `ALU_OPA_IS_REGA;
+		id_ex_opb_select_2 = `ALU_OPB_IS_REGB;
+		id_ex_alu_func_2 = `ALU_ADDQ;
+	// Should output the multiplies, not the adds.	
+	
+        DISPLAY_STATE(`PRECLOCK);
+        @(posedge clock);
+        @(negedge clock);
+        DISPLAY_STATE(`POSTCLOCK);
+		
+		
 	// SUCCESSFULLY END TESTBENCH //
 	$display("ENDING TESTBENCH : SUCCESS !\n");
 	$finish;

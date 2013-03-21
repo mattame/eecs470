@@ -14,7 +14,7 @@
 `define ROB_ENTRIES 32
 `define ROB_ENTRY_AVAILABLE 1
 `define NO_ROB_ENTRY 0
-`define SD = 1;
+`define SD #1
 
 
 // rob main module //
@@ -104,7 +104,7 @@ module rob_entry(
   reg [31:0]  n_instruction;
   reg         n_valid;
   reg         n_tail
-  reg         n_value;
+  reg         n_value;   <--- duplicate n_value??
   reg [63:0]  n_value;
   reg         n_complete;
   reg         n_register;
@@ -131,23 +131,22 @@ module rob_entry(
      if (reset)
      begin
         instruction_out <= `SD 32'd0;
-        valid_out <= `SD 1'b0;
-        head_out <= `SD 1'b0;
-        tail_out <= `SD 1'b0;
-        value_out <= `SD 64'h0;
-        complete_out <= `SD 1'b0;
-        exception_out <= `SD 1'b0;
+        valid_out       <= `SD 1'b0;
+        head_out        <= `SD 1'b0;
+        tail_out        <= `SD 1'b0;
+        value_out       <= `SD 64'h0;
+        complete_out    <= `SD 1'b0;
+        exception_out   <= `SD 1'b0;
      end
      else
      begin
         instruction_out <= `SD n_instruction;
-        valid_out <= `SD n_valid;
-        head_out <= `SD n_head;
-        tail_out <= `SD n_tail;
-        value_out <= `SD n_value;
-        complete_out <= `SD n_complete;
-        exception_out <= `SD n_exception;
+        valid_out       <= `SD n_valid;
+        head_out        <= `SD n_head;
+        tail_out        <= `SD n_tail;
+        value_out       <= `SD n_value;
+        complete_out    <= `SD n_complete;
+        exception_out   <= `SD n_exception;
      end
-
 
 endmodule

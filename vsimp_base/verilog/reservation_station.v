@@ -16,7 +16,7 @@
 `define RSTAG_NULL      8'd0           
 
 
-// individual reservation station module //
+// individual reservation station entry module //
 module reservation_station_entry(clock,reset,fill,                                     // signals in
                            dest_reg_in,rega_value_in,regb_value_in,              // busses in
                            waiting_taga_in,waiting_tagb_in,                      // more busses in

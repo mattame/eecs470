@@ -20,7 +20,7 @@ module ex_stage(// Inputs
 				// Input Bus 1 (contains branch logic)
                 id_ex_NPC_1,
                 id_ex_IR_1,
-				id_ex_dest_reg_1,
+                id_ex_dest_reg_1,
                 id_ex_rega_1,
                 id_ex_regb_1,
                 id_ex_opa_select_1,

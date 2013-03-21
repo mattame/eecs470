@@ -302,9 +302,9 @@ module mult_stage(clock, reset,
     partial_prod_reg <= #1 partial_product;
     mplier_out       <= #1 next_mplier;
     mcand_out        <= #1 next_mcand;
-	IR_out			 <= #1 IR_in;
-	NPC_out			 <= #1 NPC_in;
-	dest_reg_out	 <= #1 dest_reg_in;
+	IR_out	     <= #1 IR_in;
+	NPC_out	     <= #1 NPC_in;
+	dest_reg_out <= #1 dest_reg_in;
   end
 
   always @(posedge clock)
@@ -471,3 +471,6 @@ module brcond(// Inputs
       cond = ~cond;
   end
 endmodule // brcond
+
+
+

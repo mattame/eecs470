@@ -26,9 +26,9 @@ module if_stage(// Inputs
                 if_IR_out_1,         // fetched instruction out
                 if_valid_inst_out_1,  // when low, instruction is garbage
 		
-		if_NPC_out_2,
-		if_IR_out_2,
-		if_valid_inst_out_2
+				if_NPC_out_2,
+				if_IR_out_2,
+				if_valid_inst_out_2
                );
 
   input         clock;              // system clock

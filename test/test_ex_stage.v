@@ -134,6 +134,7 @@ module testbench;
    begin
       if (preclock==`PRECLOCK)
 	begin
+	 $display("---------------------------------------------------------------");
 	 $display("Pre-Clock Input %4.0f", $time); 
 	 $display("COND_BRANCH=%b, UNCOND_BRANCH=%b", id_ex_cond_branch, id_ex_uncond_branch);
          $display("NPC1=%h, IR1=%h, DREG1=%d, REGA1=%d, REGB1=%d, OPA1=%h, OPB1=%h, FUNC1=%h", id_ex_NPC_1, id_ex_IR_1, id_ex_dest_reg_1, id_ex_rega_1, id_ex_regb_1,

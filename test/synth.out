@@ -1,0 +1,391 @@
+
+                      Design Compiler Graphical
+                            DC Ultra (TM)
+                             DFTMAX (TM)
+                         Power Compiler (TM)
+                           DesignWare (R)
+                           DC Expert (TM)
+                         Design Vision (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                            DFT Compiler
+                        Library Compiler (TM)
+                         Design Compiler(R)
+
+            Version G-2012.06 for RHEL64 -- May 30, 2012
+               Copyright (c) 1988-2012 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+#
+# Written by : DC-Transcript, Version X-2005.09-SP2 -- Jan 03, 2006
+# Date       : Tue Aug 29 17:09:34 2006
+#
+#
+# Translation of script: tut_synth.scr
+#
+#/***********************************************************/
+#/*   FILE        : tut_synth.scr                           */
+#/*   Description : Default Synopsys Design Compiler Script */
+#/*   Usage       : dc_shell -f tut_synth.scr               */
+#/*   You'll need to minimally set design_name & read files */
+#/***********************************************************/
+set SYN_DIR ./
+./
+set search_path [ list "./" "/afs/umich.edu/class/eecs470/lib/synopsys/" ]
+./ /afs/umich.edu/class/eecs470/lib/synopsys/
+set target_library "lec25dscc25_TT.db"
+lec25dscc25_TT.db
+set link_library [concat  "*" $target_library]
+* lec25dscc25_TT.db
+#/***********************************************************/
+#/* Set some flags to suppress warnings we don't care about */
+set suppress_errors [concat $suppress_errors "UID-401"]
+UID-401
+suppress_message {"VER-130"}
+#/***********************************************************/
+#/* The following four lines must be updated for every      */
+#/* new design                                              */
+#/***********************************************************/
+read_file -f verilog [list "reservation_station.v"]
+Loading db file '/afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/gtech.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/standard.sldb'
+  Loading link library 'lec25dscc25_TT'
+  Loading link library 'gtech'
+Loading verilog file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v'
+Detecting input file type automatically (-rtl or -netlist).
+Running DC verilog reader
+Reading with Presto HDL Compiler (equivalent to -rtl option).
+Running PRESTO HDLC
+Compiling source file /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v:80: the undeclared symbol 'taga_cur_match_cdb1_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v:81: the undeclared symbol 'taga_cur_match_cdb2_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v:82: the undeclared symbol 'tagb_cur_match_cdb1_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v:83: the undeclared symbol 'tagb_cur_match_cdb2_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v:80: The delay specification for net declaration is ignored. (VER-976)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v:81: The delay specification for net declaration is ignored. (VER-976)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v:82: The delay specification for net declaration is ignored. (VER-976)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v:83: The delay specification for net declaration is ignored. (VER-976)
+
+Statistics for case statements in always block at line 87 in file
+	'/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           100            |    auto/auto     |
+|           118            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine reservation_station line 128 in file
+		'/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+| rega_value_out_reg  | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+| regb_value_out_reg  | Flip-flop |  35   |  Y  | N  | N  | N  | N  | N  | N  |
+| regb_value_out_reg  | Flip-flop |  29   |  Y  | N  | N  | N  | N  | N  | N  |
+|   status_out_reg    | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|  dest_reg_out_reg   | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|  waiting_taga_reg   | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|  waiting_tagb_reg   | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Presto compilation completed successfully.
+Current design is now '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.db:reservation_station'
+Loaded 1 design.
+Current design is 'reservation_station'.
+reservation_station
+set design_name reservation_station
+reservation_station
+#set reset_name reset
+set clock_name clock
+clock
+set CLK_PERIOD 4
+4
+#/***********************************************************/
+#/* The rest of this file may be left alone for most small  */
+#/* to moderate sized designs.  You may need to alter it    */
+#/* when synthesizing your final project.                   */
+#/***********************************************************/
+#/***********************************************************/
+#/* Set some flags for optimisation */
+set compile_top_all_paths "true"
+true
+set auto_wire_load_selection "false"
+false
+#/***********************************************************/
+#/*  Clk Periods/uncertainty/transition                     */
+set CLK_TRANSITION 0.1
+0.1
+set CLK_UNCERTAINTY 0.1
+0.1
+set CLK_LATENCY 0.1
+0.1
+#/* Input/output Delay values */
+set AVG_INPUT_DELAY 0.1
+0.1
+set AVG_OUTPUT_DELAY 0.1
+0.1
+#/* Critical Range (ns) */
+set CRIT_RANGE 1.0
+1.0
+#/***********************************************************/
+#/* Design Constrains: Not all used                         */
+set MAX_TRANSITION 1.0
+1.0
+set FAST_TRANSITION 0.1
+0.1
+set MAX_FANOUT 32
+32
+set MID_FANOUT 8
+8
+set LOW_FANOUT 1
+1
+set HIGH_DRIVE 0
+0
+set HIGH_LOAD 1.0
+1.0
+set AVG_LOAD 0.1
+0.1
+set AVG_FANOUT_LOAD 10
+10
+#/***********************************************************/
+#/*BASIC_INPUT = cb18os120_tsmc_max/nd02d1/A1
+#BASIC_OUTPUT = cb18os120_tsmc_max/nd02d1/ZN*/
+set DRIVING_CELL dffacs1
+dffacs1
+#/* DONT_USE_LIST = {   } */
+#/*************operation cons**************/
+#/*OP_WCASE = WCCOM;
+#OP_BCASE = BCCOM;*/
+set WIRE_LOAD "tsmcwire"
+tsmcwire
+set LOGICLIB lec25dscc25_TT
+lec25dscc25_TT
+#/*****************************/
+#/* Sourcing the file that sets the Search path and the libraries(target,link) */
+set sys_clk $clock_name
+clock
+set netlist_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".vg"]
+./reservation_station.vg
+set db_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".db"]
+./reservation_station.db
+set rep_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".rep"]
+./reservation_station.rep
+set dc_shell_status [ set chk_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".chk"] ]
+./reservation_station.chk
+#/* if we didnt find errors at this point, run */
+if {  $dc_shell_status != [list] } {
+   current_design $design_name
+  link
+  set_wire_load_model -name $WIRE_LOAD -lib $LOGICLIB $design_name
+  set_wire_load_mode top
+  set_fix_multiple_port_nets -outputs -buffer_constants
+  create_clock -period $CLK_PERIOD -name $sys_clk [find port $sys_clk]
+  set_clock_uncertainty $CLK_UNCERTAINTY $sys_clk
+  set_fix_hold $sys_clk
+  group_path -from [all_inputs] -name input_grp
+  group_path -to [all_outputs] -name output_grp
+  set_driving_cell  -lib_cell $DRIVING_CELL [all_inputs]
+  remove_driving_cell [find port $sys_clk]
+  set_fanout_load $AVG_FANOUT_LOAD [all_outputs]
+  set_load $AVG_LOAD [all_outputs]
+  set_input_delay $AVG_INPUT_DELAY -clock $sys_clk [all_inputs]
+  remove_input_delay -clock $sys_clk [find port $sys_clk]
+  set_output_delay $AVG_OUTPUT_DELAY -clock $sys_clk [all_outputs]
+  set_dont_touch reset_name
+  set_resistance 0 reset_name
+  set_drive 0 reset_name
+  set_critical_range $CRIT_RANGE [current_design]
+  set_max_delay $CLK_PERIOD [all_outputs]
+  set MAX_FANOUT $MAX_FANOUT
+  set MAX_TRANSITION $MAX_TRANSITION
+  uniquify
+  redirect $chk_file { check_design }
+  compile -map_effort medium
+  write -hier -format verilog -output $netlist_file $design_name
+  write -hier -format db -output $db_file $design_name
+  redirect $rep_file { report_design -nosplit }
+  redirect -append $rep_file { report_area }
+  redirect -append $rep_file { report_timing -max_paths 2 -input_pins -nets -transition_time -nosplit }
+  redirect -append $rep_file { report_constraint -all_violators -verbose -nosplit }
+  remove_design -all
+  read_file -format verilog $netlist_file
+  current_design $design_name
+  redirect -append $rep_file { report_reference -nosplit }
+  quit
+} else {
+   quit
+}
+Current design is 'reservation_station'.
+
+  Linking design 'reservation_station'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  reservation_station         /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.db
+  lec25dscc25_TT (library)    /afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db
+
+Warning: Can't find object 'reset_name' in design 'reservation_station'. (UID-95)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Warning: Can't find net 'reset_name' in design 'reservation_station'. (UID-95)
+Error: Value for list 'net_list' must have 1 elements. (CMD-036)
+Warning: Can't find port 'reset_name' in design 'reservation_station'. (UID-95)
+Error: Value for list 'port_list' must have 1 elements. (CMD-036)
+Current design is 'reservation_station'.
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | G-2012.06-DWBB_201206.0 |     *     |
+| Licensed DW Building Blocks        |                         |           |
+============================================================================
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'reservation_station'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Processing 'reservation_station_DW01_cmp6_0'
+  Processing 'reservation_station_DW01_cmp6_1'
+  Processing 'reservation_station_DW01_cmp6_2'
+  Processing 'reservation_station_DW01_cmp6_3'
+  Processing 'reservation_station_DW01_cmp6_4'
+  Processing 'reservation_station_DW01_cmp6_5'
+  Processing 'reservation_station_DW01_cmp6_6'
+  Processing 'reservation_station_DW01_cmp6_7'
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:04   76951.8      0.00       0.0       0.0                                0.00
+    0:00:04   76951.8      0.00       0.0       0.0                                0.00
+    0:00:04   76951.8      0.00       0.0       0.0                                0.00
+    0:00:04   76951.8      0.00       0.0       0.0                                0.00
+    0:00:04   76951.8      0.00       0.0       0.0                                0.00
+    0:00:04   76951.8      0.00       0.0       0.0                                0.00
+    0:00:04   61341.8      0.00       0.0       0.0                                0.00
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+    0:00:04   61101.2      0.00       0.0       0.0                                0.00
+    0:00:05   58310.3      0.00       0.0      23.8                                0.00
+
+
+  Beginning Design Rule Fixing  (max_transition)
+  ----------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:05   58310.3      0.00       0.0      23.8                                0.00
+    0:00:05   58326.9      0.00       0.0      23.7 dest_reg_out[4]                0.00
+    0:00:05   58509.3      0.00       0.0      21.8 dest_reg_out[3]                0.00
+    0:00:05   59007.0      0.00       0.0      16.4 regb_value_out[56]             0.00
+    0:00:06   59454.9      0.00       0.0      11.7 regb_value_out[29]             0.00
+    0:00:06   59902.7      0.00       0.0       6.9 rega_value_out[54]             0.00
+    0:00:06   60350.6      0.00       0.0       2.1 rega_value_out[27]             0.00
+    0:00:06   60566.2      0.00       0.0       0.0                                0.00
+
+
+  Beginning Critical Range Optimization
+  -------------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:06   60566.2      0.00       0.0       0.0                                0.00
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:06   60566.2      0.00       0.0       0.0                                0.00
+    0:00:06   60566.2      0.00       0.0       0.0                                0.00
+    0:00:06   60566.2      0.00       0.0       0.0                                0.00
+    0:00:06   60148.6      0.00       0.0       0.0                                0.00
+    0:00:06   59881.1      0.00       0.0       0.0                                0.00
+    0:00:06   59680.5      0.00       0.0       0.0                                0.00
+    0:00:06   59579.9      0.00       0.0       0.0                                0.00
+    0:00:06   59513.0      0.00       0.0       0.0                                0.00
+    0:00:06   59513.0      0.00       0.0       0.0                                0.00
+    0:00:06   59513.0      0.00       0.0       0.0                                0.00
+    0:00:06   59513.0      0.00       0.0       0.0                                0.00
+    0:00:06   59513.0      0.00       0.0       0.0                                0.00
+    0:00:07   59513.0      0.00       0.0       0.0                                0.00
+    0:00:07   59513.0      0.00       0.0       0.0                                0.00
+    0:00:07   59513.0      0.00       0.0       0.0                                0.00
+    0:00:07   59513.0      0.00       0.0       0.0                                0.00
+    0:00:07   59513.0      0.00       0.0       0.0                                0.00
+    0:00:07   59513.0      0.00       0.0       0.0                                0.00
+
+
+  Beginning Critical Range Optimization
+  -------------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:07   59513.0      0.00       0.0       0.0                                0.00
+    0:00:07   59513.0      0.00       0.0       0.0                                0.00
+Loading db file '/afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db'
+
+  Optimization Complete
+  ---------------------
+Writing verilog file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.vg'.
+Error: Writing designs in DB format is no longer supported. (UID-530)
+Removing design 'reservation_station'
+Removing library 'lec25dscc25_TT'
+Removing library 'gtech'
+Removing library 'standard.sldb'
+Loading db file '/afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/gtech.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/standard.sldb'
+  Loading link library 'lec25dscc25_TT'
+  Loading link library 'gtech'
+Loading verilog file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.vg'
+Detecting input file type automatically (-rtl or -netlist).
+Running DC verilog reader
+Performing 'read' command.
+Compiling source file /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.vg
+Reading with netlist reader (equivalent to -netlist option).
+Verilog netlist reader completed successfully.
+Current design is now '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station.db:reservation_station'
+Loaded 1 design.
+Current design is 'reservation_station'.
+Current design is 'reservation_station'.
+
+Thank you...

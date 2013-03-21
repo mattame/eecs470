@@ -6,47 +6,63 @@
 
 `define SD #1
 `define RSTAG_NULL 8'd0
+`define ZERO_REG   5'd0
 
 // main map table module //
-module map_table(clock,reset,
-                 reg1_in,reg2_in,
-                 tag1_in,tag2_in,
-                 write_reg1_tag,write_reg2_tag,
-                 tag1_out,tag2_out);
+module map_table(clock,reset,        // signal inputs
+                 inst1_write_tag,    // 
+                 inst2_write_tag,    //
+
+                 // instruction 1 access inputs //
+                 inst1_rega_in,
+                 inst1_regb_in,
+                 inst1_dest_in,
+                 inst1_tag_in,
+
+                 // instruction 2 access inputs //
+                 inst2_rega_in,
+                 inst2_regb_in,
+                 inst2_dest_in,
+                 inst2_tag_in,
+
+                 // tag outputs //
+                 inst1_taga_out,inst1_tagb_out,
+                 inst2_taga_out,inst2_tagb_out  );
 
    // inputs //
    input wire clock;
    input wire reset;
-   input wire [4:0] reg1_in;
-   input wire [4:0] reg2_in;
-   input wire [7:0] tag1_in;
-   input wire [7:0] tag2_in;
-   input wire write_reg1_tag;
-   input wire write_reg2_tag;
+   input wire inst1_write_tag;
+   input wire inst2_write_tag;
+   input wire [4:0] inst1_rega_in,inst1_regb_in;
+   input wire [4:0] inst2_rega_in,inst2_regb_in;
+   input wire [4:0] inst1_dest_in;
+   input wire [4:0] inst2_dest_in;
+   input wire [7:0] inst1_tag_in;
+   input wire [7:0] inst2_tag_in;
 
    // outputs //
-   output reg [7:0] tag1_out;
-   output reg [7:0] tag2_out;
+   output wire [7:0] inst1_taga_out,inst1_tagb_out;
+   output wire [7:0] inst2_tag2_out,inst2_tagb_out;
 
 
    // internal registers and wires //
    wire [7:0] n_tag_table [4:0];
    reg  [7:0]   tag_table [4:0];
-   wire  [7:0] n_tag1_out;
-   wire  [7:0] n_tag2_out;
 
-   // combinational assignments for the next tag output //
-   assign n_tag1_out = n_tag_table[reg1_in];
-   assign n_tag2_out = n_tag_table[reg2_in];
+   // combinational assignments for the tag outputs //
+   assign inst1_taga_out = tag_table[inst1_rega_in];
+   assign inst1_tagb_out = tag_table[inst1_regb_in];
+   assign inst2_taga_out = ((inst2_rega_in==inst1_dest_in) && (inst1_dest_in!=`ZERO_REG)) ? inst1_tag_in : tag_table[inst2_rega_in];  // forward from inst1
+   assign inst2_tagb_out = ((inst2_regb_in==inst1_dest_in) && (inst1_dest_in!=`ZERO_REG)) ? inst1_tag_in : tag_table[inst2_regb_in];  // forward from inst1
 
-
-   // combinational assignment of next tag //
+   // combinational logic for next states in tag table //
    genvar i;
    generate
       for (i=0; i<32; i=i+1)
       begin : NTAGTABLEASSIGN
-         assign n_tag_table[i] = (reg1_in==i && write_reg1_tag) ? tag1_in :
-                               ( (reg2_in==i && write_reg2_tag) ? tag2_in : tag_table[i] );
+         assign n_tag_table[i] = ((inst2_dest_in==i) && (inst2_dest_in!=`ZERO_REG)) ? inst2_tag_in :                       // inst2 takes precidence here
+                                    ( ((inst1_dest_in==i) && (inst1_dest_in!=`ZERO_REG)) ? inst1_tag_in : tag_table[i] );  // because it comes after inst1
       end
    endgenerate
 
@@ -71,13 +87,17 @@ module map_table(clock,reset,
    begin
       if (reset)
       begin    
-         tag1_out <= `SD `RSTAG_NULL;
-         tag2_out <= `SD `RSTAG_NULL;
+         inst1_taga_out <= `SD `RSTAG_NULL;
+         inst1_tagb_out <= `SD `RSTAG_NULL;
+         inst2_taga_out <= `SD `RSTAG_NULL;
+         inst2_tagb_out <= `SD `RSTAG_NULL;
       end
       else
       begin
-         tag1_out <= `SD n_tag1_out;
-         tag2_out <= `SD n_tag2_out;
+         inst1_taga_out <= `SD n_inst1_taga_out;
+         inst1_tagb_out <= `SD n_inst1_tagb_out;
+         inat2_taga_out <= `SD n_inst2_taga_out;
+         inst2_tagb_out <= `SD n_inst2_tagb_out;
       end
    end
 

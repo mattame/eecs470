@@ -151,15 +151,71 @@ endmodule
 
 
 
+// needed outputs from decode stage: //
+//
+// wire [63:0] id_rega_out;
+// wire [63:0] id_regb_out;
+// wire  [1:0] id_opa_select_out;
+// wire  [1:0] id_opb_select_out;
+// wire  [4:0] id_dest_reg_idx_out;
+// wire  [4:0] id_alu_func_out;
+// wire        id_rd_mem_out;
+// wire        id_wr_mem_out;
+// wire        id_cond_branch_out;
+// wire        id_uncond_branch_out;
+// wire        id_halt_out;
+// wire        id_illegal_out;
+// wire        id_valid_inst_out;
+//
+// FROM SCOTT:  //
+//
+// opa_select
+// opb_select
+// alu_func
+// dest_reg
+// cond_branch
+// uncond_branch
+// valid_inst
+//
 
-// the actual reservation table module //
-module reservation_station_table(clock,reset,
-                                 inst1_rega_value_in,inst1_regb_value_in,
-                                 inst2_rega_value_in,inst2_regb_value_in,
-                                 tag1_in,tag2_in,
-                                 common_data_bus_in,
-                                 reg1_out,reg2_out,
-                                 table_full );
+// the actual reservation station module //
+module reservation_station(clock,reset,               // signals in
+
+                           // signals and busses in for inst 1 (from id1) //
+                           inst1_rega_value_in,inst1_regb_value_in,
+                           inst1_taga_in,inst1_tagb_in,
+                           inst1_opa_select_in,inst1_opb_select_in,
+                           inst1_dest_reg_in,
+                           inst1_alu_func_in,
+                           inst1_rd_mem_in,
+                           inst1_wr_mem_in,
+                           inst1_cond_branch_in,
+                           inst1_uncond_branch_in,
+                           inst1_valid,
+
+                           // signals and busses in for inst 2 (from id2) //
+                           inst2_rega_value_in,inst2_regb_value_in,
+                           inst2_opa_select_in,inst2_opb_select_in,
+                           inst2_dest_reg_in,
+                           inst2_alu_func_in,
+                           inst2_rd_mem_in,
+                           inst2_wr_mem_in,
+                           inst2_cond_branch_in,
+                           inst2_uncond_branch_in,
+                           inst2_valid,
+
+                           //
+                           tag1_in,tag2_in,
+
+                           // cdb inputs //
+                           cdb1_tag_in,cdb2_tag_in,
+                           cdb1_value_in,cdb2_value_in,
+
+
+                           // outputs //
+                           inst1_dispatch,inst2_dispatch,
+                           reg1_out,reg2_out,
+                           table_full );
 
 
    // inputs //
@@ -176,7 +232,7 @@ module reservation_station_table(clock,reset,
    output wire reg2_out;
    output wand table_full; 
 
-/*
+
    // internal wires //
    wire [2:0] rs_statuses      [(`RESERVATION_STATIONS-1):0];
    wire [7:0] rs_waiting_tags1 [(`RESERVATION_STATIONS-1):0];
@@ -201,7 +257,7 @@ module reservation_station_table(clock,reset,
    reservation_station rses [(`RESERVATION_STATIONS-1):0] ( .clock(`RESERVATION_STATIONS{clock}), .reset(`RESERVATION_STATIONS{reset}),
                                                             .status(rs_statuses), .waiting_tag1(rs_waiting_tags1), .waiting_tag2(rs_waiting_tags2)
                                                                                                                                                     );
-*/
+
 
 endmodule
 

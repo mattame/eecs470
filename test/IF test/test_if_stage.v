@@ -1,5 +1,6 @@
+`define SD #1
 
-
+`timescale 1ns/100ps
 // reservation station testbench module //
 module testbench;
 
@@ -8,11 +9,11 @@ module testbench;
 	integer i = 0;
 
 	// wires for testing the module //
-	wire clock;
-	wire reset;
-	wire take_branch;
-	wire [31:0] branch_target;
-	wire [63:0] mem2proc_data;
+	reg clock;
+	reg reset;
+	reg take_branch;
+	reg [63:0] branch_target;
+	reg [63:0] mem2proc_data;
 	
 	wire [63:0] proc2mem_addr;
 	
@@ -40,9 +41,9 @@ if_stage if0(// Inputs
                 .if_IR_out_1(IR_out_1),         // fetched instruction out
                 .if_valid_inst_out_1(valid_out_1),  // when low, instruction is garbage
 		
-				if_NPC_out_2(NPC_out_2),
-				if_IR_out_2(IR_out_2),
-				if_valid_inst_out_2(valid_out_2)
+				.if_NPC_out_2(NPC_out_2),
+				.if_IR_out_2(IR_out_2),
+				.if_valid_inst_out_2(valid_out_2)
                );
 
 
@@ -82,20 +83,20 @@ if_stage if0(// Inputs
    endtask
 
    // displays the current state of all wires //
-   `define PRECLOCK  1'b1
-   `define POSTCLOCK 1'b0
+   `define INPUT  1'b1
+   `define OUTPUT 1'b0
    task DISPLAY_STATE;
       input preclock;
    begin
-      if (preclock==`PRECLOCK)
+      if (preclock==`INPUT)
 	begin
 	 $display("---------------------------------------------------------------");
-	 $display("Pre-Clock Input %4.0f", $time); 
+	 $display(">>>> Pre-Clock Input   %4.0f", $time); 
 	 $display("Memory Line: %h, Take Branch: %b, Branch Target: %h", mem2proc_data, take_branch, branch_target); 
       	end
       else
 	begin
-	 $display("Post-Clock Output %4.0f", $time); 
+	 $display(">>>> Pre-Clock Output %4.0f, Next Mem Addr: %h", $time, proc2mem_addr); 
 	 $display("NPC1: %h, IR1: %h, Valid1: %b", NPC_out_1, IR_out_1, valid_out_1);
 	 $display("NPC2: %h, IR2: %h, Valid2: %b", NPC_out_2, IR_out_2, valid_out_2);
 	end
@@ -115,45 +116,63 @@ if_stage if0(// Inputs
 
 	take_branch = 0;
 	branch_target = 64'h0;
-	mem2proc_data = 64'h0000000011111111;
+	mem2proc_data = 64'hffffffffffffffff;
+	
 	
 	reset = 1;
-
-        DISPLAY_STATE(`PRECLOCK);
+	    @(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);
         @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
 		
 	take_branch = 0;
 	branch_target = 64'h0;
-	mem2proc_data = 64'h1111111122222222;
+	mem2proc_data = 64'h0000000011111111;
+	
 	
         reset = 0;
-
-        DISPLAY_STATE(`PRECLOCK);
+	    @(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);
         @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
 
 	take_branch = 1;
-	branch_target = 64'h0000000000000100;
+	branch_target = 64'h0000000000000004;
 	mem2proc_data = 64'h2222222233333333;
 	
-        DISPLAY_STATE(`PRECLOCK);
+	    @(negedge clock);	
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);
         @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
 
 
+	take_branch = 0;
+	branch_target = 64'h0;
+	mem2proc_data = 64'h0000000011111111;
+	
+	    @(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);		
+        @(posedge clock);
+		
+	take_branch = 1;
+	branch_target = 64'hFFFFFFFFFFFFFFF0;
+	mem2proc_data = 64'h2222222233333333;
+	
+	    @(negedge clock);	
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);
+        @(posedge clock);
+		
 	take_branch = 0;
 	branch_target = 64'h0;
 	mem2proc_data = 64'h4444444455555555;
 	
-        DISPLAY_STATE(`PRECLOCK);
+	    @(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);		
         @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);		
-		
+
 	// SUCCESSFULLY END TESTBENCH //
 	$display("ENDING TESTBENCH : SUCCESS !\n");
 	$finish;

@@ -17,17 +17,17 @@ VCS = SW_VCS=2011.03 vcs +v2k +vc -Mupdate -line -full64
 INTFLAGS = -I +memcbk -full64
 
 all:    simv
-#	./simv | tee program.out
+	./simv | tee program.out
 
 ##### 
 # Modify starting here
 #####
 
-TESTBENCH = test_ex_stage.v
-SIMFILES = ex_stage.v, ex_stage_submodules.v
+TESTBENCH = test_ex_stage.v \ sysdefs.vh
+SIMFILES = ex_stage.v \ ex_stage_submodules.v
 SYNFILES = ex_stage.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
 
-reservation_station.vg:	test_res_station.v reservation_station.tcl 
+ex_stage.vg:	test_ex_stage.v reservation_station.tcl 
 	dc_shell-t -f reservation_station.tcl | tee synth.out
 
 

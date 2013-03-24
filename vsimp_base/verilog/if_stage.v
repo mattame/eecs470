@@ -14,7 +14,6 @@
 module if_stage(// Inputs
                 clock,
                 reset,
-                mem_wb_valid_inst,
                 ex_mem_take_branch,
                 ex_mem_target_pc,
                 Imem2proc_data,

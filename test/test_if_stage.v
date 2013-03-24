@@ -1,183 +1,165 @@
-/////////////////////////////////////////////////////////////////////////
-//                                                                     //
-//                                                                     //
-//   Modulename :  testbench.v                                         //
-//                                                                     //
-//  Description :  Testbench module for the verisimple pipeline;       //
-//                                                                     //
-//                                                                     //
-/////////////////////////////////////////////////////////////////////////
-
-`timescale 1ns/100ps
-
-extern void print_header(string str);
-extern void print_cycles();
-extern void print_stage(string div, int inst, int npc, int valid_inst);
-extern void print_reg(int wb_reg_wr_data_out_hi, int wb_reg_wr_data_out_lo,
-                      int wb_reg_wr_idx_out, int wb_reg_wr_en_out);
-extern void print_membus(int proc2mem_command, int mem2proc_response,
-                         int proc2mem_addr_hi, int proc2mem_addr_lo,
-                         int proc2mem_data_hi, int proc2mem_data_lo);
-extern void print_close();
 
 
+// reservation station testbench module //
 module testbench;
 
-// Registers and wires used in the testbench
-reg        clock;
-reg        reset;
+	// internal wires/registers //
+	reg correct;
+	integer i = 0;
 
-wire [3:0]  mem2proc_response;
-wire [63:0] mem2proc_data;
-wire [3:0]  mem2proc_tag;
+	// wires for testing the module //
+	wire clock;
+	wire reset;
+	wire take_branch;
+	wire [31:0] branch_target;
+	wire [63:0] mem2proc_data;
+	
+	wire [63:0] proc2mem_addr;
+	
+	wire [63:0] NPC_out_1;
+	wire [31:0] IR_out_1;
+	wire valid_out_1;
+	
+	wire [63:0] NPC_out_2;
+	wire [31:0] IR_out_2;
+	wire valid_out_2;
+	
 
-wire [63:0] if_NPC_out_1;
-wire [31:0] if_IR_out_1;
-wire        if_valid_inst_out_1;
+        // module to be tested //	
+if_stage if0(// Inputs
+                .clock(clock),
+                .reset(reset),
+                .ex_mem_take_branch(take_branch),
+                .ex_mem_target_pc(branch_target),
+                .Imem2proc_data(mem2proc_data),
+                    
+                // Outputs
+                .proc2Imem_addr(proc2mem_addr),
 
-wire [63:0] if_NPC_out_2;
-wire [31:0] if_IR_out_2;
-wire        if_valid_inst_out_2;
-
-// Instantiate the Pipeline
-pipeline pipeline_0 (// Inputs
-					 .clock             (clock),
-					 .reset             (reset),
-					 .mem2proc_response (mem2proc_response),
-					 .mem2proc_data     (mem2proc_data),
-					 .mem2proc_tag      (mem2proc_tag),
-                     
-     
-                      // Outputs
-					  .proc2Imem_addr	(proc2Imem_addr),
-					  
-					  .if_NPC_out_1		(if_NPC_out_1),
-					  .if_IR_out_1		(if_IR_out_1),
-					  .if_valid_inst_out_1	(if_valid_inst_out_1),
-					  
-					  .if_NPC_out_2		(if_NPC_out_1),
-					  .if_IR_out_2		(if_IR_out_2),
-					  .if_valid_inst_out_2	(if_valid_inst_out_2)
-					);
-
-// Generate System Clock
-always
-begin
-  #(`VERILOG_CLOCK_PERIOD/2.0);
-  clock = ~clock;
-end
-
-initial
-begin
-    
-  clock = 1'b0;
-  reset = 1'b0;
-
-  // Pulse the reset signal
-  $display("@@\n@@\n@@  %t  Asserting System reset......", $realtime);
-  reset = 1'b1;
-  @(posedge clock);
-  @(posedge clock);
-
-  $readmemh("program.mem", memory.unified_memory);
-
-  @(posedge clock);
-  @(posedge clock);
-  `SD;
-  // This reset is at an odd time to avoid the pos & neg clock edges
-
-  reset = 1'b0;
-  $display("@@  %t  Deasserting System reset......\n@@\n@@", $realtime);
-
-  wb_fileno = $fopen("writeback.out");
-  
-  //Open header AFTER throwing the reset otherwise the reset state is displayed
-  print_header("                                                                            D-MEM Bus &\n");
-  print_header("Cycle:      IF      |     ID      |     EX      |     MEM     |     WB      Reg Result");
-end
+                .if_NPC_out_1(NPC_out_1),        // PC+4 of fetched instruction
+                .if_IR_out_1(IR_out_1),         // fetched instruction out
+                .if_valid_inst_out_1(valid_out_1),  // when low, instruction is garbage
+		
+				if_NPC_out_2(NPC_out_2),
+				if_IR_out_2(IR_out_2),
+				if_valid_inst_out_2(valid_out_2)
+               );
 
 
-// // Count the number of posedges and number of instructions completed
-// // till simulation ends
-// always @(posedge clock)
-// begin
-  // if(reset)
-  // begin
-    // clock_count <= `SD 0;
-    // instr_count <= `SD 0;
-  // end
-  // else
-  // begin
-    // clock_count <= `SD (clock_count + 1);
-    // instr_count <= `SD (instr_count + pipeline_completed_insts);
-  // end
-// end  
+   // run the clock //
+   always
+   begin 
+      #5; //clock "interval" ... AKA 1/2 the period
+      clock=~clock; 
+   end 
+
+   // task to exit if there is an error //
+   task exit_on_error;
+   begin
+      $display("@@@ Incorrect at time %4.0f", $time);
+      $display("@@@ Time:%4.0f clock:%b reset:%h ", $time, clock, reset   );
+      $display("ENDING TESTBENCH : ERROR !");
+      $finish;
+   end
+   endtask
 
 
-always @(negedge clock)
-begin
-  if(reset)
-    $display("@@\n@@  %t : System STILL at reset, can't show anything\n@@",
-             $realtime);
-  else
-  begin
-    `SD;
-    `SD;
-    
-     // print the piepline stuff via c code to the pipeline.out
-     print_cycles();
-     print_stage(" ", if_IR_out, if_NPC_out[31:0], {31'b0,if_valid_inst_out});
-     print_stage("|", if_id_IR, if_id_NPC[31:0], {31'b0,if_id_valid_inst});
-     print_stage("|", id_ex_IR, id_ex_NPC[31:0], {31'b0,id_ex_valid_inst});
-     print_stage("|", ex_mem_IR, ex_mem_NPC[31:0], {31'b0,ex_mem_valid_inst});
-     print_stage("|", mem_wb_IR, mem_wb_NPC[31:0], {31'b0,mem_wb_valid_inst});
-     print_reg(pipeline_commit_wr_data[63:32], pipeline_commit_wr_data[31:0],
-               {27'b0,pipeline_commit_wr_idx}, {31'b0,pipeline_commit_wr_en});
-     print_membus({30'b0,proc2mem_command}, {28'b0,mem2proc_response},
-                  proc2mem_addr[63:32], proc2mem_addr[31:0],
-                  proc2mem_data[63:32], proc2mem_data[31:0]);
+   // exit if not correct //
+   always@(posedge clock)
+   begin
+      #2
+      if(!correct)
+         exit_on_error();
+   end 
 
+   // task to check correctness of the module state currently // 
+   task CHECK_CORRECT;
+      input [1:0] tb_state;
+      begin
+         if( tb_state == 2'b00 ) correct = 1;
+         else                    correct = 0;
+      end
+   endtask
 
-     // print the writeback information to writeback.out
-     if(pipeline_completed_insts>0) begin
-       if(pipeline_commit_wr_en)
-         $fdisplay(wb_fileno, "PC=%x, REG[%d]=%x",
-                   pipeline_commit_NPC-4,
-                   pipeline_commit_wr_idx,
-                   pipeline_commit_wr_data);
+   // displays the current state of all wires //
+   `define PRECLOCK  1'b1
+   `define POSTCLOCK 1'b0
+   task DISPLAY_STATE;
+      input preclock;
+   begin
+      if (preclock==`PRECLOCK)
+	begin
+	 $display("---------------------------------------------------------------");
+	 $display("Pre-Clock Input %4.0f", $time); 
+	 $display("Memory Line: %h, Take Branch: %b, Branch Target: %h", mem2proc_data, take_branch, branch_target); 
+      	end
       else
-        $fdisplay(wb_fileno, "PC=%x, ---",pipeline_commit_NPC-4);
-    end
+	begin
+	 $display("Post-Clock Output %4.0f", $time); 
+	 $display("NPC1: %h, IR1: %h, Valid1: %b", NPC_out_1, IR_out_1, valid_out_1);
+	 $display("NPC2: %h, IR2: %h, Valid2: %b", NPC_out_2, IR_out_2, valid_out_2);
+	end
+      end
+  endtask
 
-    // deal with any halting conditions
-    if(pipeline_error_status!=`NO_ERROR)
-    begin
-      $display("@@@ Unified Memory contents hex on left, decimal on right: ");
-      show_mem_with_decimal(0,`MEM_64BIT_LINES - 1); 
-        // 8Bytes per line, 16kB total
 
-      $display("@@  %t : System halted\n@@", $realtime);
+   // testing segment //
+   initial begin 
 
-      case(pipeline_error_status)
-        `HALTED_ON_MEMORY_ERROR:  
-            $display("@@@ System halted on memory error");
-        `HALTED_ON_HALT:          
-            $display("@@@ System halted on HALT instruction");
-        `HALTED_ON_ILLEGAL:
-            $display("@@@ System halted on illegal instruction");
-        default: 
-            $display("@@@ System halted on unknown error code %x",
-                     pipeline_error_status);
-      endcase
-      $display("@@@\n@@");
-      show_clk_count;
-      print_close(); // close the pipe_print output file
-      $fclose(wb_fileno);
-      #100 $finish;
-    end
+	$display("STARTING TESTBENCH!\n");
 
-  end  // if(reset)	 
-end 
+	// initial state //
+	correct = 1;
+	clock   = 0;
+	reset   = 1;
 
-endmodule  // module testbench
+	take_branch = 0;
+	branch_target = 64'h0;
+	mem2proc_data = 64'h0000000011111111;
+	
+	reset = 1;
+
+        DISPLAY_STATE(`PRECLOCK);
+        @(posedge clock);
+        @(negedge clock);
+        DISPLAY_STATE(`POSTCLOCK);
+		
+	take_branch = 0;
+	branch_target = 64'h0;
+	mem2proc_data = 64'h1111111122222222;
+	
+        reset = 0;
+
+        DISPLAY_STATE(`PRECLOCK);
+        @(posedge clock);
+        @(negedge clock);
+        DISPLAY_STATE(`POSTCLOCK);
+
+	take_branch = 1;
+	branch_target = 64'h0000000000000100;
+	mem2proc_data = 64'h2222222233333333;
+	
+        DISPLAY_STATE(`PRECLOCK);
+        @(posedge clock);
+        @(negedge clock);
+        DISPLAY_STATE(`POSTCLOCK);
+
+
+	take_branch = 0;
+	branch_target = 64'h0;
+	mem2proc_data = 64'h4444444455555555;
+	
+        DISPLAY_STATE(`PRECLOCK);
+        @(posedge clock);
+        @(negedge clock);
+        DISPLAY_STATE(`POSTCLOCK);		
+		
+	// SUCCESSFULLY END TESTBENCH //
+	$display("ENDING TESTBENCH : SUCCESS !\n");
+	$finish;
+	
+   end
+
+endmodule
+
 

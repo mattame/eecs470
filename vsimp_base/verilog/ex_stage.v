@@ -119,6 +119,7 @@ module ex_stage(// Inputs
   wire 		  ex_mult_valid_out_2;   // Valid Output
   
   reg    [63:0] opa_mux_out_1, opa_mux_out_2, opb_mux_out_1, opb_mux_out_2;
+  wire		branch_valid_out;
   wire          brcond_result;
    
    // set up possible immediates:
@@ -129,6 +130,8 @@ module ex_stage(// Inputs
   wire [63:0] br_disp_1  = { {41{id_ex_IR_1[20]}}, id_ex_IR_1[20:0], 2'b00 };
   wire [63:0] alu_imm_1  = { 56'b0, id_ex_IR_1[20:13] };
   
+  wire [63:0] branch_target;
+
   wire [63:0] mem_disp_2 = { {48{id_ex_IR_2[15]}}, id_ex_IR_2[15:0] };
   wire [63:0] br_disp_2  = { {41{id_ex_IR_2[20]}}, id_ex_IR_2[20:0], 2'b00 };
   wire [63:0] alu_imm_2  = { 56'b0, id_ex_IR_2[20:13] };
@@ -144,6 +147,9 @@ module ex_stage(// Inputs
   assign mult_valid_in_2 = (id_ex_alu_func_2 == `ALU_MULQ) ? 1'b1: 1'b0;
   assign alu_valid_out_2  = (ex_alu_result_out_2 == 64'hdeadbeefbaadbeef) ? 1'b0: 1'b1;
    
+  assign branch_valid_out = (id_ex_uncond_branch | id_ex_cond_branch) ? 1'b1: 1'b0;
+
+  assign branch_target = br_disp_1 + id_ex_NPC_1;
    //
    // ALU opA mux
    //
@@ -250,7 +256,10 @@ module ex_stage(// Inputs
                 // Output
                 .cond(brcond_result)
                );
-  arbiter arb_0 (// Inputs
+  arbiter arb_0 (// Inputs		// Branch
+					.ex_branch_valid_out(branch_valid_out),
+					.ex_branch_target(branch_target),
+					// ALU 1 Bus
 					.ex_alu_IR_out_1(ex_alu_IR_out_1),
 					.ex_alu_NPC_out_1(ex_alu_NPC_out_1),
 					.ex_alu_dest_reg_out_1(ex_alu_dest_reg_out_1),

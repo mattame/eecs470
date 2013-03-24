@@ -21,7 +21,8 @@
 //
 module arbiter(		  // Inputs
 				// Branch (on bus 1)
-				ex_branch_valid_out
+				ex_branch_valid_out,
+				ex_branch_target,
 				// ALU 1 Bus
 				ex_alu_IR_out_1,
 				ex_alu_NPC_out_1,
@@ -64,6 +65,10 @@ module arbiter(		  // Inputs
 				ex_valid_out_2
 			  );
 				  
+	input 	     ex_branch_valid_out;
+	input 	     ex_take_branch;
+	input [63:0] ex_branch_target;
+
 	input [31:0] ex_alu_IR_out_1;
 	input [63:0] ex_alu_NPC_out_1;
 	input  [4:0] ex_alu_dest_reg_out_1;
@@ -90,7 +95,7 @@ module arbiter(		  // Inputs
 	
 	output		  stall_bus_1;
 	output		  stall_bus_2;
-	
+
 	output [31:0] ex_IR_out_1;
 	output [63:0] ex_NPC_out_1;
 	output  [4:0] ex_dest_reg_out_1;
@@ -118,13 +123,22 @@ module arbiter(		  // Inputs
 			end
 			1'b0:
 			begin
-				
 				ex_IR_out_1 		= ex_alu_IR_out_1;
 				ex_NPC_out_1 		= ex_alu_NPC_out_1;
 				ex_dest_reg_out_1 	= ex_alu_dest_reg_out_1;
-				ex_result_out_1 	= ex_alu_result_out_1;
-				ex_valid_out_1		= ex_alu_valid_out_1;
 				stall_bus_1 		= 0;
+
+				case(ex_branch_valid_out)
+					1'b1:
+					begin
+						ex_result_out_1 	= ex_branch_target;
+						ex_valid_out_1		= 1;
+					end
+					1'b0:
+					begin
+						ex_result_out_1 	= ex_alu_result_out_1;
+						ex_valid_out_1		= ex_alu_valid_out_1;
+					end
 			end
 		endcase
 		//Output mux 2

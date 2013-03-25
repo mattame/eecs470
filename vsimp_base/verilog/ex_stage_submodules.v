@@ -8,8 +8,6 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-`timescale 1ns/100ps
-
 //
 // The Output Arbiter
 //
@@ -66,7 +64,6 @@ module arbiter(		  // Inputs
 			  );
 				  
 	input 	     ex_branch_valid_out;
-	input 	     ex_take_branch;
 	input [63:0] ex_branch_target;
 
 	input [31:0] ex_alu_IR_out_1;
@@ -108,171 +105,26 @@ module arbiter(		  // Inputs
 	output [63:0] ex_result_out_2;
 	output		  ex_valid_out_2;
 	
-	always @*
-	begin	
-		//Output mux 1
-		case(ex_mult_valid_out_1)
-			1'b1: 
-			begin
-				ex_IR_out_1 		= ex_mult_IR_out_1;
-				ex_NPC_out_1 		= ex_mult_NPC_out_1;
-				ex_dest_reg_out_1 	= ex_mult_dest_reg_out_1;
-				ex_result_out_1 	= ex_mult_result_out_1;
-				ex_valid_out_1		= 1;
-				stall_bus_1 		= 1;
-			end
-			1'b0:
-			begin
-				ex_IR_out_1 		= ex_alu_IR_out_1;
-				ex_NPC_out_1 		= ex_alu_NPC_out_1;
-				ex_dest_reg_out_1 	= ex_alu_dest_reg_out_1;
-				stall_bus_1 		= 0;
-
-				case(ex_branch_valid_out)
-					1'b1:
-					begin
-						ex_result_out_1 	= ex_branch_target;
-						ex_valid_out_1		= 1;
-					end
-					1'b0:
-					begin
-						ex_result_out_1 	= ex_alu_result_out_1;
-						ex_valid_out_1		= ex_alu_valid_out_1;
-					end
-			end
-		endcase
-		//Output mux 2
-		case(ex_mult_valid_out_2)
-			1'b1: 
-			begin
-				ex_IR_out_2 		= ex_mult_IR_out_2;
-				ex_NPC_out_2 		= ex_mult_NPC_out_2;
-				ex_dest_reg_out_2 	= ex_mult_dest_reg_out_2;
-				ex_result_out_2 	= ex_mult_result_out_2;
-				ex_valid_out_2		= 1;
-				stall_bus_2 		= 1;
-			end
-			1'b0:
-			begin
-				ex_IR_out_2 		= ex_alu_IR_out_2;
-				ex_NPC_out_2 		= ex_alu_NPC_out_2;
-				ex_dest_reg_out_2 	= ex_alu_dest_reg_out_2;
-				ex_result_out_2 	= ex_alu_result_out_2;
-				ex_valid_out_2		= ex_alu_valid_out_2;
-				stall_bus_2 		= 0;
-			end
-		endcase
-	end
+	//BUS 1 MUXES
+	assign ex_IR_out_1 = (ex_mult_valid_out_1) ? ex_mult_IR_out_1: ex_alu_IR_out_1;
+	assign ex_NPC_out_1 = (ex_mult_valid_out_1) ? ex_mult_NPC_out_1: ex_alu_NPC_out_1;
+	assign ex_dest_reg_out_1 = (ex_mult_valid_out_1) ? ex_mult_dest_reg_out_1: ex_alu_dest_reg_out_1;
+	assign ex_result_out_1 = (ex_mult_valid_out_1) ? ex_mult_result_out_1:
+							 ((ex_branch_valid_out) ? ex_branch_target:
+							 ex_alu_result_out_1);
+	assign ex_valid_out_1 = (ex_mult_valid_out_1 | ex_branch_valid_out) ? 1'b1: ex_alu_valid_out_1;
+	assign stall_bus_1 = ex_mult_valid_out_1;
 	
-
-	/* --- GLOBAL OUTPUT BUSSES
-	wire	used_bus_1, used_bus_2;	
-	// Branch > Load > Multiply > ALU
-	// Currently only Multiply and ALU implemented
-	// Yes I know it's ugly as hell.
-	always @*
-	begin
-		used_bus_1 			= 0;
-		ex_IR_out_1			= 32'h0;
-		ex_NPC_out_1		= 64'h0;
-		ex_dest_reg_out_1	= 5'h0;
-		ex_result_out_1		= 64'h0;
-		ex_valid_out_1		= 0;
+	//BUS 2 MUXES
+	assign ex_IR_out_2 = (ex_mult_valid_out_2) ? ex_mult_IR_out_2: ex_alu_IR_out_2;
+	assign ex_NPC_out_2 = (ex_mult_valid_out_2) ? ex_mult_NPC_out_2: ex_alu_NPC_out_2;
+	assign ex_dest_reg_out_2 = (ex_mult_valid_out_2) ? ex_mult_dest_reg_out_2: ex_alu_dest_reg_out_2;
+	assign ex_result_out_2 = (ex_mult_valid_out_2) ? ex_mult_result_out_2: ex_alu_result_out_2;
+	assign ex_valid_out_2 = (ex_mult_valid_out_2) ? 1'b1: ex_alu_valid_out_2;
+	assign stall_bus_2 = ex_mult_valid_out_2;
 		
-		used_bus_2			= 0;
-		ex_IR_out_2			= 32'h0;
-		ex_NPC_out_2		= 64'h0;
-		ex_dest_reg_out_2	= 5'h0;
-		ex_result_out_2		= 64'h0;
-		ex_valid_out_2		= 0;	
-		
-		stall_alu_1 = 0;
-		stall_alu_2 = 0;
-		
-		if(ex_mult_valid_out_1 == 1) {
-			used_bus_1 			= 1;
-			ex_IR_out_1 		= ex_mult_IR_out_1;
-			ex_NPC_out_1 		= ex_mult_NPC_out_1;
-			ex_dest_reg_out_1 	= ex_mult_dest_reg_out_1;
-			ex_result_out_1 	= ex_mult_result_out_1;
-			ex_valid_out_1		= 1;
-		}
-		
-		if(ex_mult_valid_out_2 == 1) {
-			if(used_bus_1 == 0){
-				used_bus_1 			= 1;
-				ex_IR_out_1 		= ex_mult_IR_out_2;
-				ex_NPC_out_1 		= ex_mult_NPC_out_2;
-				ex_dest_reg_out_1 	= ex_mult_dest_reg_out_2;
-				ex_result_out_1 	= ex_mult_result_out_2;
-				ex_valid_out_1		= 1;
-			} else {
-				used_bus_2 			= 1;
-				ex_IR_out_2 		= ex_mult_IR_out_2;
-				ex_NPC_out_2 		= ex_mult_NPC_out_2;
-				ex_dest_reg_out_2 	= ex_mult_dest_reg_out_2;
-				ex_result_out_2 	= ex_mult_result_out_2;
-				ex_valid_out_2		= 1;
-			}
-		}
-		
-		if(ex_alu_valid_out_1 == 1) {
-			if(used_bus_1 == 0){
-				used_bus_1 			= 1;
-				ex_IR_out_1 		= ex_alu_IR_out_1;
-				ex_NPC_out_1 		= ex_alu_NPC_out_1;
-				ex_dest_reg_out_1 	= ex_alu_dest_reg_out_1;
-				ex_result_out_1 	= ex_alu_result_out_1;
-				ex_valid_out_1		= 1;
-			} else if(used_bus_2 == 0){
-				used_bus_1 			= 1;
-				ex_IR_out_1 		= ex_alu_IR_out_1;
-				ex_NPC_out_1 		= ex_alu_NPC_out_1;
-				ex_dest_reg_out_1 	= ex_alu_dest_reg_out_1;
-				ex_result_out_1 	= ex_alu_result_out_1;
-				ex_valid_out_1		= 1;
-			} else {
-				stall_alu_1 = 1;
-			}
-		}
-		
-		if(ex_alu_valid_out_2 == 1) {
-			if(used_bus_1 == 0){
-				used_bus_1 			= 1;
-				ex_IR_out_1 		= ex_alu_IR_out_2;
-				ex_NPC_out_1 		= ex_alu_NPC_out_2;
-				ex_dest_reg_out_1 	= ex_alu_dest_reg_out_2;
-				ex_result_out_1 	= ex_alu_result_out_2;
-				ex_valid_out_1		= 1;
-			} else if(used_bus_2 == 0){
-				used_bus_1 			= 1;
-				ex_IR_out_1 		= ex_alu_IR_out_2;
-				ex_NPC_out_1 		= ex_alu_NPC_out_2;
-				ex_dest_reg_out_1 	= ex_alu_dest_reg_out_2;
-				ex_result_out_1 	= ex_alu_result_out_2;
-				ex_valid_out_1		= 1;
-			} else {
-				stall_alu_2 = 1;
-			}
-		}
-	end
-	*/
-
-	
 endmodule
-/*
-module arbiter_base(req,en,gnt,req_up);
-        input [1:0] req;
-        input en;
-        output [1:0] gnt;
-        output req_up;
 
-        assign req_up = req[1] | req[0];
-        assign gnt[1] = en & req[1];
-        assign gnt[0] = en & req[0] & ~req[1];
-
-endmodule
-*/
 //
 // The Multiplier Stage
 //

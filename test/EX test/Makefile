@@ -23,8 +23,8 @@ all:    simv
 # Modify starting here
 #####
 
-TESTBENCH = test_ex_stage.v \ sysdefs.vh
-SIMFILES = ex_stage.v \ ex_stage_submodules.v
+TESTBENCH = sys_defs.vh test_ex_stage.v 
+SIMFILES = ex_stage_submodules.v ex_stage.v
 SYNFILES = ex_stage.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
 
 ex_stage.vg:	test_ex_stage.v reservation_station.tcl 

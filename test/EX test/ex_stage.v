@@ -11,7 +11,6 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-`timescale 1ns/100ps
 
 
 module ex_stage(// Inputs
@@ -81,22 +80,22 @@ module ex_stage(// Inputs
   
 
   output        stall_bus_1;	     // Should input bus 1 stall?
-  output	stall_bus_2;	     // Should input bus 2 stall?
-  output        ex_take_branch_out;  // is this a taken branch?
+  output		stall_bus_2;	     // Should input bus 2 stall?
+  output        ex_branch_taken;  // is this a taken branch?
   
 				// Bus 1
-  output [31:0]	ex_IR_out_1,		 // 32 bit instruction out
-  output [63:0] ex_NPC_out_1,		 // PC+4
-  output  [4:0] ex_dest_reg_out_1,	 // Destination Reg
-  output [63:0] ex_result_out_1,	 // Bus 1 Result
-  output		ex_valid_out_1,		 // Valid Output
+  output [31:0]	ex_IR_out_1;		 // 32 bit instruction out
+  output [63:0] ex_NPC_out_1;		 // PC+4
+  output  [4:0] ex_dest_reg_out_1;	 // Destination Reg
+  output [63:0] ex_result_out_1;	 // Bus 1 Result
+  output		ex_valid_out_1;		 // Valid Output
   
 				// Bus 2
-  output [31:0]	ex_IR_out_2,		 // 32 bit instruction
-  output [63:0] ex_NPC_out_2,		 // PC+4
-  output  [4:0] ex_dest_reg_out_2,   // Desitnation Reg
-  output [63:0] ex_result_out_2,	 // Bus 2 result
-  output		ex_valid_out_2,		 // Valid Output
+  output [31:0]	ex_IR_out_2;		 // 32 bit instruction
+  output [63:0] ex_NPC_out_2;		 // PC+4
+  output  [4:0] ex_dest_reg_out_2;   // Desitnation Reg
+  output [63:0] ex_result_out_2;	 // Bus 2 result
+  output		ex_valid_out_2;		 // Valid Output
   
   
   // Inputs to the arbiter
@@ -104,7 +103,7 @@ module ex_stage(// Inputs
   wire		  ex_alu_valid_out_1;    // Valid Output
   
   wire [63:0] ex_alu_result_out_2;   // ALU result
-  wire		  ex_alu_valid_out_1;	 // Valid Output
+  wire		  ex_alu_valid_out_2;	 // Valid Output
   
   wire [31:0] ex_mult_IR_out_1;	  	 // 32 bit instruction
   wire [63:0] ex_mult_NPC_out_1;	 // PC+4
@@ -136,16 +135,16 @@ module ex_stage(// Inputs
   wire [63:0] br_disp_2  = { {41{id_ex_IR_2[20]}}, id_ex_IR_2[20:0], 2'b00 };
   wire [63:0] alu_imm_2  = { 56'b0, id_ex_IR_2[20:13] };
   
-  wire mult_valid_in_1, mult_valid_in_2;
+  wire ex_mult_valid_in_1, ex_mult_valid_in_2;
    
    //
    // Check if we use the ALU or the Multiplier for each channel
    //
-  assign mult_valid_in_1 = (id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1: 1'b0;
-  assign alu_valid_out_1  = (ex_alu_result_out_1 == 64'hdeadbeefbaadbeef) ? 1'b0: 1'b1;
+  assign ex_mult_valid_in_1 = (id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1: 1'b0;
+  assign ex_alu_valid_out_1  = (ex_alu_result_out_1 == 64'hdeadbeefbaadbeef) ? 1'b0: 1'b1;
   
-  assign mult_valid_in_2 = (id_ex_alu_func_2 == `ALU_MULQ) ? 1'b1: 1'b0;
-  assign alu_valid_out_2  = (ex_alu_result_out_2 == 64'hdeadbeefbaadbeef) ? 1'b0: 1'b1;
+  assign ex_mult_valid_in_2 = (id_ex_alu_func_2 == `ALU_MULQ) ? 1'b1: 1'b0;
+  assign ex_alu_valid_out_2  = (ex_alu_result_out_2 == 64'hdeadbeefbaadbeef) ? 1'b0: 1'b1;
    
   assign branch_valid_out = (id_ex_uncond_branch | id_ex_cond_branch) ? 1'b1: 1'b0;
 
@@ -183,7 +182,7 @@ module ex_stage(// Inputs
       `ALU_OPB_IS_BR_DISP: opb_mux_out_1 = br_disp_1;
     endcase 
     opb_mux_out_2 = 64'hbaadbeefdeadbeef;
-    case (id_ex_opb_select)
+    case (id_ex_opb_select_2)
       `ALU_OPB_IS_REGB:    opb_mux_out_2 = id_ex_regb_2;
       `ALU_OPB_IS_ALU_IMM: opb_mux_out_2 = alu_imm_2;
       `ALU_OPB_IS_BR_DISP: opb_mux_out_2 = br_disp_2;
@@ -199,7 +198,7 @@ module ex_stage(// Inputs
              .func(id_ex_alu_func_1),
 
              // Output
-             .result(ex_alu_1_result_out_1),
+             .result(ex_alu_result_out_1)
             );
   alu alu_2 (// Inputs
              .opa(opa_mux_out_2),
@@ -207,7 +206,7 @@ module ex_stage(// Inputs
              .func(id_ex_alu_func_2),
 
              // Output
-             .result(ex_alu_result_out_2),
+             .result(ex_alu_result_out_2)
             );
     //
     // instantiate the multiplier
@@ -216,18 +215,18 @@ module ex_stage(// Inputs
                .clock(clock),
                .reset(reset),
 			   .IR_in(id_ex_IR_1),
-			   .NPC_out(id_ex_NPC_1),
+			   .NPC_in(id_ex_NPC_1),
 			   .dest_reg_in(id_ex_dest_reg_1),
                .mplier(opa_mux_out_1),
                .mcand(opb_mux_out_1),
-               .valid_in(mult_valid_in_1),
+               .valid_in(ex_mult_valid_in_1),
            
                // Outputs
 			   .IR_out(ex_mult_IR_out_1),
 			   .NPC_out(ex_mult_NPC_out_1),
 			   .dest_reg_out(ex_mult_dest_reg_out_1),
                .product(ex_mult_result_out_1),
-               .valid_out(mult_valid_out_1)
+               .valid_out(ex_mult_valid_out_1)
               );
   mult mult_2 (// Inputs
                .clock(clock),
@@ -237,14 +236,14 @@ module ex_stage(// Inputs
 			   .dest_reg_in(id_ex_dest_reg_2),
                .mplier(opa_mux_out_2),
                .mcand(opb_mux_out_2),
-               .valid_in(mult_valid_in_2),
+               .valid_in(ex_mult_valid_in_2),
            
                // Outputs
 			   .IR_out(ex_mult_IR_out_2),
 			   .NPC_out(ex_mult_NPC_out_2),
 			   .dest_reg_out(ex_mult_dest_reg_out_2),
-               .product(ex_mul_result_out_2),
-               .valid_out(mult_valid_out_2)
+               .product(ex_mult_result_out_2),
+               .valid_out(ex_mult_valid_out_2)
               );
    //
    // instantiate the branch condition tester
@@ -260,15 +259,15 @@ module ex_stage(// Inputs
 					.ex_branch_valid_out(branch_valid_out),
 					.ex_branch_target(branch_target),
 					// ALU 1 Bus
-					.ex_alu_IR_out_1(ex_alu_IR_out_1),
-					.ex_alu_NPC_out_1(ex_alu_NPC_out_1),
-					.ex_alu_dest_reg_out_1(ex_alu_dest_reg_out_1),
+					.ex_alu_IR_out_1(id_ex_IR_1),
+					.ex_alu_NPC_out_1(id_ex_NPC_1),
+					.ex_alu_dest_reg_out_1(id_ex_dest_reg_1),
 					.ex_alu_result_out_1(ex_alu_result_out_1),
 					.ex_alu_valid_out_1(ex_alu_valid_out_1),
 					// ALU 2 Bus
-					.ex_alu_IR_out_2(ex_alu_IR_out_2),
-					.ex_alu_NPC_out_2(ex_alu_NPC_out_2),
-					.ex_alu_dest_reg_out_2(ex_alu_dest_reg_out_2),
+					.ex_alu_IR_out_2(id_ex_IR_2),
+					.ex_alu_NPC_out_2(id_ex_NPC_2),
+					.ex_alu_dest_reg_out_2(id_ex_dest_reg_2),
 					.ex_alu_result_out_2(ex_alu_result_out_2),
 					.ex_alu_valid_out_2(ex_alu_valid_out_2),
 					// Multiplier 1 Bus
@@ -286,7 +285,7 @@ module ex_stage(// Inputs
 					
 				   // Outputs
 					.stall_bus_1(stall_bus_1),
-					.stall_bus_2(stall_bus_2,
+					.stall_bus_2(stall_bus_2),
 					// Bus 1
 					.ex_IR_out_1(ex_IR_out_1),
 					.ex_NPC_out_1(ex_NPC_out_1),

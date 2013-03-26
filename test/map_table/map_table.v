@@ -25,6 +25,12 @@ module map_table(clock,reset,clear_entries,        // signal inputs
                  inst2_dest_in,
                  inst2_tag_in,
 
+                 // cdb inputs //
+                 cdb1_tag_in,
+                 cdb1_value_in,
+                 cdb2_tag_in,
+                 cdb2_value_in,
+                
                  // tag outputs //
                  inst1_taga_out,inst1_tagb_out,
                  inst2_taga_out,inst2_tagb_out  );
@@ -39,6 +45,8 @@ module map_table(clock,reset,clear_entries,        // signal inputs
    input wire [4:0] inst2_dest_in;
    input wire [7:0] inst1_tag_in;
    input wire [7:0] inst2_tag_in;
+   input wire [7:0] cdb1_tag_in;
+   input wire [7:0] cdb2_tag_in;
 
    // outputs //
    output wire [7:0] inst1_taga_out,inst1_tagb_out;

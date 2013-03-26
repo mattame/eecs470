@@ -1,0 +1,72 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Red Hat Enterprise Linux Workstation release 6.3 (Santiago)' 
+  is not supported on 'x86_64' officially, assuming linux compatibility by 
+  default. Set VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+                         Chronologic VCS (TM)
+         Version E-2011.03_Full64 -- Tue Mar 26 05:07:31 2013
+               Copyright (c) 1991-2011 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+DirectC Release 1.0 Copyright (c) 1991-2011 by Synopsys Inc.
+Parsing design file 'test_map_table.v'
+Parsing design file 'map_table.v'
+Top Level Modules:
+       testbench
+No TimeScale specified
+Starting vcs inline pass...
+1 module and 0 UDP read.
+recompiling module testbench
+make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/map_table/csrc'
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/map_table/csrc'
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Mar 26 05:07 2013
+
+STARTING TESTBENCH!
+
+  preclock: reset=1 i1_taga_out=xx i1_tagb_out=xx i2_taga_out=xx i2_tagb_out=xx
+  postclock: reset=1 i1_taga_out=00 i1_tagb_out=00 i2_taga_out=00 i2_tagb_out=00
+
+  preclock: reset=0 i1_taga_out=00 i1_tagb_out=00 i2_taga_out=00 i2_tagb_out=00
+  postclock: reset=0 i1_taga_out=00 i1_tagb_out=00 i2_taga_out=00 i2_tagb_out=00
+
+  preclock: reset=0 i1_taga_out=00 i1_tagb_out=00 i2_taga_out=00 i2_tagb_out=00
+  postclock: reset=0 i1_taga_out=00 i1_tagb_out=00 i2_taga_out=00 i2_tagb_out=00
+
+  preclock: reset=0 i1_taga_out=00 i1_tagb_out=00 i2_taga_out=00 i2_tagb_out=00
+  postclock: reset=0 i1_taga_out=ab i1_tagb_out=00 i2_taga_out=00 i2_tagb_out=00
+
+  preclock: reset=0 i1_taga_out=ab i1_tagb_out=00 i2_taga_out=00 i2_tagb_out=00
+  postclock: reset=0 i1_taga_out=ab i1_tagb_out=ab i2_taga_out=ab i2_tagb_out=ab
+
+  preclock: reset=0 i1_taga_out=ab i1_tagb_out=ab i2_taga_out=ab i2_tagb_out=ab
+  postclock: reset=0 i1_taga_out=cd i1_tagb_out=cd i2_taga_out=ef i2_tagb_out=ef
+
+  preclock: reset=0 i1_taga_out=cd i1_tagb_out=cd i2_taga_out=ef i2_tagb_out=ef
+  postclock: reset=0 i1_taga_out=22 i1_tagb_out=22 i2_taga_out=ef i2_tagb_out=ef
+
+  preclock: reset=0 i1_taga_out=22 i1_tagb_out=22 i2_taga_out=ef i2_tagb_out=ef
+  postclock: reset=0 i1_taga_out=33 i1_tagb_out=33 i2_taga_out=ef i2_tagb_out=ef
+
+  preclock: reset=1 i1_taga_out=33 i1_tagb_out=33 i2_taga_out=ef i2_tagb_out=ef
+  postclock: reset=1 i1_taga_out=00 i1_tagb_out=00 i2_taga_out=00 i2_tagb_out=00
+
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test_map_table.v", line 185.
+$finish at simulation time                   90
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 90
+CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
+Tue Mar 26 05:07:32 2013
+CPU time: .140 seconds to compile + .038 seconds to elab + .159 seconds to link + .042 seconds in simulation

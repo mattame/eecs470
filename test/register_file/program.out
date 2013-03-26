@@ -1,0 +1,72 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Red Hat Enterprise Linux Workstation release 6.3 (Santiago)' 
+  is not supported on 'x86_64' officially, assuming linux compatibility by 
+  default. Set VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+                         Chronologic VCS (TM)
+         Version E-2011.03_Full64 -- Tue Mar 26 05:06:04 2013
+               Copyright (c) 1991-2011 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+DirectC Release 1.0 Copyright (c) 1991-2011 by Synopsys Inc.
+Parsing design file 'test_register_file.v'
+Parsing design file 'register_file.v'
+Top Level Modules:
+       testbench
+No TimeScale specified
+Starting vcs inline pass...
+1 module and 0 UDP read.
+recompiling module testbench
+make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/csrc'
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/csrc'
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Mar 26 05:06 2013
+
+STARTING TESTBENCH!
+
+  preclock: reset=1 i1_rega_out=xxxxxxxxxxxxxxxx i1_regb_out=xxxxxxxxxxxxxxxx i2_rega_out=xxxxxxxxxxxxxxxx i2_regb_out=xxxxxxxxxxxxxxxx clear_entries=00000000000000000000000000000000
+ postclock: reset=1 i1_rega_out=0000000000000000 i1_regb_out=0000000000000000 i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000000
+
+  preclock: reset=0 i1_rega_out=0000000000000000 i1_regb_out=0000000000000000 i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000000
+ postclock: reset=0 i1_rega_out=0000000000000000 i1_regb_out=0000000000000000 i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000000
+
+  preclock: reset=0 i1_rega_out=0000000000000000 i1_regb_out=0000000000000000 i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000110
+ postclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=bbbbbbbbbbbbbbbb i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000110
+
+  preclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=bbbbbbbbbbbbbbbb i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000100
+ postclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=aaaaaaaaaaaaaaaa i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000100
+
+  preclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=aaaaaaaaaaaaaaaa i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000011000
+ postclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=aaaaaaaaaaaaaaaa i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000011000
+
+  preclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=aaaaaaaaaaaaaaaa i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000000
+ postclock: reset=0 i1_rega_out=dddddddddddddddd i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000000000000
+
+  preclock: reset=0 i1_rega_out=dddddddddddddddd i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000000100000
+ postclock: reset=0 i1_rega_out=cdcdcdcdcdcdcdcd i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000000100000
+
+  preclock: reset=0 i1_rega_out=cdcdcdcdcdcdcdcd i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000001000000
+ postclock: reset=0 i1_rega_out=ffffffffffffffff i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000001000000
+
+  preclock: reset=1 i1_rega_out=ffffffffffffffff i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000001000000
+ postclock: reset=1 i1_rega_out=0000000000000000 i1_regb_out=0000000000000000 i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000001000000
+
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test_register_file.v", line 186.
+$finish at simulation time                   95
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 95
+CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
+Tue Mar 26 05:06:05 2013
+CPU time: .156 seconds to compile + .040 seconds to elab + .162 seconds to link + .042 seconds in simulation

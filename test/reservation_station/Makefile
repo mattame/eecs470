@@ -23,12 +23,12 @@ all:    simv
 # Modify starting here
 #####
 
-TESTBENCH = test_map_table.v
-SIMFILES = map_table.v
-SYNFILES = map_table.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
+TESTBENCH = test_reservation_station.v
+SIMFILES = reservation_station.v
+SYNFILES = reservation_station.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
 
-map_table.vg:	test_map_table.v map_table.tcl 
-	dc_shell-t -f map_table.tcl | tee synth.out
+reservation_station.vg:	test_reservation_station.v reservation_station.tcl 
+	dc_shell-t -f reservation_station.tcl | tee synth.out
 
 
 #####

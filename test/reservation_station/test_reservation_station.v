@@ -14,18 +14,63 @@ module testbench;
         reg [4:0] dest_reg_in;
         reg [7:0] waiting_taga_in, waiting_tagb_in, cdb1_tag_in, cdb2_tag_in;
         reg [63:0] rega_value_in, regb_value_in, cdb1_value_in, cdb2_value_in;
-        
+       
+        reg [1:0] opa_select_in;
+        reg [1:0] opb_select_in;
+        reg [4:0] alu_func_in;
+        reg       rd_mem_in;
+        reg       wr_mem_in;
+        reg       cond_branch_in;
+        reg       uncond_branch_in;
+
+        wire [1:0] opa_select_out;
+        wire [1:0] opb_select_out;
+        wire [4:0] alu_func_out;
+        wire       rd_mem_out;
+        wire       wr_mem_out;
+        wire       cond_branch_out;
+        wire       uncond_branch_out;
+ 
         wire [2:0]  status_out;
         wire [4:0]  dest_reg_out;
         wire [63:0] rega_value_out, regb_value_out;
 
    
         // module to be tested //	
-        reservation_station rs(.clock(clock), .reset(reset), .fill(fill), 
-                 .dest_reg_in(dest_reg_in), .waiting_taga_in(waiting_taga_in),
-                 .waiting_tagb_in(waiting_tagb_in), .cdb1_tag_in(cdb1_tag_in), .cdb2_tag_in(cdb2_tag_in), .rega_value_in(rega_value_in),
-                 .regb_value_in(regb_value_in), .cdb1_value_in(cdb1_value_in), .cdb2_value_in(cdb2_value_in), .status_out(status_out), .dest_reg_out(dest_reg_out), .rega_value_out(rega_value_out),
-                 .regb_value_out(regb_value_out)      );
+        reservation_station_entry rs(.clock(clock), .reset(reset), .fill(fill), 
+
+                 .dest_reg_in(dest_reg_in),
+                 .waiting_taga_in(waiting_taga_in),
+                 .waiting_tagb_in(waiting_tagb_in),
+                 .cdb1_tag_in(cdb1_tag_in),
+                 .cdb2_tag_in(cdb2_tag_in),
+                 .rega_value_in(rega_value_in),
+                 .regb_value_in(regb_value_in),
+                 .cdb1_value_in(cdb1_value_in),
+                 .cdb2_value_in(cdb2_value_in),
+
+                 .opa_select_in(opa_select_in),
+                 .opb_select_in(opb_select_in),
+                 .alu_func_in(alu_func_in),
+                 .rd_mem_in(rd_mem_in),
+                 .wr_mem_in(wr_mem_in),
+                 .cond_branch_in(cond_branch_in),
+                 .uncond_branch_in(uncond_branch_in),
+
+                 .opa_select_out(opa_select_out),
+                 .opb_select_out(opb_select_out),
+                 .alu_func_out(alu_func_out),
+                 .rd_mem_out(rd_mem_out),
+                 .wr_mem_out(wr_mem_out),
+                 .cond_branch_out(cond_branch_out),
+                 .uncond_branch_out(uncond_branch_out),
+
+                 .status_out(status_out),
+                 .dest_reg_out(dest_reg_out),
+                 .rega_value_out(rega_value_out),
+                 .regb_value_out(regb_value_out)
+
+      );
 
 
    // run the clock //
@@ -70,11 +115,9 @@ module testbench;
       input preclock;
    begin
       if (preclock==`PRECLOCK)
-         $display("  preclock: reset=%b fill=%b dest_reg_in=%h waiting_taga_in=%h waiting_tagb_in=%h cdb1_tag_in=%h cdb2_tag_in=%h cdb1_value_in=%h cdb2_value_in=%h status_out=%h dest_reg_out=%h rega_value_out=%h regb_value_out=%h ", reset,
-         fill,dest_reg_in,waiting_taga_in,waiting_tagb_in,cdb1_tag_in, cdb2_tag_in, cdb1_value_in, cdb2_value_in, status_out, dest_reg_out, rega_value_out, regb_value_out);  
+         $display("  preclock: reset=%b fill=%b status_out=%h dest_reg_out=%h rega_value_out=%h regb_value_out=%h opaselo=%b opbselo=%b aluo=%b cbo=%b ubo=%b ", reset, fill, status_out, dest_reg_out, rega_value_out, regb_value_out, opa_select_out, opb_select_out, alu_func_out, rd_mem_out, wr_mem_out, cond_branch_out, uncond_branch_out);  
       else
-         $display(" postclock: reset=%b fill=%b dest_reg_in=%h waiting_taga_in=%h waiting_tagb_in=%h cdb1_tag_in=%h cdb2_tag_in=%h cdb1_value_in=%h cdb2_value_in=%h status_out=%h dest_reg_out=%h rega_value_out=%h regb_value_out=%h ", reset,
-         fill,dest_reg_in,waiting_taga_in,waiting_tagb_in,cdb1_tag_in, cdb2_tag_in, cdb1_value_in, cdb2_value_in, status_out, dest_reg_out, rega_value_out, regb_value_out);
+         $display(" postclock: reset=%b fill=%b status_out=%h dest_reg_out=%h rega_value_out=%h regb_value_out=%h opaselo=%b opbselo=%b aluo=%b cbo=%b ubo=%b ", reset, fill, status_out, dest_reg_out, rega_value_out, regb_value_out, opa_select_out, opb_select_out, alu_func_out, rd_mem_out, wr_mem_out, cond_branch_out, uncond_branch_out);
    end
    endtask
 
@@ -89,6 +132,7 @@ module testbench;
 	clock   = 0;
 	reset   = 1;
 	fill    = 0;
+
   dest_reg_in = 5'd0;
   waiting_taga_in = 8'd0;
   waiting_tagb_in = 8'd0;
@@ -98,6 +142,14 @@ module testbench;
   regb_value_in = 64'd0;
   cdb1_value_in = 64'd0;
   cdb2_value_in = 64'd0;
+
+     opa_select_in    = 2'b10;
+     opb_select_in    = 2'b01;
+     alu_func_in      = 5'b10101;
+     rd_mem_in        = 1'b0;
+     wr_mem_in        = 1'b0;
+     cond_branch_in   = 1'b0;
+     uncond_branch_in = 1'b0;
 
 
         // TRANSITION TESTS //

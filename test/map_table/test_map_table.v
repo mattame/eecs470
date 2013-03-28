@@ -1,5 +1,5 @@
 
-`define RSTAG_NULL 8'd0
+`define RSTAG_NULL 8'hFF
 
 // general case testbench module //
 module testbench;
@@ -11,8 +11,6 @@ module testbench;
 	// wires for testing the module //
 	reg clock;
 	reg reset;
-        reg inst1_write_tag;
-        reg inst2_write_tag;
         reg [4:0] inst1_rega_in;
         reg [4:0] inst1_regb_in;
         reg [4:0] inst1_dest_in;
@@ -22,6 +20,8 @@ module testbench;
         reg [4:0] inst2_dest_in;
         reg [7:0] inst2_tag_in;
         reg [31:0] clear_entries;
+        reg [7:0] cdb1_tag_in;
+        reg [7:0] cdb2_tag_in;
         wire [7:0] inst1_taga_out;
         wire [7:0] inst1_tagb_out;
         wire [7:0] inst2_taga_out;
@@ -39,7 +39,10 @@ module testbench;
                  .inst2_regb_in(inst2_regb_in),
                  .inst2_dest_in(inst2_dest_in),
                  .inst2_tag_in(inst2_tag_in),
-                 
+ 
+                 .cdb1_tag_in(cdb1_tag_in),
+                 .cdb2_tag_in(cdb2_tag_in),                
+ 
                  .inst1_taga_out(inst1_taga_out),.inst1_tagb_out(inst1_tagb_out),
                  .inst2_taga_out(inst2_taga_out),.inst2_tagb_out(inst2_tagb_out)
                                                                                   );
@@ -87,9 +90,9 @@ module testbench;
       input preclock;
    begin
       if (preclock==`PRECLOCK)
-         $display("  preclock: reset=%b i1_taga_out=%h i1_tagb_out=%h i2_taga_out=%h i2_tagb_out=%h", reset, inst1_taga_out,inst1_tagb_out,inst2_taga_out,inst2_tagb_out);
+         $display("  preclock: reset=%b i1_taga_out=%b i1_tagb_out=%b i2_taga_out=%b i2_tagb_out=%b", reset, inst1_taga_out,inst1_tagb_out,inst2_taga_out,inst2_tagb_out);
       else
-         $display("  postclock: reset=%b i1_taga_out=%h i1_tagb_out=%h i2_taga_out=%h i2_tagb_out=%h", reset, inst1_taga_out,inst1_tagb_out,inst2_taga_out,inst2_tagb_out);
+         $display(" postclock: reset=%b i1_taga_out=%b i1_tagb_out=%b i2_taga_out=%b i2_tagb_out=%b", reset, inst1_taga_out,inst1_tagb_out,inst2_taga_out,inst2_tagb_out);
    end
    endtask
 
@@ -114,17 +117,17 @@ module testbench;
         correct = 1;
         clock   = 0;
         reset   = 1;
-        inst1_write_tag = 0;
-        inst2_write_tag = 0;
         inst1_rega_in = 5'd0;
         inst1_regb_in = 5'd0;
         inst2_rega_in = 5'd0;
         inst2_regb_in = 5'd0;
         inst1_dest_in = 5'd0;
         inst2_dest_in = 5'd0;
-        inst2_tag_in = `RSTAG_NULL; 
+        inst1_tag_in = `RSTAG_NULL; 
         inst2_tag_in = `RSTAG_NULL;
         clear_entries = 32'd0;
+        cdb1_tag_in = `RSTAG_NULL;
+        cdb2_tag_in = `RSTAG_NULL;
 
         // TRANSITION TESTS //
 
@@ -136,13 +139,11 @@ module testbench;
 
         CLOCK_AND_DISPLAY();
 
-        inst1_write_tag = 1;
         inst1_dest_in   = 5'd4;
-        inst1_tag_in    = 8'hAB;
+        inst1_tag_in    = 8'h0A;
 
         CLOCK_AND_DISPLAY();
       
-        inst1_write_tag = 0;
         inst1_rega_in = 5'd4;
 
         CLOCK_AND_DISPLAY();
@@ -153,12 +154,10 @@ module testbench;
 
         CLOCK_AND_DISPLAY();
 
-        inst1_write_tag = 1;
-        inst2_write_tag = 1;
         inst1_dest_in = 5'd4;
         inst2_dest_in = 5'd5;
-        inst1_tag_in = 8'hCD;
-        inst2_tag_in = 8'hEF;
+        inst1_tag_in = 8'h0B;
+        inst2_tag_in = 8'h0C;
         inst2_rega_in = 5'd5;
         inst2_regb_in = 5'd5;
 
@@ -166,13 +165,47 @@ module testbench;
 
         inst1_dest_in = 5'd4;
         inst2_dest_in = 5'd4;
-        inst1_tag_in = 8'h11;
-        inst2_tag_in = 8'h22;
+        inst1_tag_in = 8'h01;
+        inst2_tag_in = 8'h03;
 
         CLOCK_AND_DISPLAY();
 
-        inst1_tag_in = 8'h33;
-        inst2_tag_in = 8'h00;
+        inst1_tag_in = 8'h05;
+        inst2_tag_in = `RSTAG_NULL;
+
+        CLOCK_AND_DISPLAY();
+
+        // test clear functionality //
+        inst1_tag_in = `RSTAG_NULL;
+        inst2_tag_in = `RSTAG_NULL;
+        clear_entries = 32'h00000030;   // clear tags for regs 4&5
+
+        CLOCK_AND_DISPLAY();
+
+        // write stuff back into map table  // 
+        clear_entries = 32'd0;
+        inst1_dest_in = 5'd1;
+        inst2_dest_in = 5'd2;
+        inst1_tag_in  = 8'h01;
+        inst2_tag_in  = 8'h03;
+        inst1_rega_in = 5'd1;
+        inst1_regb_in = 5'd1;
+        inst2_rega_in = 5'd2;
+        inst2_regb_in = 5'd2; 
+
+        CLOCK_AND_DISPLAY();
+
+        // test ready-in-rob bit //
+        inst1_tag_in = `RSTAG_NULL;
+        inst2_tag_in = `RSTAG_NULL;
+        cdb1_tag_in = 8'h01;
+        cdb2_tag_in = 8'h03;
+
+        CLOCK_AND_DISPLAY();
+
+        // test ready-in-rob persist //
+        cdb1_tag_in = `RSTAG_NULL;
+        cdb2_tag_in = `RSTAG_NULL;
 
         CLOCK_AND_DISPLAY();
 

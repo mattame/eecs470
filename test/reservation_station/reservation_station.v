@@ -1,4 +1,5 @@
 
+
 ///////////////////////////////////////////////////////////////////////////////
 // This file will hold module definitions of the reservation station table.  //
 // The main module utilizes multiple individual reservation station modules. //
@@ -275,7 +276,7 @@ endmodule
 // valid_inst
 //
 
-/*
+
 // the actual reservation station module //
 module reservation_station(clock,reset,               // signals in
 
@@ -340,7 +341,10 @@ module reservation_station(clock,reset,               // signals in
                            // signal outputs //
                            inst1_dispatch,
                            inst2_dispatch,
-                           table_full         );
+                           table_full    
+                         
+                           // outputs for debugging //
+                           rs_ready_by_age_decoded     );
 
 
    // inputs //
@@ -401,14 +405,35 @@ module reservation_station(clock,reset,               // signals in
    wire [7:0] rs_waiting_tags1 [(`RESERVATION_STATIONS-1):0];
    wire [7:0] rs_waiting_tags2 [(`RESERVATION_STATIONS-1):0]; 
 
+   reg  [5:0]   rs_ages          [(`RESERVATION_STATIONS-1):0];
+   wire [5:0] n_rs_ages          [(`RESERVATION_STATIONS-1):0];
+   wire [5:0]   rs_ages_plus_one [(`RESERVATION_STATIONS-1):0];
+   output wor [(`RESERVATION_STATIONS-1):0] rs_ready_by_age_decoded;
 
-   // combination logic assignments //
 
+   // combinational logic for assigning rs age values //
+   genvar i;
+   generate
+      for (i=0; i<`RESERVATION_STATIONS; i=i+1)
+      begin : ASSIGNRSAGESPLUSONE
+         assign rs_ages_plus_one[i] = rs_ages[i] + 6'd1;
+      end
+   endgenerate
  
+      assign n_rs_ages[i] = (rs_statuses[i]==`RS_EMPTY &&   )
 
- 
-   // variable for combinational logic loops //
-   integer i;
+
+
+   // combination logic for assigning rs_ready_by_age_decoded //
+   // this bus indicates which rs entries are ready to be issued, in order //
+   // of their currently assigned age //
+   genvar i;
+   generate
+      for (i=0; i<`RESERVATION_STATIONS; i=i+1)
+      begin : ASSIGNREADYBYAGEDECODED
+         assign = rs_ready_by_age_decoded = ( {(`RESERVATION_STATIONS-1){1'b0},(rs_statuses[i]==`RS_READY)} << rs_ages[i] );
+      end
+   end
 
 
    // combinational logic to determine if table is table full //
@@ -417,7 +442,7 @@ module reservation_station(clock,reset,               // signals in
       genvar i;
       generate
          for (i=0; i<`RESERVATION_STATIONS; i=i+1)
-            table_full = (rs_statuses[i]==`RESERVATION_STATION_WAITING || rs_statuses[i]==`RESERVATION_STATION_READY);
+            table_full = (rs_statuses[i]==`RS_READY);
       generate
    end
 
@@ -429,6 +454,6 @@ module reservation_station(clock,reset,               // signals in
 
 
 endmodule
-*/
+
 
 

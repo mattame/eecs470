@@ -56,7 +56,7 @@ module reorder_buffer(
 	reg 			 [`ROB_ENTRIES-1:0] complete;
 	reg				 [4:0]  counter;    
 	reg				 [4:0]	previous_tail
-f
+
 	/***  outputs  ***/
   output reg        head_out;
   output reg [63:0] value_out;

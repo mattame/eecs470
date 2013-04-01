@@ -25,7 +25,7 @@
 module reorder_buffer(
                   //inputs
                   //clock, reset, 
-                  value_in, complete_in, register_in, rob_entry_in, wrt_en_in,
+                  value_in1, value_in2, register_in1, register_in2, rob_entry_in1, rob_entry_in2, wrt_en_in1, wrt_en_in2,
 
                   //outputs
                   head_out, value_out, complete_out,register_out, rob_full, rob_entry_number
@@ -35,11 +35,15 @@ module reorder_buffer(
   /***  inputs  ***/
   input wire        reset;
   input wire        clock;
-  input wire [63:0] value_in;      //comes from CDB
+  input wire [63:0] value_in1;      //comes from CDB
+	input wire [63:0] value_in2;
   //input wire        complete_in;     //not sure if this is needed                         
-  input wire [4:0]  register_in;   //comes from decode stage
-	input wire [4:0]	rob_entry_in;  //comes from CDB
-	input wire 				wrt_en_in			 //comes from CDB?
+  input wire [4:0]  register_in1;   //comes from decode stage
+	input wire [4:0]  register_in2;
+	input wire [4:0]	rob_entry_in1;  //comes from CDB
+	input wire [4:0]  rob_entry_in2;
+	input wire 				wrt_en_in1;			 //comes from CDB
+	input wire				wrt_en_in2;
 
   /***  internals  ***/
 	reg				 [`ROB_ENTRIES-1:0] valid;

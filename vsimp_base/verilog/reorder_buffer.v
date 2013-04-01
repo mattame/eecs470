@@ -55,7 +55,7 @@ module reorder_buffer(
 	reg 			 [4:0] 	tail_location;	
 	reg 			 [`ROB_ENTRIES-1:0] complete;
 	reg				 [4:0]  counter;    
-	reg				 [4:0]	previous_tail
+	reg				 [4:0]	previous_tail;
 
 	/***  outputs  ***/
   output reg        head_out;
@@ -91,13 +91,13 @@ module reorder_buffer(
 					if(i == 0) //deallocates previous tail
 					begin
 						previous_tail 						=  5'd31;
-						//tail[previous_tail]				=  0
+						//tail[previous_tail]			=  0
 					end
 			
 					else
 					begin
 						previous_tail 						= i - 1;
-						//tail[previous_tail] 			= 0;
+						//tail[previous_tail] 		= 0;
 					end
 
 					disable Loop;

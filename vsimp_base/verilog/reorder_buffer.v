@@ -59,11 +59,14 @@ module reorder_buffer(
 
 	/***  outputs  ***/
   output reg        head_out;
-  output reg [63:0] value_out;
+  output reg [63:0] value_out1;
+	output reg [63:0] value_out2;
   output reg        complete_out;
-  output reg [4:0]  register_out;
+  output reg [4:0]  register_out1;
+	output reg [4:0]  register_out2;
 	output reg 				rob_full;
-	output reg [4:0]	rob_entry_number;	
+	output reg [4:0]	rob_entry_number1;
+	output reg [4:0]  rob_entry_number2;
 
 	
 	

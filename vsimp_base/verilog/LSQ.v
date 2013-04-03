@@ -221,8 +221,24 @@ module LSQ(//Inputs
 
  reg [4:0] LSQ_head;
  reg [4:0] LSQ_tail;
- reg [4:0] next_1;
- reg [4:0] next_2;
+ reg [4:0] _1;
+ reg [4:0] _2;
+
+always @(posedge clock) begin
+	if(reset) begin
+		LSQ_head <= `SD 5'h0;
+		LSQ_tail <= `SD 5'h0;
+		_1 <= `SD 5'h0;
+		_2 <= `SD 5'h1;
+	end
+	else begin
+		LSQ_head <= `SD next_head;
+		LSQ_tail <= `SD next_tail;
+		_1 <= `SD next__1;
+		_2 <= `SD next__2;		
+	end
+
+end
 
 
 

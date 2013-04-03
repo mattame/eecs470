@@ -13,6 +13,11 @@
 
 `timescale 1ns/100ps
 
+`define SD #1
+
+// defined paramters //
+`define LSQ_ENTRIES	    32
+
 /*
 ***************************
 		Entry Module
@@ -148,9 +153,12 @@ end
 assign stored_address_out = stored_address;
 assign stored_value_out = stored_value;
 assign stored_tag_out = stored_tag;
-assign ready_out = ((!read | (read & (stored_tag == ROB_head_1 | stored_tag == ROB_head_2))) & complete) ? 1'b1: 1'b0;
+assign ready_out = (((!read & (LSQ_head == stored_tag) | 
+	                 (read & (stored_tag == ROB_head_1 | stored_tag == ROB_head_2)))
+	                 & complete) ? 1'b1: 1'b0;
 
 endmodule
+
 
 /*
 ****************************
@@ -221,21 +229,77 @@ module LSQ(//Inputs
 
  reg [4:0] LSQ_head;
  reg [4:0] LSQ_tail;
- reg [4:0] _1;
- reg [4:0] _2;
+ reg [4:0] entry_1;
+ reg [4:0] entry_2;
+
+ wire [4:0] next_head, next_tail, next_entry_1, next_entry_2;
+
+ wire [4:0]  tags_out [(`LSQ_ENTRIES-1):0];
+ wire [63:0] addrs_out [(`LSQ_ENTRIES-1):0];
+ wire [63:0] values_out [(`LSQ_ENTRIES-1):0];
+ wire 		 readies_out [(`LSQ_ENTRIES-1):0];
+
+
+// --------------- ENTRIES ----------------
+
+ LSQ_entry entries[(`LSQ_ENTRIES-1):0] (
+ 						//Inputs
+						.clock(`LSQ_ENTRIES{clock}),
+						.reset(`LSQ_ENTRIES{reset}),
+
+						.ROB_head_1(`LSQ_ENTRIES{ROB_head_1}),
+						.ROB_head_2(`LSQ_ENTRIES{ROB_head_2}),
+
+						.LSQ_head(`LSQ_ENTRIES{LSQ_head}),
+
+						.clear(clears),
+
+						.ROB_tag_1(`LSQ_ENTRIES{ROB_tag_1}),
+						.rd_mem_in_1(`LSQ_ENTRIES{rd_mem_in_1}),
+						.store_ROB_1(stores_1),
+
+						.addr_in_1(`LSQ_ENTRIES{address_in_1}),
+						.value_in_1(`LSQ_ENTRIES{value_in_1}),
+						.EX_tag_1(`LSQ_ENTRIES{EX_tag_1}),
+
+						.ROB_tag_2(`LSQ_ENTRIES{ROB_tag_2}),
+						.rd_mem_in_2(`LSQ_ENTRIES{rd_mem_in_2}),
+						.store_ROB_2(stores_2),
+
+						.addr_in_2(`LSQ_ENTRIES{address_in_2}),
+						.value_in_2(`LSQ_ENTRIES{value_in_2}),
+						.EX_tag_2(`LSQ_ENTRIES{EX_tag_2}),
+
+						//Outputs
+						.stored_tag_out(tags_out),
+						.stored_address_out(addrs_out),
+						.stored_value_out(values_out),
+						.ready_out(readies_out)
+					    );
+
+
+
+//---------------- POINTER KEEPING -----------------
+ assign next_head = ;
+
+ assign next_tail = ;
+
+ assign next_entry_1 = ;
+
+ assign next_entry_2 = ;
 
 always @(posedge clock) begin
 	if(reset) begin
 		LSQ_head <= `SD 5'h0;
 		LSQ_tail <= `SD 5'h0;
-		_1 <= `SD 5'h0;
-		_2 <= `SD 5'h1;
+		entry_1  <= `SD 5'h0;
+		entry_2  <= `SD 5'h1;
 	end
 	else begin
 		LSQ_head <= `SD next_head;
 		LSQ_tail <= `SD next_tail;
-		_1 <= `SD next__1;
-		_2 <= `SD next__2;		
+		entry_1  <= `SD next_entry_1;
+		entry_2  <= `SD next_entry_2;		
 	end
 
 end

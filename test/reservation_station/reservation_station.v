@@ -8,7 +8,7 @@
 `define SD #1
 
 // defined paramters //
-`define RESERVATION_STATIONS 8
+`define NUM_RSES 8
 `define RS_EMPTY        3'b000
 `define RS_WAITING_A    3'b001
 `define RS_WAITING_B    3'b010
@@ -249,6 +249,8 @@ endmodule
 
 
 
+
+
 // needed outputs from decode stage: //
 //
 // wire [63:0] id_rega_out;
@@ -339,12 +341,10 @@ module reservation_station(clock,reset,               // signals in
                            inst2_dest_tag_out,
 
                            // signal outputs //
-                           inst1_dispatch,
-                           inst2_dispatch,
-                           table_full    
+                           dispatch
                          
                            // outputs for debugging //
-                           rs_ready_by_age_decoded     );
+                               );
 
 
    // inputs //
@@ -377,9 +377,7 @@ module reservation_station(clock,reset,               // signals in
 
 
    // outputs //
-   output wire inst1_dispatch;
-   output wire inst2_dispatch;
-   output wand table_full; 
+   output wire dispatch; 
 
    output wire [63:0] inst1_rega_value_out,inst1_regb_value_out;
    output wire [1:0]  inst1_opa_select_out,inst1_opb_select_out;
@@ -399,61 +397,178 @@ module reservation_station(clock,reset,               // signals in
    output wire [4:0]  inst2_dest_reg_out;
    output wire [7:0]  inst2_dest_tag_out;
 
+   
+   // internal wires for interfacing the rs entries //
+   wire [(`NUM_RSES-1):0] fills;
+   wire [(`NUM_RSES-1):0] resets;
 
-   // internal wires //
-   wire [2:0] rs_statuses      [(`RESERVATION_STATIONS-1):0];
-   wire [7:0] rs_waiting_tags1 [(`RESERVATION_STATIONS-1):0];
-   wire [7:0] rs_waiting_tags2 [(`RESERVATION_STATIONS-1):0]; 
+   wire [4:0]             dest_regs_in     [(`NUM_RSES-1):0];
+   wire [63:0]            rega_values_in   [(`NUM_RSES-1):0];
+   wire [63:0]            regb_values_in   [(`NUM_RSES-1):0];
+   wire [7:0]             waiting_tagas_in [(`NUM_RSES-1):0];
+   wire [7:0]             waiting_tagbs_in [(`NUM_RSES-1):0];                
 
-   reg  [5:0]   rs_ages          [(`RESERVATION_STATIONS-1):0];
-   wire [5:0] n_rs_ages          [(`RESERVATION_STATIONS-1):0];
-   wire [5:0]   rs_ages_plus_one [(`RESERVATION_STATIONS-1):0];
-   output wor [(`RESERVATION_STATIONS-1):0] rs_ready_by_age_decoded;
+   wire [1:0]             opa_selects_in   [(`NUM_RSES-1):0];
+   wire [1:0]             opb_selects_in   [(`NUM_RSES-1):0];
+   wire [4:0]             alu_funcs_in     [(`NUM_RSES-1):0];
+   wire [(`NUM_RSES-1):0] rd_mems_in;
+   wire [(`NUM_RSES-1):0] wr_mems_in;
+   wire [(`NUM_RSES-1):0] cond_branches_in;
+   wire [(`NUM_RSES-1):0] uncond_branches_in;
+ 
+   wire [2:0]             statuses_out     [(`NUM_RSES-1):0];
+   wire [4:0]             dest_regs_out    [(`NUM_RSES-1):0];
+   wire [63:0]            rega_values_out  [(`NUM_RSES-1):0];
+   wire [63:0]            regb_values_out  [(`NUM_RSES-1):0];
+   
+   wire [1:0]             opa_selects_out  [(`NUM_RSES-1):0];
+   wire [1:0]             opb_selects_out  [(`NUM_RSES-1):0];
+   wire [4:0]             alu_funcs_out    [(`NUM_RSES-1):0];
+   wire [(`NUM_RSES-1):0] rd_mems_out ;
+   wire [(`NUM_RSES-1):0] wr_mems_out;
+   wire [(`NUM_RSES-1):0] cond_branches_out;
+   wire [(`NUM_RSES-1):0] uncond_branches_out;
+
+   
+   // other internal wires //
+   wire [2:0] statuses       [(`NUM_RSES-1):0];
+   wire [7:0] waiting_tags1  [(`NUM_RSES-1):0];
+   wire [7:0] waiting_tags2  [(`NUM_RSES-1):0]; 
+
+   reg  [7:0]   ages         [(`NUM_RSES-1):0];
+   wire [7:0] n_ages         [(`NUM_RSES-1):0];
+
+   wand [(`NUM_RSES-1):0] issue_first_states;   // indicates whether or not this rs entry should issue next
+   wand [(`NUM_RSES-1):0] issue_second_states;  // indicates whether or not this rs entry should issue next
+   wire [(`NUM_RSES-1):0] ready_states;         // indicates whether or not this rs entry is currently ready to issue
+   wire [(`NUM_RSES-1):0] comp_table [(`NUM_RSES-1):0];    // table of rs entry age comparisons 
 
 
    // combinational logic for assigning rs age values //
    genvar i;
    generate
-      for (i=0; i<`RESERVATION_STATIONS; i=i+1)
-      begin : ASSIGNRSAGESPLUSONE
-         assign rs_ages_plus_one[i] = rs_ages[i] + 6'd1;
+      for (i=0; i<`NUM_RSES; i=i+1)
+      begin : ASSIGNNRSAGES
+         assign n_ages[i] = (dispatching1 && dispatching2) ? ages[i]+8'd2 : ( (dispatching1 || dispatching2) ? ages[i]+8'd1 : ages[i] );
       end
    endgenerate
- 
-      assign n_rs_ages[i] = (rs_statuses[i]==`RS_EMPTY &&   )
-
-
-
-   // combination logic for assigning rs_ready_by_age_decoded //
-   // this bus indicates which rs entries are ready to be issued, in order //
-   // of their currently assigned age //
+   
+   
+   // combinational logic for assigning rs entry inputs/outputs //
    genvar i;
    generate
-      for (i=0; i<`RESERVATION_STATIONS; i=i+1)
-      begin : ASSIGNREADYBYAGEDECODED
-         assign = rs_ready_by_age_decoded = ( {(`RESERVATION_STATIONS-1){1'b0},(rs_statuses[i]==`RS_READY)} << rs_ages[i] );
-      end
-   end
+      for (i=0; i<`NUM_RSES; i=i+1)
+	  begin : ASSIGNRSINOUTS
+	     assign resets[i] = (reset ||  
+		 assign fills[i]  = 
+		 
+		 assign inst1_rega_value_out = (issue_first_states[i] ? rega_values_out[i] : 64'd0);
+		 assign inst1_regb_value_out = (issue_first_states[i] ? regb_values_out[i] : 64'd0);
+	     assign inst1_opa_select_out = (issue_first_states[i] ? opa_selects_out[i] : 2'd0);
+		 assign inst1_opb_select_out = (issue_first_states[i] ? opb_selects_out[i] : 2'd0);
+		 assign inst1_alu_func_out   = (issue_first_states[i] ? alu_funcs_out[i] : 5'd0);
+		 assign inst1_
+		 assign 
+		 
+	  end
+	  
+   endgenerate   
+   
 
+   // combinational logic for assigning issue_first_states, //
+   // issue_second_states, ready_states, and comp_table     // 
+   genvar i;
+   genvar j;
+   for (i=0; i<`NUM_RSES; i=i+1)
+   begin : ASSIGNSTATESOUTERLOOP
+
+      assign ready_states[i]        = (statuses[i]==`RS_READY);
+      assign issue_first_states[i]  = ready_states[i];
+      assign issue_second_states[i] = ready_states[i];
+      assign issue_second_states[i] = ~issue_first_states[i];
+
+      for (j=0; j<`NUM_RSES; j=j+1)
+      begin : ASSIGNSTATESINNERLOOP
+         assign issue_first_states[i]  = (~ready_states[j] || comp_table[j][i]);   // exclusion cases for rs entry j
+         assign issue_second_states[i] = (~ready_states[j] || comp_table[j][i] || issue_first_states[j]);   // exclusion cases for rs entry j
+         assign comp_table[i][j]       = (ages[i]<ages[j]);   // is rs entry i newer than rs entry j?  
+      end
+
+   end
 
    // combinational logic to determine if table is table full //
    always @*
    begin
       genvar i;
       generate
-         for (i=0; i<`RESERVATION_STATIONS; i=i+1)
-            table_full = (rs_statuses[i]==`RS_READY);
+         for (i=0; i<`NUM_RSES; i=i+1)
+            dispatch = (rs_statuses[i]==`RS_EMPTY);
       generate
    end
 
 
-   // internal modules //
-   reservation_station rses [(`RESERVATION_STATIONS-1):0] ( .clock(`RESERVATION_STATIONS{clock}), .reset(`RESERVATION_STATIONS{reset}),
-                                                            .status(rs_statuses), .waiting_tag1(rs_waiting_tags1), .waiting_tag2(rs_waiting_tags2)
-                                                                                                                                                    );
+   // internal modules (reservation station entries) //
+   genvar i;
+   generate 
+      for (i=0; i<`NUM_RSES; i=i+1)
+      begin : RSEMODULELOOP
+         reservation_station_entry entries(.clock(clock), .reset(resets[i]), .fill(fills[i])
 
+                           // input busses //
+                           .dest_reg_in(dest_regs_in[i]),
+                           .rega_value_in(rega_values_in[i]),
+                           .regb_value_in(regb_values_in[i]),
+                           .waiting_taga_in(waiting_tagas_in[i]),
+                           .waiting_tagb_in(waiting_tagbs_in[i]),                
+
+                           // generic signals to just be passed on //
+                           .opa_select_in(opa_selects_in[i]),
+                           .opb_select_in(opb_selects_in[i]),
+                           .alu_func_in(alu_funcs_in[i]),
+                           .rd_mem_in(rd_mems_in[i]),
+                           .wr_mem_in(wr_mems_in[i]),
+                           .cond_branch_in(cond_branches_in[i]),
+                           .uncond_branch_in(uncond_branches_in[i]),
+
+                           // cdbs in //
+                           .cdb1_tag_in(cdb1_tag_in), .cdb1_value_in(cdb1_value_in),                
+                           .cdb2_tag_in(cdb2_tag_in), .cdb2_value_in(cdb2_value_in),
+
+                           // outputs //
+                           .status_out(statuses_out[i]),                                           // signals out
+                           .dest_reg_out(dest_regs_out[i]),
+                           .rega_value_out(rega_values_out[i]),
+                           .regb_value_out(regb_values_out[i]),
+
+                           // outputs for signals to simply be passed through
+                           .opa_select_out(opa_selects_out[i]),
+                           .opb_select_out(opb_selects_out[i]),
+                           .alu_func_out(alu_funcs_out[i]),
+                           .rd_mem_out(rd_mems_out[i]),
+                           .wr_mem_out(wr_mems_out[i]),
+                           .cond_branch_out(cond_branches_out[i]),
+                           .uncond_branch_out(uncond_branches_out[i])
+						   
+						   );
+      end
+
+   endgenerate
+
+
+   // clock synchronous assignment //
+   always@(posedge clock)
+   begin
+      if (reset)
+      begin
+      
+      end
+      else
+      begin
+
+      end
+
+   end
 
 endmodule
-
 
 

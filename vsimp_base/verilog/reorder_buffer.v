@@ -1,4 +1,4 @@
-////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////
 // This file houses modules for the inner workings of the ROB //
 //
 // This ROB will have 32 entries. We can decide to add or     //
@@ -6,208 +6,173 @@
 // ROB consists of 32 ROB Entries                             //
 ////////////////////////////////////////////////////////////////
 
+/***
+*     TODO:  Combinaional logic
+***/
 
 // parameters //
 `define ROB_ENTRIES 32
 `define ROB_ENTRY_AVAILABLE 1
 `define NO_ROB_ENTRY 0
-`define SD #1
+`define SD = 1;
+
+
+// rob main module //
+
+module rob(clock, reset, rob_full, dest_reg, output_value);
+
+
+    /*** Leaving this in here but Matt is working on restructure ***/
+
+module rob(clock,reset);
+
+
+  /***  inputs  ***/
+
+
+  /***  internals ***/
+
+  //Keep track of the tail
+  reg  [4:0]  tail, n_tail;
+  reg  [4:0]  head, n_head;
+    
+
+
+  /***  outputs ***/
+  //what outputs do we need
+  output reg  [64:0] value1_out, value2_out;
+  output reg  [4:0] register1_out, register2_out;
+
+  //initialize rob entries
+  rob_entry[31:0](
+   
+
+  //we need to set each rob entries' write_enable
+  always@ *
+  begin
+    
+
+
+
+  end
+
+   
+
+always @(posedge clock)
+begin
+   if(reset)
+   begin
+
+   end
+
+   else
+   begin
+         
+   
+
+endmodule 
+
 
 /***
 *   Each ROB Entry needs:
-*       Head/Tail bit   (To determine where the head/tail 
 *       Instruction     
 *       Valid bit       (Whether or not the entry is valid)
 *       Value           (To know when to retire)
 *       Register        (Output REgister
 *       Complete bit    (To know if it is ready to retire) 
 ***/
-module reorder_buffer(
+module rob_entry(
                   //inputs
-                  //clock, reset, 
-                  value_in1, value_in2, register_in1, register_in2, rob_entry_in1, rob_entry_in2, wrt_en_in1, wrt_en_in2,
+                  clock, reset,
+                  instruction_in1, valid_in1, head_in1, tail_in1, value_in1, complete_in1, register_in1, 
+                  instruction_in2, valid_in2, head_in2, tail_in2, value_in2, complete_in2, register_in2,
 
                   //outputs
-                  head_out, value_out, complete_out,register_out, rob_full, rob_entry_number
+                  instruction_out, valid_out, head_out, tail_out, value_out, register_out, complete_out,
                  );
 
 
   /***  inputs  ***/
   input wire        reset;
   input wire        clock;
-  input wire [63:0] value_in1;      //comes from CDB
-	input wire [63:0] value_in2;
-  //input wire        complete_in;     //not sure if this is needed                         
-  input wire [4:0]  register_in1;   //comes from decode stage
-	input wire [4:0]  register_in2;
-	input wire [4:0]	rob_entry_in1;  //comes from CDB
-	input wire [4:0]  rob_entry_in2;
-	input wire 				wrt_en_in1;			 //comes from CDB
-	input wire				wrt_en_in2;
+
+  input wire [31:0] instruction_in;
+  input wire        valid_in;
+  input wire [63:0] value_in;
+  input wire        complete_in;
+  input wire  [4:0] register_in;
 
   /***  internals  ***/
-	reg				 [`ROB_ENTRIES-1:0] valid;
-	reg				 [63:0] values		[`ROB_ENTRIES-1:0];   //2-D ARRAY OF VALUES IN ROB
-	reg				 [5:0]  registers	[`ROB_ENTRIES-1:0];		//2-D ARRAY OF REGISTERS IN ROB
-	//reg				 [`ROB_ENTRIES-1:0] head;
-	//reg				 [`ROB_ENTRIES-1:0] tail;
-	reg				 [4:0]	head_location;
-	reg 			 [4:0] 	tail_location;	
-	reg 			 [`ROB_ENTRIES-1:0] complete;
-	reg				 [4:0]  counter;    
-	reg				 [4:0]	previous_tail;
+  reg [31:0]  n_instruction;
+  reg         n_valid;
+  reg [63:0]  n_value;
+  reg         n_complete;
+  reg  [4:0]  n_register;
 
-	/***  outputs  ***/
-  output reg        head_out;
-  output reg [63:0] value_out1;
-	output reg [63:0] value_out2;
+  reg write_enable1, write_enable2;
+  reg n_write_enable1, n_write_enable2;
+
+  /***  outputs  ***/
+  output reg [31:0] instruction_out;
+  output reg        valid_out;
+  output reg [63:0] value_out;
   output reg        complete_out;
-  output reg [4:0]  register_out1;
-	output reg [4:0]  register_out2;
-	output reg 				rob_full;
-	output reg [4:0]	rob_entry_number1;
-	output reg [4:0]  rob_entry_number2;
+  output reg  [4:0] register_out;
 
-	
-	
 
-  // combinational logic for ROB entry allocation // 
+  // combinational assignments //  
   always @*
-	begin
-  	begin : Loop
-			integer i;
-			counter = 5'b0;
-			for(i = 0; i < `ROB_ENTRIES; i = i + 1)
-			begin
-				if(valid[i] == 0)		  			//if this entry in the ROB is invalid, allocate the new entry in this ROB #
-				begin							
-					valid[i]      		=  1;
-					registers[i]  		=  register_in; 
-					counter       		=  counter + 5'b1;
-					rob_entry_number	=  i;  //tells Map table which ROB # corresponds to the destReg(should convert integer into register)
-					//tail[i]						=	 1;
-					tail_location 		=  i; 
-					
-					if(i == 0) //deallocates previous tail
-					begin
-						previous_tail 						=  5'd31;
-						//tail[previous_tail]			=  0
-					end
-			
-					else
-					begin
-						previous_tail 						= i - 1;
-						//tail[previous_tail] 		= 0;
-					end
+  begin
+    if (write_enable_1)
+    begin
+      n_instruction = instruction_in1;
+      n_valid = valid_in1;
+      n_value = 64'b0;
+      n_register = register_in1;
+      n_complete = 1'b0;
+    end
+    else if (write_enable_2)
+      begin
+      n_instruction = instruction_in2;
+      n_valid = valid_in2;
+      n_value = 64'b0;
+      n_register = register_in2;
+      n_complete = 1'b0;
+    end
+    else
+    begin 
+      n_instruction = instruction_out;
+      n_valid = valid_out;
+      n_value = value_out;
+      n_register = register_out;
+      n_complete = complete_out;
+    end
 
-					disable Loop;
-				end
-				
-				else	
-				begin	
-					counter   		=  counter + 5'b1;
-
-					if(counter == 32) //assumes ROB is full if all valid bits are 1 (all ROB entries are being used)
-					begin
-						rob_full 		=  1;
-					end
-
-					else
-					begin
-						rob_full 		=  0;
-					end
-				end
-			end
-		end
-	end
+  end
 
 
+  // combinational logic to next state //
 
-	// combinational logic for when inputs come from CDB //
-	always @*
-	begin
-		if(wrt_en_in)
-		begin
-			values[rob_entry_in] 		= value_in;
-			complete[rob_entry_in]  = 1'b1;
-		end
-	end
-
-
-	// writing to the register file & free ROB entry //
-	always @*	
-	begin
-		if(complete[head_location] == 1)
-		begin
-			register_out 					= registers[head_location];
-			value_out 	 					= values[head_location];
-			//head[head_location] 	= 0;
-			valid[head_location]	= 0;
-
-			if(head_location == 5'd31)
-			begin
-				head_location 			= 5'b0;
-				//head[head_location] = 1'b1;
-			end
-
-			else
-			begin
-				head_location				= head_location + 1'b1;
-				//head[head_location] = 1'b1;
-			end
-		end
-	end
-
-	// if we need to empty the ROB for some reason //
-	always @*
-	begin
-		if(reset)
-		begin
-			valid  				= 32'b0;
-			//head	 				= 32'b0;
-			//tail					= 32'b0;
-			head_location = 0;
-			tail_location = 0;
-			previous_tail = 0;
-		end
-	end
-	
-    
 
   // clock synchronous events //
-/*  always @(posedge clock)	
+  always@(posedge clock)
   begin
      if (reset)
      begin
-        valid		        <= `SD 32'b0;
-        head_out        <= `SD 5'b0;
-        value_out       <= `SD 64'h0;
-        complete_out    <= `SD 1'b0;
-       // exception_out   <= `SD 1'b0;
-				register_out 		<= `SD 5'b0;
-				rob_full				<= `SD 1'b0;
-				counter					<= `SD 5'b0;
+        instruction_out <= `SD 32'd0;
+        valid_out <= `SD 1'b0;
+        value_out <= `SD 64'h0;
+        register_out <= `SD 5'b0;
+        complete_out <= `SD 1'b0;
      end
-
      else
      begin
-        //head_out        <= `SD n_head;
-        //tail_out        <= `SD n_tail;
-        //complete_out    <= `SD n_complete;
-        //exception_out   <= `SD n_exception;
+        instruction_out <= `SD n_instruction;
+        valid_out <= `SD n_valid;
+        value_out <= `SD n_value;
+        register_out <= `SD n_exception;
+        complete_out <= `SD n_complete;
+     end
 
-		 		if(complete[head_location] == 1 && n_head == 1) //Retiring an entry in the ROB
-				begin
-		 			register_out 		<= `SD n_register;  //needs to be written to the regfile
-					value_out       <= `SD n_value;
-					//make sure to change the head of ROB here
-				end
 
-				else
-		 		begin
-		 			register_out		<= `SD 5'b0;
-					value_out       <= `SD 64'h0;
-		 		end
-		end
-*/
 endmodule

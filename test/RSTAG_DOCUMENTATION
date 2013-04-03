@@ -1,0 +1,21 @@
+
+----------------------------
+ RSTAGS
+----------------------------
+
+an RSTAG represents a reservation station tag. it consists of 8 bits:
+
+[7: null tag bit] [6: ready-in-rob bit] [5:0: rob entry number]
+
+`RSTAG_NULL is defined as 8'hFF, and it is customary to check against this for a valid tag, instead of checking bit 7 of the rs tag (though that would work also). bit 6 is only set in the map table, and indicates that the value for a tag is ready in the ROB.
+
+-Mike
+
+
+
+
+
+
+
+
+

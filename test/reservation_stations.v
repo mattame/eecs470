@@ -17,7 +17,7 @@
 
 
 // individual reservation station module //
-module reservation_station(clock,reset,fill,                                     // signals in
+module reservation_station_entry(clock,reset,fill,                                     // signals in
                            dest_reg_in,rega_value_in,regb_value_in,              // busses in
                            waiting_taga_in,waiting_tagb_in,                      // more busses in
                            cdb1_tag_in,cdb1_value_in,                              // yet more busses in

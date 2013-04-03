@@ -17,17 +17,11 @@ include filelist.dpi
 include filelist.hsopt
 
 
-VCS_OBJS =$(CG_OBJS) 5NrI_d.o 5NrIB_d.o SIM_l.o 
+VCS_OBJS =$(CG_OBJS) \
+	SIM_l.o \
+	5NrI_d.o 5NrIB_d.o 
 
-CG_OBJS= _vcsobj_1_1.o 
-
-_vcsobj_1_1.o : _vcsobj_1_1.a
-	@-if [ -L $< ]; then \
-		ln -sf $< $@; \
-	else \
-		$(AR) -s $<; \
-		ld -r -o $@ --whole-archive $< --no-whole-archive; \
-	fi
+CG_OBJS= 
 
 
 VCS_INCR_OBJS=pre_vcsobj_1_1.o 

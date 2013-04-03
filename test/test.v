@@ -1,4 +1,5 @@
 
+`define RSTAG_NULL 8'd0
 
 // general case testbench module //
 module testbench;
@@ -10,17 +11,38 @@ module testbench;
 	// wires for testing the module //
 	reg clock;
 	reg reset;
-        reg [4:0] reg1_in,reg2_in;
-        reg [7:0] tag1_in,tag2_in;
-        reg write_reg1_tag,write_reg2_tag;
-        wire [7:0] tag1_out,tag2_out;
+        reg inst1_write_tag;
+        reg inst2_write_tag;
+        reg [4:0] inst1_rega_in;
+        reg [4:0] inst1_regb_in;
+        reg [4:0] inst1_dest_in;
+        reg [7:0] inst1_tag_in;
+        reg [4:0] inst2_rega_in;
+        reg [4:0] inst2_regb_in;
+        reg [4:0] inst2_dest_in;
+        reg [7:0] inst2_tag_in;
+        reg [31:0] clear_entries;
+        wire [7:0] inst1_taga_out;
+        wire [7:0] inst1_tagb_out;
+        wire [7:0] inst2_taga_out;
+        wire [7:0] inst2_tagb_out;
 
         // module to be tested //	
-        map_table mt(.clock(clock), .reset(reset),
-                 .reg1_in(reg1_in), .reg2_in(reg2_in),
-                 .tag1_in(tag1_in), .tag2_in(tag2_in),
-                 .write_reg1_tag(write_reg1_tag), .write_reg2_tag(write_reg2_tag),
-                 .tag1_out(tag1_out), .tag2_out(tag2_out)      );
+        map_table mt(.clock(clock),.reset(reset),.clear_entries(clear_entries),
+                 
+                 .inst1_rega_in(inst1_rega_in),
+                 .inst1_regb_in(inst1_regb_in),
+                 .inst1_dest_in(inst1_dest_in),
+                 .inst1_tag_in(inst1_tag_in),
+
+                 .inst2_rega_in(inst2_rega_in),
+                 .inst2_regb_in(inst2_regb_in),
+                 .inst2_dest_in(inst2_dest_in),
+                 .inst2_tag_in(inst2_tag_in),
+                 
+                 .inst1_taga_out(inst1_taga_out),.inst1_tagb_out(inst1_tagb_out),
+                 .inst2_taga_out(inst2_taga_out),.inst2_tagb_out(inst2_tagb_out)
+                                                                                  );
 
    // run the clock //
    always
@@ -65,102 +87,98 @@ module testbench;
       input preclock;
    begin
       if (preclock==`PRECLOCK)
-         $display("  preclock: reset=%b reg1_in=%h reg2_in=%h tag1_in=%h tag2_in=%h write_reg1_tag=%b write_reg2_tag=%b tag1_out=%h tag2_out=%h ", reset, reg1_in,reg2_in,tag1_in,tag2_in,write_reg1_tag,write_reg2_tag,tag1_out,tag2_out);  
+         $display("  preclock: reset=%b i1_taga_out=%h i1_tagb_out=%h i2_taga_out=%h i2_tagb_out=%h", reset, inst1_taga_out,inst1_tagb_out,inst2_taga_out,inst2_tagb_out);
       else
-         $display(" postclock: reset=%b reg1_in=%h reg2_in=%h tag1_in=%h tag2_in=%h write_reg1_tag=%b write_reg2_tag=%b tag1_out=%h tag2_out=%h ", reset, reg1_in,reg2_in,tag1_in,tag2_in,write_reg1_tag,write_reg2_tag,tag1_out,tag2_out);
+         $display("  postclock: reset=%b i1_taga_out=%h i1_tagb_out=%h i2_taga_out=%h i2_tagb_out=%h", reset, inst1_taga_out,inst1_tagb_out,inst2_taga_out,inst2_tagb_out);
    end
    endtask
 
+   // runs the clock once and displays output before and after //
+   task CLOCK_AND_DISPLAY;
+   begin
+      DISPLAY_STATE(`PRECLOCK);
+      @(posedge clock);
+      @(negedge clock);
+      DISPLAY_STATE(`POSTCLOCK);
+      $display("");
+   end
+   endtask
 
    // testing segment //
-   initial begin 
+   initial
+   begin 
 
 	$display("STARTING TESTBENCH!\n");
 
 	// initial state //
-	correct = 1;
-	clock   = 0;
-	reset   = 1;
-	reg1_in = 5'd0;
-        reg2_in = 5'd0;
-        tag1_in = 8'h00;
-        tag2_in = 8'h00;
-        write_reg1_tag = 0;
-        write_reg2_tag = 0;
-
+        correct = 1;
+        clock   = 0;
+        reset   = 1;
+        inst1_write_tag = 0;
+        inst2_write_tag = 0;
+        inst1_rega_in = 5'd0;
+        inst1_regb_in = 5'd0;
+        inst2_rega_in = 5'd0;
+        inst2_regb_in = 5'd0;
+        inst1_dest_in = 5'd0;
+        inst2_dest_in = 5'd0;
+        inst2_tag_in = `RSTAG_NULL; 
+        inst2_tag_in = `RSTAG_NULL;
+        clear_entries = 32'd0;
 
         // TRANSITION TESTS //
 
 	reset = 1;
 
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
+        CLOCK_AND_DISPLAY();
 
         reset = 0;
 
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
+        CLOCK_AND_DISPLAY();
 
-        reg2_in = 5'd2;
-        tag1_in = 8'hAB;
-        tag2_in = 8'hCD;
-        write_reg1_tag = 1;
-        write_reg2_tag = 1;
+        inst1_write_tag = 1;
+        inst1_dest_in   = 5'd4;
+        inst1_tag_in    = 8'hAB;
 
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
+        CLOCK_AND_DISPLAY();
+      
+        inst1_write_tag = 0;
+        inst1_rega_in = 5'd4;
 
-        write_reg1_tag = 0;
-        write_reg2_tag = 0;
+        CLOCK_AND_DISPLAY();
 
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
+        inst1_regb_in = 5'd4;
+        inst2_rega_in = 5'd4;
+        inst2_regb_in = 5'd4;
 
-        reg1_in = 5'd3;
+        CLOCK_AND_DISPLAY();
 
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);                 
+        inst1_write_tag = 1;
+        inst2_write_tag = 1;
+        inst1_dest_in = 5'd4;
+        inst2_dest_in = 5'd5;
+        inst1_tag_in = 8'hCD;
+        inst2_tag_in = 8'hEF;
+        inst2_rega_in = 5'd5;
+        inst2_regb_in = 5'd5;
 
-        tag1_in = 8'hEF;
-        write_reg1_tag = 1;
+        CLOCK_AND_DISPLAY();
 
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
+        inst1_dest_in = 5'd4;
+        inst2_dest_in = 5'd4;
+        inst1_tag_in = 8'h11;
+        inst2_tag_in = 8'h22;
 
-        write_reg1_tag = 0;
+        CLOCK_AND_DISPLAY();
 
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
+        inst1_tag_in = 8'h33;
+        inst2_tag_in = 8'h00;
 
-        reg1_in = 5'd1;
-
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
+        CLOCK_AND_DISPLAY();
 
         reset = 1;
-        write_reg1_tag = 1;
-        reg1_in = 5'd3;
 
-        DISPLAY_STATE(`PRECLOCK);
-        @(posedge clock);
-        @(negedge clock);
-        DISPLAY_STATE(`POSTCLOCK);
+        CLOCK_AND_DISPLAY();
 
 	// SUCCESSFULLY END TESTBENCH //
 	$display("ENDING TESTBENCH : SUCCESS !\n");

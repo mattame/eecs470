@@ -1,0 +1,81 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Red Hat Enterprise Linux Workstation release 6.3 (Santiago)' 
+  is not supported on 'x86_64' officially, assuming linux compatibility by 
+  default. Set VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+                         Chronologic VCS (TM)
+         Version E-2011.03_Full64 -- Thu Mar 28 01:31:33 2013
+               Copyright (c) 1991-2011 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+DirectC Release 1.0 Copyright (c) 1991-2011 by Synopsys Inc.
+Parsing design file 'test_if_stage.v'
+Parsing design file 'if_stage.v'
+Top Level Modules:
+       testbench
+TimeScale is 1 ns / 100 ps
+Starting vcs inline pass...
+1 module and 0 UDP read.
+recompiling module testbench
+make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/IF test/csrc'
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/IF test/csrc'
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Mar 28 01:31 2013
+
+STARTING TESTBENCH!
+
+---------------------------------------------------------------
+>>>> Pre-Clock Input     10
+Memory Line: ffffffffffffffff, Take Branch: 0, Branch Target: 0000000000000000
+>>>> Pre-Clock Output   10, Next Mem Addr: 0000000000000008
+NPC1: 0000000000000004, IR1: ffffffff, Valid1: 0
+NPC2: 0000000000000008, IR2: ffffffff, Valid2: 0
+---------------------------------------------------------------
+>>>> Pre-Clock Input     20
+Memory Line: 0000000011111111, Take Branch: 0, Branch Target: 0000000000000000
+>>>> Pre-Clock Output   20, Next Mem Addr: 0000000000000010
+NPC1: 000000000000000c, IR1: 00000000, Valid1: 1
+NPC2: 0000000000000010, IR2: 11111111, Valid2: 1
+---------------------------------------------------------------
+>>>> Pre-Clock Input     30
+Memory Line: 2222222233333333, Take Branch: 1, Branch Target: 0000000000000004
+>>>> Pre-Clock Output   30, Next Mem Addr: 0000000000000000
+NPC1: 0000000000000014, IR1: 22222222, Valid1: 1
+NPC2: 0000000000000018, IR2: 33333333, Valid2: 1
+---------------------------------------------------------------
+>>>> Pre-Clock Input     40
+Memory Line: 0000000011111111, Take Branch: 0, Branch Target: 0000000000000000
+>>>> Pre-Clock Output   40, Next Mem Addr: 0000000000000008
+NPC1: 0000000000000008, IR1: 00000000, Valid1: 0
+NPC2: 0000000000000008, IR2: 11111111, Valid2: 1
+---------------------------------------------------------------
+>>>> Pre-Clock Input     50
+Memory Line: 2222222233333333, Take Branch: 1, Branch Target: fffffffffffffff0
+>>>> Pre-Clock Output   50, Next Mem Addr: fffffffffffffff0
+NPC1: 000000000000000c, IR1: 22222222, Valid1: 1
+NPC2: 0000000000000010, IR2: 33333333, Valid2: 1
+---------------------------------------------------------------
+>>>> Pre-Clock Input     60
+Memory Line: 4444444455555555, Take Branch: 0, Branch Target: 0000000000000000
+>>>> Pre-Clock Output   60, Next Mem Addr: fffffffffffffff8
+NPC1: fffffffffffffff4, IR1: 44444444, Valid1: 1
+NPC2: fffffffffffffff8, IR2: 55555555, Valid2: 1
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test_if_stage.v", line 178.
+$finish at simulation time                  650
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 65000 ps
+CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
+Thu Mar 28 01:31:34 2013
+CPU time: .109 seconds to compile + .045 seconds to elab + .189 seconds to link + .049 seconds in simulation

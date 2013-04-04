@@ -14,7 +14,7 @@
 `define ROB_ENTRIES 32
 `define ROB_ENTRY_AVAILABLE 1
 `define NO_ROB_ENTRY 0
-`define SD = 1;
+`define SD #1
 
 
 // rob main module //
@@ -176,3 +176,5 @@ module rob_entry(
 
 
 endmodule
+
+

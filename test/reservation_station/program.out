@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Thu Mar 28 03:04:55 2013
+         Version E-2011.03_Full64 -- Thu Apr  4 02:16:56 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -17,12 +17,22 @@ controlling such use and disclosure.
 DirectC Release 1.0 Copyright (c) 1991-2011 by Synopsys Inc.
 Parsing design file 'test_reservation_station.v'
 Parsing design file 'reservation_station.v'
+
+Warning-[TMR] Text macro redefined
+reservation_station.v, 18
+  Text macro (RSTAG_NULL) is redefined. The last definition will override 
+  previous ones.
+  In test_reservation_station.v, 4, it was defined as 8'hFF     
+
 Top Level Modules:
        testbench
 No TimeScale specified
+Notice: Ports coerced to inout, use -notice for details
 Starting vcs inline pass...
-1 module and 0 UDP read.
+2 modules and 0 UDP read.
 recompiling module testbench
+recompiling module reservation_station_entry
+Both modules done.
 make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/csrc'
 if [ -x ../simv ]; then chmod -x ../simv; fi
 g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
@@ -30,43 +40,22 @@ g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5N
 make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Mar 28 03:04 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr  4 02:16 2013
 
 STARTING TESTBENCH!
 
-  preclock: reset=1 fill=0 status_out=x dest_reg_out=xx rega_value_out=xxxxxxxxxxxxxxxx regb_value_out=xxxxxxxxxxxxxxxx opaselo=xx opbselo=xx aluo=xxxxx cbo=x ubo=x xx
- postclock: reset=1 fill=0 status_out=0 dest_reg_out=00 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=00 opbselo=00 aluo=00000 cbo=0 ubo=0 00
+  preclock: reset=1 
+ postclock: reset=1 
 
-  preclock: reset=0 fill=0 status_out=0 dest_reg_out=00 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=00 opbselo=00 aluo=00000 cbo=0 ubo=0 00
- postclock: reset=0 fill=0 status_out=4 dest_reg_out=00 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=00 opbselo=00 aluo=00000 cbo=0 ubo=0 00
+  preclock: reset=0 
+ postclock: reset=0 
 
-  preclock: reset=0 fill=1 status_out=4 dest_reg_out=00 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=00 opbselo=00 aluo=00000 cbo=0 ubo=0 00
- postclock: reset=0 fill=1 status_out=3 dest_reg_out=02 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
-
-  preclock: reset=0 fill=0 status_out=3 dest_reg_out=02 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=0 fill=0 status_out=3 dest_reg_out=02 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
-
-  preclock: reset=0 fill=0 status_out=3 dest_reg_out=02 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=0 fill=0 status_out=4 dest_reg_out=02 rega_value_out=deadbeefbaadbeef regb_value_out=ffffffffffffffff opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
-
-  preclock: reset=0 fill=0 status_out=4 dest_reg_out=02 rega_value_out=deadbeefbaadbeef regb_value_out=ffffffffffffffff opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=0 fill=0 status_out=4 dest_reg_out=02 rega_value_out=deadbeefbaadbeef regb_value_out=ffffffffffffffff opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
-
-  preclock: reset=0 fill=1 status_out=4 dest_reg_out=02 rega_value_out=deadbeefbaadbeef regb_value_out=ffffffffffffffff opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=0 fill=1 status_out=4 dest_reg_out=01 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
-
-  preclock: reset=0 fill=1 status_out=4 dest_reg_out=01 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=0 fill=1 status_out=4 dest_reg_out=01 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
-
-  preclock: reset=1 fill=1 status_out=4 dest_reg_out=01 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=1 fill=1 status_out=0 dest_reg_out=00 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=00 opbselo=00 aluo=00000 cbo=0 ubo=0 00
-
-ENDING TESTBENCH : SUCCESS !
-
-$finish called from file "test_reservation_station.v", line 241.
-$finish at simulation time                   90
+@@@ Incorrect at time   20
+ENDING TESTBENCH : ERROR !
+$finish called from file "test_reservation_station.v", line 192.
+$finish at simulation time                   20
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 90
+Time: 20
 CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
-Thu Mar 28 03:04:56 2013
-CPU time: .186 seconds to compile + .043 seconds to elab + .186 seconds to link + .050 seconds in simulation
+Thu Apr  4 02:16:57 2013
+CPU time: .407 seconds to compile + .056 seconds to elab + .201 seconds to link + .049 seconds in simulation

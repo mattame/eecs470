@@ -25,9 +25,9 @@ all:    simv
 
 TESTBENCH = test_reservation_station.v
 SIMFILES = reservation_station.v
-SYNFILES = reservation_station_entry.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
+SYNFILES = reservation_station.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
 
-reservation_station_entry.vg:	test_reservation_station.v reservation_station.tcl 
+reservation_station.vg:	test_reservation_station.v reservation_station.tcl 
 	dc_shell-t -f reservation_station.tcl | tee synth.out
 
 

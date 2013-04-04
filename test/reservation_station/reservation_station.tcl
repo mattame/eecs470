@@ -28,10 +28,10 @@ suppress_message {"VER-130"}
 #/* new design                                              */
 #/***********************************************************/
 read_file -f verilog [list "reservation_station.v"]
-set design_name reservation_station_entry
+set design_name reservation_station
 #set reset_name reset
 set clock_name clock
-set CLK_PERIOD 4
+set CLK_PERIOD 15
 
 
 #/***********************************************************/

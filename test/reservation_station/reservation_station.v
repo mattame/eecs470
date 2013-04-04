@@ -176,8 +176,8 @@ module reservation_station_entry(clock,reset,fill,                              
 
    
    // purely combinational assignments for first_empty and second_empty stuff //
-   assign first_empty  = (~first_empty_filled_in && status_out==`RS_EMPTY);
-   assign second_empty = ( first_empty_filled_in && ~second_empty_filled_in && status_out==`RS_EMPTY);
+   assign first_empty  = (/*~first_empty_filled_in &&*/ status_out==`RS_EMPTY);
+   assign second_empty = (/* first_empty_filled_in && ~second_empty_filled_in &&*/ status_out==`RS_EMPTY);
    assign first_empty_filled_out  = (first_empty  || first_empty_filled_in);
    assign second_empty_filled_out = (second_empty || second_empty_filled_in);
    
@@ -388,10 +388,10 @@ module reservation_station(clock,reset,               // signals in
                            inst2_dest_tag_out,
 
                            // signal outputs //
-                           dispatch
+                           dispatch,
                          
                            // outputs for debugging //
-                               );
+                           first_empties,second_empties,states_out,fills);
 
 
    // inputs //
@@ -445,9 +445,10 @@ module reservation_station(clock,reset,               // signals in
    output wor [4:0]  inst2_dest_reg_out;
    output wor [7:0]  inst2_dest_tag_out;
 
+   output wire [(`NUM_RSES*3-1):0] states_out;
    
    // internal wires for directly interfacing the rs entries //
-   reg [(`NUM_RSES-1):0] fills;
+   output reg [(`NUM_RSES-1):0] fills;
    reg [(`NUM_RSES-1):0] resets;
 
    wire [(`NUM_RSES-1):0] first_empty_filleds;     // first/second empty links between rses
@@ -470,8 +471,8 @@ module reservation_station(clock,reset,               // signals in
  
    wire [2:0]             statuses     [(`NUM_RSES-1):0];
    wire [7:0]             ages         [(`NUM_RSES-1):0];
-   wire [(`NUM_RSES-1):0] first_empties;
-   wire [(`NUM_RSES-1):0] second_empties;
+   output wire [(`NUM_RSES-1):0] first_empties;   
+   output wire [(`NUM_RSES-1):0] second_empties;
    
    wire [4:0]             dest_regs_out    [(`NUM_RSES-1):0];
    wire [7:0]             dest_tags_out    [(`NUM_RSES-1):0];
@@ -656,7 +657,7 @@ module reservation_station(clock,reset,               // signals in
    // internal modules (reservation station entries) //
    ////////////////////////////////////////////////////
    generate
-      for (i=1; i<`NUM_RSES; i=i+1)
+      for (i=0; i<`NUM_RSES; i=i+1)
 	  begin : RSEMODULES
 
 		   reservation_station_entry entries( .clock(clock), .reset(resets[i]), .fill(fills[i]),
@@ -710,6 +711,15 @@ module reservation_station(clock,reset,               // signals in
 								   
 									  );
 									  
+      end
+   endgenerate
+   
+   
+   // state debug output //
+   generate
+      for (i=0; i<`NUM_RSES*3; i=i+3)
+      begin : STATESOUT
+	     assign states_out[i+2:i] = statuses[i/3];
       end
    endgenerate
    

@@ -3,7 +3,7 @@
 // defines //
 `define RSTAG_NULL      8'hFF     
 `define ZERO_REG     5'd0
-
+`define NUM_RSES 8
 
 // reservation station testbench module //
 module testbench;
@@ -61,6 +61,11 @@ module testbench;
    wire        inst2_valid_out;
    wire [4:0]  inst2_dest_reg_out;
    wire [7:0]  inst2_dest_tag_out;
+   
+   wire [7:0] first_empties;
+   wire [7:0] second_empties;
+   wire [(3*`NUM_RSES-1):0] states_out;
+   wire [(`NUM_RSES-1):0] fills;
 
    
         // module to be tested //	
@@ -125,9 +130,10 @@ module testbench;
                            .inst2_dest_tag_out(inst2_dest_tag_out),
 
                            // signal outputs //
-                           .dispatch(dispatch)
+                           .dispatch(dispatch),
                          
                            // outputs for debugging //
+						   .first_empties(first_empties),.second_empties(second_empties),.states_out(states_out),.fills(fills)
                                );
 
 
@@ -164,9 +170,9 @@ module testbench;
       input preclock;
    begin
       if (preclock==`PRECLOCK)
-         $display("  preclock: reset=%b ", reset);
+         $display("  preclock: reset=%b fe=%b se=%b states=%b fills=%b", reset,first_empties,second_empties,states_out,fills);
       else
-         $display(" postclock: reset=%b ", reset);
+         $display(" postclock: reset=%b se=%b se=%b states=%b fills=%b", reset,first_empties,second_empties,states_out,fills);
    end
    endtask
 
@@ -249,9 +255,10 @@ module testbench;
 		ASSERT(~inst1_valid_out && ~inst2_valid_out);
 		
         reset = 0;
+		
 
 		CLOCK_AND_DISPLAY();
-	    ASSERT(~inst1_valid_out && ~inst2_valid_out);
+	    ASSERT(dispatch);
 
 	    reset = 1;
 				

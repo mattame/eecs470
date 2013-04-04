@@ -54,6 +54,7 @@ module LSQ_entry(//Inputs
 				 	stored_tag_out,
 				 	stored_address_out,
 				 	stored_value_out,
+				 	read_out,
 				 	ready_out
 				);
 
@@ -86,6 +87,7 @@ input [4:0]  EX_tag_2;
 output [4:0] stored_tag_out;
 output [63:0] stored_address_out;
 output [63:0] stored_value_out;
+output read_out;
 output ready_out;
 
 reg [63:0] stored_address;
@@ -153,6 +155,7 @@ end
 assign stored_address_out = stored_address;
 assign stored_value_out = stored_value;
 assign stored_tag_out = stored_tag;
+assign read_out = read;
 assign ready_out = (((!read & (LSQ_head == stored_tag) | 
 	                 (read & (stored_tag == ROB_head_1 | stored_tag == ROB_head_2)))
 	                 & complete) ? 1'b1: 1'b0;
@@ -166,6 +169,8 @@ endmodule
 ****************************
 */
 module LSQ(//Inputs
+			clock,
+			reset,
 			//From ROB/ID
 
 			ROB_head_1,
@@ -184,11 +189,11 @@ module LSQ(//Inputs
 			valid_in_2,
 
 			//From EX ALU
-			tag_match_1,
+			EX_tag_1,
 			value_in_1,
 			address_in_1,
 
-			tag_match_2,
+			EX_tag_2,
 			value_in_2,
 			address_in_2,
 
@@ -196,9 +201,14 @@ module LSQ(//Inputs
 			tag_out,
 			address_out,
 			value_out,
-			rd_out,
-			wr_out
+			read_out,
+			valid_out,
+
+			stall
 		  );
+
+ input clock;
+ input reset;
 
  input [4:0] ROB_head_1;
  input [4:0] ROB_head_2;
@@ -208,37 +218,53 @@ module LSQ(//Inputs
  input 		 wr_mem_in_1;
  input 		 valid_in_1;
 
+ input [4:0]  EX_tag_1;
+ input [63:0] value_in_1;
+ input [63:0] address_in_1;
+
  input [4:0] ROB_tag_2;
  input       rd_mem_in_2;
  input 		 wr_mem_in_2;
  input 		 valid_in_2;
 
- input [4:0] tag_match_1;
- input [63:0] value_in_1;
- input [63:0] address_in_1;
+ input [4:0]  EX_tag_2;
+ input [63:0] value_in_2;
+ input [63:0] address_in_2;
 
- input [4:0] tag_match_1;
- input [63:0] value_in_1;
- input [63:0] address_in_1;
-
- output [4:0] tag_out;
+ output [4:0]  tag_out;
  output [63:0] address_out;
  output [63:0] value_out;
- output 	   rd_out;
- output        wr_out;
+ output 	   read_out;
+ output        valid_out;
+
+ output stall;
 
  reg [4:0] LSQ_head;
  reg [4:0] LSQ_tail;
- reg [4:0] entry_1;
- reg [4:0] entry_2;
+
+ wire valid_alu_in_1, valid_alu_in_2;
+
+ assign valid_alu_in_1 = ((rd_mem_in_1 | wr_mem_in_1) & valid_in_1) ? 1'b1: 1'b0;
+ assign valid_alu_in_2 = ((rd_mem_in_2 | wr_mem_in_2) & valid_in_2) ? 1'b1: 1'b0;
 
  wire [4:0] next_head, next_tail, next_entry_1, next_entry_2;
 
  wire [4:0]  tags_out [(`LSQ_ENTRIES-1):0];
  wire [63:0] addrs_out [(`LSQ_ENTRIES-1):0];
  wire [63:0] values_out [(`LSQ_ENTRIES-1):0];
+ wire 	     reads_out [(`LSQ_ENTRIES-1):0];
  wire 		 readies_out [(`LSQ_ENTRIES-1):0];
 
+// ----------- ENTRY INPUT LOGIC ----------
+ genvar i;
+ generate
+ 	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin
+ 		assign clears[i]   = (i == LSQ_head & readies_out[i] == 1'b1) ? 1'b1: 1'b0;
+ 		assign stores_1[i] = (i == next_entry_1 & valid_alu_in_1) ? 1'b1: 1'b0;
+ 		assign stores_2[i] = ((i == next_entry_1 & !valid_alu_in_1 & valid_alu_in_2) | 
+ 							  (i == next_entry_2 & valid_alu_in_1 & valid_alu_in_2)) ? 1'b1: 1'b0;
+ 	end
+ endgenerate
 
 // --------------- ENTRIES ----------------
 
@@ -274,36 +300,43 @@ module LSQ(//Inputs
 						.stored_tag_out(tags_out),
 						.stored_address_out(addrs_out),
 						.stored_value_out(values_out),
+						.read_out(reads_out),
 						.ready_out(readies_out)
 					    );
 
+// --------- ENTRY OUPUT LOGIC -----------
+ assign valid_out = readies_out[LSQ_head] ? 1'b1: 1'b0;
 
+ assign address_out = (valid_out) ? addrs_out[LSQ_head]: 64'h0;
 
-//---------------- POINTER KEEPING -----------------
- assign next_head = ;
+ assign value_out = (valid_out) ? values_out[LSQ_head]: 64'h0;
 
- assign next_tail = ;
+ assign tag_out = (valid_out) ? tags_out[LSQ_head]: 5'h0;
 
- assign next_entry_1 = ;
+ assign read_out = (valid_out) ? reads_out[LSQ_head]: 1'b0;
 
- assign next_entry_2 = ;
+//----------- POINTER KEEPING ------------
+ assign next_head = (readies_out[LSQ_head]) ? (LSQ_head + 1):LSQ_head;
+
+ assign next_tail = (valid_alu_in_1) ? ((valid_alu_in_2) ? entry_2) : (valid_alu_in_2) ? entry_1 : LSQ_tail;
+
+ assign next_entry_1 = LSQ_tail + 1;
+
+ assign next_entry_2 = LSQ_tail + 2;
+
+ assign stall = ((LSQ_head == next_entry_1) | (LSQ_head == next_entry_2)) ? 1'b1: 1'b0;
 
 always @(posedge clock) begin
 	if(reset) begin
-		LSQ_head <= `SD 5'h0;
+		LSQ_head <= `SD 5'h1; //so that it matches up with next_entry_1
 		LSQ_tail <= `SD 5'h0;
-		entry_1  <= `SD 5'h0;
-		entry_2  <= `SD 5'h1;
 	end
 	else begin
 		LSQ_head <= `SD next_head;
-		LSQ_tail <= `SD next_tail;
-		entry_1  <= `SD next_entry_1;
-		entry_2  <= `SD next_entry_2;		
+		LSQ_tail <= `SD next_tail;	
 	end
 
 end
-
 
 
 endmodule

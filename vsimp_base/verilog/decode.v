@@ -221,8 +221,6 @@ module id_stage(
               wb_reg_wr_data_out,
 
               // Outputs
-              id_ra_value_out_1,
-              id_rb_value_out_1,
               id_opa_select_out_1,
               id_opb_select_out_1,
               id_dest_reg_idx_out_1,
@@ -234,9 +232,10 @@ module id_stage(
               id_halt_out_1,
               id_illegal_out_1,
               id_valid_inst_out_1,
+              ra_idx_1,
+              rb_idx_1,
+              rc_idx_1,
 
-              id_ra_value_out_2,
-              id_rb_value_out_2,
               id_opa_select_out_2,
               id_opb_select_out_2,
               id_dest_reg_idx_out_2,
@@ -247,7 +246,10 @@ module id_stage(
               id_uncond_branch_out_2,
               id_halt_out_2,
               id_illegal_out_2,
-              id_valid_inst_out_2
+              id_valid_inst_out_2,
+              ra_idx_2,
+              rb_idx_2,
+              rc_idx_2
               );
 
 
@@ -264,8 +266,6 @@ module id_stage(
   input   [4:0] wb_reg_wr_idx_out;    // Reg write index from WB Stage
   input  [63:0] wb_reg_wr_data_out;   // Reg write data from WB Stage
 
-  output [63:0] id_ra_value_out_1;      // reg A value
-  output [63:0] id_rb_value_out_1;      // reg B value
   output  [1:0] id_opa_select_out_1;    // ALU opa mux select (ALU_OPA_xxx *)
   output  [1:0] id_opb_select_out_1;    // ALU opb mux select (ALU_OPB_xxx *)
   output  [4:0] id_dest_reg_idx_out_1;  // destination (writeback) register index
@@ -281,8 +281,6 @@ module id_stage(
   output        id_valid_inst_out_1;    // is inst a valid instruction to be 
                                       // counted for CPI calculations?
 
-  output [63:0] id_ra_value_out_2;      // reg A value
-  output [63:0] id_rb_value_out_2;      // reg B value
   output  [1:0] id_opa_select_out_2;    // ALU opa mux select (ALU_OPA_xxx *)
   output  [1:0] id_opb_select_out_2;    // ALU opb mux select (ALU_OPB_xxx *)
   output  [4:0] id_dest_reg_idx_out_2;  // destination (writeback) register index
@@ -298,30 +296,18 @@ module id_stage(
   output        id_valid_inst_out_2;    // is inst a valid instruction to be 
                                       // counted for CPI calculations?
    
-  wire    [1:0] dest_reg_select;
-  reg     [4:0] id_dest_reg_idx_out;     // not state: behavioral mux output
+  wire    [1:0] dest_reg_select_1, dest_reg_select_2;
+  reg     [4:0] id_dest_reg_idx_out_1, id_dest_reg_idx_out_2;     // not state: behavioral mux output
    
     // instruction fields read from IF/ID pipeline register
-  wire    [4:0] ra_idx = if_id_IR[25:21];   // inst operand A register index
-  wire    [4:0] rb_idx = if_id_IR[20:16];   // inst operand B register index
-  wire    [4:0] rc_idx = if_id_IR[4:0];     // inst operand C register index
+  output wire    [4:0] ra_idx_1 = if_id_IR_1[25:21];   // inst operand A register index
+  output wire    [4:0] rb_idx_1 = if_id_IR_1[20:16];   // inst operand B register index
+  output wire    [4:0] rc_idx_1 = if_id_IR_1[4:0];     // inst operand C register index
 
-    // Instantiate the register file used by this pipeline
-    
-    // -----------------------------------------------------------
-    //DOES THIS NEED TO BE HERE STILL OR IS THIS GOING TO BE SOMEWHERE ELSE?
-  regfile regf_0 (.rda_idx(ra_idx),
-                  .rda_out(id_ra_value_out), 
-      
-                  .rdb_idx(rb_idx),
-                  .rdb_out(id_rb_value_out),
-
-                  .wr_clk(clock),
-                  .wr_en(wb_reg_wr_en_out),
-                  .wr_idx(wb_reg_wr_idx_out),
-                  .wr_data(wb_reg_wr_data_out)
-                 );
-    // -----------------------------------------------------------
+    // instruction fields read from IF/ID pipeline register
+  output wire    [4:0] ra_idx_2 = if_id_IR_2[25:21];   // inst operand A register index
+  output wire    [4:0] rb_idx_2 = if_id_IR_2[20:16];   // inst operand B register index
+  output wire    [4:0] rc_idx_2 = if_id_IR_2[4:0];     // inst operand C register index
 
     // instantiate the instruction decoder
   decoder decoder_1 (// Input

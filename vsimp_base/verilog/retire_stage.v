@@ -40,10 +40,10 @@ module retire_stage(
 
 
   /*** parameters ***/
-  parameter INITIAL       = 2'b00;
-  parameter BOTH_COMPLETE = 2'b01;
-  parameter HEAD1_ONLY    = 2'b10;
-  parameter NONE          = 2'b11;
+  parameter INITIAL       = 2'b00;    //Initial state
+  parameter BOTH_COMPLETE = 2'b01;    //Both heads are complete and can retire
+  parameter HEAD1_ONLY    = 2'b10;    //Only the head1 is complete and can retire
+  parameter NONE          = 2'b11;    //Neither head can retire
 
 
 
@@ -76,6 +76,24 @@ module retire_stage(
     case(state)
   
     INITIAL: begin
+        register_out1 = 
+        register_out2 = 
+        value_out1    =
+        value_out2    =
+    end
+      
+    BOTH: begin
+        register_out1 = rob_register_in1;
+        register_out2 = rob_register_in2;
+        value_out1    = rob_value_in1;
+        value_out2    = rob_value_in2;
+    end
+
+    HEAD1_ONLY: begin
+        register_out1 = rob_register_in1;
+        register_out2 = 
+        value_out1    = rob_value_in1;
+        value_out2    = 
       
 
   

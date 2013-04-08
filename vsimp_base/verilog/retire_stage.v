@@ -32,8 +32,11 @@ module retire_stage(
   reg next_state0; //next state bits
   reg next_state1;
   
-  wire current_state0; //current state bits
-  wire current_state1;
+  reg current_state0; //current state bits
+  reg current_state1;
+
+  reg [1:0] state;
+
 
 
   /*** parameters ***/

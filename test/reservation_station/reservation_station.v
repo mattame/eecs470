@@ -173,11 +173,11 @@ module reservation_station_entry(clock,reset,fill,                              
    assign taga_cur_match_cdb2_in = (waiting_taga==cdb2_tag_in);
    assign tagb_cur_match_cdb1_in = (waiting_tagb==cdb1_tag_in);
    assign tagb_cur_match_cdb2_in = (waiting_tagb==cdb2_tag_in);
-
+   assign status_currently_empty = (status_out==`RS_EMPTY);
    
    // purely combinational assignments for first_empty and second_empty stuff //
-   assign first_empty  = (~first_empty_filled_in && status_out==`RS_EMPTY);
-   assign second_empty = ( first_empty_filled_in && ~second_empty_filled_in && status_out==`RS_EMPTY);
+   assign first_empty  = (~first_empty_filled_in && status_currently_empty);
+   assign second_empty = ( first_empty_filled_in && ~second_empty_filled_in && status_currently_empty);
    assign first_empty_filled_out  = (first_empty  || first_empty_filled_in);
    assign second_empty_filled_out = (second_empty || second_empty_filled_in);
    
@@ -204,7 +204,7 @@ module reservation_station_entry(clock,reset,fill,                              
             2'b10: n_status = `RS_WAITING_A;
             2'b11: n_status = `RS_WAITING_BOTH;
          endcase
-	 n_age = (first_empty ? 8'd0 : 8'd1);
+	 n_age = (first_empty ? 8'd1 : 8'd2);
          
          // pass-throughs //
          n_dest_reg          = dest_reg_in;
@@ -230,8 +230,11 @@ module reservation_station_entry(clock,reset,fill,                              
                          ((taga_cur_match_cdb2_in && taga_cur_nonnull) ? cdb2_value_in : rega_value_out);
          n_regb_value   = (tagb_cur_match_cdb1_in && tagb_cur_nonnull) ? cdb1_value_in : 
                          ((tagb_cur_match_cdb2_in && tagb_cur_nonnull) ? cdb2_value_in : regb_value_out);
-         if (status_out==`RS_EMPTY)
+         if (status_currently_empty)
+         begin
             n_status = `RS_EMPTY;
+            n_age    = 8'd0;
+         end
          else
          begin
             case ({ (n_waiting_taga!=`RSTAG_NULL), (n_waiting_tagb!=`RSTAG_NULL) })
@@ -240,8 +243,8 @@ module reservation_station_entry(clock,reset,fill,                              
                2'b10: n_status = `RS_WAITING_A;
                2'b11: n_status = `RS_WAITING_BOTH;
             endcase
+	    n_age = (filling_first && filling_second) ? (age_out+8'd2) : ((filling_first || filling_second) ? (age_out+8'd1) : age_out);
          end
-	 n_age = (filling_first && filling_second) ? (age_out+8'd2) : ((filling_first || filling_second) ? (age_out+8'd1) : age_out);
 
          // pass-throughs //
          n_dest_reg          = dest_reg_out;

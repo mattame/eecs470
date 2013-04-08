@@ -301,6 +301,32 @@ module testbench;
         ASSERT(~dispatch);   // should be full by this point
 
 
+        // fill all voids and issue first 2 ins'ns //
+        $display("issue1\n"); 
+        cdb1_tag_in = 8'd0;
+        cdb1_value_in = 64'hDEADBEEFBAADBEEF;
+        inst1_valid = 1'b0;
+        inst2_valid = 1'b0;
+        CLOCK_AND_DISPLAY();
+        ASSERT(inst1_valid_out && inst2_valid_out);   // first issue
+
+        // watch RS empty as everything gets issued 
+        $display("issue2\n");
+        CLOCK_AND_DISPLAY();
+        ASSERT(inst1_valid_out && inst2_valid_out);
+        $display("issue3\n");
+        CLOCK_AND_DISPLAY();
+        ASSERT(inst1_valid_out && inst2_valid_out);
+        $display("issue4\n");
+        CLOCK_AND_DISPLAY();
+        ASSERT(inst1_valid_out && inst2_valid_out);     // this should be the last issue
+        $display("nothing\n");
+        CLOCK_AND_DISPLAY();
+        ASSERT(~inst1_valid_out && ~inst2_valid_out);   // RS should be empty at this point
+        $display("nothing[again]\n");
+        CLOCK_AND_DISPLAY();
+        ASSERT(~inst1_valid_out && ~inst2_valid_out); 
+
 
         // reset and check //
         $display("resetting\n");

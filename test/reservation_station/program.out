@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Mon Apr  8 00:06:00 2013
+         Version E-2011.03_Full64 -- Mon Apr  8 03:17:37 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -29,7 +29,7 @@ Top Level Modules:
 No TimeScale specified
 
 Warning-[SIOB] Select index out of bounds
-reservation_station.v, 670
+reservation_station.v, 673
 "first_empty_filleds[(0 - 1)]"
   The select index is out of declared bounds : [7:0].
   In module instance : rs 
@@ -37,7 +37,7 @@ reservation_station.v, 670
 
 
 Warning-[SIOB] Select index out of bounds
-reservation_station.v, 670
+reservation_station.v, 673
 "second_empty_filleds[(0 - 1)]"
   The select index is out of declared bounds : [7:0].
   In module instance : rs 
@@ -56,7 +56,7 @@ g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5N
 make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr  8 00:06 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr  8 03:17 2013
 
 STARTING TESTBENCH!
 
@@ -78,43 +78,85 @@ dispatching1
 
   preclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
    i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
- postclock: reset=0 fe=00000100 se=00001000 states=000000000000000000010010 fills=00001100 ifs=00000000 iss=00000000 ao=0202020202020100 
+ postclock: reset=0 fe=00000100 se=00001000 states=000000000000000000010010 fills=00001100 ifs=00000000 iss=00000000 ao=0000000000000201 
    i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
 d2
 
-  preclock: reset=0 fe=00000100 se=00001000 states=000000000000000000010010 fills=00001100 ifs=00000000 iss=00000000 ao=0202020202020100 
+  preclock: reset=0 fe=00000100 se=00001000 states=000000000000000000010010 fills=00001100 ifs=00000000 iss=00000000 ao=0000000000000201 
    i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
- postclock: reset=0 fe=00010000 se=00100000 states=000000000000010010010010 fills=00110000 ifs=00000000 iss=00000000 ao=0404040401000302 
+ postclock: reset=0 fe=00010000 se=00100000 states=000000000000010010010010 fills=00110000 ifs=00000000 iss=00000000 ao=0000000002010403 
    i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
 d3
 
-  preclock: reset=0 fe=00010000 se=00100000 states=000000000000010010010010 fills=00110000 ifs=00000000 iss=00000000 ao=0404040401000302 
+  preclock: reset=0 fe=00010000 se=00100000 states=000000000000010010010010 fills=00110000 ifs=00000000 iss=00000000 ao=0000000002010403 
    i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
- postclock: reset=0 fe=01000000 se=10000000 states=000000010010010010010010 fills=11000000 ifs=00000000 iss=00000000 ao=0606010003020504 
+ postclock: reset=0 fe=01000000 se=10000000 states=000000010010010010010010 fills=11000000 ifs=00000000 iss=00000000 ao=0000020104030605 
    i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
 d4
 
-  preclock: reset=0 fe=01000000 se=10000000 states=000000010010010010010010 fills=11000000 ifs=00000000 iss=00000000 ao=0606010003020504 
+  preclock: reset=0 fe=01000000 se=10000000 states=000000010010010010010010 fills=11000000 ifs=00000000 iss=00000000 ao=0000020104030605 
    i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
- postclock: reset=0 fe=00000000 se=00000000 states=010010010010010010010010 fills=00000000 ifs=00000000 iss=00000000 ao=0100030205040706 
+ postclock: reset=0 fe=00000000 se=00000000 states=010010010010010010010010 fills=00000000 ifs=00000000 iss=00000000 ao=0201040306050807 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+issue1
+
+  preclock: reset=0 fe=00000000 se=00000000 states=010010010010010010010010 fills=00000000 ifs=00000000 iss=00000000 ao=0201040306050807 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00000000 se=00000000 states=100100100100100100100100 fills=00000000 ifs=00000010 iss=00000001 ao=0201040306050807 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+
+issue2
+
+  preclock: reset=0 fe=00000000 se=00000000 states=100100100100100100100100 fills=00000000 ifs=00000010 iss=00000001 ao=0201040306050807 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+ postclock: reset=0 fe=00000001 se=00000010 states=100100100100100100000000 fills=00000000 ifs=00001000 iss=00000100 ao=0201040306050000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+
+issue3
+
+  preclock: reset=0 fe=00000001 se=00000010 states=100100100100100100000000 fills=00000000 ifs=00001000 iss=00000100 ao=0201040306050000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+ postclock: reset=0 fe=00000001 se=00000010 states=100100100100000000000000 fills=00000000 ifs=00100000 iss=00010000 ao=0201040300000000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+
+issue4
+
+  preclock: reset=0 fe=00000001 se=00000010 states=100100100100000000000000 fills=00000000 ifs=00100000 iss=00010000 ao=0201040300000000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+ postclock: reset=0 fe=00000001 se=00000010 states=100100000000000000000000 fills=00000000 ifs=10000000 iss=01000000 ao=0201000000000000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+
+nothing
+
+  preclock: reset=0 fe=00000001 se=00000010 states=100100000000000000000000 fills=00000000 ifs=10000000 iss=01000000 ao=0201000000000000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+ postclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+nothing[again]
+
+  preclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
    i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
 resetting
 
-  preclock: reset=1 fe=00000000 se=00000000 states=010010010010010010010010 fills=00000000 ifs=00000000 iss=00000000 ao=0100030205040706 
+  preclock: reset=1 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
    i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
- postclock: reset=1 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000011 ifs=00000000 iss=00000000 ao=0000000000000000 
+ postclock: reset=1 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
    i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
 ENDING TESTBENCH : SUCCESS !
 
-$finish called from file "test_reservation_station.v", line 314.
-$finish at simulation time                  140
+$finish called from file "test_reservation_station.v", line 340.
+$finish at simulation time                  260
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 140
-CPU Time:      0.020 seconds;       Data structure size:   0.1Mb
-Mon Apr  8 00:06:01 2013
-CPU time: .391 seconds to compile + .061 seconds to elab + .212 seconds to link + .090 seconds in simulation
+Time: 260
+CPU Time:      0.010 seconds;       Data structure size:   0.1Mb
+Mon Apr  8 03:17:38 2013
+CPU time: .479 seconds to compile + .057 seconds to elab + .200 seconds to link + .051 seconds in simulation

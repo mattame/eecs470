@@ -96,5 +96,12 @@ module retire_stage(
         value_out2    = 32'b0;
     end
       
-
+    NONE: begin
+        register_out1 = 32'b0;
+        register_out2 = 32'b0;
+        value_out1    = 32'b0;
+        value_out2    = 32'b0;
+    end
+    endcase
+  end
   

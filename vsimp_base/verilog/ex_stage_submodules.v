@@ -128,10 +128,11 @@ module arbiter(		  // Inputs
 	//BUS 2 MUXES
 	assign ex_IR_out_2 = (ex_mult_valid_out_2) ? ex_mult_IR_out_2: ex_alu_IR_out_2;
 	assign ex_NPC_out_2 = (ex_mult_valid_out_2) ? ex_mult_NPC_out_2: ex_alu_NPC_out_2;
-	assign ex_dest_reg_out_2 = (ex_mult_valid_out_2) ? ex_mult_dest_reg_out_2: ex_alu_dest_reg_out_2;
-	assign ex_result_out_2 = (ex_mult_valid_out_2) ? ex_mult_result_out_2: ex_alu_result_out_2;
-	assign ex_valid_out_2 = (ex_mult_valid_out_2) ? 1'b1: ex_alu_valid_out_2;
-	assign stall_bus_2 = ex_mult_valid_out_2;
+	assign ex_dest_reg_out_2 = (mem_valid_in) ? mem_tag_in: (ex_mult_valid_out_2) ? ex_mult_dest_reg_out_2: ex_alu_dest_reg_out_2;
+	assign ex_result_out_2 = (mem_valid_in) ? mem_value_in: (ex_mult_valid_out_2) ? ex_mult_result_out_2: ex_alu_result_out_2;
+	assign ex_valid_out_2 = (ex_mult_valid_out_2 | mem_valid_in | ex_alu_valid_out_2) ? 1'b1: 1'b0;
+	assign stall_bus_2 = (mem_valid_in | ex_mult_valid_out_2) ? 1'b1: 1'b0;
+  assign stall_mult_2 = mem_valid_in;
 		
 endmodule
 
@@ -144,13 +145,14 @@ endmodule
 // This module has sequential logic
 //
 module mult_stage(clock, reset,
-                  IR_in, NPC_in, dest_reg_in, product_in,  mplier_in,  mcand_in,  start,
+                  IR_in, NPC_in, dest_reg_in, product_in,  mplier_in,  mcand_in,  start, stall,
                   IR_out, NPC_out, dest_reg_out, product_out, mplier_out, mcand_out, done);
 
   input clock, reset, start;
   input [63:0] product_in, mplier_in, mcand_in, NPC_in;
   input [31:0] IR_in;
   input [4:0]  dest_reg_in;
+  input        stall
 
   output done;
   output [63:0] product_out, mplier_out, mcand_out, NPC_out;
@@ -174,20 +176,36 @@ module mult_stage(clock, reset,
 
   always @(posedge clock)
   begin
-    prod_in_reg      <= #1 product_in;
-    partial_prod_reg <= #1 partial_product;
-    mplier_out       <= #1 next_mplier;
-    mcand_out        <= #1 next_mcand;
-	IR_out	     <= #1 IR_in;
-	NPC_out	     <= #1 NPC_in;
-	dest_reg_out <= #1 dest_reg_in;
+     if(stall) begin
+          prod_in_reg      <= #1 prod_in_reg;
+          partial_prod_reg <= #1 partial_prod_reg;
+          mplier_out       <= #1 mplier_out;
+          mcand_out        <= #1 mcand_out;
+          IR_out           <= #1 IR_out;
+          NPC_out          <= #1 NPC_out;
+          dest_reg_out     <= #1 dest_reg_out;     
+     end
+
+     else 
+     begin
+          prod_in_reg      <= #1 product_in;
+          partial_prod_reg <= #1 partial_product;
+          mplier_out       <= #1 next_mplier;
+          mcand_out        <= #1 next_mcand;
+      	  IR_out	         <= #1 IR_in;
+      	  NPC_out	         <= #1 NPC_in;
+      	  dest_reg_out     <= #1 dest_reg_in;
+     end
+
   end
 
   always @(posedge clock)
   begin
     if(reset)
       done <= #1 1'b0;
-    else
+    else if (stall)
+      done <= #1 done;
+    else 
       done <= #1 start;
   end
 
@@ -212,6 +230,7 @@ module mult(clock, reset, IR_in, NPC_in, dest_reg_in, mplier, mcand, valid_in, I
   input [63:0] mcand, mplier, NPC_in;
   input [31:0] IR_in;
   input [4:0]  dest_reg_in;
+  input        stall;
 
   output [63:0] product, NPC_out;
   output [31:0] IR_out;
@@ -235,6 +254,7 @@ module mult(clock, reset, IR_in, NPC_in, dest_reg_in, mplier, mcand, valid_in, I
      .mplier_in({internal_mpliers,mplier}),
      .mcand_in({internal_mcands,mcand}),
      .start({internal_dones,valid_in}),
+     .stall(stall),
 	 //Outputs
 	 .IR_out({IR_out,internal_IRs}),
 	 .NPC_out({NPC_out,internal_NPCs}),

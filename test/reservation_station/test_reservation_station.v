@@ -64,9 +64,11 @@ module testbench;
    
    wire [7:0] first_empties;
    wire [7:0] second_empties;
-   wire [(3*`NUM_RSES-1):0] states_out;
+   wire [(3*`NUM_RSES-1):0] states_out;   // for debugging 
    wire [(`NUM_RSES-1):0] fills;
-
+   wire [7:0] issue_first_states;
+   wire [7:0] issue_second_states;
+   wire [(8*`NUM_RSES-1):0] ages_out;
    
         // module to be tested //	
         reservation_station rs( .clock(clock), .reset(reset),               // signals in
@@ -133,14 +135,15 @@ module testbench;
                            .dispatch(dispatch),
                          
                            // outputs for debugging //
-						   .first_empties(first_empties),.second_empties(second_empties),.states_out(states_out),.fills(fills)
-                               );
+                           .first_empties(first_empties),.second_empties(second_empties),.states_out(states_out),.fills(fills),
+                           .issue_first_states(issue_first_states),.issue_second_states(issue_second_states), .ages_out(ages_out) 
+                      );
 
 
    // run the clock //
    always
    begin 
-      #5; //clock "interval" ... AKA 1/2 the period
+      #10; //clock "interval" ... AKA 1/2 the period
       clock=~clock; 
    end 
 
@@ -170,9 +173,15 @@ module testbench;
       input preclock;
    begin
       if (preclock==`PRECLOCK)
-         $display("  preclock: reset=%b fe=%b se=%b states=%b fills=%b", reset,first_empties,second_empties,states_out,fills);
+      begin
+         $display("  preclock: reset=%b fe=%b se=%b states=%b fills=%b ifs=%b iss=%b ao=%h ", reset,first_empties,second_empties,states_out,fills,issue_first_states,issue_second_states,ages_out);
+         $display("   i1_ravo=%h i1_rbvo=%h i2_ravo=%h i2_rbvo=%h", inst1_rega_value_out, inst1_regb_value_out, inst2_rega_value_out, inst2_regb_value_out);
+      end
       else
-         $display(" postclock: reset=%b se=%b se=%b states=%b fills=%b", reset,first_empties,second_empties,states_out,fills);
+      begin
+         $display(" postclock: reset=%b fe=%b se=%b states=%b fills=%b ifs=%b iss=%b ao=%h ", reset,first_empties,second_empties,states_out,fills,issue_first_states,issue_second_states,ages_out);
+         $display("   i1_ravo=%h i1_rbvo=%h i2_ravo=%h i2_rbvo=%h", inst1_rega_value_out, inst1_regb_value_out, inst2_rega_value_out, inst2_regb_value_out);
+      end
    end
    endtask
 
@@ -212,33 +221,33 @@ module testbench;
     reset = 1;
 
     inst1_rega_value_in = 64'd0;
-	inst1_regb_value_in = 64'd0;
+    inst1_regb_value_in = 64'd0;
     inst1_rega_tag_in = `RSTAG_NULL;
-	inst1_regb_tag_in = `RSTAG_NULL;
+    inst1_regb_tag_in = `RSTAG_NULL;
     inst1_dest_reg_in = `ZERO_REG;
     inst1_dest_tag_in = `RSTAG_NULL;
     inst1_opa_select_in = 2'd0;
-	inst1_opb_select_in = 2'd0;
+    inst1_opb_select_in = 2'd0;
     inst1_alu_func_in = 5'd0;
     inst1_rd_mem_in = 1'b0;
-	inst1_wr_mem_in = 1'b0;
+    inst1_wr_mem_in = 1'b0;
     inst1_cond_branch_in = 1'b0;
-	inst1_uncond_branch_in = 1'b0;
+    inst1_uncond_branch_in = 1'b0;
     inst1_valid = 1'b0;
    
     inst2_rega_value_in = 64'd0;
-	inst2_regb_value_in = 64'd0;
+    inst2_regb_value_in = 64'd0;
     inst2_rega_tag_in = `RSTAG_NULL;
-	inst2_regb_tag_in = `RSTAG_NULL;
+    inst2_regb_tag_in = `RSTAG_NULL;
     inst2_dest_reg_in = `ZERO_REG;
     inst2_dest_tag_in = `RSTAG_NULL;
     inst2_opa_select_in = 2'd0;
-	inst2_opb_select_in = 2'd0;
+    inst2_opb_select_in = 2'd0;
     inst2_alu_func_in = 5'd0;
     inst2_rd_mem_in = 1'b0;
-	inst2_wr_mem_in = 1'b0;
+    inst2_wr_mem_in = 1'b0;
     inst2_cond_branch_in = 1'b0;
-	inst2_uncond_branch_in = 1'b0;
+    inst2_uncond_branch_in = 1'b0;
     inst2_valid = 1'b0;
 
     cdb1_value_in = 64'd0;
@@ -247,23 +256,57 @@ module testbench;
     cdb2_tag_in = `RSTAG_NULL;
 
 
+        //////////////////////
         // TRANSITION TESTS //
+        //////////////////////
 
-	    reset = 1;
-
-		CLOCK_AND_DISPLAY();
-		ASSERT(~inst1_valid_out && ~inst2_valid_out);
+        // reet and check //
+        $display("resetting\n");
+        reset = 1;
+        CLOCK_AND_DISPLAY();
+	ASSERT(~inst1_valid_out && ~inst2_valid_out);
 		
+        // hold nothing and check //
+        $display("holding\n");
         reset = 0;
-		
+	CLOCK_AND_DISPLAY();
+        ASSERT(dispatch);
+        ASSERT(~inst1_valid_out && ~inst2_valid_out);
 
-		CLOCK_AND_DISPLAY();
-	    ASSERT(dispatch);
+        // dispatch two instructions and check //
+        $display("dispatching1\n");
+        inst1_valid = 1'b1;
+        inst2_valid = 1'b1;
+        inst1_rega_value_in = 64'd1;
+        inst1_regb_tag_in = 8'd0;
+        inst2_rega_value_in = 64'd2;
+        inst2_regb_tag_in = 8'd0;
+        
+        CLOCK_AND_DISPLAY();
+        ASSERT(dispatch);
 
-	    reset = 1;
-				
-		CLOCK_AND_DISPLAY();
-	    ASSERT(~inst1_valid_out && ~inst2_valid_out);
+        // dispatch again //
+        $display("d2\n");
+        CLOCK_AND_DISPLAY();
+        ASSERT(dispatch);
+
+        // and again //
+        $display("d3\n");
+        CLOCK_AND_DISPLAY();
+        ASSERT(dispatch);
+
+        // and yet again //
+        $display("d4\n");
+        CLOCK_AND_DISPLAY();
+        ASSERT(~dispatch);   // should be full by this point
+
+
+
+        // reset and check //
+        $display("resetting\n");
+        reset = 1;	
+	CLOCK_AND_DISPLAY();
+        ASSERT(~inst1_valid_out && ~inst2_valid_out);
 		
 
 	// SUCCESSFULLY END TESTBENCH //

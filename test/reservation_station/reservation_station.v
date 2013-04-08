@@ -24,13 +24,13 @@
 module reservation_station_entry(clock,reset,fill,                               // signals in
 
                            first_empty_filled_in,
-						   second_empty_filled_in,
-						   filling_first,
-						   filling_second,
+			   second_empty_filled_in,
+			   filling_first,
+			   filling_second,
 
                            // input busses //
                            dest_reg_in,
-						   dest_tag_in,
+                           dest_tag_in,
                            rega_value_in,
                            regb_value_in,
                            waiting_taga_in,
@@ -51,12 +51,12 @@ module reservation_station_entry(clock,reset,fill,                              
 
                            // outputs //
                            status_out,                                           // signals out
-						   age_out,
-						   first_empty_filled_out,
-						   second_empty_filled_out,
-						   first_empty,
-						   second_empty,					   
-						   dest_tag_out,
+			   age_out,
+			   first_empty_filled_out,
+			   second_empty_filled_out,
+			   first_empty,
+			   second_empty,					   
+			   dest_tag_out,
                            dest_reg_out,
                            rega_value_out,
                            regb_value_out,
@@ -176,8 +176,8 @@ module reservation_station_entry(clock,reset,fill,                              
 
    
    // purely combinational assignments for first_empty and second_empty stuff //
-   assign first_empty  = (/*~first_empty_filled_in &&*/ status_out==`RS_EMPTY);
-   assign second_empty = (/* first_empty_filled_in && ~second_empty_filled_in &&*/ status_out==`RS_EMPTY);
+   assign first_empty  = (~first_empty_filled_in && status_out==`RS_EMPTY);
+   assign second_empty = ( first_empty_filled_in && ~second_empty_filled_in && status_out==`RS_EMPTY);
    assign first_empty_filled_out  = (first_empty  || first_empty_filled_in);
    assign second_empty_filled_out = (second_empty || second_empty_filled_in);
    
@@ -204,11 +204,11 @@ module reservation_station_entry(clock,reset,fill,                              
             2'b10: n_status = `RS_WAITING_A;
             2'b11: n_status = `RS_WAITING_BOTH;
          endcase
-		 n_age = (first_empty ? 8'd0 : 8'd1);
+	 n_age = (first_empty ? 8'd0 : 8'd1);
          
          // pass-throughs //
          n_dest_reg          = dest_reg_in;
-		 n_dest_tag          = dest_tag_in;
+	 n_dest_tag          = dest_tag_in;
          n_opa_select_out    = opa_select_in; 
          n_opb_select_out    = opb_select_in; 
          n_alu_func_out      = alu_func_in;
@@ -230,17 +230,22 @@ module reservation_station_entry(clock,reset,fill,                              
                          ((taga_cur_match_cdb2_in && taga_cur_nonnull) ? cdb2_value_in : rega_value_out);
          n_regb_value   = (tagb_cur_match_cdb1_in && tagb_cur_nonnull) ? cdb1_value_in : 
                          ((tagb_cur_match_cdb2_in && tagb_cur_nonnull) ? cdb2_value_in : regb_value_out);
-         case ({ (n_waiting_taga!=`RSTAG_NULL), (n_waiting_tagb!=`RSTAG_NULL) })
-            2'b00: n_status = `RS_READY;
-            2'b01: n_status = `RS_WAITING_B;
-            2'b10: n_status = `RS_WAITING_A;
-            2'b11: n_status = `RS_WAITING_BOTH;
-         endcase
-		 n_age = (filling_first && filling_second) ? (age_out+8'd2) : ((filling_first || filling_second) ? (age_out+8'd1) : age_out);
+         if (status_out==`RS_EMPTY)
+            n_status = `RS_EMPTY;
+         else
+         begin
+            case ({ (n_waiting_taga!=`RSTAG_NULL), (n_waiting_tagb!=`RSTAG_NULL) })
+               2'b00: n_status = `RS_READY;
+               2'b01: n_status = `RS_WAITING_B;
+               2'b10: n_status = `RS_WAITING_A;
+               2'b11: n_status = `RS_WAITING_BOTH;
+            endcase
+         end
+	 n_age = (filling_first && filling_second) ? (age_out+8'd2) : ((filling_first || filling_second) ? (age_out+8'd1) : age_out);
 
          // pass-throughs //
          n_dest_reg          = dest_reg_out;
-		 n_dest_tag          = dest_tag_out;
+	 n_dest_tag          = dest_tag_out;
          n_opa_select_out    = opa_select_out;
          n_opb_select_out    = opb_select_out;
          n_alu_func_out      = alu_func_out;
@@ -259,7 +264,7 @@ module reservation_station_entry(clock,reset,fill,                              
       begin
          status_out        <= `SD `RS_EMPTY;
          dest_reg_out      <= `SD 5'd0;
-		 dest_tag_out      <= `SD `RSTAG_NULL;
+	 dest_tag_out      <= `SD `RSTAG_NULL;
          waiting_taga      <= `SD `RSTAG_NULL;
          waiting_tagb      <= `SD `RSTAG_NULL;
          rega_value_out    <= `SD 64'd0;
@@ -271,13 +276,13 @@ module reservation_station_entry(clock,reset,fill,                              
          wr_mem_out        <= `SD 1'b0;
          cond_branch_out   <= `SD 1'b0;
          uncond_branch_out <= `SD 1'b0;
-		 age_out           <= `SD 8'd0;
+	 age_out           <= `SD 8'd0;
       end
       else
       begin
          status_out        <= `SD n_status;
          dest_reg_out      <= `SD n_dest_reg;
-		 dest_tag_out      <= `SD n_dest_tag;
+	 dest_tag_out      <= `SD n_dest_tag;
          waiting_taga      <= `SD n_waiting_taga;
          waiting_tagb      <= `SD n_waiting_tagb;
          rega_value_out    <= `SD n_rega_value;
@@ -289,7 +294,7 @@ module reservation_station_entry(clock,reset,fill,                              
          wr_mem_out        <= `SD n_wr_mem_out;
          cond_branch_out   <= `SD n_cond_branch_out;
          uncond_branch_out <= `SD n_uncond_branch_out;
-		 age_out           <= `SD n_age;
+	 age_out           <= `SD n_age;
       end
    end
 
@@ -391,7 +396,7 @@ module reservation_station(clock,reset,               // signals in
                            dispatch,
                          
                            // outputs for debugging //
-                           first_empties,second_empties,states_out,fills);
+                           first_empties,second_empties,states_out,fills,issue_first_states,issue_second_states,ages_out);
 
 
    // inputs //
@@ -468,11 +473,13 @@ module reservation_station(clock,reset,               // signals in
    reg [(`NUM_RSES-1):0] wr_mems_in;
    reg [(`NUM_RSES-1):0] cond_branches_in;
    reg [(`NUM_RSES-1):0] uncond_branches_in;
+
+   output wire [(`NUM_RSES*8-1):0] ages_out;
  
    wire [2:0]             statuses     [(`NUM_RSES-1):0];
    wire [7:0]             ages         [(`NUM_RSES-1):0];
-   output wire [(`NUM_RSES-1):0] first_empties;   
-   output wire [(`NUM_RSES-1):0] second_empties;
+   output wire [(`NUM_RSES-1):0] first_empties;    // bit to indicate whether an rs entry is the first empty one available 
+   output wire [(`NUM_RSES-1):0] second_empties;   // bit to indicate whether an rs entry is the second empty one available
    
    wire [4:0]             dest_regs_out    [(`NUM_RSES-1):0];
    wire [7:0]             dest_tags_out    [(`NUM_RSES-1):0];
@@ -487,20 +494,20 @@ module reservation_station(clock,reset,               // signals in
    wire [(`NUM_RSES-1):0] cond_branches_out;
    wire [(`NUM_RSES-1):0] uncond_branches_out;
 
-   wor  dispatch_available1;
-   wor  dispatch_available2;
+   wor  dispatch_available1;   // if slot 1 can be dispatched to (both slots 1 and 2 must be available for the rs to allow dispatch) 
+   wor  dispatch_available2;   // if slot 2 can be dispatched to (both slots 1 and 2 must be available for the rs to allow dispatch)
    wor  filling1;
    wor  filling2;
    
-   wand [(`NUM_RSES-1):0] issue_first_states;   // indicates whether or not this rs entry should issue next
-   wand [(`NUM_RSES-1):0] issue_second_states;  // indicates whether or not this rs entry should issue next
+   output wand [(`NUM_RSES-1):0] issue_first_states;   // indicates whether or not this rs entry should issue next (first out)
+   output wand [(`NUM_RSES-1):0] issue_second_states;  // indicates whether or not this rs entry should issue next (second out)
    wire [(`NUM_RSES-1):0] ready_states;         // indicates whether or not this rs entry is currently ready to issue
    wire [(`NUM_RSES-1):0] comp_table [(`NUM_RSES-1):0];    // table of rs entry age comparisons 
 
  
    
    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-   // combinational logic for assigning outputs, including dispatch state (whether or not table is full) //
+   // combinational logic for assigning rs outputs                                                       //
    ////////////////////////////////////////////////////////////////////////////////////////////////////////
    genvar i,j;
    generate
@@ -520,18 +527,18 @@ module reservation_station(clock,reset,               // signals in
 			assign inst1_dest_reg_out      = (issue_first_states[i] ? dest_regs_out[i] : 5'd0);
 			assign inst1_dest_tag_out      = (issue_first_states[i] ? dest_tags_out[i] : 5'd0);
 
-			assign inst2_rega_value_out    = (issue_first_states[i] ? rega_values_out[i] : 64'd0);  
-			assign inst2_regb_value_out    = (issue_first_states[i] ? regb_values_out[i] : 64'd0);
-			assign inst2_opa_select_out    = (issue_first_states[i] ? opa_selects_out[i] : 2'd0);
-			assign inst2_opb_select_out    = (issue_first_states[i] ? opb_selects_out[i] : 2'd0);
-			assign inst2_alu_func_out      = (issue_first_states[i] ? alu_funcs_out[i] : 5'd0);
-			assign inst2_rd_mem_out        = (issue_first_states[i] ? rd_mems_out[i] : 1'b0);
-			assign inst2_wr_mem_out        = (issue_first_states[i] ? wr_mems_out[i] : 1'b0);
-			assign inst2_cond_branch_out   = (issue_first_states[i] ? cond_branches_out[i] : 1'b0);
-			assign inst2_uncond_branch_out = (issue_first_states[i] ? uncond_branches_out[i] : 1'b0);
-			assign inst2_valid_out         = (issue_first_states[i] ? 1'b1 : 1'b0);
-			assign inst2_dest_reg_out      = (issue_first_states[i] ? dest_regs_out[i] : 5'd0);
-			assign inst2_dest_tag_out      = (issue_first_states[i] ? dest_tags_out[i] : 5'd0);
+			assign inst2_rega_value_out    = (issue_second_states[i] ? rega_values_out[i] : 64'd0);  
+			assign inst2_regb_value_out    = (issue_second_states[i] ? regb_values_out[i] : 64'd0);
+			assign inst2_opa_select_out    = (issue_second_states[i] ? opa_selects_out[i] : 2'd0);
+			assign inst2_opb_select_out    = (issue_second_states[i] ? opb_selects_out[i] : 2'd0);
+			assign inst2_alu_func_out      = (issue_second_states[i] ? alu_funcs_out[i] : 5'd0);
+			assign inst2_rd_mem_out        = (issue_second_states[i] ? rd_mems_out[i] : 1'b0);
+			assign inst2_wr_mem_out        = (issue_second_states[i] ? wr_mems_out[i] : 1'b0);
+			assign inst2_cond_branch_out   = (issue_second_states[i] ? cond_branches_out[i] : 1'b0);
+			assign inst2_uncond_branch_out = (issue_second_states[i] ? uncond_branches_out[i] : 1'b0);
+			assign inst2_valid_out         = (issue_second_states[i] ? 1'b1 : 1'b0);
+			assign inst2_dest_reg_out      = (issue_second_states[i] ? dest_regs_out[i] : 5'd0);
+			assign inst2_dest_tag_out      = (issue_second_states[i] ? dest_tags_out[i] : 5'd0);
 			
 	  end
    endgenerate   
@@ -552,7 +559,7 @@ module reservation_station(clock,reset,               // signals in
 			 begin
 			 
 			    // this rs entry is going to be filled from the first instruction //
-				if (inst1_valid && first_empties[i])
+                            if (inst1_valid && first_empties[i])
 			    begin
 					fills[i]              = 1'b1;
 					dest_regs_in[i]       = inst1_dest_reg_in;
@@ -568,11 +575,11 @@ module reservation_station(clock,reset,               // signals in
 					wr_mems_in[i]         = inst1_wr_mem_in;
 					cond_branches_in[i]   = inst1_cond_branch_in;
 					uncond_branches_in[i] = inst1_uncond_branch_in;
-				end
+                            end
 				
-				// this rs entry is going to be filled from the second instruction //
-				else if (inst2_valid && second_empties[i])
-				begin
+                            // this rs entry is going to be filled from the second instruction //
+                            else if (inst2_valid && second_empties[i])
+                            begin
 					fills[i]              = 1'b1;
 					dest_regs_in[i]       = inst2_dest_reg_in;
 					dest_tags_in[i]       = inst2_dest_tag_in;
@@ -587,12 +594,12 @@ module reservation_station(clock,reset,               // signals in
 					wr_mems_in[i]         = inst2_wr_mem_in;
 					cond_branches_in[i]   = inst2_cond_branch_in;
 					uncond_branches_in[i] = inst2_uncond_branch_in;
-				end
-			 end
+                            end
+                     end
 				 
-			 // default case: no instruction being dispatched/ no rs entries being filled //
+                     // default case: no instruction being dispatched/ no rs entries being filled //
 		     else
-			 begin
+                     begin
 				fills[i]              = 1'b0;
 				dest_regs_in[i]       = `ZERO_REG;
 				dest_tags_in[i]       = `RSTAG_NULL;
@@ -607,20 +614,20 @@ module reservation_station(clock,reset,               // signals in
 				wr_mems_in[i]         = 1'b0;
 				cond_branches_in[i]   = 1'b0; 
 				uncond_branches_in[i] = 1'b0;
-			 end
+                     end
 
-		 	 // assign resets for all rs entries //
-		     resets[i] = (reset || issue_first_states[i] || issue_second_states[i]);
-			 
+                     // assign resets for all rs entries //
+                     resets[i] = (reset || issue_first_states[i] || issue_second_states[i]);
+ 
 	     end
 		 
-		 // assign current filling state //
-		 assign filling1 = fills[i];   // this is a wor
-		 assign filling2 = fills[i];   // this is a wor
+             // assign current filling state //
+             assign filling1 = fills[i];   // this is a wor
+             assign filling2 = fills[i];   // this is a wor
 		 
-		 // assign the dispatch availabilities //
-		 assign dispatch_available1 = first_empties[i];    // note this is a wor, so it accumulates
-		 assign dispatch_available2 = second_empties[i];   // note this is a wor, so it accumulates		
+             // assign the dispatch availabilities //
+             assign dispatch_available1 = first_empties[i];    // note this is a wor, so it accumulates
+             assign dispatch_available2 = second_empties[i];   // note this is a wor, so it accumulates		
 		 
       end
    endgenerate
@@ -644,8 +651,8 @@ module reservation_station(clock,reset,               // signals in
 
          for (j=0; j<`NUM_RSES; j=j+1)
          begin : ASSIGNSTATESINNERLOOP
-            assign issue_first_states[i]  = (~ready_states[j] || comp_table[j][i]);   // exclusion cases for rs entry j
-            assign issue_second_states[i] = (~ready_states[j] || comp_table[j][i] || issue_first_states[j]);   // exclusion cases for rs entry j
+            assign issue_first_states[i]  = (j==i) ? 1'b1 : (~ready_states[j] || comp_table[j][i]);   // exclusion cases for rs entry j
+            assign issue_second_states[i] = (j==i) ? 1'b1 : (~ready_states[j] || comp_table[j][i] || issue_first_states[j]);   // exclusion cases for rs entry j
             assign comp_table[i][j]       = (ages[i]<ages[j]);   // is rs entry i newer than rs entry j?  
          end
    
@@ -722,7 +729,14 @@ module reservation_station(clock,reset,               // signals in
 	     assign states_out[i+2:i] = statuses[i/3];
       end
    endgenerate
-   
+  
+   generate
+      for (i=0; i<`NUM_RSES; i=i+1)
+      begin : ASDAS
+          assign ages_out[(i+1)*8-1:(i*8)] = ages[i];
+      end
+   endgenerate
+ 
 endmodule
 
 

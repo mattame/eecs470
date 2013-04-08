@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Thu Apr  4 03:50:05 2013
+         Version E-2011.03_Full64 -- Mon Apr  8 00:06:00 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -29,7 +29,7 @@ Top Level Modules:
 No TimeScale specified
 
 Warning-[SIOB] Select index out of bounds
-reservation_station.v, 663
+reservation_station.v, 670
 "first_empty_filleds[(0 - 1)]"
   The select index is out of declared bounds : [7:0].
   In module instance : rs 
@@ -37,7 +37,7 @@ reservation_station.v, 663
 
 
 Warning-[SIOB] Select index out of bounds
-reservation_station.v, 663
+reservation_station.v, 670
 "second_empty_filleds[(0 - 1)]"
   The select index is out of declared bounds : [7:0].
   In module instance : rs 
@@ -56,22 +56,65 @@ g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5N
 make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr  4 03:50 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr  8 00:06 2013
 
 STARTING TESTBENCH!
 
-  preclock: reset=1 fe=xxxxxxxx se=xxxxxxxx states=xxxxxxxxxxxxxxxxxxxxxxxx fills=xxxxxxxx
- postclock: reset=1 se=11111111 se=11111111 states=000000000000000000000000 fills=00000000
+resetting
 
-  preclock: reset=0 fe=11111111 se=11111111 states=000000000000000000000000 fills=00000000
- postclock: reset=0 se=00000000 se=00000000 states=100100100100100100100100 fills=00000000
+  preclock: reset=1 fe=xxxxxxxx se=xxxxxxxx states=xxxxxxxxxxxxxxxxxxxxxxxx fills=xxxxxxxx ifs=xxxxxxxx iss=xxxxxxxx ao=xxxxxxxxxxxxxxxx 
+   i1_ravo=xxxxxxxxxxxxxxxx i1_rbvo=xxxxxxxxxxxxxxxx i2_ravo=xxxxxxxxxxxxxxxx i2_rbvo=xxxxxxxxxxxxxxxx
+ postclock: reset=1 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
-@@@ Incorrect at time   20
-ENDING TESTBENCH : ERROR !
-$finish called from file "test_reservation_station.v", line 198.
-$finish at simulation time                   20
+holding
+
+  preclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+dispatching1
+
+  preclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00000100 se=00001000 states=000000000000000000010010 fills=00001100 ifs=00000000 iss=00000000 ao=0202020202020100 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+d2
+
+  preclock: reset=0 fe=00000100 se=00001000 states=000000000000000000010010 fills=00001100 ifs=00000000 iss=00000000 ao=0202020202020100 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00010000 se=00100000 states=000000000000010010010010 fills=00110000 ifs=00000000 iss=00000000 ao=0404040401000302 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+d3
+
+  preclock: reset=0 fe=00010000 se=00100000 states=000000000000010010010010 fills=00110000 ifs=00000000 iss=00000000 ao=0404040401000302 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=01000000 se=10000000 states=000000010010010010010010 fills=11000000 ifs=00000000 iss=00000000 ao=0606010003020504 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+d4
+
+  preclock: reset=0 fe=01000000 se=10000000 states=000000010010010010010010 fills=11000000 ifs=00000000 iss=00000000 ao=0606010003020504 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00000000 se=00000000 states=010010010010010010010010 fills=00000000 ifs=00000000 iss=00000000 ao=0100030205040706 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+resetting
+
+  preclock: reset=1 fe=00000000 se=00000000 states=010010010010010010010010 fills=00000000 ifs=00000000 iss=00000000 ao=0100030205040706 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=1 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000011 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test_reservation_station.v", line 314.
+$finish at simulation time                  140
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 20
-CPU Time:      0.010 seconds;       Data structure size:   0.1Mb
-Thu Apr  4 03:50:06 2013
-CPU time: .434 seconds to compile + .060 seconds to elab + .210 seconds to link + .055 seconds in simulation
+Time: 140
+CPU Time:      0.020 seconds;       Data structure size:   0.1Mb
+Mon Apr  8 00:06:01 2013
+CPU time: .391 seconds to compile + .061 seconds to elab + .212 seconds to link + .090 seconds in simulation

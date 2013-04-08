@@ -54,12 +54,14 @@ module retire_stage(
     begin
       current_state1 <= 0;
       current_state0 <= 0;
+      state          <= 2'b00;
     end
     
     else
     begin
       current_state1 <= next_state1;
       current_state0 <= next_state0;
+      state          <= {next_state1, next_state0};
     end
   end
 

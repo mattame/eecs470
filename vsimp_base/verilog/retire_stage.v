@@ -34,3 +34,43 @@ module retire_stage(
   
   wire current_state0; //current state bits
   wire current_state1;
+
+
+  /*** parameters ***/
+  parameter INITIAL       = 2'b00;
+  parameter BOTH_COMPLETE = 2'b01;
+  parameter HEAD1_ONLY    = 2'b10;
+  parameter NONE          = 2'b11;
+
+
+
+  assign next_state1 = !(complete_head1 && complete_head2);
+  assign next_state0 = !(complete_head1 && !complete_head2);
+  
+
+  always @(posedge clock)
+  begin
+    if(reset)
+    begin
+      current_state1 <= 0;
+      current_state0 <= 0;
+    end
+    
+    else
+    begin
+      current_state1 <= next_state1;
+      current_state0 <= next_state0;
+    end
+  end
+
+
+
+  /*** output logic ***/
+  always @*
+  begin
+    case(state)
+  
+    INITIAL: begin
+      
+
+  

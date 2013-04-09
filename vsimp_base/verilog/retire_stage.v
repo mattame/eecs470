@@ -76,10 +76,10 @@ module retire_stage(
     case(state)
   
     INITIAL: begin
-        register_out1 = 32'b0;
-        register_out2 = 32'b0;
-        value_out1    = 32'b0;
-        value_out2    = 32'b0;
+        register_out1 = 5'b0;
+        register_out2 = 5'b0;
+        value_out1    = 64'b0;
+        value_out2    = 64'b0;
     end
       
     BOTH: begin
@@ -91,16 +91,16 @@ module retire_stage(
 
     HEAD1_ONLY: begin
         register_out1 = rob_register_in1;
-        register_out2 = 32'b0;
+        register_out2 = 5'b0;
         value_out1    = rob_value_in1;
-        value_out2    = 32'b0;
+        value_out2    = 64'b0;
     end
       
     NONE: begin
-        register_out1 = 32'b0;
-        register_out2 = 32'b0;
-        value_out1    = 32'b0;
-        value_out2    = 32'b0;
+        register_out1 = 5'b0;
+        register_out2 = 5'b0;
+        value_out1    = 64'b0;
+        value_out2    = 64'b0;
     end
     endcase
   end

@@ -24,8 +24,8 @@
 *     Register to be written to
 *     Value to be written
 ***/
-
 module reorder_buffer_entry(
+
                   //inputs
                   clock, reset, tag_in
                   register_in, 
@@ -104,7 +104,7 @@ module reorder_buffer_entry(
      begin
         state_out    <= `SD `ROBE_EMPTY
         value_out    <= `SD 64'h0;
-        register_out <= `SD 5'b0;
+        register_out <= `SD `RSTAG_NULL;
      end
      else
      begin
@@ -117,15 +117,15 @@ module reorder_buffer_entry(
 endmodule
 
 
+
 /////////////////////
-// mian ROB module //
+// main ROB module //
 /////////////////////
 // todo: integrate with rob entry module and set correct inputs for latching
 // instruction 
 // also, forwarding for the case of a full rob and trying to add instructions
 // while retiring is not added, probably should be
 module reorder_buffer( clock,reset,
-
       
       inst1_valid_in,
       inst1_dest_reg,
@@ -188,6 +188,10 @@ module reorder_buffer( clock,reset,
    reg n_rob_empty;
 
 
+   // regs/wires for talking directly to ther
+
+
+
    // combinational assignments for head/tail plus one and two. accounts //
    // for overflow  //
    assign head_plus_one = (head==(`ROB_ENTRIES-1)) ? 8'd0 : head+8'd1;
@@ -223,13 +227,14 @@ module reorder_buffer( clock,reset,
       reservation_station_entry entries ( .clock(clock), .reset(reset),
                                        
                     .tag_in(tags_in[i]),
-
-                    .     
+                    .register_in(registers_in[i]),       
                
                     .cdb1_tag_in(cdb1_tag_in), .cdb1_value_in(cdb1_value_in),
                     .cdb2_tag_in(cdb2_tag_in), .cdb2_value_in(cdb2_value_in),
 
-                    .value_out  
+                    .value_out(values_out[i]),
+                    .register_out(registers_out[i]),
+                    .state_out(states_out[i])
 
                          );
 

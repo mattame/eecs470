@@ -351,21 +351,38 @@ endmodule
 // while retiring is not added, probably should be
 module reorder_buffer( clock,reset,
 
+      
       inst1_valid_in,
       inst1_dest_reg,
 
       inst2_valid_in,
       inst2_dest_reg,
 
-      cdb1_tag_in,
-      cdb2_tag_in,  
+      // tags for reading from the rs // 
+      inst1_rega_tag_in,
+      inst1_regb_tag_in,
+      inst2_rega_tag_in,
+      inst2_regb_tag_in,
 
+      // cdb inputs //
+      cdb1_tag_in,
+      cdb1_value_in,
+      cdb2_tag_in,
+      cdb2_value_in, 
+
+      // outputs //
       inst1_tag_out,
       inst2_tag_out,
 
+      // values out to the rs //
+      inst1_rega_value_out,
+      inst1_regb_value_out,
+      inst2_rega_value_out,
+      inst2_regb_value_out,     
+
+      // signals out //
       rob_full
                  );
-
 
    // inputs //
    input wire clock;
@@ -428,8 +445,16 @@ module reorder_buffer( clock,reset,
       for (i=0; i<`ROB_ENTRIES; i=i+1)
       begin
 
-      reservation_station_entry entries ( clock,reset,
+      reservation_station_entry entries ( .clock(clock), .reset(reset),
+                                       
+                    .tag_in(tags_in[i]),
 
+                    .     
+               
+                    .cdb1_tag_in(cdb1_tag_in), .cdb1_value_in(cdb1_value_in),
+                    .cdb2_tag_in(cdb2_tag_in), .cdb2_value_in(cdb2_value_in),
+
+                    .value_out  
 
                          );
 

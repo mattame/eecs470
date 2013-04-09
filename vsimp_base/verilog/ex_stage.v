@@ -27,6 +27,7 @@ module ex_stage(// Inputs
                 id_ex_alu_func_1,
                 id_ex_cond_branch,
                 id_ex_uncond_branch,
+
 				// Input Bus 2
 				id_ex_NPC_2,
 				id_ex_IR_2,
@@ -37,6 +38,11 @@ module ex_stage(// Inputs
 				id_ex_opb_select_2,
 				id_ex_alu_func_2,
 				
+          // From Mem Access
+        MEM_tag_in,
+        MEM_value_in,
+        MEM_valid_in,
+        
 			    // Outputs
 				stall_bus_1,
 				stall_bus_2,
@@ -52,7 +58,16 @@ module ex_stage(// Inputs
 				ex_NPC_out_2,
 				ex_dest_reg_out_2,
 				ex_result_out_2,
-				ex_valid_out_2
+				ex_valid_out_2,
+
+          // To LSQ
+        LSQ_tag_out_1,
+        LSQ_address_out_1,
+        LSQ_value_out_1,
+
+        LSQ_tag_out_2,
+        LSQ_address_out_2,
+        LSQ_value_out_2
                );
 
   input         clock;               // system clock
@@ -80,7 +95,7 @@ module ex_stage(// Inputs
   
 
   output        stall_bus_1;	     // Should input bus 1 stall?
-  output		stall_bus_2;	     // Should input bus 2 stall?
+  output		    stall_bus_2;	     // Should input bus 2 stall?
   output        ex_branch_taken;  // is this a taken branch?
   
 				// Bus 1
@@ -97,6 +112,14 @@ module ex_stage(// Inputs
   output [63:0] ex_result_out_2;	 // Bus 2 result
   output		ex_valid_out_2;		 // Valid Output
   
+  output [4:0] LSQ_tag_out_1;
+  output [63:0] LSQ_address_out_1;
+  output [63:0] LSQ_value_out_1;
+
+  output [4:0] LSQ_tag_out_2;
+  output [63:0] LSQ_address_out_2;
+  output [63:0] LSQ_value_out_2;
+
   
   // Inputs to the arbiter
   wire [63:0] ex_alu_result_out_1;   // ALU result

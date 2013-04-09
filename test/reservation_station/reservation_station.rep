@@ -1,0 +1,1256 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'reservation_station' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : design
+Design : reservation_station
+Version: G-2012.06
+Date   : Tue Apr  9 02:15:01 2013
+****************************************
+
+Design allows ideal nets on clock nets.
+
+Library(s) Used:
+
+    lec25dscc25_TT (File: /afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db)
+
+Local Link Library:
+
+    {lec25dscc25_TT.db}
+
+Flip-Flop Types:
+
+    No flip-flop types specified.
+
+Latch Types:
+
+    No latch types specified.
+
+Operating Conditions:
+
+
+    Operating Condition Name : nom_pvt
+    Library : lec25dscc25_TT
+    Process :   1.00
+    Temperature :  25.00
+    Voltage :   2.50
+    Interconnect Model : balanced_tree
+
+Wire Loading Model:
+
+    Selected manually by the user.
+
+Name           :   tsmcwire
+Location       :   lec25dscc25_TT
+Resistance     :   0.2642
+Capacitance    :   0.000132782
+Area           :   0.27
+Slope          :   0.74
+Fanout   Length   Points Average Cap Std Deviation
+--------------------------------------------------------------
+     1     0.89
+     2     1.48
+     3     2.44
+     4     3.18
+     5     3.92
+
+
+
+Wire Loading Model Mode: top.
+
+Timing Ranges:
+
+    No timing ranges specified.
+
+Pin Input Delays:
+
+    None specified.
+
+Pin Output Delays:
+
+    None specified.
+
+Disabled Timing Arcs:
+
+    No arcs disabled.
+
+Required Licenses:
+
+    None Required
+
+Design Parameters:
+
+    None specified.
+1
+ 
+****************************************
+Report : area
+Design : reservation_station
+Version: G-2012.06
+Date   : Tue Apr  9 02:15:01 2013
+****************************************
+
+Library(s) Used:
+
+    lec25dscc25_TT (File: /afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db)
+
+Number of ports:                         1055
+Number of nets:                         18898
+Number of cells:                        15723
+Number of combinational cells:          12987
+Number of sequential cells:              2720
+Number of macros:                           0
+Number of buf/inv:                       3619
+Number of references:                      47
+
+Combinational area:       1267179.863708
+Noncombinational area:    741527.818115
+Net Interconnect area:    17716.641594 
+
+Total cell area:          2008707.681824
+Total area:               2026424.323418
+1
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -input_pins
+        -nets
+        -max_paths 2
+        -transition_time
+Design : reservation_station
+Version: G-2012.06
+Date   : Tue Apr  9 02:15:01 2013
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: nom_pvt   Library: lec25dscc25_TT
+Wire Load Model Mode: top
+
+  Startpoint: RSEMODULES[0].entries/status_out_reg[0]
+              (rising edge-triggered flip-flop clocked by clock)
+  Endpoint: RSEMODULES[14].entries/age_out_reg[0]
+            (rising edge-triggered flip-flop clocked by clock)
+  Path Group: clock
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  reservation_station tsmcwire             lec25dscc25_TT
+
+  Point                                       Fanout     Trans      Incr       Path
+  ------------------------------------------------------------------------------------
+  clock clock (rise edge)                                           0.00       0.00
+  clock network delay (ideal)                                       0.00       0.00
+  RSEMODULES[0].entries/status_out_reg[0]/CLK (dffcs1)     0.00     0.00 #     0.00 r
+  RSEMODULES[0].entries/status_out_reg[0]/QN (dffcs1)     0.20      0.15       0.15 r
+  RSEMODULES[0].entries/n455 (net)              1                   0.00       0.15 r
+  RSEMODULES[0].entries/U629/DIN3 (nnd3s1)                0.20      0.00       0.16 r
+  RSEMODULES[0].entries/U629/Q (nnd3s1)                   0.26      0.12       0.28 f
+  RSEMODULES[0].entries/n52 (net)               3                   0.00       0.28 f
+  RSEMODULES[0].entries/U625/DIN2 (nnd2s1)                0.26      0.00       0.28 f
+  RSEMODULES[0].entries/U625/Q (nnd2s1)                   0.39      0.19       0.47 r
+  RSEMODULES[0].entries/first_empty_filled_out (net)     2          0.00       0.47 r
+  RSEMODULES[0].entries/first_empty_filled_out (reservation_station_entry_15)     0.00     0.47 r
+  first_empty_filleds[0] (net)                                      0.00       0.47 r
+  RSEMODULES[1].entries/first_empty_filled_in (reservation_station_entry_14)     0.00     0.47 r
+  RSEMODULES[1].entries/first_empty_filled_in (net)                 0.00       0.47 r
+  RSEMODULES[1].entries/U625/DIN (hi1s1)                  0.39      0.00       0.47 r
+  RSEMODULES[1].entries/U625/Q (hi1s1)                    0.46      0.24       0.71 f
+  RSEMODULES[1].entries/n44 (net)               3                   0.00       0.71 f
+  RSEMODULES[1].entries/U622/DIN1 (nnd2s1)                0.46      0.00       0.71 f
+  RSEMODULES[1].entries/U622/Q (nnd2s1)                   0.40      0.21       0.93 r
+  RSEMODULES[1].entries/first_empty_filled_out (net)     2          0.00       0.93 r
+  RSEMODULES[1].entries/first_empty_filled_out (reservation_station_entry_14)     0.00     0.93 r
+  first_empty_filleds[1] (net)                                      0.00       0.93 r
+  RSEMODULES[2].entries/first_empty_filled_in (reservation_station_entry_13)     0.00     0.93 r
+  RSEMODULES[2].entries/first_empty_filled_in (net)                 0.00       0.93 r
+  RSEMODULES[2].entries/U626/DIN (hi1s1)                  0.40      0.00       0.93 r
+  RSEMODULES[2].entries/U626/Q (hi1s1)                    0.46      0.25       1.17 f
+  RSEMODULES[2].entries/n51 (net)               3                   0.00       1.17 f
+  RSEMODULES[2].entries/U623/DIN1 (nnd2s1)                0.46      0.00       1.17 f
+  RSEMODULES[2].entries/U623/Q (nnd2s1)                   0.40      0.21       1.39 r
+  RSEMODULES[2].entries/first_empty_filled_out (net)     2          0.00       1.39 r
+  RSEMODULES[2].entries/first_empty_filled_out (reservation_station_entry_13)     0.00     1.39 r
+  first_empty_filleds[2] (net)                                      0.00       1.39 r
+  RSEMODULES[3].entries/first_empty_filled_in (reservation_station_entry_12)     0.00     1.39 r
+  RSEMODULES[3].entries/first_empty_filled_in (net)                 0.00       1.39 r
+  RSEMODULES[3].entries/U628/DIN (hi1s1)                  0.40      0.00       1.39 r
+  RSEMODULES[3].entries/U628/Q (hi1s1)                    0.46      0.24       1.63 f
+  RSEMODULES[3].entries/n54 (net)               3                   0.00       1.63 f
+  RSEMODULES[3].entries/U625/DIN1 (nnd2s1)                0.46      0.00       1.64 f
+  RSEMODULES[3].entries/U625/Q (nnd2s1)                   0.40      0.21       1.85 r
+  RSEMODULES[3].entries/first_empty_filled_out (net)     2          0.00       1.85 r
+  RSEMODULES[3].entries/first_empty_filled_out (reservation_station_entry_12)     0.00     1.85 r
+  first_empty_filleds[3] (net)                                      0.00       1.85 r
+  RSEMODULES[4].entries/first_empty_filled_in (reservation_station_entry_11)     0.00     1.85 r
+  RSEMODULES[4].entries/first_empty_filled_in (net)                 0.00       1.85 r
+  RSEMODULES[4].entries/U628/DIN (hi1s1)                  0.40      0.00       1.85 r
+  RSEMODULES[4].entries/U628/Q (hi1s1)                    0.46      0.24       2.09 f
+  RSEMODULES[4].entries/n54 (net)               3                   0.00       2.09 f
+  RSEMODULES[4].entries/U625/DIN1 (nnd2s1)                0.46      0.00       2.10 f
+  RSEMODULES[4].entries/U625/Q (nnd2s1)                   0.40      0.21       2.31 r
+  RSEMODULES[4].entries/first_empty_filled_out (net)     2          0.00       2.31 r
+  RSEMODULES[4].entries/first_empty_filled_out (reservation_station_entry_11)     0.00     2.31 r
+  first_empty_filleds[4] (net)                                      0.00       2.31 r
+  RSEMODULES[5].entries/first_empty_filled_in (reservation_station_entry_10)     0.00     2.31 r
+  RSEMODULES[5].entries/first_empty_filled_in (net)                 0.00       2.31 r
+  RSEMODULES[5].entries/U624/DIN (hi1s1)                  0.40      0.00       2.31 r
+  RSEMODULES[5].entries/U624/Q (hi1s1)                    0.46      0.24       2.56 f
+  RSEMODULES[5].entries/n48 (net)               3                   0.00       2.56 f
+  RSEMODULES[5].entries/U621/DIN1 (nnd2s1)                0.46      0.00       2.56 f
+  RSEMODULES[5].entries/U621/Q (nnd2s1)                   0.40      0.21       2.77 r
+  RSEMODULES[5].entries/first_empty_filled_out (net)     2          0.00       2.77 r
+  RSEMODULES[5].entries/first_empty_filled_out (reservation_station_entry_10)     0.00     2.77 r
+  first_empty_filleds[5] (net)                                      0.00       2.77 r
+  RSEMODULES[6].entries/first_empty_filled_in (reservation_station_entry_9)     0.00     2.77 r
+  RSEMODULES[6].entries/first_empty_filled_in (net)                 0.00       2.77 r
+  RSEMODULES[6].entries/U628/DIN (hi1s1)                  0.40      0.00       2.77 r
+  RSEMODULES[6].entries/U628/Q (hi1s1)                    0.46      0.24       3.02 f
+  RSEMODULES[6].entries/n49 (net)               3                   0.00       3.02 f
+  RSEMODULES[6].entries/U626/DIN1 (nnd2s1)                0.46      0.00       3.02 f
+  RSEMODULES[6].entries/U626/Q (nnd2s1)                   0.40      0.21       3.23 r
+  RSEMODULES[6].entries/first_empty_filled_out (net)     2          0.00       3.23 r
+  RSEMODULES[6].entries/first_empty_filled_out (reservation_station_entry_9)     0.00     3.23 r
+  first_empty_filleds[6] (net)                                      0.00       3.23 r
+  RSEMODULES[7].entries/first_empty_filled_in (reservation_station_entry_8)     0.00     3.23 r
+  RSEMODULES[7].entries/first_empty_filled_in (net)                 0.00       3.23 r
+  RSEMODULES[7].entries/U630/DIN (hi1s1)                  0.40      0.00       3.23 r
+  RSEMODULES[7].entries/U630/Q (hi1s1)                    0.46      0.24       3.48 f
+  RSEMODULES[7].entries/n51 (net)               3                   0.00       3.48 f
+  RSEMODULES[7].entries/U627/DIN1 (nnd2s1)                0.46      0.00       3.48 f
+  RSEMODULES[7].entries/U627/Q (nnd2s1)                   0.40      0.21       3.69 r
+  RSEMODULES[7].entries/first_empty_filled_out (net)     2          0.00       3.69 r
+  RSEMODULES[7].entries/first_empty_filled_out (reservation_station_entry_8)     0.00     3.69 r
+  first_empty_filleds[7] (net)                                      0.00       3.69 r
+  RSEMODULES[8].entries/first_empty_filled_in (reservation_station_entry_7)     0.00     3.69 r
+  RSEMODULES[8].entries/first_empty_filled_in (net)                 0.00       3.69 r
+  RSEMODULES[8].entries/U628/DIN (hi1s1)                  0.40      0.00       3.70 r
+  RSEMODULES[8].entries/U628/Q (hi1s1)                    0.46      0.24       3.94 f
+  RSEMODULES[8].entries/n49 (net)               3                   0.00       3.94 f
+  RSEMODULES[8].entries/U625/DIN1 (nnd2s1)                0.46      0.00       3.94 f
+  RSEMODULES[8].entries/U625/Q (nnd2s1)                   0.40      0.21       4.16 r
+  RSEMODULES[8].entries/first_empty_filled_out (net)     2          0.00       4.16 r
+  RSEMODULES[8].entries/first_empty_filled_out (reservation_station_entry_7)     0.00     4.16 r
+  first_empty_filleds[8] (net)                                      0.00       4.16 r
+  RSEMODULES[9].entries/first_empty_filled_in (reservation_station_entry_6)     0.00     4.16 r
+  RSEMODULES[9].entries/first_empty_filled_in (net)                 0.00       4.16 r
+  RSEMODULES[9].entries/U628/DIN (hi1s1)                  0.40      0.00       4.16 r
+  RSEMODULES[9].entries/U628/Q (hi1s1)                    0.46      0.24       4.40 f
+  RSEMODULES[9].entries/n49 (net)               3                   0.00       4.40 f
+  RSEMODULES[9].entries/U625/DIN1 (nnd2s1)                0.46      0.00       4.40 f
+  RSEMODULES[9].entries/U625/Q (nnd2s1)                   0.40      0.21       4.62 r
+  RSEMODULES[9].entries/first_empty_filled_out (net)     2          0.00       4.62 r
+  RSEMODULES[9].entries/first_empty_filled_out (reservation_station_entry_6)     0.00     4.62 r
+  first_empty_filleds[9] (net)                                      0.00       4.62 r
+  RSEMODULES[10].entries/first_empty_filled_in (reservation_station_entry_5)     0.00     4.62 r
+  RSEMODULES[10].entries/first_empty_filled_in (net)                0.00       4.62 r
+  RSEMODULES[10].entries/U625/DIN (hi1s1)                 0.40      0.00       4.62 r
+  RSEMODULES[10].entries/U625/Q (hi1s1)                   0.46      0.24       4.86 f
+  RSEMODULES[10].entries/n49 (net)              3                   0.00       4.86 f
+  RSEMODULES[10].entries/U622/DIN1 (nnd2s1)               0.46      0.00       4.86 f
+  RSEMODULES[10].entries/U622/Q (nnd2s1)                  0.40      0.21       5.08 r
+  RSEMODULES[10].entries/first_empty_filled_out (net)     2         0.00       5.08 r
+  RSEMODULES[10].entries/first_empty_filled_out (reservation_station_entry_5)     0.00     5.08 r
+  first_empty_filleds[10] (net)                                     0.00       5.08 r
+  RSEMODULES[11].entries/first_empty_filled_in (reservation_station_entry_4)     0.00     5.08 r
+  RSEMODULES[11].entries/first_empty_filled_in (net)                0.00       5.08 r
+  RSEMODULES[11].entries/U630/DIN (hi1s1)                 0.40      0.00       5.08 r
+  RSEMODULES[11].entries/U630/Q (hi1s1)                   0.46      0.24       5.32 f
+  RSEMODULES[11].entries/n57 (net)              3                   0.00       5.32 f
+  RSEMODULES[11].entries/U627/DIN1 (nnd2s1)               0.46      0.00       5.33 f
+  RSEMODULES[11].entries/U627/Q (nnd2s1)                  0.40      0.21       5.54 r
+  RSEMODULES[11].entries/first_empty_filled_out (net)     2         0.00       5.54 r
+  RSEMODULES[11].entries/first_empty_filled_out (reservation_station_entry_4)     0.00     5.54 r
+  first_empty_filleds[11] (net)                                     0.00       5.54 r
+  RSEMODULES[12].entries/first_empty_filled_in (reservation_station_entry_3)     0.00     5.54 r
+  RSEMODULES[12].entries/first_empty_filled_in (net)                0.00       5.54 r
+  RSEMODULES[12].entries/U629/DIN (hi1s1)                 0.40      0.00       5.54 r
+  RSEMODULES[12].entries/U629/Q (hi1s1)                   0.46      0.24       5.78 f
+  RSEMODULES[12].entries/n57 (net)              3                   0.00       5.78 f
+  RSEMODULES[12].entries/U626/DIN1 (nnd2s1)               0.46      0.00       5.79 f
+  RSEMODULES[12].entries/U626/Q (nnd2s1)                  0.40      0.21       6.00 r
+  RSEMODULES[12].entries/first_empty_filled_out (net)     2         0.00       6.00 r
+  RSEMODULES[12].entries/first_empty_filled_out (reservation_station_entry_3)     0.00     6.00 r
+  first_empty_filleds[12] (net)                                     0.00       6.00 r
+  RSEMODULES[13].entries/first_empty_filled_in (reservation_station_entry_2)     0.00     6.00 r
+  RSEMODULES[13].entries/first_empty_filled_in (net)                0.00       6.00 r
+  RSEMODULES[13].entries/U631/DIN (hi1s1)                 0.40      0.00       6.00 r
+  RSEMODULES[13].entries/U631/Q (hi1s1)                   0.46      0.24       6.25 f
+  RSEMODULES[13].entries/n57 (net)              3                   0.00       6.25 f
+  RSEMODULES[13].entries/U629/DIN1 (nnd2s1)               0.46      0.00       6.25 f
+  RSEMODULES[13].entries/U629/Q (nnd2s1)                  0.40      0.21       6.46 r
+  RSEMODULES[13].entries/first_empty_filled_out (net)     2         0.00       6.46 r
+  RSEMODULES[13].entries/first_empty_filled_out (reservation_station_entry_2)     0.00     6.46 r
+  first_empty_filleds[13] (net)                                     0.00       6.46 r
+  RSEMODULES[14].entries/first_empty_filled_in (reservation_station_entry_1)     0.00     6.46 r
+  RSEMODULES[14].entries/first_empty_filled_in (net)                0.00       6.46 r
+  RSEMODULES[14].entries/U624/DIN (hi1s1)                 0.40      0.00       6.46 r
+  RSEMODULES[14].entries/U624/Q (hi1s1)                   0.46      0.24       6.71 f
+  RSEMODULES[14].entries/n48 (net)              3                   0.00       6.71 f
+  RSEMODULES[14].entries/U621/DIN1 (nnd2s1)               0.46      0.00       6.71 f
+  RSEMODULES[14].entries/U621/Q (nnd2s1)                  0.40      0.21       6.92 r
+  RSEMODULES[14].entries/first_empty_filled_out (net)     2         0.00       6.92 r
+  RSEMODULES[14].entries/first_empty_filled_out (reservation_station_entry_1)     0.00     6.92 r
+  first_empty_filleds[14] (net)                                     0.00       6.92 r
+  RSEMODULES[15].entries/first_empty_filled_in (reservation_station_entry_0)     0.00     6.92 r
+  RSEMODULES[15].entries/first_empty_filled_in (net)                0.00       6.92 r
+  RSEMODULES[15].entries/U624/DIN (hi1s1)                 0.40      0.00       6.92 r
+  RSEMODULES[15].entries/U624/Q (hi1s1)                   0.46      0.24       7.17 f
+  RSEMODULES[15].entries/n48 (net)              3                   0.00       7.17 f
+  RSEMODULES[15].entries/U623/DIN2 (nnd2s1)               0.46      0.00       7.17 f
+  RSEMODULES[15].entries/U623/Q (nnd2s1)                  0.33      0.15       7.32 r
+  RSEMODULES[15].entries/n356 (net)             2                   0.00       7.32 r
+  RSEMODULES[15].entries/U622/DIN (hi1s1)                 0.33      0.00       7.32 r
+  RSEMODULES[15].entries/U622/Q (hi1s1)                   2.35      0.99       8.31 f
+  RSEMODULES[15].entries/first_empty (net)      4                   0.00       8.31 f
+  RSEMODULES[15].entries/first_empty (reservation_station_entry_0)     0.00     8.31 f
+  first_empties[15] (net)                                           0.00       8.31 f
+  U8706/DIN3 (or4s1)                                      2.35      0.00       8.32 f
+  U8706/Q (or4s1)                                         0.20      0.33       8.64 f
+  n10755 (net)                                  1                   0.00       8.64 f
+  U8137/DIN5 (oai33s2)                                    0.20      0.00       8.64 f
+  U8137/Q (oai33s2)                                       0.34      0.52       9.17 r
+  n10684 (net)                                  6                   0.00       9.17 r
+  U8136/DIN (hi1s1)                                       0.34      0.00       9.17 r
+  U8136/Q (hi1s1)                                         2.33      0.99      10.16 f
+  n15680 (net)                                 16                   0.00      10.16 f
+  U8138/DIN2 (nnd2s1)                                     2.33      0.00      10.16 f
+  U8138/Q (nnd2s1)                                        0.93      0.53      10.69 r
+  n10686 (net)                                  5                   0.00      10.69 r
+  U9989/DIN3 (oai22s2)                                    0.93      0.00      10.69 r
+  U9989/Q (oai22s2)                                       1.22      0.59      11.29 f
+  fills[9] (net)                                3                   0.00      11.29 f
+  U9368/DIN4 (or4s1)                                      1.22      0.00      11.29 f
+  U9368/Q (or4s1)                                         0.19      0.31      11.60 f
+  n10682 (net)                                  1                   0.00      11.60 f
+  U8184/DIN3 (nor4s1)                                     0.19      0.00      11.60 f
+  U8184/Q (nor4s1)                                        0.53      0.20      11.80 r
+  n10777 (net)                                  3                   0.00      11.80 r
+  U8149/DIN (ib1s1)                                       0.53      0.00      11.80 r
+  U8149/Q (ib1s1)                                         0.74      0.39      12.19 f
+  n11511 (net)                                 26                   0.00      12.19 f
+  RSEMODULES[14].entries/filling_second (reservation_station_entry_1)     0.00    12.19 f
+  RSEMODULES[14].entries/filling_second (net)                       0.00      12.19 f
+  RSEMODULES[14].entries/U14/DIN2 (nor2s1)                0.74      0.00      12.19 f
+  RSEMODULES[14].entries/U14/Q (nor2s1)                   0.99      0.44      12.63 r
+  RSEMODULES[14].entries/n349 (net)             9                   0.00      12.63 r
+  RSEMODULES[14].entries/U504/DIN1 (nor2s1)               0.99      0.00      12.63 r
+  RSEMODULES[14].entries/U504/Q (nor2s1)                  0.84      0.48      13.12 f
+  RSEMODULES[14].entries/n348 (net)             8                   0.00      13.12 f
+  RSEMODULES[14].entries/U503/DIN4 (aoi222s1)             0.84      0.00      13.12 f
+  RSEMODULES[14].entries/U503/Q (aoi222s1)                0.47      0.24      13.36 r
+  RSEMODULES[14].entries/n357 (net)             1                   0.00      13.36 r
+  RSEMODULES[14].entries/U501/DIN3 (oai22s1)              0.47      0.00      13.36 r
+  RSEMODULES[14].entries/U501/Q (oai22s1)                 0.32      0.20      13.56 f
+  RSEMODULES[14].entries/n_age[0] (net)         1                   0.00      13.56 f
+  RSEMODULES[14].entries/age_out_reg[0]/CLRB (dffcs2)     0.32      0.00      13.56 f
+  data arrival time                                                           13.56
+
+  clock clock (rise edge)                                          16.00      16.00
+  clock network delay (ideal)                                       0.00      16.00
+  clock uncertainty                                                -0.10      15.90
+  RSEMODULES[14].entries/age_out_reg[0]/CLK (dffcs2)                0.00      15.90 r
+  library setup time                                               -0.36      15.54
+  data required time                                                          15.54
+  ------------------------------------------------------------------------------------
+  data required time                                                          15.54
+  data arrival time                                                          -13.56
+  ------------------------------------------------------------------------------------
+  slack (MET)                                                                  1.98
+
+
+  Startpoint: RSEMODULES[0].entries/status_out_reg[0]
+              (rising edge-triggered flip-flop clocked by clock)
+  Endpoint: RSEMODULES[15].entries/age_out_reg[0]
+            (rising edge-triggered flip-flop clocked by clock)
+  Path Group: clock
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  reservation_station tsmcwire             lec25dscc25_TT
+
+  Point                                       Fanout     Trans      Incr       Path
+  ------------------------------------------------------------------------------------
+  clock clock (rise edge)                                           0.00       0.00
+  clock network delay (ideal)                                       0.00       0.00
+  RSEMODULES[0].entries/status_out_reg[0]/CLK (dffcs1)     0.00     0.00 #     0.00 r
+  RSEMODULES[0].entries/status_out_reg[0]/QN (dffcs1)     0.20      0.15       0.15 r
+  RSEMODULES[0].entries/n455 (net)              1                   0.00       0.15 r
+  RSEMODULES[0].entries/U629/DIN3 (nnd3s1)                0.20      0.00       0.16 r
+  RSEMODULES[0].entries/U629/Q (nnd3s1)                   0.26      0.12       0.28 f
+  RSEMODULES[0].entries/n52 (net)               3                   0.00       0.28 f
+  RSEMODULES[0].entries/U625/DIN2 (nnd2s1)                0.26      0.00       0.28 f
+  RSEMODULES[0].entries/U625/Q (nnd2s1)                   0.39      0.19       0.47 r
+  RSEMODULES[0].entries/first_empty_filled_out (net)     2          0.00       0.47 r
+  RSEMODULES[0].entries/first_empty_filled_out (reservation_station_entry_15)     0.00     0.47 r
+  first_empty_filleds[0] (net)                                      0.00       0.47 r
+  RSEMODULES[1].entries/first_empty_filled_in (reservation_station_entry_14)     0.00     0.47 r
+  RSEMODULES[1].entries/first_empty_filled_in (net)                 0.00       0.47 r
+  RSEMODULES[1].entries/U625/DIN (hi1s1)                  0.39      0.00       0.47 r
+  RSEMODULES[1].entries/U625/Q (hi1s1)                    0.46      0.24       0.71 f
+  RSEMODULES[1].entries/n44 (net)               3                   0.00       0.71 f
+  RSEMODULES[1].entries/U622/DIN1 (nnd2s1)                0.46      0.00       0.71 f
+  RSEMODULES[1].entries/U622/Q (nnd2s1)                   0.40      0.21       0.93 r
+  RSEMODULES[1].entries/first_empty_filled_out (net)     2          0.00       0.93 r
+  RSEMODULES[1].entries/first_empty_filled_out (reservation_station_entry_14)     0.00     0.93 r
+  first_empty_filleds[1] (net)                                      0.00       0.93 r
+  RSEMODULES[2].entries/first_empty_filled_in (reservation_station_entry_13)     0.00     0.93 r
+  RSEMODULES[2].entries/first_empty_filled_in (net)                 0.00       0.93 r
+  RSEMODULES[2].entries/U626/DIN (hi1s1)                  0.40      0.00       0.93 r
+  RSEMODULES[2].entries/U626/Q (hi1s1)                    0.46      0.25       1.17 f
+  RSEMODULES[2].entries/n51 (net)               3                   0.00       1.17 f
+  RSEMODULES[2].entries/U623/DIN1 (nnd2s1)                0.46      0.00       1.17 f
+  RSEMODULES[2].entries/U623/Q (nnd2s1)                   0.40      0.21       1.39 r
+  RSEMODULES[2].entries/first_empty_filled_out (net)     2          0.00       1.39 r
+  RSEMODULES[2].entries/first_empty_filled_out (reservation_station_entry_13)     0.00     1.39 r
+  first_empty_filleds[2] (net)                                      0.00       1.39 r
+  RSEMODULES[3].entries/first_empty_filled_in (reservation_station_entry_12)     0.00     1.39 r
+  RSEMODULES[3].entries/first_empty_filled_in (net)                 0.00       1.39 r
+  RSEMODULES[3].entries/U628/DIN (hi1s1)                  0.40      0.00       1.39 r
+  RSEMODULES[3].entries/U628/Q (hi1s1)                    0.46      0.24       1.63 f
+  RSEMODULES[3].entries/n54 (net)               3                   0.00       1.63 f
+  RSEMODULES[3].entries/U625/DIN1 (nnd2s1)                0.46      0.00       1.64 f
+  RSEMODULES[3].entries/U625/Q (nnd2s1)                   0.40      0.21       1.85 r
+  RSEMODULES[3].entries/first_empty_filled_out (net)     2          0.00       1.85 r
+  RSEMODULES[3].entries/first_empty_filled_out (reservation_station_entry_12)     0.00     1.85 r
+  first_empty_filleds[3] (net)                                      0.00       1.85 r
+  RSEMODULES[4].entries/first_empty_filled_in (reservation_station_entry_11)     0.00     1.85 r
+  RSEMODULES[4].entries/first_empty_filled_in (net)                 0.00       1.85 r
+  RSEMODULES[4].entries/U628/DIN (hi1s1)                  0.40      0.00       1.85 r
+  RSEMODULES[4].entries/U628/Q (hi1s1)                    0.46      0.24       2.09 f
+  RSEMODULES[4].entries/n54 (net)               3                   0.00       2.09 f
+  RSEMODULES[4].entries/U625/DIN1 (nnd2s1)                0.46      0.00       2.10 f
+  RSEMODULES[4].entries/U625/Q (nnd2s1)                   0.40      0.21       2.31 r
+  RSEMODULES[4].entries/first_empty_filled_out (net)     2          0.00       2.31 r
+  RSEMODULES[4].entries/first_empty_filled_out (reservation_station_entry_11)     0.00     2.31 r
+  first_empty_filleds[4] (net)                                      0.00       2.31 r
+  RSEMODULES[5].entries/first_empty_filled_in (reservation_station_entry_10)     0.00     2.31 r
+  RSEMODULES[5].entries/first_empty_filled_in (net)                 0.00       2.31 r
+  RSEMODULES[5].entries/U624/DIN (hi1s1)                  0.40      0.00       2.31 r
+  RSEMODULES[5].entries/U624/Q (hi1s1)                    0.46      0.24       2.56 f
+  RSEMODULES[5].entries/n48 (net)               3                   0.00       2.56 f
+  RSEMODULES[5].entries/U621/DIN1 (nnd2s1)                0.46      0.00       2.56 f
+  RSEMODULES[5].entries/U621/Q (nnd2s1)                   0.40      0.21       2.77 r
+  RSEMODULES[5].entries/first_empty_filled_out (net)     2          0.00       2.77 r
+  RSEMODULES[5].entries/first_empty_filled_out (reservation_station_entry_10)     0.00     2.77 r
+  first_empty_filleds[5] (net)                                      0.00       2.77 r
+  RSEMODULES[6].entries/first_empty_filled_in (reservation_station_entry_9)     0.00     2.77 r
+  RSEMODULES[6].entries/first_empty_filled_in (net)                 0.00       2.77 r
+  RSEMODULES[6].entries/U628/DIN (hi1s1)                  0.40      0.00       2.77 r
+  RSEMODULES[6].entries/U628/Q (hi1s1)                    0.46      0.24       3.02 f
+  RSEMODULES[6].entries/n49 (net)               3                   0.00       3.02 f
+  RSEMODULES[6].entries/U626/DIN1 (nnd2s1)                0.46      0.00       3.02 f
+  RSEMODULES[6].entries/U626/Q (nnd2s1)                   0.40      0.21       3.23 r
+  RSEMODULES[6].entries/first_empty_filled_out (net)     2          0.00       3.23 r
+  RSEMODULES[6].entries/first_empty_filled_out (reservation_station_entry_9)     0.00     3.23 r
+  first_empty_filleds[6] (net)                                      0.00       3.23 r
+  RSEMODULES[7].entries/first_empty_filled_in (reservation_station_entry_8)     0.00     3.23 r
+  RSEMODULES[7].entries/first_empty_filled_in (net)                 0.00       3.23 r
+  RSEMODULES[7].entries/U630/DIN (hi1s1)                  0.40      0.00       3.23 r
+  RSEMODULES[7].entries/U630/Q (hi1s1)                    0.46      0.24       3.48 f
+  RSEMODULES[7].entries/n51 (net)               3                   0.00       3.48 f
+  RSEMODULES[7].entries/U627/DIN1 (nnd2s1)                0.46      0.00       3.48 f
+  RSEMODULES[7].entries/U627/Q (nnd2s1)                   0.40      0.21       3.69 r
+  RSEMODULES[7].entries/first_empty_filled_out (net)     2          0.00       3.69 r
+  RSEMODULES[7].entries/first_empty_filled_out (reservation_station_entry_8)     0.00     3.69 r
+  first_empty_filleds[7] (net)                                      0.00       3.69 r
+  RSEMODULES[8].entries/first_empty_filled_in (reservation_station_entry_7)     0.00     3.69 r
+  RSEMODULES[8].entries/first_empty_filled_in (net)                 0.00       3.69 r
+  RSEMODULES[8].entries/U628/DIN (hi1s1)                  0.40      0.00       3.70 r
+  RSEMODULES[8].entries/U628/Q (hi1s1)                    0.46      0.24       3.94 f
+  RSEMODULES[8].entries/n49 (net)               3                   0.00       3.94 f
+  RSEMODULES[8].entries/U625/DIN1 (nnd2s1)                0.46      0.00       3.94 f
+  RSEMODULES[8].entries/U625/Q (nnd2s1)                   0.40      0.21       4.16 r
+  RSEMODULES[8].entries/first_empty_filled_out (net)     2          0.00       4.16 r
+  RSEMODULES[8].entries/first_empty_filled_out (reservation_station_entry_7)     0.00     4.16 r
+  first_empty_filleds[8] (net)                                      0.00       4.16 r
+  RSEMODULES[9].entries/first_empty_filled_in (reservation_station_entry_6)     0.00     4.16 r
+  RSEMODULES[9].entries/first_empty_filled_in (net)                 0.00       4.16 r
+  RSEMODULES[9].entries/U628/DIN (hi1s1)                  0.40      0.00       4.16 r
+  RSEMODULES[9].entries/U628/Q (hi1s1)                    0.46      0.24       4.40 f
+  RSEMODULES[9].entries/n49 (net)               3                   0.00       4.40 f
+  RSEMODULES[9].entries/U625/DIN1 (nnd2s1)                0.46      0.00       4.40 f
+  RSEMODULES[9].entries/U625/Q (nnd2s1)                   0.40      0.21       4.62 r
+  RSEMODULES[9].entries/first_empty_filled_out (net)     2          0.00       4.62 r
+  RSEMODULES[9].entries/first_empty_filled_out (reservation_station_entry_6)     0.00     4.62 r
+  first_empty_filleds[9] (net)                                      0.00       4.62 r
+  RSEMODULES[10].entries/first_empty_filled_in (reservation_station_entry_5)     0.00     4.62 r
+  RSEMODULES[10].entries/first_empty_filled_in (net)                0.00       4.62 r
+  RSEMODULES[10].entries/U625/DIN (hi1s1)                 0.40      0.00       4.62 r
+  RSEMODULES[10].entries/U625/Q (hi1s1)                   0.46      0.24       4.86 f
+  RSEMODULES[10].entries/n49 (net)              3                   0.00       4.86 f
+  RSEMODULES[10].entries/U622/DIN1 (nnd2s1)               0.46      0.00       4.86 f
+  RSEMODULES[10].entries/U622/Q (nnd2s1)                  0.40      0.21       5.08 r
+  RSEMODULES[10].entries/first_empty_filled_out (net)     2         0.00       5.08 r
+  RSEMODULES[10].entries/first_empty_filled_out (reservation_station_entry_5)     0.00     5.08 r
+  first_empty_filleds[10] (net)                                     0.00       5.08 r
+  RSEMODULES[11].entries/first_empty_filled_in (reservation_station_entry_4)     0.00     5.08 r
+  RSEMODULES[11].entries/first_empty_filled_in (net)                0.00       5.08 r
+  RSEMODULES[11].entries/U630/DIN (hi1s1)                 0.40      0.00       5.08 r
+  RSEMODULES[11].entries/U630/Q (hi1s1)                   0.46      0.24       5.32 f
+  RSEMODULES[11].entries/n57 (net)              3                   0.00       5.32 f
+  RSEMODULES[11].entries/U627/DIN1 (nnd2s1)               0.46      0.00       5.33 f
+  RSEMODULES[11].entries/U627/Q (nnd2s1)                  0.40      0.21       5.54 r
+  RSEMODULES[11].entries/first_empty_filled_out (net)     2         0.00       5.54 r
+  RSEMODULES[11].entries/first_empty_filled_out (reservation_station_entry_4)     0.00     5.54 r
+  first_empty_filleds[11] (net)                                     0.00       5.54 r
+  RSEMODULES[12].entries/first_empty_filled_in (reservation_station_entry_3)     0.00     5.54 r
+  RSEMODULES[12].entries/first_empty_filled_in (net)                0.00       5.54 r
+  RSEMODULES[12].entries/U629/DIN (hi1s1)                 0.40      0.00       5.54 r
+  RSEMODULES[12].entries/U629/Q (hi1s1)                   0.46      0.24       5.78 f
+  RSEMODULES[12].entries/n57 (net)              3                   0.00       5.78 f
+  RSEMODULES[12].entries/U626/DIN1 (nnd2s1)               0.46      0.00       5.79 f
+  RSEMODULES[12].entries/U626/Q (nnd2s1)                  0.40      0.21       6.00 r
+  RSEMODULES[12].entries/first_empty_filled_out (net)     2         0.00       6.00 r
+  RSEMODULES[12].entries/first_empty_filled_out (reservation_station_entry_3)     0.00     6.00 r
+  first_empty_filleds[12] (net)                                     0.00       6.00 r
+  RSEMODULES[13].entries/first_empty_filled_in (reservation_station_entry_2)     0.00     6.00 r
+  RSEMODULES[13].entries/first_empty_filled_in (net)                0.00       6.00 r
+  RSEMODULES[13].entries/U631/DIN (hi1s1)                 0.40      0.00       6.00 r
+  RSEMODULES[13].entries/U631/Q (hi1s1)                   0.46      0.24       6.25 f
+  RSEMODULES[13].entries/n57 (net)              3                   0.00       6.25 f
+  RSEMODULES[13].entries/U629/DIN1 (nnd2s1)               0.46      0.00       6.25 f
+  RSEMODULES[13].entries/U629/Q (nnd2s1)                  0.40      0.21       6.46 r
+  RSEMODULES[13].entries/first_empty_filled_out (net)     2         0.00       6.46 r
+  RSEMODULES[13].entries/first_empty_filled_out (reservation_station_entry_2)     0.00     6.46 r
+  first_empty_filleds[13] (net)                                     0.00       6.46 r
+  RSEMODULES[14].entries/first_empty_filled_in (reservation_station_entry_1)     0.00     6.46 r
+  RSEMODULES[14].entries/first_empty_filled_in (net)                0.00       6.46 r
+  RSEMODULES[14].entries/U624/DIN (hi1s1)                 0.40      0.00       6.46 r
+  RSEMODULES[14].entries/U624/Q (hi1s1)                   0.46      0.24       6.71 f
+  RSEMODULES[14].entries/n48 (net)              3                   0.00       6.71 f
+  RSEMODULES[14].entries/U621/DIN1 (nnd2s1)               0.46      0.00       6.71 f
+  RSEMODULES[14].entries/U621/Q (nnd2s1)                  0.40      0.21       6.92 r
+  RSEMODULES[14].entries/first_empty_filled_out (net)     2         0.00       6.92 r
+  RSEMODULES[14].entries/first_empty_filled_out (reservation_station_entry_1)     0.00     6.92 r
+  first_empty_filleds[14] (net)                                     0.00       6.92 r
+  RSEMODULES[15].entries/first_empty_filled_in (reservation_station_entry_0)     0.00     6.92 r
+  RSEMODULES[15].entries/first_empty_filled_in (net)                0.00       6.92 r
+  RSEMODULES[15].entries/U624/DIN (hi1s1)                 0.40      0.00       6.92 r
+  RSEMODULES[15].entries/U624/Q (hi1s1)                   0.46      0.24       7.17 f
+  RSEMODULES[15].entries/n48 (net)              3                   0.00       7.17 f
+  RSEMODULES[15].entries/U623/DIN2 (nnd2s1)               0.46      0.00       7.17 f
+  RSEMODULES[15].entries/U623/Q (nnd2s1)                  0.33      0.15       7.32 r
+  RSEMODULES[15].entries/n356 (net)             2                   0.00       7.32 r
+  RSEMODULES[15].entries/U622/DIN (hi1s1)                 0.33      0.00       7.32 r
+  RSEMODULES[15].entries/U622/Q (hi1s1)                   2.35      0.99       8.31 f
+  RSEMODULES[15].entries/first_empty (net)      4                   0.00       8.31 f
+  RSEMODULES[15].entries/first_empty (reservation_station_entry_0)     0.00     8.31 f
+  first_empties[15] (net)                                           0.00       8.31 f
+  U8706/DIN3 (or4s1)                                      2.35      0.00       8.32 f
+  U8706/Q (or4s1)                                         0.20      0.33       8.64 f
+  n10755 (net)                                  1                   0.00       8.64 f
+  U8137/DIN5 (oai33s2)                                    0.20      0.00       8.64 f
+  U8137/Q (oai33s2)                                       0.34      0.52       9.17 r
+  n10684 (net)                                  6                   0.00       9.17 r
+  U8136/DIN (hi1s1)                                       0.34      0.00       9.17 r
+  U8136/Q (hi1s1)                                         2.33      0.99      10.16 f
+  n15680 (net)                                 16                   0.00      10.16 f
+  U8138/DIN2 (nnd2s1)                                     2.33      0.00      10.16 f
+  U8138/Q (nnd2s1)                                        0.93      0.53      10.69 r
+  n10686 (net)                                  5                   0.00      10.69 r
+  U9989/DIN3 (oai22s2)                                    0.93      0.00      10.69 r
+  U9989/Q (oai22s2)                                       1.22      0.59      11.29 f
+  fills[9] (net)                                3                   0.00      11.29 f
+  U9368/DIN4 (or4s1)                                      1.22      0.00      11.29 f
+  U9368/Q (or4s1)                                         0.19      0.31      11.60 f
+  n10682 (net)                                  1                   0.00      11.60 f
+  U8184/DIN3 (nor4s1)                                     0.19      0.00      11.60 f
+  U8184/Q (nor4s1)                                        0.53      0.20      11.80 r
+  n10777 (net)                                  3                   0.00      11.80 r
+  U8149/DIN (ib1s1)                                       0.53      0.00      11.80 r
+  U8149/Q (ib1s1)                                         0.74      0.39      12.19 f
+  n11511 (net)                                 26                   0.00      12.19 f
+  RSEMODULES[15].entries/filling_second (reservation_station_entry_0)     0.00    12.19 f
+  RSEMODULES[15].entries/filling_second (net)                       0.00      12.19 f
+  RSEMODULES[15].entries/U14/DIN2 (nor2s1)                0.74      0.00      12.19 f
+  RSEMODULES[15].entries/U14/Q (nor2s1)                   0.99      0.44      12.63 r
+  RSEMODULES[15].entries/n349 (net)             9                   0.00      12.63 r
+  RSEMODULES[15].entries/U504/DIN1 (nor2s1)               0.99      0.00      12.63 r
+  RSEMODULES[15].entries/U504/Q (nor2s1)                  0.84      0.48      13.12 f
+  RSEMODULES[15].entries/n348 (net)             8                   0.00      13.12 f
+  RSEMODULES[15].entries/U503/DIN4 (aoi222s1)             0.84      0.00      13.12 f
+  RSEMODULES[15].entries/U503/Q (aoi222s1)                0.47      0.24      13.36 r
+  RSEMODULES[15].entries/n357 (net)             1                   0.00      13.36 r
+  RSEMODULES[15].entries/U501/DIN3 (oai22s1)              0.47      0.00      13.36 r
+  RSEMODULES[15].entries/U501/Q (oai22s1)                 0.32      0.20      13.56 f
+  RSEMODULES[15].entries/n_age[0] (net)         1                   0.00      13.56 f
+  RSEMODULES[15].entries/age_out_reg[0]/CLRB (dffcs2)     0.32      0.00      13.56 f
+  data arrival time                                                           13.56
+
+  clock clock (rise edge)                                          16.00      16.00
+  clock network delay (ideal)                                       0.00      16.00
+  clock uncertainty                                                -0.10      15.90
+  RSEMODULES[15].entries/age_out_reg[0]/CLK (dffcs2)                0.00      15.90 r
+  library setup time                                               -0.36      15.54
+  data required time                                                          15.54
+  ------------------------------------------------------------------------------------
+  data required time                                                          15.54
+  data arrival time                                                          -13.56
+  ------------------------------------------------------------------------------------
+  slack (MET)                                                                  1.98
+
+
+  Startpoint: inst1_valid
+              (input port clocked by clock)
+  Endpoint: RSEMODULES[14].entries/age_out_reg[1]
+            (rising edge-triggered flip-flop clocked by clock)
+  Path Group: input_grp
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  reservation_station tsmcwire             lec25dscc25_TT
+
+  Point                                       Fanout     Trans      Incr       Path
+  ------------------------------------------------------------------------------------
+  clock clock (rise edge)                                           0.00       0.00
+  clock network delay (ideal)                                       0.00       0.00
+  input external delay                                              0.10       0.10 r
+  inst1_valid (in)                                        0.21      0.01       0.11 r
+  inst1_valid (net)                             1                   0.00       0.11 r
+  U8126/DIN (hi1s1)                                       0.21      0.00       0.11 r
+  U8126/Q (hi1s1)                                         0.45      0.21       0.33 f
+  n10775 (net)                                  1                   0.00       0.33 f
+  U8127/DIN (i1s3)                                        0.45      0.00       0.33 f
+  U8127/Q (i1s3)                                          0.58      0.28       0.61 r
+  n10776 (net)                                 19                   0.00       0.61 r
+  U4181/DIN2 (nnd2s2)                                     0.58      0.00       0.61 r
+  U4181/Q (nnd2s2)                                        0.86      0.17       0.78 f
+  n10688 (net)                                  7                   0.00       0.78 f
+  U8271/DIN (ib1s1)                                       0.86      0.00       0.78 f
+  U8271/Q (ib1s1)                                         0.27      0.13       0.91 r
+  n11225 (net)                                  1                   0.00       0.91 r
+  U10504/DIN (ib1s1)                                      0.27      0.00       0.91 r
+  U10504/Q (ib1s1)                                        0.86      0.41       1.32 f
+  n11224 (net)                                 22                   0.00       1.32 f
+  U9990/DIN2 (oai22s2)                                    0.86      0.00       1.32 f
+  U9990/Q (oai22s2)                                       1.60      0.64       1.96 r
+  fills[7] (net)                                3                   0.00       1.96 r
+  U9368/DIN2 (or4s1)                                      1.60      0.00       1.97 r
+  U9368/Q (or4s1)                                         0.22      0.45       2.42 r
+  n10682 (net)                                  1                   0.00       2.42 r
+  U8184/DIN3 (nor4s1)                                     0.22      0.00       2.42 r
+  U8184/Q (nor4s1)                                        0.54      0.21       2.64 f
+  n10777 (net)                                  3                   0.00       2.64 f
+  U8150/DIN (ib1s1)                                       0.54      0.00       2.64 f
+  U8150/Q (ib1s1)                                         0.87      0.40       3.04 r
+  n11512 (net)                                 26                   0.00       3.04 r
+  RSEMODULES[14].entries/filling_first (reservation_station_entry_1)     0.00     3.04 r
+  RSEMODULES[14].entries/filling_first (net)                        0.00       3.04 r
+  RSEMODULES[14].entries/U14/DIN1 (nor2s1)                0.87      0.00       3.04 r
+  RSEMODULES[14].entries/U14/Q (nor2s1)                   0.88      0.50       3.54 f
+  RSEMODULES[14].entries/n349 (net)             9                   0.00       3.54 f
+  RSEMODULES[14].entries/U504/DIN1 (nor2s1)               0.88      0.00       3.54 f
+  RSEMODULES[14].entries/U504/Q (nor2s1)                  0.90      0.39       3.93 r
+  RSEMODULES[14].entries/n348 (net)             8                   0.00       3.93 r
+  RSEMODULES[14].entries/U500/DIN4 (aoi222s1)             0.90      0.00       3.94 r
+  RSEMODULES[14].entries/U500/Q (aoi222s1)                0.65      0.24       4.17 f
+  RSEMODULES[14].entries/n355 (net)             1                   0.00       4.17 f
+  RSEMODULES[14].entries/U499/DIN4 (oai22s1)              0.65      0.00       4.17 f
+  RSEMODULES[14].entries/U499/Q (oai22s1)                 0.71      0.23       4.40 r
+  RSEMODULES[14].entries/n_age[1] (net)         1                   0.00       4.40 r
+  RSEMODULES[14].entries/age_out_reg[1]/CLRB (dffcs1)     0.71      0.00       4.40 r
+  data arrival time                                                            4.40
+
+  clock clock (rise edge)                                          16.00      16.00
+  clock network delay (ideal)                                       0.00      16.00
+  clock uncertainty                                                -0.10      15.90
+  RSEMODULES[14].entries/age_out_reg[1]/CLK (dffcs1)                0.00      15.90 r
+  library setup time                                               -0.33      15.57
+  data required time                                                          15.57
+  ------------------------------------------------------------------------------------
+  data required time                                                          15.57
+  data arrival time                                                           -4.40
+  ------------------------------------------------------------------------------------
+  slack (MET)                                                                 11.17
+
+
+  Startpoint: inst1_valid
+              (input port clocked by clock)
+  Endpoint: RSEMODULES[8].entries/age_out_reg[1]
+            (rising edge-triggered flip-flop clocked by clock)
+  Path Group: input_grp
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  reservation_station tsmcwire             lec25dscc25_TT
+
+  Point                                       Fanout     Trans      Incr       Path
+  ------------------------------------------------------------------------------------
+  clock clock (rise edge)                                           0.00       0.00
+  clock network delay (ideal)                                       0.00       0.00
+  input external delay                                              0.10       0.10 r
+  inst1_valid (in)                                        0.21      0.01       0.11 r
+  inst1_valid (net)                             1                   0.00       0.11 r
+  U8126/DIN (hi1s1)                                       0.21      0.00       0.11 r
+  U8126/Q (hi1s1)                                         0.45      0.21       0.33 f
+  n10775 (net)                                  1                   0.00       0.33 f
+  U8127/DIN (i1s3)                                        0.45      0.00       0.33 f
+  U8127/Q (i1s3)                                          0.58      0.28       0.61 r
+  n10776 (net)                                 19                   0.00       0.61 r
+  U4181/DIN2 (nnd2s2)                                     0.58      0.00       0.61 r
+  U4181/Q (nnd2s2)                                        0.86      0.17       0.78 f
+  n10688 (net)                                  7                   0.00       0.78 f
+  U8271/DIN (ib1s1)                                       0.86      0.00       0.78 f
+  U8271/Q (ib1s1)                                         0.27      0.13       0.91 r
+  n11225 (net)                                  1                   0.00       0.91 r
+  U10504/DIN (ib1s1)                                      0.27      0.00       0.91 r
+  U10504/Q (ib1s1)                                        0.86      0.41       1.32 f
+  n11224 (net)                                 22                   0.00       1.32 f
+  U9990/DIN2 (oai22s2)                                    0.86      0.00       1.32 f
+  U9990/Q (oai22s2)                                       1.60      0.64       1.96 r
+  fills[7] (net)                                3                   0.00       1.96 r
+  U9368/DIN2 (or4s1)                                      1.60      0.00       1.97 r
+  U9368/Q (or4s1)                                         0.22      0.45       2.42 r
+  n10682 (net)                                  1                   0.00       2.42 r
+  U8184/DIN3 (nor4s1)                                     0.22      0.00       2.42 r
+  U8184/Q (nor4s1)                                        0.54      0.21       2.64 f
+  n10777 (net)                                  3                   0.00       2.64 f
+  U8150/DIN (ib1s1)                                       0.54      0.00       2.64 f
+  U8150/Q (ib1s1)                                         0.87      0.40       3.04 r
+  n11512 (net)                                 26                   0.00       3.04 r
+  RSEMODULES[8].entries/filling_first (reservation_station_entry_7)     0.00     3.04 r
+  RSEMODULES[8].entries/filling_first (net)                         0.00       3.04 r
+  RSEMODULES[8].entries/U13/DIN1 (nor2s1)                 0.87      0.00       3.04 r
+  RSEMODULES[8].entries/U13/Q (nor2s1)                    0.88      0.50       3.54 f
+  RSEMODULES[8].entries/n353 (net)              9                   0.00       3.54 f
+  RSEMODULES[8].entries/U506/DIN1 (nor2s1)                0.88      0.00       3.54 f
+  RSEMODULES[8].entries/U506/Q (nor2s1)                   0.90      0.39       3.93 r
+  RSEMODULES[8].entries/n352 (net)              8                   0.00       3.93 r
+  RSEMODULES[8].entries/U502/DIN4 (aoi222s1)              0.90      0.00       3.94 r
+  RSEMODULES[8].entries/U502/Q (aoi222s1)                 0.65      0.24       4.17 f
+  RSEMODULES[8].entries/n359 (net)              1                   0.00       4.17 f
+  RSEMODULES[8].entries/U501/DIN4 (oai22s1)               0.65      0.00       4.17 f
+  RSEMODULES[8].entries/U501/Q (oai22s1)                  0.71      0.23       4.40 r
+  RSEMODULES[8].entries/n_age[1] (net)          1                   0.00       4.40 r
+  RSEMODULES[8].entries/age_out_reg[1]/CLRB (dffcs1)      0.71      0.00       4.40 r
+  data arrival time                                                            4.40
+
+  clock clock (rise edge)                                          16.00      16.00
+  clock network delay (ideal)                                       0.00      16.00
+  clock uncertainty                                                -0.10      15.90
+  RSEMODULES[8].entries/age_out_reg[1]/CLK (dffcs1)                 0.00      15.90 r
+  library setup time                                               -0.33      15.57
+  data required time                                                          15.57
+  ------------------------------------------------------------------------------------
+  data required time                                                          15.57
+  data arrival time                                                           -4.40
+  ------------------------------------------------------------------------------------
+  slack (MET)                                                                 11.17
+
+
+  Startpoint: RSEMODULES[0].entries/status_out_reg[0]
+              (rising edge-triggered flip-flop clocked by clock)
+  Endpoint: fills[5] (output port clocked by clock)
+  Path Group: output_grp
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  reservation_station tsmcwire             lec25dscc25_TT
+
+  Point                                       Fanout     Trans      Incr       Path
+  ------------------------------------------------------------------------------------
+  RSEMODULES[0].entries/status_out_reg[0]/CLK (dffcs1)     0.00     0.00 #     0.00 r
+  RSEMODULES[0].entries/status_out_reg[0]/QN (dffcs1)     0.20      0.15       0.15 r
+  RSEMODULES[0].entries/n455 (net)              1                   0.00       0.15 r
+  RSEMODULES[0].entries/U629/DIN3 (nnd3s1)                0.20      0.00       0.16 r
+  RSEMODULES[0].entries/U629/Q (nnd3s1)                   0.26      0.12       0.28 f
+  RSEMODULES[0].entries/n52 (net)               3                   0.00       0.28 f
+  RSEMODULES[0].entries/U625/DIN2 (nnd2s1)                0.26      0.00       0.28 f
+  RSEMODULES[0].entries/U625/Q (nnd2s1)                   0.39      0.19       0.47 r
+  RSEMODULES[0].entries/first_empty_filled_out (net)     2          0.00       0.47 r
+  RSEMODULES[0].entries/first_empty_filled_out (reservation_station_entry_15)     0.00     0.47 r
+  first_empty_filleds[0] (net)                                      0.00       0.47 r
+  RSEMODULES[1].entries/first_empty_filled_in (reservation_station_entry_14)     0.00     0.47 r
+  RSEMODULES[1].entries/first_empty_filled_in (net)                 0.00       0.47 r
+  RSEMODULES[1].entries/U625/DIN (hi1s1)                  0.39      0.00       0.47 r
+  RSEMODULES[1].entries/U625/Q (hi1s1)                    0.46      0.24       0.71 f
+  RSEMODULES[1].entries/n44 (net)               3                   0.00       0.71 f
+  RSEMODULES[1].entries/U622/DIN1 (nnd2s1)                0.46      0.00       0.71 f
+  RSEMODULES[1].entries/U622/Q (nnd2s1)                   0.40      0.21       0.93 r
+  RSEMODULES[1].entries/first_empty_filled_out (net)     2          0.00       0.93 r
+  RSEMODULES[1].entries/first_empty_filled_out (reservation_station_entry_14)     0.00     0.93 r
+  first_empty_filleds[1] (net)                                      0.00       0.93 r
+  RSEMODULES[2].entries/first_empty_filled_in (reservation_station_entry_13)     0.00     0.93 r
+  RSEMODULES[2].entries/first_empty_filled_in (net)                 0.00       0.93 r
+  RSEMODULES[2].entries/U626/DIN (hi1s1)                  0.40      0.00       0.93 r
+  RSEMODULES[2].entries/U626/Q (hi1s1)                    0.46      0.25       1.17 f
+  RSEMODULES[2].entries/n51 (net)               3                   0.00       1.17 f
+  RSEMODULES[2].entries/U623/DIN1 (nnd2s1)                0.46      0.00       1.17 f
+  RSEMODULES[2].entries/U623/Q (nnd2s1)                   0.40      0.21       1.39 r
+  RSEMODULES[2].entries/first_empty_filled_out (net)     2          0.00       1.39 r
+  RSEMODULES[2].entries/first_empty_filled_out (reservation_station_entry_13)     0.00     1.39 r
+  first_empty_filleds[2] (net)                                      0.00       1.39 r
+  RSEMODULES[3].entries/first_empty_filled_in (reservation_station_entry_12)     0.00     1.39 r
+  RSEMODULES[3].entries/first_empty_filled_in (net)                 0.00       1.39 r
+  RSEMODULES[3].entries/U628/DIN (hi1s1)                  0.40      0.00       1.39 r
+  RSEMODULES[3].entries/U628/Q (hi1s1)                    0.46      0.24       1.63 f
+  RSEMODULES[3].entries/n54 (net)               3                   0.00       1.63 f
+  RSEMODULES[3].entries/U625/DIN1 (nnd2s1)                0.46      0.00       1.64 f
+  RSEMODULES[3].entries/U625/Q (nnd2s1)                   0.40      0.21       1.85 r
+  RSEMODULES[3].entries/first_empty_filled_out (net)     2          0.00       1.85 r
+  RSEMODULES[3].entries/first_empty_filled_out (reservation_station_entry_12)     0.00     1.85 r
+  first_empty_filleds[3] (net)                                      0.00       1.85 r
+  RSEMODULES[4].entries/first_empty_filled_in (reservation_station_entry_11)     0.00     1.85 r
+  RSEMODULES[4].entries/first_empty_filled_in (net)                 0.00       1.85 r
+  RSEMODULES[4].entries/U628/DIN (hi1s1)                  0.40      0.00       1.85 r
+  RSEMODULES[4].entries/U628/Q (hi1s1)                    0.46      0.24       2.09 f
+  RSEMODULES[4].entries/n54 (net)               3                   0.00       2.09 f
+  RSEMODULES[4].entries/U625/DIN1 (nnd2s1)                0.46      0.00       2.10 f
+  RSEMODULES[4].entries/U625/Q (nnd2s1)                   0.40      0.21       2.31 r
+  RSEMODULES[4].entries/first_empty_filled_out (net)     2          0.00       2.31 r
+  RSEMODULES[4].entries/first_empty_filled_out (reservation_station_entry_11)     0.00     2.31 r
+  first_empty_filleds[4] (net)                                      0.00       2.31 r
+  RSEMODULES[5].entries/first_empty_filled_in (reservation_station_entry_10)     0.00     2.31 r
+  RSEMODULES[5].entries/first_empty_filled_in (net)                 0.00       2.31 r
+  RSEMODULES[5].entries/U624/DIN (hi1s1)                  0.40      0.00       2.31 r
+  RSEMODULES[5].entries/U624/Q (hi1s1)                    0.46      0.24       2.56 f
+  RSEMODULES[5].entries/n48 (net)               3                   0.00       2.56 f
+  RSEMODULES[5].entries/U621/DIN1 (nnd2s1)                0.46      0.00       2.56 f
+  RSEMODULES[5].entries/U621/Q (nnd2s1)                   0.40      0.21       2.77 r
+  RSEMODULES[5].entries/first_empty_filled_out (net)     2          0.00       2.77 r
+  RSEMODULES[5].entries/first_empty_filled_out (reservation_station_entry_10)     0.00     2.77 r
+  first_empty_filleds[5] (net)                                      0.00       2.77 r
+  RSEMODULES[6].entries/first_empty_filled_in (reservation_station_entry_9)     0.00     2.77 r
+  RSEMODULES[6].entries/first_empty_filled_in (net)                 0.00       2.77 r
+  RSEMODULES[6].entries/U628/DIN (hi1s1)                  0.40      0.00       2.77 r
+  RSEMODULES[6].entries/U628/Q (hi1s1)                    0.46      0.24       3.02 f
+  RSEMODULES[6].entries/n49 (net)               3                   0.00       3.02 f
+  RSEMODULES[6].entries/U626/DIN1 (nnd2s1)                0.46      0.00       3.02 f
+  RSEMODULES[6].entries/U626/Q (nnd2s1)                   0.40      0.21       3.23 r
+  RSEMODULES[6].entries/first_empty_filled_out (net)     2          0.00       3.23 r
+  RSEMODULES[6].entries/first_empty_filled_out (reservation_station_entry_9)     0.00     3.23 r
+  first_empty_filleds[6] (net)                                      0.00       3.23 r
+  RSEMODULES[7].entries/first_empty_filled_in (reservation_station_entry_8)     0.00     3.23 r
+  RSEMODULES[7].entries/first_empty_filled_in (net)                 0.00       3.23 r
+  RSEMODULES[7].entries/U630/DIN (hi1s1)                  0.40      0.00       3.23 r
+  RSEMODULES[7].entries/U630/Q (hi1s1)                    0.46      0.24       3.48 f
+  RSEMODULES[7].entries/n51 (net)               3                   0.00       3.48 f
+  RSEMODULES[7].entries/U627/DIN1 (nnd2s1)                0.46      0.00       3.48 f
+  RSEMODULES[7].entries/U627/Q (nnd2s1)                   0.40      0.21       3.69 r
+  RSEMODULES[7].entries/first_empty_filled_out (net)     2          0.00       3.69 r
+  RSEMODULES[7].entries/first_empty_filled_out (reservation_station_entry_8)     0.00     3.69 r
+  first_empty_filleds[7] (net)                                      0.00       3.69 r
+  RSEMODULES[8].entries/first_empty_filled_in (reservation_station_entry_7)     0.00     3.69 r
+  RSEMODULES[8].entries/first_empty_filled_in (net)                 0.00       3.69 r
+  RSEMODULES[8].entries/U628/DIN (hi1s1)                  0.40      0.00       3.70 r
+  RSEMODULES[8].entries/U628/Q (hi1s1)                    0.46      0.24       3.94 f
+  RSEMODULES[8].entries/n49 (net)               3                   0.00       3.94 f
+  RSEMODULES[8].entries/U625/DIN1 (nnd2s1)                0.46      0.00       3.94 f
+  RSEMODULES[8].entries/U625/Q (nnd2s1)                   0.40      0.21       4.16 r
+  RSEMODULES[8].entries/first_empty_filled_out (net)     2          0.00       4.16 r
+  RSEMODULES[8].entries/first_empty_filled_out (reservation_station_entry_7)     0.00     4.16 r
+  first_empty_filleds[8] (net)                                      0.00       4.16 r
+  RSEMODULES[9].entries/first_empty_filled_in (reservation_station_entry_6)     0.00     4.16 r
+  RSEMODULES[9].entries/first_empty_filled_in (net)                 0.00       4.16 r
+  RSEMODULES[9].entries/U628/DIN (hi1s1)                  0.40      0.00       4.16 r
+  RSEMODULES[9].entries/U628/Q (hi1s1)                    0.46      0.24       4.40 f
+  RSEMODULES[9].entries/n49 (net)               3                   0.00       4.40 f
+  RSEMODULES[9].entries/U625/DIN1 (nnd2s1)                0.46      0.00       4.40 f
+  RSEMODULES[9].entries/U625/Q (nnd2s1)                   0.40      0.21       4.62 r
+  RSEMODULES[9].entries/first_empty_filled_out (net)     2          0.00       4.62 r
+  RSEMODULES[9].entries/first_empty_filled_out (reservation_station_entry_6)     0.00     4.62 r
+  first_empty_filleds[9] (net)                                      0.00       4.62 r
+  RSEMODULES[10].entries/first_empty_filled_in (reservation_station_entry_5)     0.00     4.62 r
+  RSEMODULES[10].entries/first_empty_filled_in (net)                0.00       4.62 r
+  RSEMODULES[10].entries/U625/DIN (hi1s1)                 0.40      0.00       4.62 r
+  RSEMODULES[10].entries/U625/Q (hi1s1)                   0.46      0.24       4.86 f
+  RSEMODULES[10].entries/n49 (net)              3                   0.00       4.86 f
+  RSEMODULES[10].entries/U622/DIN1 (nnd2s1)               0.46      0.00       4.86 f
+  RSEMODULES[10].entries/U622/Q (nnd2s1)                  0.40      0.21       5.08 r
+  RSEMODULES[10].entries/first_empty_filled_out (net)     2         0.00       5.08 r
+  RSEMODULES[10].entries/first_empty_filled_out (reservation_station_entry_5)     0.00     5.08 r
+  first_empty_filleds[10] (net)                                     0.00       5.08 r
+  RSEMODULES[11].entries/first_empty_filled_in (reservation_station_entry_4)     0.00     5.08 r
+  RSEMODULES[11].entries/first_empty_filled_in (net)                0.00       5.08 r
+  RSEMODULES[11].entries/U630/DIN (hi1s1)                 0.40      0.00       5.08 r
+  RSEMODULES[11].entries/U630/Q (hi1s1)                   0.46      0.24       5.32 f
+  RSEMODULES[11].entries/n57 (net)              3                   0.00       5.32 f
+  RSEMODULES[11].entries/U627/DIN1 (nnd2s1)               0.46      0.00       5.33 f
+  RSEMODULES[11].entries/U627/Q (nnd2s1)                  0.40      0.21       5.54 r
+  RSEMODULES[11].entries/first_empty_filled_out (net)     2         0.00       5.54 r
+  RSEMODULES[11].entries/first_empty_filled_out (reservation_station_entry_4)     0.00     5.54 r
+  first_empty_filleds[11] (net)                                     0.00       5.54 r
+  RSEMODULES[12].entries/first_empty_filled_in (reservation_station_entry_3)     0.00     5.54 r
+  RSEMODULES[12].entries/first_empty_filled_in (net)                0.00       5.54 r
+  RSEMODULES[12].entries/U629/DIN (hi1s1)                 0.40      0.00       5.54 r
+  RSEMODULES[12].entries/U629/Q (hi1s1)                   0.46      0.24       5.78 f
+  RSEMODULES[12].entries/n57 (net)              3                   0.00       5.78 f
+  RSEMODULES[12].entries/U626/DIN1 (nnd2s1)               0.46      0.00       5.79 f
+  RSEMODULES[12].entries/U626/Q (nnd2s1)                  0.40      0.21       6.00 r
+  RSEMODULES[12].entries/first_empty_filled_out (net)     2         0.00       6.00 r
+  RSEMODULES[12].entries/first_empty_filled_out (reservation_station_entry_3)     0.00     6.00 r
+  first_empty_filleds[12] (net)                                     0.00       6.00 r
+  RSEMODULES[13].entries/first_empty_filled_in (reservation_station_entry_2)     0.00     6.00 r
+  RSEMODULES[13].entries/first_empty_filled_in (net)                0.00       6.00 r
+  RSEMODULES[13].entries/U631/DIN (hi1s1)                 0.40      0.00       6.00 r
+  RSEMODULES[13].entries/U631/Q (hi1s1)                   0.46      0.24       6.25 f
+  RSEMODULES[13].entries/n57 (net)              3                   0.00       6.25 f
+  RSEMODULES[13].entries/U629/DIN1 (nnd2s1)               0.46      0.00       6.25 f
+  RSEMODULES[13].entries/U629/Q (nnd2s1)                  0.40      0.21       6.46 r
+  RSEMODULES[13].entries/first_empty_filled_out (net)     2         0.00       6.46 r
+  RSEMODULES[13].entries/first_empty_filled_out (reservation_station_entry_2)     0.00     6.46 r
+  first_empty_filleds[13] (net)                                     0.00       6.46 r
+  RSEMODULES[14].entries/first_empty_filled_in (reservation_station_entry_1)     0.00     6.46 r
+  RSEMODULES[14].entries/first_empty_filled_in (net)                0.00       6.46 r
+  RSEMODULES[14].entries/U624/DIN (hi1s1)                 0.40      0.00       6.46 r
+  RSEMODULES[14].entries/U624/Q (hi1s1)                   0.46      0.24       6.71 f
+  RSEMODULES[14].entries/n48 (net)              3                   0.00       6.71 f
+  RSEMODULES[14].entries/U621/DIN1 (nnd2s1)               0.46      0.00       6.71 f
+  RSEMODULES[14].entries/U621/Q (nnd2s1)                  0.40      0.21       6.92 r
+  RSEMODULES[14].entries/first_empty_filled_out (net)     2         0.00       6.92 r
+  RSEMODULES[14].entries/first_empty_filled_out (reservation_station_entry_1)     0.00     6.92 r
+  first_empty_filleds[14] (net)                                     0.00       6.92 r
+  RSEMODULES[15].entries/first_empty_filled_in (reservation_station_entry_0)     0.00     6.92 r
+  RSEMODULES[15].entries/first_empty_filled_in (net)                0.00       6.92 r
+  RSEMODULES[15].entries/U624/DIN (hi1s1)                 0.40      0.00       6.92 r
+  RSEMODULES[15].entries/U624/Q (hi1s1)                   0.46      0.24       7.17 f
+  RSEMODULES[15].entries/n48 (net)              3                   0.00       7.17 f
+  RSEMODULES[15].entries/U623/DIN2 (nnd2s1)               0.46      0.00       7.17 f
+  RSEMODULES[15].entries/U623/Q (nnd2s1)                  0.33      0.15       7.32 r
+  RSEMODULES[15].entries/n356 (net)             2                   0.00       7.32 r
+  RSEMODULES[15].entries/U622/DIN (hi1s1)                 0.33      0.00       7.32 r
+  RSEMODULES[15].entries/U622/Q (hi1s1)                   2.35      0.99       8.31 f
+  RSEMODULES[15].entries/first_empty (net)      4                   0.00       8.31 f
+  RSEMODULES[15].entries/first_empty (reservation_station_entry_0)     0.00     8.31 f
+  first_empties[15] (net)                                           0.00       8.31 f
+  U8706/DIN3 (or4s1)                                      2.35      0.00       8.32 f
+  U8706/Q (or4s1)                                         0.20      0.33       8.64 f
+  n10755 (net)                                  1                   0.00       8.64 f
+  U8137/DIN5 (oai33s2)                                    0.20      0.00       8.64 f
+  U8137/Q (oai33s2)                                       0.34      0.52       9.17 r
+  n10684 (net)                                  6                   0.00       9.17 r
+  U8136/DIN (hi1s1)                                       0.34      0.00       9.17 r
+  U8136/Q (hi1s1)                                         2.33      0.99      10.16 f
+  n15680 (net)                                 16                   0.00      10.16 f
+  U8138/DIN2 (nnd2s1)                                     2.33      0.00      10.16 f
+  U8138/Q (nnd2s1)                                        0.93      0.53      10.69 r
+  n10686 (net)                                  5                   0.00      10.69 r
+  U9986/DIN (ib1s1)                                       0.93      0.00      10.69 r
+  U9986/Q (ib1s1)                                         0.69      0.38      11.07 f
+  n15679 (net)                                 15                   0.00      11.07 f
+  U9976/DIN3 (aoi22s1)                                    0.69      0.00      11.07 f
+  U9976/Q (aoi22s1)                                       0.82      0.25      11.32 r
+  n10668 (net)                                  2                   0.00      11.32 r
+  U9360/DIN (ib1s1)                                       0.82      0.00      11.32 r
+  U9360/Q (ib1s1)                                         0.89      0.49      11.81 f
+  fills[5] (net)                               13                   0.00      11.81 f
+  fills[5] (out)                                          0.89      0.02      11.83 f
+  data arrival time                                                           11.83
+
+  max_delay                                                        16.00      16.00
+  clock uncertainty                                                -0.10      15.90
+  output external delay                                            -0.10      15.80
+  data required time                                                          15.80
+  ------------------------------------------------------------------------------------
+  data required time                                                          15.80
+  data arrival time                                                          -11.83
+  ------------------------------------------------------------------------------------
+  slack (MET)                                                                  3.97
+
+
+  Startpoint: RSEMODULES[0].entries/status_out_reg[0]
+              (rising edge-triggered flip-flop clocked by clock)
+  Endpoint: fills[12] (output port clocked by clock)
+  Path Group: output_grp
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  reservation_station tsmcwire             lec25dscc25_TT
+
+  Point                                       Fanout     Trans      Incr       Path
+  ------------------------------------------------------------------------------------
+  RSEMODULES[0].entries/status_out_reg[0]/CLK (dffcs1)     0.00     0.00 #     0.00 r
+  RSEMODULES[0].entries/status_out_reg[0]/QN (dffcs1)     0.20      0.15       0.15 r
+  RSEMODULES[0].entries/n455 (net)              1                   0.00       0.15 r
+  RSEMODULES[0].entries/U629/DIN3 (nnd3s1)                0.20      0.00       0.16 r
+  RSEMODULES[0].entries/U629/Q (nnd3s1)                   0.26      0.12       0.28 f
+  RSEMODULES[0].entries/n52 (net)               3                   0.00       0.28 f
+  RSEMODULES[0].entries/U625/DIN2 (nnd2s1)                0.26      0.00       0.28 f
+  RSEMODULES[0].entries/U625/Q (nnd2s1)                   0.39      0.19       0.47 r
+  RSEMODULES[0].entries/first_empty_filled_out (net)     2          0.00       0.47 r
+  RSEMODULES[0].entries/first_empty_filled_out (reservation_station_entry_15)     0.00     0.47 r
+  first_empty_filleds[0] (net)                                      0.00       0.47 r
+  RSEMODULES[1].entries/first_empty_filled_in (reservation_station_entry_14)     0.00     0.47 r
+  RSEMODULES[1].entries/first_empty_filled_in (net)                 0.00       0.47 r
+  RSEMODULES[1].entries/U625/DIN (hi1s1)                  0.39      0.00       0.47 r
+  RSEMODULES[1].entries/U625/Q (hi1s1)                    0.46      0.24       0.71 f
+  RSEMODULES[1].entries/n44 (net)               3                   0.00       0.71 f
+  RSEMODULES[1].entries/U622/DIN1 (nnd2s1)                0.46      0.00       0.71 f
+  RSEMODULES[1].entries/U622/Q (nnd2s1)                   0.40      0.21       0.93 r
+  RSEMODULES[1].entries/first_empty_filled_out (net)     2          0.00       0.93 r
+  RSEMODULES[1].entries/first_empty_filled_out (reservation_station_entry_14)     0.00     0.93 r
+  first_empty_filleds[1] (net)                                      0.00       0.93 r
+  RSEMODULES[2].entries/first_empty_filled_in (reservation_station_entry_13)     0.00     0.93 r
+  RSEMODULES[2].entries/first_empty_filled_in (net)                 0.00       0.93 r
+  RSEMODULES[2].entries/U626/DIN (hi1s1)                  0.40      0.00       0.93 r
+  RSEMODULES[2].entries/U626/Q (hi1s1)                    0.46      0.25       1.17 f
+  RSEMODULES[2].entries/n51 (net)               3                   0.00       1.17 f
+  RSEMODULES[2].entries/U623/DIN1 (nnd2s1)                0.46      0.00       1.17 f
+  RSEMODULES[2].entries/U623/Q (nnd2s1)                   0.40      0.21       1.39 r
+  RSEMODULES[2].entries/first_empty_filled_out (net)     2          0.00       1.39 r
+  RSEMODULES[2].entries/first_empty_filled_out (reservation_station_entry_13)     0.00     1.39 r
+  first_empty_filleds[2] (net)                                      0.00       1.39 r
+  RSEMODULES[3].entries/first_empty_filled_in (reservation_station_entry_12)     0.00     1.39 r
+  RSEMODULES[3].entries/first_empty_filled_in (net)                 0.00       1.39 r
+  RSEMODULES[3].entries/U628/DIN (hi1s1)                  0.40      0.00       1.39 r
+  RSEMODULES[3].entries/U628/Q (hi1s1)                    0.46      0.24       1.63 f
+  RSEMODULES[3].entries/n54 (net)               3                   0.00       1.63 f
+  RSEMODULES[3].entries/U625/DIN1 (nnd2s1)                0.46      0.00       1.64 f
+  RSEMODULES[3].entries/U625/Q (nnd2s1)                   0.40      0.21       1.85 r
+  RSEMODULES[3].entries/first_empty_filled_out (net)     2          0.00       1.85 r
+  RSEMODULES[3].entries/first_empty_filled_out (reservation_station_entry_12)     0.00     1.85 r
+  first_empty_filleds[3] (net)                                      0.00       1.85 r
+  RSEMODULES[4].entries/first_empty_filled_in (reservation_station_entry_11)     0.00     1.85 r
+  RSEMODULES[4].entries/first_empty_filled_in (net)                 0.00       1.85 r
+  RSEMODULES[4].entries/U628/DIN (hi1s1)                  0.40      0.00       1.85 r
+  RSEMODULES[4].entries/U628/Q (hi1s1)                    0.46      0.24       2.09 f
+  RSEMODULES[4].entries/n54 (net)               3                   0.00       2.09 f
+  RSEMODULES[4].entries/U625/DIN1 (nnd2s1)                0.46      0.00       2.10 f
+  RSEMODULES[4].entries/U625/Q (nnd2s1)                   0.40      0.21       2.31 r
+  RSEMODULES[4].entries/first_empty_filled_out (net)     2          0.00       2.31 r
+  RSEMODULES[4].entries/first_empty_filled_out (reservation_station_entry_11)     0.00     2.31 r
+  first_empty_filleds[4] (net)                                      0.00       2.31 r
+  RSEMODULES[5].entries/first_empty_filled_in (reservation_station_entry_10)     0.00     2.31 r
+  RSEMODULES[5].entries/first_empty_filled_in (net)                 0.00       2.31 r
+  RSEMODULES[5].entries/U624/DIN (hi1s1)                  0.40      0.00       2.31 r
+  RSEMODULES[5].entries/U624/Q (hi1s1)                    0.46      0.24       2.56 f
+  RSEMODULES[5].entries/n48 (net)               3                   0.00       2.56 f
+  RSEMODULES[5].entries/U621/DIN1 (nnd2s1)                0.46      0.00       2.56 f
+  RSEMODULES[5].entries/U621/Q (nnd2s1)                   0.40      0.21       2.77 r
+  RSEMODULES[5].entries/first_empty_filled_out (net)     2          0.00       2.77 r
+  RSEMODULES[5].entries/first_empty_filled_out (reservation_station_entry_10)     0.00     2.77 r
+  first_empty_filleds[5] (net)                                      0.00       2.77 r
+  RSEMODULES[6].entries/first_empty_filled_in (reservation_station_entry_9)     0.00     2.77 r
+  RSEMODULES[6].entries/first_empty_filled_in (net)                 0.00       2.77 r
+  RSEMODULES[6].entries/U628/DIN (hi1s1)                  0.40      0.00       2.77 r
+  RSEMODULES[6].entries/U628/Q (hi1s1)                    0.46      0.24       3.02 f
+  RSEMODULES[6].entries/n49 (net)               3                   0.00       3.02 f
+  RSEMODULES[6].entries/U626/DIN1 (nnd2s1)                0.46      0.00       3.02 f
+  RSEMODULES[6].entries/U626/Q (nnd2s1)                   0.40      0.21       3.23 r
+  RSEMODULES[6].entries/first_empty_filled_out (net)     2          0.00       3.23 r
+  RSEMODULES[6].entries/first_empty_filled_out (reservation_station_entry_9)     0.00     3.23 r
+  first_empty_filleds[6] (net)                                      0.00       3.23 r
+  RSEMODULES[7].entries/first_empty_filled_in (reservation_station_entry_8)     0.00     3.23 r
+  RSEMODULES[7].entries/first_empty_filled_in (net)                 0.00       3.23 r
+  RSEMODULES[7].entries/U630/DIN (hi1s1)                  0.40      0.00       3.23 r
+  RSEMODULES[7].entries/U630/Q (hi1s1)                    0.46      0.24       3.48 f
+  RSEMODULES[7].entries/n51 (net)               3                   0.00       3.48 f
+  RSEMODULES[7].entries/U627/DIN1 (nnd2s1)                0.46      0.00       3.48 f
+  RSEMODULES[7].entries/U627/Q (nnd2s1)                   0.40      0.21       3.69 r
+  RSEMODULES[7].entries/first_empty_filled_out (net)     2          0.00       3.69 r
+  RSEMODULES[7].entries/first_empty_filled_out (reservation_station_entry_8)     0.00     3.69 r
+  first_empty_filleds[7] (net)                                      0.00       3.69 r
+  RSEMODULES[8].entries/first_empty_filled_in (reservation_station_entry_7)     0.00     3.69 r
+  RSEMODULES[8].entries/first_empty_filled_in (net)                 0.00       3.69 r
+  RSEMODULES[8].entries/U628/DIN (hi1s1)                  0.40      0.00       3.70 r
+  RSEMODULES[8].entries/U628/Q (hi1s1)                    0.46      0.24       3.94 f
+  RSEMODULES[8].entries/n49 (net)               3                   0.00       3.94 f
+  RSEMODULES[8].entries/U625/DIN1 (nnd2s1)                0.46      0.00       3.94 f
+  RSEMODULES[8].entries/U625/Q (nnd2s1)                   0.40      0.21       4.16 r
+  RSEMODULES[8].entries/first_empty_filled_out (net)     2          0.00       4.16 r
+  RSEMODULES[8].entries/first_empty_filled_out (reservation_station_entry_7)     0.00     4.16 r
+  first_empty_filleds[8] (net)                                      0.00       4.16 r
+  RSEMODULES[9].entries/first_empty_filled_in (reservation_station_entry_6)     0.00     4.16 r
+  RSEMODULES[9].entries/first_empty_filled_in (net)                 0.00       4.16 r
+  RSEMODULES[9].entries/U628/DIN (hi1s1)                  0.40      0.00       4.16 r
+  RSEMODULES[9].entries/U628/Q (hi1s1)                    0.46      0.24       4.40 f
+  RSEMODULES[9].entries/n49 (net)               3                   0.00       4.40 f
+  RSEMODULES[9].entries/U625/DIN1 (nnd2s1)                0.46      0.00       4.40 f
+  RSEMODULES[9].entries/U625/Q (nnd2s1)                   0.40      0.21       4.62 r
+  RSEMODULES[9].entries/first_empty_filled_out (net)     2          0.00       4.62 r
+  RSEMODULES[9].entries/first_empty_filled_out (reservation_station_entry_6)     0.00     4.62 r
+  first_empty_filleds[9] (net)                                      0.00       4.62 r
+  RSEMODULES[10].entries/first_empty_filled_in (reservation_station_entry_5)     0.00     4.62 r
+  RSEMODULES[10].entries/first_empty_filled_in (net)                0.00       4.62 r
+  RSEMODULES[10].entries/U625/DIN (hi1s1)                 0.40      0.00       4.62 r
+  RSEMODULES[10].entries/U625/Q (hi1s1)                   0.46      0.24       4.86 f
+  RSEMODULES[10].entries/n49 (net)              3                   0.00       4.86 f
+  RSEMODULES[10].entries/U622/DIN1 (nnd2s1)               0.46      0.00       4.86 f
+  RSEMODULES[10].entries/U622/Q (nnd2s1)                  0.40      0.21       5.08 r
+  RSEMODULES[10].entries/first_empty_filled_out (net)     2         0.00       5.08 r
+  RSEMODULES[10].entries/first_empty_filled_out (reservation_station_entry_5)     0.00     5.08 r
+  first_empty_filleds[10] (net)                                     0.00       5.08 r
+  RSEMODULES[11].entries/first_empty_filled_in (reservation_station_entry_4)     0.00     5.08 r
+  RSEMODULES[11].entries/first_empty_filled_in (net)                0.00       5.08 r
+  RSEMODULES[11].entries/U630/DIN (hi1s1)                 0.40      0.00       5.08 r
+  RSEMODULES[11].entries/U630/Q (hi1s1)                   0.46      0.24       5.32 f
+  RSEMODULES[11].entries/n57 (net)              3                   0.00       5.32 f
+  RSEMODULES[11].entries/U627/DIN1 (nnd2s1)               0.46      0.00       5.33 f
+  RSEMODULES[11].entries/U627/Q (nnd2s1)                  0.40      0.21       5.54 r
+  RSEMODULES[11].entries/first_empty_filled_out (net)     2         0.00       5.54 r
+  RSEMODULES[11].entries/first_empty_filled_out (reservation_station_entry_4)     0.00     5.54 r
+  first_empty_filleds[11] (net)                                     0.00       5.54 r
+  RSEMODULES[12].entries/first_empty_filled_in (reservation_station_entry_3)     0.00     5.54 r
+  RSEMODULES[12].entries/first_empty_filled_in (net)                0.00       5.54 r
+  RSEMODULES[12].entries/U629/DIN (hi1s1)                 0.40      0.00       5.54 r
+  RSEMODULES[12].entries/U629/Q (hi1s1)                   0.46      0.24       5.78 f
+  RSEMODULES[12].entries/n57 (net)              3                   0.00       5.78 f
+  RSEMODULES[12].entries/U626/DIN1 (nnd2s1)               0.46      0.00       5.79 f
+  RSEMODULES[12].entries/U626/Q (nnd2s1)                  0.40      0.21       6.00 r
+  RSEMODULES[12].entries/first_empty_filled_out (net)     2         0.00       6.00 r
+  RSEMODULES[12].entries/first_empty_filled_out (reservation_station_entry_3)     0.00     6.00 r
+  first_empty_filleds[12] (net)                                     0.00       6.00 r
+  RSEMODULES[13].entries/first_empty_filled_in (reservation_station_entry_2)     0.00     6.00 r
+  RSEMODULES[13].entries/first_empty_filled_in (net)                0.00       6.00 r
+  RSEMODULES[13].entries/U631/DIN (hi1s1)                 0.40      0.00       6.00 r
+  RSEMODULES[13].entries/U631/Q (hi1s1)                   0.46      0.24       6.25 f
+  RSEMODULES[13].entries/n57 (net)              3                   0.00       6.25 f
+  RSEMODULES[13].entries/U629/DIN1 (nnd2s1)               0.46      0.00       6.25 f
+  RSEMODULES[13].entries/U629/Q (nnd2s1)                  0.40      0.21       6.46 r
+  RSEMODULES[13].entries/first_empty_filled_out (net)     2         0.00       6.46 r
+  RSEMODULES[13].entries/first_empty_filled_out (reservation_station_entry_2)     0.00     6.46 r
+  first_empty_filleds[13] (net)                                     0.00       6.46 r
+  RSEMODULES[14].entries/first_empty_filled_in (reservation_station_entry_1)     0.00     6.46 r
+  RSEMODULES[14].entries/first_empty_filled_in (net)                0.00       6.46 r
+  RSEMODULES[14].entries/U624/DIN (hi1s1)                 0.40      0.00       6.46 r
+  RSEMODULES[14].entries/U624/Q (hi1s1)                   0.46      0.24       6.71 f
+  RSEMODULES[14].entries/n48 (net)              3                   0.00       6.71 f
+  RSEMODULES[14].entries/U621/DIN1 (nnd2s1)               0.46      0.00       6.71 f
+  RSEMODULES[14].entries/U621/Q (nnd2s1)                  0.40      0.21       6.92 r
+  RSEMODULES[14].entries/first_empty_filled_out (net)     2         0.00       6.92 r
+  RSEMODULES[14].entries/first_empty_filled_out (reservation_station_entry_1)     0.00     6.92 r
+  first_empty_filleds[14] (net)                                     0.00       6.92 r
+  RSEMODULES[15].entries/first_empty_filled_in (reservation_station_entry_0)     0.00     6.92 r
+  RSEMODULES[15].entries/first_empty_filled_in (net)                0.00       6.92 r
+  RSEMODULES[15].entries/U624/DIN (hi1s1)                 0.40      0.00       6.92 r
+  RSEMODULES[15].entries/U624/Q (hi1s1)                   0.46      0.24       7.17 f
+  RSEMODULES[15].entries/n48 (net)              3                   0.00       7.17 f
+  RSEMODULES[15].entries/U623/DIN2 (nnd2s1)               0.46      0.00       7.17 f
+  RSEMODULES[15].entries/U623/Q (nnd2s1)                  0.33      0.15       7.32 r
+  RSEMODULES[15].entries/n356 (net)             2                   0.00       7.32 r
+  RSEMODULES[15].entries/U622/DIN (hi1s1)                 0.33      0.00       7.32 r
+  RSEMODULES[15].entries/U622/Q (hi1s1)                   2.35      0.99       8.31 f
+  RSEMODULES[15].entries/first_empty (net)      4                   0.00       8.31 f
+  RSEMODULES[15].entries/first_empty (reservation_station_entry_0)     0.00     8.31 f
+  first_empties[15] (net)                                           0.00       8.31 f
+  U8706/DIN3 (or4s1)                                      2.35      0.00       8.32 f
+  U8706/Q (or4s1)                                         0.20      0.33       8.64 f
+  n10755 (net)                                  1                   0.00       8.64 f
+  U8137/DIN5 (oai33s2)                                    0.20      0.00       8.64 f
+  U8137/Q (oai33s2)                                       0.34      0.52       9.17 r
+  n10684 (net)                                  6                   0.00       9.17 r
+  U8136/DIN (hi1s1)                                       0.34      0.00       9.17 r
+  U8136/Q (hi1s1)                                         2.33      0.99      10.16 f
+  n15680 (net)                                 16                   0.00      10.16 f
+  U8138/DIN2 (nnd2s1)                                     2.33      0.00      10.16 f
+  U8138/Q (nnd2s1)                                        0.93      0.53      10.69 r
+  n10686 (net)                                  5                   0.00      10.69 r
+  U9986/DIN (ib1s1)                                       0.93      0.00      10.69 r
+  U9986/Q (ib1s1)                                         0.69      0.38      11.07 f
+  n15679 (net)                                 15                   0.00      11.07 f
+  U9979/DIN3 (aoi22s1)                                    0.69      0.00      11.07 f
+  U9979/Q (aoi22s1)                                       0.82      0.25      11.32 r
+  n10676 (net)                                  2                   0.00      11.32 r
+  U9363/DIN (ib1s1)                                       0.82      0.00      11.32 r
+  U9363/Q (ib1s1)                                         0.89      0.49      11.81 f
+  fills[12] (net)                              13                   0.00      11.81 f
+  fills[12] (out)                                         0.89      0.02      11.83 f
+  data arrival time                                                           11.83
+
+  max_delay                                                        16.00      16.00
+  clock uncertainty                                                -0.10      15.90
+  output external delay                                            -0.10      15.80
+  data required time                                                          15.80
+  ------------------------------------------------------------------------------------
+  data required time                                                          15.80
+  data arrival time                                                          -11.83
+  ------------------------------------------------------------------------------------
+  slack (MET)                                                                  3.97
+
+
+1
+ 
+****************************************
+Report : constraint
+        -all_violators
+        -verbose
+Design : reservation_station
+Version: G-2012.06
+Date   : Tue Apr  9 02:15:01 2013
+****************************************
+
+This design has no violated constraints.
+
+1
+Information: Updating graph... (UID-83)
+Warning: Design 'reservation_station' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : reference
+Design : reservation_station
+Version: G-2012.06
+Date   : Tue Apr  9 02:15:09 2013
+****************************************
+
+Attributes:
+    b - black box (unknown)
+   bo - allows boundary optimization
+    d - dont_touch
+   mo - map_only
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    s - synthetic operator
+    u - contains unmapped logic
+
+Reference          Library       Unit Area   Count    Total Area   Attributes
+-----------------------------------------------------------------------------
+and3s1             lec25dscc25_TT    66.355202      16  1061.683228
+aoi13s1            lec25dscc25_TT    58.060799     120  6967.295837
+aoi21s1            lec25dscc25_TT    49.766399     123  6121.267124
+aoi22s1            lec25dscc25_TT    58.060799      12   696.729584
+aoi23s1            lec25dscc25_TT    66.355202     240 15925.248413
+aoi211s1           lec25dscc25_TT    58.060799     136  7896.268616
+aoi221s1           lec25dscc25_TT    74.649597    1280 95551.484375
+hi1s1              lec25dscc25_TT    33.177601      42  1393.459236
+i1s1               lec25dscc25_TT    33.177601       3    99.532803
+i1s3               lec25dscc25_TT    41.472000     107  4437.504013
+ib1s1              lec25dscc25_TT    33.177601    3467 115026.742184
+lclks1             lec25dscc25_TT    91.238403    2720 248168.457031 n
+nnd2s1             lec25dscc25_TT    41.472000     841 34877.952103
+nnd2s2             lec25dscc25_TT    41.472000      44  1824.768005
+nnd3s1             lec25dscc25_TT    49.766399       8   398.131195
+nnd3s2             lec25dscc25_TT    49.766399      24  1194.393585
+nnd4s1             lec25dscc25_TT    58.060799     400 23224.319458
+nor2s1             lec25dscc25_TT    41.472000     728 30191.616089
+nor4s1             lec25dscc25_TT    82.944000       1    82.944000
+oai13s1            lec25dscc25_TT    58.060799     120  6967.295837
+oai21s1            lec25dscc25_TT    49.766399     360 17915.903778
+oai22s2            lec25dscc25_TT    58.060799    3620 210180.091095
+oai33s2            lec25dscc25_TT    99.532799       1    99.532799
+oai211s1           lec25dscc25_TT    58.060799     360 20901.887512
+oai221s2           lec25dscc25_TT    74.649597     400 29859.838867
+or2s1              lec25dscc25_TT    49.766399     388 19309.362961
+or4s1              lec25dscc25_TT    82.944000      16  1327.104004
+or4s2              lec25dscc25_TT   132.710007       2   265.420013
+or4s3              lec25dscc25_TT   132.710007       6   796.260040
+or5s1              lec25dscc25_TT    91.238403       2   182.476807
+reservation_station_entry_0   68445.237236       1  68445.237236  h, n
+reservation_station_entry_1   68445.237236       1  68445.237236  h, n
+reservation_station_entry_2   68627.713428       1  68627.713428  h, n
+reservation_station_entry_3   68544.769222       1  68544.769222  h, n
+reservation_station_entry_4   68577.946823       1  68577.946823  h, n
+reservation_station_entry_5   68412.058819       1  68412.058819  h, n
+reservation_station_entry_6   68495.002823       1  68495.002823  h, n
+reservation_station_entry_7   68495.002823       1  68495.002823  h, n
+reservation_station_entry_8   68561.358025       1  68561.358025  h, n
+reservation_station_entry_9   68495.002823       1  68495.002823  h, n
+reservation_station_entry_10  68378.881218       1  68378.881218  h, n
+reservation_station_entry_11  68511.591621       1  68511.591621  h, n
+reservation_station_entry_12  68511.591621       1  68511.591621  h, n
+reservation_station_entry_13  68461.825424       1  68461.825424  h, n
+reservation_station_entry_14  68392.681633       1  68392.681633  h, n
+reservation_station_entry_15  68453.530426       1  68453.530426  h, n
+xor2s1             lec25dscc25_TT    82.944000     120  9953.280029
+-----------------------------------------------------------------------------
+Total 47 references                                 2008707.681824
+1

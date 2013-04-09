@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Thu Mar 28 03:04:55 2013
+         Version E-2011.03_Full64 -- Mon Apr  8 03:17:37 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -17,12 +17,38 @@ controlling such use and disclosure.
 DirectC Release 1.0 Copyright (c) 1991-2011 by Synopsys Inc.
 Parsing design file 'test_reservation_station.v'
 Parsing design file 'reservation_station.v'
+
+Warning-[TMR] Text macro redefined
+reservation_station.v, 18
+  Text macro (RSTAG_NULL) is redefined. The last definition will override 
+  previous ones.
+  In test_reservation_station.v, 4, it was defined as 8'hFF     
+
 Top Level Modules:
        testbench
 No TimeScale specified
+
+Warning-[SIOB] Select index out of bounds
+reservation_station.v, 673
+"first_empty_filleds[(0 - 1)]"
+  The select index is out of declared bounds : [7:0].
+  In module instance : rs 
+  In module : reservation_station.
+
+
+Warning-[SIOB] Select index out of bounds
+reservation_station.v, 673
+"second_empty_filleds[(0 - 1)]"
+  The select index is out of declared bounds : [7:0].
+  In module instance : rs 
+  In module : reservation_station.
+
+Notice: Ports coerced to inout, use -notice for details
 Starting vcs inline pass...
-1 module and 0 UDP read.
+2 modules and 0 UDP read.
 recompiling module testbench
+recompiling module reservation_station_entry
+Both modules done.
 make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/csrc'
 if [ -x ../simv ]; then chmod -x ../simv; fi
 g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
@@ -30,43 +56,107 @@ g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5N
 make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Mar 28 03:04 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr  8 03:17 2013
 
 STARTING TESTBENCH!
 
-  preclock: reset=1 fill=0 status_out=x dest_reg_out=xx rega_value_out=xxxxxxxxxxxxxxxx regb_value_out=xxxxxxxxxxxxxxxx opaselo=xx opbselo=xx aluo=xxxxx cbo=x ubo=x xx
- postclock: reset=1 fill=0 status_out=0 dest_reg_out=00 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=00 opbselo=00 aluo=00000 cbo=0 ubo=0 00
+resetting
 
-  preclock: reset=0 fill=0 status_out=0 dest_reg_out=00 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=00 opbselo=00 aluo=00000 cbo=0 ubo=0 00
- postclock: reset=0 fill=0 status_out=4 dest_reg_out=00 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=00 opbselo=00 aluo=00000 cbo=0 ubo=0 00
+  preclock: reset=1 fe=xxxxxxxx se=xxxxxxxx states=xxxxxxxxxxxxxxxxxxxxxxxx fills=xxxxxxxx ifs=xxxxxxxx iss=xxxxxxxx ao=xxxxxxxxxxxxxxxx 
+   i1_ravo=xxxxxxxxxxxxxxxx i1_rbvo=xxxxxxxxxxxxxxxx i2_ravo=xxxxxxxxxxxxxxxx i2_rbvo=xxxxxxxxxxxxxxxx
+ postclock: reset=1 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
-  preclock: reset=0 fill=1 status_out=4 dest_reg_out=00 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=00 opbselo=00 aluo=00000 cbo=0 ubo=0 00
- postclock: reset=0 fill=1 status_out=3 dest_reg_out=02 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
+holding
 
-  preclock: reset=0 fill=0 status_out=3 dest_reg_out=02 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=0 fill=0 status_out=3 dest_reg_out=02 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
+  preclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
-  preclock: reset=0 fill=0 status_out=3 dest_reg_out=02 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=0 fill=0 status_out=4 dest_reg_out=02 rega_value_out=deadbeefbaadbeef regb_value_out=ffffffffffffffff opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
+dispatching1
 
-  preclock: reset=0 fill=0 status_out=4 dest_reg_out=02 rega_value_out=deadbeefbaadbeef regb_value_out=ffffffffffffffff opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=0 fill=0 status_out=4 dest_reg_out=02 rega_value_out=deadbeefbaadbeef regb_value_out=ffffffffffffffff opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
+  preclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00000100 se=00001000 states=000000000000000000010010 fills=00001100 ifs=00000000 iss=00000000 ao=0000000000000201 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
-  preclock: reset=0 fill=1 status_out=4 dest_reg_out=02 rega_value_out=deadbeefbaadbeef regb_value_out=ffffffffffffffff opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=0 fill=1 status_out=4 dest_reg_out=01 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
+d2
 
-  preclock: reset=0 fill=1 status_out=4 dest_reg_out=01 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=0 fill=1 status_out=4 dest_reg_out=01 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
+  preclock: reset=0 fe=00000100 se=00001000 states=000000000000000000010010 fills=00001100 ifs=00000000 iss=00000000 ao=0000000000000201 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00010000 se=00100000 states=000000000000010010010010 fills=00110000 ifs=00000000 iss=00000000 ao=0000000002010403 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
-  preclock: reset=1 fill=1 status_out=4 dest_reg_out=01 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=10 opbselo=01 aluo=10101 cbo=0 ubo=0 00
- postclock: reset=1 fill=1 status_out=0 dest_reg_out=00 rega_value_out=0000000000000000 regb_value_out=0000000000000000 opaselo=00 opbselo=00 aluo=00000 cbo=0 ubo=0 00
+d3
+
+  preclock: reset=0 fe=00010000 se=00100000 states=000000000000010010010010 fills=00110000 ifs=00000000 iss=00000000 ao=0000000002010403 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=01000000 se=10000000 states=000000010010010010010010 fills=11000000 ifs=00000000 iss=00000000 ao=0000020104030605 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+d4
+
+  preclock: reset=0 fe=01000000 se=10000000 states=000000010010010010010010 fills=11000000 ifs=00000000 iss=00000000 ao=0000020104030605 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00000000 se=00000000 states=010010010010010010010010 fills=00000000 ifs=00000000 iss=00000000 ao=0201040306050807 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+issue1
+
+  preclock: reset=0 fe=00000000 se=00000000 states=010010010010010010010010 fills=00000000 ifs=00000000 iss=00000000 ao=0201040306050807 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00000000 se=00000000 states=100100100100100100100100 fills=00000000 ifs=00000010 iss=00000001 ao=0201040306050807 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+
+issue2
+
+  preclock: reset=0 fe=00000000 se=00000000 states=100100100100100100100100 fills=00000000 ifs=00000010 iss=00000001 ao=0201040306050807 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+ postclock: reset=0 fe=00000001 se=00000010 states=100100100100100100000000 fills=00000000 ifs=00001000 iss=00000100 ao=0201040306050000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+
+issue3
+
+  preclock: reset=0 fe=00000001 se=00000010 states=100100100100100100000000 fills=00000000 ifs=00001000 iss=00000100 ao=0201040306050000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+ postclock: reset=0 fe=00000001 se=00000010 states=100100100100000000000000 fills=00000000 ifs=00100000 iss=00010000 ao=0201040300000000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+
+issue4
+
+  preclock: reset=0 fe=00000001 se=00000010 states=100100100100000000000000 fills=00000000 ifs=00100000 iss=00010000 ao=0201040300000000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+ postclock: reset=0 fe=00000001 se=00000010 states=100100000000000000000000 fills=00000000 ifs=10000000 iss=01000000 ao=0201000000000000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+
+nothing
+
+  preclock: reset=0 fe=00000001 se=00000010 states=100100000000000000000000 fills=00000000 ifs=10000000 iss=01000000 ao=0201000000000000 
+   i1_ravo=0000000000000002 i1_rbvo=deadbeefbaadbeef i2_ravo=0000000000000001 i2_rbvo=deadbeefbaadbeef
+ postclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+nothing[again]
+
+  preclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=0 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+
+resetting
+
+  preclock: reset=1 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
+ postclock: reset=1 fe=00000001 se=00000010 states=000000000000000000000000 fills=00000000 ifs=00000000 iss=00000000 ao=0000000000000000 
+   i1_ravo=0000000000000000 i1_rbvo=0000000000000000 i2_ravo=0000000000000000 i2_rbvo=0000000000000000
 
 ENDING TESTBENCH : SUCCESS !
 
-$finish called from file "test_reservation_station.v", line 241.
-$finish at simulation time                   90
+$finish called from file "test_reservation_station.v", line 340.
+$finish at simulation time                  260
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 90
-CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
-Thu Mar 28 03:04:56 2013
-CPU time: .186 seconds to compile + .043 seconds to elab + .186 seconds to link + .050 seconds in simulation
+Time: 260
+CPU Time:      0.010 seconds;       Data structure size:   0.1Mb
+Mon Apr  8 03:17:38 2013
+CPU time: .479 seconds to compile + .057 seconds to elab + .200 seconds to link + .051 seconds in simulation

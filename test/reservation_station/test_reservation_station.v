@@ -3,7 +3,7 @@
 // defines //
 `define RSTAG_NULL      8'hFF     
 `define ZERO_REG     5'd0
-`define NUM_RSES 8
+`define NUM_RSES 16
 
 // reservation station testbench module //
 module testbench;
@@ -62,12 +62,12 @@ module testbench;
    wire [4:0]  inst2_dest_reg_out;
    wire [7:0]  inst2_dest_tag_out;
    
-   wire [7:0] first_empties;
-   wire [7:0] second_empties;
+   wire [(`NUM_RSES-1):0] first_empties;
+   wire [(`NUM_RSES-1):0] second_empties;
    wire [(3*`NUM_RSES-1):0] states_out;   // for debugging 
    wire [(`NUM_RSES-1):0] fills;
-   wire [7:0] issue_first_states;
-   wire [7:0] issue_second_states;
+   wire [(`NUM_RSES-1):0] issue_first_states;
+   wire [(`NUM_RSES-1):0] issue_second_states;
    wire [(8*`NUM_RSES-1):0] ages_out;
    
         // module to be tested //	
@@ -298,7 +298,7 @@ module testbench;
         // and yet again //
         $display("d4\n");
         CLOCK_AND_DISPLAY();
-        ASSERT(~dispatch);   // should be full by this point
+        ASSERT(dispatch);   // should not be full yet
 
 
         // fill all voids and issue first 2 ins'ns //

@@ -8,14 +8,17 @@
 `define SD #1
 
 // defined paramters //
-`define NUM_RSES 8
+`define NUM_RSES 16
 `define NUM_RSES_MINUS_ONE 7
 `define RS_EMPTY        3'b000
 `define RS_WAITING_A    3'b001
 `define RS_WAITING_B    3'b010
 `define RS_WAITING_BOTH 3'b011
 `define RS_READY        3'b100
+`define RS_TEST         3'b111
 `define RSTAG_NULL      8'hFF           
+`define ZERO_REG         5'd0
+
 
 
 /////////////////////////////////////////////////
@@ -158,7 +161,7 @@ module reservation_station_entry(clock,reset,fill,                              
    wire taga_cur_match_cdb2_cur;
    wire tagb_cur_match_cdb1_cur;
    wire tagb_cur_match_cdb2_cur;
-
+   wire status_currently_empty;
    
    // combinational assignments for stuff used for next states //
    assign taga_in_nonnull        = (waiting_taga_in!=`RSTAG_NULL);
@@ -259,6 +262,8 @@ module reservation_station_entry(clock,reset,fill,                              
 
       end
    end
+
+   // synopsys sync_set_reset "reset"
 
    // clock synchronous events //
    always@(posedge clock)
@@ -456,7 +461,7 @@ module reservation_station(clock,reset,               // signals in
    output wire [(`NUM_RSES*3-1):0] states_out;
    
    // internal wires for directly interfacing the rs entries //
-   output reg [(`NUM_RSES-1):0] fills;
+   output wire [(`NUM_RSES-1):0] fills;
    reg [(`NUM_RSES-1):0] resets;
 
    wire [(`NUM_RSES-1):0] first_empty_filleds;     // first/second empty links between rses
@@ -553,7 +558,9 @@ module reservation_station(clock,reset,               // signals in
    generate
       for (i=0; i<`NUM_RSES; i=i+1)
 	  begin : ASSIGNRSINPUTS
-	  
+
+                 assign fills[i] = (dispatch&&((inst1_valid&&first_empties[i]) || (inst2_valid&&second_empties[i])) ); 
+
 		 always@*
 		 begin
 		 
@@ -564,7 +571,7 @@ module reservation_station(clock,reset,               // signals in
 			    // this rs entry is going to be filled from the first instruction //
                             if (inst1_valid && first_empties[i])
 			    begin
-					fills[i]              = 1'b1;
+//					fills[i]              = 1'b1;
 					dest_regs_in[i]       = inst1_dest_reg_in;
 					dest_tags_in[i]       = inst1_dest_tag_in;
 					rega_values_in[i]     = inst1_rega_value_in;
@@ -583,7 +590,7 @@ module reservation_station(clock,reset,               // signals in
                             // this rs entry is going to be filled from the second instruction //
                             else if (inst2_valid && second_empties[i])
                             begin
-					fills[i]              = 1'b1;
+//					fills[i]              = 1'b1;
 					dest_regs_in[i]       = inst2_dest_reg_in;
 					dest_tags_in[i]       = inst2_dest_tag_in;
 					rega_values_in[i]     = inst2_rega_value_in;
@@ -603,7 +610,7 @@ module reservation_station(clock,reset,               // signals in
                      // default case: no instruction being dispatched/ no rs entries being filled //
 		     else
                      begin
-				fills[i]              = 1'b0;
+//				fills[i]              = 1'b0;
 				dest_regs_in[i]       = `ZERO_REG;
 				dest_tags_in[i]       = `RSTAG_NULL;
 				rega_values_in[i]     = 64'd0;

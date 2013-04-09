@@ -63,25 +63,215 @@ Running DC verilog reader
 Reading with Presto HDL Compiler (equivalent to -rtl option).
 Running PRESTO HDLC
 Compiling source file /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:172: the undeclared symbol 'taga_cur_match_cdb1_in' assumed to have the default net type, which is 'wire'. (VER-936)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:173: the undeclared symbol 'taga_cur_match_cdb2_in' assumed to have the default net type, which is 'wire'. (VER-936)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:174: the undeclared symbol 'tagb_cur_match_cdb1_in' assumed to have the default net type, which is 'wire'. (VER-936)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:175: the undeclared symbol 'tagb_cur_match_cdb2_in' assumed to have the default net type, which is 'wire'. (VER-936)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:172: The delay specification for net declaration is ignored. (VER-976)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:173: The delay specification for net declaration is ignored. (VER-976)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:174: The delay specification for net declaration is ignored. (VER-976)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:175: the undeclared symbol 'taga_cur_match_cdb1_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:176: the undeclared symbol 'taga_cur_match_cdb2_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:177: the undeclared symbol 'tagb_cur_match_cdb1_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:178: the undeclared symbol 'tagb_cur_match_cdb2_in' assumed to have the default net type, which is 'wire'. (VER-936)
 Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:175: The delay specification for net declaration is ignored. (VER-976)
-Error:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:604: The macro 'ZERO_REG' has not been defined. (VER-913)
-*** Presto compilation terminated with 1 errors. ***
-Error: Can't read 'verilog' file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v'. (UID-59)
-No designs were read
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:176: The delay specification for net declaration is ignored. (VER-976)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:177: The delay specification for net declaration is ignored. (VER-976)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:178: The delay specification for net declaration is ignored. (VER-976)
+
+Statistics for case statements in always block at line 189 in file
+	'/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v'
+===============================================
+|           Line           |  full/ parallel  |
+===============================================
+|           204            |    auto/auto     |
+|           243            |    auto/auto     |
+===============================================
+
+Inferred memory devices in process
+	in routine reservation_station_entry line 269 in file
+		'/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v'.
+=================================================================================
+|     Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+=================================================================================
+| uncond_branch_out_reg | Flip-flop |   1   |  N  | N  | N  | N  | Y  | N  | N  |
+|      age_out_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | Y  | N  | N  |
+|    status_out_reg     | Flip-flop |   3   |  Y  | N  | N  | N  | Y  | N  | N  |
+|   dest_reg_out_reg    | Flip-flop |   5   |  Y  | N  | N  | N  | Y  | N  | N  |
+|   dest_tag_out_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | Y  | N  |
+|   waiting_taga_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | Y  | N  |
+|   waiting_tagb_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | Y  | N  |
+|  rega_value_out_reg   | Flip-flop |  64   |  Y  | N  | N  | N  | Y  | N  | N  |
+|  regb_value_out_reg   | Flip-flop |  64   |  Y  | N  | N  | N  | Y  | N  | N  |
+|  opa_select_out_reg   | Flip-flop |   2   |  Y  | N  | N  | N  | Y  | N  | N  |
+|  opb_select_out_reg   | Flip-flop |   2   |  Y  | N  | N  | N  | Y  | N  | N  |
+|   alu_func_out_reg    | Flip-flop |   5   |  Y  | N  | N  | N  | Y  | N  | N  |
+|    rd_mem_out_reg     | Flip-flop |   1   |  N  | N  | N  | N  | Y  | N  | N  |
+|    wr_mem_out_reg     | Flip-flop |   1   |  N  | N  | N  | N  | Y  | N  | N  |
+|  cond_branch_out_reg  | Flip-flop |   1   |  N  | N  | N  | N  | Y  | N  | N  |
+=================================================================================
+Warning:  Starting with the 2000.11-1 release, the Presto Verilog reader treats Verilog 'integer' types as signed; synthesized result may not match earlier versions of HDL Compiler. (VER-314)
+
+Inferred memory devices in process
+	in routine reservation_station line 564 in file
+		'/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v'.
+==============================================================================
+|     Register Name      | Type  | Width | Bus | MB | AR | AS | SR | SS | ST |
+==============================================================================
+|     wr_mems_in_reg     | Latch |  16   |  N  | N  | N  | N  | -  | -  | -  |
+|  cond_branches_in_reg  | Latch |  16   |  N  | N  | N  | N  | -  | -  | -  |
+| uncond_branches_in_reg | Latch |  16   |  N  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_regs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|    dest_tags_in_reg    | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   rega_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|   regb_values_in_reg   | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagas_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|  waiting_tagbs_in_reg  | Latch |   8   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opa_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|   opb_selects_in_reg   | Latch |   2   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|    alu_funcs_in_reg    | Latch |   5   |  Y  | N  | N  | N  | -  | -  | -  |
+|     rd_mems_in_reg     | Latch |  16   |  N  | N  | N  | N  | -  | -  | -  |
+==============================================================================
+Presto compilation completed successfully.
+Current design is now '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station_entry.db:reservation_station_entry'
+Loaded 2 designs.
+Current design is 'reservation_station_entry'.
+reservation_station_entry reservation_station
 set design_name reservation_station
 reservation_station
 #set reset_name reset
 set clock_name clock
 clock
-set CLK_PERIOD 15
-15
+set CLK_PERIOD 16
+16
 #/***********************************************************/
 #/* The rest of this file may be left alone for most small  */
 #/* to moderate sized designs.  You may need to alter it    */
@@ -197,68 +387,478 @@ if {  $dc_shell_status != [list] } {
 } else {
    quit
 }
-Error: Can't find design 'reservation_station'. (UID-109)
-Error: Current design is not defined. (UID-4)
-Error: Current design is not defined. (UID-4)
-Error: Current design is not defined. (UID-4)
-Error: Can't find object 'reservation_station'. (UID-109)
+Current design is 'reservation_station'.
+
+  Linking design 'reservation_station'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  * (2 designs)               /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.db, etc
+  lec25dscc25_TT (library)    /afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db
+
+Warning: Can't find object 'reset_name' in design 'reservation_station'. (UID-95)
 Error: Value for list 'object_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Current design is not defined. (UID-4)
-Error: Current design is not defined. (UID-4)
-Error: Can't find port 'clock'. (UID-109)
-Error: Value for list 'source_objects' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Can't find object 'clock'. (UID-109)
-Error: Value for list 'object_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Can't find clock 'clock'. (UID-109)
-Error: Value for list '<clock_list>' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Value for list '-from' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Value for list '-to' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Value for list 'port_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Can't find port 'clock'. (UID-109)
-Error: Value for list 'port_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Value for list 'port_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Value for list 'objects' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Current design is not defined. (UID-4)
-Error: Can't find clock 'clock'. (UID-109)
-Error: Value for list '-clock' must have 1 elements. (CMD-036)
-Error: Value for list 'port_pin_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Can't find port 'clock'. (UID-109)
-Error: Current design is not defined. (UID-4)
-Error: Can't find clock 'clock'. (UID-109)
-Error: Value for list 'port_pin_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Current design is not defined. (UID-4)
-Error: Can't find clock 'clock'. (UID-109)
-Error: Value for list '-clock' must have 1 elements. (CMD-036)
-Error: Value for list 'port_pin_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Can't find object 'reset_name'. (UID-109)
-Error: Value for list 'object_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Can't find net 'reset_name'. (UID-109)
+Warning: Can't find net 'reset_name' in design 'reservation_station'. (UID-95)
 Error: Value for list 'net_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Can't find port 'reset_name'. (UID-109)
+Warning: Can't find port 'reset_name' in design 'reservation_station'. (UID-95)
 Error: Value for list 'port_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Value for list '<object_list>' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Value for list 'to_list' must have 1 elements. (CMD-036)
-Error: Current design is not defined. (UID-4)
-Error: Current design is not defined. (UID-4)
-Error: No files or designs were specified. (UID-22)
+Current design is 'reservation_station'.
+Information: Uniquified 16 instances of design 'reservation_station_entry'. (OPT-1056)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | G-2012.06-DWBB_201206.0 |     *     |
+| Licensed DW Building Blocks        |                         |           |
+============================================================================
+
+
+Information: There are 37 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'reservation_station_entry_0'
+  Processing 'reservation_station'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Processing 'reservation_station_DW01_cmp6_0'
+  Processing 'reservation_station_DW01_cmp6_1'
+  Processing 'reservation_station_DW01_cmp6_2'
+  Processing 'reservation_station_DW01_cmp6_3'
+  Processing 'reservation_station_DW01_cmp6_4'
+  Processing 'reservation_station_DW01_cmp6_5'
+  Processing 'reservation_station_DW01_cmp6_6'
+  Processing 'reservation_station_DW01_cmp6_7'
+  Processing 'reservation_station_DW01_cmp6_8'
+  Processing 'reservation_station_DW01_cmp6_9'
+  Processing 'reservation_station_DW01_cmp6_10'
+  Processing 'reservation_station_DW01_cmp6_11'
+  Processing 'reservation_station_DW01_cmp6_12'
+  Processing 'reservation_station_DW01_cmp6_13'
+  Processing 'reservation_station_DW01_cmp6_14'
+  Processing 'reservation_station_DW01_cmp6_15'
+  Processing 'reservation_station_DW01_cmp6_16'
+  Processing 'reservation_station_DW01_cmp6_17'
+  Processing 'reservation_station_DW01_cmp6_18'
+  Processing 'reservation_station_DW01_cmp6_19'
+  Processing 'reservation_station_DW01_cmp6_20'
+  Processing 'reservation_station_DW01_cmp6_21'
+  Processing 'reservation_station_DW01_cmp6_22'
+  Processing 'reservation_station_DW01_cmp6_23'
+  Processing 'reservation_station_DW01_cmp6_24'
+  Processing 'reservation_station_DW01_cmp6_25'
+  Processing 'reservation_station_DW01_cmp6_26'
+  Processing 'reservation_station_DW01_cmp6_27'
+  Processing 'reservation_station_DW01_cmp6_28'
+  Processing 'reservation_station_DW01_cmp6_29'
+  Processing 'reservation_station_DW01_cmp6_30'
+  Processing 'reservation_station_DW01_cmp6_31'
+  Processing 'reservation_station_DW01_cmp6_32'
+  Processing 'reservation_station_DW01_cmp6_33'
+  Processing 'reservation_station_DW01_cmp6_34'
+  Processing 'reservation_station_DW01_cmp6_35'
+  Processing 'reservation_station_DW01_cmp6_36'
+  Processing 'reservation_station_DW01_cmp6_37'
+  Processing 'reservation_station_DW01_cmp6_38'
+  Processing 'reservation_station_DW01_cmp6_39'
+  Processing 'reservation_station_DW01_cmp6_40'
+  Processing 'reservation_station_DW01_cmp6_41'
+  Processing 'reservation_station_DW01_cmp6_42'
+  Processing 'reservation_station_DW01_cmp6_43'
+  Processing 'reservation_station_DW01_cmp6_44'
+  Processing 'reservation_station_DW01_cmp6_45'
+  Processing 'reservation_station_DW01_cmp6_46'
+  Processing 'reservation_station_DW01_cmp6_47'
+  Processing 'reservation_station_DW01_cmp6_48'
+  Processing 'reservation_station_DW01_cmp6_49'
+  Processing 'reservation_station_DW01_cmp6_50'
+  Processing 'reservation_station_DW01_cmp6_51'
+  Processing 'reservation_station_DW01_cmp6_52'
+  Processing 'reservation_station_DW01_cmp6_53'
+  Processing 'reservation_station_DW01_cmp6_54'
+  Processing 'reservation_station_DW01_cmp6_55'
+  Processing 'reservation_station_DW01_cmp6_56'
+  Processing 'reservation_station_DW01_cmp6_57'
+  Processing 'reservation_station_DW01_cmp6_58'
+  Processing 'reservation_station_DW01_cmp6_59'
+  Processing 'reservation_station_DW01_cmp6_60'
+  Processing 'reservation_station_DW01_cmp6_61'
+  Processing 'reservation_station_DW01_cmp6_62'
+  Processing 'reservation_station_DW01_cmp6_63'
+  Processing 'reservation_station_DW01_cmp6_64'
+  Processing 'reservation_station_DW01_cmp6_65'
+  Processing 'reservation_station_DW01_cmp6_66'
+  Processing 'reservation_station_DW01_cmp6_67'
+  Processing 'reservation_station_DW01_cmp6_68'
+  Processing 'reservation_station_DW01_cmp6_69'
+  Processing 'reservation_station_DW01_cmp6_70'
+  Processing 'reservation_station_DW01_cmp6_71'
+  Processing 'reservation_station_DW01_cmp6_72'
+  Processing 'reservation_station_DW01_cmp6_73'
+  Processing 'reservation_station_DW01_cmp6_74'
+  Processing 'reservation_station_DW01_cmp6_75'
+  Processing 'reservation_station_DW01_cmp6_76'
+  Processing 'reservation_station_DW01_cmp6_77'
+  Processing 'reservation_station_DW01_cmp6_78'
+  Processing 'reservation_station_DW01_cmp6_79'
+  Processing 'reservation_station_DW01_cmp6_80'
+  Processing 'reservation_station_DW01_cmp6_81'
+  Processing 'reservation_station_DW01_cmp6_82'
+  Processing 'reservation_station_DW01_cmp6_83'
+  Processing 'reservation_station_DW01_cmp6_84'
+  Processing 'reservation_station_DW01_cmp6_85'
+  Processing 'reservation_station_DW01_cmp6_86'
+  Processing 'reservation_station_DW01_cmp6_87'
+  Processing 'reservation_station_DW01_cmp6_88'
+  Processing 'reservation_station_DW01_cmp6_89'
+  Processing 'reservation_station_DW01_cmp6_90'
+  Processing 'reservation_station_DW01_cmp6_91'
+  Processing 'reservation_station_DW01_cmp6_92'
+  Processing 'reservation_station_DW01_cmp6_93'
+  Processing 'reservation_station_DW01_cmp6_94'
+  Processing 'reservation_station_DW01_cmp6_95'
+  Processing 'reservation_station_DW01_cmp6_96'
+  Processing 'reservation_station_DW01_cmp6_97'
+  Processing 'reservation_station_DW01_cmp6_98'
+  Processing 'reservation_station_DW01_cmp6_99'
+  Processing 'reservation_station_DW01_cmp6_100'
+  Processing 'reservation_station_DW01_cmp6_101'
+  Processing 'reservation_station_DW01_cmp6_102'
+  Processing 'reservation_station_DW01_cmp6_103'
+  Processing 'reservation_station_DW01_cmp6_104'
+  Processing 'reservation_station_DW01_cmp6_105'
+  Processing 'reservation_station_DW01_cmp6_106'
+  Processing 'reservation_station_DW01_cmp6_107'
+  Processing 'reservation_station_DW01_cmp6_108'
+  Processing 'reservation_station_DW01_cmp6_109'
+  Processing 'reservation_station_DW01_cmp6_110'
+  Processing 'reservation_station_DW01_cmp6_111'
+  Processing 'reservation_station_DW01_cmp6_112'
+  Processing 'reservation_station_DW01_cmp6_113'
+  Processing 'reservation_station_DW01_cmp6_114'
+  Processing 'reservation_station_DW01_cmp6_115'
+  Processing 'reservation_station_DW01_cmp6_116'
+  Processing 'reservation_station_DW01_cmp6_117'
+  Processing 'reservation_station_DW01_cmp6_118'
+  Processing 'reservation_station_DW01_cmp6_119'
+  Processing 'reservation_station_entry_0_DW01_inc_0'
+  Processing 'reservation_station_entry_0_DW01_add_0'
+  Processing 'reservation_station_entry_0_DW01_cmp6_0'
+  Processing 'reservation_station_entry_0_DW01_cmp6_1'
+  Processing 'reservation_station_entry_0_DW01_cmp6_2'
+  Processing 'reservation_station_entry_0_DW01_cmp6_3'
+  Processing 'reservation_station_entry_0_DW01_cmp6_4'
+  Processing 'reservation_station_entry_0_DW01_cmp6_5'
+  Processing 'reservation_station_entry_0_DW01_cmp6_6'
+  Processing 'reservation_station_entry_0_DW01_cmp6_7'
+  Processing 'reservation_station_entry_1_DW01_inc_0'
+  Processing 'reservation_station_entry_1_DW01_add_0'
+  Processing 'reservation_station_entry_1_DW01_cmp6_0'
+  Processing 'reservation_station_entry_1_DW01_cmp6_1'
+  Processing 'reservation_station_entry_1_DW01_cmp6_2'
+  Processing 'reservation_station_entry_1_DW01_cmp6_3'
+  Processing 'reservation_station_entry_1_DW01_cmp6_4'
+  Processing 'reservation_station_entry_1_DW01_cmp6_5'
+  Processing 'reservation_station_entry_1_DW01_cmp6_6'
+  Processing 'reservation_station_entry_1_DW01_cmp6_7'
+  Processing 'reservation_station_entry_2_DW01_inc_0'
+  Processing 'reservation_station_entry_2_DW01_add_0'
+  Processing 'reservation_station_entry_2_DW01_cmp6_0'
+  Processing 'reservation_station_entry_2_DW01_cmp6_1'
+  Processing 'reservation_station_entry_2_DW01_cmp6_2'
+  Processing 'reservation_station_entry_2_DW01_cmp6_3'
+  Processing 'reservation_station_entry_2_DW01_cmp6_4'
+  Processing 'reservation_station_entry_2_DW01_cmp6_5'
+  Processing 'reservation_station_entry_2_DW01_cmp6_6'
+  Processing 'reservation_station_entry_2_DW01_cmp6_7'
+  Processing 'reservation_station_entry_3_DW01_inc_0'
+  Processing 'reservation_station_entry_3_DW01_add_0'
+  Processing 'reservation_station_entry_3_DW01_cmp6_0'
+  Processing 'reservation_station_entry_3_DW01_cmp6_1'
+  Processing 'reservation_station_entry_3_DW01_cmp6_2'
+  Processing 'reservation_station_entry_3_DW01_cmp6_3'
+  Processing 'reservation_station_entry_3_DW01_cmp6_4'
+  Processing 'reservation_station_entry_3_DW01_cmp6_5'
+  Processing 'reservation_station_entry_3_DW01_cmp6_6'
+  Processing 'reservation_station_entry_3_DW01_cmp6_7'
+  Processing 'reservation_station_entry_4_DW01_inc_0'
+  Processing 'reservation_station_entry_4_DW01_add_0'
+  Processing 'reservation_station_entry_4_DW01_cmp6_0'
+  Processing 'reservation_station_entry_4_DW01_cmp6_1'
+  Processing 'reservation_station_entry_4_DW01_cmp6_2'
+  Processing 'reservation_station_entry_4_DW01_cmp6_3'
+  Processing 'reservation_station_entry_4_DW01_cmp6_4'
+  Processing 'reservation_station_entry_4_DW01_cmp6_5'
+  Processing 'reservation_station_entry_4_DW01_cmp6_6'
+  Processing 'reservation_station_entry_4_DW01_cmp6_7'
+  Processing 'reservation_station_entry_5_DW01_inc_0'
+  Processing 'reservation_station_entry_5_DW01_add_0'
+  Processing 'reservation_station_entry_5_DW01_cmp6_0'
+  Processing 'reservation_station_entry_5_DW01_cmp6_1'
+  Processing 'reservation_station_entry_5_DW01_cmp6_2'
+  Processing 'reservation_station_entry_5_DW01_cmp6_3'
+  Processing 'reservation_station_entry_5_DW01_cmp6_4'
+  Processing 'reservation_station_entry_5_DW01_cmp6_5'
+  Processing 'reservation_station_entry_5_DW01_cmp6_6'
+  Processing 'reservation_station_entry_5_DW01_cmp6_7'
+  Processing 'reservation_station_entry_6_DW01_inc_0'
+  Processing 'reservation_station_entry_6_DW01_add_0'
+  Processing 'reservation_station_entry_6_DW01_cmp6_0'
+  Processing 'reservation_station_entry_6_DW01_cmp6_1'
+  Processing 'reservation_station_entry_6_DW01_cmp6_2'
+  Processing 'reservation_station_entry_6_DW01_cmp6_3'
+  Processing 'reservation_station_entry_6_DW01_cmp6_4'
+  Processing 'reservation_station_entry_6_DW01_cmp6_5'
+  Processing 'reservation_station_entry_6_DW01_cmp6_6'
+  Processing 'reservation_station_entry_6_DW01_cmp6_7'
+  Processing 'reservation_station_entry_7_DW01_inc_0'
+  Processing 'reservation_station_entry_7_DW01_add_0'
+  Processing 'reservation_station_entry_7_DW01_cmp6_0'
+  Processing 'reservation_station_entry_7_DW01_cmp6_1'
+  Processing 'reservation_station_entry_7_DW01_cmp6_2'
+  Processing 'reservation_station_entry_7_DW01_cmp6_3'
+  Processing 'reservation_station_entry_7_DW01_cmp6_4'
+  Processing 'reservation_station_entry_7_DW01_cmp6_5'
+  Processing 'reservation_station_entry_7_DW01_cmp6_6'
+  Processing 'reservation_station_entry_7_DW01_cmp6_7'
+  Processing 'reservation_station_entry_8_DW01_inc_0'
+  Processing 'reservation_station_entry_8_DW01_add_0'
+  Processing 'reservation_station_entry_8_DW01_cmp6_0'
+  Processing 'reservation_station_entry_8_DW01_cmp6_1'
+  Processing 'reservation_station_entry_8_DW01_cmp6_2'
+  Processing 'reservation_station_entry_8_DW01_cmp6_3'
+  Processing 'reservation_station_entry_8_DW01_cmp6_4'
+  Processing 'reservation_station_entry_8_DW01_cmp6_5'
+  Processing 'reservation_station_entry_8_DW01_cmp6_6'
+  Processing 'reservation_station_entry_8_DW01_cmp6_7'
+  Processing 'reservation_station_entry_9_DW01_inc_0'
+  Processing 'reservation_station_entry_9_DW01_add_0'
+  Processing 'reservation_station_entry_9_DW01_cmp6_0'
+  Processing 'reservation_station_entry_9_DW01_cmp6_1'
+  Processing 'reservation_station_entry_9_DW01_cmp6_2'
+  Processing 'reservation_station_entry_9_DW01_cmp6_3'
+  Processing 'reservation_station_entry_9_DW01_cmp6_4'
+  Processing 'reservation_station_entry_9_DW01_cmp6_5'
+  Processing 'reservation_station_entry_9_DW01_cmp6_6'
+  Processing 'reservation_station_entry_9_DW01_cmp6_7'
+  Processing 'reservation_station_entry_10_DW01_inc_0'
+  Processing 'reservation_station_entry_10_DW01_add_0'
+  Processing 'reservation_station_entry_10_DW01_cmp6_0'
+  Processing 'reservation_station_entry_10_DW01_cmp6_1'
+  Processing 'reservation_station_entry_10_DW01_cmp6_2'
+  Processing 'reservation_station_entry_10_DW01_cmp6_3'
+  Processing 'reservation_station_entry_10_DW01_cmp6_4'
+  Processing 'reservation_station_entry_10_DW01_cmp6_5'
+  Processing 'reservation_station_entry_10_DW01_cmp6_6'
+  Processing 'reservation_station_entry_10_DW01_cmp6_7'
+  Processing 'reservation_station_entry_11_DW01_inc_0'
+  Processing 'reservation_station_entry_11_DW01_add_0'
+  Processing 'reservation_station_entry_11_DW01_cmp6_0'
+  Processing 'reservation_station_entry_11_DW01_cmp6_1'
+  Processing 'reservation_station_entry_11_DW01_cmp6_2'
+  Processing 'reservation_station_entry_11_DW01_cmp6_3'
+  Processing 'reservation_station_entry_11_DW01_cmp6_4'
+  Processing 'reservation_station_entry_11_DW01_cmp6_5'
+  Processing 'reservation_station_entry_11_DW01_cmp6_6'
+  Processing 'reservation_station_entry_11_DW01_cmp6_7'
+  Processing 'reservation_station_entry_12_DW01_inc_0'
+  Processing 'reservation_station_entry_12_DW01_add_0'
+  Processing 'reservation_station_entry_12_DW01_cmp6_0'
+  Processing 'reservation_station_entry_12_DW01_cmp6_1'
+  Processing 'reservation_station_entry_12_DW01_cmp6_2'
+  Processing 'reservation_station_entry_12_DW01_cmp6_3'
+  Processing 'reservation_station_entry_12_DW01_cmp6_4'
+  Processing 'reservation_station_entry_12_DW01_cmp6_5'
+  Processing 'reservation_station_entry_12_DW01_cmp6_6'
+  Processing 'reservation_station_entry_12_DW01_cmp6_7'
+  Processing 'reservation_station_entry_13_DW01_inc_0'
+  Processing 'reservation_station_entry_13_DW01_add_0'
+  Processing 'reservation_station_entry_13_DW01_cmp6_0'
+  Processing 'reservation_station_entry_13_DW01_cmp6_1'
+  Processing 'reservation_station_entry_13_DW01_cmp6_2'
+  Processing 'reservation_station_entry_13_DW01_cmp6_3'
+  Processing 'reservation_station_entry_13_DW01_cmp6_4'
+  Processing 'reservation_station_entry_13_DW01_cmp6_5'
+  Processing 'reservation_station_entry_13_DW01_cmp6_6'
+  Processing 'reservation_station_entry_13_DW01_cmp6_7'
+  Processing 'reservation_station_entry_14_DW01_inc_0'
+  Processing 'reservation_station_entry_14_DW01_add_0'
+  Processing 'reservation_station_entry_14_DW01_cmp6_0'
+  Processing 'reservation_station_entry_14_DW01_cmp6_1'
+  Processing 'reservation_station_entry_14_DW01_cmp6_2'
+  Processing 'reservation_station_entry_14_DW01_cmp6_3'
+  Processing 'reservation_station_entry_14_DW01_cmp6_4'
+  Processing 'reservation_station_entry_14_DW01_cmp6_5'
+  Processing 'reservation_station_entry_14_DW01_cmp6_6'
+  Processing 'reservation_station_entry_14_DW01_cmp6_7'
+  Processing 'reservation_station_entry_15_DW01_inc_0'
+  Processing 'reservation_station_entry_15_DW01_add_0'
+  Processing 'reservation_station_entry_15_DW01_cmp6_0'
+  Processing 'reservation_station_entry_15_DW01_cmp6_1'
+  Processing 'reservation_station_entry_15_DW01_cmp6_2'
+  Processing 'reservation_station_entry_15_DW01_cmp6_3'
+  Processing 'reservation_station_entry_15_DW01_cmp6_4'
+  Processing 'reservation_station_entry_15_DW01_cmp6_5'
+  Processing 'reservation_station_entry_15_DW01_cmp6_6'
+  Processing 'reservation_station_entry_15_DW01_cmp6_7'
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:21 2365367.4      2.23    2585.0   20795.7                                0.00
+    0:01:21 2365367.4      2.23    2585.0   20795.7                                0.00
+    0:01:22 2611333.9      3.29    3916.8   20044.0                                0.00
+    0:01:26 3453700.3      0.00       0.0    9238.5                                0.00
+    0:01:38 3625250.6      0.00       0.0      30.1                                0.00
+    0:01:38 3625250.6      0.00       0.0      30.1                                0.00
+    0:01:38 3625250.6      0.00       0.0      30.1                                0.00
+    0:01:38 3625250.6      0.00       0.0      30.1                                0.00
+    0:01:38 3625250.6      0.00       0.0      30.1                                0.00
+    0:01:39 3625250.6      0.00       0.0      30.1                                0.00
+    0:01:53 2114913.2      0.00       0.0      14.2                                0.00
+    0:01:55 2096234.0      0.00       0.0      14.2                                0.00
+    0:02:01 2096234.0      0.00       0.0      14.1                                0.00
+    0:02:02 2096234.0      0.00       0.0      14.1                                0.00
+    0:02:02 2096234.0      0.00       0.0      14.1                                0.00
+    0:02:03 2096234.0      0.00       0.0      14.1                                0.00
+    0:02:03 2096234.0      0.00       0.0      14.1                                0.00
+    0:02:04 2096364.2      0.00       0.0      10.9                                0.00
+    0:02:04 2096439.8      0.00       0.0       9.8                                0.00
+    0:02:05 2096490.1      0.00       0.0       9.7                                0.00
+    0:02:05 2096490.1      0.00       0.0       9.7                                0.00
+    0:02:05 2096490.1      0.00       0.0       9.7                                0.00
+    0:02:05 2096490.1      0.00       0.0       9.7                                0.00
+    0:02:05 2096490.1      0.00       0.0       9.7                                0.00
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:02:05 2096490.1      0.00       0.0       9.7                                0.00
+    0:02:05 2096490.1      0.00       0.0       9.7                                0.00
+    0:02:10 2092970.5      0.00       0.0     146.1                                0.00
+
+
+  Beginning Design Rule Fixing  (max_transition)  (max_fanout)
+  ----------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:02:12 2092970.5      0.00       0.0     146.1                                0.00
+    0:02:17 2096674.7      0.00       0.0      25.7 RSEMODULES[0].entries/status_out[2]      0.00
+    0:02:18 2096800.8      0.00       0.0       0.0                                0.00
+
+
+  Beginning Critical Range Optimization
+  -------------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:02:18 2096800.8      0.00       0.0       0.0                                0.00
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:02:18 2096800.8      0.00       0.0       0.0                                0.00
+    0:02:18 2096800.8      0.00       0.0       0.0                                0.00
+    0:02:19 2096800.8      0.00       0.0       0.0                                0.00
+    0:02:23 2083592.0      0.00       0.0       0.0                                0.00
+    0:02:25 2073151.0      0.00       0.0       0.0                                0.00
+    0:02:27 2063177.6      0.00       0.0       0.0                                0.00
+    0:02:30 2056394.4      0.00       0.0       0.0                                0.00
+    0:02:32 2050287.2      0.00       0.0       0.0                                0.00
+    0:02:34 2045137.8      0.00       0.0       0.0                                0.00
+    0:02:36 2041895.1      0.00       0.0       0.0                                0.00
+    0:02:37 2038452.7      0.00       0.0       0.0                                0.00
+    0:02:39 2035878.1      0.00       0.0       0.0                                0.00
+    0:02:40 2032935.6      0.00       0.0       0.0                                0.00
+    0:02:41 2030294.2      0.00       0.0       0.0                                0.00
+    0:02:42 2028555.6      0.00       0.0       0.0                                0.00
+    0:02:44 2027552.3      0.00       0.0       0.0                                0.00
+    0:02:44 2026883.6      0.00       0.0       0.0                                0.00
+    0:02:44 2026482.4      0.00       0.0       0.0                                0.00
+    0:02:44 2026482.4      0.00       0.0       0.0                                0.00
+    0:02:44 2026482.4      0.00       0.0       0.0                                0.00
+    0:02:44 2026482.4      0.00       0.0       0.0                                0.00
+    0:02:45 2026482.4      0.00       0.0       0.0                                0.00
+    0:02:45 2026424.3      0.00       0.0       0.0                                0.00
+    0:02:45 2026424.3      0.00       0.0       0.0                                0.00
+    0:02:45 2026424.3      0.00       0.0       0.0                                0.00
+    0:02:46 2026424.3      0.00       0.0       0.0                                0.00
+    0:02:46 2026424.3      0.00       0.0       0.0                                0.00
+    0:02:46 2026424.3      0.00       0.0       0.0                                0.00
+    0:02:46 2026424.3      0.00       0.0       0.0                                0.00
+
+
+  Beginning Critical Range Optimization
+  -------------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:02:46 2026424.3      0.00       0.0       0.0                                0.00
+    0:02:47 2026424.3      0.00       0.0       0.0                                0.00
+Loading db file '/afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db'
+
+  Optimization Complete
+  ---------------------
+Warning: Design 'reservation_station' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+     Net 'RSEMODULES[1].entries/clock': 2896 load(s), 1 driver(s)
+Writing verilog file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.vg'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
 Error: Writing designs in DB format is no longer supported. (UID-530)
+Removing design 'reservation_station'
+Removing design 'reservation_station_entry_0'
+Removing design 'reservation_station_entry_1'
+Removing design 'reservation_station_entry_2'
+Removing design 'reservation_station_entry_3'
+Removing design 'reservation_station_entry_4'
+Removing design 'reservation_station_entry_5'
+Removing design 'reservation_station_entry_6'
+Removing design 'reservation_station_entry_7'
+Removing design 'reservation_station_entry_8'
+Removing design 'reservation_station_entry_9'
+Removing design 'reservation_station_entry_10'
+Removing design 'reservation_station_entry_11'
+Removing design 'reservation_station_entry_12'
+Removing design 'reservation_station_entry_13'
+Removing design 'reservation_station_entry_14'
+Removing design 'reservation_station_entry_15'
+Removing design 'reservation_station_entry_0_DW01_inc_0'
+Removing design 'reservation_station_entry_1_DW01_inc_0'
+Removing design 'reservation_station_entry_2_DW01_inc_0'
+Removing design 'reservation_station_entry_3_DW01_inc_0'
+Removing design 'reservation_station_entry_4_DW01_inc_0'
+Removing design 'reservation_station_entry_5_DW01_inc_0'
+Removing design 'reservation_station_entry_6_DW01_inc_0'
+Removing design 'reservation_station_entry_7_DW01_inc_0'
+Removing design 'reservation_station_entry_8_DW01_inc_0'
+Removing design 'reservation_station_entry_9_DW01_inc_0'
+Removing design 'reservation_station_entry_10_DW01_inc_0'
+Removing design 'reservation_station_entry_11_DW01_inc_0'
+Removing design 'reservation_station_entry_12_DW01_inc_0'
+Removing design 'reservation_station_entry_13_DW01_inc_0'
+Removing design 'reservation_station_entry_14_DW01_inc_0'
+Removing design 'reservation_station_entry_15_DW01_inc_0'
 Removing library 'lec25dscc25_TT'
 Removing library 'gtech'
 Removing library 'standard.sldb'
@@ -267,9 +867,16 @@ Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/gtech.db'
 Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/standard.sldb'
   Loading link library 'lec25dscc25_TT'
   Loading link library 'gtech'
-Error: Cannot read file './reservation_station.vg'. (UID-58)
-No designs were read
-Error: Can't find design 'reservation_station'. (UID-109)
-Error: Current design is not defined. (UID-4)
+Loading verilog file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.vg'
+Detecting input file type automatically (-rtl or -netlist).
+Running DC verilog reader
+Performing 'read' command.
+Compiling source file /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.vg
+Reading with netlist reader (equivalent to -netlist option).
+Verilog netlist reader completed successfully.
+Current design is now '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station_entry_15_DW01_inc_0.db:reservation_station_entry_15_DW01_inc_0'
+Loaded 33 designs.
+Current design is 'reservation_station_entry_15_DW01_inc_0'.
+Current design is 'reservation_station'.
 
 Thank you...

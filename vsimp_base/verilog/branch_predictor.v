@@ -30,11 +30,11 @@ inst_opcode2 = instruction[31:26];
 always@*
 begin
     //decode instruction to check if branch
-    if (inst_opcode1 ==  BR_INST   || inst_opcode1 == BSR_INST ||  
-        inst_opcode1 ==  BLBC_INST || inst_opcode1 == BEQ_INST || 
-        inst_opcode1 ==  BLT_INST  || inst_opcode1 == BLE_INST || 
-        inst_opcode1 ==  BLBS_INST || inst_opcode1 == BNE_INST ||  
-        inst_opcode1 ==  BGE_INST  || inst_opcode1 == BGT_INST)
+    if (inst_opcode1 ==  `BR_INST   || inst_opcode1 == `BSR_INST ||  
+        inst_opcode1 ==  `BLBC_INST || inst_opcode1 == `BEQ_INST || 
+        inst_opcode1 ==  `BLT_INST  || inst_opcode1 == `BLE_INST || 
+        inst_opcode1 ==  `BLBS_INST || inst_opcode1 == `BNE_INST ||  
+        inst_opcode1 ==  `BGE_INST  || inst_opcode1 == `BGT_INST)
       
       isBranch = 1;
     else
@@ -52,7 +52,7 @@ begin
     
     pht_index = pc_bits^ghr_bits;
     
-    if(inst_opcode1 == BR_INST || inst_opcode1 == BSR_INST)
+    if(inst_opcode1 == `BR_INST || inst_opcode1 == `BSR_INST)
       prediction = 1;
     else
       prediction = pht[pht_index];
@@ -79,7 +79,7 @@ end
 always@*
 begin
     //assume that unconditional branches don't count in the global branch history register (ghr)
-    if (inst_opcode1 != BR_INST && inst_opcode1 != BSR_INST)
+    if (inst_opcode1 != `BR_INST && inst_opcode1 != `BSR_INST)
       ghr[0] = result;
     
     

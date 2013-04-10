@@ -1,0 +1,103 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Red Hat Enterprise Linux Workstation release 6.3 (Santiago)' 
+  is not supported on 'x86_64' officially, assuming linux compatibility by 
+  default. Set VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+                         Chronologic VCS (TM)
+         Version E-2011.03_Full64 -- Tue Apr  9 22:57:25 2013
+               Copyright (c) 1991-2011 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+DirectC Release 1.0 Copyright (c) 1991-2011 by Synopsys Inc.
+Parsing design file 'test_reorder_buffer.v'
+Parsing design file 'reorder_buffer.v'
+
+Warning-[TMR] Text macro redefined
+reorder_buffer.v, 9
+  Text macro (RSTAG_NULL) is redefined. The last definition will override 
+  previous ones.
+  In test_reorder_buffer.v, 4, it was defined as 8'hFF     
+
+Top Level Modules:
+       testbench
+No TimeScale specified
+Starting vcs inline pass...
+2 modules and 0 UDP read.
+recompiling module testbench
+recompiling module reorder_buffer_entry
+Both modules done.
+make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reorder_buffer/csrc'
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reorder_buffer/csrc'
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr  9 22:57 2013
+
+STARTING TESTBENCH!
+
+resetting
+
+  preclock: reset=1 i1_tag_o=xxxxxxxx i2_tag_o=xxxxxxxx rob_full=x rob_empty=x
+   i1_dest_o=xxxxx i1_value_o=xxxxxxxxxxxxxxxx i2_dest_o=xxxxx i2_value_o=xxxxxxxxxxxxxxxx
+ postclock: reset=1 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+holding
+
+  preclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+ postclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+inserting 2 ins'ns
+
+  preclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+ postclock: reset=0 i1_tag_o=00000000 i2_tag_o=00000001 rob_full=0 rob_empty=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+hold
+
+  preclock: reset=0 i1_tag_o=00000000 i2_tag_o=00000001 rob_full=0 rob_empty=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+ postclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+putting data on cdb
+
+  preclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+ postclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=0
+   i1_dest_o=00001 i1_value_o=aaaaaaaaaaaaaaaa i2_dest_o=00010 i2_value_o=bbbbbbbbbbbbbbbb
+
+wait
+
+  preclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=0
+   i1_dest_o=00001 i1_value_o=aaaaaaaaaaaaaaaa i2_dest_o=00010 i2_value_o=bbbbbbbbbbbbbbbb
+ postclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+resetting
+
+  preclock: reset=1 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+ postclock: reset=1 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test_reorder_buffer.v", line 248.
+$finish at simulation time                  140
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 140
+CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
+Tue Apr  9 22:57:27 2013
+CPU time: .254 seconds to compile + .056 seconds to elab + .188 seconds to link + .049 seconds in simulation

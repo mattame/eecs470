@@ -14,6 +14,7 @@
 module if_stage(// Inputs
                 clock,
                 reset,
+                stall,
                 ex_mem_take_branch,
                 ex_mem_target_pc,
                 Imem2proc_data,
@@ -32,7 +33,9 @@ module if_stage(// Inputs
 
   input         clock;              // system clock
   input         reset;              // system reset
-                                    // makes pipeline behave as single-cycle
+
+  input         stall;              // stalling signal in.
+
   input         ex_mem_take_branch; // taken-branch signal
   input  [63:0] ex_mem_target_pc;   // target pc: use if take_branch is TRUE
   input  [63:0] Imem2proc_data;     // Data coming back from instruction-memory
@@ -67,12 +70,12 @@ module if_stage(// Inputs
     // the next sequential PC (PC+4) if no branch
     // and we're on the second word or PC+8 if not.
     // (halting is handled with the enable PC_enable;
-  assign next_PC = (ex_mem_take_branch) ? ex_mem_target_pc: if_NPC_out_2;
+  assign next_PC = (stall) ? next_PC: ((ex_mem_take_branch) ? ex_mem_target_pc: if_NPC_out_2);
 
     // Assign the first valid only if the PC is not the second word in the cache.
     // The second is always valid
-  assign if_valid_inst_out_1 = (PC_reg[2] | reset) ? 1'b0: 1'b1;
-  assign if_valid_inst_out_2 = (reset) ? 1'b0: 1'b1;
+  assign if_valid_inst_out_1 = (PC_reg[2] | reset | stall) ? 1'b0: 1'b1;
+  assign if_valid_inst_out_2 = (reset | stall) ? 1'b0: 1'b1;
 
     // The take-branch signal must override stalling (otherwise it may be lost)
 //  assign PC_enable= if_valid_inst_out | ex_mem_take_branch;    			//DO WE EVEN NEED THIS LINE?

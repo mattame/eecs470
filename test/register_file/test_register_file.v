@@ -99,6 +99,19 @@ module testbench;
       $display("");
    end
    endtask
+   
+   // asserts truth of a value, exits on failure //
+   task ASSERT;
+   input state;
+   begin
+      if (~state)
+	  begin
+	     $display("@@@ Incorrect at time %4.0f", $time);
+         $display("ENDING TESTBENCH : ERROR !");
+         $finish;
+      end
+   end
+   endtask
 
    // testing segment //
    initial
@@ -121,66 +134,89 @@ module testbench;
 
         // TRANSITION TESTS //
 
-	reset = 1;
-
+		 // reset //
+		 $display("resetting");
+	    reset = 1;
         CLOCK_AND_DISPLAY();
 
+        // hold //
+		$display("holding");
         reset = 0;
-
         CLOCK_AND_DISPLAY();
+		ASSERT(clear_entries==32'd0);
 
+		// load vals to regs 1 and 2 and try to read from them at the same time (test forwarding) //
+		$display("loading to regs 1 and 2, forwarding test");
         inst1_rega_in = 5'd1;
         inst1_regb_in = 5'd2;
         inst1_dest_in = 5'd1;
         inst2_dest_in = 5'd2;
         inst1_value_in = 64'hAAAAAAAAAAAAAAAA;
         inst2_value_in = 64'hBBBBBBBBBBBBBBBB;
-
         CLOCK_AND_DISPLAY();
-      
+		ASSERT(inst1_rega_out==64'hAAAAAAAAAAAAAAAA && inst1_regb_out==64'hBBBBBBBBBBBBBBBB
+		         && inst2_rega_out==64'h0000000000000000 && inst2_regb_out==64'h0000000000000000);
+		
+	    // do nothing except change inst1regb output //
+		$display("changing inst1regb output");
         inst1_dest_in = 5'd0;
         inst1_dest_in = 5'd0;
         inst1_regb_in = 5'd1;
         inst1_value_in = 64'hCCCCCCCCCCCCCCCC;
         inst2_value_in = 64'hCCCCCCCCCCCCCCCC;
-
         CLOCK_AND_DISPLAY();
-
+		ASSERT(inst1_rega_out==64'hAAAAAAAAAAAAAAAA && inst1_regb_out==64'hAAAAAAAAAAAAAAAA
+		         && inst2_rega_out==64'h0000000000000000 && inst2_regb_out==64'h0000000000000000);
+		
+        // write to regs 3 and 4 //
+		$display("writing to regs 3 and 4");
         inst1_dest_in = 5'd3;
         inst2_dest_in = 5'd4;
         inst1_value_in = 64'hDDDDDDDDDDDDDDDD;
         inst2_value_in = 64'hEEEEEEEEEEEEEEEE;
-
         CLOCK_AND_DISPLAY();
-
+		ASSERT(inst1_rega_out==64'hAAAAAAAAAAAAAAAA && inst1_regb_out==64'hAAAAAAAAAAAAAAAA
+		         && inst2_rega_out==64'h0000000000000000 && inst2_regb_out==64'h0000000000000000);
+		
+		// read from regs 3 and 4 //
+		$display("reading from regs 3 and 4");
         inst1_dest_in = 5'd0;
         inst2_dest_in = 5'd0;
         inst1_rega_in = 5'd3;
         inst1_regb_in = 5'd3;
         inst2_rega_in = 5'd4;
         inst2_regb_in = 5'd4;
-
         CLOCK_AND_DISPLAY();
+		ASSERT(inst1_rega_out==64'hDDDDDDDDDDDDDDDD && inst1_regb_out==64'hDDDDDDDDDDDDDDDD
+		         && inst2_rega_out==64'hEEEEEEEEEEEEEEEE && inst2_regb_out==64'hEEEEEEEEEEEEEEEE);
 
+        // write to reg 5 and check conflict resolution //
+		$display("checking conflict resolution on reg 5");
         inst1_dest_in = 5'd5;
         inst2_dest_in = 5'd5;
         inst1_value_in = 64'hABABABABABABABAB;
         inst2_value_in = 64'hCDCDCDCDCDCDCDCD;
         inst1_rega_in = 5'd5;
-
         CLOCK_AND_DISPLAY();
+		ASSERT(inst1_rega_out==64'hCDCDCDCDCDCDCDCD);
 
+		// write to reg 6 //
+		$display("writing to reg 6");
         inst1_dest_in = 5'd6;
         inst2_dest_in = 5'd0;
         inst1_value_in = 64'hFFFFFFFFFFFFFFFF;
         inst1_rega_in = 5'd6;
-
         CLOCK_AND_DISPLAY();
+		ASSERT(inst1_rega_out==64'hFFFFFFFFFFFFFFFF);
 
+		// check reset //
+		$display("resetting");
         reset = 1;
-
         CLOCK_AND_DISPLAY();
+		ASSERT(inst1_rega_out==64'h0000000000000000 && inst1_regb_out==64'h0000000000000000
+		         && inst2_rega_out==64'h0000000000000000 && inst2_regb_out==64'h0000000000000000);
 
+				 
 	// SUCCESSFULLY END TESTBENCH //
 	$display("ENDING TESTBENCH : SUCCESS !\n");
 	$finish;

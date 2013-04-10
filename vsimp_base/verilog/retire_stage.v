@@ -32,5 +32,76 @@ module retire_stage(
   reg next_state0; //next state bits
   reg next_state1;
   
-  wire current_state0; //current state bits
-  wire current_state1;
+  reg current_state0; //current state bits
+  reg current_state1;
+
+  reg [1:0] state;
+
+
+
+  /*** parameters ***/
+  parameter INITIAL       = 2'b00;    //Initial state
+  parameter BOTH_COMPLETE = 2'b01;    //Both heads are complete and can retire
+  parameter HEAD1_ONLY    = 2'b10;    //Only the head1 is complete and can retire
+  parameter NONE          = 2'b11;    //Neither head can retire
+
+
+
+  assign next_state1 = !(complete_head1 && complete_head2);
+  assign next_state0 = !(complete_head1 && !complete_head2);
+  
+
+  always @(posedge clock)
+  begin
+    if(reset)
+    begin
+      current_state1 <= 0;
+      current_state0 <= 0;
+      state          <= 2'b00;
+    end
+    
+    else
+    begin
+      current_state1 <= next_state1;
+      current_state0 <= next_state0;
+      state          <= {next_state1, next_state0};
+    end
+  end
+
+
+
+  /*** output logic ***/
+  always @*
+  begin
+    case(state)
+  
+    INITIAL: begin
+        register_out1 = 5'b0;
+        register_out2 = 5'b0;
+        value_out1    = 64'b0;
+        value_out2    = 64'b0;
+    end
+      
+    BOTH: begin
+        register_out1 = rob_register_in1;
+        register_out2 = rob_register_in2;
+        value_out1    = rob_value_in1;
+        value_out2    = rob_value_in2;
+    end
+
+    HEAD1_ONLY: begin
+        register_out1 = rob_register_in1;
+        register_out2 = 5'b0;
+        value_out1    = rob_value_in1;
+        value_out2    = 64'b0;
+    end
+      
+    NONE: begin
+        register_out1 = 5'b0;
+        register_out2 = 5'b0;
+        value_out1    = 64'b0;
+        value_out2    = 64'b0;
+    end
+    endcase
+  end
+  

@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Wed Mar 27 20:02:27 2013
+         Version E-2011.03_Full64 -- Tue Apr  9 22:55:07 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -22,8 +22,7 @@ Top Level Modules:
 No TimeScale specified
 Starting vcs inline pass...
 1 module and 0 UDP read.
-recompiling module testbench because:
-	This module or some inlined child module(s) has/have been modified.
+recompiling module testbench
 make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/map_table/csrc'
 if [ -x ../simv ]; then chmod -x ../simv; fi
 g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
@@ -31,55 +30,67 @@ g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5N
 make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/map_table/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Mar 27 20:02 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr  9 22:55 2013
 
 STARTING TESTBENCH!
 
+reset
   preclock: reset=1 i1_taga_out=xxxxxxxx i1_tagb_out=xxxxxxxx i2_taga_out=xxxxxxxx i2_tagb_out=xxxxxxxx
  postclock: reset=1 i1_taga_out=11111111 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
 
+hold
   preclock: reset=0 i1_taga_out=11111111 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
  postclock: reset=0 i1_taga_out=11111111 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
 
+mapping reg 4 to 0x0A
   preclock: reset=0 i1_taga_out=11111111 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
  postclock: reset=0 i1_taga_out=11111111 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
 
+read from written spot
   preclock: reset=0 i1_taga_out=11111111 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
  postclock: reset=0 i1_taga_out=00001010 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
 
+read tag out on all feeds
   preclock: reset=0 i1_taga_out=00001010 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
  postclock: reset=0 i1_taga_out=00001010 i1_tagb_out=00001010 i2_taga_out=00001010 i2_tagb_out=00001010
 
+forwarding check - reg5
   preclock: reset=0 i1_taga_out=00001010 i1_tagb_out=00001010 i2_taga_out=00001010 i2_tagb_out=00001010
  postclock: reset=0 i1_taga_out=00001011 i1_tagb_out=00001011 i2_taga_out=00001100 i2_tagb_out=00001100
 
+preemption check
   preclock: reset=0 i1_taga_out=00001011 i1_tagb_out=00001011 i2_taga_out=00001100 i2_tagb_out=00001100
  postclock: reset=0 i1_taga_out=00000011 i1_tagb_out=00000011 i2_taga_out=00001100 i2_tagb_out=00001100
 
   preclock: reset=0 i1_taga_out=00000011 i1_tagb_out=00000011 i2_taga_out=00001100 i2_tagb_out=00001100
  postclock: reset=0 i1_taga_out=00000101 i1_tagb_out=00000101 i2_taga_out=00001100 i2_tagb_out=00001100
 
+clear functionality test
   preclock: reset=0 i1_taga_out=00000101 i1_tagb_out=00000101 i2_taga_out=00001100 i2_tagb_out=00001100
  postclock: reset=0 i1_taga_out=11111111 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
 
+full write
   preclock: reset=0 i1_taga_out=11111111 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
  postclock: reset=0 i1_taga_out=00000001 i1_tagb_out=00000001 i2_taga_out=00000011 i2_tagb_out=00000011
 
+ready-in-ROB bit test
   preclock: reset=0 i1_taga_out=00000001 i1_tagb_out=00000001 i2_taga_out=00000011 i2_tagb_out=00000011
  postclock: reset=0 i1_taga_out=01000001 i1_tagb_out=01000001 i2_taga_out=01000011 i2_tagb_out=01000011
 
+ready-in-ROB persist
   preclock: reset=0 i1_taga_out=01000001 i1_tagb_out=01000001 i2_taga_out=01000011 i2_tagb_out=01000011
  postclock: reset=0 i1_taga_out=01000001 i1_tagb_out=01000001 i2_taga_out=01000011 i2_tagb_out=01000011
 
+reset test
   preclock: reset=1 i1_taga_out=01000001 i1_tagb_out=01000001 i2_taga_out=01000011 i2_tagb_out=01000011
  postclock: reset=1 i1_taga_out=11111111 i1_tagb_out=11111111 i2_taga_out=11111111 i2_tagb_out=11111111
 
 ENDING TESTBENCH : SUCCESS !
 
-$finish called from file "test_map_table.v", line 218.
+$finish called from file "test_map_table.v", line 254.
 $finish at simulation time                  130
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 130
 CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
-Wed Mar 27 20:02:27 2013
-CPU time: .175 seconds to compile + .011 seconds to elab + .163 seconds to link + .052 seconds in simulation
+Tue Apr  9 22:55:15 2013
+CPU time: .210 seconds to compile + .055 seconds to elab + .205 seconds to link + .055 seconds in simulation

@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Tue Mar 26 05:06:04 2013
+         Version E-2011.03_Full64 -- Tue Apr  9 22:38:35 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -30,43 +30,52 @@ g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5N
 make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Mar 26 05:06 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr  9 22:38 2013
 
 STARTING TESTBENCH!
 
+resetting
   preclock: reset=1 i1_rega_out=xxxxxxxxxxxxxxxx i1_regb_out=xxxxxxxxxxxxxxxx i2_rega_out=xxxxxxxxxxxxxxxx i2_regb_out=xxxxxxxxxxxxxxxx clear_entries=00000000000000000000000000000000
  postclock: reset=1 i1_rega_out=0000000000000000 i1_regb_out=0000000000000000 i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000000
 
+holding
   preclock: reset=0 i1_rega_out=0000000000000000 i1_regb_out=0000000000000000 i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000000
  postclock: reset=0 i1_rega_out=0000000000000000 i1_regb_out=0000000000000000 i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000000
 
+loading to regs 1 and 2, forwarding test
   preclock: reset=0 i1_rega_out=0000000000000000 i1_regb_out=0000000000000000 i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000110
  postclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=bbbbbbbbbbbbbbbb i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000110
 
+changing inst1regb output
   preclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=bbbbbbbbbbbbbbbb i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000100
  postclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=aaaaaaaaaaaaaaaa i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000100
 
+writing to regs 3 and 4
   preclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=aaaaaaaaaaaaaaaa i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000011000
  postclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=aaaaaaaaaaaaaaaa i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000011000
 
+reading from regs 3 and 4
   preclock: reset=0 i1_rega_out=aaaaaaaaaaaaaaaa i1_regb_out=aaaaaaaaaaaaaaaa i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000000000000
  postclock: reset=0 i1_rega_out=dddddddddddddddd i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000000000000
 
+checking conflict resolution on reg 5
   preclock: reset=0 i1_rega_out=dddddddddddddddd i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000000100000
  postclock: reset=0 i1_rega_out=cdcdcdcdcdcdcdcd i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000000100000
 
+writing to reg 6
   preclock: reset=0 i1_rega_out=cdcdcdcdcdcdcdcd i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000001000000
  postclock: reset=0 i1_rega_out=ffffffffffffffff i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000001000000
 
+resetting
   preclock: reset=1 i1_rega_out=ffffffffffffffff i1_regb_out=dddddddddddddddd i2_rega_out=eeeeeeeeeeeeeeee i2_regb_out=eeeeeeeeeeeeeeee clear_entries=00000000000000000000000001000000
  postclock: reset=1 i1_rega_out=0000000000000000 i1_regb_out=0000000000000000 i2_rega_out=0000000000000000 i2_regb_out=0000000000000000 clear_entries=00000000000000000000000001000000
 
 ENDING TESTBENCH : SUCCESS !
 
-$finish called from file "test_register_file.v", line 186.
+$finish called from file "test_register_file.v", line 222.
 $finish at simulation time                   95
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 95
 CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
-Tue Mar 26 05:06:05 2013
-CPU time: .156 seconds to compile + .040 seconds to elab + .162 seconds to link + .042 seconds in simulation
+Tue Apr  9 22:38:36 2013
+CPU time: .175 seconds to compile + .053 seconds to elab + .183 seconds to link + .050 seconds in simulation

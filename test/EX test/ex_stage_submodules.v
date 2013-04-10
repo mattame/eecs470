@@ -45,10 +45,15 @@ module arbiter(		  // Inputs
 				ex_mult_dest_reg_out_2,
 				ex_mult_result_out_2,
 				ex_mult_valid_out_2,
+        // MEM bus (on bus 2)
+        mem_tag_in,
+        mem_value_in,
+        mem_valid_in,
 				
 			   // Outputs
 				stall_bus_1,
 				stall_bus_2,
+        stall_mult_2,
 				// Bus 1
 				ex_IR_out_1,
 				ex_NPC_out_1,
@@ -90,8 +95,13 @@ module arbiter(		  // Inputs
 	input [63:0] ex_mult_result_out_2;
 	input		 ex_mult_valid_out_2;
 	
+  input  [4:0] mem_tag_in,
+  input [63:0] mem_value_in,
+  input        mem_valid_in,
+
 	output		  stall_bus_1;
 	output		  stall_bus_2;
+  output      stall_mult_2; //THIS NEEDS TO BE IMPLEMENTED!!!
 
 	output [31:0] ex_IR_out_1;
 	output [63:0] ex_NPC_out_1;

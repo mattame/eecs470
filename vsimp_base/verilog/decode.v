@@ -215,7 +215,10 @@ module id_stage(
 
               if_id_IR_2,
               if_id_valid_inst_2,
+
 // Do we need these three inputs?
+// i don't thing so, since the register write stuff is not handled here any
+// more.   -Mike
               wb_reg_wr_en_out,
               wb_reg_wr_idx_out,
               wb_reg_wr_data_out,

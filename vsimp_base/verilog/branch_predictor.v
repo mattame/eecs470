@@ -47,7 +47,7 @@ pht = 32'b0;
 always@*
 begin
     //for use with the xor
-    pc_bits = {pc[3:2], 3'b0};
+    pc_bits = pc[6:2];
     ghr_bits = {2'b0, ghr};
     
     pht_index = pc_bits^ghr_bits;

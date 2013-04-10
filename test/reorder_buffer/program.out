@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Tue Apr  9 22:57:25 2013
+         Version E-2011.03_Full64 -- Wed Apr 10 18:27:20 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -39,7 +39,7 @@ g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5N
 make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reorder_buffer/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr  9 22:57 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 10 18:27 2013
 
 STARTING TESTBENCH!
 
@@ -99,5 +99,5 @@ $finish at simulation time                  140
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 140
 CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
-Tue Apr  9 22:57:27 2013
-CPU time: .254 seconds to compile + .056 seconds to elab + .188 seconds to link + .049 seconds in simulation
+Wed Apr 10 18:27:22 2013
+CPU time: .240 seconds to compile + .058 seconds to elab + .172 seconds to link + .054 seconds in simulation

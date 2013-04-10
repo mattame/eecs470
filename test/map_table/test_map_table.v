@@ -106,6 +106,19 @@ module testbench;
       $display("");
    end
    endtask
+   
+   // asserts truth of a value, exits on failure //
+   task ASSERT;
+   input state;
+   begin
+      if (~state)
+	  begin
+	     $display("@@@ Incorrect at time %4.0f", $time);
+         $display("ENDING TESTBENCH : ERROR !");
+         $finish;
+      end
+   end
+   endtask
 
    // testing segment //
    initial
@@ -129,60 +142,78 @@ module testbench;
         cdb1_tag_in = `RSTAG_NULL;
         cdb2_tag_in = `RSTAG_NULL;
 
+		
         // TRANSITION TESTS //
 
-	reset = 1;
-
+		// reset //
+	    $display("reset");
+		reset = 1;
         CLOCK_AND_DISPLAY();
-
+        ASSERT(inst1_taga_out==`RSTAG_NULL && inst1_tagb_out==`RSTAG_NULL && inst2_taga_out==`RSTAG_NULL && inst2_tagb_out==`RSTAG_NULL);
+		
+		// hold //
+		$display("hold");
         reset = 0;
-
         CLOCK_AND_DISPLAY();
-
+        ASSERT(inst1_taga_out==`RSTAG_NULL && inst1_tagb_out==`RSTAG_NULL && inst2_taga_out==`RSTAG_NULL && inst2_tagb_out==`RSTAG_NULL);
+		
+		// map reg 4 to tag 0x0A //
+		$display("mapping reg 4 to 0x0A");
         inst1_dest_in   = 5'd4;
         inst1_tag_in    = 8'h0A;
-
         CLOCK_AND_DISPLAY();
+        ASSERT(inst1_taga_out==`RSTAG_NULL && inst1_tagb_out==`RSTAG_NULL && inst2_taga_out==`RSTAG_NULL && inst2_tagb_out==`RSTAG_NULL);
       
+	    // reg from recently written spot //
+		$display("read from written spot");
         inst1_rega_in = 5'd4;
-
         CLOCK_AND_DISPLAY();
+		ASSERT(inst1_taga_out==8'h0A && inst1_tagb_out==`RSTAG_NULL && inst2_taga_out==`RSTAG_NULL && inst2_tagb_out==`RSTAG_NULL);
 
+		// read tag out on all feeds //
+		$display("read tag out on all feeds");
         inst1_regb_in = 5'd4;
         inst2_rega_in = 5'd4;
         inst2_regb_in = 5'd4;
-
         CLOCK_AND_DISPLAY();
+		ASSERT(inst1_taga_out==8'h0A && inst1_tagb_out==8'h0A && inst2_taga_out==8'h0A && inst2_tagb_out==8'h0A);
 
+		// check forwarding when writing to reg 5 //
+		$display("forwarding check - reg5");
         inst1_dest_in = 5'd4;
         inst2_dest_in = 5'd5;
         inst1_tag_in = 8'h0B;
         inst2_tag_in = 8'h0C;
         inst2_rega_in = 5'd5;
         inst2_regb_in = 5'd5;
-
         CLOCK_AND_DISPLAY();
+		ASSERT(inst1_taga_out==8'h0B && inst1_tagb_out==8'h0B && inst2_taga_out==8'h0C && inst2_tagb_out==8'h0C);		
 
+		// check preemption //
+		$display("preemption check");
         inst1_dest_in = 5'd4;
         inst2_dest_in = 5'd4;
         inst1_tag_in = 8'h01;
         inst2_tag_in = 8'h03;
-
         CLOCK_AND_DISPLAY();
-
+		ASSERT(inst1_taga_out==8'h03 && inst1_tagb_out==8'h03 && inst2_taga_out==8'h0C && inst2_tagb_out==8'h0C);
+		
+		// check lack of preemption when null tag on second //
         inst1_tag_in = 8'h05;
         inst2_tag_in = `RSTAG_NULL;
-
         CLOCK_AND_DISPLAY();
+		ASSERT(inst1_taga_out==8'h05 && inst1_tagb_out==8'h05 && inst2_taga_out==8'h0C && inst2_tagb_out==8'h0C);
 
         // test clear functionality //
+		$display("clear functionality test");
         inst1_tag_in = `RSTAG_NULL;
         inst2_tag_in = `RSTAG_NULL;
         clear_entries = 32'h00000030;   // clear tags for regs 4&5
-
         CLOCK_AND_DISPLAY();
-
-        // write stuff back into map table  // 
+        ASSERT(inst1_taga_out==`RSTAG_NULL && inst1_tagb_out==`RSTAG_NULL && inst2_taga_out==`RSTAG_NULL && inst2_tagb_out==`RSTAG_NULL);
+		
+        // write stuff back into map table  //
+		$display("full write");
         clear_entries = 32'd0;
         inst1_dest_in = 5'd1;
         inst2_dest_in = 5'd2;
@@ -192,27 +223,32 @@ module testbench;
         inst1_regb_in = 5'd1;
         inst2_rega_in = 5'd2;
         inst2_regb_in = 5'd2; 
-
         CLOCK_AND_DISPLAY();
+		ASSERT(inst1_taga_out==8'h01 && inst1_tagb_out==8'h01 && inst2_taga_out==8'h03 && inst2_tagb_out==8'h03);
 
         // test ready-in-rob bit //
+		$display("ready-in-ROB bit test");
         inst1_tag_in = `RSTAG_NULL;
         inst2_tag_in = `RSTAG_NULL;
         cdb1_tag_in = 8'h01;
         cdb2_tag_in = 8'h03;
-
         CLOCK_AND_DISPLAY();
+		ASSERT(inst1_taga_out==8'h41 && inst1_tagb_out==8'h41 && inst2_taga_out==8'h43 && inst2_tagb_out==8'h43);
 
         // test ready-in-rob persist //
+        $display("ready-in-ROB persist");
         cdb1_tag_in = `RSTAG_NULL;
         cdb2_tag_in = `RSTAG_NULL;
-
         CLOCK_AND_DISPLAY();
-
+		ASSERT(inst1_taga_out==8'h41 && inst1_tagb_out==8'h41 && inst2_taga_out==8'h43 && inst2_tagb_out==8'h43);
+				
+		// reset //
+		$display("reset test");
         reset = 1;
-
         CLOCK_AND_DISPLAY();
-
+        ASSERT(inst1_taga_out==`RSTAG_NULL && inst1_tagb_out==`RSTAG_NULL && inst2_taga_out==`RSTAG_NULL && inst2_tagb_out==`RSTAG_NULL);
+		
+		
 	// SUCCESSFULLY END TESTBENCH //
 	$display("ENDING TESTBENCH : SUCCESS !\n");
 	$finish;

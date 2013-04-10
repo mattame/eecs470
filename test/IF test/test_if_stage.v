@@ -16,6 +16,8 @@ module testbench;
 	reg [63:0] mem2proc_data;
 	
 	wire [63:0] proc2mem_addr;
+
+	reg stall;
 	
 	wire [63:0] NPC_out_1;
 	wire [31:0] IR_out_1;
@@ -30,6 +32,7 @@ module testbench;
 if_stage if0(// Inputs
                 .clock(clock),
                 .reset(reset),
+                .stall(stall),
                 .ex_mem_take_branch(take_branch),
                 .ex_mem_target_pc(branch_target),
                 .Imem2proc_data(mem2proc_data),
@@ -114,6 +117,7 @@ if_stage if0(// Inputs
 	clock   = 0;
 	reset   = 1;
 
+	stall   = 0;
 	take_branch = 0;
 	branch_target = 64'h0;
 	mem2proc_data = 64'hffffffffffffffff;
@@ -172,6 +176,65 @@ if_stage if0(// Inputs
         DISPLAY_STATE(`INPUT);
         DISPLAY_STATE(`OUTPUT);		
         @(posedge clock);
+
+    stall = 1;
+	take_branch = 0;
+	branch_target = 64'h0;
+	mem2proc_data = 64'h6666666677777777;
+	
+	    @(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);		
+        @(posedge clock);
+		
+    stall = 0;
+	take_branch = 0;
+	branch_target = 64'hFFFFFFFFFFFFFFF0;
+	mem2proc_data = 64'h123456789abcdef0;
+	
+	    @(negedge clock);	
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);
+        @(posedge clock);
+		
+	take_branch = 0;
+	branch_target = 64'h0;
+	mem2proc_data = 64'h8888888899999999;
+	
+	    @(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);		
+        @(posedge clock);     
+
+    stall = 0;
+	take_branch = 0;
+	branch_target = 64'h0;
+	mem2proc_data = 64'haaaaaaaabbbbbbbb;
+	
+	    @(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);		
+        @(posedge clock);
+		
+    stall = 1;
+	take_branch = 1;
+	branch_target = 64'h0000000000000004;
+	mem2proc_data = 64'hccccccccdddddddd;
+	
+	    @(negedge clock);	
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);
+        @(posedge clock);
+		
+	take_branch = 0;
+	branch_target = 64'h0;
+	mem2proc_data = 64'h0fedcba987654321;
+	
+	    @(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);		
+        @(posedge clock);     
+
 
 	// SUCCESSFULLY END TESTBENCH //
 	$display("ENDING TESTBENCH : SUCCESS !\n");

@@ -23,12 +23,12 @@ all:    simv
 # Modify starting here
 #####
 
-TESTBENCH = sys_defs.vh test_ex_stage.v 
-SIMFILES = ex_stage_submodules.v ex_stage.v
-SYNFILES = ex_stage.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
+TESTBENCH = sys_defs.vh test_LSQ.v 
+SIMFILES = LSQ.v
+SYNFILES = LSQ.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
 
-ex_stage.vg:	test_ex_stage.v reservation_station.tcl 
-	dc_shell-t -f reservation_station.tcl | tee synth.out
+LSQ.vg:	LSQ.v LSQ.tcl 
+	dc_shell-t -f LSQ.tcl | tee synth.out
 
 
 #####

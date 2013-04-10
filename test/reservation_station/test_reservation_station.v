@@ -344,7 +344,7 @@ module testbench;
         $display("issue4\n");
         CLOCK_AND_DISPLAY();
         ASSERT(inst1_valid_out && inst2_valid_out);     // this should be the last issue
-        ASSERT(inst1_rega_value_out==64'd1 && inst1_regb_value_out==64'hDEADBEEFBAADBEEF && inst2_rega_value_out==64'd2 && inst2_regb_value_out==64'hDEADBEEFBAADBEEF);
+        ASSERT(inst1_rega_value_out==64'd2 && inst1_regb_value_out==64'hDEADBEEFBAADBEEF && inst2_rega_value_out==64'd1 && inst2_regb_value_out==64'hDEADBEEFBAADBEEF);
 
         // do nothing //
         $display("nothing\n");
@@ -356,15 +356,24 @@ module testbench;
         inst2_valid = 1'b1;
         inst2_rega_rob_value_in = 64'h00000000AAAAAAAA;
         inst2_rega_tag_in = 8'h40;
+        inst2_regb_value_in = 64'hAAAAAAAA00000000;
+        inst2_regb_tag_in = 8'h0A;
         CLOCK_AND_DISPLAY();
-        ASSERT(inst1_valid_out && ~inst2_valid_out); // one valid instruction out
+        ASSERT(~inst1_valid_out && ~inst2_valid_out); // no valid instructions out //
 
-        // nothing //
-        $display("nothing[again]\n");
+        // broadcast on cdb and wait for inst to issue //
+        $display("broadcast on cdb, watch for issue\n");
         inst2_valid = 1'b0;
+        cdb2_value_in = 64'hBBBBBBBB00000000;
+        cdb2_tag_in = 8'h0A;
         CLOCK_AND_DISPLAY();
-        ASSERT(~inst1_valid_out && ~inst2_valid_out); 
+        ASSERT(inst1_valid_out && ~inst2_valid_out);   // one valid instruction out 
 
+        // do nothing //
+        $display("nothing\n");
+        CLOCK_AND_DISPLAY();
+        ASSERT(~inst1_valid_out && ~inst2_valid_out);   // RS should be empty at this point
+       
 
         // reset and check //
         $display("resetting\n");

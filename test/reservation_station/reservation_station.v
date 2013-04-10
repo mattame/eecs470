@@ -578,22 +578,18 @@ module reservation_station(clock,reset,               // signals in
 		 always@*
 		 begin
 		 
-			 // if we are dispatching at least one instruction //
-			 if (dispatch && (inst1_valid || inst2_valid))
+			 // pull from the first instruction slot //
+			 if ( dispatch && inst1_valid && (first_empties[i]||second_empties[i]) )
 			 begin
-			 
-			    // this rs entry is going to be filled from the first instruction //
-                            if (inst1_valid && first_empties[i])
-			    begin
 //                             fills[i]              = 1'b1;
-                               if (inst1_rega_tag_in[6]) begin   // ready-in-ROB: pull from the ROB versus the reg file
+                               if (inst1_rega_tag_in[7:6]==2'b01) begin   // ready-in-ROB: pull from the ROB versus the reg file
                                   rega_values_in[i]     = inst1_rega_rob_value_in;
                                   waiting_tagas_in[i]   = `RSTAG_NULL;
                                end else begin
                                   rega_values_in[i]     = inst1_rega_value_in;
                                   waiting_tagas_in[i]   = inst1_rega_tag_in;
                                end
-                               if (inst1_regb_tag_in[6]) begin   // ready-in-ROB: pull from the ROB versus the reg file
+                               if (inst1_regb_tag_in[7:6]==2'b01) begin   // ready-in-ROB: pull from the ROB versus the reg file
                                   regb_values_in[i]     = inst1_regb_rob_value_in;
                                   waiting_tagbs_in[i]   = `RSTAG_NULL;
                                end else begin
@@ -609,20 +605,20 @@ module reservation_station(clock,reset,               // signals in
                                wr_mems_in[i]         = inst1_wr_mem_in;
                                cond_branches_in[i]   = inst1_cond_branch_in;
                                uncond_branches_in[i] = inst1_uncond_branch_in;
-                            end
+                         end
 				
-                            // this rs entry is going to be filled from the second instruction //
-                            else if (inst2_valid && second_empties[i])
-                            begin
+                         // pull from the second instruction slot //
+                         else if ( dispatch && inst2_valid && (first_empties[i]||second_empties[i]) )
+                         begin
 //                             fills[i]              = 1'b1;
-                               if (inst2_rega_tag_in[6]) begin   // ready-in-ROB: pull from the ROB versus the reg file
+                               if (inst2_rega_tag_in[7:6]==2'b01) begin   // ready-in-ROB: pull from the ROB versus the reg file
                                   rega_values_in[i]     = inst2_rega_rob_value_in;
                                   waiting_tagas_in[i]   = `RSTAG_NULL;
                                end else begin
                                   rega_values_in[i]     = inst2_rega_value_in;
                                   waiting_tagas_in[i]   = inst2_rega_tag_in;
                                end
-                               if (inst2_regb_tag_in[6]) begin   // ready-in-ROB: pull from the ROB versus the reg file
+                               if (inst2_regb_tag_in[7:6]==2'b01) begin   // ready-in-ROB: pull from the ROB versus the reg file
                                   regb_values_in[i]     = inst2_regb_rob_value_in;
                                   waiting_tagbs_in[i]   = `RSTAG_NULL;
                                end else begin
@@ -638,12 +634,12 @@ module reservation_station(clock,reset,               // signals in
                                wr_mems_in[i]         = inst2_wr_mem_in;
                                cond_branches_in[i]   = inst2_cond_branch_in;
                                uncond_branches_in[i] = inst2_uncond_branch_in;
-                            end
-                     end
+                         end
+                     
 				 
-                     // default case: no instruction being dispatched/ no rs entries being filled //
-		     else
-                     begin
+                         // default case: no instruction being dispatched/ no rs entries being filled //
+                         else
+                         begin
 //				fills[i]              = 1'b0;
 				dest_regs_in[i]       = `ZERO_REG;
 				dest_tags_in[i]       = `RSTAG_NULL;
@@ -658,10 +654,10 @@ module reservation_station(clock,reset,               // signals in
 				wr_mems_in[i]         = 1'b0;
 				cond_branches_in[i]   = 1'b0; 
 				uncond_branches_in[i] = 1'b0;
-                     end
+                         end
 
-                     // assign resets for all rs entries //
-                     resets[i] = (reset || issue_first_states[i] || issue_second_states[i]);
+                        // assign resets for all rs entries //
+                        resets[i] = (reset || issue_first_states[i] || issue_second_states[i]);
  
 	     end
 		 

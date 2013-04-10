@@ -21,9 +21,12 @@
 /*! Do we need anything else?
 *   The cache can be added in later as a sub-module in EX & IF
 */
+/*! we need a map table, I've added it.
+   -Mike
+*/
 
 
-
+// main pipeline module //
 module pipeline (// Inputs
                  clock,
                  reset,
@@ -236,19 +239,41 @@ module pipeline (// Inputs
   //                   REGISTERS                  //
   //                                              //
   //////////////////////////////////////////////////
-  reg_file reg_file_0 (// Inputs
+  register_file rf (// Inputs
                        
                        // Outputs
                       );
 
   //////////////////////////////////////////////////
   //                                              //
-  //                 HISTORY BUFFER               //
+  //                 ROB                          //
   //                                              //
   //////////////////////////////////////////////////
-  hist_buff hist_buff_0 (// Inputs
+  // Note: did some research and a history buffer //
+  // will actualy be harder to impliment and not  //
+  // really give us any advantages, so i think we //
+  // sould go with a ROB instead. I've switched   //
+  // it here.                                     //
+  //////////////////////////////////////////////////
+ 
+  reorder_buffer rob(clock,reset// Inputs
                        
                        // Outputs
                       );
 
-endmodule  // module verisimple
+
+   /////////////////////////////////////////////////
+   //                                             //
+   //          MAP TABLE                          //
+   //                                             //
+   /////////////////////////////////////////////////
+   map_table mt(clock,reset
+
+                );
+
+
+
+endmodule  // module verisimple;
+
+
+

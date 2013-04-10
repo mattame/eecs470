@@ -52,6 +52,7 @@ module if_stage(// Inputs
 
   reg    [63:0] PC_reg;               // PC we are currently fetching
   reg           if_valid_inst_out;
+  reg           stall_out;
 
   wire   [63:0] next_PC;
   wire          PC_enable;
@@ -70,12 +71,12 @@ module if_stage(// Inputs
     // the next sequential PC (PC+4) if no branch
     // and we're on the second word or PC+8 if not.
     // (halting is handled with the enable PC_enable;
-  assign next_PC = (stall) ? next_PC: ((ex_mem_take_branch) ? ex_mem_target_pc: if_NPC_out_2);
+  assign next_PC = (ex_mem_take_branch) ? ex_mem_target_pc: ((stall) ? next_PC: if_NPC_out_2);
 
     // Assign the first valid only if the PC is not the second word in the cache.
     // The second is always valid
-  assign if_valid_inst_out_1 = (PC_reg[2] | reset | stall) ? 1'b0: 1'b1;
-  assign if_valid_inst_out_2 = (reset | stall) ? 1'b0: 1'b1;
+  assign if_valid_inst_out_1 = (PC_reg[2] | reset | stall_out | ex_mem_take_branch) ? 1'b0: 1'b1;
+  assign if_valid_inst_out_2 = (reset | stall_out | ex_mem_take_branch) ? 1'b0: 1'b1;
 
     // The take-branch signal must override stalling (otherwise it may be lost)
 //  assign PC_enable= if_valid_inst_out | ex_mem_take_branch;    			//DO WE EVEN NEED THIS LINE?
@@ -88,8 +89,10 @@ module if_stage(// Inputs
   begin
     if(reset)
       PC_reg <= `SD 0;       // initial PC value is 0
+      stall_out <= `SD 0;
     else
       PC_reg <= `SD next_PC; // transition to next PC
+      stall_out <= `SD stall;
   end  // always
 
   

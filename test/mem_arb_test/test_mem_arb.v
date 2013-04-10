@@ -14,17 +14,17 @@ module testbench;
 	
 	//Inputs
 		//From IF
-    wire [63:0] if_mem_req_addr;
+  reg [63:0] if_mem_req_addr;
 
 		//From LSQ	
-    wire [63:0] LSQ_mem_req_addr;
-    wire [63:0] LSQ_mem_req_value;
-    wire        LSQ_mem_read;
-    wire  [4:0] LSQ_tag;
-	wire        LSQ_valid;
+  reg [63:0] LSQ_mem_req_addr;
+  reg [63:0] LSQ_mem_req_value;
+  reg        LSQ_mem_read;
+  reg  [4:0] LSQ_tag;
+	reg        LSQ_valid;
 
 		//From Memory
-    wire [63:0] MEM_value_in;
+  reg [63:0] MEM_value_in;
 
 	//Outputs
 		//To IF
@@ -150,17 +150,17 @@ module memory_arbiter(
 ///////////////////////////////////////////////////////
 
         //From IF
-    if_mem_req_addr = 64'h0000000000000000;
+    if_mem_req_addr = 64'h1;
 
 		//From LSQ	
-    LSQ_mem_req_addr = 64'h0000000000000000;
-    LSQ_mem_req_value = 64'h0000000000000000;
+    LSQ_mem_req_addr = 64'h0000000000000100;
+    LSQ_mem_req_value = 64'h0000000000001000;
     LSQ_mem_read = 1'b0;
-    LSQ_tag = 5'h0;
+    LSQ_tag = 5'h4;
 	LSQ_valid = 1'b0;
 
 		//From Memory
-    MEM_value_in = 64'h0000000000000000;
+    MEM_value_in = 64'h1000000000000000;
 	
 ///////////////////////////////////////////////////////
 //***************************************************//
@@ -176,17 +176,17 @@ module memory_arbiter(
 ///////////////////////////////////////////////////////
 
         //From IF
-    if_mem_req_addr = 64'h0000000000000000;
+    if_mem_req_addr = 64'h0000000000000002;
 
 		//From LSQ	
-    LSQ_mem_req_addr = 64'h0000000000000000;
-    LSQ_mem_req_value = 64'h0000000000000000;
+    LSQ_mem_req_addr = 64'h0000000000000100;
+    LSQ_mem_req_value = 64'h0000000000001000;
     LSQ_mem_read = 1'b0;
-    LSQ_tag = 5'h0;
+    LSQ_tag = 5'h2;
 	LSQ_valid = 1'b0;
 
 		//From Memory
-    MEM_value_in = 64'h0000000000000000;
+    MEM_value_in = 64'h2000000000000000;
 	
 ///////////////////////////////////////////////////////
 //***************************************************//
@@ -201,17 +201,17 @@ module memory_arbiter(
 ///////////////////////////////////////////////////////
 
         //From IF
-    if_mem_req_addr = 64'h0000000000000000;
+    if_mem_req_addr = 64'h0000000000000003;
 
 		//From LSQ	
-    LSQ_mem_req_addr = 64'h0000000000000000;
-    LSQ_mem_req_value = 64'h0000000000000000;
-    LSQ_mem_read = 1'b0;
-    LSQ_tag = 5'h0;
-	LSQ_valid = 1'b0;
+    LSQ_mem_req_addr = 64'h0000000000000200;
+    LSQ_mem_req_value = 64'h0000000000002000;
+    LSQ_mem_read = 1'b1;
+    LSQ_tag = 5'h4;
+	LSQ_valid = 1'b1;
 
 		//From Memory
-    MEM_value_in = 64'h0000000000000000;
+    MEM_value_in = 64'h3000000000000000;
 	
 ///////////////////////////////////////////////////////
 //***************************************************//
@@ -226,14 +226,14 @@ module memory_arbiter(
 ///////////////////////////////////////////////////////
 
         //From IF
-    if_mem_req_addr = 64'h0000000000000000;
+    if_mem_req_addr = 64'h0000000000000003;
 
 		//From LSQ	
-    LSQ_mem_req_addr = 64'h0000000000000000;
-    LSQ_mem_req_value = 64'h0000000000000000;
+    LSQ_mem_req_addr = 64'h0000000000000100;
+    LSQ_mem_req_value = 64'h0000000000001000;
     LSQ_mem_read = 1'b0;
-    LSQ_tag = 5'h0;
-	LSQ_valid = 1'b0;
+    LSQ_tag = 5'h9;
+	LSQ_valid = 1'b1;
 
 		//From Memory
     MEM_value_in = 64'h0000000000000000;
@@ -251,17 +251,17 @@ module memory_arbiter(
 ///////////////////////////////////////////////////////
 
         //From IF
-    if_mem_req_addr = 64'h0000000000000000;
+    if_mem_req_addr = 64'h0000000000000003;
 
 		//From LSQ	
-    LSQ_mem_req_addr = 64'h0000000000000000;
-    LSQ_mem_req_value = 64'h0000000000000000;
+    LSQ_mem_req_addr = 64'h0000000000000100;
+    LSQ_mem_req_value = 64'h0000000000001000;
     LSQ_mem_read = 1'b0;
-    LSQ_tag = 5'h0;
+    LSQ_tag = 5'h5;
 	LSQ_valid = 1'b0;
 
 		//From Memory
-    MEM_value_in = 64'h0000000000000000;
+    MEM_value_in = 64'hfedcba9876543210;
 	
 ///////////////////////////////////////////////////////
 //***************************************************//
@@ -276,17 +276,17 @@ module memory_arbiter(
 ///////////////////////////////////////////////////////
 
         //From IF
-    if_mem_req_addr = 64'h0000000000000000;
+    if_mem_req_addr = 64'h0000000000000004;
 
 		//From LSQ	
-    LSQ_mem_req_addr = 64'h0000000000000000;
-    LSQ_mem_req_value = 64'h0000000000000000;
+    LSQ_mem_req_addr = 64'h0000000000000100;
+    LSQ_mem_req_value = 64'h0000000000001000;
     LSQ_mem_read = 1'b0;
     LSQ_tag = 5'h0;
 	LSQ_valid = 1'b0;
 
 		//From Memory
-    MEM_value_in = 64'h0000000000000000;
+    MEM_value_in = 64'h3000000000000000;
 	
 ///////////////////////////////////////////////////////
 //***************************************************//

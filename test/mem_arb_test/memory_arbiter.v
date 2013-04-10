@@ -6,11 +6,6 @@
 //        and the memory.                    //
 //                                           //
 ///////////////////////////////////////////////
-`define SD			   #1
-
-`define BUS_NONE       2'h0
-`define BUS_LOAD       2'h1
-`define BUS_STORE      2'h2
 
 module memory_arbiter(
 	//Inputs

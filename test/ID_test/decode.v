@@ -1,3 +1,13 @@
+
+///////////////////////////////////////////////////////////////
+//  this file is for the new decode module                   //
+///////////////////////////////////////////////////////////////
+//
+//
+//
+//
+
+
 /////////////////////////////////////////////////////////////////////////
 //                                                                     //
 //   Modulename :  id_stage.v                                          //
@@ -200,104 +210,162 @@ module id_stage(
               // Inputs
               clock,
               reset,
-              if_id_IR,
-              if_id_valid_inst,
-              wb_reg_wr_en_out,
-              wb_reg_wr_idx_out,
-              wb_reg_wr_data_out,
+              if_id_IR_1,
+              if_id_valid_inst_1,
+
+              if_id_IR_2,
+              if_id_valid_inst_2,
 
               // Outputs
-              id_ra_value_out,
-              id_rb_value_out,
-              id_opa_select_out,
-              id_opb_select_out,
-              id_dest_reg_idx_out,
-              id_alu_func_out,
-              id_rd_mem_out,
-              id_wr_mem_out,
-              id_cond_branch_out,
-              id_uncond_branch_out,
-              id_halt_out,
-              id_illegal_out,
-              id_valid_inst_out
+              id_opa_select_out_1,
+              id_opb_select_out_1,
+              id_dest_reg_idx_out_1,
+              id_alu_func_out_1,
+              id_rd_mem_out_1,
+              id_wr_mem_out_1,
+              id_cond_branch_out_1,
+              id_uncond_branch_out_1,
+              id_halt_out_1,
+              id_illegal_out_1,
+              id_valid_inst_out_1,
+              ra_idx_1,
+              rb_idx_1,
+              rc_idx_1,
+
+              id_opa_select_out_2,
+              id_opb_select_out_2,
+              id_dest_reg_idx_out_2,
+              id_alu_func_out_2,
+              id_rd_mem_out_2,
+              id_wr_mem_out_2,
+              id_cond_branch_out_2,
+              id_uncond_branch_out_2,
+              id_halt_out_2,
+              id_illegal_out_2,
+              id_valid_inst_out_2,
+              ra_idx_2,
+              rb_idx_2,
+              rc_idx_2
               );
 
 
   input         clock;                // system clock
   input         reset;                // system reset
-  input  [31:0] if_id_IR;             // incoming instruction
-  input         wb_reg_wr_en_out;     // Reg write enable from WB Stage
-  input   [4:0] wb_reg_wr_idx_out;    // Reg write index from WB Stage
-  input  [63:0] wb_reg_wr_data_out;   // Reg write data from WB Stage
-  input         if_id_valid_inst;
 
-  output [63:0] id_ra_value_out;      // reg A value
-  output [63:0] id_rb_value_out;      // reg B value
-  output  [1:0] id_opa_select_out;    // ALU opa mux select (ALU_OPA_xxx *)
-  output  [1:0] id_opb_select_out;    // ALU opb mux select (ALU_OPB_xxx *)
-  output  [4:0] id_dest_reg_idx_out;  // destination (writeback) register index
+  input  [31:0] if_id_IR_1;             // incoming instruction
+  input         if_id_valid_inst_1;
+
+  input  [31:0] if_id_IR_2;             // incoming instruction
+  input         if_id_valid_inst_2;
+
+  output  [1:0] id_opa_select_out_1;    // ALU opa mux select (ALU_OPA_xxx *)
+  output  [1:0] id_opb_select_out_1;    // ALU opb mux select (ALU_OPB_xxx *)
+  output  [4:0] id_dest_reg_idx_out_1;  // destination (writeback) register index
                                       // (ZERO_REG if no writeback)
-  output  [4:0] id_alu_func_out;      // ALU function select (ALU_xxx *)
-  output        id_rd_mem_out;        // does inst read memory?
-  output        id_wr_mem_out;        // does inst write memory?
-  output        id_cond_branch_out;   // is inst a conditional branch?
-  output        id_uncond_branch_out; // is inst an unconditional branch 
+  output  [4:0] id_alu_func_out_1;      // ALU function select (ALU_xxx *)
+  output        id_rd_mem_out_1;        // does inst read memory?
+  output        id_wr_mem_out_1;        // does inst write memory?
+  output        id_cond_branch_out_1;   // is inst a conditional branch?
+  output        id_uncond_branch_out_1; // is inst an unconditional branch 
                                       // or jump?
-  output        id_halt_out;
-  output        id_illegal_out;
-  output        id_valid_inst_out;    // is inst a valid instruction to be 
+  output        id_halt_out_1;
+  output        id_illegal_out_1;
+  output        id_valid_inst_out_1;    // is inst a valid instruction to be 
+                                      // counted for CPI calculations?
+
+  output  [1:0] id_opa_select_out_2;    // ALU opa mux select (ALU_OPA_xxx *)
+  output  [1:0] id_opb_select_out_2;    // ALU opb mux select (ALU_OPB_xxx *)
+  output  [4:0] id_dest_reg_idx_out_2;  // destination (writeback) register index
+                                      // (ZERO_REG if no writeback)
+  output  [4:0] id_alu_func_out_2;      // ALU function select (ALU_xxx *)
+  output        id_rd_mem_out_2;        // does inst read memory?
+  output        id_wr_mem_out_2;        // does inst write memory?
+  output        id_cond_branch_out_2;   // is inst a conditional branch?
+  output        id_uncond_branch_out_2; // is inst an unconditional branch 
+                                      // or jump?
+  output        id_halt_out_2;
+  output        id_illegal_out_2;
+  output        id_valid_inst_out_2;    // is inst a valid instruction to be 
                                       // counted for CPI calculations?
    
-  wire    [1:0] dest_reg_select;
-  reg     [4:0] id_dest_reg_idx_out;     // not state: behavioral mux output
+  wire    [1:0] dest_reg_select_1, dest_reg_select_2;
+  reg     [4:0] id_dest_reg_idx_out_1, id_dest_reg_idx_out_2;     // not state: behavioral mux output
    
     // instruction fields read from IF/ID pipeline register
-  wire    [4:0] ra_idx = if_id_IR[25:21];   // inst operand A register index
-  wire    [4:0] rb_idx = if_id_IR[20:16];   // inst operand B register index
-  wire    [4:0] rc_idx = if_id_IR[4:0];     // inst operand C register index
+  output wire    [4:0] ra_idx_1 = if_id_IR_1[25:21];   // inst operand A register index
+  output wire    [4:0] rb_idx_1 = if_id_IR_1[20:16];   // inst operand B register index
+  output wire    [4:0] rc_idx_1 = if_id_IR_1[4:0];     // inst operand C register index
 
-    // Instantiate the register file used by this pipeline
-  regfile regf_0 (.rda_idx(ra_idx),
-                  .rda_out(id_ra_value_out), 
-      
-                  .rdb_idx(rb_idx),
-                  .rdb_out(id_rb_value_out),
-
-                  .wr_clk(clock),
-                  .wr_en(wb_reg_wr_en_out),
-                  .wr_idx(wb_reg_wr_idx_out),
-                  .wr_data(wb_reg_wr_data_out)
-                 );
+    // instruction fields read from IF/ID pipeline register
+  output wire    [4:0] ra_idx_2 = if_id_IR_2[25:21];   // inst operand A register index
+  output wire    [4:0] rb_idx_2 = if_id_IR_2[20:16];   // inst operand B register index
+  output wire    [4:0] rc_idx_2 = if_id_IR_2[4:0];     // inst operand C register index
 
     // instantiate the instruction decoder
-  decoder decoder_0 (// Input
-                     .inst(if_id_IR),
-                     .valid_inst_in(if_id_valid_inst),
+  decoder decoder_1 (// Input
+                     .inst(if_id_IR_1),
+                     .valid_inst_in(if_id_valid_inst_1),
 
                      // Outputs
-                     .opa_select(id_opa_select_out),
-                     .opb_select(id_opb_select_out),
-                     .alu_func(id_alu_func_out),
-                     .dest_reg(dest_reg_select),
-                     .rd_mem(id_rd_mem_out),
-                     .wr_mem(id_wr_mem_out),
-                     .cond_branch(id_cond_branch_out),
-                     .uncond_branch(id_uncond_branch_out),
-                     .halt(id_halt_out),
-                     .illegal(id_illegal_out),
-                     .valid_inst(id_valid_inst_out)
+                     .opa_select(id_opa_select_out_1),
+                     .opb_select(id_opb_select_out_1),
+                     .alu_func(id_alu_func_out_1),
+                     .dest_reg(dest_reg_select_1),
+                     .rd_mem(id_rd_mem_out_1),
+                     .wr_mem(id_wr_mem_out_1),
+                     .cond_branch(id_cond_branch_out_1),
+                     .uncond_branch(id_uncond_branch_out_1),
+                     .halt(id_halt_out_1),
+                     .illegal(id_illegal_out_1),
+                     .valid_inst(id_valid_inst_out_1)
                     );
 
+  decoder decoder_2 (// Input
+                     .inst(if_id_IR_2),
+                     .valid_inst_in(if_id_valid_inst_2),
+
+                     // Outputs
+                     .opa_select(id_opa_select_out_2),
+                     .opb_select(id_opb_select_out_2),
+                     .alu_func(id_alu_func_out_2),
+                     .dest_reg(dest_reg_select_2),
+                     .rd_mem(id_rd_mem_out_2),
+                     .wr_mem(id_wr_mem_out_2),
+                     .cond_branch(id_cond_branch_out_2),
+                     .uncond_branch(id_uncond_branch_out_2),
+                     .halt(id_halt_out_2),
+                     .illegal(id_illegal_out_2),
+                     .valid_inst(id_valid_inst_out_2)
+                    );
      // mux to generate dest_reg_idx based on
      // the dest_reg_select output from decoder
   always @*
     begin
-      case (dest_reg_select)
-        `DEST_IS_REGC: id_dest_reg_idx_out = rc_idx;
-        `DEST_IS_REGA: id_dest_reg_idx_out = ra_idx;
-        `DEST_NONE:    id_dest_reg_idx_out = `ZERO_REG;
-        default:       id_dest_reg_idx_out = `ZERO_REG; 
+      case (dest_reg_select_1)
+        `DEST_IS_REGC: id_dest_reg_idx_out_1 = rc_idx;
+        `DEST_IS_REGA: id_dest_reg_idx_out_1 = ra_idx;
+        `DEST_NONE:    id_dest_reg_idx_out_1 = `ZERO_REG;
+        default:       id_dest_reg_idx_out_1 = `ZERO_REG; 
+      endcase
+      case (dest_reg_select_2)
+        `DEST_IS_REGC: id_dest_reg_idx_out_2 = rc_idx;
+        `DEST_IS_REGA: id_dest_reg_idx_out_2 = ra_idx;
+        `DEST_NONE:    id_dest_reg_idx_out_2 = `ZERO_REG;
+        default:       id_dest_reg_idx_out_2 = `ZERO_REG; 
       endcase
     end
    
 endmodule // module id_stage
+
+
+
+
+
+
+
+
+
+
+
+
+

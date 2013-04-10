@@ -243,6 +243,7 @@ module ex_stage(// Inputs
                .mplier(opa_mux_out_1),
                .mcand(opb_mux_out_1),
                .valid_in(ex_mult_valid_in_1),
+               .stall(1'b0),
            
                // Outputs
 			   .IR_out(ex_mult_IR_out_1),
@@ -260,6 +261,7 @@ module ex_stage(// Inputs
                .mplier(opa_mux_out_2),
                .mcand(opb_mux_out_2),
                .valid_in(ex_mult_valid_in_2),
+               .stall(stall_mult_2),
            
                // Outputs
 			   .IR_out(ex_mult_IR_out_2),
@@ -309,6 +311,7 @@ module ex_stage(// Inputs
 				   // Outputs
 					.stall_bus_1(stall_bus_1),
 					.stall_bus_2(stall_bus_2),
+          .stall_mult_2(stall_mult_2),
 					// Bus 1
 					.ex_IR_out_1(ex_IR_out_1),
 					.ex_NPC_out_1(ex_NPC_out_1),

@@ -13,8 +13,6 @@
 
 `timescale 1ns/100ps
 
-`define SD #1
-
 // defined paramters //
 `define LSQ_ENTRIES	    32
 

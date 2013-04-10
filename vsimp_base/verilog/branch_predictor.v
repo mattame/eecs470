@@ -1,6 +1,9 @@
-module branch_predictor (pc, isBranch, result, pht_index_in, prediction, pht_index_out)
+module branch_predictor (clock, reset, pc, isBranch, result, pht_index_in, prediction, pht_index_out)
 
 //----------------inputs------------
+input wire clock;
+input wire reset;
+
 input reg [31:0]pc;
 input reg isBranch;
 input reg [4:0]pht_index_in;
@@ -21,7 +24,8 @@ reg [4:0]pht_index;
 //init pht to not taken. 0 means not taken, 1 means taken. 
 pht = 32'b0;
 
-
+alwasys @*
+begin
 //for use with the xor
 pc_bits = {pc[3:2], 3'b0};
 ghr_bits = {2'b0, ghr};
@@ -31,6 +35,8 @@ pht_index = pc_bits^ghr_bits;
 prediction = pht[pht_index];
 
 pht_index_out = pht_index;
+end
+
 
 always@
 ghr = ghr<<1;

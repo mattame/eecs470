@@ -196,16 +196,28 @@ module pipeline (// Inputs
   if_stage if_stage_0 (// Inputs
                        .clock (clock),
                        .reset (reset),
-                       .mem_wb_valid_inst(mem_wb_valid_inst),
+                       
+                       
+                       //What does stall do or where does it come from
+                       .stall (/***/),
+                       
+                       //.mem_wb_valid_inst(mem_wb_valid_inst),
+                       
                        .ex_mem_take_branch(ex_mem_take_branch),
                        .ex_mem_target_pc(ex_mem_alu_result),
                        .Imem2proc_data(mem2proc_data),
                        
                        // Outputs
-                       .if_NPC_out(if_NPC_out), 
-                       .if_IR_out(if_IR_out),
+                       .if_NPC_out_1(if_NPC_out_1), 
+                       .if_IR_out_1(if_IR_out_1),
+                       .if_valid_inst_out1(if_valid_inst_out_1),
+                       
+                       .if_NPC_out_2(if_NPC_out_2), 
+                       .if_IR_out_2(if_IR_out_2),
+                       .if_valid_inst_out2(if_valid_inst_out_2),
+
                        .proc2Imem_addr(proc2Imem_addr),
-                       .if_valid_inst_out(if_valid_inst_out)
+                   
                       );
 
 
@@ -238,6 +250,9 @@ module pipeline (// Inputs
   //                  ID-Stage                    //
   //                                              //
   //////////////////////////////////////////////////
+
+  //need 2 ID stages
+
   id_stage id_stage_0 (// Inputs
                        .clock     (clock),
                        .reset   (reset),
@@ -262,6 +277,12 @@ module pipeline (// Inputs
                        .id_illegal_out(id_illegal_out),
                        .id_valid_inst_out(id_valid_inst_out)
                       );
+
+
+  reorder_buffer reorder_buffer_0 (//Inputs
+                                    .clock (clock),
+                                    .reset (reset),
+
 
 
   //////////////////////////////////////////////////

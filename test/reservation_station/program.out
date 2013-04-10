@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Wed Apr 10 18:06:34 2013
+         Version E-2011.03_Full64 -- Wed Apr 10 18:43:55 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -49,14 +49,14 @@ Starting vcs inline pass...
 recompiling module testbench
 recompiling module reservation_station_entry
 Both modules done.
-make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/csrc'
+make[1]: Entering directory `/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/test/reservation_station/csrc'
 if [ -x ../simv ]; then chmod -x ../simv; fi
 g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
 ../simv up to date
-make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/csrc'
+make[1]: Leaving directory `/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/test/reservation_station/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 10 18:06 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 10 18:43 2013
 
 STARTING TESTBENCH!
 
@@ -179,5 +179,5 @@ $finish at simulation time                  320
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 320
 CPU Time:      0.010 seconds;       Data structure size:   0.1Mb
-Wed Apr 10 18:06:36 2013
-CPU time: .699 seconds to compile + .051 seconds to elab + .169 seconds to link + .041 seconds in simulation
+Wed Apr 10 18:43:56 2013
+CPU time: .414 seconds to compile + .036 seconds to elab + .128 seconds to link + .040 seconds in simulation

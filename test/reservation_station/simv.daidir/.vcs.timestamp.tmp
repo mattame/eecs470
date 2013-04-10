@@ -26,8 +26,12 @@
 /usr/caen/vcs-2011.03/amd64/bin/vcs1
 reservation_station.v
 test_reservation_station.v
-44
+57
 _LMFILES_=/usr/caen/misc/modules/vcs/2011.03
+XMODIFIERS=@im=none
+XDG_SESSION_COOKIE=89f6d208a68c70b74114f91100000029-1365630606.469473-981981205
+XAUTHORITY=/var/run/gdm/auth-for-mattnick-H6OmQu/database
+WINDOWPATH=7
 VMR_MODE_FLAG=64
 VENDOR=unknown
 VCS_MODE_FLAG=64
@@ -35,46 +39,55 @@ VCS_HOME=/usr/caen/vcs-2011.03
 VCS_DEPTH=0
 VCS_ARG_ADDED_FOR_TMP=1
 VCS_ARCH=amd64
+USERNAME=mattnick
 UNAME=/bin/uname
 TOOL_HOME=/usr/caen/vcs-2011.03/amd64
 SW_VCS=2011.03
-SSH_TTY=/dev/pts/16
-SSH_CONNECTION=141.213.55.23 54823 141.213.74.38 22
-SSH_CLIENT=141.213.55.23 54823 22
+SSH_AUTH_SOCK=/tmp/keyring-0pdQ9g/socket.ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+SSH_AGENT_PID=3793
 SNPSLMD_LICENSE_FILE=/usr/caen/vcs-2011.03/license.dat:/usr/caen/vcs-2011.03/flexlm//license.dat
-SELINUX_USE_CURRENT_RANGE=
-SELINUX_ROLE_REQUESTED=
-SELINUX_LEVEL_REQUESTED=
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3808,unix/unix:/tmp/.ICE-unix/3808
 SCRNAME=vcs
 SCRIPT_NAME=vcs
-REMOTEHOST=beyster1620p19.engin.umich.edu
+QT_IM_MODULE=xim
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
 QTDIR=/usr/lib64/qt-3.3
 OVA_UUM=0
 OSTYPE=linux
+ORBIT_SOCKETDIR=/tmp/orbit-mattnick
 MODULESHOME=/usr/share/Modules
 MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/caen/misc/modules:/afs/umich.edu/class/coe/modules
 MFLAGS=
-MANPAGER=/usr/bin/less -is
 MAKELEVEL=1
 MAKEFLAGS=
-MAILSERVER=mail.umich.edu
 LOADEDMODULES=vcs/2011.03
 LESSOPEN=|/usr/bin/lesspipe.sh %s
-KRB5CCNAME=FILE:/tmp/krb5cc_877473_rzXNcb
+KRB5CCNAME=FILE:/tmp/krb5cc_929405_Ag4BgW
 KDE_IS_PRELINKED=1
 KDEDIRS=/usr
+IMSETTINGS_MODULE=none
+IMSETTINGS_INTEGRATE_DESKTOP=yes
 HOSTTYPE=x86_64-linux
-HOSTNAME=caen-vnc02.engin.umich.edu
-HOST=caen-vnc02.engin.umich.edu
+HOSTNAME=beyster1620p18.engin.umich.edu
+HOST=beyster1620p18.engin.umich.edu
 G_BROKEN_FILENAMES=1
+GTK_RC_FILES=/etc/gtk/gtkrc:/afs/umich.edu/user/m/a/mattnick/.gtkrc-1.2-gnome2
 GROUP=users
+GNOME_KEYRING_SOCKET=/tmp/keyring-0pdQ9g/socket
+GNOME_KEYRING_PID=3697
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GDM_LANG=en_US.UTF-8
+GDM_KEYBOARD_LAYOUT=us
+GDMSESSION=gnome
+DESKTOP_SESSION=gnome
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-L86CHZkG5k,guid=9a7188fe6acaa44d8650fa6d000000b8
+COLORTERM=gnome-terminal
 0
 2
-1365630815 reservation_station.v
-1365631590 test_reservation_station.v
+1365633652 reservation_station.v
+1365633042 test_reservation_station.v
 4
 0 
 1298523545 /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so

@@ -2,7 +2,7 @@
 ****************************************
 check_design summary:
 Version:     G-2012.06
-Date:        Tue Apr  9 02:12:08 2013
+Date:        Wed Apr 10 21:31:13 2013
 ****************************************
 
                    Name                                            Total
@@ -12,44 +12,44 @@ Cells                                                              35
     Connected to power or ground (LINT-32)                          2
     Nets connected to multiple pins on same cell (LINT-33)          1
 
-Nets                                                              348
+Nets                                                              346
     Unloaded nets (LINT-2)                                          2
     Net has multiple drivers (LINT-4)                              32
-    Net is wired or (LINT-35)                                     314
+    Net is wired or (LINT-35)                                     312
 --------------------------------------------------------------------------------
 
-Warning: In design 'reservation_station_entry_15', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_15', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_0', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_0', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_1', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_1', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_2', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_2', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_3', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_3', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_4', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_4', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_5', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_5', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_6', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_6', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_7', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_7', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_8', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_8', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_9', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_9', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_10', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_10', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_11', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_11', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_12', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_12', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_13', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_13', cell 'C1112' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_14', cell 'C1100' does not drive any nets. (LINT-1)
-Warning: In design 'reservation_station_entry_14', cell 'C1112' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_15', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_15', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_0', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_0', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_1', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_1', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_2', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_2', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_3', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_3', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_4', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_4', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_5', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_5', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_6', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_6', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_7', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_7', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_8', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_8', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_9', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_9', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_10', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_10', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_11', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_11', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_12', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_12', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_13', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_13', cell 'C1129' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_14', cell 'C1115' does not drive any nets. (LINT-1)
+Warning: In design 'reservation_station_entry_14', cell 'C1129' does not drive any nets. (LINT-1)
 Warning: In design 'reservation_station', net 'second_empty_filleds[15]' driven by pin 'RSEMODULES[15].entries/second_empty_filled_out' has no loads. (LINT-2)
 Warning: In design 'reservation_station', net 'first_empty_filleds[15]' driven by pin 'RSEMODULES[15].entries/first_empty_filled_out' has no loads. (LINT-2)
 Information: In design 'reservation_station', net 'issue_second_states[0]' has multiple drivers.  Wired AND assumed. (LINT-4)
@@ -92,8 +92,6 @@ Warning: In design 'reservation_station', the same net is connected to more than
    Net '*Logic0*' is connected to pins 'first_empty_filled_in', 'second_empty_filled_in''.
 Information: In design 'reservation_station', net 'dispatch_available2' has multiple drivers.  Wired OR assumed. (LINT-35)
 Information: In design 'reservation_station', net 'dispatch_available1' has multiple drivers.  Wired OR assumed. (LINT-35)
-Information: In design 'reservation_station', net 'filling2' has multiple drivers.  Wired OR assumed. (LINT-35)
-Information: In design 'reservation_station', net 'filling1' has multiple drivers.  Wired OR assumed. (LINT-35)
 Information: In design 'reservation_station', net 'inst2_dest_tag_out[0]' has multiple drivers.  Wired OR assumed. (LINT-35)
 Information: In design 'reservation_station', net 'inst2_dest_tag_out[1]' has multiple drivers.  Wired OR assumed. (LINT-35)
 Information: In design 'reservation_station', net 'inst2_dest_tag_out[2]' has multiple drivers.  Wired OR assumed. (LINT-35)

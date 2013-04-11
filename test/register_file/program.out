@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Wed Apr 10 18:47:31 2013
+         Version E-2011.03_Full64 -- Wed Apr 10 21:29:20 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -23,14 +23,14 @@ No TimeScale specified
 Starting vcs inline pass...
 1 module and 0 UDP read.
 recompiling module testbench
-make[1]: Entering directory `/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/test/register_file/csrc'
+make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/csrc'
 if [ -x ../simv ]; then chmod -x ../simv; fi
 g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
 ../simv up to date
-make[1]: Leaving directory `/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/test/register_file/csrc'
+make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 10 18:47 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 10 21:29 2013
 
 STARTING TESTBENCH!
 
@@ -76,6 +76,6 @@ $finish called from file "test_register_file.v", line 222.
 $finish at simulation time                   95
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 95
-CPU Time:      0.000 seconds;       Data structure size:   0.0Mb
-Wed Apr 10 18:47:31 2013
-CPU time: .104 seconds to compile + .032 seconds to elab + .106 seconds to link + .033 seconds in simulation
+CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
+Wed Apr 10 21:29:21 2013
+CPU time: .160 seconds to compile + .049 seconds to elab + .186 seconds to link + .043 seconds in simulation

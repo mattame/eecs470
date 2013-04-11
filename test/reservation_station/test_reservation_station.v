@@ -40,7 +40,12 @@ module testbench;
    reg [7:0]  cdb1_tag_in;
    reg [63:0] cdb2_value_in;
    reg [7:0]  cdb2_tag_in;
-   
+  
+   reg [63:0] inst1_rega_rob_value_in;
+   reg [63:0] inst1_regb_rob_value_in;
+   reg [63:0] inst2_rega_rob_value_in;
+   reg [63:0] inst2_regb_rob_value_in;
+ 
    // wires from the module //
    wire dispatch; 
 
@@ -110,6 +115,12 @@ module testbench;
                            .cdb2_tag_in(cdb2_tag_in),
                            .cdb1_value_in(cdb1_value_in),
                            .cdb2_value_in(cdb2_value_in),
+
+                           // inputs from the ROB //
+                           .inst1_rega_rob_value_in(inst1_rega_rob_value_in),
+                           .inst1_regb_rob_value_in(inst1_regb_rob_value_in),
+                           .inst2_rega_rob_value_in(inst2_rega_rob_value_in),
+                           .inst2_regb_rob_value_in(inst2_regb_rob_value_in),
 
                            // signals and busses out for inst1 to the ex stage
                            .inst1_rega_value_out(inst1_rega_value_out),.inst1_regb_value_out(inst1_regb_value_out),
@@ -255,6 +266,11 @@ module testbench;
     cdb2_value_in = 64'd0;
     cdb2_tag_in = `RSTAG_NULL;
 
+    inst1_rega_rob_value_in = 64'd0;
+    inst1_regb_rob_value_in = 64'd0;
+    inst2_rega_rob_value_in = 64'd0;
+    inst2_regb_rob_value_in = 64'd0;
+
 
         //////////////////////
         // TRANSITION TESTS //
@@ -274,29 +290,36 @@ module testbench;
         ASSERT(~inst1_valid_out && ~inst2_valid_out);
 
         // dispatch two instructions and check //
-        $display("dispatching1\n");
+        $display("double dispatch 1\n");
         inst1_valid = 1'b1;
         inst2_valid = 1'b1;
         inst1_rega_value_in = 64'd1;
         inst1_regb_tag_in = 8'd0;
         inst2_rega_value_in = 64'd2;
         inst2_regb_tag_in = 8'd0;
-        
         CLOCK_AND_DISPLAY();
         ASSERT(dispatch);
 
         // dispatch again //
-        $display("d2\n");
+        $display("double dispatch 2\n");
         CLOCK_AND_DISPLAY();
         ASSERT(dispatch);
 
         // and again //
-        $display("d3\n");
+        $display("double dispatch 3\n");
         CLOCK_AND_DISPLAY();
         ASSERT(dispatch);
 
-        // and yet again //
-        $display("d4\n");
+        // single dispatch //
+        $display("single dispatch\n");
+        inst1_valid = 1'b0;
+        CLOCK_AND_DISPLAY();
+        ASSERT(dispatch);   // should not be full yet
+
+        // yet again //
+        $display("single dispatch, other slot\n");
+        inst1_valid = 1'b1;
+        inst2_valid = 1'b0;
         CLOCK_AND_DISPLAY();
         ASSERT(dispatch);   // should not be full yet
 
@@ -312,6 +335,7 @@ module testbench;
 
         // watch RS empty as everything gets issued 
         $display("issue2\n");
+        cdb1_tag_in = `RSTAG_NULL;
         CLOCK_AND_DISPLAY();
         ASSERT(inst1_valid_out && inst2_valid_out);
         $display("issue3\n");
@@ -320,13 +344,36 @@ module testbench;
         $display("issue4\n");
         CLOCK_AND_DISPLAY();
         ASSERT(inst1_valid_out && inst2_valid_out);     // this should be the last issue
+        ASSERT(inst1_rega_value_out==64'd2 && inst1_regb_value_out==64'hDEADBEEFBAADBEEF && inst2_rega_value_out==64'd1 && inst2_regb_value_out==64'hDEADBEEFBAADBEEF);
+
+        // do nothing //
         $display("nothing\n");
         CLOCK_AND_DISPLAY();
         ASSERT(~inst1_valid_out && ~inst2_valid_out);   // RS should be empty at this point
-        $display("nothing[again]\n");
-        CLOCK_AND_DISPLAY();
-        ASSERT(~inst1_valid_out && ~inst2_valid_out); 
 
+        // dispatch single instruction, ready-in-rob //
+        $display("dispatch single inst, read from ROB\n");
+        inst2_valid = 1'b1;
+        inst2_rega_rob_value_in = 64'h00000000AAAAAAAA;
+        inst2_rega_tag_in = 8'h40;
+        inst2_regb_value_in = 64'hAAAAAAAA00000000;
+        inst2_regb_tag_in = 8'h0A;
+        CLOCK_AND_DISPLAY();
+        ASSERT(~inst1_valid_out && ~inst2_valid_out); // no valid instructions out //
+
+        // broadcast on cdb and wait for inst to issue //
+        $display("broadcast on cdb, watch for issue\n");
+        inst2_valid = 1'b0;
+        cdb2_value_in = 64'hBBBBBBBB00000000;
+        cdb2_tag_in = 8'h0A;
+        CLOCK_AND_DISPLAY();
+        ASSERT(inst1_valid_out && ~inst2_valid_out);   // one valid instruction out 
+
+        // do nothing //
+        $display("nothing\n");
+        CLOCK_AND_DISPLAY();
+        ASSERT(~inst1_valid_out && ~inst2_valid_out);   // RS should be empty at this point
+       
 
         // reset and check //
         $display("resetting\n");

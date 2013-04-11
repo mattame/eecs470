@@ -30,6 +30,8 @@ module testbench;
    reg [7:0]  cdb2_tag_in;
    reg [63:0] cdb1_value_in;
    reg [63:0] cdb2_value_in;
+   reg cdb1_mispredicted_in;
+   reg cdb2_mispredicted_in;
 
    // outputs //
    wire [7:0] inst1_tag_out;
@@ -44,6 +46,8 @@ module testbench;
    wire [63:0] inst1_value_out;
    wire [4:0]  inst2_dest_out;
    wire [63:0] inst2_value_out;
+   wire inst1_mispredicted_out;
+   wire inst2_mispredicted_out;
 
    wire rob_full,rob_empty;
 
@@ -68,6 +72,8 @@ module testbench;
       .cdb1_value_in(cdb1_value_in),
       .cdb2_tag_in(cdb2_tag_in),
       .cdb2_value_in(cdb2_value_in),
+      .cdb1_mispredicted_in(cdb1_mispredicted_in),
+      .cdb2_mispredicted_in(cdb2_mispredicted_in),
 
       // outputs //
       .inst1_tag_out(inst1_tag_out),
@@ -81,12 +87,17 @@ module testbench;
 
       // outputs to write directly to the reg file //
       .inst1_dest_out(inst1_dest_out),  
-	  .inst1_value_out(inst1_value_out),
-      .inst2_dest_out(inst2_dest_out),  
-	  .inst2_value_out(inst2_value_out),
+      .inst1_value_out(inst1_value_out),
+      .inst2_dest_out(inst2_dest_out), 
+      .inst2_value_out(inst2_value_out),
+      
+      // mispredicted branch outputs //
+      .inst1_mispredicted_out(inst1_mispredicted_out),
+      .inst2_mispredicted_out(inst2_mispredicted_out),
 
       // signals out //
       .rob_full(rob_full), .rob_empty(rob_empty)
+
                  );
 
 
@@ -125,12 +136,12 @@ module testbench;
    begin
       if (preclock==`PRECLOCK)
       begin
-         $display("  preclock: reset=%b i1_tag_o=%b i2_tag_o=%b rob_full=%b rob_empty=%b", reset,inst1_tag_out,inst2_tag_out,rob_full,rob_empty);
+         $display("  preclock: reset=%b i1_tag_o=%b i2_tag_o=%b rob_full=%b rob_empty=%b i1mo=%b i2mo=%b", reset,inst1_tag_out,inst2_tag_out,rob_full,rob_empty,inst1_mispredicted_out,inst2_mispredicted_out);
          $display("   i1_dest_o=%b i1_value_o=%h i2_dest_o=%b i2_value_o=%h", inst1_dest_out,inst1_value_out,inst2_dest_out,inst2_value_out);
       end
       else
       begin
-         $display(" postclock: reset=%b i1_tag_o=%b i2_tag_o=%b rob_full=%b rob_empty=%b", reset,inst1_tag_out,inst2_tag_out,rob_full,rob_empty);
+         $display(" postclock: reset=%b i1_tag_o=%b i2_tag_o=%b rob_full=%b rob_empty=%b i1mo=%b i2mo=%b", reset,inst1_tag_out,inst2_tag_out,rob_full,rob_empty,inst1_mispredicted_out,inst2_mispredicted_out);
          $display("   i1_dest_o=%b i1_value_o=%h i2_dest_o=%b i2_value_o=%h", inst1_dest_out,inst1_value_out,inst2_dest_out,inst2_value_out);
       end
    end
@@ -185,7 +196,8 @@ module testbench;
    cdb2_tag_in = `RSTAG_NULL;
    cdb1_value_in = 64'd0;
    cdb2_value_in = 64'd0;
-
+   cdb1_mispredicted_in = 1'b0;
+   cdb2_mispredicted_in = 1'b0;
 
         //////////////////////
         // TRANSITION TESTS //
@@ -225,9 +237,10 @@ module testbench;
 	 cdb2_tag_in = 8'd1;
 	 cdb1_value_in = 64'hAAAAAAAAAAAAAAAA;
 	 cdb2_value_in = 64'hBBBBBBBBBBBBBBBB;
+         cdb1_mispredicted_in = 1'b1;
         CLOCK_AND_DISPLAY();
         ASSERT(~rob_full);
-        ASSERT(inst1_dest_out==5'd1 && inst2_dest_out==5'd2 && inst1_value_out==64'hAAAAAAAAAAAAAAAA &&inst2_value_out==64'hBBBBBBBBBBBBBBBB); 
+        ASSERT(inst1_dest_out==5'd1 && inst2_dest_out==5'd2 && inst1_value_out==64'hAAAAAAAAAAAAAAAA &&inst2_value_out==64'hBBBBBBBBBBBBBBBB && inst1_mispredicted_out==1'b1); 
 		
         // wait //
         $display("wait\n");

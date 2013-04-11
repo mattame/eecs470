@@ -1,0 +1,15 @@
+ 
+****************************************
+check_design summary:
+Version:     G-2012.06
+Date:        Wed Apr 10 21:28:41 2013
+****************************************
+
+                   Name                                            Total
+--------------------------------------------------------------------------------
+Inputs/Outputs                                                      1
+    Unconnected ports (LINT-28)                                     1
+--------------------------------------------------------------------------------
+
+Warning: In design 'map_table', port 'clear_entries[0]' is not connected to any nets. (LINT-28)
+1

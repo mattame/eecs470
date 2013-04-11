@@ -1,0 +1,647 @@
+
+                      Design Compiler Graphical
+                            DC Ultra (TM)
+                             DFTMAX (TM)
+                         Power Compiler (TM)
+                           DesignWare (R)
+                           DC Expert (TM)
+                         Design Vision (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                            DFT Compiler
+                        Library Compiler (TM)
+                         Design Compiler(R)
+
+            Version G-2012.06 for RHEL64 -- May 30, 2012
+               Copyright (c) 1988-2012 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+#
+# Written by : DC-Transcript, Version X-2005.09-SP2 -- Jan 03, 2006
+# Date       : Tue Aug 29 17:09:34 2006
+#
+#
+# Translation of script: tut_synth.scr
+#
+#/***********************************************************/
+#/*   FILE        : tut_synth.scr                           */
+#/*   Description : Default Synopsys Design Compiler Script */
+#/*   Usage       : dc_shell -f tut_synth.scr               */
+#/*   You'll need to minimally set design_name & read files */
+#/***********************************************************/
+set SYN_DIR ./
+./
+set search_path [ list "./" "/afs/umich.edu/class/eecs470/lib/synopsys/" ]
+./ /afs/umich.edu/class/eecs470/lib/synopsys/
+set target_library "lec25dscc25_TT.db"
+lec25dscc25_TT.db
+set link_library [concat  "*" $target_library]
+* lec25dscc25_TT.db
+#/***********************************************************/
+#/* Set some flags to suppress warnings we don't care about */
+set suppress_errors [concat $suppress_errors "UID-401"]
+UID-401
+suppress_message {"VER-130"}
+#/***********************************************************/
+#/* The following four lines must be updated for every      */
+#/* new design                                              */
+#/***********************************************************/
+read_file -f verilog [list "register_file.v"]
+Loading db file '/afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/gtech.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/standard.sldb'
+  Loading link library 'lec25dscc25_TT'
+  Loading link library 'gtech'
+Loading verilog file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/register_file.v'
+Detecting input file type automatically (-rtl or -netlist).
+Running DC verilog reader
+Reading with Presto HDL Compiler (equivalent to -rtl option).
+Running PRESTO HDLC
+Compiling source file /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/register_file.v
+Warning:  Starting with the 2000.11-1 release, the Presto Verilog reader treats Verilog 'integer' types as signed; synthesized result may not match earlier versions of HDL Compiler. (VER-314)
+
+Inferred memory devices in process
+	in routine register_file line 89 in file
+		'/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/register_file.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|     values_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Statistics for MUX_OPs
+===========================================================
+| block name/line  | Inputs | Outputs | # sel inputs | MB |
+===========================================================
+| register_file/56 |   32   |   64    |      5       | N  |
+| register_file/59 |   32   |   64    |      5       | N  |
+| register_file/62 |   32   |   64    |      5       | N  |
+| register_file/65 |   32   |   64    |      5       | N  |
+===========================================================
+Presto compilation completed successfully.
+Current design is now '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/register_file.db:register_file'
+Loaded 1 design.
+Current design is 'register_file'.
+register_file
+set design_name register_file
+register_file
+#set reset_name reset
+set clock_name clock
+clock
+set CLK_PERIOD 5
+5
+#/***********************************************************/
+#/* The rest of this file may be left alone for most small  */
+#/* to moderate sized designs.  You may need to alter it    */
+#/* when synthesizing your final project.                   */
+#/***********************************************************/
+#/***********************************************************/
+#/* Set some flags for optimisation */
+set compile_top_all_paths "true"
+true
+set auto_wire_load_selection "false"
+false
+#/***********************************************************/
+#/*  Clk Periods/uncertainty/transition                     */
+set CLK_TRANSITION 0.1
+0.1
+set CLK_UNCERTAINTY 0.1
+0.1
+set CLK_LATENCY 0.1
+0.1
+#/* Input/output Delay values */
+set AVG_INPUT_DELAY 0.1
+0.1
+set AVG_OUTPUT_DELAY 0.1
+0.1
+#/* Critical Range (ns) */
+set CRIT_RANGE 1.0
+1.0
+#/***********************************************************/
+#/* Design Constrains: Not all used                         */
+set MAX_TRANSITION 1.0
+1.0
+set FAST_TRANSITION 0.1
+0.1
+set MAX_FANOUT 32
+32
+set MID_FANOUT 8
+8
+set LOW_FANOUT 1
+1
+set HIGH_DRIVE 0
+0
+set HIGH_LOAD 1.0
+1.0
+set AVG_LOAD 0.1
+0.1
+set AVG_FANOUT_LOAD 10
+10
+#/***********************************************************/
+#/*BASIC_INPUT = cb18os120_tsmc_max/nd02d1/A1
+#BASIC_OUTPUT = cb18os120_tsmc_max/nd02d1/ZN*/
+set DRIVING_CELL dffacs1
+dffacs1
+#/* DONT_USE_LIST = {   } */
+#/*************operation cons**************/
+#/*OP_WCASE = WCCOM;
+#OP_BCASE = BCCOM;*/
+set WIRE_LOAD "tsmcwire"
+tsmcwire
+set LOGICLIB lec25dscc25_TT
+lec25dscc25_TT
+#/*****************************/
+#/* Sourcing the file that sets the Search path and the libraries(target,link) */
+set sys_clk $clock_name
+clock
+set netlist_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".vg"]
+./register_file.vg
+set db_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".db"]
+./register_file.db
+set rep_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".rep"]
+./register_file.rep
+set dc_shell_status [ set chk_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".chk"] ]
+./register_file.chk
+#/* if we didnt find errors at this point, run */
+if {  $dc_shell_status != [list] } {
+   current_design $design_name
+  link
+  set_wire_load_model -name $WIRE_LOAD -lib $LOGICLIB $design_name
+  set_wire_load_mode top
+  set_fix_multiple_port_nets -outputs -buffer_constants
+  create_clock -period $CLK_PERIOD -name $sys_clk [find port $sys_clk]
+  set_clock_uncertainty $CLK_UNCERTAINTY $sys_clk
+  set_fix_hold $sys_clk
+  group_path -from [all_inputs] -name input_grp
+  group_path -to [all_outputs] -name output_grp
+  set_driving_cell  -lib_cell $DRIVING_CELL [all_inputs]
+  remove_driving_cell [find port $sys_clk]
+  set_fanout_load $AVG_FANOUT_LOAD [all_outputs]
+  set_load $AVG_LOAD [all_outputs]
+  set_input_delay $AVG_INPUT_DELAY -clock $sys_clk [all_inputs]
+  remove_input_delay -clock $sys_clk [find port $sys_clk]
+  set_output_delay $AVG_OUTPUT_DELAY -clock $sys_clk [all_outputs]
+  set_dont_touch reset_name
+  set_resistance 0 reset_name
+  set_drive 0 reset_name
+  set_critical_range $CRIT_RANGE [current_design]
+  set_max_delay $CLK_PERIOD [all_outputs]
+  set MAX_FANOUT $MAX_FANOUT
+  set MAX_TRANSITION $MAX_TRANSITION
+  uniquify
+  redirect $chk_file { check_design }
+  compile -map_effort medium
+  write -hier -format verilog -output $netlist_file $design_name
+  write -hier -format db -output $db_file $design_name
+  redirect $rep_file { report_design -nosplit }
+  redirect -append $rep_file { report_area }
+  redirect -append $rep_file { report_timing -max_paths 2 -input_pins -nets -transition_time -nosplit }
+  redirect -append $rep_file { report_constraint -all_violators -verbose -nosplit }
+  remove_design -all
+  read_file -format verilog $netlist_file
+  current_design $design_name
+  redirect -append $rep_file { report_reference -nosplit }
+  quit
+} else {
+   quit
+}
+Current design is 'register_file'.
+
+  Linking design 'register_file'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  register_file               /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/register_file.db
+  lec25dscc25_TT (library)    /afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db
+
+Warning: Can't find object 'reset_name' in design 'register_file'. (UID-95)
+Error: Value for list 'object_list' must have 1 elements. (CMD-036)
+Warning: Can't find net 'reset_name' in design 'register_file'. (UID-95)
+Error: Value for list 'net_list' must have 1 elements. (CMD-036)
+Warning: Can't find port 'reset_name' in design 'register_file'. (UID-95)
+Error: Value for list 'port_list' must have 1 elements. (CMD-036)
+Current design is 'register_file'.
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | G-2012.06-DWBB_201206.0 |     *     |
+| Licensed DW Building Blocks        |                         |           |
+============================================================================
+
+
+Information: There are 1 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'register_file'
+Information: The register 'values_reg[0][63]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][62]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][61]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][60]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][59]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][58]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][57]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][56]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][55]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][54]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][53]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][52]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][51]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][50]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][49]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][48]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][47]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][46]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][45]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][44]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][43]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][42]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][41]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][40]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][39]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][38]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][37]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][36]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][35]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][34]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][33]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][32]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][31]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][30]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][29]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][28]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][27]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][26]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][25]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][24]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][23]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][22]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][21]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][20]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][19]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][18]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][17]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][16]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][15]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][14]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][13]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][12]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][11]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][10]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][9]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][8]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][7]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][6]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][5]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][4]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][3]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][2]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][1]' is a constant and will be removed. (OPT-1206)
+Information: The register 'values_reg[0][0]' is a constant and will be removed. (OPT-1206)
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Processing 'register_file_DW01_cmp6_0'
+  Processing 'register_file_DW01_cmp6_1'
+  Processing 'register_file_DW01_cmp6_2'
+  Processing 'register_file_DW01_cmp6_3'
+  Processing 'register_file_DW01_cmp6_4'
+  Processing 'register_file_DW01_cmp6_5'
+  Processing 'register_file_DW01_cmp6_6'
+  Processing 'register_file_DW01_cmp6_7'
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:21 1099067.5     39.15   14268.2   19236.9                                0.00
+    0:00:21 1099067.5     39.15   14268.2   19236.9                                0.00
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+  Mapping Optimization (Phase 1)
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:26 1873450.0      0.00      -0.0     324.1                                0.00
+    0:00:26 1873450.0      0.00      -0.0     324.1                                0.00
+    0:00:29 1637624.3      0.00       0.0     328.5                                0.00
+    0:00:29 1637624.3      0.00       0.0     328.5                                0.00
+    0:00:29 1637624.3      0.00       0.0     328.5                                0.00
+    0:00:29 1637624.3      0.00       0.0     328.5                                0.00
+    0:00:29 1637624.3      0.00       0.0     328.5                                0.00
+    0:00:29 1637624.3      0.00       0.0     328.5                                0.00
+    0:00:37 1027705.0      0.00       0.0       9.2                                0.00
+    0:00:38 1022509.6      0.00       0.0       9.2                                0.00
+    0:00:39 1022509.6      0.00       0.0       8.8                                0.00
+    0:00:39 1022509.6      0.00       0.0       8.8                                0.00
+    0:00:39 1022509.6      0.00       0.0       8.8                                0.00
+    0:00:40 1022509.6      0.00       0.0       8.8                                0.00
+    0:00:40 1022509.6      0.00       0.0       8.8                                0.00
+    0:00:40 1022598.1      0.00       0.0       7.4                                0.00
+    0:00:40 1022686.6      0.00       0.0       6.0                                0.00
+    0:00:40 1022775.2      0.00       0.0       4.6                                0.00
+    0:00:40 1022819.4      0.00       0.0       3.9                                0.00
+    0:00:40 1022863.7      0.00       0.0       3.2                                0.00
+    0:00:40 1022907.9      0.00       0.0       2.5                                0.00
+    0:00:40 1022952.2      0.00       0.0       1.8                                0.00
+    0:00:41 1022996.5      0.00       0.0       1.1                                0.00
+    0:00:41 1022996.5      0.00       0.0       1.1                                0.00
+    0:00:41 1022996.5      0.00       0.0       1.1                                0.00
+    0:00:41 1022996.5      0.00       0.0       1.1                                0.00
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:41 1022996.5      0.00       0.0       1.1                                0.00
+    0:00:41 1022996.5      0.00       0.0       1.1                                0.00
+    0:00:44  990085.8      0.00       0.0     136.0                                0.00
+
+
+  Beginning Design Rule Fixing  (max_transition)
+  ----------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:45  990085.8      0.00       0.0     136.0                                0.00
+    0:00:46  990577.6      0.00       0.0     134.1 values[5][36]                  0.00
+    0:00:46  990793.2      0.00       0.0     132.8 values[13][61]                 0.00
+    0:00:47  991025.5      0.00       0.0     131.5 values[17][7]                  0.00
+    0:00:48  991307.5      0.00       0.0     129.9 values[29][7]                  0.00
+    0:00:48  991407.0      0.00       0.0     129.3 values[15][61]                 0.00
+    0:00:49  991639.2      0.00       0.0     128.1 values[19][36]                 0.00
+    0:00:49  991805.1      0.00       0.0     127.2 values[19][61]                 0.00
+    0:00:50  992087.1      0.00       0.0     125.7 values[18][36]                 0.00
+    0:00:50  992302.8      0.00       0.0     124.5 values[6][61]                  0.00
+    0:00:51  992584.7      0.00       0.0     123.1 values[22][7]                  0.00
+    0:00:52  992800.4      0.00       0.0     122.0 values[4][61]                  0.00
+    0:00:52  992966.3      0.00       0.0     121.2 values[12][61]                 0.00
+    0:00:53  993314.6      0.00       0.0     119.4 values[12][8]                  0.00
+    0:00:54  993414.1      0.00       0.0     119.0 values[28][61]                 0.00
+    0:00:54  993646.4      0.00       0.0     118.1 values[21][62]                 0.00
+    0:00:55  993812.3      0.00       0.0     117.7 values[31][10]                 0.00
+    0:00:56  993862.0      0.00       0.0     117.6 values[14][61]                 0.00
+    0:00:56  994045.0      0.00       0.0     117.4 values[30][61]                 0.00
+    0:00:57  994310.4      0.00       0.0     115.8 values[5][34]                  0.00
+    0:00:57  994526.0      0.00       0.0     114.6 values[13][58]                 0.00
+    0:00:58  994808.0      0.00       0.0     113.0 values[9][3]                   0.00
+    0:00:59  994924.1      0.00       0.0     112.3 values[29][5]                  0.00
+    0:00:59  995023.7      0.00       0.0     111.8 values[15][58]                 0.00
+    0:01:00  995255.9      0.00       0.0     110.5 values[23][34]                 0.00
+    0:01:00  995421.8      0.00       0.0     109.6 values[19][3]                  0.00
+    0:01:01  995654.0      0.00       0.0     108.4 values[6][34]                  0.00
+    0:01:01  995936.0      0.00       0.0     106.9 values[6][5]                   0.00
+    0:01:01  996035.5      0.00       0.0     106.4 values[4][32]                  0.00
+    0:01:02  996201.4      0.00       0.0     105.6 values[4][58]                  0.00
+    0:01:02  996367.3      0.00       0.0     104.8 values[12][58]                 0.00
+    0:01:03  996699.1      0.00       0.0     103.1 values[28][58]                 0.00
+    0:01:04  996864.9      0.00       0.0     102.6 values[21][60]                 0.00
+    0:01:05  997030.8      0.00       0.0     102.2 values[31][8]                  0.00
+    0:01:05  997080.6      0.00       0.0     102.1 values[14][58]                 0.00
+    0:01:06  997163.5      0.00       0.0     102.0 values[30][60]                 0.00
+    0:01:06  997462.1      0.00       0.0     100.3 values[13][16]                 0.00
+    0:01:06  997661.2      0.00       0.0      99.1 values[13][28]                 0.00
+    0:01:07  997860.2      0.00       0.0      98.0 values[5][11]                  0.00
+    0:01:07  998059.3      0.00       0.0      96.8 values[5][23]                  0.00
+    0:01:07  998258.3      0.00       0.0      95.7 values[9][12]                  0.00
+    0:01:07  998457.4      0.00       0.0      94.5 values[9][24]                  0.00
+    0:01:08  998656.4      0.00       0.0      93.4 values[17][50]                 0.00
+    0:01:08  998855.5      0.00       0.0      92.2 values[13][42]                 0.00
+    0:01:08  999054.6      0.00       0.0      91.1 values[13][54]                 0.00
+    0:01:08  999253.6      0.00       0.0      89.9 values[5][54]                  0.00
+    0:01:09  999452.7      0.00       0.0      88.8 values[9][40]                  0.00
+    0:01:09  999651.7      0.00       0.0      87.6 values[9][52]                  0.00
+    0:01:09  999850.8      0.00       0.0      86.5 values[9][0]                   0.00
+    0:01:10 1000049.8      0.00       0.0      85.4 values[25][26]                 0.00
+    0:01:10 1000248.9      0.00       0.0      84.2 values[29][9]                  0.00
+    0:01:10 1000447.9      0.00       0.0      83.1 values[29][21]                 0.00
+    0:01:10 1000647.0      0.00       0.0      81.9 values[29][33]                 0.00
+    0:01:11 1000846.1      0.00       0.0      80.8 values[25][45]                 0.00
+    0:01:11 1001045.1      0.00       0.0      79.6 values[25][57]                 0.00
+    0:01:11 1001244.2      0.00       0.0      78.5 values[29][43]                 0.00
+    0:01:12 1001443.2      0.00       0.0      77.3 values[29][55]                 0.00
+    0:01:12 1001642.3      0.00       0.0      76.2 values[25][3]                  0.00
+    0:01:12 1001841.3      0.00       0.0      75.0 values[7][12]                  0.00
+    0:01:12 1002040.4      0.00       0.0      74.0 values[7][24]                  0.00
+    0:01:13 1002239.5      0.00       0.0      72.9 values[15][13]                 0.00
+    0:01:13 1002438.5      0.00       0.0      71.8 values[15][25]                 0.00
+    0:01:13 1002637.6      0.00       0.0      70.8 values[15][37]                 0.00
+    0:01:14 1002836.6      0.00       0.0      69.7 values[7][49]                  0.00
+    0:01:14 1003035.7      0.00       0.0      68.6 values[7][61]                  0.00
+    0:01:14 1003234.7      0.00       0.0      67.5 values[15][47]                 0.00
+    0:01:14 1003433.8      0.00       0.0      66.5 values[7][5]                   0.00
+    0:01:15 1003632.8      0.00       0.0      65.4 values[27][22]                 0.00
+    0:01:15 1003831.9      0.00       0.0      64.3 values[27][34]                 0.00
+    0:01:15 1004031.0      0.00       0.0      63.2 values[19][17]                 0.00
+    0:01:16 1004230.0      0.00       0.0      62.2 values[19][29]                 0.00
+    0:01:16 1004429.1      0.00       0.0      61.1 values[23][23]                 0.00
+    0:01:16 1004628.1      0.00       0.0      60.0 values[27][41]                 0.00
+    0:01:16 1004827.2      0.00       0.0      59.0 values[27][53]                 0.00
+    0:01:17 1005026.2      0.00       0.0      57.9 values[19][39]                 0.00
+    0:01:17 1005225.3      0.00       0.0      56.8 values[19][51]                 0.00
+    0:01:17 1005424.4      0.00       0.0      55.7 values[23][51]                 0.00
+    0:01:18 1005623.4      0.00       0.0      54.7 values[23][63]                 0.00
+    0:01:18 1005822.5      0.00       0.0      53.6 values[19][2]                  0.00
+    0:01:18 1006021.5      0.00       0.0      52.5 values[18][22]                 0.00
+    0:01:18 1006220.6      0.00       0.0      51.5 values[6][9]                   0.00
+    0:01:19 1006419.6      0.00       0.0      50.5 values[6][23]                  0.00
+    0:01:19 1006618.7      0.00       0.0      49.4 values[18][49]                 0.00
+    0:01:19 1006817.7      0.00       0.0      48.4 values[6][41]                  0.00
+    0:01:20 1007016.8      0.00       0.0      47.3 values[6][53]                  0.00
+    0:01:20 1007215.9      0.00       0.0      46.3 values[22][23]                 0.00
+    0:01:20 1007414.9      0.00       0.0      45.3 values[22][35]                 0.00
+    0:01:20 1007614.0      0.00       0.0      44.2 values[22][47]                 0.00
+    0:01:21 1007813.0      0.00       0.0      43.2 values[22][59]                 0.00
+    0:01:21 1008012.1      0.00       0.0      42.2 values[4][13]                  0.00
+    0:01:21 1008211.1      0.00       0.0      41.2 values[4][25]                  0.00
+    0:01:21 1008410.2      0.00       0.0      40.2 values[16][22]                 0.00
+    0:01:22 1008609.3      0.00       0.0      39.2 values[8][9]                   0.00
+    0:01:22 1008808.3      0.00       0.0      38.2 values[8][23]                  0.00
+    0:01:22 1009007.4      0.00       0.0      37.2 values[8][35]                  0.00
+    0:01:23 1009206.4      0.00       0.0      36.2 values[12][18]                 0.00
+    0:01:23 1009405.5      0.00       0.0      35.3 values[12][30]                 0.00
+    0:01:23 1009604.5      0.00       0.0      34.3 values[4][42]                  0.00
+    0:01:24 1009803.6      0.00       0.0      33.3 values[4][54]                  0.00
+    0:01:24 1010002.6      0.00       0.0      32.3 values[16][54]                 0.00
+    0:01:24 1010201.7      0.00       0.0      31.3 values[8][46]                  0.00
+    0:01:24 1010400.8      0.00       0.0      30.3 values[8][58]                  0.00
+    0:01:25 1010599.8      0.00       0.0      29.3 values[12][44]                 0.00
+    0:01:25 1010798.9      0.00       0.0      28.3 values[12][56]                 0.00
+    0:01:25 1010997.9      0.00       0.0      27.4 values[20][18]                 0.00
+    0:01:25 1011197.0      0.00       0.0      26.4 values[20][30]                 0.00
+    0:01:26 1011396.0      0.00       0.0      25.4 values[24][19]                 0.00
+    0:01:26 1011595.1      0.00       0.0      24.4 values[24][31]                 0.00
+    0:01:26 1011794.1      0.00       0.0      23.4 values[28][14]                 0.00
+    0:01:27 1011993.2      0.00       0.0      22.4 values[28][26]                 0.00
+    0:01:27 1012192.3      0.00       0.0      21.4 values[20][38]                 0.00
+    0:01:27 1012391.3      0.00       0.0      20.4 values[20][50]                 0.00
+    0:01:27 1012590.4      0.00       0.0      19.5 values[24][6]                  0.00
+    0:01:28 1012789.4      0.00       0.0      18.5 values[28][57]                 0.00
+    0:01:28 1012988.5      0.00       0.0      17.5 values[28][45]                 0.00
+    0:01:28 1013187.5      0.00       0.0      16.5 values[24][59]                 0.00
+    0:01:28 1013386.6      0.00       0.0      15.5 values[24][47]                 0.00
+    0:01:29 1013585.7      0.00       0.0      14.5 values[20][61]                 0.00
+    0:01:29 1013817.9      0.00       0.0      13.8 values[21][50]                 0.00
+    0:01:29 1014050.1      0.00       0.0      13.2 values[21][36]                 0.00
+    0:01:29 1014282.4      0.00       0.0      12.6 values[21][22]                 0.00
+    0:01:30 1014514.6      0.00       0.0      12.0 values[21][8]                  0.00
+    0:01:30 1014746.8      0.00       0.0      11.5 values[31][58]                 0.00
+    0:01:30 1014979.0      0.00       0.0      10.9 values[31][44]                 0.00
+    0:01:30 1015211.3      0.00       0.0      10.4 values[31][30]                 0.00
+    0:01:30 1015443.5      0.00       0.0       9.9 values[11][54]                 0.00
+    0:01:31 1015675.7      0.00       0.0       9.4 values[11][40]                 0.00
+    0:01:31 1015908.0      0.00       0.0       8.9 values[11][26]                 0.00
+    0:01:31 1016140.2      0.00       0.0       8.4 values[11][12]                 0.00
+    0:01:31 1016372.4      0.00       0.0       7.9 values[30][56]                 0.00
+    0:01:32 1016604.7      0.00       0.0       7.4 values[30][42]                 0.00
+    0:01:32 1016836.9      0.00       0.0       6.9 values[30][28]                 0.00
+    0:01:32 1017069.1      0.00       0.0       6.4 values[30][14]                 0.00
+    0:01:32 1017301.4      0.00       0.0       6.0 values[30][0]                  0.00
+    0:01:32 1017533.6      0.00       0.0       5.5 values[26][50]                 0.00
+    0:01:33 1017765.8      0.00       0.0       5.0 values[26][36]                 0.00
+    0:01:33 1017998.1      0.00       0.0       4.5 values[26][22]                 0.00
+    0:01:33 1018230.3      0.00       0.0       4.1 values[26][8]                  0.00
+    0:01:33 1018462.5      0.00       0.0       3.6 values[14][44]                 0.00
+    0:01:34 1018694.8      0.00       0.0       3.1 values[14][30]                 0.00
+    0:01:34 1018927.0      0.00       0.0       2.6 values[14][16]                 0.00
+    0:01:34 1019159.2      0.00       0.0       2.2 values[14][2]                  0.00
+    0:01:34 1019391.5      0.00       0.0       1.7 values[10][52]                 0.00
+    0:01:35 1019623.7      0.00       0.0       1.2 values[10][38]                 0.00
+    0:01:35 1019855.9      0.00       0.0       0.7 values[10][24]                 0.00
+    0:01:35 1020088.2      0.00       0.0       0.3 values[10][10]                 0.00
+    0:01:35 1020220.9      0.00       0.0       0.0                                0.00
+
+
+  Beginning Critical Range Optimization
+  -------------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:35 1020220.9      0.00       0.0       0.0                                0.00
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:35 1020220.9      0.00       0.0       0.0                                0.00
+    0:01:35 1020220.9      0.00       0.0       0.0                                0.00
+    0:01:35 1020220.9      0.00       0.0       0.0                                0.00
+    0:01:36 1011776.6      0.02       2.6       0.0                                0.00
+    0:01:37 1009001.1      0.00       0.0       0.0                                0.00
+    0:01:38 1007931.7      0.00       0.0       0.0                                0.00
+    0:01:39 1007196.2      0.00       0.0       0.0                                0.00
+    0:01:40 1006561.9      0.00       0.0       0.0                                0.00
+    0:01:40 1006094.1      0.00       0.0       0.0                                0.00
+    0:01:41 1005659.3      0.00       0.0       0.0                                0.00
+    0:01:41 1005091.4      0.00       0.0       0.0                                0.00
+    0:01:42 1004522.8      0.00       0.0       0.0                                0.00
+    0:01:42 1004121.8      0.00       0.0       0.0                                0.00
+    0:01:42 1003854.3      0.00       0.0       0.0                                0.00
+    0:01:43 1003553.6      0.00       0.0       0.0                                0.00
+    0:01:43 1003286.5      0.00       0.0       0.0                                0.00
+    0:01:43 1002986.1      0.00       0.0       0.0                                0.00
+    0:01:44 1002718.9      0.00       0.0       0.0                                0.00
+    0:01:44 1002585.4      0.00       0.0       0.0                                0.00
+    0:01:44 1002585.4      0.00       0.0       0.0                                0.00
+    0:01:44 1002585.4      0.00       0.0       0.0                                0.00
+    0:01:44 1002585.4      0.00       0.0       0.0                                0.00
+    0:01:45 1002585.4      0.00       0.0       0.0                                0.00
+    0:01:45 1002560.5      0.00       0.0       0.0                                0.00
+    0:01:45 1002560.5      0.00       0.0       0.0                                0.00
+    0:01:45 1002560.5      0.00       0.0       0.0                                0.00
+    0:01:45 1002560.5      0.00       0.0       0.0                                0.00
+    0:01:45 1002560.5      0.00       0.0       0.0                                0.00
+    0:01:45 1002560.5      0.00       0.0       0.0                                0.00
+    0:01:45 1002560.5      0.00       0.0       0.0                                0.00
+
+
+  Beginning Critical Range Optimization
+  -------------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:45 1002560.5      0.00       0.0       0.0                                0.00
+    0:01:45 1002593.9      0.00       0.0       0.0                                0.00
+Loading db file '/afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db'
+
+  Optimization Complete
+  ---------------------
+Warning: Design 'register_file' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+     Net 'clock': 1984 load(s), 1 driver(s)
+Writing verilog file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/register_file.vg'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+Error: Writing designs in DB format is no longer supported. (UID-530)
+Removing design 'register_file'
+Removing library 'lec25dscc25_TT'
+Removing library 'gtech'
+Removing library 'standard.sldb'
+Loading db file '/afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/gtech.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/standard.sldb'
+  Loading link library 'lec25dscc25_TT'
+  Loading link library 'gtech'
+Loading verilog file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/register_file.vg'
+Detecting input file type automatically (-rtl or -netlist).
+Running DC verilog reader
+Performing 'read' command.
+Compiling source file /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/register_file.vg
+Reading with netlist reader (equivalent to -netlist option).
+Verilog netlist reader completed successfully.
+Current design is now '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/register_file/register_file.db:register_file'
+Loaded 1 design.
+Current design is 'register_file'.
+Current design is 'register_file'.
+
+Thank you...

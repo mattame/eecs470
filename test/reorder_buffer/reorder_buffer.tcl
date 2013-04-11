@@ -27,8 +27,8 @@ suppress_message {"VER-130"}
 #/* The following four lines must be updated for every      */
 #/* new design                                              */
 #/***********************************************************/
-read_file -f verilog [list "reservation_station.v"]
-set design_name reservation_station
+read_file -f verilog [list "reorder_buffer.v"]
+set design_name reorder_buffer
 #set reset_name reset
 set clock_name clock
 set CLK_PERIOD 13.57

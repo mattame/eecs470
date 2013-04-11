@@ -1,0 +1,742 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Red Hat Enterprise Linux Workstation release 6.3 (Santiago)' 
+  is not supported on 'x86_64' officially, assuming linux compatibility by 
+  default. Set VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+                         Chronologic VCS (TM)
+         Version E-2011.03_Full64 -- Wed Apr 10 21:27:05 2013
+               Copyright (c) 1991-2011 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+DirectC Release 1.0 Copyright (c) 1991-2011 by Synopsys Inc.
+Parsing design file 'test_reorder_buffer.v'
+Parsing design file 'reorder_buffer.vg'
+Parsing design file '/afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v'
+Top Level Modules:
+       testbench
+       and2s3
+       and3s2
+       and3s3
+       and4s2
+       aoai1112s1
+       aoai1112s2
+       aoai1112s3
+       aoi123s1
+       aoi123s2
+       aoi123s3
+       aoi13s1
+       aoi13s2
+       aoi13s3
+       aoi211s1
+       aoi211s2
+       aoi211s3
+       aoi21s1
+       aoi21s2
+       aoi21s3
+       aoi221s1
+       aoi221s2
+       aoi221s3
+       aoi2221s1
+       aoi2221s2
+       aoi2221s3
+       aoi222s1
+       aoi222s2
+       aoi222s3
+       aoi22s3
+       aoi23s2
+       aoi23s3
+       aoi33s1
+       aoi33s2
+       aoi33s3
+       aoi4111s1
+       aoi4111s2
+       aoi4111s3
+       aoi42s1
+       aoi42s2
+       aoi42s3
+       bshes1
+       bshes2
+       bshes3
+       bsles1
+       bsles2
+       bsles3
+       dchei24s1
+       dchei24s2
+       dchei24s3
+       dci24s1
+       dci24s2
+       dci24s3
+       dclei24s1
+       dclei24s2
+       dclei24s3
+       dffacs1
+       dffacs2
+       dffascs1
+       dffascs2
+       dffass1
+       dffass2
+       dffcs2
+       dffles1
+       dffles2
+       dffscs1
+       dffscs2
+       dffss2
+       di2s1
+       di2s2
+       di2s3
+       di2s4
+       di2s5
+       di2s6
+       dsmxc31s1
+       fadd1s1
+       fadd1s2
+       fadd1s3
+       hib1s1
+       hnb1s1
+       i1s2
+       i1s4
+       i1s5
+       i1s6
+       i1s7
+       ib1s2
+       ib1s3
+       ib1s4
+       ib1s5
+       lclks1
+       lclks2
+       lcs1
+       lcs2
+       lnnds1
+       lnnds2
+       lnors1
+       lnors2
+       lscs1
+       lscs2
+       lss1
+       lss2
+       mx21s1
+       mx21s2
+       mx21s3
+       mx41s1
+       mx41s2
+       mx41s3
+       mxi21s3
+       mxi41s2
+       mxi41s3
+       nb1s3
+       nb1s4
+       nb1s5
+       nb1s6
+       nnd2s3
+       nnd3s3
+       nnd4s2
+       nnd4s3
+       nnd5s3
+       nnd6s3
+       nor2s2
+       nor2s3
+       nor3s1
+       nor3s2
+       nor3s3
+       nor4s1
+       nor4s2
+       nor4s3
+       nor5s1
+       nor5s2
+       nor5s3
+       nor6s2
+       nor6s3
+       npd1s1
+       npd1s2
+       npt1s1
+       npt1s2
+       npt1s3
+       npt1s4
+       npt1s5
+       npt1s6
+       oaaoi1123s1
+       oaaoi1123s2
+       oaaoi1123s3
+       oai1112s1
+       oai1112s3
+       oai211s1
+       oai211s3
+       oai21s3
+       oai221s1
+       oai221s3
+       oai2222s1
+       oai2222s2
+       oai2222s3
+       oai222s2
+       oai222s3
+       oai24s1
+       oai24s2
+       oai24s3
+       oai322s1
+       oai322s2
+       oai322s3
+       oai32s1
+       oai32s2
+       oai32s3
+       oai33s2
+       oai33s3
+       or2s3
+       or3s1
+       or3s2
+       or3s3
+       or4s2
+       or4s3
+       or5s3
+       ppt1s1
+       ppt1s2
+       ppt1s3
+       ppt1s4
+       ppt1s5
+       ppt1s6
+       ppu1s1
+       ppu1s2
+       rpc1s1
+       rpc1s2
+       sdffacs1
+       sdffacs2
+       sdffascs1
+       sdffascs2
+       sdffass1
+       sdffass2
+       sdffcs1
+       sdffcs2
+       sdffles1
+       sdffles2
+       sdffs1
+       sdffs2
+       sdffscs1
+       sdffscs2
+       sdffss1
+       sdffss2
+       sub1s1
+       sub1s2
+       sub1s3
+       tibh1s1
+       tibh1s2
+       tibh1s3
+       tibh1s4
+       tibh1s5
+       tibl1s1
+       tibl1s2
+       tibl1s3
+       tibl1s4
+       tibl1s5
+       tnbh1s1
+       tnbh1s2
+       tnbh1s3
+       tnbh1s4
+       tnbh1s5
+       tnbl1s1
+       xnr2s2
+       xnr2s3
+       xnr3s1
+       xnr3s2
+       xnr3s3
+       xor2s2
+       xor2s3
+       xor3s1
+       xor3s2
+       xor3s3
+       and4s3
+       aoai122s1
+       aoai122s2
+       aoai122s3
+       clc2s1
+       clc2s2
+       clc2s3
+       di2s10
+       di2s11
+       di2s12
+       di2s7
+       di2s8
+       di2s9
+       faddpgs1
+       faddpgs2
+       faddpgs3
+       hadd1s2
+       hadd1s3
+       i1s10
+       i1s11
+       i1s12
+       i1s8
+       i1s9
+       ib1s10
+       ib1s11
+       ib1s12
+       ib1s6
+       ib1s7
+       ib1s8
+       ib1s9
+       nb1s10
+       nb1s11
+       nb1s12
+       nb1s7
+       nb1s8
+       nb1s9
+       nnd7s3
+       nnd8s3
+       nor7s3
+       oai13s1
+       oai13s2
+       oai13s3
+       oai22s3
+       oai321s2
+       oai321s3
+       oai33s1
+       tibh1s6
+       tibl1s6
+       tnbh1s6
+       tnbl1s2
+       tnbl1s3
+       tnbl1s4
+       tnbl1s5
+       tnbl1s6
+No TimeScale specified
+Notice: Ports coerced to inout, use -notice for details
+Starting vcs inline pass...
+357 modules and 8 UDPs read.
+recompiling module testbench
+recompiling module reorder_buffer_entry_31
+recompiling module reorder_buffer_entry_30
+recompiling module reorder_buffer_entry_29
+recompiling module reorder_buffer_entry_28
+recompiling module reorder_buffer_entry_27
+recompiling module reorder_buffer_entry_26
+recompiling module reorder_buffer_entry_25
+recompiling module reorder_buffer_entry_24
+recompiling module reorder_buffer_entry_23
+recompiling module reorder_buffer_entry_22
+recompiling module reorder_buffer_entry_21
+recompiling module reorder_buffer_entry_20
+recompiling module reorder_buffer_entry_19
+recompiling module reorder_buffer_entry_18
+recompiling module reorder_buffer_entry_17
+recompiling module reorder_buffer_entry_16
+recompiling module reorder_buffer_entry_15
+recompiling module reorder_buffer_entry_14
+recompiling module reorder_buffer_entry_13
+recompiling module reorder_buffer_entry_12
+recompiling module reorder_buffer_entry_11
+recompiling module reorder_buffer_entry_10
+recompiling module reorder_buffer_entry_9
+recompiling module reorder_buffer_entry_8
+recompiling module reorder_buffer_entry_7
+recompiling module reorder_buffer_entry_6
+recompiling module reorder_buffer_entry_5
+recompiling module reorder_buffer_entry_4
+recompiling module reorder_buffer_entry_3
+recompiling module reorder_buffer_entry_2
+recompiling module reorder_buffer_entry_1
+recompiling module reorder_buffer_entry_0
+recompiling module reorder_buffer_DW01_inc_0
+recompiling module reorder_buffer_DW01_inc_1
+recompiling module and2s1
+recompiling module and2s3
+recompiling module and3s1
+recompiling module and3s2
+recompiling module and3s3
+recompiling module and4s1
+recompiling module and4s2
+recompiling module aoai1112s1
+recompiling module aoai1112s2
+recompiling module aoai1112s3
+recompiling module aoi123s1
+recompiling module aoi123s2
+recompiling module aoi123s3
+recompiling module aoi13s1
+recompiling module aoi13s2
+50 of 357 modules done
+recompiling module aoi13s3
+recompiling module aoi211s1
+recompiling module aoi211s2
+recompiling module aoi211s3
+recompiling module aoi21s1
+recompiling module aoi21s2
+recompiling module aoi21s3
+recompiling module aoi221s1
+recompiling module aoi221s2
+recompiling module aoi221s3
+recompiling module aoi2221s1
+recompiling module aoi2221s2
+recompiling module aoi2221s3
+recompiling module aoi222s1
+recompiling module aoi222s2
+recompiling module aoi222s3
+recompiling module aoi22s1
+recompiling module aoi22s2
+recompiling module aoi22s3
+recompiling module aoi23s1
+recompiling module aoi23s2
+recompiling module aoi23s3
+recompiling module aoi33s1
+recompiling module aoi33s2
+recompiling module aoi33s3
+recompiling module aoi4111s1
+recompiling module aoi4111s2
+recompiling module aoi4111s3
+recompiling module aoi42s1
+recompiling module aoi42s2
+recompiling module aoi42s3
+recompiling module bshes1
+recompiling module bshes2
+recompiling module bshes3
+recompiling module bsles1
+recompiling module bsles2
+recompiling module bsles3
+recompiling module dchei24s1
+recompiling module dchei24s2
+recompiling module dchei24s3
+recompiling module dci24s1
+recompiling module dci24s2
+recompiling module dci24s3
+recompiling module dclei24s1
+recompiling module dclei24s2
+recompiling module dclei24s3
+recompiling module dffacs1
+recompiling module dffacs2
+recompiling module dffascs1
+recompiling module dffascs2
+100 of 357 modules done
+recompiling module dffass1
+recompiling module dffass2
+recompiling module dffcs1
+recompiling module dffcs2
+recompiling module dffles1
+recompiling module dffles2
+recompiling module dffs1
+recompiling module dffs2
+recompiling module dffscs1
+recompiling module dffscs2
+recompiling module dffss1
+recompiling module dffss2
+recompiling module di2s1
+recompiling module di2s2
+recompiling module di2s3
+recompiling module di2s4
+recompiling module di2s5
+recompiling module di2s6
+recompiling module dsmxc31s1
+recompiling module dsmxc31s2
+recompiling module fadd1s1
+recompiling module fadd1s2
+recompiling module fadd1s3
+recompiling module hib1s1
+recompiling module hnb1s1
+recompiling module i1s1
+recompiling module i1s2
+recompiling module i1s3
+recompiling module i1s4
+recompiling module i1s5
+recompiling module i1s6
+recompiling module i1s7
+recompiling module ib1s2
+recompiling module ib1s3
+recompiling module ib1s4
+recompiling module ib1s5
+recompiling module lclks1
+recompiling module lclks2
+recompiling module lcs1
+recompiling module lcs2
+recompiling module lnnds1
+recompiling module lnnds2
+recompiling module lnors1
+recompiling module lnors2
+recompiling module lscs1
+recompiling module lscs2
+recompiling module lss1
+recompiling module lss2
+recompiling module mx21s1
+recompiling module mx21s2
+150 of 357 modules done
+recompiling module mx21s3
+recompiling module mx41s1
+recompiling module mx41s2
+recompiling module mx41s3
+recompiling module mxi21s1
+recompiling module mxi21s2
+recompiling module mxi21s3
+recompiling module mxi41s1
+recompiling module mxi41s2
+recompiling module mxi41s3
+recompiling module nb1s1
+recompiling module nb1s2
+recompiling module nb1s3
+recompiling module nb1s4
+recompiling module nb1s5
+recompiling module nb1s6
+recompiling module nnd2s1
+recompiling module nnd2s2
+recompiling module nnd2s3
+recompiling module nnd3s2
+recompiling module nnd3s3
+recompiling module nnd4s1
+recompiling module nnd4s2
+recompiling module nnd4s3
+recompiling module nnd5s3
+recompiling module nnd6s3
+recompiling module nor2s1
+recompiling module nor2s2
+recompiling module nor2s3
+recompiling module nor3s1
+recompiling module nor3s2
+recompiling module nor3s3
+recompiling module nor4s1
+recompiling module nor4s2
+recompiling module nor4s3
+recompiling module nor5s1
+recompiling module nor5s2
+recompiling module nor5s3
+recompiling module nor6s1
+recompiling module nor6s2
+recompiling module nor6s3
+recompiling module npd1s1
+recompiling module npd1s2
+recompiling module npt1s1
+recompiling module npt1s2
+recompiling module npt1s3
+recompiling module npt1s4
+recompiling module npt1s5
+recompiling module npt1s6
+recompiling module oaaoi1123s1
+200 of 357 modules done
+recompiling module oaaoi1123s2
+recompiling module oaaoi1123s3
+recompiling module oai1112s1
+recompiling module oai1112s2
+recompiling module oai1112s3
+recompiling module oai211s1
+recompiling module oai211s2
+recompiling module oai211s3
+recompiling module oai21s1
+recompiling module oai21s2
+recompiling module oai21s3
+recompiling module oai221s1
+recompiling module oai221s2
+recompiling module oai221s3
+recompiling module oai2222s1
+recompiling module oai2222s2
+recompiling module oai2222s3
+recompiling module oai222s1
+recompiling module oai222s2
+recompiling module oai222s3
+recompiling module oai22s1
+recompiling module oai22s2
+recompiling module oai24s1
+recompiling module oai24s2
+recompiling module oai24s3
+recompiling module oai322s1
+recompiling module oai322s2
+recompiling module oai322s3
+recompiling module oai32s1
+recompiling module oai32s2
+recompiling module oai32s3
+recompiling module oai33s2
+recompiling module oai33s3
+recompiling module or2s2
+recompiling module or2s3
+recompiling module or3s1
+recompiling module or3s2
+recompiling module or3s3
+recompiling module or4s1
+recompiling module or4s2
+recompiling module or4s3
+recompiling module or5s1
+recompiling module or5s2
+recompiling module or5s3
+recompiling module ppt1s1
+recompiling module ppt1s2
+recompiling module ppt1s3
+recompiling module ppt1s4
+recompiling module ppt1s5
+recompiling module ppt1s6
+250 of 357 modules done
+recompiling module ppu1s1
+recompiling module ppu1s2
+recompiling module rpc1s1
+recompiling module rpc1s2
+recompiling module sdffacs1
+recompiling module sdffacs2
+recompiling module sdffascs1
+recompiling module sdffascs2
+recompiling module sdffass1
+recompiling module sdffass2
+recompiling module sdffcs1
+recompiling module sdffcs2
+recompiling module sdffles1
+recompiling module sdffles2
+recompiling module sdffs1
+recompiling module sdffs2
+recompiling module sdffscs1
+recompiling module sdffscs2
+recompiling module sdffss1
+recompiling module sdffss2
+recompiling module sub1s1
+recompiling module sub1s2
+recompiling module sub1s3
+recompiling module tibh1s1
+recompiling module tibh1s2
+recompiling module tibh1s3
+recompiling module tibh1s4
+recompiling module tibh1s5
+recompiling module tibl1s1
+recompiling module tibl1s2
+recompiling module tibl1s3
+recompiling module tibl1s4
+recompiling module tibl1s5
+recompiling module tnbh1s1
+recompiling module tnbh1s2
+recompiling module tnbh1s3
+recompiling module tnbh1s4
+recompiling module tnbh1s5
+recompiling module tnbl1s1
+recompiling module xnr2s1
+recompiling module xnr2s2
+recompiling module xnr2s3
+recompiling module xnr3s1
+recompiling module xnr3s2
+recompiling module xnr3s3
+recompiling module xor2s1
+recompiling module xor2s2
+recompiling module xor2s3
+recompiling module xor3s1
+recompiling module xor3s2
+300 of 357 modules done
+recompiling module xor3s3
+recompiling module and4s3
+recompiling module aoai122s1
+recompiling module aoai122s2
+recompiling module aoai122s3
+recompiling module clc2s1
+recompiling module clc2s2
+recompiling module clc2s3
+recompiling module di2s10
+recompiling module di2s11
+recompiling module di2s12
+recompiling module di2s7
+recompiling module di2s8
+recompiling module di2s9
+recompiling module faddpgs1
+recompiling module faddpgs2
+recompiling module faddpgs3
+recompiling module hadd1s1
+recompiling module hadd1s2
+recompiling module hadd1s3
+recompiling module i1s10
+recompiling module i1s11
+recompiling module i1s12
+recompiling module i1s8
+recompiling module i1s9
+recompiling module ib1s10
+recompiling module ib1s11
+recompiling module ib1s12
+recompiling module ib1s6
+recompiling module ib1s7
+recompiling module ib1s8
+recompiling module ib1s9
+recompiling module nb1s10
+recompiling module nb1s11
+recompiling module nb1s12
+recompiling module nb1s7
+recompiling module nb1s8
+recompiling module nb1s9
+recompiling module nnd7s3
+recompiling module nnd8s3
+recompiling module nor7s3
+recompiling module oai13s1
+recompiling module oai13s2
+recompiling module oai13s3
+recompiling module oai22s3
+recompiling module oai321s1
+recompiling module oai321s2
+recompiling module oai321s3
+recompiling module oai33s1
+recompiling module tibh1s6
+350 of 357 modules done
+recompiling module tibl1s6
+recompiling module tnbh1s6
+recompiling module tnbl1s2
+recompiling module tnbl1s3
+recompiling module tnbl1s4
+recompiling module tnbl1s5
+recompiling module tnbl1s6
+All of 357 modules done
+make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reorder_buffer/csrc'
+if [ -x ../syn_simv ]; then chmod -x ../syn_simv; fi
+g++  -o ../syn_simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../syn_simv up to date
+make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reorder_buffer/csrc'
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 10 21:27 2013
+
+STARTING TESTBENCH!
+
+resetting
+
+  preclock: reset=1 i1_tag_o=xxxxxxxx i2_tag_o=xxxxxxxx rob_full=x rob_empty=x i1mo=x i2mo=x
+   i1_dest_o=xxxxx i1_value_o=xxxxxxxxxxxxxxxx i2_dest_o=xxxxx i2_value_o=xxxxxxxxxxxxxxxx
+ postclock: reset=1 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+holding
+
+  preclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+ postclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+inserting 2 ins'ns
+
+  preclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+ postclock: reset=0 i1_tag_o=00000000 i2_tag_o=00000001 rob_full=0 rob_empty=0 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+hold
+
+  preclock: reset=0 i1_tag_o=00000000 i2_tag_o=00000001 rob_full=0 rob_empty=0 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+ postclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=0 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+putting data on cdb
+
+  preclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=0 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+ postclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=0 i1mo=1 i2mo=0
+   i1_dest_o=00001 i1_value_o=aaaaaaaaaaaaaaaa i2_dest_o=00010 i2_value_o=bbbbbbbbbbbbbbbb
+
+wait
+
+  preclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=0 i1mo=1 i2mo=0
+   i1_dest_o=00001 i1_value_o=aaaaaaaaaaaaaaaa i2_dest_o=00010 i2_value_o=bbbbbbbbbbbbbbbb
+ postclock: reset=0 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+resetting
+
+  preclock: reset=1 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+ postclock: reset=1 i1_tag_o=11111111 i2_tag_o=11111111 rob_full=0 rob_empty=1 i1mo=0 i2mo=0
+   i1_dest_o=00000 i1_value_o=0000000000000000 i2_dest_o=00000 i2_value_o=0000000000000000
+
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test_reorder_buffer.v", line 261.
+$finish at simulation time                  140
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 140
+CPU Time:      0.040 seconds;       Data structure size:   9.0Mb
+Wed Apr 10 21:27:15 2013
+CPU time: 5.003 seconds to compile + .387 seconds to elab + .440 seconds to link + .083 seconds in simulation

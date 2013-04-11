@@ -89,9 +89,13 @@ module pipeline (// Inputs
   wire   if_id_enable, id_ex_enable, ex_mem_enable, mem_wb_enable;
 
   // Outputs from IF-Stage
-  wire [63:0] if_NPC_out;
-  wire [31:0] if_IR_out;
-  wire        if_valid_inst_out;
+  wire [63:0] if_NPC_out_1;
+  wire [31:0] if_IR_out_1;
+  wire        if_valid_inst_out_1;
+
+  wire [63:0] if_NPC_out_2;
+  wire [31:0] if_IR_out_2;
+  wire        if_valid_inst_out_2;
 
   wire [63:0] proc2Imem_addr;
 
@@ -169,6 +173,10 @@ module pipeline (// Inputs
   wire [63:0] wb_reg_wr_data_out;
   wire  [4:0] wb_reg_wr_idx_out;
   wire        wb_reg_wr_en_out;
+  
+  wire stall;
+  
+  assign stall = stall_RS | stall_ROB;
 
   assign pipeline_completed_insts = {3'b0, mem_wb_valid_inst};
   assign pipeline_error_status = 
@@ -188,6 +196,8 @@ module pipeline (// Inputs
   assign proc2mem_addr =
            (proc2Dmem_command==`BUS_NONE)?proc2Imem_addr:proc2Dmem_addr;
 
+  
+
   //////////////////////////////////////////////////
   //                                              //
   //                  IF-Stage                    //
@@ -199,26 +209,31 @@ module pipeline (// Inputs
                        
                        
                        //What does stall do or where does it come from
-                       .stall (/***/),
+                       .stall (stall),
                        
+                       //this was not in our IF stage
                        //.mem_wb_valid_inst(mem_wb_valid_inst),
                        
                        .ex_mem_take_branch(ex_mem_take_branch),
                        .ex_mem_target_pc(ex_mem_alu_result),
-                       .Imem2proc_data(mem2proc_data),
+                       .Imem2proc_data(Imem2proc_data),
                        
                        // Outputs
-                       .if_NPC_out_1(if_NPC_out_1), 
-                       .if_IR_out_1(if_IR_out_1),
-                       .if_valid_inst_out1(if_valid_inst_out_1),
+                       .if_NPC_out_1(if_NPC_1), 
+                       .if_IR_out_1(if_IR_1),
+                       .if_valid_inst_out1(if_valid_inst_1),
                        
                        .if_NPC_out_2(if_NPC_out_2), 
                        .if_IR_out_2(if_IR_out_2),
-                       .if_valid_inst_out2(if_valid_inst_out_2),
+                       .if_valid_inst_out2(if_valid_inst_2),
 
                        .proc2Imem_addr(proc2Imem_addr),
                    
                       );
+
+  wire [63:0] if_NPC_1, if_NPC_2;
+  wire [31:0] if_IR_1, if_IR_2;
+  wire if_valid_inst_out1, if_valid_inst_out2;
 
 
   //////////////////////////////////////////////////
@@ -251,39 +266,273 @@ module pipeline (// Inputs
   //                                              //
   //////////////////////////////////////////////////
 
-  //need 2 ID stages
 
-  id_stage id_stage_0 (// Inputs
-                       .clock     (clock),
-                       .reset   (reset),
-                       .if_id_IR   (if_id_IR),
-                       .if_id_valid_inst(if_id_valid_inst),
-                       .wb_reg_wr_en_out   (wb_reg_wr_en_out),
-                       .wb_reg_wr_idx_out  (wb_reg_wr_idx_out),
-                       .wb_reg_wr_data_out (wb_reg_wr_data_out),
-                       
-                       // Outputs
-                       .id_ra_value_out(id_rega_out),
-                       .id_rb_value_out(id_regb_out),
-                       .id_opa_select_out(id_opa_select_out),
-                       .id_opb_select_out(id_opb_select_out),
-                       .id_dest_reg_idx_out(id_dest_reg_idx_out),
-                       .id_alu_func_out(id_alu_func_out),
-                       .id_rd_mem_out(id_rd_mem_out),
-                       .id_wr_mem_out(id_wr_mem_out),
-                       .id_cond_branch_out(id_cond_branch_out),
-                       .id_uncond_branch_out(id_uncond_branch_out),
-                       .id_halt_out(id_halt_out),
-                       .id_illegal_out(id_illegal_out),
-                       .id_valid_inst_out(id_valid_inst_out)
-                      );
+ 
 
+
+  //need 2 ID stages   ...?
+  id_stage id_stage0(
+              // Inputs
+              .clock(clock),
+              .reset(reset),
+              if_id_IR_1(,
+              if_id_valid_inst_1,
+
+              if_id_IR_2,
+              if_id_valid_inst_2,
+
+              wb_reg_wr_en_out,
+              wb_reg_wr_idx_out,
+              wb_reg_wr_data_out,
+
+              // Outputs
+              id_opa_select_out_1,
+              id_opb_select_out_1,
+              id_dest_reg_idx_out_1,
+              id_alu_func_out_1,
+              id_rd_mem_out_1,
+              id_wr_mem_out_1,
+              id_cond_branch_out_1,
+              id_uncond_branch_out_1,
+              id_halt_out_1,
+              id_illegal_out_1,
+              id_valid_inst_out_1,
+              ra_idx_1,
+              rb_idx_1,
+              rc_idx_1,
+
+              id_opa_select_out_2,
+              id_opb_select_out_2,
+              id_dest_reg_idx_out_2,
+              id_alu_func_out_2,
+              id_rd_mem_out_2,
+              id_wr_mem_out_2,
+              id_cond_branch_out_2,
+              id_uncond_branch_out_2,
+              id_halt_out_2,
+              id_illegal_out_2,
+              id_valid_inst_out_2,
+              ra_idx_2,
+              rb_idx_2,
+              rc_idx_2
+              );
+                      
+                      
+                      
+                      
+  //for second decode                    
+                      
+  wire [63:0] id_inst2_rega_value, id_inst2_regb_value;                  
+
+
+  wire rob_full, rob_empty;
+
+  //from Map Table to ROB
+  wire [7:0] inst1_taga, inst1_tagb, inst2_taga, inst2_tagb;
+  
+  //from ROB to Register
+  wire  [4:0] inst1_dest, inst2_dest;
+  wire [63:0] inst1_value, inst2_value;
+
+  //from ROB to Reservation Station
+  wire [63:0] rob_inst1_rega_value, rob_inst1_regb_value, rob_inst2_rega_value, rob_inst2_regb_value;
+  wire  [7:0] inst1_tag, inst2_tag;
 
   reorder_buffer reorder_buffer_0 (//Inputs
-                                    .clock (clock),
-                                    .reset (reset),
+  
+                                          .clock(clock), .reset(reset),
+                                          
+                                          /*these will come from decode*/
+                                          .inst1_valid_in,
+                                          .inst1_dest_in,
+
+                                          .inst2_valid_in,
+                                          .inst2_dest_in,
+
+                                          // tags for reading from the rs // 
+                                          .inst1_rega_tag_in(inst1_taga),
+                                          .inst1_regb_tag_in(inst1_tagb),
+                                          .inst2_rega_tag_in(inst2_taga),
+                                          .inst2_regb_tag_in(inst2_tagb),
+
+                                          // cdb inputs //
+                                          .cdb1_tag_in,
+                                          .cdb1_value_in,
+                                          .cdb2_tag_in,
+                                          .cdb2_value_in, 
+
+                                          // outputs //
+                                          
+                                          //outputs to RS
+                                          .inst1_tag_out(inst1_tag),
+                                          .inst2_tag_out(inst2_tag),
+
+                                          // values out to the rs //
+                                          .inst1_rega_value_out(rob_inst1_rega_value),
+                                          .inst1_regb_value_out(rob_inst1_regb_value),
+                                          .inst2_rega_value_out(rob_inst2_rega_value),
+                                          .inst2_regb_value_out(rob_inst2_regb_value),     
+
+                                          // outputs to write directly to the reg file //
+                                          .inst1_dest_out(inst1_dest), .inst1_value_out(inst1_value),
+                                          .inst2_dest_out(inst2_dest), .inst2_value_out(inst2_value),
+
+                                          // signals out //
+                                          .rob_full(rob_full), .rob_empty(rob_empty)
+                                      );
+                                      
+                                      
+                                      
+  reservation_station reservation_station_0(//Inputs
+  
+                           // signals and busses in for inst 1 (from id1) //
+                           //Values from ROB
+                           .inst1_rega_value_in(inst1_rega_value),
+                           .inst1_regb_value_in(inst1_regb_value),
+                        
+                           //Tags from Map Table
+                           .inst1_rega_tag_in(inst1_taga),
+                           .inst1_regb_tag_in(inst1_tagb),
 
 
+                           //Tag from ROB                           
+                           .inst1_dest_tag_in(inst1_tag), 
+                           
+                           
+                           
+                           //Instruction signals from Decode                         
+                           .inst1_dest_reg_in,
+                           .inst1_opa_select_in,
+                           .inst1_opb_select_in,
+                           .inst1_alu_func_in,
+                           .inst1_rd_mem_in,
+                           .inst1_wr_mem_in,
+                           .inst1_cond_branch_in,
+                           .inst1_uncond_branch_in,
+                           .inst1_valid,
+
+                           // signals and busses in for inst 2 (from id2) //
+                           //Values from DECODE
+                           .inst2_rega_value_in(),
+                           .inst2_regb_value_in(),
+                           
+                           //Tags from Map Table
+                           .inst2_rega_tag_in(inst2_taga),
+                           .inst2_regb_tag_in(inst2_tagb),
+                           
+                           //Tag from ROB
+                           .inst2_dest_tag_in(inst2_tag),
+                           
+                           //Instruction signals from Decode
+                           .inst2_dest_reg_in,
+                           .inst2_opa_select_in,
+                           .inst2_opb_select_in,
+                           .inst2_alu_func_in,
+                           .inst2_rd_mem_in,
+                           .inst2_wr_mem_in,
+                           .inst2_cond_branch_in,
+                           .inst2_uncond_branch_in,
+                           .inst2_valid,
+
+                           // cdb inputs //
+                           .cdb1_tag_in,
+                           .cdb2_tag_in,
+                           .cdb1_value_in,
+                           .cdb2_value_in,
+
+                           // inputs from the ROB //
+                           .inst1_rega_rob_value_in(rob_inst1_rega_value),
+                           .inst1_regb_rob_value_in(rob_inst1_regb_value),
+                           .inst2_rega_rob_value_in(rob_inst2_rega_value),
+                           .inst2_regb_rob_value_in(rob_inst2_regb_value),
+
+                           // signals and busses out for inst1 to the ex stage
+                           .inst1_rega_value_out, .inst1_regb_value_out,
+                           .inst1_opa_select_out, .inst1_opb_select_out,
+                           .inst1_alu_func_out,
+                           .inst1_rd_mem_out, .inst1_wr_mem_out,
+                           .inst1_cond_branch_out, .inst1_uncond_branch_out,
+                           .inst1_valid_out,
+                           .inst1_dest_reg_out,
+                           .inst1_dest_tag_out,
+
+                           // signals and busses out for inst2 to the ex stage
+                           .inst2_rega_value_out, .inst2_regb_value_out,
+                           .inst2_opa_select_out, .inst2_opb_select_out,
+                           .inst2_alu_func_out,
+                           .inst2_rd_mem_out, .inst2_wr_mem_out,
+                           .inst2_cond_branch_out, .inst2_uncond_branch_out,
+                           .inst2_valid_out,
+                           .inst2_dest_reg_out,
+                           .inst2_dest_tag_out,
+
+                           // signal outputs //
+                           .dispatch(stall_RS),
+                         
+                           // outputs for debugging //
+                           .first_empties, .second_empties, .states_out, .fills, .issue_first_states, .issue_second_states, .ages_out
+                           
+                           );
+
+
+  wire [4:0] inst1_rega, inst1_regb, inst2_rega, inst2_regb;
+
+  map_table map_table_0 (//Inputs
+  
+                           .clock(clock), .reset(reset), .clear_entries(clear_entries),
+
+
+                           //THESE COME FROM DECODE
+
+                           // instruction 1 access inputs //
+                           .inst1_rega_in,
+                           .inst1_regb_in,
+                           .inst1_dest_in,
+                           .inst1_tag_in,
+
+                           // instruction 2 access inputs //
+                           .inst2_rega_in,
+                           .inst2_regb_in,
+                           .inst2_dest_in,
+                           .inst2_tag_in,
+
+                           // cdb inputs //
+                           .cdb1_tag_in,
+                           .cdb2_tag_in,
+                          
+                           // tag outputs //
+                           .inst1_taga_out(inst1_taga), .inst1_tagb_out(inst1_tagb),
+                           .inst2_taga_out(inst2_taga), .inst2_tagb_out(inst2_tagb)  
+                           
+                           );
+      
+  //from Register File to Reservation Station                         
+  wire [63:0] inst1_rega, inst1_regb, inst2_rega, inst2_regb;
+ 
+ 
+  //from Register File to Map Table
+  wire [31:0] clear_entries;
+  
+  register_file register_file0(//Inputs
+                      
+                     .clock(clock), .reset(reset),
+
+                     // input busses: register indexes and values in // 
+                     .inst1_rega_in, .inst1_regb_in, 
+                     .inst2_rega_in, .inst2_regb_in,
+                     
+                     //Destination and Value to write
+                     .inst1_dest_in(inst1_dest), .inst1_value_in(inst1_value),
+                     .inst2_dest_in(inst2_dest), .inst2_value_in(inst2_value),
+
+                     // output busses: register values out //
+                     .inst1_rega_out(inst1_rega), .inst1_regb_out(inst1_regb),
+                     .inst2_rega_out(inst2_regb), .inst2_regb_out(inst2_regb),
+
+                     // ouput signals: tell the map table when to clear //
+                     .clear_entries(clear_entries)
+                     );
+  
 
   //////////////////////////////////////////////////
   //                                              //

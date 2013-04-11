@@ -59,7 +59,7 @@ module reorder_buffer_entry(
   /***  outputs  ***/
   output reg [63:0] value_out;
   output reg  [4:0] register_out;
-  output reg [1:0]  state_out;
+  output reg  [1:0] state_out;
 
 
   // combinational assignments //  

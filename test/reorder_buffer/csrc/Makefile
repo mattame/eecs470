@@ -8,7 +8,7 @@ VSRC=..
 TARGET_ARCH=
 
 # Choose name of executable 
-PRODUCTBASE=$(VSRC)/syn_simv
+PRODUCTBASE=$(VSRC)/simv
 
 PRODUCT=$(PRODUCTBASE)
 

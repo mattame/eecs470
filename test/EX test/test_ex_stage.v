@@ -32,6 +32,12 @@ module testbench;
     reg  [1:0] id_ex_opb_select_2;
 	reg  [4:0] id_ex_alu_func_2;
 
+          // From Mem Access
+    reg  [4:0] MEM_tag_in;
+    reg [63:0] MEM_value_in;
+    reg        MEM_valid_in;
+
+
 	wire stall_bus_1;
 	wire stall_bus_2;
 	wire ex_branch_taken;
@@ -48,8 +54,18 @@ module testbench;
 	wire [63:0] ex_result_out_2;
 	wire        ex_valid_out_2;
 
+          // To LSQ
+    wire  [4:0] LSQ_tag_out_1;
+    wire [63:0] LSQ_address_out_1;
+    wire [63:0] LSQ_value_out_1;
+
+    wire  [4:0] LSQ_tag_out_2;
+    wire [63:0] LSQ_address_out_2;
+    wire [63:0] LSQ_value_out_2;
+
         // module to be tested //	
-	ex_stage ex_0(// Inputs
+
+ex_stage ex_0(// Inputs
                 .clock(clock),
                 .reset(reset),
 				// Input Bus 1 (contains branch logic)
@@ -72,7 +88,12 @@ module testbench;
 				.id_ex_opa_select_2(id_ex_opa_select_2),
 				.id_ex_opb_select_2(id_ex_opb_select_2),
 				.id_ex_alu_func_2(id_ex_alu_func_2),
-			
+				
+          // From Mem Access
+        .MEM_tag_in(MEM_tag_in),
+        .MEM_value_in(MEM_value_in),
+        .MEM_valid_in(MEM_valid_in),
+        
 		   	        // Outputs
 				.stall_bus_1(stall_bus_1),
 				.stall_bus_2(stall_bus_2),
@@ -88,9 +109,17 @@ module testbench;
 				.ex_NPC_out_2(ex_NPC_out_2),
 				.ex_dest_reg_out_2(ex_dest_reg_out_2),
 				.ex_result_out_2(ex_result_out_2),
-				.ex_valid_out_2(ex_valid_out_2)
-               );
+				.ex_valid_out_2(ex_valid_out_2),
 
+          // To LSQ
+        .LSQ_tag_out_1(LSQ_tag_out_1),
+        .LSQ_address_out_1(LSQ_address_out_1),
+        .LSQ_value_out_1(LSQ_value_out_1),
+
+        .LSQ_tag_out_2(LSQ_tag_out_2),
+        .LSQ_address_out_2(LSQ_address_out_2),
+        .LSQ_value_out_2(LSQ_value_out_2)
+               );
 
    // run the clock //
    always
@@ -188,6 +217,10 @@ module testbench;
 	id_ex_opa_select_2 = `ALU_OPA_IS_REGA;
 	id_ex_opb_select_2 = `ALU_OPB_IS_REGB;
 	id_ex_alu_func_2 = `ALU_ADDQ;
+
+	MEM_tag_in = 5'h0;
+	MEM_value_in = 64'h0;
+	MEM_valid_in = 1'b0;
 
         @(posedge clock);
         @(posedge clock);

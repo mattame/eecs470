@@ -216,16 +216,10 @@ module id_stage(
               if_id_IR_2,
               if_id_valid_inst_2,
 
-// Do we need these three inputs?
-// i don't thing so, since the register write stuff is not handled here any
-// more.   -Mike
-              wb_reg_wr_en_out,
-              wb_reg_wr_idx_out,
-              wb_reg_wr_data_out,
-
               // Outputs
               id_opa_select_out_1,
               id_opb_select_out_1,
+              
               id_dest_reg_idx_out_1,
               id_alu_func_out_1,
               id_rd_mem_out_1,
@@ -235,9 +229,12 @@ module id_stage(
               id_halt_out_1,
               id_illegal_out_1,
               id_valid_inst_out_1,
+              
+              //Registers to Map Table
+              //[4:0]
+              //REMOVED C
               ra_idx_1,
               rb_idx_1,
-              rc_idx_1,
 
               id_opa_select_out_2,
               id_opb_select_out_2,
@@ -252,7 +249,6 @@ module id_stage(
               id_valid_inst_out_2,
               ra_idx_2,
               rb_idx_2,
-              rc_idx_2
               );
 
 
@@ -265,9 +261,6 @@ module id_stage(
   input  [31:0] if_id_IR_2;             // incoming instruction
   input         if_id_valid_inst_2;
 
-  input         wb_reg_wr_en_out;     // Reg write enable from WB Stage
-  input   [4:0] wb_reg_wr_idx_out;    // Reg write index from WB Stage
-  input  [63:0] wb_reg_wr_data_out;   // Reg write data from WB Stage
 
   output  [1:0] id_opa_select_out_1;    // ALU opa mux select (ALU_OPA_xxx *)
   output  [1:0] id_opb_select_out_1;    // ALU opb mux select (ALU_OPB_xxx *)

@@ -13,14 +13,11 @@
 `define	NO_BROADCAST ; 
 
 module cm_stage(// Inputs
-		ex_cm_IR_1,
-		ex_cm_NPC_1,
+
 		ex_cm_tag_1,
 		ex_cm_result_1,
 		ex_cm_valid_1,
 		
-		ex_cm_IR_2,
-		ex_cm_NPC_2,
 		ex_cm_tag_2,
 		ex_cm_result_2,
 		ex_cm_valid_2,
@@ -33,15 +30,10 @@ module cm_stage(// Inputs
 		cdb_value_2
 		);
 
-input [32:0] ex_cm_IR_1;
-input [63:0] ex_cm_NPC_1;
 input  [4:0] ex_cm_tag_1;
 input [63:0] ex_cm_result_1;
 input        ex_cm_valid_1;
 
-
-input [32:0] ex_cm_IR_2;
-input [63:0] ex_cm_NPC_2;
 input  [4:0] ex_cm_tag_2;
 input [63:0] ex_cm_result_2;
 input        ex_cm_valid_2;

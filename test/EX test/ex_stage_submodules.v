@@ -95,9 +95,9 @@ module arbiter(		  // Inputs
 	input [63:0] ex_mult_result_out_2;
 	input		 ex_mult_valid_out_2;
 	
-  input  [4:0] mem_tag_in,
-  input [63:0] mem_value_in,
-  input        mem_valid_in,
+  input  [4:0] mem_tag_in;
+  input [63:0] mem_value_in;
+  input        mem_valid_in;
 
 	output		  stall_bus_1;
 	output		  stall_bus_2;

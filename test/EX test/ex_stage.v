@@ -92,7 +92,10 @@ module ex_stage(// Inputs
   input   [1:0] id_ex_opa_select_2;  // opA mux select from decoder
   input   [1:0] id_ex_opb_select_2;  // opB mux select from decoder
   input   [4:0] id_ex_alu_func_2;    // ALU function select from decoder
-  
+ 
+  input   [4:0] MEM_tag_in;
+  input  [63:0] MEM_value_in;
+  input         MEM_valid_in;  
 
   output        stall_bus_1;	     // Should input bus 1 stall?
   output		    stall_bus_2;	     // Should input bus 2 stall?

@@ -154,7 +154,7 @@ assign stored_address_out = stored_address;
 assign stored_value_out = stored_value;
 assign stored_tag_out = stored_tag;
 assign read_out = read;
-assign ready_out = (((!read & (LSQ_head == stored_tag) | 
+assign ready_out = (((!read & (LSQ_head == stored_tag)) | 
 	                 (read & (stored_tag == ROB_head_1 | stored_tag == ROB_head_2)))
 	                 & complete) ? 1'b1: 1'b0;
 
@@ -254,9 +254,13 @@ module LSQ(//Inputs
  wire 		 readies_out [(`LSQ_ENTRIES-1):0];
 
 // ----------- ENTRY INPUT LOGIC ----------
+ wire clears [(`LSQ_ENTRIES-1):0];
+ wire stores_1 [(`LSQ_ENTRIES-1):0];
+ wire stores_2 [(`LSQ_ENTRIES-1):0];
+
  genvar i;
  generate
- 	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin
+ 	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin : ASSIGNLSQINPUTS
  		assign clears[i]   = (reset | (i == LSQ_head & readies_out[i] == 1'b1)) ? 1'b1: 1'b0;
  		assign stores_1[i] = (i == next_entry_1 & valid_alu_in_1) ? 1'b1: 1'b0;
  		assign stores_2[i] = ((i == next_entry_1 & !valid_alu_in_1 & valid_alu_in_2) | 
@@ -268,31 +272,31 @@ module LSQ(//Inputs
 
  LSQ_entry entries[(`LSQ_ENTRIES-1):0] (
  						//Inputs
-						.clock(`LSQ_ENTRIES{clock}),
-						.reset(`LSQ_ENTRIES{reset}),
+						.clock({`LSQ_ENTRIES{clock}}),
+						.reset({`LSQ_ENTRIES{reset}}),
 
-						.ROB_head_1(`LSQ_ENTRIES{ROB_head_1}),
-						.ROB_head_2(`LSQ_ENTRIES{ROB_head_2}),
+						.ROB_head_1({`LSQ_ENTRIES{ROB_head_1}}),
+						.ROB_head_2({`LSQ_ENTRIES{ROB_head_2}}),
 
-						.LSQ_head(`LSQ_ENTRIES{LSQ_head}),
+						.LSQ_head({`LSQ_ENTRIES{LSQ_head}}),
 
 						.clear(clears),
 
-						.ROB_tag_1(`LSQ_ENTRIES{ROB_tag_1}),
-						.rd_mem_in_1(`LSQ_ENTRIES{rd_mem_in_1}),
+						.ROB_tag_1({`LSQ_ENTRIES{ROB_tag_1}}),
+						.rd_mem_in_1({`LSQ_ENTRIES{rd_mem_in_1}}),
 						.store_ROB_1(stores_1),
 
-						.addr_in_1(`LSQ_ENTRIES{address_in_1}),
-						.value_in_1(`LSQ_ENTRIES{value_in_1}),
-						.EX_tag_1(`LSQ_ENTRIES{EX_tag_1}),
+						.addr_in_1({`LSQ_ENTRIES{address_in_1}}),
+						.value_in_1({`LSQ_ENTRIES{value_in_1}}),
+						.EX_tag_1({`LSQ_ENTRIES{EX_tag_1}}),
 
-						.ROB_tag_2(`LSQ_ENTRIES{ROB_tag_2}),
-						.rd_mem_in_2(`LSQ_ENTRIES{rd_mem_in_2}),
+						.ROB_tag_2({`LSQ_ENTRIES{ROB_tag_2}}),
+						.rd_mem_in_2({`LSQ_ENTRIES{rd_mem_in_2}}),
 						.store_ROB_2(stores_2),
 
-						.addr_in_2(`LSQ_ENTRIES{address_in_2}),
-						.value_in_2(`LSQ_ENTRIES{value_in_2}),
-						.EX_tag_2(`LSQ_ENTRIES{EX_tag_2}),
+						.addr_in_2({`LSQ_ENTRIES{address_in_2}}),
+						.value_in_2({`LSQ_ENTRIES{value_in_2}}),
+						.EX_tag_2({`LSQ_ENTRIES{EX_tag_2}}),
 
 						//Outputs
 						.stored_tag_out(tags_out),
@@ -316,7 +320,7 @@ module LSQ(//Inputs
 //----------- POINTER KEEPING ------------
  assign next_head = (readies_out[LSQ_head]) ? (LSQ_head + 1):LSQ_head;
 
- assign next_tail = (valid_alu_in_1) ? ((valid_alu_in_2) ? entry_2) : (valid_alu_in_2) ? entry_1 : LSQ_tail;
+ assign next_tail = (valid_alu_in_1) ? ((valid_alu_in_2) ? next_entry_2: next_entry_1): (valid_alu_in_2) ? next_entry_1 : LSQ_tail;
 
  assign next_entry_1 = LSQ_tail + 1;
 

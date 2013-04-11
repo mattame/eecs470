@@ -27,7 +27,7 @@ suppress_message {"VER-130"}
 #/* The following four lines must be updated for every      */
 #/* new design                                              */
 #/***********************************************************/
-read_file -f verilog [list "ex_stage.v ex_stage_submodules.v"]
+read_file -f verilog [list "sys_defs.vh" "ex_stage_submodules.v" "ex_stage.v"]
 set design_name ex_stage
 #set reset_name reset
 set clock_name clock

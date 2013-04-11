@@ -30,8 +30,7 @@ SYNFILES = ex_stage.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
 ex_stage.vg:	test_ex_stage.v ex_stage.tcl 
 	dc_shell-t -f ex_stage.tcl | tee synth.out
 
-
-#####
+####
 # Should be no need to modify after here
 #####
 

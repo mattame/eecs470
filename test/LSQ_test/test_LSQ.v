@@ -192,19 +192,81 @@ LSQ lsqueue(//Inputs
         @(posedge clock);
 			
 	reset = 0;
+// two loads being added
 
+	ROB_head_1 = 4'h0;
+	ROB_head_2 = 4'h1;
+			//1
+	ROB_tag_1 = 4'h0;
+	rd_mem_in_1 = 1'b0;
+	wr_mem_in_1 = 1'b1;
+	valid_in_1 = 1'b1;
+			//2
+	ROB_tag_2 = 4'h1;
+	rd_mem_in_2 = 1'b0;
+	wr_mem_in_2 = 1'b1;
+	valid_in_2 = 1'b1;
+			//From EX ALU
+	EX_tag_1 = 4'h0;
+	value_in_1 = 64'h0;
+	address_in_1 = 64'h0;
+	EX_tag_2 = 4'h0;
+	value_in_2 = 64'h0;
+	address_in_2 = 64'h0;
 
         @(negedge clock);
         DISPLAY_STATE(`INPUT);
         DISPLAY_STATE(`OUTPUT);
         @(posedge clock);
 
+// No loads or stores added, but the 
+
+	ROB_head_1 = 4'h0;
+	ROB_head_2 = 4'h1;
+			//1
+	ROB_tag_1 = 4'h2;
+	rd_mem_in_1 = 1'b0;
+	wr_mem_in_1 = 1'b0;
+	valid_in_1 = 1'b0;
+			//2
+	ROB_tag_2 = 4'h3;
+	rd_mem_in_2 = 1'b0;
+	wr_mem_in_2 = 1'b0;
+	valid_in_2 = 1'b0;
+			//From EX ALU
+	EX_tag_1 = 4'h0;
+	value_in_1 = 64'h0;
+	address_in_1 = 64'h100;
+	EX_tag_2 = 4'h1;
+	value_in_2 = 64'h0;
+	address_in_2 = 64'h200;
 	
         @(negedge clock);
         DISPLAY_STATE(`INPUT);
         DISPLAY_STATE(`OUTPUT);
         @(posedge clock);
 
+// store added
+
+	ROB_head_1 = 4'h2;
+	ROB_head_2 = 4'h3;
+			//1
+	ROB_tag_1 = 4'h4;
+	rd_mem_in_1 = 1'b0;
+	wr_mem_in_1 = 1'b1;
+	valid_in_1 = 1'b0;
+			//2
+	ROB_tag_2 = 4'h5;
+	rd_mem_in_2 = 1'b0;
+	wr_mem_in_2 = 1'b1;
+	valid_in_2 = 1'b0;
+			//From EX ALU
+	EX_tag_1 = 4'h0;
+	value_in_1 = 64'h0;
+	address_in_1 = 64'h100;
+	EX_tag_2 = 4'h1;
+	value_in_2 = 64'h0;
+	address_in_2 = 64'h200;
 
         @(negedge clock);
         DISPLAY_STATE(`INPUT);

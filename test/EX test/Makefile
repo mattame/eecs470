@@ -27,8 +27,8 @@ TESTBENCH = sys_defs.vh test_ex_stage.v
 SIMFILES = ex_stage_submodules.v ex_stage.v
 SYNFILES = ex_stage.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
 
-ex_stage.vg:	test_ex_stage.v reservation_station.tcl 
-	dc_shell-t -f reservation_station.tcl | tee synth.out
+ex_stage.vg:	test_ex_stage.v ex_stage.tcl 
+	dc_shell-t -f ex_stage.tcl | tee synth.out
 
 
 #####

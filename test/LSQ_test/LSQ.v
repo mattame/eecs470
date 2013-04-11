@@ -257,7 +257,7 @@ module LSQ(//Inputs
  genvar i;
  generate
  	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin
- 		assign clears[i]   = (i == LSQ_head & readies_out[i] == 1'b1) ? 1'b1: 1'b0;
+ 		assign clears[i]   = (reset | (i == LSQ_head & readies_out[i] == 1'b1)) ? 1'b1: 1'b0;
  		assign stores_1[i] = (i == next_entry_1 & valid_alu_in_1) ? 1'b1: 1'b0;
  		assign stores_2[i] = ((i == next_entry_1 & !valid_alu_in_1 & valid_alu_in_2) | 
  							  (i == next_entry_2 & valid_alu_in_1 & valid_alu_in_2)) ? 1'b1: 1'b0;

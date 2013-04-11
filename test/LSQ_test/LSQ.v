@@ -258,8 +258,8 @@ module LSQ(//Inputs
  wire stores_1 [(`LSQ_ENTRIES-1):0];
  wire stores_2 [(`LSQ_ENTRIES-1):0];
 
- genvar i;
  generate
+ 	genvar i;
  	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin : ASSIGNLSQINPUTS
  		assign clears[i]   = (reset | (i == LSQ_head & readies_out[i] == 1'b1)) ? 1'b1: 1'b0;
  		assign stores_1[i] = (i == next_entry_1 & valid_alu_in_1) ? 1'b1: 1'b0;
@@ -270,42 +270,48 @@ module LSQ(//Inputs
 
 // --------------- ENTRIES ----------------
 
- LSQ_entry entries[(`LSQ_ENTRIES-1):0] (
+ generate
+ 	genvar i;
+ 	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin : LSQENTRIES
+ 		LSQ_entry entries(
  						//Inputs
-						.clock({`LSQ_ENTRIES{clock}}),
-						.reset({`LSQ_ENTRIES{reset}}),
+						.clock(clock),
+						.reset(reset),
 
-						.ROB_head_1({`LSQ_ENTRIES{ROB_head_1}}),
-						.ROB_head_2({`LSQ_ENTRIES{ROB_head_2}}),
+						.ROB_head_1(ROB_head_1),
+						.ROB_head_2(ROB_head_2),
 
-						.LSQ_head({`LSQ_ENTRIES{LSQ_head}}),
+						.LSQ_head(LSQ_head),
 
-						.clear(clears),
+						.clear(clears[i]),
 
-						.ROB_tag_1({`LSQ_ENTRIES{ROB_tag_1}}),
-						.rd_mem_in_1({`LSQ_ENTRIES{rd_mem_in_1}}),
-						.store_ROB_1(stores_1),
+						.ROB_tag_1(ROB_tag_1),
+						.rd_mem_in_1(rd_mem_in_1),
+						.store_ROB_1(stores_1[i]),
 
-						.addr_in_1({`LSQ_ENTRIES{address_in_1}}),
-						.value_in_1({`LSQ_ENTRIES{value_in_1}}),
-						.EX_tag_1({`LSQ_ENTRIES{EX_tag_1}}),
+						.addr_in_1(address_in_1),
+						.value_in_1(value_in_1),
+						.EX_tag_1(EX_tag_1),
 
-						.ROB_tag_2({`LSQ_ENTRIES{ROB_tag_2}}),
-						.rd_mem_in_2({`LSQ_ENTRIES{rd_mem_in_2}}),
-						.store_ROB_2(stores_2),
+						.ROB_tag_2(ROB_tag_2),
+						.rd_mem_in_2(rd_mem_in_2),
+						.store_ROB_2(stores_2[i]),
 
-						.addr_in_2({`LSQ_ENTRIES{address_in_2}}),
-						.value_in_2({`LSQ_ENTRIES{value_in_2}}),
-						.EX_tag_2({`LSQ_ENTRIES{EX_tag_2}}),
+						.addr_in_2(address_in_2),
+						.value_in_2(value_in_2),
+						.EX_tag_2(EX_tag_2),
 
 						//Outputs
-						.stored_tag_out(tags_out),
-						.stored_address_out(addrs_out),
-						.stored_value_out(values_out),
-						.read_out(reads_out),
-						.ready_out(readies_out)
+						.stored_tag_out(tags_out[i]),
+						.stored_address_out(addrs_out[i]),
+						.stored_value_out(values_out[i]),
+						.read_out(reads_out[i]),
+						.ready_out(readies_out[i])
 					    );
+ 	end
+ endgenerate
 
+ 
 // --------- ENTRY OUPUT LOGIC -----------
  assign valid_out = readies_out[LSQ_head] ? 1'b1: 1'b0;
 

@@ -703,6 +703,12 @@ module pipeline (// Inputs
                            
                            );
 
+  //////////////////////////////////////////////////
+  //                                              //
+  //              RS/EX Register                  //
+  //                                              //
+  //////////////////////////////////////////////////    
+
 
   wire [4:0] inst1_rega, inst1_regb, inst2_rega, inst2_regb;
       
@@ -724,9 +730,9 @@ module pipeline (// Inputs
   reg [63:0] cm_value_1, cm_value_2;
   reg cm_valid_1, cm_valid_2;
   
-  wire  [7:0] cm_tag_1_in, cm_tag_2_in;
-  wire [63:0] cm_value_1_in, cm_value_2_in;
-  wire cm_valid_1_in, cm_valid_2_in;
+  wire  [7:0] ex_tag_1, ex_tag_2;
+  wire [63:0] ex_value_1, ex_value_2;
+  wire ex_valid_1, ex_valid_2;
   
 
   //////////////////////////////////////////////////
@@ -751,13 +757,13 @@ module pipeline (// Inputs
     end
     else
     begin
-      cm_tag_1 <= `SD cm_tag_1_in;
-      cm_value_1 <= `SD cm_value_1_in;
-      cm_valid_1 <= `SD cm_valid_1_in;
+      cm_tag_1 <= `SD ex_tag_1;
+      cm_value_1 <= `SD ex_value_1;
+      cm_valid_1 <= `SD ex_valid_1;
       
-      cm_tag_2 <= `SD cm_tag_2_in;
-      cm_value_2 <= `SD cm_value_2_in;
-      cm_valid_2 <= `SD cm_valid_2_in;
+      cm_tag_2 <= `SD ex_tag_2;
+      cm_value_2 <= `SD ex_value_2;
+      cm_valid_2 <= `SD ex_valid_2;
       
     end
     
@@ -872,24 +878,63 @@ module pipeline (// Inputs
   //                  EX-Stage                    //
   //                                              //
   //////////////////////////////////////////////////
-  ex_stage ex_stage_0 (// Inputs
-                       .clock(clock),
-                       .reset(reset),
-                       .id_ex_NPC(id_ex_NPC), 
-                       .id_ex_IR(id_ex_IR),
-                       .id_ex_rega(id_ex_rega),
-                       .id_ex_regb(id_ex_regb),
-                       .id_ex_opa_select(id_ex_opa_select),
-                       .id_ex_opb_select(id_ex_opb_select),
-                       .id_ex_alu_func(id_ex_alu_func),
-                       .id_ex_cond_branch(id_ex_cond_branch),
-                       .id_ex_uncond_branch(id_ex_uncond_branch),
-                       
-                       // Outputs
-                       .ex_alu_result_out(ex_alu_result_out),
-                       .ex_take_branch_out(ex_take_branch_out)
-                      );
+   ex_stage ex_stage_0(// Inputs
+                          .clock(clock),
+                          .reset(reset),
+				                  // Input Bus 1 (contains branch logic)
+                          .id_ex_NPC_1,
+                          .id_ex_IR_1,
+                          .id_ex_dest_reg_1,
+                          .id_ex_rega_1,
+                          .id_ex_regb_1,
+                          .id_ex_opa_select_1,
+                          .id_ex_opb_select_1,
+                          .id_ex_alu_func_1,
+                          .id_ex_cond_branch,
+                          .id_ex_uncond_branch,
 
+				                  // Input Bus 2
+				                  .id_ex_NPC_2,
+				                  .id_ex_IR_2,
+				                  .id_ex_dest_reg_2,
+				                  .id_ex_rega_2,
+				                  .id_ex_regb_2,
+				                  .id_ex_opa_select_2,
+				                  .id_ex_opb_select_2,
+				                  .id_ex_alu_func_2,
+				
+                          // From Mem Access
+                          .MEM_tag_in,
+                          .MEM_value_in,
+                          .MEM_valid_in,
+                          
+			                    // Outputs
+				                  .stall_bus_1,
+				                  .stall_bus_2,
+				                  .ex_branch_taken,
+				                  
+				                  // Bus 1
+				                  .ex_IR_out_1,
+				                  .ex_NPC_out_1,
+				                  .ex_dest_reg_out_1(ex_tag_1),
+				                  .ex_result_out_1(ex_value_1),
+				                  .ex_valid_out_1(ex_valid_1),
+				                  // Bus 2
+				                  .ex_IR_out_2,
+				                  .ex_NPC_out_2,
+				                  .ex_dest_reg_out_2(ex_tag_1),
+				                  .ex_result_out_2(ex_value_1),
+				                  .ex_valid_out_2(ex_value_1),
+
+                            // To LSQ
+                          .LSQ_tag_out_1,
+                          .LSQ_address_out_1,
+                          .LSQ_value_out_1,
+
+                          .LSQ_tag_out_2,
+                          .LSQ_address_out_2,
+                          .LSQ_value_out_2
+                        );
 
   //////////////////////////////////////////////////
   //                                              //

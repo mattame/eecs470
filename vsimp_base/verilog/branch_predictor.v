@@ -24,30 +24,24 @@ reg [5:0]inst_opcode2;
 reg isBranch;
 
 
-inst_opcode1 = instruction[63:58];
-inst_opcode2 = instruction[31:26];
+//decode instruction to check if branch but doesnt not count br or bsr instruction//
 
 always@*
 begin
-    //decode instruction to check if branch
-    if (inst_opcode1 ==  `BR_INST   || inst_opcode1 == `BSR_INST ||  
-        inst_opcode1 ==  `BLBC_INST || inst_opcode1 == `BEQ_INST || 
+    inst_opcode1 = instruction[63:58];
+    inst_opcode2 = instruction[31:26];
+
+    if (inst_opcode1 ==  `BLBC_INST || inst_opcode1 == `BEQ_INST || 
         inst_opcode1 ==  `BLT_INST  || inst_opcode1 == `BLE_INST || 
         inst_opcode1 ==  `BLBS_INST || inst_opcode1 == `BNE_INST ||  
         inst_opcode1 ==  `BGE_INST  || inst_opcode1 == `BGT_INST)
-      
+  
       isBranch = 1;
     else
       isBranch = 0;
-end 
 
-//init pht to not taken. 0 means not taken, 1 means taken. 
-pht = 32'b0;
-
-always@*
-begin
-    //for use with the xor
-    pc_bits = pc[6:2];
+    
+    pc_bits = pc[6:2];        //for use with the xor
     ghr_bits = {2'b0, ghr};
     
     pht_index = pc_bits^ghr_bits;
@@ -62,17 +56,19 @@ end
 
 
 
-assign new_ghr = ghr<<1;
+assign new_ghr = (isBranch) ? (ghr << 1) : ghr;
+
 always@(posedge clk)
 begin
   if(reset)
   begin
     ghr <= 3'b0;
+    pht <= 32'b0;
   end
 
   else
   begin
-    ghr <= new_ghr;
+    ghr <= new_ghr; 
   end
 end
 

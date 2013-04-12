@@ -1,0 +1,112 @@
+0 
+36
++v2k
++vc
+-Mamsrun=
+-Masflags=
+-Mcc=gcc
+-Mcfl= -pipe -O -I/usr/caen/vcs-2011.03/include
+-Mcmodrun=
+-Mcplusplus=g++
+-Mcrt0=
+-Mcrtn=
+-Mcsrc=testbench/pipe_print.c
+-Mldflags=
+-Mobjects= /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so
+-Mout=simv
+-Msaverestoreobj=/usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o
+-Msyslibs=-ldl
+-Mupdate
+-Mvcsaceobjs=
+-cm_xmldb
+-full64
+-gen_obj
+-line
+-o simv
+/usr/caen/vcs-2011.03/amd64/bin/vcs1
+sys_defs.vh
+testbench/mem.v
+testbench/testbench.v
+verilog/cache/cachemem.v
+verilog/ex_stage.v
+verilog/icache.v
+verilog/id_stage.v
+verilog/if_stage.v
+verilog/mem_stage.v
+verilog/pipeline.v
+verilog/regfile.v
+verilog/wb_stage.v
+52
+_LMFILES_=/usr/caen/misc/modules/vcs/2011.03
+VMR_MODE_FLAG=64
+VENDOR=unknown
+VCS_MODE_FLAG=64
+VCS_HOME=/usr/caen/vcs-2011.03
+VCS_DEPTH=0
+VCS_ARG_ADDED_FOR_TMP=1
+VCS_ARCH=amd64
+UNAME=/bin/uname
+TOOL_HOME=/usr/caen/vcs-2011.03/amd64
+SW_VCS=2011.03
+SSH_TTY=/dev/pts/90
+SSH_CONNECTION=141.213.55.10 50031 141.213.74.40 22
+SSH_CLIENT=141.213.55.10 50031 22
+SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+SNPSLMD_LICENSE_FILE=/usr/caen/vcs-2011.03/license.dat:/usr/caen/vcs-2011.03/flexlm//license.dat
+SELINUX_USE_CURRENT_RANGE=
+SELINUX_ROLE_REQUESTED=
+SELINUX_LEVEL_REQUESTED=
+SCRNAME=vcs
+SCRIPT_NAME=vcs
+RESET_NET_NAME=reset
+REMOTEHOST=beyster1620p06.engin.umich.edu
+QTLIB=/usr/lib64/qt-3.3/lib
+QTINC=/usr/lib64/qt-3.3/include
+QTDIR=/usr/lib64/qt-3.3
+PIPELINE_NAME=pipeline
+PIPEFILES=verilog/ex_stage.v verilog/icache.v verilog/id_stage.v verilog/if_stage.v verilog/mem_stage.v verilog/pipeline.v verilog/regfile.v verilog/wb_stage.v
+OVA_UUM=0
+OSTYPE=linux
+MODULESHOME=/usr/share/Modules
+MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/caen/misc/modules:/afs/umich.edu/class/coe/modules
+MFLAGS=
+MANPAGER=/usr/bin/less -is
+MAKELEVEL=1
+MAKEFLAGS=
+MAILSERVER=mail.umich.edu
+LOADEDMODULES=vcs/2011.03
+LESSOPEN=|/usr/bin/lesspipe.sh %s
+KRB5CCNAME=FILE:/tmp/krb5cc_877473_PkTy05
+KDE_IS_PRELINKED=1
+KDEDIRS=/usr
+HOSTTYPE=x86_64-linux
+HOSTNAME=caen-vnc04.engin.umich.edu
+HOST=caen-vnc04.engin.umich.edu
+HEADERS=sys_defs.vh
+G_BROKEN_FILENAMES=1
+GROUP=users
+CLOCK_PERIOD=50	
+CLOCK_NET_NAME=clock
+CACHE_NAME=cache
+CACHEFILES=verilog/cache/cachemem.v
+0
+12
+1297290965 testbench/testbench.v
+1297290965 testbench/mem.v
+1329342859 verilog/cache/cachemem.v
+1297290965 verilog/wb_stage.v
+1297290965 verilog/regfile.v
+1329340406 verilog/pipeline.v
+1297290965 verilog/mem_stage.v
+1297290965 verilog/if_stage.v
+1297290965 verilog/id_stage.v
+1297290965 verilog/icache.v
+1297290965 verilog/ex_stage.v
+1297290965 sys_defs.vh
+5
+1297290965 testbench/pipe_print.c
+0 
+1298523545 /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so
+1298523345 /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so
+1298523150 /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so
+1365793770 simv.daidir

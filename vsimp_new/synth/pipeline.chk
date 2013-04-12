@@ -1,0 +1,110 @@
+ 
+****************************************
+check_design summary:
+Version:     G-2012.06
+Date:        Fri Apr 12 15:02:39 2013
+****************************************
+
+                   Name                                            Total
+--------------------------------------------------------------------------------
+Inputs/Outputs                                                     74
+    Shorted outputs (LINT-31)                                      69
+    Constant outputs (LINT-52)                                      5
+
+Cells                                                              12
+    Cells do not drive (LINT-1)                                    12
+
+Nets                                                                3
+    Unloaded nets (LINT-2)                                          3
+--------------------------------------------------------------------------------
+
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/C1487' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/C1483' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/C1481' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/B_31' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/B_30' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/B_29' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/B_28' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/B_27' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/B_26' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/B_25' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/B_24' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', cell 'ex_stage_0/alu_0/B_23' does not drive any nets. (LINT-1)
+Warning: In design 'pipeline', net 'id_cpuid_out' driven by pin 'id_stage_0/decoder_0/C843/Z_0' has no loads. (LINT-2)
+Warning: In design 'pipeline', net 'id_stc_mem_out' driven by pin 'id_stage_0/decoder_0/C840/Z_0' has no loads. (LINT-2)
+Warning: In design 'pipeline', net 'id_ldl_mem_out' driven by pin 'id_stage_0/decoder_0/C851/Z_0' has no loads. (LINT-2)
+Warning: In design 'pipeline', output port 'pipeline_completed_insts[3]' is connected directly to output port 'pipeline_error_status[2]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_completed_insts[3]' is connected directly to output port 'pipeline_error_status[3]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_completed_insts[3]' is connected directly to output port 'pipeline_completed_insts[1]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_completed_insts[3]' is connected directly to output port 'pipeline_completed_insts[2]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_completed_insts[0]' is connected directly to output port 'mem_wb_valid_inst'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[63]' is connected directly to output port 'mem_wb_NPC[63]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[62]' is connected directly to output port 'mem_wb_NPC[62]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[61]' is connected directly to output port 'mem_wb_NPC[61]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[60]' is connected directly to output port 'mem_wb_NPC[60]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[59]' is connected directly to output port 'mem_wb_NPC[59]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[58]' is connected directly to output port 'mem_wb_NPC[58]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[57]' is connected directly to output port 'mem_wb_NPC[57]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[56]' is connected directly to output port 'mem_wb_NPC[56]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[55]' is connected directly to output port 'mem_wb_NPC[55]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[54]' is connected directly to output port 'mem_wb_NPC[54]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[53]' is connected directly to output port 'mem_wb_NPC[53]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[52]' is connected directly to output port 'mem_wb_NPC[52]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[51]' is connected directly to output port 'mem_wb_NPC[51]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[50]' is connected directly to output port 'mem_wb_NPC[50]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[49]' is connected directly to output port 'mem_wb_NPC[49]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[48]' is connected directly to output port 'mem_wb_NPC[48]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[47]' is connected directly to output port 'mem_wb_NPC[47]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[46]' is connected directly to output port 'mem_wb_NPC[46]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[45]' is connected directly to output port 'mem_wb_NPC[45]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[44]' is connected directly to output port 'mem_wb_NPC[44]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[43]' is connected directly to output port 'mem_wb_NPC[43]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[42]' is connected directly to output port 'mem_wb_NPC[42]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[41]' is connected directly to output port 'mem_wb_NPC[41]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[40]' is connected directly to output port 'mem_wb_NPC[40]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[39]' is connected directly to output port 'mem_wb_NPC[39]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[38]' is connected directly to output port 'mem_wb_NPC[38]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[37]' is connected directly to output port 'mem_wb_NPC[37]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[36]' is connected directly to output port 'mem_wb_NPC[36]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[35]' is connected directly to output port 'mem_wb_NPC[35]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[34]' is connected directly to output port 'mem_wb_NPC[34]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[33]' is connected directly to output port 'mem_wb_NPC[33]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[32]' is connected directly to output port 'mem_wb_NPC[32]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[31]' is connected directly to output port 'mem_wb_NPC[31]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[30]' is connected directly to output port 'mem_wb_NPC[30]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[29]' is connected directly to output port 'mem_wb_NPC[29]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[28]' is connected directly to output port 'mem_wb_NPC[28]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[27]' is connected directly to output port 'mem_wb_NPC[27]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[26]' is connected directly to output port 'mem_wb_NPC[26]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[25]' is connected directly to output port 'mem_wb_NPC[25]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[24]' is connected directly to output port 'mem_wb_NPC[24]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[23]' is connected directly to output port 'mem_wb_NPC[23]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[22]' is connected directly to output port 'mem_wb_NPC[22]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[21]' is connected directly to output port 'mem_wb_NPC[21]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[20]' is connected directly to output port 'mem_wb_NPC[20]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[19]' is connected directly to output port 'mem_wb_NPC[19]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[18]' is connected directly to output port 'mem_wb_NPC[18]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[17]' is connected directly to output port 'mem_wb_NPC[17]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[16]' is connected directly to output port 'mem_wb_NPC[16]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[15]' is connected directly to output port 'mem_wb_NPC[15]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[14]' is connected directly to output port 'mem_wb_NPC[14]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[13]' is connected directly to output port 'mem_wb_NPC[13]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[12]' is connected directly to output port 'mem_wb_NPC[12]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[11]' is connected directly to output port 'mem_wb_NPC[11]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[10]' is connected directly to output port 'mem_wb_NPC[10]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[9]' is connected directly to output port 'mem_wb_NPC[9]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[8]' is connected directly to output port 'mem_wb_NPC[8]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[7]' is connected directly to output port 'mem_wb_NPC[7]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[6]' is connected directly to output port 'mem_wb_NPC[6]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[5]' is connected directly to output port 'mem_wb_NPC[5]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[4]' is connected directly to output port 'mem_wb_NPC[4]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[3]' is connected directly to output port 'mem_wb_NPC[3]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[2]' is connected directly to output port 'mem_wb_NPC[2]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[1]' is connected directly to output port 'mem_wb_NPC[1]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_commit_NPC[0]' is connected directly to output port 'mem_wb_NPC[0]'. (LINT-31)
+Warning: In design 'pipeline', output port 'pipeline_completed_insts[3]' is connected directly to 'logic 0'. (LINT-52)
+Warning: In design 'pipeline', output port 'pipeline_completed_insts[2]' is connected directly to 'logic 0'. (LINT-52)
+Warning: In design 'pipeline', output port 'pipeline_completed_insts[1]' is connected directly to 'logic 0'. (LINT-52)
+Warning: In design 'pipeline', output port 'pipeline_error_status[3]' is connected directly to 'logic 0'. (LINT-52)
+Warning: In design 'pipeline', output port 'pipeline_error_status[2]' is connected directly to 'logic 0'. (LINT-52)
+1

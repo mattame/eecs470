@@ -1,1 +1,1 @@
-../../vsimp_base/verilog/map_table.v
+../../vsimp_new/verilog/map_table.v

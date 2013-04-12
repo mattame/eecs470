@@ -1,0 +1,417 @@
+                                                                            D-MEM Bus &
+Cycle:      IF      |     ID      |     EX      |     MEM     |     WB      Reg Result
+    0:    4:lda     |   0:-       |   0:-       |   0:-       |   0:-       BUS_LOAD  MEM[0] accepted 1
+    1:    8:-       |   4:lda     |   0:-       |   0:-       |   0:-       BUS_LOAD  MEM[0] accepted 1
+    2:    8:-       |   8:-       |   4:lda     |   0:-       |   0:-       BUS_LOAD  MEM[0] accepted 1
+    3:    8:-       |   8:-       |   8:-       |   4:lda     |   0:-       BUS_LOAD  MEM[0] accepted 1
+    4:    8:-       |   8:-       |   8:-       |   8:-       |   4:lda     r2=0  BUS_LOAD  MEM[0] accepted 1
+    5:    8:lda     |   8:-       |   8:-       |   8:-       |   8:-       BUS_LOAD  MEM[0] accepted 1
+    6:   12:-       |   8:lda     |   8:-       |   8:-       |   8:-       BUS_LOAD  MEM[8] accepted 1
+    7:   12:-       |  12:-       |   8:lda     |   8:-       |   8:-       BUS_LOAD  MEM[8] accepted 1
+    8:   12:-       |  12:-       |  12:-       |   8:lda     |   8:-       BUS_LOAD  MEM[8] accepted 1
+    9:   12:-       |  12:-       |  12:-       |  12:-       |   8:lda     r3=4096  BUS_LOAD  MEM[8] accepted 1
+   10:   12:blbs    |  12:-       |  12:-       |  12:-       |  12:-       BUS_LOAD  MEM[8] accepted 1
+   11:   16:-       |  12:blbs    |  12:-       |  12:-       |  12:-       BUS_LOAD  MEM[8] accepted 1
+   12:   16:-       |  16:-       |  12:blbs    |  12:-       |  12:-       BUS_LOAD  MEM[8] accepted 1
+   13:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+   14:   16:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[8] accepted 1
+   15:   16:stq     |  16:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[8] accepted 1
+   16:   20:-       |  16:stq     |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+   17:   20:-       |  20:-       |  16:stq     |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+   18:   20:-       |  20:-       |  20:-       |  16:stq     |  16:-       BUS_STORE MEM[4096] = 0 accepted 1
+   19:   20:-       |  20:-       |  20:-       |  20:-       |  16:stq     BUS_LOAD  MEM[16] accepted 1
+   20:   20:addq    |  20:-       |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+   21:   24:-       |  20:addq    |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+   22:   24:-       |  24:-       |  20:addq    |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+   23:   24:-       |  24:-       |  24:-       |  20:addq    |  20:-       BUS_LOAD  MEM[16] accepted 1
+   24:   24:-       |  24:-       |  24:-       |  24:-       |  20:addq    r3=4104  BUS_LOAD  MEM[16] accepted 1
+   25:   24:addq    |  24:-       |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[16] accepted 1
+   26:   28:-       |  24:addq    |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+   27:   28:-       |  28:-       |  24:addq    |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+   28:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+   29:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=1  BUS_LOAD  MEM[24] accepted 1
+   30:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+   31:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+   32:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+   33:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+   34:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+   35:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+   36:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+   37:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+   38:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+   39:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+   40:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+   41:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+   42:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+   43:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+   44:   24:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[16] accepted 1
+   45:   24:addq    |  24:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+   46:   28:-       |  24:addq    |  24:-       |  16:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+   47:   28:-       |  28:-       |  24:addq    |  24:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+   48:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+   49:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=2  BUS_LOAD  MEM[24] accepted 1
+   50:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+   51:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+   52:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+   53:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+   54:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+   55:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+   56:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+   57:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+   58:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+   59:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+   60:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+   61:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+   62:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+   63:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+   64:   16:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[8] accepted 1
+   65:   16:stq     |  16:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[8] accepted 1
+   66:   20:-       |  16:stq     |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+   67:   20:-       |  20:-       |  16:stq     |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+   68:   20:-       |  20:-       |  20:-       |  16:stq     |  16:-       BUS_STORE MEM[4104] = 2 accepted 1
+   69:   20:-       |  20:-       |  20:-       |  20:-       |  16:stq     BUS_LOAD  MEM[16] accepted 1
+   70:   20:addq    |  20:-       |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+   71:   24:-       |  20:addq    |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+   72:   24:-       |  24:-       |  20:addq    |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+   73:   24:-       |  24:-       |  24:-       |  20:addq    |  20:-       BUS_LOAD  MEM[16] accepted 1
+   74:   24:-       |  24:-       |  24:-       |  24:-       |  20:addq    r3=4112  BUS_LOAD  MEM[16] accepted 1
+   75:   24:addq    |  24:-       |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[16] accepted 1
+   76:   28:-       |  24:addq    |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+   77:   28:-       |  28:-       |  24:addq    |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+   78:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+   79:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=3  BUS_LOAD  MEM[24] accepted 1
+   80:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+   81:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+   82:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+   83:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+   84:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+   85:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+   86:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+   87:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+   88:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+   89:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+   90:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+   91:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+   92:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+   93:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+   94:   24:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[16] accepted 1
+   95:   24:addq    |  24:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+   96:   28:-       |  24:addq    |  24:-       |  16:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+   97:   28:-       |  28:-       |  24:addq    |  24:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+   98:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+   99:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=4  BUS_LOAD  MEM[24] accepted 1
+  100:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  101:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  102:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  103:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  104:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  105:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  106:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  107:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  108:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  109:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  110:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  111:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  112:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  113:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  114:   16:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[8] accepted 1
+  115:   16:stq     |  16:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[8] accepted 1
+  116:   20:-       |  16:stq     |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  117:   20:-       |  20:-       |  16:stq     |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  118:   20:-       |  20:-       |  20:-       |  16:stq     |  16:-       BUS_STORE MEM[4112] = 4 accepted 1
+  119:   20:-       |  20:-       |  20:-       |  20:-       |  16:stq     BUS_LOAD  MEM[16] accepted 1
+  120:   20:addq    |  20:-       |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  121:   24:-       |  20:addq    |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  122:   24:-       |  24:-       |  20:addq    |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  123:   24:-       |  24:-       |  24:-       |  20:addq    |  20:-       BUS_LOAD  MEM[16] accepted 1
+  124:   24:-       |  24:-       |  24:-       |  24:-       |  20:addq    r3=4120  BUS_LOAD  MEM[16] accepted 1
+  125:   24:addq    |  24:-       |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[16] accepted 1
+  126:   28:-       |  24:addq    |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  127:   28:-       |  28:-       |  24:addq    |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  128:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  129:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=5  BUS_LOAD  MEM[24] accepted 1
+  130:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  131:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  132:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  133:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  134:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  135:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  136:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  137:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  138:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  139:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  140:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  141:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  142:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  143:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  144:   24:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[16] accepted 1
+  145:   24:addq    |  24:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  146:   28:-       |  24:addq    |  24:-       |  16:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  147:   28:-       |  28:-       |  24:addq    |  24:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  148:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  149:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=6  BUS_LOAD  MEM[24] accepted 1
+  150:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  151:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  152:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  153:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  154:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  155:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  156:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  157:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  158:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  159:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  160:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  161:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  162:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  163:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  164:   16:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[8] accepted 1
+  165:   16:stq     |  16:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[8] accepted 1
+  166:   20:-       |  16:stq     |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  167:   20:-       |  20:-       |  16:stq     |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  168:   20:-       |  20:-       |  20:-       |  16:stq     |  16:-       BUS_STORE MEM[4120] = 6 accepted 1
+  169:   20:-       |  20:-       |  20:-       |  20:-       |  16:stq     BUS_LOAD  MEM[16] accepted 1
+  170:   20:addq    |  20:-       |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  171:   24:-       |  20:addq    |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  172:   24:-       |  24:-       |  20:addq    |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  173:   24:-       |  24:-       |  24:-       |  20:addq    |  20:-       BUS_LOAD  MEM[16] accepted 1
+  174:   24:-       |  24:-       |  24:-       |  24:-       |  20:addq    r3=4128  BUS_LOAD  MEM[16] accepted 1
+  175:   24:addq    |  24:-       |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[16] accepted 1
+  176:   28:-       |  24:addq    |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  177:   28:-       |  28:-       |  24:addq    |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  178:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  179:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=7  BUS_LOAD  MEM[24] accepted 1
+  180:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  181:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  182:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  183:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  184:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  185:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  186:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  187:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  188:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  189:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  190:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  191:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  192:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  193:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  194:   24:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[16] accepted 1
+  195:   24:addq    |  24:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  196:   28:-       |  24:addq    |  24:-       |  16:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  197:   28:-       |  28:-       |  24:addq    |  24:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  198:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  199:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=8  BUS_LOAD  MEM[24] accepted 1
+  200:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  201:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  202:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  203:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  204:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  205:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  206:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  207:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  208:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  209:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  210:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  211:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  212:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  213:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  214:   16:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[8] accepted 1
+  215:   16:stq     |  16:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[8] accepted 1
+  216:   20:-       |  16:stq     |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  217:   20:-       |  20:-       |  16:stq     |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  218:   20:-       |  20:-       |  20:-       |  16:stq     |  16:-       BUS_STORE MEM[4128] = 8 accepted 1
+  219:   20:-       |  20:-       |  20:-       |  20:-       |  16:stq     BUS_LOAD  MEM[16] accepted 1
+  220:   20:addq    |  20:-       |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  221:   24:-       |  20:addq    |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  222:   24:-       |  24:-       |  20:addq    |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  223:   24:-       |  24:-       |  24:-       |  20:addq    |  20:-       BUS_LOAD  MEM[16] accepted 1
+  224:   24:-       |  24:-       |  24:-       |  24:-       |  20:addq    r3=4136  BUS_LOAD  MEM[16] accepted 1
+  225:   24:addq    |  24:-       |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[16] accepted 1
+  226:   28:-       |  24:addq    |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  227:   28:-       |  28:-       |  24:addq    |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  228:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  229:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=9  BUS_LOAD  MEM[24] accepted 1
+  230:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  231:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  232:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  233:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  234:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  235:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  236:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  237:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  238:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  239:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  240:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  241:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  242:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  243:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  244:   24:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[16] accepted 1
+  245:   24:addq    |  24:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  246:   28:-       |  24:addq    |  24:-       |  16:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  247:   28:-       |  28:-       |  24:addq    |  24:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  248:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  249:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=10  BUS_LOAD  MEM[24] accepted 1
+  250:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  251:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  252:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  253:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  254:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  255:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  256:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  257:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  258:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  259:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  260:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  261:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  262:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  263:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  264:   16:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[8] accepted 1
+  265:   16:stq     |  16:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[8] accepted 1
+  266:   20:-       |  16:stq     |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  267:   20:-       |  20:-       |  16:stq     |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  268:   20:-       |  20:-       |  20:-       |  16:stq     |  16:-       BUS_STORE MEM[4136] = 10 accepted 1
+  269:   20:-       |  20:-       |  20:-       |  20:-       |  16:stq     BUS_LOAD  MEM[16] accepted 1
+  270:   20:addq    |  20:-       |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  271:   24:-       |  20:addq    |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  272:   24:-       |  24:-       |  20:addq    |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  273:   24:-       |  24:-       |  24:-       |  20:addq    |  20:-       BUS_LOAD  MEM[16] accepted 1
+  274:   24:-       |  24:-       |  24:-       |  24:-       |  20:addq    r3=4144  BUS_LOAD  MEM[16] accepted 1
+  275:   24:addq    |  24:-       |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[16] accepted 1
+  276:   28:-       |  24:addq    |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  277:   28:-       |  28:-       |  24:addq    |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  278:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  279:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=11  BUS_LOAD  MEM[24] accepted 1
+  280:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  281:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  282:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  283:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  284:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  285:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  286:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  287:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  288:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  289:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  290:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  291:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  292:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  293:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  294:   24:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[16] accepted 1
+  295:   24:addq    |  24:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  296:   28:-       |  24:addq    |  24:-       |  16:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  297:   28:-       |  28:-       |  24:addq    |  24:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  298:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  299:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=12  BUS_LOAD  MEM[24] accepted 1
+  300:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  301:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  302:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  303:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  304:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  305:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  306:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  307:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  308:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  309:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  310:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  311:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  312:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  313:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  314:   16:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[8] accepted 1
+  315:   16:stq     |  16:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[8] accepted 1
+  316:   20:-       |  16:stq     |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  317:   20:-       |  20:-       |  16:stq     |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  318:   20:-       |  20:-       |  20:-       |  16:stq     |  16:-       BUS_STORE MEM[4144] = 12 accepted 1
+  319:   20:-       |  20:-       |  20:-       |  20:-       |  16:stq     BUS_LOAD  MEM[16] accepted 1
+  320:   20:addq    |  20:-       |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  321:   24:-       |  20:addq    |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  322:   24:-       |  24:-       |  20:addq    |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  323:   24:-       |  24:-       |  24:-       |  20:addq    |  20:-       BUS_LOAD  MEM[16] accepted 1
+  324:   24:-       |  24:-       |  24:-       |  24:-       |  20:addq    r3=4152  BUS_LOAD  MEM[16] accepted 1
+  325:   24:addq    |  24:-       |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[16] accepted 1
+  326:   28:-       |  24:addq    |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  327:   28:-       |  28:-       |  24:addq    |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  328:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  329:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=13  BUS_LOAD  MEM[24] accepted 1
+  330:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  331:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  332:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  333:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  334:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  335:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  336:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  337:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  338:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  339:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  340:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  341:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  342:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  343:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  344:   24:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[16] accepted 1
+  345:   24:addq    |  24:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  346:   28:-       |  24:addq    |  24:-       |  16:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  347:   28:-       |  28:-       |  24:addq    |  24:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  348:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  349:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=14  BUS_LOAD  MEM[24] accepted 1
+  350:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  351:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  352:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  353:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  354:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  355:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  356:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  357:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  358:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  359:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  360:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  361:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  362:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  363:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  364:   16:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[8] accepted 1
+  365:   16:stq     |  16:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[8] accepted 1
+  366:   20:-       |  16:stq     |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  367:   20:-       |  20:-       |  16:stq     |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  368:   20:-       |  20:-       |  20:-       |  16:stq     |  16:-       BUS_STORE MEM[4152] = 14 accepted 1
+  369:   20:-       |  20:-       |  20:-       |  20:-       |  16:stq     BUS_LOAD  MEM[16] accepted 1
+  370:   20:addq    |  20:-       |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  371:   24:-       |  20:addq    |  20:-       |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  372:   24:-       |  24:-       |  20:addq    |  20:-       |  20:-       BUS_LOAD  MEM[16] accepted 1
+  373:   24:-       |  24:-       |  24:-       |  20:addq    |  20:-       BUS_LOAD  MEM[16] accepted 1
+  374:   24:-       |  24:-       |  24:-       |  24:-       |  20:addq    r3=4160  BUS_LOAD  MEM[16] accepted 1
+  375:   24:addq    |  24:-       |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[16] accepted 1
+  376:   28:-       |  24:addq    |  24:-       |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  377:   28:-       |  28:-       |  24:addq    |  24:-       |  24:-       BUS_LOAD  MEM[24] accepted 1
+  378:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  379:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=15  BUS_LOAD  MEM[24] accepted 1
+  380:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  381:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  382:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  383:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  384:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=1  BUS_LOAD  MEM[24] accepted 1
+  385:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  386:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  387:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  388:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  389:   12:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[8] accepted 1
+  390:   12:blbs    |  12:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  391:   16:-       |  12:blbs    |  12:-       |  36:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  392:   16:-       |  16:-       |  12:blbs    |  12:-       |  36:-       BUS_LOAD  MEM[8] accepted 1
+  393:   16:-       |  16:-       |  16:-       |  12:blbs    |  12:-       BUS_LOAD  MEM[8] accepted 1
+  394:   24:-       |  16:-       |  16:-       |  16:-       |  12:blbs    BUS_LOAD  MEM[16] accepted 1
+  395:   24:addq    |  24:-       |  16:-       |  16:-       |  16:-       BUS_LOAD  MEM[16] accepted 1
+  396:   28:-       |  24:addq    |  24:-       |  16:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  397:   28:-       |  28:-       |  24:addq    |  24:-       |  16:-       BUS_LOAD  MEM[24] accepted 1
+  398:   28:-       |  28:-       |  28:-       |  24:addq    |  24:-       BUS_LOAD  MEM[24] accepted 1
+  399:   28:-       |  28:-       |  28:-       |  28:-       |  24:addq    r2=16  BUS_LOAD  MEM[24] accepted 1
+  400:   28:cmple   |  28:-       |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  401:   32:-       |  28:cmple   |  28:-       |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  402:   32:-       |  32:-       |  28:cmple   |  28:-       |  28:-       BUS_LOAD  MEM[24] accepted 1
+  403:   32:-       |  32:-       |  32:-       |  28:cmple   |  28:-       BUS_LOAD  MEM[24] accepted 1
+  404:   32:-       |  32:-       |  32:-       |  32:-       |  28:cmple   r1=0  BUS_LOAD  MEM[24] accepted 1
+  405:   32:bne     |  32:-       |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[24] accepted 1
+  406:   36:-       |  32:bne     |  32:-       |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  407:   36:-       |  36:-       |  32:bne     |  32:-       |  32:-       BUS_LOAD  MEM[32] accepted 1
+  408:   36:-       |  36:-       |  36:-       |  32:bne     |  32:-       BUS_LOAD  MEM[32] accepted 1
+  409:   36:-       |  36:-       |  36:-       |  36:-       |  32:bne     BUS_LOAD  MEM[32] accepted 1
+  410:   36:halt    |  36:-       |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[32] accepted 1
+  411:   40:-       |  36:halt    |  36:-       |  36:-       |  36:-       BUS_LOAD  MEM[32] accepted 1
+  412:   40:-       |  40:-       |  36:halt    |  36:-       |  36:-       BUS_LOAD  MEM[32] accepted 1
+  413:   40:-       |  40:-       |  40:-       |  36:halt    |  36:-       BUS_LOAD  MEM[32] accepted 1
+  414:   40:-       |  40:-       |  40:-       |  40:-       |  36:halt    BUS_LOAD  MEM[32] accepted 1

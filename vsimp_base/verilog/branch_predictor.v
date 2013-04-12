@@ -8,9 +8,10 @@ module branch_predictor (
 //----------------inputs------------
 input wire clock;
 input wire reset;
-input reg [31:0]pc;
-input reg [4:0]pht_index_in;
-input reg [63:0]instruction;
+input wire [31:0]pc;
+input wire [4:0]pht_index_in;
+input wire [63:0]instruction;
+input wire result;
 
 
 //----------------outputs-----------
@@ -24,7 +25,7 @@ reg [2:0]new_ghr;
 reg [4:0]pc_bits;
 reg [4:0]ghr_bits;
 reg [4:0]pht_index;
-reg [5:0]inst_opcode1
+reg [5:0]inst_opcode1;
 reg [5:0]inst_opcode2;
 reg isBranch;
 
@@ -89,3 +90,4 @@ begin
       pht[pht_index_in] = result;
 end
 
+endmodule

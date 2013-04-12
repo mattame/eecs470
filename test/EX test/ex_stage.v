@@ -46,7 +46,6 @@ module ex_stage(// Inputs
 			    // Outputs
 				stall_bus_1,
 				stall_bus_2,
-				ex_branch_taken,
 				// Bus 1
 				ex_IR_out_1,
 				ex_NPC_out_1,
@@ -64,10 +63,15 @@ module ex_stage(// Inputs
         LSQ_tag_out_1,
         LSQ_address_out_1,
         LSQ_value_out_1,
+		LSQ_valid_out_1,
+		
+		// why are value and valid almost the same word!? 
+		// we need them both but they're hard to seperate!
 
         LSQ_tag_out_2,
         LSQ_address_out_2,
-        LSQ_value_out_2
+        LSQ_value_out_2,
+		LSQ_valid_out_2
                );
 
   input         clock;               // system clock
@@ -98,7 +102,7 @@ module ex_stage(// Inputs
   input         MEM_valid_in;  
 
   output        stall_bus_1;	     // Should input bus 1 stall?
-  output		    stall_bus_2;	     // Should input bus 2 stall?
+  output		stall_bus_2;	     // Should input bus 2 stall?
   output        ex_branch_taken;  // is this a taken branch?
   
 				// Bus 1
@@ -115,14 +119,15 @@ module ex_stage(// Inputs
   output [63:0] ex_result_out_2;	 // Bus 2 result
   output		ex_valid_out_2;		 // Valid Output
   
-  output [4:0] LSQ_tag_out_1;
+  output  [4:0] LSQ_tag_out_1;
   output [63:0] LSQ_address_out_1;
   output [63:0] LSQ_value_out_1;
+  output        LSQ_valid_out_1;
 
-  output [4:0] LSQ_tag_out_2;
+  output  [4:0] LSQ_tag_out_2;
   output [63:0] LSQ_address_out_2;
   output [63:0] LSQ_value_out_2;
-
+  output        LSQ_valid_out_2;
   
   // Inputs to the arbiter
   wire [63:0] ex_alu_result_out_1;   // ALU result
@@ -155,7 +160,6 @@ module ex_stage(// Inputs
   wire [63:0] br_disp_1  = { {41{id_ex_IR_1[20]}}, id_ex_IR_1[20:0], 2'b00 };
   wire [63:0] alu_imm_1  = { 56'b0, id_ex_IR_1[20:13] };
   
-  wire [63:0] branch_target;
 
   wire [63:0] mem_disp_2 = { {48{id_ex_IR_2[15]}}, id_ex_IR_2[15:0] };
   wire [63:0] br_disp_2  = { {41{id_ex_IR_2[20]}}, id_ex_IR_2[20:0], 2'b00 };
@@ -174,7 +178,6 @@ module ex_stage(// Inputs
    
   assign branch_valid_out = (id_ex_uncond_branch | id_ex_cond_branch) ? 1'b1: 1'b0;
 
-  assign branch_target = br_disp_1 + id_ex_NPC_1;
    //
    // ALU opA mux
    //

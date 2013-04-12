@@ -1,0 +1,21 @@
+
+////////////////////////////////////////////////////////////////
+// This file houses modules for the inner workings of the ROB //
+/////////////////////////////////////////////////////////////////
+
+
+// rob main module //
+module rob(clock,reset);
+
+   // inputs //
+   input wire clock;
+   input wire reset;
+
+   // outputs //
+
+
+
+
+
+endmodule 
+

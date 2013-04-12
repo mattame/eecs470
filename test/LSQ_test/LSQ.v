@@ -204,8 +204,8 @@ module LSQ(//Inputs
  input clock;
  input reset;
 
- input [4:0] ROB_head_1;
- input [4:0] ROB_head_2;
+ input [7:0] ROB_head_1;
+ input [7:0] ROB_head_2;
 
  input [4:0] ROB_tag_1;
  input       rd_mem_in_1;
@@ -316,8 +316,11 @@ module LSQ(//Inputs
 
  assign read_out = reads_out[LSQ_head];
 
+ // output complete for stores, but not for loads.
+ // only clear stores when retired. Loads cleared when complete at LSQ head
+ 
  assign valid_out = completes_out[LSQ_head] & 
-					(read_out | (!read_out & (tag_out == ROB_head_1 | tag_out == ROB_head_2)));
+					(read_out | (!read_out & (tag_out == ROB_head_1[4:0] | tag_out == ROB_head_2[4:0])));
  
 //----------- POINTER KEEPING ------------
  assign next_head = (valid_out) ? (LSQ_head + 1):LSQ_head;

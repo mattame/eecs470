@@ -18,6 +18,7 @@ module ex_stage(// Inputs
                 reset,
 				// Input Bus 1 (contains branch logic)
                 id_ex_NPC_1,
+				id_ex_PPC_1,
                 id_ex_IR_1,
                 id_ex_dest_reg_1,
                 id_ex_rega_1,
@@ -25,11 +26,12 @@ module ex_stage(// Inputs
                 id_ex_opa_select_1,
                 id_ex_opb_select_1,
                 id_ex_alu_func_1,
-                id_ex_cond_branch,
-                id_ex_uncond_branch,
+                id_ex_cond_branch_1,
+                id_ex_uncond_branch_1,
 
 				// Input Bus 2
 				id_ex_NPC_2,
+				id_ex_PPC_2,
 				id_ex_IR_2,
 				id_ex_dest_reg_2,
 				id_ex_rega_2,
@@ -37,6 +39,8 @@ module ex_stage(// Inputs
 				id_ex_opa_select_2,
 				id_ex_opb_select_2,
 				id_ex_alu_func_2,
+                id_ex_cond_branch_2,
+                id_ex_uncond_branch_2,
 				
           // From Mem Access
         MEM_tag_in,
@@ -47,17 +51,15 @@ module ex_stage(// Inputs
 				stall_bus_1,
 				stall_bus_2,
 				// Bus 1
-				ex_IR_out_1,
-				ex_NPC_out_1,
 				ex_dest_reg_out_1,
 				ex_result_out_1,
 				ex_valid_out_1,
+				mispredict_1,
 				// Bus 2
-				ex_IR_out_2,
-				ex_NPC_out_2,
 				ex_dest_reg_out_2,
 				ex_result_out_2,
 				ex_valid_out_2,
+				mispredict_2,
 
           // To LSQ
         LSQ_tag_out_1,
@@ -78,6 +80,7 @@ module ex_stage(// Inputs
   input         reset;               // system reset
   
   input  [63:0] id_ex_NPC_1;         // incoming instruction PC+4
+  input  [63:0] id_ex_PPC_1;		 // Predicted PC for branches
   input  [31:0] id_ex_IR_1;          // incoming instruction
   input   [4:0] id_ex_dest_reg_1;	 // destination register
   input  [63:0] id_ex_rega_1;        // register A value from reg file
@@ -85,10 +88,11 @@ module ex_stage(// Inputs
   input   [1:0] id_ex_opa_select_1;  // opA mux select from decoder
   input   [1:0] id_ex_opb_select_1;  // opB mux select from decoder
   input   [4:0] id_ex_alu_func_1;    // ALU function select from decoder
-  input         id_ex_cond_branch;   // is this a cond br? from decoder
-  input         id_ex_uncond_branch; // is this an uncond br? from decoder
+  input         id_ex_cond_branch_1;   // is this a cond br? from decoder
+  input         id_ex_uncond_branch_1; // is this an uncond br? from decoder
 
   input  [63:0] id_ex_NPC_2;         // incoming instruction PC+4
+  input  [63:0] id_ex_PPC_2;		 // Predicted PC for branches
   input  [31:0] id_ex_IR_2;          // incoming instruction
   input   [4:0] id_ex_dest_reg_2;	 // destination register
   input  [63:0] id_ex_rega_2;        // register A value from reg file
@@ -96,6 +100,8 @@ module ex_stage(// Inputs
   input   [1:0] id_ex_opa_select_2;  // opA mux select from decoder
   input   [1:0] id_ex_opb_select_2;  // opB mux select from decoder
   input   [4:0] id_ex_alu_func_2;    // ALU function select from decoder
+  input         id_ex_cond_branch_2;   // is this a cond br? from decoder
+  input         id_ex_uncond_branch_2; // is this an uncond br? from decoder
  
   input   [4:0] MEM_tag_in;
   input  [63:0] MEM_value_in;
@@ -106,15 +112,11 @@ module ex_stage(// Inputs
   output        ex_branch_taken;  // is this a taken branch?
   
 				// Bus 1
-  output [31:0]	ex_IR_out_1;		 // 32 bit instruction out
-  output [63:0] ex_NPC_out_1;		 // PC+4
   output  [4:0] ex_dest_reg_out_1;	 // Destination Reg
   output [63:0] ex_result_out_1;	 // Bus 1 Result
   output		ex_valid_out_1;		 // Valid Output
   
 				// Bus 2
-  output [31:0]	ex_IR_out_2;		 // 32 bit instruction
-  output [63:0] ex_NPC_out_2;		 // PC+4
   output  [4:0] ex_dest_reg_out_2;   // Desitnation Reg
   output [63:0] ex_result_out_2;	 // Bus 2 result
   output		ex_valid_out_2;		 // Valid Output
@@ -148,9 +150,13 @@ module ex_stage(// Inputs
   wire [63:0] ex_mult_result_out_2;  // Mult result
   wire 		  ex_mult_valid_out_2;   // Valid Output
   
-  reg    [63:0] opa_mux_out_1, opa_mux_out_2, opb_mux_out_1, opb_mux_out_2;
-  wire		branch_valid_out;
-  wire          brcond_result;
+  reg  [63:0] opa_mux_out_1, opa_mux_out_2, opb_mux_out_1, opb_mux_out_2;
+  wire		branch_valid_out_1, branch_valid_out_2;
+  wire      brcond_result_1, brcond_result_2;
+  wire [63:0] CPC_1, CPC_1;
+  output wire mispredict_1, mispredict_2;
+  
+  wire stall_mult_2;
    
    // set up possible immediates:
    //   mem_disp: sign-extended 16-bit immediate for memory format
@@ -176,7 +182,8 @@ module ex_stage(// Inputs
   assign ex_mult_valid_in_2 = (id_ex_alu_func_2 == `ALU_MULQ) ? 1'b1: 1'b0;
   assign ex_alu_valid_out_2  = (ex_alu_result_out_2 == 64'hdeadbeefbaadbeef) ? 1'b0: 1'b1;
    
-  assign branch_valid_out = (id_ex_uncond_branch | id_ex_cond_branch) ? 1'b1: 1'b0;
+  assign branch_valid_out_1 = (id_ex_uncond_branch_1 | id_ex_cond_branch_1) ? 1'b1: 1'b0;
+  assign branch_valid_out_2 = (id_ex_uncond_branch_2 | id_ex_cond_branch_2) ? 1'b1: 1'b0;
 
    //
    // ALU opA mux
@@ -239,7 +246,6 @@ module ex_stage(// Inputs
             );
     //
     // instantiate the multiplier
-    //
   mult mult_1 (// Inputs
                .clock(clock),
                .reset(reset),
@@ -249,6 +255,7 @@ module ex_stage(// Inputs
                .mplier(opa_mux_out_1),
                .mcand(opb_mux_out_1),
                .valid_in(ex_mult_valid_in_1),
+               .stall(1'b0),
            
                // Outputs
 			   .IR_out(ex_mult_IR_out_1),
@@ -266,6 +273,7 @@ module ex_stage(// Inputs
                .mplier(opa_mux_out_2),
                .mcand(opb_mux_out_2),
                .valid_in(ex_mult_valid_in_2),
+               .stall(stall_mult_2),
            
                // Outputs
 			   .IR_out(ex_mult_IR_out_2),
@@ -277,25 +285,37 @@ module ex_stage(// Inputs
    //
    // instantiate the branch condition tester
    //
-  brcond brcond (// Inputs
+  brcond brcond_1 (// Inputs
                 .opa(id_ex_rega_1),       // always check regA value
-                .func(id_ex_IR_1[28:26]), // inst bits to determine check
+                .func(id_ex_IR_2[28:26]), // inst bits to determine check
 
                 // Output
                 .cond(brcond_result)
                );
-  arbiter arb_0 (// Inputs		// Branch
-					.ex_branch_valid_out(branch_valid_out),
-					.ex_branch_target(branch_target),
+  brcond brcond_2 (// Inputs
+                .opa(id_ex_rega_2),       // always check regA value
+                .func(id_ex_IR_2[28:26]), // inst bits to determine check
+
+                // Output
+                .cond(brcond_result_2)
+               );
+  assign CPC_1 = ((brcond_result_1 & id_ex_cond_branch_1) | id_ex_uncond_branch_1) ?  ex_alu_result_out_1: id_ex_NPC_1;
+  assign CPC_2 = ((brcond_result_2 & id_ex_cond_branch_2) | id_ex_uncond_branch_2) ?  ex_alu_result_out_2: id_ex_NPC_2;
+  
+  assign mispredict_1 = (CPC_1 != id_ex_PPC_1);
+  assign mispredict_2 = (CPC_2 != id_ex_PPC_2);
+			   
+			   
+  arbiter arb_0 (// Inputs
 					// ALU 1 Bus
-					.ex_alu_IR_out_1(id_ex_IR_1),
-					.ex_alu_NPC_out_1(id_ex_NPC_1),
+					.ex_branch_valid_out_1(ex_branch_valid_out_1),
+					.ex_alu_CPC_out_1(CPC_1),
 					.ex_alu_dest_reg_out_1(id_ex_dest_reg_1),
 					.ex_alu_result_out_1(ex_alu_result_out_1),
 					.ex_alu_valid_out_1(ex_alu_valid_out_1),
 					// ALU 2 Bus
-					.ex_alu_IR_out_2(id_ex_IR_2),
-					.ex_alu_NPC_out_2(id_ex_NPC_2),
+					.ex_branch_valid_out_2(ex_branch_valid_out_2),
+					.ex_alu_CPC_out_2(CPC_2),
 					.ex_alu_dest_reg_out_2(id_ex_dest_reg_2),
 					.ex_alu_result_out_2(ex_alu_result_out_2),
 					.ex_alu_valid_out_2(ex_alu_valid_out_2),
@@ -315,23 +335,18 @@ module ex_stage(// Inputs
 				   // Outputs
 					.stall_bus_1(stall_bus_1),
 					.stall_bus_2(stall_bus_2),
+					.stall_mult_2(stall_mult_2),
 					// Bus 1
-					.ex_IR_out_1(ex_IR_out_1),
-					.ex_NPC_out_1(ex_NPC_out_1),
 					.ex_dest_reg_out_1(ex_dest_reg_out_1),
 					.ex_result_out_1(ex_result_out_1),
 					.ex_valid_out_1(ex_valid_out_1),
 					// Bus 2
-					.ex_IR_out_2(ex_IR_out_2),
-					.ex_NPC_out_2(ex_NPC_out_2),
 					.ex_dest_reg_out_2(ex_dest_reg_out_2),
 					.ex_result_out_2(ex_result_out_2),
-					.ex_valid_out_2(ex_valid_out_2)
+					.ex_valid_out_2(ex_valid_out_2),
 				  );
    // ultimate "take branch" signal:
    //    unconditional, or conditional and the condition is true
-  assign ex_take_branch_out = id_ex_uncond_branch
-                          | (id_ex_cond_branch & brcond_result);
 
 endmodule // module ex_stage
 

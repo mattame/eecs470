@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Fri Apr 12 03:39:49 2013
+         Version E-2011.03_Full64 -- Fri Apr 12 16:17:19 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -35,15 +35,16 @@ Top Level Modules:
 No TimeScale specified
 Starting vcs inline pass...
 1 module and 0 UDP read.
-recompiling module testbench
-make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/branch_target_buffer/csrc'
+recompiling module testbench because:
+	This module or some inlined child module(s) has/have been modified.
+make[1]: Entering directory `/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/test/branch_target_buffer/csrc'
 if [ -x ../simv ]; then chmod -x ../simv; fi
 g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
 ../simv up to date
-make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/branch_target_buffer/csrc'
+make[1]: Leaving directory `/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/test/branch_target_buffer/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 12 03:39 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 12 16:17 2013
 
 STARTING TESTBENCH!
 
@@ -93,6 +94,6 @@ $finish called from file "test_branch_target_buffer.v", line 181.
 $finish at simulation time                  160
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 160
-CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
-Fri Apr 12 03:39:50 2013
-CPU time: .158 seconds to compile + .042 seconds to elab + .187 seconds to link + .051 seconds in simulation
+CPU Time:      0.000 seconds;       Data structure size:   0.0Mb
+Fri Apr 12 16:17:20 2013
+CPU time: .098 seconds to compile + .026 seconds to elab + .132 seconds to link + .029 seconds in simulation

@@ -18,7 +18,7 @@
 `define RS_TEST         3'b111
 `define RSTAG_NULL      8'hFF           
 `define ZERO_REG         5'd0
-
+`define NOOP_INST    32'h47ff041f
 
 
 /////////////////////////////////////////////////
@@ -47,6 +47,8 @@ module reservation_station_entry(clock,reset,fill,                              
                            wr_mem_in,
                            cond_branch_in,
                            uncond_branch_in,
+                           NPC_in,
+                           IR_in,
 
                            // cdbs in //
                            cdb1_tag_in,cdb1_value_in,                
@@ -71,7 +73,9 @@ module reservation_station_entry(clock,reset,fill,                              
                            rd_mem_out,
                            wr_mem_out,
                            cond_branch_out,
-                           uncond_branch_out
+                           uncond_branch_out,
+                           NPC_out,
+                           IR_out
 
                            );
 
@@ -99,14 +103,15 @@ module reservation_station_entry(clock,reset,fill,                              
    input wire [63:0] cdb1_value_in;
    input wire [63:0] cdb2_value_in;
 
-   input wire [1:0] opa_select_in;
-   input wire [1:0] opb_select_in;
-   input wire [4:0] alu_func_in;
-   input wire       rd_mem_in;
-   input wire       wr_mem_in;
-   input wire       cond_branch_in;
-   input wire       uncond_branch_in;
-
+   input wire [1:0]  opa_select_in;
+   input wire [1:0]  opb_select_in;
+   input wire [4:0]  alu_func_in;
+   input wire        rd_mem_in;
+   input wire        wr_mem_in;
+   input wire        cond_branch_in;
+   input wire        uncond_branch_in;
+   input wire [63:0] NPC_in;
+   input wire [31:0] IR_in;
 
    // outputs //
    output reg  [2:0]  status_out;
@@ -129,7 +134,8 @@ module reservation_station_entry(clock,reset,fill,                              
    output reg         wr_mem_out;
    output reg         cond_branch_out;
    output reg         uncond_branch_out;
-
+   output reg  [63:0] NPC_out;
+   output reg  [31:0] IR_out;
 
    // internal registers and wires //
    reg [2:0]  n_status;
@@ -150,6 +156,8 @@ module reservation_station_entry(clock,reset,fill,                              
    reg        n_wr_mem_out;
    reg        n_cond_branch_out;
    reg        n_uncond_branch_out;
+   reg [63:0] n_NPC;
+   reg [31:0] n_IR;
 
    wire taga_in_nonnull;     
    wire tagb_in_nonnull;
@@ -222,6 +230,8 @@ module reservation_station_entry(clock,reset,fill,                              
          n_wr_mem_out        = wr_mem_in;
          n_cond_branch_out   = cond_branch_in;
          n_uncond_branch_out = uncond_branch_in;
+         n_NPC               = NPC_in;
+         n_IR                = IR_in;
 
       end
       else
@@ -262,6 +272,8 @@ module reservation_station_entry(clock,reset,fill,                              
          n_wr_mem_out        = wr_mem_out;
          n_cond_branch_out   = cond_branch_out;
          n_uncond_branch_out = uncond_branch_out;
+         n_NPC               = NPC_out;
+         n_IR                = IR_out;
 
       end
    end
@@ -288,6 +300,8 @@ module reservation_station_entry(clock,reset,fill,                              
          cond_branch_out   <= `SD 1'b0;
          uncond_branch_out <= `SD 1'b0;
 	 age_out           <= `SD 8'd0;
+         NPC_out           <= `SD 64'd0; 
+         IR_out            <= `SD `NOOP_INST;
       end
       else
       begin
@@ -306,6 +320,8 @@ module reservation_station_entry(clock,reset,fill,                              
          cond_branch_out   <= `SD n_cond_branch_out;
          uncond_branch_out <= `SD n_uncond_branch_out;
 	 age_out           <= `SD n_age;
+         NPC_out           <= `SD n_NPC;
+         IR_out            <= `SD n_IR;
       end
    end
 
@@ -359,6 +375,8 @@ module reservation_station(clock,reset,               // signals in
                            inst1_wr_mem_in,
                            inst1_cond_branch_in,
                            inst1_uncond_branch_in,
+                           inst1_NPC_in,
+                           inst1_IR_in,
                            inst1_valid,
 
                            // signals and busses in for inst 2 (from id2) //
@@ -375,6 +393,8 @@ module reservation_station(clock,reset,               // signals in
                            inst2_wr_mem_in,
                            inst2_cond_branch_in,
                            inst2_uncond_branch_in,
+                           inst2_NPC_in,
+                           inst2_IR_in,
                            inst2_valid,
 
                            // cdb inputs //
@@ -395,6 +415,7 @@ module reservation_station(clock,reset,               // signals in
                            inst1_alu_func_out,
                            inst1_rd_mem_out,inst1_wr_mem_out,
                            inst1_cond_branch_out,inst1_uncond_branch_out,
+                           inst1_NPC_out,inst1_IR_out,
                            inst1_valid_out,
                            inst1_dest_reg_out,
                            inst1_dest_tag_out,
@@ -405,6 +426,7 @@ module reservation_station(clock,reset,               // signals in
                            inst2_alu_func_out,
                            inst2_rd_mem_out,inst2_wr_mem_out,
                            inst2_cond_branch_out,inst2_uncond_branch_out,
+                           inst2_NPC_out,inst2_IR_out,
                            inst2_valid_out,
                            inst2_dest_reg_out,
                            inst2_dest_tag_out,
@@ -428,6 +450,8 @@ module reservation_station(clock,reset,               // signals in
    input wire [4:0]  inst1_alu_func_in;
    input wire        inst1_rd_mem_in,inst1_wr_mem_in;
    input wire        inst1_cond_branch_in,inst1_uncond_branch_in;
+   input wire [63:0] inst1_NPC_in;
+   input wire [31:0] inst1_IR_in;
    input wire        inst1_valid;
    
    input wire [63:0] inst2_rega_value_in,inst2_regb_value_in;
@@ -438,6 +462,8 @@ module reservation_station(clock,reset,               // signals in
    input wire [4:0]  inst2_alu_func_in;
    input wire        inst2_rd_mem_in,inst2_wr_mem_in;
    input wire        inst2_cond_branch_in,inst2_uncond_branch_in;
+   input wire [63:0] inst2_NPC_in;
+   input wire [31:0] inst2_IR_in;
    input wire        inst2_valid;
 
    input wire [63:0] cdb1_value_in;
@@ -450,6 +476,7 @@ module reservation_station(clock,reset,               // signals in
    input wire [63:0] inst2_rega_rob_value_in;
    input wire [63:0] inst2_regb_rob_value_in;
 
+
    // outputs //
    output wire dispatch; 
 
@@ -458,6 +485,8 @@ module reservation_station(clock,reset,               // signals in
    output wor [4:0]  inst1_alu_func_out;
    output wor        inst1_rd_mem_out,inst1_wr_mem_out;
    output wor        inst1_cond_branch_out,inst1_uncond_branch_out;
+   output wor [63:0] inst1_NPC_out;
+   output wor [31:0] inst1_IR_out;
    output wor        inst1_valid_out;
    output wor [4:0]  inst1_dest_reg_out;
    output wor [7:0]  inst1_dest_tag_out;
@@ -467,15 +496,18 @@ module reservation_station(clock,reset,               // signals in
    output wor [4:0]  inst2_alu_func_out;
    output wor        inst2_rd_mem_out,inst2_wr_mem_out;
    output wor        inst2_cond_branch_out,inst2_uncond_branch_out;
+   output wor [63:0] inst2_NPC_out;
+   output wor [31:0] inst2_IR_out;
    output wor        inst2_valid_out;
    output wor [4:0]  inst2_dest_reg_out;
    output wor [7:0]  inst2_dest_tag_out;
 
    output wire [(`NUM_RSES*3-1):0] states_out;
+
    
    // internal wires for directly interfacing the rs entries //
    output wire [(`NUM_RSES-1):0] fills;
-   reg [(`NUM_RSES-1):0] resets;
+   reg  [(`NUM_RSES-1):0] resets;
 
    wire [(`NUM_RSES-1):0] first_empty_filleds;     // first/second empty links between rses
    wire [(`NUM_RSES-1):0] second_empty_filleds;
@@ -514,6 +546,8 @@ module reservation_station(clock,reset,               // signals in
    wire [(`NUM_RSES-1):0] wr_mems_out;
    wire [(`NUM_RSES-1):0] cond_branches_out;
    wire [(`NUM_RSES-1):0] uncond_branches_out;
+   wire [63:0]            NPCs_out         [(`NUM_RSES-1):0];
+   wire [31:0]            IRs_out          [(`NUM_RSES-1):0];
 
    wor  dispatch_available1;   // if slot 1 can be dispatched to (both slots 1 and 2 must be available for the rs to allow dispatch) 
    wor  dispatch_available2;   // if slot 2 can be dispatched to (both slots 1 and 2 must be available for the rs to allow dispatch)
@@ -544,6 +578,8 @@ module reservation_station(clock,reset,               // signals in
 			assign inst1_wr_mem_out        = (issue_first_states[i] ? wr_mems_out[i] : 1'b0);
 			assign inst1_cond_branch_out   = (issue_first_states[i] ? cond_branches_out[i] : 1'b0);
 			assign inst1_uncond_branch_out = (issue_first_states[i] ? uncond_branches_out[i] : 1'b0);
+                        assign inst1_NPC_out           = (issue_first_states[i] ? NPCs_out[i] : 64'd0);
+                        assign inst1_IR_out            = (issue_first_states[i] ? IRs_out[i] : 32'd0); 
 			assign inst1_valid_out         = (issue_first_states[i] ? 1'b1 : 1'b0);
 			assign inst1_dest_reg_out      = (issue_first_states[i] ? dest_regs_out[i] : 5'd0);
 			assign inst1_dest_tag_out      = (issue_first_states[i] ? dest_tags_out[i] : 5'd0);
@@ -557,6 +593,8 @@ module reservation_station(clock,reset,               // signals in
 			assign inst2_wr_mem_out        = (issue_second_states[i] ? wr_mems_out[i] : 1'b0);
 			assign inst2_cond_branch_out   = (issue_second_states[i] ? cond_branches_out[i] : 1'b0);
 			assign inst2_uncond_branch_out = (issue_second_states[i] ? uncond_branches_out[i] : 1'b0);
+                        assign inst2_NPC_out           = (issue_second_states[i] ? NPCs_out[i] : 64'd0);
+                        assign inst2_IR_out            = (issue_second_states[i] ? IRs_out[i] : 32'd0);
 			assign inst2_valid_out         = (issue_second_states[i] ? 1'b1 : 1'b0);
 			assign inst2_dest_reg_out      = (issue_second_states[i] ? dest_regs_out[i] : 5'd0);
 			assign inst2_dest_tag_out      = (issue_second_states[i] ? dest_tags_out[i] : 5'd0);
@@ -752,8 +790,10 @@ module reservation_station(clock,reset,               // signals in
 								   .rd_mem_out(rd_mems_out[i]),
 								   .wr_mem_out(wr_mems_out[i]),
 								   .cond_branch_out(cond_branches_out[i]),
-								   .uncond_branch_out(uncond_branches_out[i])
-								   
+								   .uncond_branch_out(uncond_branches_out[i]),
+								   .NPC_out(NPCs_out[i]), 
+                                                                   .IR_out(IRs_out[i])
+
 									  );
 									  
       end

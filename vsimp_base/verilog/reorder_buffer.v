@@ -32,9 +32,10 @@ module reorder_buffer_entry(
                   register_in, 
                   cdb1_value_in, cdb1_tag_in,
                   cdb2_value_in, cdb2_tag_in,
+                  cdb1_mispredicted_in, cdb2_mispredicted_in,
 
                   //outputs
-                  value_out, register_out, state_out
+                  value_out, register_out, state_out, mispredicted_out
                   );
 
 
@@ -48,19 +49,19 @@ module reorder_buffer_entry(
 
   input wire [63:0] cdb1_value_in, cdb2_value_in;
   input wire  [7:0] cdb1_tag_in, cdb2_tag_in;
-
+  input wire        cdb1_mispredicted_in,cdb2_mispredicted_in;
 
   /***  internals  ***/
   reg [63:0]  n_value;
   reg  [4:0]  n_register;
   reg  [1:0]  n_state;
-
+  reg         n_mispredicted;
 
   /***  outputs  ***/
   output reg [63:0] value_out;
   output reg  [4:0] register_out;
   output reg  [1:0] state_out;
-
+  output reg        mispredicted_out;
 
   // combinational assignments //  
   always @*
@@ -69,31 +70,35 @@ module reorder_buffer_entry(
     //determine whether to latch dispatch
     if (write)
     begin
-      n_state    = `ROBE_INUSE;
-      n_value    = 64'b0;
-      n_register = register_in;
+      n_state        = `ROBE_INUSE;
+      n_value        = 64'b0;
+      n_register     = register_in;
+      n_mispredicted = 1'b0;  
     end
 
     //determine whether to latch complete 
     else if (~write && (tag_in==cdb1_tag_in))
     begin 
-      n_state    = `ROBE_COMPLETE;
-      n_value    = cdb1_value_in;
-      n_register = register_out;
+      n_state        = `ROBE_COMPLETE;
+      n_value        = cdb1_value_in;
+      n_register     = register_out;
+      n_mispredicted = cdb1_mispredicted_in;
     end
     else if (~write && (tag_in==cdb2_tag_in))
     begin
-      n_state = `ROBE_COMPLETE;
-      n_value = cdb2_value_in;
-      n_register = register_out;
+      n_state        = `ROBE_COMPLETE;
+      n_value        = cdb2_value_in;
+      n_register     = register_out;
+      n_mispredicted = cdb2_mispredicted_in; 
     end
 
     //default case
     else
     begin
-      n_state = state_out;
-      n_value = value_out;
-      n_register = register_out;
+      n_state        = state_out;
+      n_value        = value_out;
+      n_register     = register_out;
+      n_mispredicted = mispredicted_out;
     end
   end
 
@@ -103,15 +108,17 @@ module reorder_buffer_entry(
   begin
      if (reset)
      begin
-        state_out    <= `SD `ROBE_EMPTY;
-        value_out    <= `SD 64'h0;
-        register_out <= `SD `RSTAG_NULL;
+        state_out        <= `SD `ROBE_EMPTY;
+        value_out        <= `SD 64'h0;
+        register_out     <= `SD `RSTAG_NULL;
+        mispredicted_out <= `SD 1'b0;
      end
      else
      begin
-        state_out    <= `SD n_state;
-        value_out    <= `SD n_value;
-        register_out <= `SD n_register;
+        state_out        <= `SD n_state;
+        value_out        <= `SD n_value;
+        register_out     <= `SD n_register;
+        mispredicted_out <= `SD n_mispredicted;
      end
   end
 
@@ -145,6 +152,8 @@ module reorder_buffer( clock,reset,
       cdb1_value_in,
       cdb2_tag_in,
       cdb2_value_in, 
+      cdb1_mispredicted_in,
+      cdb2_mispredicted_in,
 
       // outputs //
       inst1_tag_out,
@@ -159,6 +168,9 @@ module reorder_buffer( clock,reset,
       // outputs to write directly to the reg file //
       inst1_dest_out,inst1_value_out,
       inst2_dest_out,inst2_value_out,
+
+      // outputs to indicate a mispredicted branch //
+      inst1_mispredicted_out,inst2_mispredicted_out,
 
       // signals out //
       rob_full,rob_empty
@@ -183,6 +195,9 @@ module reorder_buffer( clock,reset,
    input wire [7:0]  cdb2_tag_in;
    input wire [63:0] cdb1_value_in;
    input wire [63:0] cdb2_value_in;
+   input wire        cdb1_mispredicted_in;
+   input wire        cdb2_mispredicted_in;
+
 
    // outputs //
    output wire [7:0] inst1_tag_out;
@@ -197,6 +212,9 @@ module reorder_buffer( clock,reset,
    output wire [63:0] inst1_value_out;
    output wire [4:0]  inst2_dest_out;
    output wire [63:0] inst2_value_out;
+
+   output wire inst1_mispredicted_out;
+   output wire inst2_mispredicted_out;
 
    output wand rob_full;
 
@@ -222,7 +240,7 @@ module reorder_buffer( clock,reset,
    wire [63:0] values_out    [(`ROB_ENTRIES-1):0];
    wire [4:0]  registers_out [(`ROB_ENTRIES-1):0];
    wire [1:0]  states_out    [(`ROB_ENTRIES-1):0]; 
-
+   wire [(`ROB_ENTRIES-1):0] mispredicteds_out; 
 
    // combinational assignments for head/tail plus one and two. accounts //
    // for overflow  //
@@ -266,6 +284,10 @@ module reorder_buffer( clock,reset,
    assign inst2_dest_out  = (inst2_retire ? registers_out[head_plus_one] : `ZERO_REG);
    assign inst2_value_out = (inst2_retire ? values_out[   head_plus_one] : 64'd0);
 
+   // mispredicted out assignments //
+   assign inst1_mispredicted_out = (inst1_retire ? mispredicteds_out[head         ] : 1'b0);
+   assign inst2_mispredicted_out = (inst2_retire ? mispredicteds_out[head_plus_one] : 1'b0);
+
    // assignments for rob entry inputs //
    genvar i;
    generate
@@ -299,10 +321,12 @@ module reorder_buffer( clock,reset,
                
                     .cdb1_tag_in(cdb1_tag_in), .cdb1_value_in(cdb1_value_in),
                     .cdb2_tag_in(cdb2_tag_in), .cdb2_value_in(cdb2_value_in),
+                    .cdb1_mispredicted_in(cdb1_mispredicted_in), .cdb2_mispredicted_in(cdb2_mispredicted_in),
 
                     .value_out(values_out[i]),
                     .register_out(registers_out[i]),
-                    .state_out(states_out[i])
+                    .state_out(states_out[i]),
+                    .mispredicted_out(mispredicteds_out[i])
 
                          );
 

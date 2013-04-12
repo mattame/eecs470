@@ -1,0 +1,441 @@
+Information: Updating design information... (UID-85)
+Warning: Design 'branch_target_buffer' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : design
+Design : branch_target_buffer
+Version: G-2012.06
+Date   : Fri Apr 12 03:40:16 2013
+****************************************
+
+Design allows ideal nets on clock nets.
+
+Library(s) Used:
+
+    lec25dscc25_TT (File: /afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db)
+
+Local Link Library:
+
+    {lec25dscc25_TT.db}
+
+Flip-Flop Types:
+
+    No flip-flop types specified.
+
+Latch Types:
+
+    No latch types specified.
+
+Operating Conditions:
+
+
+    Operating Condition Name : nom_pvt
+    Library : lec25dscc25_TT
+    Process :   1.00
+    Temperature :  25.00
+    Voltage :   2.50
+    Interconnect Model : balanced_tree
+
+Wire Loading Model:
+
+    Selected manually by the user.
+
+Name           :   tsmcwire
+Location       :   lec25dscc25_TT
+Resistance     :   0.2642
+Capacitance    :   0.000132782
+Area           :   0.27
+Slope          :   0.74
+Fanout   Length   Points Average Cap Std Deviation
+--------------------------------------------------------------
+     1     0.89
+     2     1.48
+     3     2.44
+     4     3.18
+     5     3.92
+
+
+
+Wire Loading Model Mode: top.
+
+Timing Ranges:
+
+    No timing ranges specified.
+
+Pin Input Delays:
+
+    None specified.
+
+Pin Output Delays:
+
+    None specified.
+
+Disabled Timing Arcs:
+
+    No arcs disabled.
+
+Required Licenses:
+
+    None Required
+
+Design Parameters:
+
+    None specified.
+1
+ 
+****************************************
+Report : area
+Design : branch_target_buffer
+Version: G-2012.06
+Date   : Fri Apr 12 03:40:16 2013
+****************************************
+
+Library(s) Used:
+
+    lec25dscc25_TT (File: /afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db)
+
+Number of ports:                          259
+Number of nets:                          3793
+Number of cells:                         3718
+Number of combinational cells:           2694
+Number of sequential cells:              1024
+Number of macros:                           0
+Number of buf/inv:                       1308
+Number of references:                      12
+
+Combinational area:       142157.849834
+Noncombinational area:    161376.250000
+Net Interconnect area:    2021.652664  
+
+Total cell area:          303534.099834
+Total area:               305555.752499
+1
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -input_pins
+        -nets
+        -max_paths 2
+        -transition_time
+Design : branch_target_buffer
+Version: G-2012.06
+Date   : Fri Apr 12 03:40:16 2013
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: nom_pvt   Library: lec25dscc25_TT
+Wire Load Model Mode: top
+
+  Startpoint: branch_PCs_reg[1][0]
+              (rising edge-triggered flip-flop clocked by clock)
+  Endpoint: branch_PCs_reg[1][0]
+            (rising edge-triggered flip-flop clocked by clock)
+  Path Group: clock
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  branch_target_buffer tsmcwire            lec25dscc25_TT
+
+  Point                        Fanout     Trans      Incr       Path
+  ---------------------------------------------------------------------
+  clock clock (rise edge)                            0.00       0.00
+  clock network delay (ideal)                        0.00       0.00
+  branch_PCs_reg[1][0]/CLK (dffs1)         0.00      0.00 #     0.00 r
+  branch_PCs_reg[1][0]/Q (dffs1)           0.22      0.22       0.22 f
+  branch_PCs[1][0] (net)         2                   0.00       0.22 f
+  U4218/DIN3 (aoi22s1)                     0.22      0.00       0.22 f
+  U4218/Q (aoi22s1)                        0.76      0.17       0.39 r
+  n1979 (net)                    1                   0.00       0.39 r
+  U4217/DIN (ib1s1)                        0.76      0.00       0.39 r
+  U4217/Q (ib1s1)                          0.31      0.13       0.52 f
+  n3559 (net)                    1                   0.00       0.52 f
+  branch_PCs_reg[1][0]/DIN (dffs1)         0.31      0.01       0.53 f
+  data arrival time                                             0.53
+
+  clock clock (rise edge)                           13.57      13.57
+  clock network delay (ideal)                        0.00      13.57
+  clock uncertainty                                 -0.10      13.47
+  branch_PCs_reg[1][0]/CLK (dffs1)                   0.00      13.47 r
+  library setup time                                -0.16      13.31
+  data required time                                           13.31
+  ---------------------------------------------------------------------
+  data required time                                           13.31
+  data arrival time                                            -0.53
+  ---------------------------------------------------------------------
+  slack (MET)                                                  12.78
+
+
+  Startpoint: branch_PCs_reg[1][1]
+              (rising edge-triggered flip-flop clocked by clock)
+  Endpoint: branch_PCs_reg[1][1]
+            (rising edge-triggered flip-flop clocked by clock)
+  Path Group: clock
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  branch_target_buffer tsmcwire            lec25dscc25_TT
+
+  Point                        Fanout     Trans      Incr       Path
+  ---------------------------------------------------------------------
+  clock clock (rise edge)                            0.00       0.00
+  clock network delay (ideal)                        0.00       0.00
+  branch_PCs_reg[1][1]/CLK (dffs1)         0.00      0.00 #     0.00 r
+  branch_PCs_reg[1][1]/Q (dffs1)           0.22      0.22       0.22 f
+  branch_PCs[1][1] (net)         2                   0.00       0.22 f
+  U4220/DIN3 (aoi22s1)                     0.22      0.00       0.22 f
+  U4220/Q (aoi22s1)                        0.76      0.17       0.39 r
+  n1981 (net)                    1                   0.00       0.39 r
+  U4219/DIN (ib1s1)                        0.76      0.00       0.39 r
+  U4219/Q (ib1s1)                          0.31      0.13       0.52 f
+  n3560 (net)                    1                   0.00       0.52 f
+  branch_PCs_reg[1][1]/DIN (dffs1)         0.31      0.01       0.53 f
+  data arrival time                                             0.53
+
+  clock clock (rise edge)                           13.57      13.57
+  clock network delay (ideal)                        0.00      13.57
+  clock uncertainty                                 -0.10      13.47
+  branch_PCs_reg[1][1]/CLK (dffs1)                   0.00      13.47 r
+  library setup time                                -0.16      13.31
+  data required time                                           13.31
+  ---------------------------------------------------------------------
+  data required time                                           13.31
+  data arrival time                                            -0.53
+  ---------------------------------------------------------------------
+  slack (MET)                                                  12.78
+
+
+  Startpoint: reset (input port clocked by clock)
+  Endpoint: branch_PCs_reg[0][0]
+            (rising edge-triggered flip-flop clocked by clock)
+  Path Group: input_grp
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  branch_target_buffer tsmcwire            lec25dscc25_TT
+
+  Point                        Fanout     Trans      Incr       Path
+  ---------------------------------------------------------------------
+  clock clock (rise edge)                            0.00       0.00
+  clock network delay (ideal)                        0.00       0.00
+  input external delay                               0.10       0.10 r
+  reset (in)                               0.58      0.17       0.27 r
+  reset (net)                   17                   0.00       0.27 r
+  U2424/DIN (i1s1)                         0.58      0.00       0.27 r
+  U2424/Q (i1s1)                           0.64      0.35       0.62 f
+  n3687 (net)                   16                   0.00       0.62 f
+  U2363/DIN3 (oai21s2)                     0.64      0.00       0.62 f
+  U2363/Q (oai21s2)                        0.65      0.34       0.96 r
+  n2111 (net)                    3                   0.00       0.96 r
+  U2322/DIN (ib1s1)                        0.65      0.00       0.96 r
+  U2322/Q (ib1s1)                          0.87      0.46       1.42 f
+  n2612 (net)                   24                   0.00       1.42 f
+  U2254/DIN1 (or2s1)                       0.87      0.00       1.43 f
+  U2254/Q (or2s1)                          0.21      0.30       1.73 f
+  n2245 (net)                    3                   0.00       1.73 f
+  U2415/DIN (ib1s1)                        0.21      0.00       1.73 f
+  U2415/Q (ib1s1)                          0.96      0.38       2.11 r
+  n2615 (net)                   22                   0.00       2.11 r
+  U4346/DIN1 (aoi22s1)                     0.96      0.00       2.11 r
+  U4346/Q (aoi22s1)                        0.67      0.15       2.27 f
+  n2046 (net)                    1                   0.00       2.27 f
+  U4345/DIN (ib1s1)                        0.67      0.00       2.27 f
+  U4345/Q (ib1s1)                          0.30      0.16       2.42 r
+  n3623 (net)                    1                   0.00       2.42 r
+  branch_PCs_reg[0][0]/DIN (dffs1)         0.30      0.01       2.43 r
+  data arrival time                                             2.43
+
+  clock clock (rise edge)                           13.57      13.57
+  clock network delay (ideal)                        0.00      13.57
+  clock uncertainty                                 -0.10      13.47
+  branch_PCs_reg[0][0]/CLK (dffs1)                   0.00      13.47 r
+  library setup time                                -0.14      13.33
+  data required time                                           13.33
+  ---------------------------------------------------------------------
+  data required time                                           13.33
+  data arrival time                                            -2.43
+  ---------------------------------------------------------------------
+  slack (MET)                                                  10.90
+
+
+  Startpoint: reset (input port clocked by clock)
+  Endpoint: branch_PCs_reg[0][1]
+            (rising edge-triggered flip-flop clocked by clock)
+  Path Group: input_grp
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  branch_target_buffer tsmcwire            lec25dscc25_TT
+
+  Point                        Fanout     Trans      Incr       Path
+  ---------------------------------------------------------------------
+  clock clock (rise edge)                            0.00       0.00
+  clock network delay (ideal)                        0.00       0.00
+  input external delay                               0.10       0.10 r
+  reset (in)                               0.58      0.17       0.27 r
+  reset (net)                   17                   0.00       0.27 r
+  U2424/DIN (i1s1)                         0.58      0.00       0.27 r
+  U2424/Q (i1s1)                           0.64      0.35       0.62 f
+  n3687 (net)                   16                   0.00       0.62 f
+  U2363/DIN3 (oai21s2)                     0.64      0.00       0.62 f
+  U2363/Q (oai21s2)                        0.65      0.34       0.96 r
+  n2111 (net)                    3                   0.00       0.96 r
+  U2322/DIN (ib1s1)                        0.65      0.00       0.96 r
+  U2322/Q (ib1s1)                          0.87      0.46       1.42 f
+  n2612 (net)                   24                   0.00       1.42 f
+  U2254/DIN1 (or2s1)                       0.87      0.00       1.43 f
+  U2254/Q (or2s1)                          0.21      0.30       1.73 f
+  n2245 (net)                    3                   0.00       1.73 f
+  U2415/DIN (ib1s1)                        0.21      0.00       1.73 f
+  U2415/Q (ib1s1)                          0.96      0.38       2.11 r
+  n2615 (net)                   22                   0.00       2.11 r
+  U4348/DIN1 (aoi22s1)                     0.96      0.00       2.11 r
+  U4348/Q (aoi22s1)                        0.67      0.15       2.27 f
+  n2048 (net)                    1                   0.00       2.27 f
+  U4347/DIN (ib1s1)                        0.67      0.00       2.27 f
+  U4347/Q (ib1s1)                          0.30      0.16       2.42 r
+  n3624 (net)                    1                   0.00       2.42 r
+  branch_PCs_reg[0][1]/DIN (dffs1)         0.30      0.01       2.43 r
+  data arrival time                                             2.43
+
+  clock clock (rise edge)                           13.57      13.57
+  clock network delay (ideal)                        0.00      13.57
+  clock uncertainty                                 -0.10      13.47
+  branch_PCs_reg[0][1]/CLK (dffs1)                   0.00      13.47 r
+  library setup time                                -0.14      13.33
+  data required time                                           13.33
+  ---------------------------------------------------------------------
+  data required time                                           13.33
+  data arrival time                                            -2.43
+  ---------------------------------------------------------------------
+  slack (MET)                                                  10.90
+
+
+  Startpoint: branch_PCs_reg[13][0]
+              (rising edge-triggered flip-flop clocked by clock)
+  Endpoint: PPC_out[0] (output port clocked by clock)
+  Path Group: output_grp
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  branch_target_buffer tsmcwire            lec25dscc25_TT
+
+  Point                        Fanout     Trans      Incr       Path
+  ---------------------------------------------------------------------
+  branch_PCs_reg[13][0]/CLK (dffs1)        0.00      0.00 #     0.00 r
+  branch_PCs_reg[13][0]/Q (dffs1)          0.22      0.22       0.22 f
+  branch_PCs[13][0] (net)        2                   0.00       0.22 f
+  U4729/DIN3 (mxi41s1)                     0.22      0.00       0.22 f
+  U4729/Q (mxi41s1)                        0.22      0.28       0.50 r
+  n2259 (net)                    1                   0.00       0.50 r
+  U4473/DIN4 (mxi41s1)                     0.22      0.00       0.50 r
+  U4473/Q (mxi41s1)                        0.75      0.52       1.03 f
+  PPC_out[0] (net)               1                   0.00       1.03 f
+  PPC_out[0] (out)                         0.75      0.02       1.05 f
+  data arrival time                                             1.05
+
+  max_delay                                         13.57      13.57
+  clock uncertainty                                 -0.10      13.47
+  output external delay                             -0.10      13.37
+  data required time                                           13.37
+  ---------------------------------------------------------------------
+  data required time                                           13.37
+  data arrival time                                            -1.05
+  ---------------------------------------------------------------------
+  slack (MET)                                                  12.32
+
+
+  Startpoint: branch_PCs_reg[13][1]
+              (rising edge-triggered flip-flop clocked by clock)
+  Endpoint: PPC_out[1] (output port clocked by clock)
+  Path Group: output_grp
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  branch_target_buffer tsmcwire            lec25dscc25_TT
+
+  Point                        Fanout     Trans      Incr       Path
+  ---------------------------------------------------------------------
+  branch_PCs_reg[13][1]/CLK (dffs1)        0.00      0.00 #     0.00 r
+  branch_PCs_reg[13][1]/Q (dffs1)          0.22      0.22       0.22 f
+  branch_PCs[13][1] (net)        2                   0.00       0.22 f
+  U4730/DIN3 (mxi41s1)                     0.22      0.00       0.22 f
+  U4730/Q (mxi41s1)                        0.22      0.28       0.50 r
+  n2263 (net)                    1                   0.00       0.50 r
+  U4477/DIN4 (mxi41s1)                     0.22      0.00       0.50 r
+  U4477/Q (mxi41s1)                        0.75      0.52       1.03 f
+  PPC_out[1] (net)               1                   0.00       1.03 f
+  PPC_out[1] (out)                         0.75      0.02       1.05 f
+  data arrival time                                             1.05
+
+  max_delay                                         13.57      13.57
+  clock uncertainty                                 -0.10      13.47
+  output external delay                             -0.10      13.37
+  data required time                                           13.37
+  ---------------------------------------------------------------------
+  data required time                                           13.37
+  data arrival time                                            -1.05
+  ---------------------------------------------------------------------
+  slack (MET)                                                  12.32
+
+
+1
+ 
+****************************************
+Report : constraint
+        -all_violators
+        -verbose
+Design : branch_target_buffer
+Version: G-2012.06
+Date   : Fri Apr 12 03:40:16 2013
+****************************************
+
+This design has no violated constraints.
+
+1
+Information: Updating graph... (UID-83)
+Warning: Design 'branch_target_buffer' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+ 
+****************************************
+Report : reference
+Design : branch_target_buffer
+Version: G-2012.06
+Date   : Fri Apr 12 03:40:18 2013
+****************************************
+
+Attributes:
+    b - black box (unknown)
+   bo - allows boundary optimization
+    d - dont_touch
+   mo - map_only
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    s - synthetic operator
+    u - contains unmapped logic
+
+Reference          Library       Unit Area   Count    Total Area   Attributes
+-----------------------------------------------------------------------------
+and2s1             lec25dscc25_TT    49.766399       1    49.766399
+aoi22s1            lec25dscc25_TT    58.060799    1024 59454.257812
+dffs1              lec25dscc25_TT   157.593994    1024 161376.250000 n
+hi1s1              lec25dscc25_TT    33.177601     128  4246.732910
+i1s1               lec25dscc25_TT    33.177601       1    33.177601
+i1s3               lec25dscc25_TT    41.472000      16   663.552002
+ib1s1              lec25dscc25_TT    33.177601    1163 38585.549801
+mxi41s1            lec25dscc25_TT   116.122002     320 37159.040527
+nnd2s2             lec25dscc25_TT    41.472000       8   331.776001
+nor2s1             lec25dscc25_TT    41.472000       1    41.472000
+oai21s2            lec25dscc25_TT    49.766399      16   796.262390
+or2s1              lec25dscc25_TT    49.766399      16   796.262390
+-----------------------------------------------------------------------------
+Total 12 references                                 303534.099834
+1

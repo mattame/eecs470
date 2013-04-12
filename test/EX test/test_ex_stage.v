@@ -1,3 +1,4 @@
+
 `timescale 1ns/100ps
 
 
@@ -182,6 +183,20 @@ ex_stage ex_0(// Inputs
 	end
       end
   endtask
+
+
+   // asserts truth of a value, exits on failure //
+   task ASSERT;
+     input state;
+   begin
+      if (~state)
+      begin
+         $display("@@@ Incorrect at time %4.0f", $time);
+         $display("ENDING TESTBENCH : ERROR !");
+         $finish;
+      end
+   end
+   endtask
 
 
    // testing segment //

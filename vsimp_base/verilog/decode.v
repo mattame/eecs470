@@ -218,8 +218,7 @@ module id_stage(
 
               // Outputs
               id_opa_select_out_1,
-              id_opb_select_out_1,
-              
+              id_opb_select_out_1,            
               id_dest_reg_idx_out_1,
               id_alu_func_out_1,
               id_rd_mem_out_1,

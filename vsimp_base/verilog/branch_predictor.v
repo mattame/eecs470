@@ -1,4 +1,9 @@
-module branch_predictor (clock, reset, pc, instruction, result, pht_index_in, prediction, pht_index_out)
+module branch_predictor (
+                          //inputs
+                          clock, reset, pc, instruction, result, pht_index_in,
+                          //outputs
+                          prediction, pht_index_out
+                        );
 
 //----------------inputs------------
 input wire clock;
@@ -39,26 +44,27 @@ begin
       isBranch = 1;
     else
       isBranch = 0;
-
     
     pc_bits = pc[6:2];        //for use with the xor
     ghr_bits = {2'b0, ghr};
     
-    pht_index = pc_bits^ghr_bits;
+    pht_index = pc_bits ^ ghr_bits;
     
-    if(inst_opcode1 == `BR_INST || inst_opcode1 == `BSR_INST)
+    if(inst_opcode1 == `BR_INST || inst_opcode1 == `BSR_INST) //checks if conditional branch
+    begin
       prediction = 1;
+    end
+
     else
+    begin
       prediction = pht[pht_index];
+    end
     
     pht_index_out = pht_index;
 end
 
 
-
-assign new_ghr = (isBranch) ? (ghr << 1) : ghr;
-
-always@(posedge clk)
+always @(posedge clock)
 begin
   if(reset)
   begin
@@ -72,7 +78,7 @@ begin
   end
 end
 
-always@*
+always @*   //updates pht when branch is resolved
 begin
     //assume that unconditional branches don't count in the global branch history register (ghr)
     if (inst_opcode1 != `BR_INST && inst_opcode1 != `BSR_INST)

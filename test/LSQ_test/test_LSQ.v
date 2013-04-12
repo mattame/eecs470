@@ -32,10 +32,12 @@ module testbench;
 	reg [4:0] EX_tag_1;
 	reg [63:0] value_in_1;
 	reg [63:0] address_in_1;
+	reg EX_valid_1;
 
 	reg [4:0] EX_tag_2;
 	reg [63:0] value_in_2;
 	reg [63:0] address_in_2;
+	reg EX_valid_2;
 
 			//Outputs
 	wire [4:0] tag_out;
@@ -72,10 +74,12 @@ LSQ lsqueue(//Inputs
 			.EX_tag_1(EX_tag_1),
 			.value_in_1(value_in_1),
 			.address_in_1(address_in_1),
+			.EX_valid_1(EX_valid_1),
 
 			.EX_tag_2(EX_tag_2),
 			.value_in_2(value_in_2),
 			.address_in_2(address_in_2),
+			.EX_valid_2(EX_valid_2),
 
 			//Outputs
 			.tag_out(tag_out),
@@ -166,25 +170,28 @@ LSQ lsqueue(//Inputs
 
 
         // TRANSITION TESTS //
-	ROB_head_1 = 4'h0;
-	ROB_head_2 = 4'h0;
+	ROB_head_1 = 5'h0;
+	ROB_head_2 = 5'h0;
 			//1
-	ROB_tag_1 = 4'h0;
+	ROB_tag_1 = 5'h0;
 	rd_mem_in_1 = 1'b0;
 	wr_mem_in_1 = 1'b0;
 	valid_in_1 = 1'b0;
 			//2
-	ROB_tag_2 = 4'h0;
+	ROB_tag_2 = 5'h0;
 	rd_mem_in_2 = 1'b0;
 	wr_mem_in_2 = 1'b0;
 	valid_in_2 = 1'b0;
 			//From EX ALU
-	EX_tag_1 = 4'h0;
+	EX_tag_1 = 5'h0;
 	value_in_1 = 64'h0;
 	address_in_1 = 64'h0;
-	EX_tag_2 = 4'h0;
+	EX_valid_1 = 1'b0;
+	
+	EX_tag_2 = 5'h0;
 	value_in_2 = 64'h0;
 	address_in_2 = 64'h0;
+	EX_valid_2 = 1'b0;
 
 
         @(posedge clock);
@@ -192,27 +199,30 @@ LSQ lsqueue(//Inputs
         @(posedge clock);
 			
 	reset = 0;
-// two loads being added
+// one load, one store being added
 
-	ROB_head_1 = 4'h0;
-	ROB_head_2 = 4'h1;
+	ROB_head_1 = 5'h0;
+	ROB_head_2 = 5'h1;
 			//1
-	ROB_tag_1 = 4'h0;
-	rd_mem_in_1 = 1'b0;
-	wr_mem_in_1 = 1'b1;
+	ROB_tag_1 = 5'h4;
+	rd_mem_in_1 = 1'b1;
+	wr_mem_in_1 = 1'b0;
 	valid_in_1 = 1'b1;
 			//2
-	ROB_tag_2 = 4'h1;
+	ROB_tag_2 = 5'h7;
 	rd_mem_in_2 = 1'b0;
 	wr_mem_in_2 = 1'b1;
 	valid_in_2 = 1'b1;
 			//From EX ALU
-	EX_tag_1 = 4'h0;
+	EX_tag_1 = 5'h0;
 	value_in_1 = 64'h0;
 	address_in_1 = 64'h0;
-	EX_tag_2 = 4'h0;
+	EX_valid_1 = 1'b0;
+	
+	EX_tag_2 = 5'h0;
 	value_in_2 = 64'h0;
 	address_in_2 = 64'h0;
+	EX_valid_2 = 1'b0;
 
         @(negedge clock);
         DISPLAY_STATE(`INPUT);
@@ -221,63 +231,115 @@ LSQ lsqueue(//Inputs
 
 // No loads or stores added, but the 
 
-	ROB_head_1 = 4'h0;
-	ROB_head_2 = 4'h1;
+	ROB_head_1 = 5'h0;
+	ROB_head_2 = 5'h1;
 			//1
-	ROB_tag_1 = 4'h2;
+	ROB_tag_1 = 5'h2;
 	rd_mem_in_1 = 1'b0;
 	wr_mem_in_1 = 1'b0;
 	valid_in_1 = 1'b0;
 			//2
-	ROB_tag_2 = 4'h3;
+	ROB_tag_2 = 5'h3;
 	rd_mem_in_2 = 1'b0;
 	wr_mem_in_2 = 1'b0;
 	valid_in_2 = 1'b0;
 			//From EX ALU
-	EX_tag_1 = 4'h0;
+	EX_tag_1 = 5'h4;
 	value_in_1 = 64'h0;
 	address_in_1 = 64'h100;
-	EX_tag_2 = 4'h1;
-	value_in_2 = 64'h0;
+	EX_valid_1 = 1'b1;
+	
+	EX_tag_2 = 5'h7;
+	value_in_2 = 64'h2220;
 	address_in_2 = 64'h200;
+	EX_valid_2 = 1'b1;
 	
         @(negedge clock);
         DISPLAY_STATE(`INPUT);
         DISPLAY_STATE(`OUTPUT);
         @(posedge clock);
 
-// store added
+// store is next up, let's try getting that working.
 
-	ROB_head_1 = 4'h2;
-	ROB_head_2 = 4'h3;
+	ROB_head_1 = 5'h2;
+	ROB_head_2 = 5'h3;
 			//1
-	ROB_tag_1 = 4'h4;
+	ROB_tag_1 = 5'h4;
 	rd_mem_in_1 = 1'b0;
 	wr_mem_in_1 = 1'b1;
 	valid_in_1 = 1'b0;
 			//2
-	ROB_tag_2 = 4'h5;
+	ROB_tag_2 = 5'h5;
 	rd_mem_in_2 = 1'b0;
 	wr_mem_in_2 = 1'b1;
 	valid_in_2 = 1'b0;
 			//From EX ALU
-	EX_tag_1 = 4'h0;
+	EX_tag_1 = 5'h0;
 	value_in_1 = 64'h0;
 	address_in_1 = 64'h100;
-	EX_tag_2 = 4'h1;
-	value_in_2 = 64'h0;
+	EX_valid_1 = 1'b0;
+	
+	EX_tag_2 = 5'h5;
+	value_in_2 = 64'h4361728;
 	address_in_2 = 64'h200;
+	EX_valid_2 = 1'b1;
 
         @(negedge clock);
         DISPLAY_STATE(`INPUT);
         DISPLAY_STATE(`OUTPUT);
         @(posedge clock);
+
+	ROB_head_1 = 5'h2;
+	ROB_head_2 = 5'h7;
+			//1
+	ROB_tag_1 = 5'h4;
+	rd_mem_in_1 = 1'b0;
+	wr_mem_in_1 = 1'b1;
+	valid_in_1 = 1'b0;
+			//2
+	ROB_tag_2 = 5'h5;
+	rd_mem_in_2 = 1'b0;
+	wr_mem_in_2 = 1'b1;
+	valid_in_2 = 1'b0;
+			//From EX ALU
+	EX_tag_1 = 5'h0;
+	value_in_1 = 64'h0;
+	address_in_1 = 64'h100;
+	EX_valid_1 = 1'b0;
+	
+	EX_tag_2 = 5'h1;
+	value_in_2 = 64'h0;
+	address_in_2 = 64'h200;
+	EX_valid_2 = 1'b0;
 
 		
         @(negedge clock);
         DISPLAY_STATE(`INPUT);
         DISPLAY_STATE(`OUTPUT);
         @(posedge clock);
+
+	ROB_head_1 = 5'h2;
+	ROB_head_2 = 5'h3;
+			//1
+	ROB_tag_1 = 5'h4;
+	rd_mem_in_1 = 1'b0;
+	wr_mem_in_1 = 1'b1;
+	valid_in_1 = 1'b0;
+			//2
+	ROB_tag_2 = 5'h5;
+	rd_mem_in_2 = 1'b0;
+	wr_mem_in_2 = 1'b1;
+	valid_in_2 = 1'b0;
+			//From EX ALU
+	EX_tag_1 = 5'h0;
+	value_in_1 = 64'h0;
+	address_in_1 = 64'h100;
+	EX_valid_1 = 1'b0;
+	
+	EX_tag_2 = 5'h1;
+	value_in_2 = 64'h0;
+	address_in_2 = 64'h200;
+	EX_valid_2 = 1'b0;
 
 	
         @(negedge clock);
@@ -285,6 +347,37 @@ LSQ lsqueue(//Inputs
         DISPLAY_STATE(`OUTPUT);
 		@(posedge clock);
 		
+	ROB_head_1 = 5'h2;
+	ROB_head_2 = 5'h3;
+			//1
+	ROB_tag_1 = 5'h4;
+	rd_mem_in_1 = 1'b1;
+	wr_mem_in_1 = 1'b0;
+	valid_in_1 = 1'b1;
+			//2
+	ROB_tag_2 = 5'h5;
+	rd_mem_in_2 = 1'b0;
+	wr_mem_in_2 = 1'b1;
+	valid_in_2 = 1'b0;
+			//From EX ALU
+	EX_tag_1 = 5'h4;
+	value_in_1 = 64'h1234123412341234;
+	address_in_1 = 64'h111;
+	EX_valid_1 = 1'b1;
+	
+	EX_tag_2 = 5'h1;
+	value_in_2 = 64'h0;
+	address_in_2 = 64'h200;
+	EX_valid_2 = 1'b0;
+
+	
+        @(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);
+		@(posedge clock);
+		DISPLAY_STATE(`OUTPUT);
+		
+	$display("**-----------------------------------------------------------**");
 	// SUCCESSFULLY END TESTBENCH //
 	$display("ENDING TESTBENCH : SUCCESS !\n");
 	$finish;

@@ -1,0 +1,102 @@
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 12 14:43 2013
+STARTING TESTBENCH!
+
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     30
+ROB heads 1: 00, 2: 01
+ROB tags  1: 04, 2: 07
+R/W in 1: 1  0,  2: 0  1
+Valids in 1: 1, 2: 1
+
+EX tags 1: 00, 2: 00
+EX values 1: 0000000000000000, 2: 0000000000000000
+EX address 1: 0000000000000000, 2: 0000000000000000
+
+>>>> Pre-Clock Output   30
+Tag: 00, Address: 0000000000000000, Value: 0000000000000000
+Read: 0, Valid: 0
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     40
+ROB heads 1: 00, 2: 01
+ROB tags  1: 02, 2: 03
+R/W in 1: 0  0,  2: 0  0
+Valids in 1: 0, 2: 0
+
+EX tags 1: 04, 2: 07
+EX values 1: 0000000000000000, 2: 0000000000002220
+EX address 1: 0000000000000100, 2: 0000000000000200
+
+>>>> Pre-Clock Output   40
+Tag: 04, Address: 0000000000000000, Value: 0000000000000000
+Read: 1, Valid: 0
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     50
+ROB heads 1: 02, 2: 03
+ROB tags  1: 04, 2: 05
+R/W in 1: 0  1,  2: 0  1
+Valids in 1: 0, 2: 0
+
+EX tags 1: 00, 2: 05
+EX values 1: 0000000000000000, 2: 0000000004361728
+EX address 1: 0000000000000100, 2: 0000000000000200
+
+>>>> Pre-Clock Output   50
+Tag: 04, Address: 0000000000000100, Value: 0000000000000000
+Read: 1, Valid: 1
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     60
+ROB heads 1: 02, 2: 07
+ROB tags  1: 04, 2: 05
+R/W in 1: 0  1,  2: 0  1
+Valids in 1: 0, 2: 0
+
+EX tags 1: 00, 2: 01
+EX values 1: 0000000000000000, 2: 0000000000000000
+EX address 1: 0000000000000100, 2: 0000000000000200
+
+>>>> Pre-Clock Output   60
+Tag: 07, Address: 0000000000000200, Value: 0000000000002220
+Read: 0, Valid: 1
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     70
+ROB heads 1: 02, 2: 03
+ROB tags  1: 04, 2: 05
+R/W in 1: 0  1,  2: 0  1
+Valids in 1: 0, 2: 0
+
+EX tags 1: 00, 2: 01
+EX values 1: 0000000000000000, 2: 0000000000000000
+EX address 1: 0000000000000100, 2: 0000000000000200
+
+>>>> Pre-Clock Output   70
+Tag: 00, Address: 0000000000000000, Value: 0000000000000000
+Read: 0, Valid: 0
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     80
+ROB heads 1: 02, 2: 03
+ROB tags  1: 04, 2: 05
+R/W in 1: 1  0,  2: 0  1
+Valids in 1: 1, 2: 0
+
+EX tags 1: 04, 2: 01
+EX values 1: 1234123412341234, 2: 0000000000000000
+EX address 1: 0000000000000111, 2: 0000000000000200
+
+>>>> Pre-Clock Output   80
+Tag: 00, Address: 0000000000000000, Value: 0000000000000000
+Read: 0, Valid: 0
+
+>>>> Pre-Clock Output   85
+Tag: 00, Address: 0000000000000000, Value: 0000000000000000
+Read: 0, Valid: 0
+**-----------------------------------------------------------**
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test_LSQ.v", line 383.
+$finish at simulation time                  850
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 85000 ps
+CPU Time:      0.350 seconds;       Data structure size:   0.1Mb
+Fri Apr 12 14:43:38 2013

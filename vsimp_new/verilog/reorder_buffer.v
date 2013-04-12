@@ -166,8 +166,8 @@ module reorder_buffer( clock,reset,
       inst2_regb_value_out,     
 
       // outputs to write directly to the reg file //
-      inst1_dest_out,inst1_value_out,
-      inst2_dest_out,inst2_value_out,
+      inst1_dest_out,inst1_value_out,inst1_retire_tag_out,
+      inst2_dest_out,inst2_value_out,inst2_retire_tag_out,
 
       // outputs to indicate a mispredicted branch //
       inst1_mispredicted_out,inst2_mispredicted_out,
@@ -210,8 +210,10 @@ module reorder_buffer( clock,reset,
 
    output wire [4:0]  inst1_dest_out;
    output wire [63:0] inst1_value_out;
+   output wire [7:0]  inst1_retire_tag_out;
    output wire [4:0]  inst2_dest_out;
    output wire [63:0] inst2_value_out;
+   output wire [7:0]  inst2_retire_tag_out;
 
    output wire inst1_mispredicted_out;
    output wire inst2_mispredicted_out;
@@ -257,10 +259,6 @@ module reorder_buffer( clock,reset,
    assign inst2_dispatch = ( ~rob_full && (inst1_valid_in && inst2_valid_in) );
 
 
-   // insternal assignments for tag comparisions //
-   //assign head_lt_tail = (head<tail);   
-
-
    // combinational assignments for next state signals //
    assign n_head = ( inst1_retire   ? (inst2_retire   ? head_plus_two : head_plus_one) : head );   // if retiring one inst, inc by one. if two, inc by two
    assign n_tail = ( inst1_dispatch ? (inst2_dispatch ? tail_plus_two : tail_plus_one) : tail );   // if dispatching one inst, inc by one. if two, inc by two
@@ -279,10 +277,12 @@ module reorder_buffer( clock,reset,
 
 
    // assignments for reg file outputs //
-   assign inst1_dest_out  = (inst1_retire ? registers_out[head         ] : `ZERO_REG);
-   assign inst1_value_out = (inst1_retire ? values_out[   head         ] : 64'd0);
-   assign inst2_dest_out  = (inst2_retire ? registers_out[head_plus_one] : `ZERO_REG);
-   assign inst2_value_out = (inst2_retire ? values_out[   head_plus_one] : 64'd0);
+   assign inst1_dest_out       = (inst1_retire ? registers_out[head         ] : `ZERO_REG);
+   assign inst1_value_out      = (inst1_retire ? values_out[   head         ] : 64'd0);
+   assign inst1_retire_tag_out = (inst1_retire ?         : `RSTAG_NULL);
+   assign inst2_dest_out       = (inst2_retire ? registers_out[head_plus_one] : `ZERO_REG);
+   assign inst2_value_out      = (inst2_retire ? values_out[   head_plus_one] : 64'd0);
+   assign inst2_retire_tag_out = (inst2_retire ?         : `RSTAG_NULL);
 
    // mispredicted out assignments //
    assign inst1_mispredicted_out = (inst1_retire ? mispredicteds_out[head         ] : 1'b0);

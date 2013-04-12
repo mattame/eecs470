@@ -1,0 +1,222 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Red Hat Enterprise Linux Workstation release 6.3 (Santiago)' 
+  is not supported on 'x86_64' officially, assuming linux compatibility by 
+  default. Set VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+                         Chronologic VCS (TM)
+         Version E-2011.03_Full64 -- Fri Apr 12 17:02:14 2013
+               Copyright (c) 1991-2011 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+DirectC Release 1.0 Copyright (c) 1991-2011 by Synopsys Inc.
+Parsing design file '../../vsimp_new/sys_defs.vh'
+Parsing design file 'test_branch_predictor.v'
+Parsing design file 'branch_predictor.v'
+Top Level Modules:
+       testbench
+No TimeScale specified
+Starting vcs inline pass...
+1 module and 0 UDP read.
+recompiling module testbench
+make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/branch_predictor/csrc'
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/branch_predictor/csrc'
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 12 17:02 2013
+
+STARTING TESTBENCH!
+
+instruction = 0000000000000000
+opcode =00 
+pc_xor_bits = 00000
+pht_index = 00xxx
+pht is = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+instruction = 0000000000000000
+opcode =00 
+pc_xor_bits = 00000
+pht_index = 00xx0
+pht is = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
+instruction = 0000000000000000
+opcode =00 
+pc_xor_bits = 00000
+pht_index = 00000
+pht is = 00000000000000000000000000000000 
+ preclock: reset=1  prediction=z pht_index_out= z 
+ postclock: reset=1  prediction=z pht_index_out= z 
+
+ preclock: reset=0  prediction=z pht_index_out= z 
+ghr is = 000
+ postclock: reset=0  prediction=z pht_index_out= z 
+
+ghr is = 000
+ghr is = 000
+ preclock: reset=0  prediction=z pht_index_out= z 
+instruction = c000000000000000
+opcode =30 
+random shit
+pht is = 00000000000000000000000000000000 
+ghr is = 000
+ postclock: reset=0  prediction=z pht_index_out= z 
+
+ghr is = 000
+ghr is = 000
+ preclock: reset=0  prediction=z pht_index_out= z 
+instruction = d000000000000000
+opcode =34 
+random shit
+pht is = 00000000000000000000000000000010 
+ghr is = 000
+ postclock: reset=0  prediction=z pht_index_out= z 
+
+ghr is = 000
+ghr is = 000
+ preclock: reset=0  prediction=z pht_index_out= z 
+instruction = e000000000000000
+opcode =38 
+opcode1 is a branch
+pc_xor_bits = 00000
+pht_index = 00000
+pht is = 00000000000000000000000000001010 
+instruction = e000000000000000
+opcode =38 
+opcode1 is a branch
+pc_xor_bits = 00000
+pht_index = 00001
+pht is = 00000000000000000000000000001010 
+ghr is = 001
+instruction = e000000000000000
+opcode =38 
+opcode1 is a branch
+pc_xor_bits = 00000
+pht_index = 00010
+pht is = 00000000000000000000000000001010 
+ postclock: reset=0  prediction=z pht_index_out= z 
+
+ghr is = 010
+instruction = e000000000000000
+opcode =38 
+opcode1 is a branch
+pc_xor_bits = 00000
+pht_index = 00100
+pht is = 00000000000000000000000000001010 
+ghr is = 100
+instruction = e000000000000000
+opcode =38 
+opcode1 is a branch
+pc_xor_bits = 00000
+pht_index = 00000
+pht is = 00000000000000000000000000001010 
+ preclock: reset=0  prediction=z pht_index_out= z 
+instruction = e400000000000000
+opcode =39 
+opcode1 is a branch
+pc_xor_bits = 00001
+pht_index = 00001
+pht is = 00000000000000000000000000001010 
+ghr is = 000
+ postclock: reset=0  prediction=z pht_index_out= z 
+
+ghr is = 000
+ghr is = 000
+ preclock: reset=0  prediction=z pht_index_out= z 
+instruction = e800000000000000
+opcode =3a 
+opcode1 is a branch
+pc_xor_bits = 00001
+pht_index = 00001
+pht is = 00000000000000000000000000001010 
+ghr is = 000
+ postclock: reset=0  prediction=z pht_index_out= z 
+
+ghr is = 000
+ghr is = 000
+ preclock: reset=0  prediction=z pht_index_out= z 
+instruction = ec00000000000000
+opcode =3b 
+opcode1 is a branch
+pc_xor_bits = 00001
+pht_index = 00001
+pht is = 00000000000000000000000000001010 
+ghr is = 000
+ postclock: reset=0  prediction=z pht_index_out= z 
+
+ghr is = 000
+ghr is = 000
+ preclock: reset=0  prediction=z pht_index_out= z 
+instruction = f000000000000000
+opcode =3c 
+opcode1 is a branch
+pc_xor_bits = 00001
+pht_index = 00001
+pht is = 00000000000000000000000000001010 
+ghr is = 000
+ postclock: reset=0  prediction=z pht_index_out= z 
+
+ghr is = 000
+ghr is = 000
+ preclock: reset=0  prediction=z pht_index_out= z 
+instruction = f400000000000000
+opcode =3d 
+opcode1 is a branch
+pc_xor_bits = 00010
+pht_index = 00010
+pht is = 00000000000000000000000000001010 
+ghr is = 000
+ postclock: reset=0  prediction=z pht_index_out= z 
+
+ghr is = 000
+ghr is = 000
+ preclock: reset=0  prediction=z pht_index_out= z 
+instruction = f800000000000000
+opcode =3e 
+opcode1 is a branch
+pc_xor_bits = 00010
+pht_index = 00010
+pht is = 00000000000000000000000000101010 
+instruction = f800000000000000
+opcode =3e 
+opcode1 is a branch
+pc_xor_bits = 00010
+pht_index = 00011
+pht is = 00000000000000000000000000101010 
+ghr is = 001
+instruction = f800000000000000
+opcode =3e 
+opcode1 is a branch
+pc_xor_bits = 00010
+pht_index = 00000
+pht is = 00000000000000000000000000101010 
+ postclock: reset=0  prediction=z pht_index_out= z 
+
+ghr is = 010
+instruction = f800000000000000
+opcode =3e 
+opcode1 is a branch
+pc_xor_bits = 00010
+pht_index = 00110
+pht is = 00000000000000000000000000101010 
+ghr is = 100
+instruction = f800000000000000
+opcode =3e 
+opcode1 is a branch
+pc_xor_bits = 00010
+pht_index = 00010
+pht is = 00000000000000000000000000101010 
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test_branch_predictor.v", line 186.
+$finish at simulation time                  330
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 330
+CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
+Fri Apr 12 17:02:15 2013
+CPU time: .136 seconds to compile + .048 seconds to elab + .202 seconds to link + .053 seconds in simulation

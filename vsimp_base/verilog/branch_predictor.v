@@ -6,28 +6,27 @@ module branch_predictor (
                         );
 
 //----------------inputs------------
-input wire clock;
-input wire reset;
-input wire [31:0]pc;
-input wire [4:0]pht_index_in;
-input wire [63:0]instruction;
-input wire result;
-
+input wire        clock;
+input wire        reset;
+input wire [31:0] pc;
+input wire [4:0]  pht_index_in;
+input wire [63:0] instruction;
+input wire        result;
 
 //----------------outputs-----------
-output reg prediction;
-output reg [4:0]pht_index_out;
+output reg       prediction;
+output reg [4:0] pht_index_out;
 
 //----------------internal-----------
-reg [4:0]pht;
-reg [2:0]ghr;
-reg [2:0]new_ghr;
-reg [4:0]pc_bits;
-reg [4:0]ghr_bits;
-reg [4:0]pht_index;
-reg [5:0]inst_opcode1;
-reg [5:0]inst_opcode2;
-reg isBranch;
+reg [4:0] pht;
+reg [2:0] ghr;
+reg [2:0] new_ghr;
+reg [4:0] pc_bits;
+reg [4:0] ghr_bits;
+reg [4:0] pht_index;
+reg [5:0] inst_opcode1;
+reg [5:0] inst_opcode2;
+reg       isBranch;
 
 
 //decode instruction to check if branch but doesnt not count br or bsr instruction//

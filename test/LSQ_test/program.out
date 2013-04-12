@@ -1,6 +1,6 @@
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 12 14:43 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 12 15:17 2013
 STARTING TESTBENCH!
 
 **-----------------------------------------------------------**
@@ -98,5 +98,5 @@ $finish called from file "test_LSQ.v", line 383.
 $finish at simulation time                  850
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 85000 ps
-CPU Time:      0.350 seconds;       Data structure size:   0.1Mb
-Fri Apr 12 14:43:38 2013
+CPU Time:      0.380 seconds;       Data structure size:   0.1Mb
+Fri Apr 12 15:17:36 2013

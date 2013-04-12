@@ -1,3 +1,5 @@
+//`define some  6'h3c
+
 module branch_predictor (
                           //inputs
                           clock, reset, pc, instruction, result, pht_index_in,
@@ -6,63 +8,103 @@ module branch_predictor (
                         );
 
 //----------------inputs------------
-input wire        clock;
-input wire        reset;
-input wire [31:0] pc;
-input wire [4:0]  pht_index_in;
-input wire [63:0] instruction;
-input wire        result;
+input wire clock;
+input wire reset;
+input wire [31:0]pc;
+input wire [4:0]pht_index_in;
+input wire [63:0]instruction;
+input wire result;
+
 
 //----------------outputs-----------
-output reg       prediction;
-output reg [4:0] pht_index_out;
+output reg prediction;
+output reg [4:0]pht_index_out;
 
 //----------------internal-----------
-reg [4:0] pht;
-reg [2:0] ghr;
-reg [2:0] new_ghr;
-reg [4:0] pc_bits;
-reg [4:0] ghr_bits;
-reg [4:0] pht_index;
-reg [5:0] inst_opcode1;
-reg [5:0] inst_opcode2;
-reg       isBranch;
+reg [31:0]pht;
+reg [2:0]ghr;
+reg [2:0]new_ghr;
+reg [4:0]pc_bits;
+reg [4:0]ghr_bits;
+reg [4:0]pht_index;
+reg [5:0]inst_opcode1;
+reg [5:0]inst_opcode2;
+reg isBranch;
 
 
 //decode instruction to check if branch but doesnt not count br or bsr instruction//
 
 always@*
 begin
+                          	$display("instruction = %h", instruction);
     inst_opcode1 = instruction[63:58];
+		$display("opcode =%h ",inst_opcode1);
     inst_opcode2 = instruction[31:26];
+		
 
     if (inst_opcode1 ==  `BLBC_INST || inst_opcode1 == `BEQ_INST || 
         inst_opcode1 ==  `BLT_INST  || inst_opcode1 == `BLE_INST || 
         inst_opcode1 ==  `BLBS_INST || inst_opcode1 == `BNE_INST ||  
         inst_opcode1 ==  `BGE_INST  || inst_opcode1 == `BGT_INST)
-  
-      isBranch = 1;
+  		begin
+				$display("opcode1 is a branch");	      	
+				isBranch = 1;
+			end
     else
-      isBranch = 0;
-    
+			begin
+      	isBranch = 0;
+    	end
     pc_bits = pc[6:2];        //for use with the xor
     ghr_bits = {2'b0, ghr};
     
     pht_index = pc_bits ^ ghr_bits;
     
-    if(inst_opcode1 == `BR_INST || inst_opcode1 == `BSR_INST) //checks if conditional branch
+  /*  if(inst_opcode1 == `BR_INST || inst_opcode1 == `BSR_INST) //checks if conditional branch
     begin
+			$display("random shit");
       prediction = 1;
     end
 
     else
     begin
+			$display("pc_xor_bits = %b", pc_bits);
+			$display("pht_index = %b", pht_index);
       prediction = pht[pht_index];
     end
-    
-    pht_index_out = pht_index;
+*/
+		if(isBranch)
+		begin
+			new_ghr = ghr << 1;
+		end
+
+		else
+		begin
+			new_ghr = ghr;
+		end
+		
+ /*   $display("pht is = %b ", pht);
+    pht_index_out = pht_index;*/
 end
 
+
+always @*
+begin
+  if(inst_opcode1 == `BR_INST || inst_opcode1 == `BSR_INST) //checks if conditional branch
+    begin
+			$display("random shit");
+      prediction = 1;
+    end
+
+    else
+    begin
+			$display("pc_xor_bits = %b", pc_bits);
+			$display("pht_index = %b", pht_index);
+      prediction = pht[pht_index];
+    end
+
+    $display("pht is = %b ", pht);
+    pht_index_out = pht_index;
+end
 
 always @(posedge clock)
 begin
@@ -70,11 +112,13 @@ begin
   begin
     ghr <= 3'b0;
     pht <= 32'b0;
+		prediction <= 0;
   end
 
   else
   begin
     ghr <= new_ghr; 
+		$display("ghr is = %b", ghr);
   end
 end
 

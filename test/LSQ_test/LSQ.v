@@ -230,7 +230,7 @@ module LSQ(//Inputs
  output [4:0]  tag_out;
  output [63:0] address_out;
  output [63:0] value_out;
- output 	      read_out;
+ output 	   read_out;
  output        valid_out;
 
  output stall;
@@ -315,12 +315,17 @@ module LSQ(//Inputs
  assign tag_out = tags_out[LSQ_head];
 
  assign read_out = reads_out[LSQ_head];
-
- // output complete for stores, but not for loads.
- // only clear stores when retired. Loads cleared when complete at LSQ head
  
- assign valid_out = completes_out[LSQ_head] & 
-					(read_out | (!read_out & (tag_out == ROB_head_1[4:0] | tag_out == ROB_head_2[4:0])));
+		 wire head_1_true, head_2_true, reset_invalid, read_valid; //wires to help compute valid out
+		 
+		 assign head_1_true = (tag_out == ROB_head_1);
+		 assign head_2_true = (tag_out == ROB_head_2);
+		 
+		 assign reset_invalid = reset & head_2_true;
+		 
+		 assign read_valid = read_out | head_1_true | head_2_true; 
+ 
+ assign valid_out = completes_out[LSQ_head] & read_valid & !reset_invalid;
  
 //----------- POINTER KEEPING ------------
  assign next_head = (valid_out) ? (LSQ_head + 1):LSQ_head;

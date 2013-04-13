@@ -29,7 +29,7 @@ module memory_arbiter(
 		if_mem_out_value,
 		if_stall,
 
-		//To LSQ
+		//To EX
 		EX_mem_value,
 		EX_tag_out,
 		EX_valid_out,

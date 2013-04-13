@@ -114,10 +114,10 @@ module arbiter(		  // Inputs
 	
 	
 	//BUS 2 MUXES
-	assign ex_dest_reg_out_2 = (ex_mult_valid_out_2) ? ex_mult_dest_reg_out_2: ex_alu_dest_reg_out_2;
-	assign ex_result_out_2 = (ex_mult_valid_out_2) ? ex_mult_result_out_2:
+	assign ex_dest_reg_out_2 = (mem_valid_in) ? mem_tag_in : (ex_mult_valid_out_2) ? ex_mult_dest_reg_out_2: ex_alu_dest_reg_out_2;
+	assign ex_result_out_2 = (mem_valid_in) ? mem_value_in : (ex_mult_valid_out_2) ? ex_mult_result_out_2:
 							 ((ex_branch_valid_out_2) ? ex_alu_CPC_out_2: ex_alu_result_out_2);
-	assign ex_valid_out_2 = (ex_mult_valid_out_2) ? 1'b1: ex_alu_valid_out_2;
+	assign ex_valid_out_2 = (ex_mult_valid_out_2 | mem_valid_in) ? 1'b1: ex_alu_valid_out_2;
 	
 	assign stall_bus_1 = ex_mult_valid_out_1;
 	assign stall_bus_2 = ex_mult_valid_out_2 | mem_valid_in;

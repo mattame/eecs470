@@ -1,5 +1,13 @@
+
+`define HISTORY_BITS 8
+`define BRANCH_NONE      2'b00
+`define BRANCH_TAKEN     2'b01
+`define BRANCH_NOT_TAKEN 2'b10
+`define BRANCH_UNUSED    2'b11
+
 // general case testbench module //
 module testbench;
+
 
 // internal wires/registers //
  reg correct;
@@ -8,23 +16,40 @@ module testbench;
 // regs for testing the module //
  reg clock;
  reg reset;
- reg [31:0]pc;
- reg [31:0]new_pc;
- reg [4:0]pht_index_in;
- reg [63:0]instruction;
- reg result;
 
- wire prediction;
- wire [4:0] pht_index_out;
+   reg [63:0] inst1_PC_in,inst2_PC_in;
 
+   reg [1:0]                 inst1_result_in,inst2_result_in;
+   reg [(`HISTORY_BITS-1):0] inst1_pht_index_in,inst2_pht_index_in;
+
+   wire inst1_prediciton_out,inst2_prediction_out;
+   wire [(`HISTORY_BITS-1):0] inst1_pht_index_out,inst2_pht_index_out;
+
+   wire [(`HISTORY_BITS-1):0]     ghr;
+   
         // module to be tested //
-        branch_predictor bp(.clock(clock), .reset(reset),
-                 
-                 .pc(pc),
-                 .pht_index_in(pht_index_in),
-                 .instruction(instruction),
-                 .result(result)
-  				                                     );
+        branch_predictor bp(
+                          .clock(clock), .reset(reset),
+    
+                          // pc of instruction in //
+                          .inst1_PC_in(inst1_PC_in),
+                          .inst2_PC_in(inst2_PC_in),
+
+			  // for writing back the history after the branch is evaluated //
+                          .inst1_result_in(inst1_result_in),
+                          .inst1_pht_index_in(inst1_pht_index_in),
+                          .inst2_result_in(inst2_result_in),
+                          .inst2_pht_index_in(inst2_pht_index_in),                        
+ 
+                          // output prediction and index //
+                          .inst1_prediction_out(inst1_prediction_out),
+                          .inst1_pht_index_out(inst1_pht_index_out),
+                          .inst2_prediction_out(inst2_prediction_out),
+                          .inst2_pht_index_out(inst2_pht_index_out),
+
+                          .ghr(ghr)
+
+                        );
 
    // run the clock //
    always
@@ -69,9 +94,9 @@ module testbench;
       input preclock;
    begin
       if (preclock==`PRECLOCK)
-         $display(" preclock: reset=%b  prediction=%d pht_index_out=%d " , reset, prediction, pht_index_out);
+         $display("  preclock: reset=%b  prediction1=%b pht_index_out1=%d prediction2=%b pht_index_out2=%d ghr=%b " , reset, inst1_prediction_out, inst1_pht_index_out,inst2_prediction_out,inst2_pht_index_out,ghr);
       else
-         $display(" postclock: reset=%b  prediction=%d pht_index_out=%d ", reset, prediction, pht_index_out);
+         $display(" postclock: reset=%b  prediction1=%b pht_index_out1=%d prediction2=%b pht_index_out2=%d ghr=%b " , reset, inst1_prediction_out, inst1_pht_index_out,inst2_prediction_out,inst2_pht_index_out,ghr);
    end
    endtask
 
@@ -86,6 +111,21 @@ module testbench;
    end
    endtask
 
+  
+      // asserts truth of a value, exits on failure //
+   task ASSERT;
+   input state;
+   begin
+      if (~state)
+	  begin
+	     $display("@@@ Incorrect at time %4.0f", $time);
+         $display("ENDING TESTBENCH : ERROR !");
+         $finish;
+      end
+   end
+   endtask
+   
+   
    // testing segment //
    initial
    begin
@@ -97,89 +137,33 @@ $display("STARTING TESTBENCH!\n");
         clock = 0;
         reset = 1;
 
-				pc = 32'b0;
-				pht_index_in = 5'b0;
-				instruction = 64'b0;
-				result = 0;
+        inst1_PC_in=64'd0;
+	inst2_PC_in=64'd0;
+
+        inst1_result_in=`BRANCH_NONE;
+	inst2_result_in=`BRANCH_NONE;
+	
+        inst1_pht_index_in = 8'd0;
+	inst2_pht_index_in = 8'd0;
 
 
         // TRANSITION TESTS //
-				#20
-				reset = 1;
 
+	reset = 1;
         CLOCK_AND_DISPLAY();
-
+        ASSERT(inst1_prediction_out==1'b0 && inst2_prediction_out==1'b0);
+	
         reset = 0;
+        inst1_result_in = `BRANCH_TAKEN;
+	inst1_pht_index_in = 8'd0;
+	CLOCK_AND_DISPLAY();
+	ASSERT(inst1_pht_index_out==8'd1);
 
-				CLOCK_AND_DISPLAY();
-				#20
-        instruction =   {6'h30,58'b0};	//br
-        pht_index_in = 5'd5;
-        result = 0;
-				pc = 32'd1;
-
+        inst1_result_in = `BRANCH_NONE;	
+	inst1_PC_in = 64'd1;
         CLOCK_AND_DISPLAY();
-				#20
-        instruction = {6'h34,58'b0};  //bsr 
-        pht_index_in = 5'b1;
-				result = 1;
-				pc = 32'd2;
-
-        CLOCK_AND_DISPLAY();
-      	#20
-        instruction = {6'h38,58'b0};	//blbc
-        pht_index_in = 5'd3;
-				result = 1;
-				pc = 32'd3;
-
-        CLOCK_AND_DISPLAY();
-				#20
-        instruction =   {6'h39,58'b0};	//beq
-        pht_index_in = 5'd5;
-        result = 0;
-				pc = 32'd4;
-				
-				CLOCK_AND_DISPLAY();
-				#20
-        instruction =   {6'h3a,58'b0};	//blt
-        pht_index_in = 5'd5;
-        result = 0;
-				pc = 32'd5;
-				
-				CLOCK_AND_DISPLAY();
-				#20
-        instruction =   {6'h3b,58'b0};	//ble
-        pht_index_in = 5'd5;
-        result = 0;
-				pc = 32'd6;
-				
-				CLOCK_AND_DISPLAY();
-				#20
-        instruction =   {6'h3c,58'b0};	//blbs
-        pht_index_in = 5'd5;
-        result = 0;
-				pc = 32'd7;
-				
-				CLOCK_AND_DISPLAY();
-				#20
-        instruction =   {6'h3d,58'b0};	//bne
-        pht_index_in = 5'd5;
-        result = 0;
-				pc = 32'd8;
-				
-				CLOCK_AND_DISPLAY();
-				#20
-        instruction =   {6'h3e,58'b0};	//bge
-        pht_index_in = 5'd5;
-        result = 1;
-				pc = 32'd9;
-								
-				CLOCK_AND_DISPLAY();
-				#20
-        instruction =   {6'h3f,58'b0};	//bgt
-        pht_index_in = 5'd5;
-        result = 0;
-				pc = 32'd10;
+	ASSERT(inst1_pht_index_out==8'd0 && inst1_prediciton_out==1'b1);
+	
 
 // SUCCESSFULLY END TESTBENCH //
 $display("ENDING TESTBENCH : SUCCESS !\n");
@@ -188,5 +172,4 @@ $finish;
    end
 
 endmodule
-
 

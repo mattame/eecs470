@@ -63,33 +63,33 @@ Running DC verilog reader
 Reading with Presto HDL Compiler (equivalent to -rtl option).
 Running PRESTO HDLC
 Compiling source file /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:185: the undeclared symbol 'taga_cur_match_cdb1_in' assumed to have the default net type, which is 'wire'. (VER-936)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:186: the undeclared symbol 'taga_cur_match_cdb2_in' assumed to have the default net type, which is 'wire'. (VER-936)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:187: the undeclared symbol 'tagb_cur_match_cdb1_in' assumed to have the default net type, which is 'wire'. (VER-936)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:188: the undeclared symbol 'tagb_cur_match_cdb2_in' assumed to have the default net type, which is 'wire'. (VER-936)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:185: The delay specification for net declaration is ignored. (VER-976)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:186: The delay specification for net declaration is ignored. (VER-976)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:187: The delay specification for net declaration is ignored. (VER-976)
-Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:188: The delay specification for net declaration is ignored. (VER-976)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:192: the undeclared symbol 'taga_cur_match_cdb1_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:193: the undeclared symbol 'taga_cur_match_cdb2_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:194: the undeclared symbol 'tagb_cur_match_cdb1_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:195: the undeclared symbol 'tagb_cur_match_cdb2_in' assumed to have the default net type, which is 'wire'. (VER-936)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:192: The delay specification for net declaration is ignored. (VER-976)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:193: The delay specification for net declaration is ignored. (VER-976)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:194: The delay specification for net declaration is ignored. (VER-976)
+Warning:  /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v:195: The delay specification for net declaration is ignored. (VER-976)
 
-Statistics for case statements in always block at line 200 in file
+Statistics for case statements in always block at line 207 in file
 	'/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v'
 ===============================================
 |           Line           |  full/ parallel  |
 ===============================================
-|           215            |    auto/auto     |
-|           256            |    auto/auto     |
+|           222            |    auto/auto     |
+|           264            |    auto/auto     |
 ===============================================
 
 Inferred memory devices in process
-	in routine reservation_station_entry line 284 in file
+	in routine reservation_station_entry line 293 in file
 		'/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v'.
 =================================================================================
 |     Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 =================================================================================
-|      NPC_out_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | Y  | N  | N  |
 |      IR_out_reg       | Flip-flop |  14   |  Y  | N  | N  | N  | Y  | N  | N  |
 |      IR_out_reg       | Flip-flop |  18   |  Y  | N  | N  | N  | N  | Y  | N  |
+|   pht_index_out_reg   | Flip-flop |   8   |  Y  | N  | N  | N  | Y  | N  | N  |
 |    status_out_reg     | Flip-flop |   3   |  Y  | N  | N  | N  | Y  | N  | N  |
 |   dest_reg_out_reg    | Flip-flop |   5   |  Y  | N  | N  | N  | Y  | N  | N  |
 |   dest_tag_out_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | Y  | N  |
@@ -105,8 +105,49 @@ Inferred memory devices in process
 |  cond_branch_out_reg  | Flip-flop |   1   |  N  | N  | N  | N  | Y  | N  | N  |
 | uncond_branch_out_reg | Flip-flop |   1   |  N  | N  | N  | N  | Y  | N  | N  |
 |      age_out_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | Y  | N  | N  |
+|      NPC_out_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | Y  | N  | N  |
 =================================================================================
 Warning:  Starting with the 2000.11-1 release, the Presto Verilog reader treats Verilog 'integer' types as signed; synthesized result may not match earlier versions of HDL Compiler. (VER-314)
+
+Inferred memory devices in process
+	in routine reservation_station line 642 in file
+		'/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.v'.
+===========================================================================
+|    Register Name    | Type  | Width | Bus | MB | AR | AS | SR | SS | ST |
+===========================================================================
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     IRs_in_reg      | Latch |  32   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+|     NPCs_in_reg     | Latch |  64   |  Y  | N  | N  | N  | -  | -  | -  |
+===========================================================================
 Presto compilation completed successfully.
 Current design is now '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station_entry.db:reservation_station_entry'
 Loaded 2 designs.
@@ -260,7 +301,7 @@ Information: Evaluating DesignWare library utilization. (UISN-27)
 ============================================================================
 
 
-Information: There are 3301 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+Information: There are 37 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
 
 
 
@@ -561,31 +602,30 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:01:26 2700782.1     17.53   83542.0   28622.7                                0.00
-    0:01:26 2700782.1     17.53   83542.0   28622.7                                0.00
-    0:01:29 3037378.7     17.46   88137.5   24813.9                                0.00
-    0:01:33 3899472.5      5.74    6657.8    9766.0                                0.00
-    0:01:45 3903906.2      0.00       0.0      28.4                                0.00
-    0:01:45 3903906.2      0.00       0.0      28.4                                0.00
-    0:01:45 3903906.2      0.00       0.0      28.4                                0.00
-    0:01:46 3903906.2      0.00       0.0      28.4                                0.00
-    0:01:46 3903906.2      0.00       0.0      28.4                                0.00
-    0:01:46 3903906.2      0.00       0.0      28.4                                0.00
-    0:02:03 2392223.6      0.00       0.0       4.7                                0.00
-    0:02:05 2375286.4      0.00       0.0       4.5                                0.00
-    0:02:11 2375286.4      0.00       0.0       4.3                                0.00
-    0:02:12 2375286.4      0.00       0.0       4.3                                0.00
-    0:02:12 2375286.4      0.00       0.0       4.3                                0.00
-    0:02:13 2375286.4      0.00       0.0       4.3                                0.00
-    0:02:13 2375286.4      0.00       0.0       4.3                                0.00
-    0:02:13 2375437.5      0.00       0.0       3.2                                0.00
-    0:02:14 2375563.5      0.00       0.0       1.1                                0.00
-    0:02:14 2375639.0      0.00       0.0       0.0                                0.00
-    0:02:14 2375664.2      0.00       0.0       0.0                                0.00
-    0:02:15 2375664.2      0.00       0.0       0.0                                0.00
-    0:02:15 2375664.2      0.00       0.0       0.0                                0.00
-    0:02:15 2375664.2      0.00       0.0       0.0                                0.00
-    0:02:15 2375664.2      0.00       0.0       0.0                                0.00
+    0:01:21 3075191.6     30.97  166430.8   39506.8                                0.00
+    0:01:21 3075191.6     30.97  166430.8   39506.8                                0.00
+    0:01:24 3447102.3     30.89  171175.6   35537.8                                0.00
+    0:01:27 4465014.2      7.96   25964.0   13891.1                                0.00
+    0:01:40 4532981.4      0.00       0.0      28.4                                0.00
+    0:01:41 4532981.4      0.00       0.0      28.4                                0.00
+    0:01:41 4532981.4      0.00       0.0      28.4                                0.00
+    0:01:41 4532981.4      0.00       0.0      28.4                                0.00
+    0:01:41 4532981.4      0.00       0.0      28.4                                0.00
+    0:01:42 4532981.4      0.00       0.0      28.4                                0.00
+    0:01:59 2703735.1      0.05       3.0       4.7                                0.00
+    0:02:01 2684176.9      0.00       0.0       4.5                                0.00
+    0:02:07 2684176.9      0.00       0.0       4.5                                0.00
+    0:02:08 2684176.9      0.00       0.0       4.5                                0.00
+    0:02:08 2684176.9      0.00       0.0       4.5                                0.00
+    0:02:08 2684176.9      0.00       0.0       4.5                                0.00
+    0:02:09 2684328.0      0.00       0.0       3.2                                0.00
+    0:02:09 2684453.9      0.00       0.0       1.1                                0.00
+    0:02:10 2684529.5      0.00       0.0       0.0                                0.00
+    0:02:10 2684554.7      0.00       0.0       0.0                                0.00
+    0:02:10 2684554.7      0.00       0.0       0.0                                0.00
+    0:02:10 2684554.7      0.00       0.0       0.0                                0.00
+    0:02:10 2684554.7      0.00       0.0       0.0                                0.00
+    0:02:10 2684554.7      0.00       0.0       0.0                                0.00
 
 
 
@@ -595,9 +635,9 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:02:15 2375664.2      0.00       0.0       0.0                                0.00
-    0:02:15 2375664.2      0.00       0.0       0.0                                0.00
-    0:02:26 2369895.8      0.00       0.0    1046.1                                0.00
+    0:02:10 2684554.7      0.00       0.0       0.0                                0.00
+    0:02:10 2684554.7      0.00       0.0       0.0                                0.00
+    0:02:19 2681262.4      0.00       0.0     739.8                                0.00
 
 
   Beginning Design Rule Fixing  (max_transition)  (max_fanout)
@@ -606,9 +646,8 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:02:28 2369895.8      0.00       0.0    1046.1                                0.00
-    0:02:30 2371775.0      0.00       0.0     974.2 RSEMODULES[9].entries/status_out[2]      0.00
-    0:02:32 2373906.6      0.00       0.0       0.0                                0.00
+    0:02:20 2681262.4      0.00       0.0     739.8                                0.00
+    0:02:22 2683610.7      0.00       0.0       0.0                                0.00
 
 
   Beginning Critical Range Optimization
@@ -617,7 +656,7 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:02:32 2373906.6      0.00       0.0       0.0                                0.00
+    0:02:22 2683610.7      0.00       0.0       0.0                                0.00
 
 
   Beginning Area-Recovery Phase  (cleanup)
@@ -626,36 +665,36 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:02:32 2373906.6      0.00       0.0       0.0                                0.00
-    0:02:32 2373906.6      0.00       0.0       0.0                                0.00
-    0:02:32 2373906.6      0.00       0.0       0.0                                0.00
-    0:02:37 2361003.1      0.00       0.0       0.0                                0.00
-    0:02:40 2349700.8      0.00       0.0       0.0                                0.00
-    0:02:42 2341548.5      0.00       0.0       0.0                                0.00
-    0:02:45 2334998.9      0.00       0.0       0.0                                0.00
-    0:02:47 2329415.5      0.00       0.0       0.0                                0.00
-    0:02:49 2324131.6      0.00       0.0       0.0                                0.00
-    0:02:51 2320119.7      0.00       0.0       0.0                                0.00
-    0:02:53 2316459.8      0.00       0.0       0.0                                0.00
-    0:02:56 2314086.1      0.00       0.0       0.0                                0.00
-    0:02:57 2312014.5      0.00       0.0       0.0                                0.00
-    0:02:58 2310042.4      0.00       0.0       0.0                                0.00
-    0:02:59 2308236.9      0.00       0.0       0.0                                0.00
-    0:03:00 2306799.2      0.00       0.0       0.0                                0.00
-    0:03:01 2305528.8      0.00       0.0       0.0                                0.00
-    0:03:02 2304626.2      0.00       0.0       0.0                                0.00
-    0:03:03 2304057.8      0.00       0.0       0.0                                0.00
-    0:03:03 2304057.8      0.00       0.0       0.0                                0.00
-    0:03:03 2304074.4      0.00       0.0       0.0                                0.00
-    0:03:03 2304074.4      0.00       0.0       0.0                                0.00
-    0:03:04 2304074.4      0.00       0.0       0.0                                0.00
-    0:03:05 2297662.9      0.00       0.0       0.0                                0.00
-    0:03:05 2297662.9      0.00       0.0       0.0                                0.00
-    0:03:05 2297662.9      0.00       0.0       0.0                                0.00
-    0:03:05 2297662.9      0.00       0.0       0.0                                0.00
-    0:03:05 2297662.9      0.00       0.0       0.0                                0.00
-    0:03:05 2297662.9      0.00       0.0       0.0                                0.00
-    0:03:05 2297662.9      0.00       0.0       0.0                                0.00
+    0:02:22 2683610.7      0.00       0.0       0.0                                0.00
+    0:02:22 2683610.7      0.00       0.0       0.0                                0.00
+    0:02:23 2683610.7      0.00       0.0       0.0                                0.00
+    0:02:27 2670690.1      0.00       0.0       0.0                                0.00
+    0:02:30 2659229.4      0.00       0.0       0.0                                0.00
+    0:02:32 2650818.9      0.00       0.0       0.0                                0.00
+    0:02:35 2643769.1      0.00       0.0       0.0                                0.00
+    0:02:37 2636290.0      0.00       0.0       0.0                                0.00
+    0:02:39 2630236.8      0.00       0.0       0.0                                0.00
+    0:02:42 2625488.8      0.00       0.0       0.0                                0.00
+    0:02:44 2621060.3      0.00       0.0       0.0                                0.00
+    0:02:46 2617616.6      0.00       0.0       0.0                                0.00
+    0:02:47 2614240.2      0.00       0.0       0.0                                0.00
+    0:02:49 2611196.5      0.00       0.0       0.0                                0.00
+    0:02:51 2608421.5      0.00       0.0       0.0                                0.00
+    0:02:52 2606248.0      0.00       0.0       0.0                                0.00
+    0:02:54 2604175.3      0.00       0.0       0.0                                0.00
+    0:02:55 2602403.9      0.00       0.0       0.0                                0.00
+    0:02:58 2601869.1      0.00       0.0       0.0                                0.00
+    0:02:58 2601869.1      0.00       0.0       0.0                                0.00
+    0:02:58 2601869.1      0.00       0.0       0.0                                0.00
+    0:02:58 2601869.1      0.00       0.0       0.0                                0.00
+    0:02:59 2601869.1      0.00       0.0       0.0                                0.00
+    0:03:00 2594694.5      0.00       0.0       0.0                                0.00
+    0:03:00 2594694.5      0.00       0.0       0.0                                0.00
+    0:03:01 2594694.5      0.00       0.0       0.0                                0.00
+    0:03:01 2594694.5      0.00       0.0       0.0                                0.00
+    0:03:01 2594694.5      0.00       0.0       0.0                                0.00
+    0:03:01 2594694.5      0.00       0.0       0.0                                0.00
+    0:03:01 2594694.5      0.00       0.0       0.0                                0.00
 
 
   Beginning Critical Range Optimization
@@ -664,14 +703,14 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:03:05 2297662.9      0.00       0.0       0.0                                0.00
-    0:03:06 2297662.9      0.00       0.0       0.0                                0.00
+    0:03:01 2594694.5      0.00       0.0       0.0                                0.00
+    0:03:02 2594694.5      0.00       0.0       0.0                                0.00
 Loading db file '/afs/umich.edu/class/eecs470/lib/synopsys/lec25dscc25_TT.db'
 
   Optimization Complete
   ---------------------
 Warning: Design 'reservation_station' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
-     Net 'RSEMODULES[1].entries/clock': 4432 load(s), 1 driver(s)
+     Net 'RSEMODULES[1].entries/clock': 4560 load(s), 1 driver(s)
 Writing verilog file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/reservation_station.vg'.
 Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
 Error: Writing designs in DB format is no longer supported. (UID-530)

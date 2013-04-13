@@ -27,7 +27,7 @@ suppress_message {"VER-130"}
 #/* The following four lines must be updated for every      */
 #/* new design                                              */
 #/***********************************************************/
-read_file -f verilog [list "branch_predictor.v"]
+read_file -f verilog [list "../../vsimp_new/sys_defs.vh branch_predictor.v"]
 set design_name branch_predictor
 #set reset_name rese
 set clock_name clock

@@ -134,25 +134,22 @@ endmodule
 // This module has sequential logic
 //
 module mult_stage(clock, reset,
-                  IR_in, NPC_in, dest_reg_in, product_in,  mplier_in,  mcand_in,  start, stall,
-                  IR_out, NPC_out, dest_reg_out, product_out, mplier_out, mcand_out, done);
+                  dest_reg_in, product_in,  mplier_in,  mcand_in,  start, stall,
+                  dest_reg_out, product_out, mplier_out, mcand_out, done);
 
   input clock, reset, start;
-  input [63:0] product_in, mplier_in, mcand_in, NPC_in;
-  input [31:0] IR_in;
+  input [63:0] product_in, mplier_in, mcand_in;
   input [4:0]  dest_reg_in;
   input        stall
 
   output done;
-  output [63:0] product_out, mplier_out, mcand_out, NPC_out;
-  output [31:0] IR_out;
+  output [63:0] product_out, mplier_out, mcand_out;
   output [4:0]  dest_reg_out;
 
   reg  [63:0] prod_in_reg, partial_prod_reg;
   wire [63:0] partial_product, next_mplier, next_mcand;
 
-  reg [63:0] mplier_out, mcand_out, NPC_out;
-  reg [31:0] IR_out;
+  reg [63:0] mplier_out, mcand_out;
   reg [4:0]  dest_reg_out;
   reg done;
 
@@ -170,8 +167,6 @@ module mult_stage(clock, reset,
           partial_prod_reg <= #1 partial_prod_reg;
           mplier_out       <= #1 mplier_out;
           mcand_out        <= #1 mcand_out;
-          IR_out           <= #1 IR_out;
-          NPC_out          <= #1 NPC_out;
           dest_reg_out     <= #1 dest_reg_out;     
      end
 
@@ -181,8 +176,6 @@ module mult_stage(clock, reset,
           partial_prod_reg <= #1 partial_product;
           mplier_out       <= #1 next_mplier;
           mcand_out        <= #1 next_mcand;
-      	  IR_out	         <= #1 IR_in;
-      	  NPC_out	         <= #1 NPC_in;
       	  dest_reg_out     <= #1 dest_reg_in;
      end
 
@@ -213,22 +206,19 @@ endmodule
 //
 
 
-module mult(clock, reset, IR_in, NPC_in, dest_reg_in, mplier, mcand, valid_in, IR_out, NPC_out, dest_reg_out, product, valid_out);
+module mult(clock, reset, dest_reg_in, mplier, mcand, valid_in, dest_reg_out, product, valid_out);
 
   input clock, reset, valid_in;
-  input [63:0] mcand, mplier, NPC_in;
-  input [31:0] IR_in;
+  input [63:0] mcand, mplier;
   input [4:0]  dest_reg_in;
   input        stall;
 
-  output [63:0] product, NPC_out;
-  output [31:0] IR_out;
+  output [63:0] product;
   output [4:0]  dest_reg_out;
   output valid_out;
 
   wire [63:0] mcand_out, mplier_out;
-  wire [(3*64)-1:0] internal_products, internal_mcands, internal_mpliers, internal_NPCs;
-  wire [(3*32)-1:0] internal_IRs;
+  wire [(3*64)-1:0] internal_products, internal_mcands, internal_mpliers;
   wire [(3*5)-1:0]  internal_dest_regs;
   wire [2:0] internal_dones;
 
@@ -236,8 +226,6 @@ module mult(clock, reset, IR_in, NPC_in, dest_reg_in, mplier, mcand, valid_in, I
     (//Input
 	 .clock(clock),
      .reset(reset),
-	 .IR_in({internal_IRs,IR_in}),
-	 .NPC_in({internal_NPCs,NPC_in}),
 	 .dest_reg_in({internal_dest_regs,dest_reg_in}),
      .product_in({internal_products,64'h0}),
      .mplier_in({internal_mpliers,mplier}),
@@ -245,8 +233,6 @@ module mult(clock, reset, IR_in, NPC_in, dest_reg_in, mplier, mcand, valid_in, I
      .start({internal_dones,valid_in}),
      .stall(stall),
 	 //Outputs
-	 .IR_out({IR_out,internal_IRs}),
-	 .NPC_out({NPC_out,internal_NPCs}),
 	 .dest_reg_out({dest_reg_out,internal_dest_regs}),
      .product_out({product,internal_products}),
      .mplier_out({mplier_out,internal_mpliers}),

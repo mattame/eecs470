@@ -115,11 +115,13 @@ module ex_stage(// Inputs
   output  [4:0] ex_dest_reg_out_1;	 // Destination Reg
   output [63:0] ex_result_out_1;	 // Bus 1 Result
   output		ex_valid_out_1;		 // Valid Output
+  output        mispredict_1;
   
 				// Bus 2
   output  [4:0] ex_dest_reg_out_2;   // Desitnation Reg
   output [63:0] ex_result_out_2;	 // Bus 2 result
-  output		ex_valid_out_2;		 // Valid Output
+  output		ex_valid_out_2;      // Valid Output
+  output        mispredict_2;		 
   
   output  [4:0] LSQ_tag_out_1;
   output [63:0] LSQ_address_out_1;
@@ -138,14 +140,10 @@ module ex_stage(// Inputs
   wire [63:0] ex_alu_result_out_2;   // ALU result
   wire		  ex_alu_valid_out_2;	 // Valid Output
   
-  wire [31:0] ex_mult_IR_out_1;	  	 // 32 bit instruction
-  wire [63:0] ex_mult_NPC_out_1;	 // PC+4
   wire  [4:0] ex_mult_dest_reg_out_1;// Destination Reg
   wire [63:0] ex_mult_result_out_1;  // Mult result
   wire 		  ex_mult_valid_out_1;   // Valid Output
   
-  wire [31:0] ex_mult_IR_out_2;	   	 // 32 bit instruction
-  wire [63:0] ex_mult_NPC_out_2;	 // PC+4
   wire  [4:0] ex_mult_dest_reg_out_2;// Destination Reg
   wire [63:0] ex_mult_result_out_2;  // Mult result
   wire 		  ex_mult_valid_out_2;   // Valid Output
@@ -154,7 +152,6 @@ module ex_stage(// Inputs
   wire		branch_valid_out_1, branch_valid_out_2;
   wire      brcond_result_1, brcond_result_2;
   wire [63:0] CPC_1, CPC_1;
-  output wire mispredict_1, mispredict_2;
   
   wire stall_mult_2;
    

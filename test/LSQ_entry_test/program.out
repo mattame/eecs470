@@ -1,0 +1,103 @@
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 12 11:44 2013
+STARTING TESTBENCH!
+
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     25
+ROB heads 1: 00, 2: 00
+LSQ head: 00
+ROB tags 1: 04, 2: 01
+clear: 0, read1: 1, store1: 1, read2: 0, store2: 0
+
+EX tags 1:00, 2: 00   Valids 1: 0, 2: 00000
+Addrs in 1: 0000000000000000, 2: 0000000000000000
+Values in 1: 0000000000000000, 2: 0000000000000000
+
+
+>>>> Post-Clock Output   40
+Tag: 04, Address: 0000000000000000
+ Value: 0000000000000000, Read: 1, Complete: 0
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     40
+ROB heads 1: 00, 2: 00
+LSQ head: 00
+ROB tags 1: 00, 2: 01
+clear: 0, read1: 0, store1: 0, read2: 0, store2: 0
+
+EX tags 1:00, 2: 00   Valids 1: 1, 2: 00000
+Addrs in 1: ffffffffffffffff, 2: 0000000000000000
+Values in 1: ffffffffffffffff, 2: 0000000000000000
+
+
+>>>> Post-Clock Output   50
+Tag: 04, Address: 0000000000000000
+ Value: 0000000000000000, Read: 1, Complete: 0
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     50
+ROB heads 1: 00, 2: 00
+LSQ head: 04
+ROB tags 1: 00, 2: 01
+clear: 0, read1: 0, store1: 0, read2: 0, store2: 0
+
+EX tags 1:04, 2: 00   Valids 1: 1, 2: 00000
+Addrs in 1: ffffffffffffffff, 2: 0000000000000000
+Values in 1: ffffffffffffffff, 2: 0000000000000000
+
+
+>>>> Post-Clock Output   60
+Tag: 04, Address: ffffffffffffffff
+ Value: ffffffffffffffff, Read: 1, Complete: 0
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     60
+ROB heads 1: 00, 2: 04
+LSQ head: 04
+ROB tags 1: 00, 2: 01
+clear: 0, read1: 0, store1: 0, read2: 0, store2: 0
+
+EX tags 1:04, 2: 00   Valids 1: 1, 2: 00000
+Addrs in 1: ffffffffffffffff, 2: 0000000000000000
+Values in 1: ffffffffffffffff, 2: 0000000000000000
+
+
+>>>> Post-Clock Output   70
+Tag: 04, Address: ffffffffffffffff
+ Value: ffffffffffffffff, Read: 1, Complete: 1
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     70
+ROB heads 1: 00, 2: 00
+LSQ head: 00
+ROB tags 1: 00, 2: 01
+clear: 1, read1: 0, store1: 0, read2: 0, store2: 0
+
+EX tags 1:00, 2: 00   Valids 1: 0, 2: 00000
+Addrs in 1: 0000000000000000, 2: 0000000000000000
+Values in 1: 0000000000000000, 2: 0000000000000000
+
+
+>>>> Post-Clock Output   80
+Tag: 04, Address: ffffffffffffffff
+ Value: ffffffffffffffff, Read: 1, Complete: 0
+**-----------------------------------------------------------**
+>>>> Pre-Clock Input     80
+ROB heads 1: 00, 2: 00
+LSQ head: 00
+ROB tags 1: 03, 2: 01
+clear: 0, read1: 0, store1: 1, read2: 0, store2: 0
+
+EX tags 1:03, 2: 00   Valids 1: 1, 2: 00000
+Addrs in 1: 123456789abcdef0, 2: 0000000000000000
+Values in 1: ffffffffffff1234, 2: 0000000000000000
+
+
+>>>> Post-Clock Output   90
+Tag: 03, Address: 123456789abcdef0
+ Value: ffffffffffff1234, Read: 0, Complete: 0
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test_LSQ_entry.v", line 388.
+$finish at simulation time                  900
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 90000 ps
+CPU Time:      0.340 seconds;       Data structure size:   0.0Mb
+Fri Apr 12 11:44:07 2013

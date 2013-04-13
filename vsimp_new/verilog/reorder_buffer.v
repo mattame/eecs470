@@ -134,65 +134,65 @@ endmodule
 // also, forwarding for the case of a full rob and trying to add instructions
 // while retiring is not added, probably should be
 module reorder_buffer( clock,reset,
-      
-      inst1_valid_in,
-      inst1_dest_in,
+                      
+                      inst1_valid_in,
+                      inst1_dest_in,
 
-      inst2_valid_in,
-      inst2_dest_in,
+                      inst2_valid_in,
+                      inst2_dest_in,
 
-      // tags for reading from the rs // 
-      inst1_rega_tag_in,
-      inst1_regb_tag_in,
-      inst2_rega_tag_in,
-      inst2_regb_tag_in,
+                      // tags for reading from the rs // 
+                      inst1_rega_tag_in,
+                      inst1_regb_tag_in,
+                      inst2_rega_tag_in,
+                      inst2_regb_tag_in,
 
-      // cdb inputs //
-      cdb1_tag_in,
-      cdb1_value_in,
-      cdb2_tag_in,
-      cdb2_value_in, 
-      cdb1_mispredicted_in,
-      cdb2_mispredicted_in,
+                      // cdb inputs //
+                      cdb1_tag_in,
+                      cdb1_value_in,
+                      cdb2_tag_in,
+                      cdb2_value_in, 
+                      cdb1_mispredicted_in,
+                      cdb2_mispredicted_in,
 
-      // outputs //
-      inst1_tag_out,
-      inst2_tag_out,
+                      // outputs //
+                      inst1_tag_out,
+                      inst2_tag_out,
 
-      // values out to the rs //
-      inst1_rega_value_out,
-      inst1_regb_value_out,
-      inst2_rega_value_out,
-      inst2_regb_value_out,     
+                      // values out to the rs //
+                      inst1_rega_value_out,
+                      inst1_regb_value_out,
+                      inst2_rega_value_out,
+                      inst2_regb_value_out,     
 
-      // outputs to write directly to the reg file //
-      inst1_dest_out,inst1_value_out,
-      inst2_dest_out,inst2_value_out,
+                      // outputs to write directly to the reg file //
+                      inst1_dest_out,inst1_value_out,
+                      inst2_dest_out,inst2_value_out,
 
-      // outputs to indicate a mispredicted branch //
-      inst1_mispredicted_out,inst2_mispredicted_out,
+                      // outputs to indicate a mispredicted branch //
+                      inst1_mispredicted_out,inst2_mispredicted_out,
 
-      // signals out //
-      rob_full,rob_empty
-                 );
+                      // signals out //
+                      rob_full,rob_empty
+                      );
 
 
    // inputs //
    input wire clock;
    input wire reset; 
 
-   input wire inst1_valid_in;
-   input wire inst2_valid_in;
-   input wire [4:0]  inst1_dest_in;
-   input wire [4:0]  inst2_dest_in;
+   input wire        inst1_valid_in;
+   input wire        inst2_valid_in;
+   input wire  [4:0] inst1_dest_in;
+   input wire  [4:0] inst2_dest_in;
 
-   input wire [7:0] inst1_rega_tag_in;
-   input wire [7:0] inst1_regb_tag_in;
-   input wire [7:0] inst2_rega_tag_in;
-   input wire [7:0] inst2_regb_tag_in;
+   input wire  [7:0] inst1_rega_tag_in;
+   input wire  [7:0] inst1_regb_tag_in;
+   input wire  [7:0] inst2_rega_tag_in;
+   input wire  [7:0] inst2_regb_tag_in;
 
-   input wire [7:0]  cdb1_tag_in;
-   input wire [7:0]  cdb2_tag_in;
+   input wire  [7:0] cdb1_tag_in;
+   input wire  [7:0] cdb2_tag_in;
    input wire [63:0] cdb1_value_in;
    input wire [63:0] cdb2_value_in;
    input wire        cdb1_mispredicted_in;

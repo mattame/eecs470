@@ -17,8 +17,10 @@ module ex_stage(// Inputs
                 clock,
                 reset,
 				// Input Bus 1 (contains branch logic)
+                valid_in_1,
                 id_ex_NPC_1,
 				id_ex_PPC_1,
+        id_ex_pht_idx_1,
                 id_ex_IR_1,
                 id_ex_dest_reg_1,
                 id_ex_rega_1,
@@ -30,8 +32,10 @@ module ex_stage(// Inputs
                 id_ex_uncond_branch_1,
 
 				// Input Bus 2
+        valid_in_2,
 				id_ex_NPC_2,
 				id_ex_PPC_2,
+        id_ex_pht_idx_2,
 				id_ex_IR_2,
 				id_ex_dest_reg_2,
 				id_ex_rega_2,
@@ -51,15 +55,21 @@ module ex_stage(// Inputs
 				stall_bus_1,
 				stall_bus_2,
 				// Bus 1
-				ex_dest_reg_out_1,
-				ex_result_out_1,
-				ex_valid_out_1,
-				mispredict_1,
+        ex_NPC_out_1,
+        ex_dest_reg_out_1,
+        ex_result_out_1,
+        ex_mispredict_1,
+        ex_branch_result_1,
+        ex_pht_idx_out_1,
+        ex_valid_out_1,
 				// Bus 2
-				ex_dest_reg_out_2,
-				ex_result_out_2,
-				ex_valid_out_2,
-				mispredict_2,
+        ex_NPC_out_2,
+        ex_dest_reg_out_2,
+        ex_result_out_2,
+        ex_mispredict_2,
+        ex_branch_result_2,
+        ex_pht_idx_out_2,
+        ex_valid_out_2,
 
           // To LSQ
         LSQ_tag_out_1,
@@ -79,8 +89,10 @@ module ex_stage(// Inputs
   input         clock;               // system clock
   input         reset;               // system reset
   
+  input         valid_in_1;
   input  [63:0] id_ex_NPC_1;         // incoming instruction PC+4
   input  [63:0] id_ex_PPC_1;		 // Predicted PC for branches
+  input   [4:0] id_ex_pht_idx_1;
   input  [31:0] id_ex_IR_1;          // incoming instruction
   input   [4:0] id_ex_dest_reg_1;	 // destination register
   input  [63:0] id_ex_rega_1;        // register A value from reg file
@@ -91,8 +103,10 @@ module ex_stage(// Inputs
   input         id_ex_cond_branch_1;   // is this a cond br? from decoder
   input         id_ex_uncond_branch_1; // is this an uncond br? from decoder
 
+  input         valid_in_2;
   input  [63:0] id_ex_NPC_2;         // incoming instruction PC+4
   input  [63:0] id_ex_PPC_2;		 // Predicted PC for branches
+  input   [4:0] id_ex_pht_idx_2;
   input  [31:0] id_ex_IR_2;          // incoming instruction
   input   [4:0] id_ex_dest_reg_2;	 // destination register
   input  [63:0] id_ex_rega_2;        // register A value from reg file
@@ -108,20 +122,25 @@ module ex_stage(// Inputs
   input         MEM_valid_in;  
 
   output        stall_bus_1;	     // Should input bus 1 stall?
-  output		stall_bus_2;	     // Should input bus 2 stall?
-  output        ex_branch_taken;  // is this a taken branch?
+  output		    stall_bus_2;	     // Should input bus 2 stall?
   
 				// Bus 1
-  output  [4:0] ex_dest_reg_out_1;	 // Destination Reg
-  output [63:0] ex_result_out_1;	 // Bus 1 Result
-  output		ex_valid_out_1;		 // Valid Output
-  output        mispredict_1;
+  output [63:0] ex_NPC_out_1;
+  output  [4:0] ex_dest_reg_out_1;
+  output [63:0] ex_result_out_1;
+  output ex_mispredict_1;
+  output  [1:0] ex_branch_result_1;
+  output  [4:0] ex_pht_idx_out_1;
+  output ex_valid_out_1;
   
 				// Bus 2
-  output  [4:0] ex_dest_reg_out_2;   // Desitnation Reg
-  output [63:0] ex_result_out_2;	 // Bus 2 result
-  output		ex_valid_out_2;      // Valid Output
-  output        mispredict_2;		 
+  output [63:0] ex_NPC_out_2;
+  output  [4:0] ex_dest_reg_out_2;
+  output [63:0] ex_result_out_2;
+  output ex_mispredict_2;
+  output  [1:0] ex_branch_result_2;
+  output  [4:0] ex_pht_idx_out_2;
+  output ex_valid_out_2;
   
   output  [4:0] LSQ_tag_out_1;
   output [63:0] LSQ_address_out_1;
@@ -148,13 +167,31 @@ module ex_stage(// Inputs
   wire [63:0] ex_mult_result_out_2;  // Mult result
   wire 		  ex_mult_valid_out_2;   // Valid Output
   
+  // Internal wires and definitions
+
   reg  [63:0] opa_mux_out_1, opa_mux_out_2, opb_mux_out_1, opb_mux_out_2;
   wire		branch_valid_out_1, branch_valid_out_2;
   wire      brcond_result_1, brcond_result_2;
+  wire      branch_taken_1, branch_taken_2;
   wire [63:0] CPC_1, CPC_1;
   
   wire stall_mult_2;
    
+  wire ex_mult_valid_in_1, ex_mult_valid_in_2;
+
+  assign LSQ_valid_out_1 = (`ALU_OPA_IS_MEM_DISP == id_ex_opa_select_1);
+  assign LSQ_valid_out_2 = (`ALU_OPA_IS_MEM_DISP == id_ex_opa_select_2);
+   
+   // Check if we use the ALU or the Multiplier for each channel
+  assign ex_mult_valid_in_1 = (valid_in_1 & id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1: 1'b0;
+  assign ex_alu_valid_out_1  = (valid_in_1 & ex_alu_result_out_1 != 64'hdeadbeefbaadbeef & (!LSQ_valid_out_1 | (id_ex_IR_1[31:26] != `STQ_INST))) ? 1'b0: 1'b1;
+  
+  assign ex_mult_valid_in_2 = (valid_in_2 & id_ex_alu_func_2 == `ALU_MULQ) ? 1'b1: 1'b0;
+  assign ex_alu_valid_out_2  = (valid_in_2 & ex_alu_result_out_2 != 64'hdeadbeefbaadbeef & (!LSQ_valid_out_2 | (id_ex_IR_2[31:26] != `STQ_INST))) ? 1'b0: 1'b1;
+   
+  assign branch_valid_out_1 = (valid_in_1 & (id_ex_uncond_branch_1 | id_ex_cond_branch_1)) ? 1'b1: 1'b0;
+  assign branch_valid_out_2 = (valid_in_2 & (id_ex_uncond_branch_2 | id_ex_cond_branch_2)) ? 1'b1: 1'b0;
+
    // set up possible immediates:
    //   mem_disp: sign-extended 16-bit immediate for memory format
    //   br_disp: sign-extended 21-bit immediate * 4 for branch displacement
@@ -167,22 +204,6 @@ module ex_stage(// Inputs
   wire [63:0] mem_disp_2 = { {48{id_ex_IR_2[15]}}, id_ex_IR_2[15:0] };
   wire [63:0] br_disp_2  = { {41{id_ex_IR_2[20]}}, id_ex_IR_2[20:0], 2'b00 };
   wire [63:0] alu_imm_2  = { 56'b0, id_ex_IR_2[20:13] };
-  
-  wire ex_mult_valid_in_1, ex_mult_valid_in_2;
-  assign LSQ_valid_out_1 = (`ALU_OPA_IS_MEM_DISP == id_ex_opa_select_1);
-  assign LSQ_valid_out_2 = (`ALU_OPA_IS_MEM_DISP == id_ex_opa_select_2);
-   
-   //
-   // Check if we use the ALU or the Multiplier for each channel
-   //
-  assign ex_mult_valid_in_1 = (id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1: 1'b0;
-  assign ex_alu_valid_out_1  = (ex_alu_result_out_1 == 64'hdeadbeefbaadbeef | (LSQ_valid_out_1 & (id_ex_IR_1[31:26] != `STQ_INST))) ? 1'b0: 1'b1;
-  
-  assign ex_mult_valid_in_2 = (id_ex_alu_func_2 == `ALU_MULQ) ? 1'b1: 1'b0;
-  assign ex_alu_valid_out_2  = (ex_alu_result_out_2 == 64'hdeadbeefbaadbeef | (LSQ_valid_out_2 & (id_ex_IR_2[31:26] != `STQ_INST))) ? 1'b0: 1'b1;
-   
-  assign branch_valid_out_1 = (id_ex_uncond_branch_1 | id_ex_cond_branch_1) ? 1'b1: 1'b0;
-  assign branch_valid_out_2 = (id_ex_uncond_branch_2 | id_ex_cond_branch_2) ? 1'b1: 1'b0;
 
    //
    // ALU opA mux
@@ -248,7 +269,6 @@ module ex_stage(// Inputs
   mult mult_1 (// Inputs
                .clock(clock),
                .reset(reset),
-			   .IR_in(id_ex_IR_1),
 			   .NPC_in(id_ex_NPC_1),
 			   .dest_reg_in(id_ex_dest_reg_1),
                .mplier(opa_mux_out_1),
@@ -257,7 +277,6 @@ module ex_stage(// Inputs
                .stall(1'b0),
            
                // Outputs
-			   .IR_out(ex_mult_IR_out_1),
 			   .NPC_out(ex_mult_NPC_out_1),
 			   .dest_reg_out(ex_mult_dest_reg_out_1),
                .product(ex_mult_result_out_1),
@@ -266,7 +285,6 @@ module ex_stage(// Inputs
   mult mult_2 (// Inputs
                .clock(clock),
                .reset(reset),
-			   .IR_in(id_ex_IR_2),
 			   .NPC_in(id_ex_NPC_2),
 			   .dest_reg_in(id_ex_dest_reg_2),
                .mplier(opa_mux_out_2),
@@ -275,7 +293,6 @@ module ex_stage(// Inputs
                .stall(stall_mult_2),
            
                // Outputs
-			   .IR_out(ex_mult_IR_out_2),
 			   .NPC_out(ex_mult_NPC_out_2),
 			   .dest_reg_out(ex_mult_dest_reg_out_2),
                .product(ex_mult_result_out_2),
@@ -298,54 +315,67 @@ module ex_stage(// Inputs
                 // Output
                 .cond(brcond_result_2)
                );
-  assign CPC_1 = ((brcond_result_1 & id_ex_cond_branch_1) | id_ex_uncond_branch_1) ?  ex_alu_result_out_1: id_ex_NPC_1;
-  assign CPC_2 = ((brcond_result_2 & id_ex_cond_branch_2) | id_ex_uncond_branch_2) ?  ex_alu_result_out_2: id_ex_NPC_2;
   
   assign mispredict_1 = (CPC_1 != id_ex_PPC_1);
   assign mispredict_2 = (CPC_2 != id_ex_PPC_2);
+	
+  assign branch_taken_1 = (id_ex_uncond_branch_1 | (brcond_result_1 & id_ex_cond_branch_1));
+  assign branch_taken_2 = (id_ex_uncond_branch_2 | (brcond_result_2 & id_ex_cond_branch_2));
 			   
-			   
-  arbiter arb_0 (// Inputs
-					// ALU 1 Bus
-					.ex_branch_valid_out_1(ex_branch_valid_out_1),
-					.ex_alu_CPC_out_1(CPC_1),
-					.ex_alu_dest_reg_out_1(id_ex_dest_reg_1),
-					.ex_alu_result_out_1(ex_alu_result_out_1),
-					.ex_alu_valid_out_1(ex_alu_valid_out_1),
-					// ALU 2 Bus
-					.ex_branch_valid_out_2(ex_branch_valid_out_2),
-					.ex_alu_CPC_out_2(CPC_2),
-					.ex_alu_dest_reg_out_2(id_ex_dest_reg_2),
-					.ex_alu_result_out_2(ex_alu_result_out_2),
-					.ex_alu_valid_out_2(ex_alu_valid_out_2),
-					// Multiplier 1 Bus
-					.ex_mult_IR_out_1(ex_mult_IR_out_1),
-					.ex_mult_NPC_out_1(ex_mult_NPC_out_1),
-					.ex_mult_dest_reg_out_1(ex_mult_dest_reg_out_1),
-					.ex_mult_result_out_1(ex_mult_result_out_1),
-					.ex_mult_valid_out_1(ex_mult_valid_out_1),
-					// Multiplier 2 Bus
-					.ex_mult_IR_out_2(ex_mult_IR_out_2),
-					.ex_mult_NPC_out_2(ex_mult_NPC_out_2),
-					.ex_mult_dest_reg_out_2(ex_mult_dest_reg_out_2),
-					.ex_mult_result_out_2(ex_mult_result_out_2),
-					.ex_mult_valid_out_2(ex_mult_valid_out_2),
-					//Incoming Loads
-					.mem_tag_in,
-					.mem_value_in,
-					.mem_valid_in,
-				   // Outputs
-					.stall_bus_1(stall_bus_1),
-					.stall_bus_2(stall_bus_2),
-					.stall_mult_2(stall_mult_2),
-					// Bus 1
-					.ex_dest_reg_out_1(ex_dest_reg_out_1),
-					.ex_result_out_1(ex_result_out_1),
-					.ex_valid_out_1(ex_valid_out_1),
-					// Bus 2
-					.ex_dest_reg_out_2(ex_dest_reg_out_2),
-					.ex_result_out_2(ex_result_out_2),
-					.ex_valid_out_2(ex_valid_out_2),
+  arbiter arb_0 (//Ins
+    .ex_branch_valid_out_1(branch_valid_out_1),
+    .ex_branch_taken_1(branch_taken_1),
+    .ex_branch_mispredict_1(mispredict_1),
+    .ex_branch_pht_idx_1(id_ex_pht_idx_1),
+    .ex_alu_NPC_out_1(id_ex_NPC_1),
+
+    .ex_alu_dest_reg_out_1(id_ex_dest_reg_1),
+    .ex_alu_result_out_1(ex_alu_result_out_1),
+    .ex_alu_valid_out_1(ex_alu_valid_out_1),
+
+    .ex_mult_NPC_out_1(ex_mult_NPC_out_1),
+    .ex_mult_dest_reg_out_1(ex_mult_dest_reg_out_1),
+    .ex_mult_result_out_1(ex_mult_result_out_1),
+    .ex_mult_valid_out_1(ex_mult_valid_out_1),
+
+    .mem_tag_in(MEM_tag_in),
+    .mem_value_in(MEM_value_in),
+    .mem_valid_in(MEM_valid_in),
+
+    .ex_branch_valid_out_2(branch_valid_out_2),
+    .ex_branch_taken_2(branch_taken_2),
+    .ex_branch_mispredict_2(mispredict_2),
+    .ex_branch_pht_idx_2(id_ex_pht_idx_2),
+    .ex_alu_NPC_out_2(id_ex_NPC_2),
+
+    .ex_alu_dest_reg_out_2(id_ex_dest_reg_2),
+    .ex_alu_result_out_2(ex_alu_result_out_2),
+    .ex_alu_valid_out_2(ex_alu_valid_out_2),
+
+    .ex_mult_NPC_out_2(ex_mult_NPC_out_2),
+    .ex_mult_dest_reg_out_2(ex_mult_dest_reg_out_2),
+    .ex_mult_result_out_2(ex_mult_result_out_2),
+    .ex_mult_valid_out_2(ex_mult_valid_out_2),
+
+//Outs
+    .stall_bus_1(stall_bus_1),
+    .ex_NPC_out_1(ex_NPC_out_1),
+    .ex_dest_reg_out_1(ex_dest_reg_out_1),
+    .ex_result_out_1(ex_result_out_1),
+    .ex_mispredict_1(ex_mispredict_1),
+    .ex_branch_result_1(ex_branch_result_1),
+    .ex_pht_idx_out_1(ex_pht_idx_out_1),
+    .ex_valid_out_1(ex_valid_out_1),
+
+    .stall_bus_2(stall_bus_2),
+    .stall_mult_2(stall_mult_2),
+    .ex_NPC_out_2(ex_NPC_out_2),
+    .ex_dest_reg_out_2(ex_dest_reg_out_2),
+    .ex_result_out_2(ex_result_out_2),
+    .ex_mispredict_2(ex_mispredict_2),
+    .ex_branch_result_2(ex_branch_result_2),
+    .ex_pht_idx_out_2(ex_pht_idx_out_2),
+    .ex_valid_out_2(ex_valid_out_2)
 				  );
    // ultimate "take branch" signal:
    //    unconditional, or conditional and the condition is true

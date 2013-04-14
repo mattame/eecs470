@@ -1,0 +1,58 @@
+
+Warning-[LNX_OS_VERUN] Unsupported Linux version
+  Linux version 'Red Hat Enterprise Linux Workstation release 6.3 (Santiago)' 
+  is not supported on 'x86_64' officially, assuming linux compatibility by 
+  default. Set VCS_ARCH_OVERRIDE to linux or suse32 to override.
+  Please refer to release notes for information on supported platforms.
+
+                         Chronologic VCS (TM)
+         Version E-2011.03_Full64 -- Sat Apr 13 05:40:26 2013
+               Copyright (c) 1991-2011 by Synopsys Inc.
+                         ALL RIGHTS RESERVED
+
+This program is proprietary and confidential information of Synopsys Inc.
+and may be used and disclosed only as authorized in a license agreement
+controlling such use and disclosure.
+
+DirectC Release 1.0 Copyright (c) 1991-2011 by Synopsys Inc.
+Parsing design file '../../vsimp_new/sys_defs.vh'
+Parsing design file 'test_branch_predictor.v'
+Parsing design file 'branch_predictor.v'
+Top Level Modules:
+       testbench
+       branch_decoder
+No TimeScale specified
+Starting vcs inline pass...
+2 modules and 0 UDP read.
+recompiling module testbench
+recompiling module branch_decoder
+Both modules done.
+make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/branch_predictor/csrc'
+if [ -x ../simv ]; then chmod -x ../simv; fi
+g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
+../simv up to date
+make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/branch_predictor/csrc'
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 13 05:40 2013
+
+STARTING TESTBENCH!
+
+  preclock: reset=1  prediction1=x pht_index_out1=  x prediction2=x pht_index_out2=  x ghr=xxxxxxxx 
+ postclock: reset=1  prediction1=0 pht_index_out1=  0 prediction2=0 pht_index_out2=  0 ghr=00000000 
+
+  preclock: reset=0  prediction1=0 pht_index_out1=  0 prediction2=0 pht_index_out2=  0 ghr=00000000 
+ postclock: reset=0  prediction1=0 pht_index_out1=  1 prediction2=0 pht_index_out2=  1 ghr=00000001 
+
+  preclock: reset=0  prediction1=0 pht_index_out1=  1 prediction2=0 pht_index_out2=  1 ghr=00000001 
+ postclock: reset=0  prediction1=1 pht_index_out1=  0 prediction2=0 pht_index_out2=  1 ghr=00000001 
+
+ENDING TESTBENCH : SUCCESS !
+
+$finish called from file "test_branch_predictor.v", line 170.
+$finish at simulation time                   30
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 30
+CPU Time:      0.010 seconds;       Data structure size:   0.0Mb
+Sat Apr 13 05:40:27 2013
+CPU time: .132 seconds to compile + .049 seconds to elab + .190 seconds to link + .050 seconds in simulation

@@ -218,7 +218,7 @@ module reorder_buffer( clock,reset,
    output wire inst1_mispredicted_out;
    output wire inst2_mispredicted_out;
 
-   output wand rob_full;
+   output wire rob_full;
 
 
    // internal regs/wires //
@@ -279,14 +279,18 @@ module reorder_buffer( clock,reset,
    // assignments for reg file outputs //
    assign inst1_dest_out       = (inst1_retire ? registers_out[head         ] : `ZERO_REG);
    assign inst1_value_out      = (inst1_retire ? values_out[   head         ] : 64'd0);
-   assign inst1_retire_tag_out = (inst1_retire ?         : `RSTAG_NULL);
+   assign inst1_retire_tag_out = (inst1_retire ? head          : `RSTAG_NULL);
    assign inst2_dest_out       = (inst2_retire ? registers_out[head_plus_one] : `ZERO_REG);
    assign inst2_value_out      = (inst2_retire ? values_out[   head_plus_one] : 64'd0);
-   assign inst2_retire_tag_out = (inst2_retire ?         : `RSTAG_NULL);
+   assign inst2_retire_tag_out = (inst2_retire ? head_plus_one : `RSTAG_NULL);
 
    // mispredicted out assignments //
    assign inst1_mispredicted_out = (inst1_retire ? mispredicteds_out[head         ] : 1'b0);
    assign inst2_mispredicted_out = (inst2_retire ? mispredicteds_out[head_plus_one] : 1'b0);
+
+   // assignment for rob full state //
+   assign rob_full = ~(states_out[tail_plus_one]==`ROBE_EMPTY && states_out[tail_plus_two]==`ROBE_EMPTY);
+
 
    // assignments for rob entry inputs //
    genvar i;
@@ -300,12 +304,11 @@ module reorder_buffer( clock,reset,
    endgenerate
    
    
-   // assignments for rob empty/full states //
+   // assignments for rob empty state //
    generate
       for (i=0; i<`ROB_ENTRIES; i=i+1)
 	  begin : ASSIGNEMPTYFULLSTATES
 	     assign rob_empty = (states_out[i]==`ROBE_EMPTY);                                    // this is a wand
-	     assign rob_full  = (states_out[i]==`ROBE_INUSE || states_out[i]==`ROBE_COMPLETE);   // again, a wand
 	  end
    endgenerate
 

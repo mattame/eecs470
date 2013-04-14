@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Fri Apr 12 16:17:19 2013
+         Version E-2011.03_Full64 -- Sun Apr 14 15:37:45 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -19,81 +19,80 @@ Parsing design file 'test_branch_target_buffer.v'
 Parsing design file 'branch_target_buffer.v'
 
 Warning-[IPDW] Identifier previously declared
-branch_target_buffer.v, 57
+branch_target_buffer.v, 68
   Second declaration for identifier 'i' ignored
 
 
 Warning-[NMIN] No module instance name
-test_branch_target_buffer.v, 27
+test_branch_target_buffer.v, 32
   No module instance name is specified.
   Source info: branch_target_buffer ( .clock (clock),  .reset (reset),  
-  .write_in (write_in),  .write_NPC_in (write_NPC_in),  .write_dest_in 
-  (write_dest_in),  .NPC_in (NPC_i ...
+  .inst1_result_in (inst1_result_in),  .inst2_result_in (inst2_result_in),  
+  .inst1_write_NPC_in (inst1_ ...
 
 Top Level Modules:
        testbench
 No TimeScale specified
 Starting vcs inline pass...
 1 module and 0 UDP read.
-recompiling module testbench because:
-	This module or some inlined child module(s) has/have been modified.
-make[1]: Entering directory `/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/test/branch_target_buffer/csrc'
+recompiling module testbench
+make[1]: Entering directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/branch_target_buffer/csrc'
 if [ -x ../simv ]; then chmod -x ../simv; fi
 g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5NrI_d.o 5NrIB_d.o SIM_l.o     rmapats_mop.o rmapats.o      /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so     /usr/caen/vcs-2011.03/amd64/lib/libvcsnew.so /usr/caen/vcs-2011.03/amd64/lib/libuclinative.so         /usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -ldl  -lc -lm -lpthread -ldl 
 ../simv up to date
-make[1]: Leaving directory `/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/test/branch_target_buffer/csrc'
+make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/branch_target_buffer/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 12 16:17 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 14 15:37 2013
 
 STARTING TESTBENCH!
 
 resetting
 
-  preclock: reset=1 PPC=xxxxxxxxxxxxxxxx 
- postclock: reset=1 PPC=0000000000000000 
+  preclock: reset=1 i1_PPC=xxxxxxxxxxxxxxxx i2_PPC=xxxxxxxxxxxxxxxx 
+ postclock: reset=1 i1_PPC=0000000000000000 i2_PPC=0000000000000000 
 
 holding
 
-  preclock: reset=0 PPC=0000000000000000 
- postclock: reset=0 PPC=0000000000000000 
+  preclock: reset=0 i1_PPC=0000000000000000 i2_PPC=0000000000000000 
+ postclock: reset=0 i1_PPC=0000000000000000 i2_PPC=0000000000000000 
 
 writing to BTB
 
-  preclock: reset=0 PPC=0000000000000000 
- postclock: reset=0 PPC=0000000000000000 
+  preclock: reset=0 i1_PPC=0000000000000000 i2_PPC=0000000000000000 
+ postclock: reset=0 i1_PPC=0000000000000000 i2_PPC=0000000000000000 
 
 reading written from BTB
 
-  preclock: reset=0 PPC=0000000000000000 
- postclock: reset=0 PPC=deadbeefbaadbeef 
+  preclock: reset=0 i1_PPC=0000000000000000 i2_PPC=0000000000000000 
+ postclock: reset=0 i1_PPC=aaaaaaaaaaaaaaaa i2_PPC=0000000000000000 
 
 reading again
 
-  preclock: reset=0 PPC=deadbeefbaadbeef 
- postclock: reset=0 PPC=deadbeefbaadbeef 
+  preclock: reset=0 i1_PPC=aaaaaaaaaaaaaaaa i2_PPC=0000000000000000 
+ postclock: reset=0 i1_PPC=aaaaaaaaaaaaaaaa i2_PPC=aaaaaaaaaaaaaaaa 
 
 changing while reading
 
-  preclock: reset=0 PPC=deadbeefbaadbeef 
- postclock: reset=0 PPC=abcdabcdabcdabcd 
+  preclock: reset=0 i1_PPC=aaaaaaaaaaaaaaaa i2_PPC=aaaaaaaaaaaaaaaa 
+ postclock: reset=0 i1_PPC=bbbbbbbbbbbbbbbb i2_PPC=bbbbbbbbbbbbbbbb 
 
 read nothing
 
-  preclock: reset=0 PPC=abcdabcdabcdabcd 
- postclock: reset=0 PPC=0000000000000000 
+  preclock: reset=0 i1_PPC=bbbbbbbbbbbbbbbb i2_PPC=bbbbbbbbbbbbbbbb 
+ postclock: reset=0 i1_PPC=0000000000000000 i2_PPC=bbbbbbbbbbbbbbbb 
 
 resetting
 
-  preclock: reset=1 PPC=0000000000000000 
- postclock: reset=1 PPC=0000000000000000 
+  preclock: reset=1 i1_PPC=0000000000000000 i2_PPC=bbbbbbbbbbbbbbbb 
+ postclock: reset=1 i1_PPC=0000000000000000 i2_PPC=0000000000000000 
 
 ENDING TESTBENCH : SUCCESS !
 
-$finish called from file "test_branch_target_buffer.v", line 181.
+$finish called from file "test_branch_target_buffer.v", line 191.
 $finish at simulation time                  160
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 160
-CPU Time:      0.000 seconds;       Data structure size:   0.0Mb
-Fri Apr 12 16:17:20 2013
-CPU time: .098 seconds to compile + .026 seconds to elab + .132 seconds to link + .029 seconds in simulation
+CPU Time:      0.020 seconds;       Data structure size:   0.1Mb
+Sun Apr 14 15:37:47 2013
+CPU time: 1.148 seconds to compile + .044 seconds to elab + .231 seconds to link + .060 seconds in simulation

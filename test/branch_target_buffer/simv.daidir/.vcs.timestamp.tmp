@@ -26,12 +26,8 @@
 /usr/caen/vcs-2011.03/amd64/bin/vcs1
 branch_target_buffer.v
 test_branch_target_buffer.v
-57
+44
 _LMFILES_=/usr/caen/misc/modules/vcs/2011.03
-XMODIFIERS=@im=none
-XDG_SESSION_COOKIE=ecbf0f04b0efb6620c2077030000002a-1365796491.47129-861963397
-XAUTHORITY=/var/run/gdm/auth-for-mattnick-cpqaJ7/database
-WINDOWPATH=1
 VMR_MODE_FLAG=64
 VENDOR=unknown
 VCS_MODE_FLAG=64
@@ -39,55 +35,46 @@ VCS_HOME=/usr/caen/vcs-2011.03
 VCS_DEPTH=0
 VCS_ARG_ADDED_FOR_TMP=1
 VCS_ARCH=amd64
-USERNAME=mattnick
 UNAME=/bin/uname
 TOOL_HOME=/usr/caen/vcs-2011.03/amd64
 SW_VCS=2011.03
-SSH_AUTH_SOCK=/tmp/keyring-Ram7LK/socket.ssh
+SSH_TTY=/dev/pts/6
+SSH_CONNECTION=141.211.231.79 62901 141.213.74.41 22
+SSH_CLIENT=141.211.231.79 62901 22
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
-SSH_AGENT_PID=4156
 SNPSLMD_LICENSE_FILE=/usr/caen/vcs-2011.03/license.dat:/usr/caen/vcs-2011.03/flexlm//license.dat
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/4171,unix/unix:/tmp/.ICE-unix/4171
+SELINUX_USE_CURRENT_RANGE=
+SELINUX_ROLE_REQUESTED=
+SELINUX_LEVEL_REQUESTED=
 SCRNAME=vcs
 SCRIPT_NAME=vcs
-QT_IM_MODULE=xim
+REMOTEHOST=ugl41.ccs.itd.umich.edu
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
 QTDIR=/usr/lib64/qt-3.3
 OVA_UUM=0
 OSTYPE=linux
-ORBIT_SOCKETDIR=/tmp/orbit-mattnick
 MODULESHOME=/usr/share/Modules
 MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/caen/misc/modules:/afs/umich.edu/class/coe/modules
 MFLAGS=
+MANPAGER=/usr/bin/less -is
 MAKELEVEL=1
 MAKEFLAGS=
+MAILSERVER=mail.umich.edu
 LOADEDMODULES=vcs/2011.03
 LESSOPEN=|/usr/bin/lesspipe.sh %s
-KRB5CCNAME=FILE:/tmp/krb5cc_929405_4nyt8t
+KRB5CCNAME=FILE:/tmp/krb5cc_877473_JVUNz2
 KDE_IS_PRELINKED=1
 KDEDIRS=/usr
-IMSETTINGS_MODULE=none
-IMSETTINGS_INTEGRATE_DESKTOP=yes
 HOSTTYPE=x86_64-linux
-HOSTNAME=beyster1620p04.engin.umich.edu
-HOST=beyster1620p04.engin.umich.edu
+HOSTNAME=caen-vnc05.engin.umich.edu
+HOST=caen-vnc05.engin.umich.edu
 G_BROKEN_FILENAMES=1
-GTK_RC_FILES=/etc/gtk/gtkrc:/afs/umich.edu/user/m/a/mattnick/.gtkrc-1.2-gnome2
 GROUP=users
-GNOME_KEYRING_SOCKET=/tmp/keyring-Ram7LK/socket
-GNOME_KEYRING_PID=4059
-GNOME_DESKTOP_SESSION_ID=this-is-deprecated
-GDM_LANG=en_US.UTF-8
-GDM_KEYBOARD_LAYOUT=us
-GDMSESSION=gnome
-DESKTOP_SESSION=gnome
-DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-cuI7McCZzB,guid=3e991f9dd0b9d8b807f0b68c0000011c
-COLORTERM=gnome-terminal
 0
 2
-1365797481 branch_target_buffer.v
-1365797225 test_branch_target_buffer.v
+1365967896 branch_target_buffer.v
+1365968262 test_branch_target_buffer.v
 4
 0 
 1298523545 /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so

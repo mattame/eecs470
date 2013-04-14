@@ -114,7 +114,7 @@ ex_stage ex_0(// Inputs
 				.ex_dest_reg_out_2(ex_dest_reg_out_2),
 				.ex_result_out_2(ex_result_out_2),
 				.ex_valid_out_2(ex_valid_out_2),
-				.mispredict_2(mispredict_2)
+				.mispredict_2(mispredict_2),
 
           // To LSQ
         .LSQ_tag_out_1(LSQ_tag_out_1),

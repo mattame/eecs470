@@ -51,6 +51,7 @@ module reservation_station_entry(clock,reset,fill,                              
                            uncond_branch_in,
                            NPC_in,
                            IR_in,
+                           PPC_in,
                            pht_index_in,
 
                            // cdbs in //
@@ -79,6 +80,7 @@ module reservation_station_entry(clock,reset,fill,                              
                            uncond_branch_out,
                            NPC_out,
                            IR_out,
+                           PPC_out,
                            pht_index_out
 
                            );
@@ -116,6 +118,7 @@ module reservation_station_entry(clock,reset,fill,                              
    input wire        uncond_branch_in;
    input wire [63:0] NPC_in;
    input wire [31:0] IR_in;
+   input wire [63:0] PPC_in;
    input wire [(`HISTORY_BITS-1):0] pht_index_in;
 
    // outputs //
@@ -141,6 +144,7 @@ module reservation_station_entry(clock,reset,fill,                              
    output reg         uncond_branch_out;
    output reg  [63:0] NPC_out;
    output reg  [31:0] IR_out;
+   output reg  [63:0] PPC_out;
    output reg  [(`HISTORY_BITS-1):0] pht_index_out;
 
    // internal registers and wires //
@@ -164,6 +168,7 @@ module reservation_station_entry(clock,reset,fill,                              
    reg        n_uncond_branch_out;
    reg [63:0] n_NPC;
    reg [31:0] n_IR;
+   reg [63:0] n_PPC;
    reg [(`HISTORY_BITS-1):0] n_pht_index;
 
    wire taga_in_nonnull;     
@@ -239,6 +244,7 @@ module reservation_station_entry(clock,reset,fill,                              
          n_uncond_branch_out = uncond_branch_in;
          n_NPC               = NPC_in;
          n_IR                = IR_in;
+         n_PPC               = PPC_in;
          n_pht_index         = pht_index_in;
 
       end
@@ -282,6 +288,7 @@ module reservation_station_entry(clock,reset,fill,                              
          n_uncond_branch_out = uncond_branch_out;
          n_NPC               = NPC_out;
          n_IR                = IR_out;
+         n_PPC               = PPC_out;
          n_pht_index         = pht_index_out;
 
       end
@@ -311,6 +318,7 @@ module reservation_station_entry(clock,reset,fill,                              
 	 age_out           <= `SD 8'd0;
          NPC_out           <= `SD 64'd0; 
          IR_out            <= `SD `NOOP_INST;
+         PPC_out           <= `SD 64'd0;
          pht_index_out     <= `SD {`HISTORY_BITS{1'b0}};
       end
       else
@@ -332,6 +340,7 @@ module reservation_station_entry(clock,reset,fill,                              
 	 age_out           <= `SD n_age;
          NPC_out           <= `SD n_NPC;
          IR_out            <= `SD n_IR;
+         PPC_out           <= `SD n_PPC; 
          pht_index_out     <= `SD n_pht_index;
       end
    end
@@ -388,6 +397,7 @@ module reservation_station(clock,reset,               // signals in
                            inst1_uncond_branch_in,
                            inst1_NPC_in,
                            inst1_IR_in,
+                           inst1_PPC_in,
                            inst1_pht_index_in,
                            inst1_valid,
 
@@ -407,6 +417,7 @@ module reservation_station(clock,reset,               // signals in
                            inst2_uncond_branch_in,
                            inst2_NPC_in,
                            inst2_IR_in,
+                           inst2_PPC_in,
                            inst2_pht_index_in,
                            inst2_valid,
 
@@ -429,6 +440,7 @@ module reservation_station(clock,reset,               // signals in
                            inst1_rd_mem_out,inst1_wr_mem_out,
                            inst1_cond_branch_out,inst1_uncond_branch_out,
                            inst1_NPC_out,inst1_IR_out,
+                           inst1_PPC_out,
                            inst1_pht_index_out,
                            inst1_valid_out,
                            inst1_dest_reg_out,
@@ -441,6 +453,7 @@ module reservation_station(clock,reset,               // signals in
                            inst2_rd_mem_out,inst2_wr_mem_out,
                            inst2_cond_branch_out,inst2_uncond_branch_out,
                            inst2_NPC_out,inst2_IR_out,
+                           inst2_PPC_out,
                            inst2_pht_index_out,
                            inst2_valid_out,
                            inst2_dest_reg_out,
@@ -467,6 +480,7 @@ module reservation_station(clock,reset,               // signals in
    input wire        inst1_cond_branch_in,inst1_uncond_branch_in;
    input wire [63:0] inst1_NPC_in;
    input wire [31:0] inst1_IR_in;
+   input wire [63:0] inst1_PPC_in;
    input wire [(`HISTORY_BITS-1):0] inst1_pht_index_in;
    input wire        inst1_valid;
    
@@ -480,6 +494,7 @@ module reservation_station(clock,reset,               // signals in
    input wire        inst2_cond_branch_in,inst2_uncond_branch_in;
    input wire [63:0] inst2_NPC_in;
    input wire [31:0] inst2_IR_in;
+   input wire [63:0] inst2_PPC_in;
    input wire [(`HISTORY_BITS-1):0] inst2_pht_index_in;
    input wire        inst2_valid;
 
@@ -504,6 +519,7 @@ module reservation_station(clock,reset,               // signals in
    output wor        inst1_cond_branch_out,inst1_uncond_branch_out;
    output wor [63:0] inst1_NPC_out;
    output wor [31:0] inst1_IR_out;
+   output wor [63:0] inst1_PPC_out;
    output wor [(`HISTORY_BITS-1):0] inst1_pht_index_out;
    output wor        inst1_valid_out;
    output wor [4:0]  inst1_dest_reg_out;
@@ -516,6 +532,7 @@ module reservation_station(clock,reset,               // signals in
    output wor        inst2_cond_branch_out,inst2_uncond_branch_out;
    output wor [63:0] inst2_NPC_out;
    output wor [31:0] inst2_IR_out;
+   output wor [63:0] inst2_PPC_out;
    output wor [(`HISTORY_BITS-1):0] inst2_pht_index_out;
    output wor        inst2_valid_out;
    output wor [4:0]  inst2_dest_reg_out;
@@ -547,6 +564,7 @@ module reservation_station(clock,reset,               // signals in
    reg [(`NUM_RSES-1):0] uncond_branches_in;
    reg [63:0]            NPCs_in         [(`NUM_RSES-1):0];
    reg [31:0]            IRs_in          [(`NUM_RSES-1):0];
+   reg [63:0]            PPCs_in         [(`NUM_RSES-1):0];
    reg [(`HISTORY_BITS-1):0] pht_indices_in [(`NUM_RSES-1):0];
 
 
@@ -571,6 +589,7 @@ module reservation_station(clock,reset,               // signals in
    wire [(`NUM_RSES-1):0] uncond_branches_out;
    wire [63:0]            NPCs_out         [(`NUM_RSES-1):0];
    wire [31:0]            IRs_out          [(`NUM_RSES-1):0];
+   wire [63:0]            PPCs_out         [(`NUM_RSES-1):0];
    wire [(`HISTORY_BITS-1):0] pht_indices_out [(`NUM_RSES-1):0];
 
    wor  dispatch_available1;   // if slot 1 can be dispatched to (both slots 1 and 2 must be available for the rs to allow dispatch) 
@@ -604,6 +623,7 @@ module reservation_station(clock,reset,               // signals in
 			assign inst1_uncond_branch_out = (issue_first_states[i] ? uncond_branches_out[i] : 1'b0);
                         assign inst1_NPC_out           = (issue_first_states[i] ? NPCs_out[i] : 64'd0);
                         assign inst1_IR_out            = (issue_first_states[i] ? IRs_out[i] : 32'd0); 
+                        assign inst1_PPC_out           = (issue_first_states[i] ? PPCs_out[i] : 64'd0);
                         assign inst1_pht_index_out     = (issue_first_states[i] ? pht_indices_out[i] : {`HISTORY_BITS{1'b0}} );
 			assign inst1_valid_out         = (issue_first_states[i] ? 1'b1 : 1'b0);
 			assign inst1_dest_reg_out      = (issue_first_states[i] ? dest_regs_out[i] : 5'd0);
@@ -620,6 +640,7 @@ module reservation_station(clock,reset,               // signals in
 			assign inst2_uncond_branch_out = (issue_second_states[i] ? uncond_branches_out[i] : 1'b0);
                         assign inst2_NPC_out           = (issue_second_states[i] ? NPCs_out[i] : 64'd0);
                         assign inst2_IR_out            = (issue_second_states[i] ? IRs_out[i] : 32'd0);
+                        assign inst2_PPC_out           = (issue_second_states[i] ? PPCs_out[i] : 64'd0);
                         assign inst2_pht_index_out     = (issue_second_states[i] ? pht_indices_out[i] : {`HISTORY_BITS{1'b0}} );
 			assign inst2_valid_out         = (issue_second_states[i] ? 1'b1 : 1'b0);
 			assign inst2_dest_reg_out      = (issue_second_states[i] ? dest_regs_out[i] : 5'd0);
@@ -671,6 +692,7 @@ module reservation_station(clock,reset,               // signals in
                                uncond_branches_in[i] = inst1_uncond_branch_in;
                                NPCs_in[i]            = inst1_NPC_in;
                                IRs_in[i]             = inst1_IR_in;
+                               PPCs_in[i]            = inst1_PPC_in;
                                pht_indices_in[i]     = inst1_pht_index_in;
 
                          end
@@ -704,6 +726,7 @@ module reservation_station(clock,reset,               // signals in
                                uncond_branches_in[i] = inst2_uncond_branch_in;
                                NPCs_in[i]            = inst2_NPC_in;
                                IRs_in[i]             = inst2_IR_in;
+                               PPCs_in[i]            = inst2_PPC_in;
                                pht_indices_in[i]     = inst2_pht_index_in;
                          end
                      
@@ -724,7 +747,10 @@ module reservation_station(clock,reset,               // signals in
 				rd_mems_in[i]         = 1'b0;
 				wr_mems_in[i]         = 1'b0;
 				cond_branches_in[i]   = 1'b0; 
-				uncond_branches_in[i] = 1'b0;
+              			uncond_branches_in[i] = 1'b0;
+                                NPCs_in[i]            = 64'd0; 
+                                IRs_in[i]             = 32'd0;
+                                PPCs_in[i]            = 64'd0;
                                 pht_indices_in[i]     = {`HISTORY_BITS{1'b0}};
                          end
 
@@ -802,6 +828,7 @@ module reservation_station(clock,reset,               // signals in
 								   .uncond_branch_in(uncond_branches_in[i]),
                                                                    .NPC_in(NPCs_in[i]),
                                                                    .IR_in(IRs_in[i]),
+                                                                   .PPC_in(PPCs_in[i]),
                                                                    .pht_index_in(pht_indices_in[i]),
 
 								   // cdbs in //
@@ -830,6 +857,7 @@ module reservation_station(clock,reset,               // signals in
 								   .uncond_branch_out(uncond_branches_out[i]),
 								   .NPC_out(NPCs_out[i]), 
                                                                    .IR_out(IRs_out[i]),
+                                                                   .PPC_out(PPCs_out[i]),
                                                                    .pht_index_out(pht_indices_out[i])
 
 									  );

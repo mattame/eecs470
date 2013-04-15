@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Sat Apr 13 06:14:43 2013
+         Version E-2011.03_Full64 -- Mon Apr 15 16:05:20 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -28,7 +28,7 @@ Top Level Modules:
        testbench
 
 Warning-[DPIMI] Duplicate port in module instantiation
-test_reservation_station.v, 92
+test_reservation_station.v, 96
 "rs"
   Port 'inst2_pht_index_in' is connected more than once for instance 'rs' of 
   'reservation_station'.
@@ -37,7 +37,7 @@ test_reservation_station.v, 92
 No TimeScale specified
 
 Warning-[SIOB] Select index out of bounds
-reservation_station.v, 780
+reservation_station.v, 806
 "first_empty_filleds[(0 - 1)]"
   The select index is out of declared bounds : [15:0].
   In module instance : rs 
@@ -45,7 +45,7 @@ reservation_station.v, 780
 
 
 Warning-[SIOB] Select index out of bounds
-reservation_station.v, 780
+reservation_station.v, 806
 "second_empty_filleds[(0 - 1)]"
   The select index is out of declared bounds : [15:0].
   In module instance : rs 
@@ -64,7 +64,7 @@ g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5N
 make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 13 06:14 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 15 16:05 2013
 
 STARTING TESTBENCH!
 
@@ -182,10 +182,10 @@ resetting
 
 ENDING TESTBENCH : SUCCESS !
 
-$finish called from file "test_reservation_station.v", line 418.
+$finish called from file "test_reservation_station.v", line 428.
 $finish at simulation time                  320
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 320
-CPU Time:      0.020 seconds;       Data structure size:   0.1Mb
-Sat Apr 13 06:14:45 2013
-CPU time: 1.121 seconds to compile + .069 seconds to elab + .232 seconds to link + .057 seconds in simulation
+CPU Time:      0.010 seconds;       Data structure size:   0.1Mb
+Mon Apr 15 16:05:22 2013
+CPU time: .833 seconds to compile + .061 seconds to elab + .231 seconds to link + .054 seconds in simulation

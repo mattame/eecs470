@@ -370,20 +370,20 @@ module pipeline (// Inputs
   
   // Bus 1
   wire [63:0] ex_NPC_out_1;
-  wire  [4:0] ex_dest_reg_out_1;
+  wire [4:0]  ex_dest_reg_out_1;
   wire [63:0] ex_result_out_1;
   wire        ex_mispredict_out_1;
-  wire  [1:0] ex_branch_result_out_1;
-  wire  [4:0] ex_pht_idx_out_1;
+  wire [1:0]  ex_branch_result_out_1;
+  wire [4:0]  ex_pht_idx_out_1;
   wire        ex_valid_out_1;
   
 				// Bus 2
   wire [63:0] ex_NPC_out_2;
-  wire  [4:0] ex_dest_reg_out_2;
+  wire [4:0]  ex_dest_reg_out_2;
   wire [63:0] ex_result_out_2;
   wire        ex_mispredict_out_2;
-  wire  [1:0] ex_branch_result_out_2;
-  wire  [4:0] ex_pht_idx_out_2;
+  wire [1:0]  ex_branch_result_out_2;
+  wire [4:0]  ex_pht_idx_out_2;
   wire        ex_valid_out_2;
 
 //Outputs from Register File
@@ -391,14 +391,42 @@ module pipeline (// Inputs
    wire [63:0] reg_inst1_regb_out;
    wire [63:0] reg_inst2_rega_out;
    wire [63:0] reg_inst2_regb_out;
-   wire [31:0] reg_clear_entries;
+   wire [31:0] reg_clear_entries_out;
+
+//Outputs from EX / CM Pipline Register
+   reg [4:0]                 cm_tag_1;
+   reg [63:0]                cm_result_1;
+   reg [63:0]                cm_NPC_1;
+   reg                       cm_mispredict_1;
+   reg [1:0]                 cm_branch_result_1;
+   reg [(`HISTORY_BITS-1):0] cm_pht_index_1;
+   reg                       cm_valid_1;
+
+   reg [4:0]                 cm_tag_2;
+   reg [63:0]                cm_result_2;
+   reg [63:0]                cm_NPC_2;
+   reg                       cm_mispredict_2;
+   reg [1:0]                 cm_branch_result_2;
+   reg [(`HISTORY_BITS-1):0] cm_pht_index_2;
+   reg                       cm_valid_2;
 
 
 //Outputs from Complete Stage
-  wire  [7:0] cm_tag_1;
-  wire [63:0] cm_value_1
-  wire  [7:0] cm_tag_2;
-  wire [63:0] cm_value_2;  
+   wire [4:0]                 cm_tag_out_1;
+   wire [63:0]                cm_value_out_1;
+   wire [63:0]                cm_NPC_out_1;
+   wire                       cm_mispredict_1;
+   wire [1:0]                 cm_branch_result_out_1;
+   wire [(`HISTORY_BITS-1):0] cm_pht_index_out_1;
+   wire                       cm_valid_out_1;
+
+   wire [4:0]                 cm_tag_out_2;
+   wire [63:0]                cm_value_out_2;
+   wire [63:0]                cm_NPC_out_2;
+   wire                       cm_mispredict_out_2;
+   wire [1:0]                 cm_branch_result_out_2;
+   wire [(`HISTORY_BITS-1):0] cm_pht_index_out_2;
+   wire                       cm_valid_out_2; 
   /**********************************/
   /**********************************/
   /**********************************/
@@ -468,6 +496,50 @@ module pipeline (// Inputs
 
 
   ///***  MAKE D-CACHE  ***///
+  //temporary D-CACHE
+/*
+  cache cachememory (// inputs
+                              .clock(clock),
+                              .reset(reset),
+                              .wr1_en(Icache_wr_en),
+                              .wr1_idx(Icache_wr_idx),
+                              .wr1_tag(Icache_wr_tag),
+                              .wr1_data(mem2proc_data),
+                              
+                              .rd1_idx(Icache_rd_idx),
+                              .rd1_tag(Icache_rd_tag),
+
+                              // outputs
+                              .rd1_data(cachemem_data),
+                              .rd1_valid(cachemem_valid)
+                             );
+
+  // Cache controller
+  dcache dcache_0(// inputs 
+                  .clock(clock),
+                  .reset(reset),
+
+                  .Dmem2proc_response(Dmem2proc_response),
+                  .Dmem2proc_data(mem2proc_data),
+                  .Dmem2proc_tag(mem2proc_tag),
+
+                  .proc2Dcache_addr(proc2Dcache_addr),
+                  .cachemem_data(cachemem_data),
+                  .cachemem_valid(cachemem_valid),
+
+                   // outputs
+                  .proc2Dmem_command(proc2Dmem_command),
+                  .proc2Dmem_addr(proc2Dmem_addr),
+
+                  .Dcache_data_out(Dcache_data_out),
+                  .Dcache_valid_out(Dcache_valid_out),
+                  .current_index(Dcache_rd_idx),
+                  .current_tag(Dcache_rd_tag),
+                  .last_index(Dcache_wr_idx),
+                  .last_tag(Dcache_wr_tag),
+                  .data_write_enable(Dcache_wr_en)  
+  
+*/  
 
   // Actual cache (data and tag RAMs)
   cache cachememory (// inputs
@@ -524,8 +596,19 @@ module pipeline (// Inputs
                        .Imem2proc_data(Icache_data_out),
                        .Imem_valid(Icache_valid_out),
                        
-                       // Outputs
-                        .proc2Imem_addr,
+                       .stall,
+
+                       .inst1_result_in,
+                       .inst2_result_in,
+                       .inst1_write_NPC_in,
+                       .inst2_write_NPC_in,
+                       .inst1_write_CPC_in,
+                       .inst2_write_CPC_in,
+                       .inst1_pht_index_in,
+                       .inst2_pht_index_in,
+                       
+                        // Outputs
+                        .proc2Imem_addr(proc2Icache_addr),
                        
                         .if_NPC_out_1(if_NPC_out_1),        // PC+4 of fetched instruction
                         .if_IR_out_1(if_IR_out_1),         // fetched instruction out
@@ -1346,28 +1429,40 @@ module pipeline (// Inputs
   begin
     if(reset)
     begin
-      cm_tag_1 <= `SD 7'b0;
-      cm_value_1 <= `SD 63'b0;
-      cm_valid_1 <= `SD 1'b0;
-      cm_mispredict_1 <= `SD 1'b0;
-      
-      cm_tag_2 <= `SD 7'b0;
-      cm_value_2 <= `SD 63'b0;
-      cm_valid_2 <= `SD 1'b0;
-      cm_mispredict_2 <= `SD 1'b0;
+      cm_tag_1           <= `SD 0;
+      cm_result_1        <= `SD 0;
+      cm_NPC_1           <= `SD 0;
+      cm_mispredict_1    <= `SD 0;
+      cm_branch_result_1 <= `SD 0;
+      cm_pht_index_1     <= `SD 0;
+      cm_valid_1         <= `SD 0;
+
+      cm_tag_2           <= `SD 0;
+      cm_result_2        <= `SD 0;
+      cm_NPC_2           <= `SD 0;
+      cm_mispredict_2    <= `SD 0;
+      cm_branch_result_2 <= `SD 0;
+      cm_pht_index_2     <= `SD 0;
+      cm_valid_2         <= `SD 0;
 
     end
     else
     begin
-      cm_tag_1 <= `SD ex_tag_out_1;
-      cm_value_1 <= `SD ex_value_out_1;
-      cm_valid_1 <= `SD ex_valid_out_1;
-      cm_mispredict_1 <= `SD ex_mispredict_out_1;
-      
-      cm_tag_2 <= `SD ex_tag_out_2;
-      cm_value_2 <= `SD ex_value_out_2;
-      cm_valid_2 <= `SD ex_valid_out_2;
-      cm_mispredict_1 <= `SD ex_mispredict_out_2
+      cm_tag_1           <= `SD ex_dest_reg_out_1;
+      cm_result_1        <= `SD ex_result_out_1;
+      cm_NPC_1           <= `SD ex_NPC_out_1;
+      cm_mispredict_1    <= `SD ex_mispredict_out_1;
+      cm_branch_result_1 <= `SD ex_branch_result_out_1;
+      cm_pht_index_1     <= `SD ex_pht_idx_out_1;
+      cm_valid_1         <= `SD ex_valid_out_1;
+
+      cm_tag_2           <= `SD ex_dest_reg_out_2;
+      cm_result_2        <= `SD ex_result_out_2;
+      cm_NPC_2           <= `SD ex_NPC_out_2;
+      cm_mispredict_2    <= `SD ex_mispredict_out_2;
+      cm_branch_result_2 <= `SD ex_branch_result_out_2;
+      cm_pht_index_2     <= `SD ex_pht_idx_out_2;
+      cm_valid_2         <= `SD ex_valid_out_2;
       
     end
     
@@ -1383,21 +1478,38 @@ module pipeline (// Inputs
   //WAITING ON SCOTT
   cm_stage cm_stage_0(// Inputs
 
-		                  ex_cm_tag_1(cm_tag_1),
-		                  ex_cm_result_1(cm_value_1),
-		                  ex_cm_valid_1(cm_valid_1),
-		
-		                  ex_cm_tag_2(cm_tag_1),
-		                  ex_cm_result_2(cm_value_1),
-		                  ex_cm_valid_2(cm_valid_1),
-		                  
-		
-		                  // Outputs
-		                  .cdb_tag_1(cm_tag_1),
-		                  .cdb_value_1(cm_value_1),
+		                  .ex_cm_tag_1(cm_tag_1),
+		                  .ex_cm_result_1(cm_result_1),
+                      .ex_cm_NPC_1(cm_NPC_1),
+                      .ex_cm_mispredict_1(cm_mispredict_1),
+                      .ex_cm_branch_result_1(cm_branch_result_1),
+                      .ex_cm_pht_index_1(cm_pht_index_1),
+		                  .ex_cm_valid_1(cm_valid_1),
 
-		                  .cdb_tag_2(cm_tag_2),
-		                  .cdb_value_2(cm_value_2)
+		                  .ex_cm_tag_2(cm_tag_2),
+		                  .ex_cm_result_2(cm_result_2),
+                      .ex_cm_NPC_2(cm_NPC_2),
+                      .ex_cm_mispredict_2(cm_mispredict_2),
+                      .ex_cm_branch_result_2(cm_branch_result_2),
+                      .ex_cm_pht_index_2(cm_pht_index_2),
+		                  .ex_cm_valid_2(cm_valid_2),
+		  
+		                  // Outputs
+		                  .cdb_tag_1(cm_tag_out_1),
+		                  .cdb_value_1(cm_value_out_1),
+		                  .cdb_NPC_1(cm_NPC_out_1),
+                      .cdb_mispredict_1(cm_mispredict_out_1),
+                      .cdb_branch_result_1(cm_branch_result_out_1),
+                      .cdb_pht_index_1(cm_pht_index_out_1),
+                      .cdb_valid_1(cm_valid_out_1),
+
+		                  .cdb_tag_2(cm_tag_out_2),
+		                  .cdb_value_2(cm_value_out_2),
+		                  .cdb_NPC_2(cm_NPC_out_2),
+                      .cdb_mispredict_2(cm_mispredict_out_2),
+                      .cdb_branch_result_2(cm_branch_result_out_2),
+                      .cdb_pht_index_2(cm_pht_index_out_2),
+                      .cdb_valid_2(cm_valid_out_2),
 		                  );   
 
 

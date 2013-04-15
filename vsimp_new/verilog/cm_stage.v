@@ -13,40 +13,40 @@
 // complete stage. purely combinational (needs latches outside)  //
 module cm_stage(// Inputs
 
-		ex_cm_tag_1,
-		ex_cm_result_1,
+		            ex_cm_tag_1,
+		            ex_cm_result_1,
                 ex_cm_NPC_1,
                 ex_cm_mispredict_1,
                 ex_cm_branch_result_1,
                 ex_cm_pht_index_1,
-		ex_cm_valid_1,
+		            ex_cm_valid_1,
 
-		ex_cm_tag_2,
-		ex_cm_result_2,
+		            ex_cm_tag_2,
+		            ex_cm_result_2,
                 ex_cm_NPC_2,
                 ex_cm_mispredict_2,
                 ex_cm_branch_result_2,
                 ex_cm_pht_index_2,
-		ex_cm_valid_2,
+		            ex_cm_valid_2,
 		
-		// Outputs
-		cdb_tag_1,
-		cdb_value_1,
+		            // Outputs
+		            cdb_tag_1,
+		            cdb_value_1,
                 cdb_NPC_1,
                 cdb_mispredict_1,
                 cdb_branch_result_1,
                 cdb_pht_index_1,
                 cdb_valid_1,
 
-		cdb_tag_2,
-		cdb_value_2,
-                cdb_NPC_1,
-                cdb_mispredict_1,
-                cdb_branch_result_1,
-                cdb_pht_index_1,
-                cdb_valid_1
+		            cdb_tag_2,
+		            cdb_value_2,
+                cdb_NPC_2,
+                cdb_mispredict_2,
+                cdb_branch_result_2,
+                cdb_pht_index_2,
+                cdb_valid_2
 
-		);
+		            );
 
    // inputs //
    input wire [4:0]  ex_cm_tag_1;

@@ -25,6 +25,9 @@ module LSQ_entry(//Inputs
 					clock,
 					reset,
 					
+					ROB_head_1,
+					ROB_head_2,
+
 					clear,
 
 					ROB_tag_1,
@@ -55,6 +58,9 @@ module LSQ_entry(//Inputs
 
 input clock;
 input reset;
+
+input [7:0] ROB_head_1;
+input [7:0] ROB_head_2;
 
 input clear;
 
@@ -95,20 +101,27 @@ wire next_complete;
 wire next_valid;
 wire next_read;
 
+wire head_1_true, head_2_true;
+
 wire [63:0] next_address;
 wire [63:0] next_value;
 wire [4:0]  next_tag;
 
-assign store_EX_1 = (EX_valid_1 & (valid | next_valid) & (EX_tag_1 == next_tag))
+assign store_EX_1 = (EX_valid_1 & (next_valid) & (EX_tag_1 == next_tag))
 					? 1'b1 : 1'b0;
 
-assign store_EX_2 = (EX_valid_2 & (valid | next_valid) & (EX_tag_2 == next_tag))
+assign store_EX_2 = (EX_valid_2 & (next_valid) & (EX_tag_2 == next_tag))
 					? 1'b1 : 1'b0;
 
 
 assign next_valid = (clear) ? 1'b0: (store_ROB_1 | store_ROB_2) ? 1'b1: valid;
 
-assign next_complete = (store_EX_1 | store_EX_2) ? 1'b1: (valid) ? complete: 1'b0;
+assign next_complete = (store_EX_1 | store_EX_2) ? 1'b1: (next_valid) ? complete: 1'b0;
+
+		 assign head_1_true = (next_tag == ROB_head_1[4:0]) & !ROB_head_1[5] & !ROB_head_1[6] & !ROB_head_1[7];
+		 assign head_2_true = (next_tag == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
+
+assign next_head_met = (next_valid) ? ((head_1_true | head_2_true) ? :):;
 
 assign next_read = (store_ROB_1) ? rd_mem_in_1:
 				   (store_ROB_2) ? rd_mem_in_2:
@@ -129,6 +142,7 @@ assign next_value = (store_EX_1) ? value_in_1:
 
 always @(posedge clock) begin
 	if(reset) begin
+		ROB_head_met <= `SD 1'b0;
 		read <= `SD 1'b0;		
 		valid <= `SD 1'b0;
 		complete <= `SD 1'b0;
@@ -137,6 +151,7 @@ always @(posedge clock) begin
 		stored_address <= `SD 64'h0;
 	end	
 	else begin
+		ROB_head_met <= `SD next_head_met;
 		read <= `SD next_read;			
 		valid <= `SD next_valid;
 		complete <= `SD next_complete;	
@@ -151,7 +166,7 @@ assign stored_address_out = stored_address;
 assign stored_value_out = stored_value;
 assign stored_tag_out = stored_tag;
 assign read_out = read;
-assign complete_out = complete;
+assign complete_out = complete & (read_out | ROB_head_met);
 
 endmodule
 
@@ -276,6 +291,9 @@ module LSQ(//Inputs
 						.clock(clock),
 						.reset(reset),
 
+						.ROB_head_1(ROB_head_1),
+						.ROB_head_2(ROB_head_2),
+
 						.clear(clears[i]),
 
 						.ROB_tag_1(ROB_tag_1),
@@ -316,16 +334,15 @@ module LSQ(//Inputs
 
  assign read_out = reads_out[LSQ_head];
  
-		 wire head_1_true, head_2_true, reset_invalid, read_valid; //wires to help compute valid out
+		 wire head_2_true, reset_invalid; //wires to help compute valid out
 		 
-		 assign head_1_true = (tag_out == ROB_head_1[4:0]) & !ROB_head_1[5] & !ROB_head_1[6] & !ROB_head_1[7];
-		 assign head_2_true = (tag_out == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
-		 
+
+		 assign head_2_true = (next_tag == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
+
 		 assign reset_invalid = reset & head_2_true;
 		 
-		 assign read_valid = read_out | head_1_true | head_2_true; 
  
- assign valid_out = completes_out[LSQ_head] & read_valid & !reset_invalid;
+ assign valid_out = completes_out[LSQ_head] & read_out & !reset_invalid;
  
 //----------- POINTER KEEPING ------------
  assign next_head = (valid_out) ? (LSQ_head + 1):LSQ_head;

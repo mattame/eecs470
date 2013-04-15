@@ -180,6 +180,8 @@ module ex_stage(// Inputs
   
   wire [63:0] ex_mult_NPC_out_1, ex_mult_NPC_out_2;
 
+// To do: use rd/wr mem inputs for each bus
+
   assign LSQ_valid_out_1 = (`ALU_OPA_IS_MEM_DISP == id_ex_opa_select_1);
   assign LSQ_valid_out_2 = (`ALU_OPA_IS_MEM_DISP == id_ex_opa_select_2);
    

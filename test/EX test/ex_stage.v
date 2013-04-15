@@ -316,7 +316,7 @@ module ex_stage(// Inputs
                 .func(id_ex_IR_2[28:26]), // inst bits to determine check
 
                 // Output
-                .cond(brcond_result)
+                .cond(brcond_result_1)
                );
   brcond brcond_2 (// Inputs
                 .opa(id_ex_rega_2),       // always check regA value

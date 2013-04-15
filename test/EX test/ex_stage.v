@@ -184,10 +184,10 @@ module ex_stage(// Inputs
   assign LSQ_valid_out_2 = (`ALU_OPA_IS_MEM_DISP == id_ex_opa_select_2);
    
    // Check if we use the ALU or the Multiplier for each channel
-  assign ex_mult_valid_in_1 = (valid_in_1 & id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1: 1'b0;
+  assign ex_mult_valid_in_1  =  (valid_in_1 & id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1:  1'b0;
   assign ex_alu_valid_out_1  = (valid_in_1 & (ex_alu_result_out_1 != 64'hdeadbeefbaadbeef) & (!LSQ_valid_out_1 | (id_ex_IR_1[31:26] == `STQ_INST))) ? 1'b1: 1'b0;
   
-  assign ex_mult_valid_in_2 = (valid_in_2 & id_ex_alu_func_2 == `ALU_MULQ) ? 1'b1: 1'b0;
+  assign ex_mult_valid_in_2 =  (valid_in_2 & id_ex_alu_func_2 == `ALU_MULQ) ?  1'b1:  1'b0;
   assign ex_alu_valid_out_2  = (valid_in_2 & (ex_alu_result_out_2 != 64'hdeadbeefbaadbeef) & (!LSQ_valid_out_2 | (id_ex_IR_2[31:26] == `STQ_INST))) ? 1'b1: 1'b0;
    
   assign branch_valid_out_1 = (valid_in_1 & (id_ex_uncond_branch_1 | id_ex_cond_branch_1)) ? 1'b1: 1'b0;

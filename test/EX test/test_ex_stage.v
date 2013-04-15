@@ -375,10 +375,10 @@ ex_stage ex_0(// Inputs
     id_ex_uncond_branch_2 = 0;
 
 	
-        @(negedge clock);
         DISPLAY_STATE(`INPUT);
-        DISPLAY_STATE(`OUTPUT);
+        @(negedge clock);
         @(posedge clock);
+        DISPLAY_STATE(`OUTPUT);
 
 	valid_in_1 = 1'b1;
 	id_ex_NPC_1 = 64'h0;
@@ -402,8 +402,8 @@ ex_stage ex_0(// Inputs
 	id_ex_pht_idx_2 = 5'h0;
 	id_ex_IR_2 = 32'h0;
 	id_ex_dest_reg_2 = 5'h3;
-    id_ex_rega_2 = 32'd20;
-    id_ex_regb_2 = 32'd20;
+    id_ex_rega_2 = 32'd30;
+    id_ex_regb_2 = 32'd30;
     id_ex_opa_select_2 = `ALU_OPA_IS_REGA;
     id_ex_opb_select_2 = `ALU_OPB_IS_REGB;
 	id_ex_alu_func_2 = `ALU_MULQ;
@@ -411,10 +411,11 @@ ex_stage ex_0(// Inputs
     id_ex_uncond_branch_2 = 0;
 
 	
-        @(negedge clock);
         DISPLAY_STATE(`INPUT);
-        DISPLAY_STATE(`OUTPUT);
+        @(negedge clock);
         @(posedge clock);
+        DISPLAY_STATE(`OUTPUT);
+
 																		//TODO: make these taken/not taken (figure out how)
 	valid_in_1 = 1'b1;
 	id_ex_NPC_1 = 64'h0;
@@ -447,10 +448,10 @@ ex_stage ex_0(// Inputs
     id_ex_cond_branch_2 = 1;
     id_ex_uncond_branch_2 = 0;
 	
-        @(negedge clock);
         DISPLAY_STATE(`INPUT);
-        DISPLAY_STATE(`OUTPUT);
         @(posedge clock);
+        @(negedge clock);
+        DISPLAY_STATE(`OUTPUT);
 		
 	valid_in_1 = 1'b1;
 	id_ex_NPC_1 = 64'h0;
@@ -482,18 +483,18 @@ ex_stage ex_0(// Inputs
     id_ex_cond_branch_2 = 0;
     id_ex_uncond_branch_2 = 1;
 	
-        @(negedge clock);
         DISPLAY_STATE(`INPUT);
-        DISPLAY_STATE(`OUTPUT);
+        @(negedge clock);
         @(posedge clock);
+        DISPLAY_STATE(`OUTPUT);
 		
 	valid_in_1 = 1'b0;
 	valid_in_2 = 1'b0;
 		
-        @(negedge clock);
         DISPLAY_STATE(`INPUT);
-        DISPLAY_STATE(`OUTPUT);
+        @(negedge clock);
         @(posedge clock);
+        DISPLAY_STATE(`OUTPUT);
 		
 	valid_in_1 = 1'b1;
 	id_ex_NPC_1 = 64'h0;
@@ -526,10 +527,10 @@ ex_stage ex_0(// Inputs
     id_ex_uncond_branch_2 = 0;
 	
 
-	    @(negedge clock);
         DISPLAY_STATE(`INPUT);
-        DISPLAY_STATE(`OUTPUT);
+	    @(negedge clock);
         @(posedge clock);
+        DISPLAY_STATE(`OUTPUT);
 		
 	valid_in_1 = 1'b1;
 	id_ex_NPC_1 = 64'h0;
@@ -562,10 +563,10 @@ ex_stage ex_0(// Inputs
     id_ex_uncond_branch_2 = 0;
 		
 		
-		@(negedge clock);
         DISPLAY_STATE(`INPUT);
-        DISPLAY_STATE(`OUTPUT);
+		@(negedge clock);
         @(posedge clock);
+        DISPLAY_STATE(`OUTPUT);
 		
 		
 	 $display("---------------------------------------------------------------");

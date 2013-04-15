@@ -30,6 +30,8 @@ module ex_stage(// Inputs
 			id_ex_alu_func_1,
 			id_ex_cond_branch_1,
 			id_ex_uncond_branch_1,
+      id_ex_rd_mem_in_1,
+      id_ex_wr_mem_in_1,
 
 			// Input Bus 2
 			valid_in_2,
@@ -45,6 +47,8 @@ module ex_stage(// Inputs
 			id_ex_alu_func_2,
 			id_ex_cond_branch_2,
 			id_ex_uncond_branch_2,
+      id_ex_rd_mem_in_2,
+      id_ex_wr_mem_in_2,
 
 			// From Mem Access
 			MEM_tag_in,
@@ -55,7 +59,6 @@ module ex_stage(// Inputs
 			stall_bus_1,
 			stall_bus_2,
 			// Bus 1
-			ex_NPC_out_1,
 			ex_dest_reg_out_1,
 			ex_result_out_1,
 			ex_mispredict_1,
@@ -63,7 +66,6 @@ module ex_stage(// Inputs
 			ex_pht_idx_out_1,
 			ex_valid_out_1,
 			// Bus 2
-			ex_NPC_out_2,
 			ex_dest_reg_out_2,
 			ex_result_out_2,
 			ex_mispredict_2,
@@ -102,6 +104,8 @@ module ex_stage(// Inputs
   input   [4:0] id_ex_alu_func_1;    // ALU function select from decoder
   input         id_ex_cond_branch_1;   // is this a cond br? from decoder
   input         id_ex_uncond_branch_1; // is this an uncond br? from decoder
+  input         id_ex_rd_mem_in_1;
+  input         id_ex_wr_mem_in_1;
 
   input         valid_in_2;
   input  [63:0] id_ex_NPC_2;         // incoming instruction PC+4
@@ -180,15 +184,17 @@ module ex_stage(// Inputs
   
   wire [63:0] ex_mult_NPC_out_1, ex_mult_NPC_out_2;
 
-  assign LSQ_valid_out_1 = (`ALU_OPA_IS_MEM_DISP == id_ex_opa_select_1);
-  assign LSQ_valid_out_2 = (`ALU_OPA_IS_MEM_DISP == id_ex_opa_select_2);
+// To do: use rd/wr mem inputs for each bus
+
+  assign LSQ_valid_out_1 = (id_ex_wr_mem_in_1 | id_ex_rd_mem_in_1);
+  assign LSQ_valid_out_2 = (id_ex_wr_mem_in_2 | id_ex_rd_mem_in_2);
    
    // Check if we use the ALU or the Multiplier for each channel
-  assign ex_mult_valid_in_1 = (valid_in_1 & id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1: 1'b0;
-  assign ex_alu_valid_out_1  = (valid_in_1 & (ex_alu_result_out_1 != 64'hdeadbeefbaadbeef) & (!LSQ_valid_out_1 | (id_ex_IR_1[31:26] == `STQ_INST))) ? 1'b1: 1'b0;
+  assign ex_mult_valid_in_1  =  (valid_in_1 & id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1:  1'b0;
+  assign ex_alu_valid_out_1  = (valid_in_1 & (ex_alu_result_out_1 != 64'hdeadbeefbaadbeef) & (!id_ex_wr_mem_in_1)) ? 1'b1: 1'b0;
   
-  assign ex_mult_valid_in_2 = (valid_in_2 & id_ex_alu_func_2 == `ALU_MULQ) ? 1'b1: 1'b0;
-  assign ex_alu_valid_out_2  = (valid_in_2 & (ex_alu_result_out_2 != 64'hdeadbeefbaadbeef) & (!LSQ_valid_out_2 | (id_ex_IR_2[31:26] == `STQ_INST))) ? 1'b1: 1'b0;
+  assign ex_mult_valid_in_2 =  (valid_in_2 & id_ex_alu_func_2 == `ALU_MULQ) ?  1'b1:  1'b0;
+  assign ex_alu_valid_out_2  = (valid_in_2 & (ex_alu_result_out_2 != 64'hdeadbeefbaadbeef) & (!id_ex_wr_mem_in_2)) ? 1'b1: 1'b0;
    
   assign branch_valid_out_1 = (valid_in_1 & (id_ex_uncond_branch_1 | id_ex_cond_branch_1)) ? 1'b1: 1'b0;
   assign branch_valid_out_2 = (valid_in_2 & (id_ex_uncond_branch_2 | id_ex_cond_branch_2)) ? 1'b1: 1'b0;

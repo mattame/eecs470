@@ -103,7 +103,8 @@ module if_stage(// Inputs
     // the next sequential PC (PC+4) if no branch
     // and we're on the second word or PC+8 if not.
     // (halting is handled with the enable PC_enable;
-  assign next_PC = ( inst1_branch_taken ? inst1_write_CPC_in : (inst2_branch_taken ? inst2_write_CPC_in : ( stall ? PC_reg : if_NPC_out_2)) ) ;
+  assign stalling = (stall ||
+  assign next_PC  =  (inst1_valid_inst_out_1 || inst2_valid_inst_out_2 || inst1_branch_taken )   ))( inst1_branch_taken ? inst1_write_CPC_in : (inst2_branch_taken ? inst2_write_CPC_in : ( stall ? PC_reg : if_NPC_out_2)) ) ;
 
     // Assign the first valid only if the PC is not the second word in the cache.
     // The second is always valid

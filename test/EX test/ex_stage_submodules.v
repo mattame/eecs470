@@ -17,6 +17,12 @@
 //
 // This module is purely combinational
 //
+
+`define BRANCH_NONE      2'b00
+`define BRANCH_TAKEN     2'b01
+`define BRANCH_NOT_TAKEN 2'b10
+`define BRANCH_UNUSED    2'b11
+
 module arbiter(
 //Ins
     ex_branch_valid_out_1,
@@ -122,25 +128,25 @@ input ex_mult_valid_out_2;
 
     //OUTPUTS
   //Bus 1
-output stall_bus_1;
-output [63:0] ex_NPC_out_1;
-output  [4:0] ex_dest_reg_out_1;
-output [63:0] ex_result_out_1;
-output ex_mispredict_1;
-output  [1:0] ex_branch_result_1;
-output  [4:0] ex_pht_idx_out_1;
-output ex_valid_out_1;
+output reg stall_bus_1;
+output reg [63:0] ex_NPC_out_1;
+output reg  [4:0] ex_dest_reg_out_1;
+output reg [63:0] ex_result_out_1;
+output reg ex_mispredict_1;
+output reg  [1:0] ex_branch_result_1;
+output reg  [4:0] ex_pht_idx_out_1;
+output reg ex_valid_out_1;
 
   //Bus 2
-output stall_bus_2;
-output stall_mult_2;
-output [63:0] ex_NPC_out_2;
-output  [4:0] ex_dest_reg_out_2;
-output [63:0] ex_result_out_2;
-output ex_mispredict_2;
-output  [1:0] ex_branch_result_2;
-output  [4:0] ex_pht_idx_out_2;
-output ex_valid_out_2;
+output reg stall_bus_2;
+output reg stall_mult_2;
+output reg [63:0] ex_NPC_out_2;
+output reg  [4:0] ex_dest_reg_out_2;
+output reg [63:0] ex_result_out_2;
+output reg ex_mispredict_2;
+output reg  [1:0] ex_branch_result_2;
+output reg  [4:0] ex_pht_idx_out_2;
+output reg ex_valid_out_2;
 
 /* ----- Logic ----- */
 
@@ -186,6 +192,7 @@ begin
     ex_mispredict_2 = 0;
     ex_branch_result_2 = `BRANCH_NONE;
     ex_valid_out_2 = 1;
+  end
   else begin 
     stall_mult_2 = 0;
     if(ex_mult_valid_out_2) begin
@@ -232,7 +239,7 @@ module mult_stage(clock, reset,
   input clock, reset, start;
   input [63:0] product_in, mplier_in, mcand_in, NPC_in;
   input [4:0]  dest_reg_in;
-  input        stall
+  input        stall;
 
   output done;
   output [63:0] product_out, mplier_out, mcand_out, NPC_out;
@@ -300,7 +307,7 @@ endmodule
 //
 
 
-module mult(clock, reset, NPC_in, dest_reg_in, mplier, mcand, valid_in, NPC_out, dest_reg_out, product, valid_out);
+module mult(clock, reset, NPC_in, dest_reg_in, mplier, mcand, valid_in, NPC_out, dest_reg_out, product, valid_out, stall);
 
   input clock, reset, valid_in;
   input [63:0] mcand, mplier, NPC_in;

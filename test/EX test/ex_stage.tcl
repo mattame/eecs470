@@ -31,7 +31,7 @@ read_file -f verilog [list "sys_defs.vh" "ex_stage_submodules.v" "ex_stage.v"]
 set design_name ex_stage
 #set reset_name reset
 set clock_name clock
-set CLK_PERIOD 13.57
+set CLK_PERIOD 14
 
 
 #/***********************************************************/

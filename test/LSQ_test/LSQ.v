@@ -318,8 +318,8 @@ module LSQ(//Inputs
  
 		 wire head_1_true, head_2_true, reset_invalid, read_valid; //wires to help compute valid out
 		 
-		 assign head_1_true = (tag_out == ROB_head_1);
-		 assign head_2_true = (tag_out == ROB_head_2);
+		 assign head_1_true = (tag_out == ROB_head_1[4:0]) & !ROB_head_1[5] & !ROB_head_1[6] & !ROB_head_1[7];
+		 assign head_2_true = (tag_out == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
 		 
 		 assign reset_invalid = reset & head_2_true;
 		 

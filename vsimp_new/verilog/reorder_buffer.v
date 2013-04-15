@@ -141,7 +141,7 @@ module reorder_buffer( clock,reset,
                       inst2_valid_in,
                       inst2_dest_in,
 
-                      // tags for reading from the rs // 
+                      // tags for reading from the MT // 
                       inst1_rega_tag_in,
                       inst1_regb_tag_in,
                       inst2_rega_tag_in,

@@ -7,6 +7,81 @@
 //                                                                     //
 /////////////////////////////////////////////////////////////////////////
 
+/**********************************************
+*   Here are our sys defs from various files
+**********************************************/
+
+//Branch Predictor
+`define HISTORY_BITS 8
+`define PHT_ENTRIES 256
+`define BRANCH_NONE      2'b00
+`define BRANCH_TAKEN     2'b01
+`define BRANCH_NOT_TAKEN 2'b10
+`define BRANCH_UNUSED    2'b11
+`define SD #1
+
+//Branch Target Buffer
+`define BTB_PC_BITS 8
+`define BTB_ENTRIES 256 
+`define BRANCH_NONE      2'b00
+`define BRANCH_TAKEN     2'b01
+`define BRANCH_NOT_TAKEN 2'b10
+`define BRANCH_UNUSED    2'b11
+`define SD #1
+
+//icache
+`define ICACHE_IDX_BITS       5      // log2(ICACHE_LINES)
+`define ICACHE_LINES (1<<`ICACHE_IDX_BITS)
+
+//LSQ
+`define LSQ_ENTRIES	    32
+
+//Map Table
+`define SD #1
+`define RSTAG_NULL 8'hFF
+`define ZERO_REG   5'd0
+
+//Memory Arbiter
+`define BUS_NONE       2'h0
+`define BUS_LOAD       2'h1
+`define BUS_STORE      2'h2
+
+//Register File
+`define ZERO_REG 5'd0
+
+//Reorder Buffer
+// parameters //
+`define ZERO_REG      5'd0
+`define RSTAG_NULL    8'hFF
+`define ROB_ENTRIES  32
+`define UNUSED_TAG_BITS 3
+`define SD #1
+
+`define ROBE_EMPTY     2'b00
+`define ROBE_INUSE     2'b01
+`define ROBE_COMPLETE  2'b10
+`define ROBE_UNUSED    2'b11
+
+//Reservation Station
+`define NUM_RSES 16
+`define NUM_RSES_MINUS_ONE 7
+`define RS_EMPTY        3'b000
+`define RS_WAITING_A    3'b001
+`define RS_WAITING_B    3'b010
+`define RS_WAITING_BOTH 3'b011
+`define RS_READY        3'b100
+`define RS_TEST         3'b111
+`define RSTAG_NULL      8'hFF           
+`define ZERO_REG         5'd0
+`define NOOP_INST    32'h47ff041f
+
+`define HISTORY_BITS 8
+
+
+
+
+
+
 
 //////////////////////////////////////////////
 //

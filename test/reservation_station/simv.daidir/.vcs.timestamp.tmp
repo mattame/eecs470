@@ -38,9 +38,9 @@ VCS_ARCH=amd64
 UNAME=/bin/uname
 TOOL_HOME=/usr/caen/vcs-2011.03/amd64
 SW_VCS=2011.03
-SSH_TTY=/dev/pts/1
-SSH_CONNECTION=141.213.50.204 56821 141.213.74.39 22
-SSH_CLIENT=141.213.50.204 56821 22
+SSH_TTY=/dev/pts/66
+SSH_CONNECTION=141.213.55.11 51931 141.213.74.39 22
+SSH_CLIENT=141.213.55.11 51931 22
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
 SNPSLMD_LICENSE_FILE=/usr/caen/vcs-2011.03/license.dat:/usr/caen/vcs-2011.03/flexlm//license.dat
 SELINUX_USE_CURRENT_RANGE=
@@ -48,7 +48,7 @@ SELINUX_ROLE_REQUESTED=
 SELINUX_LEVEL_REQUESTED=
 SCRNAME=vcs
 SCRIPT_NAME=vcs
-REMOTEHOST=eecs2331p05.engin.umich.edu
+REMOTEHOST=beyster1620p07.engin.umich.edu
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
 QTDIR=/usr/lib64/qt-3.3
@@ -63,7 +63,7 @@ MAKEFLAGS=
 MAILSERVER=mail.umich.edu
 LOADEDMODULES=vcs/2011.03
 LESSOPEN=|/usr/bin/lesspipe.sh %s
-KRB5CCNAME=FILE:/tmp/krb5cc_877473_4fXKrD
+KRB5CCNAME=FILE:/tmp/krb5cc_877473_aPnBcd
 KDE_IS_PRELINKED=1
 KDEDIRS=/usr
 HOSTTYPE=x86_64-linux
@@ -73,8 +73,8 @@ G_BROKEN_FILENAMES=1
 GROUP=users
 0
 2
-1365847480 reservation_station.v
-1365848081 test_reservation_station.v
+1366056316 reservation_station.v
+1366056074 test_reservation_station.v
 4
 0 
 1298523545 /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so

@@ -27,6 +27,7 @@ module testbench;
    reg        inst1_cond_branch_in,inst1_uncond_branch_in;
    reg [63:0] inst1_NPC_in;
    reg [31:0] inst1_IR_in;
+   reg [63:0] inst1_PPC_in;
    reg [(`HISTORY_BITS-1):0] inst1_pht_index_in;
    reg        inst1_valid;
    
@@ -40,6 +41,7 @@ module testbench;
    reg        inst2_cond_branch_in,inst2_uncond_branch_in;
    reg [63:0] inst2_NPC_in;
    reg [31:0] inst2_IR_in;
+   reg [63:0] inst2_PPC_in;
    reg [(`HISTORY_BITS-1):0] inst2_pht_index_in;
    reg        inst2_valid;
 
@@ -63,6 +65,7 @@ module testbench;
    wire        inst1_cond_branch_out,inst1_uncond_branch_out;
    wire [63:0] inst1_NPC_out;
    wire [31:0] inst1_IR_out;
+   wire [63:0] inst1_PPC_out;
    wire [(`HISTORY_BITS-1):0] inst1_pht_index_out;
    wire        inst1_valid_out;
    wire [4:0]  inst1_dest_reg_out;
@@ -75,6 +78,7 @@ module testbench;
    wire        inst2_cond_branch_out,inst2_uncond_branch_out;
    wire [63:0] inst2_NPC_out;
    wire [31:0] inst2_IR_out;
+   wire [63:0] inst2_PPC_out;
    wire [(`HISTORY_BITS-1):0] inst2_pht_index_out;
    wire        inst2_valid_out;
    wire [4:0]  inst2_dest_reg_out;
@@ -107,6 +111,7 @@ module testbench;
                            .inst1_uncond_branch_in(inst1_uncond_branch_in),
                            .inst1_NPC_in(inst1_NPC_in),
                            .inst1_IR_in(inst1_IR_in),
+                           .inst1_PPC_in(inst1_PPC_in),
                            .inst1_pht_index_in(inst1_pht_index_in),
                            .inst1_valid(inst1_valid),
 
@@ -126,6 +131,7 @@ module testbench;
                            .inst2_uncond_branch_in(inst2_uncond_branch_in),
                            .inst2_NPC_in(inst2_NPC_in),
                            .inst2_IR_in(inst2_IR_in),
+                           .inst2_PPC_in(inst2_PPC_in),
                            .inst2_pht_index_in(inst2_pht_index_in),
                            .inst2_valid(inst2_valid),
 
@@ -149,6 +155,7 @@ module testbench;
                            .inst1_cond_branch_out(inst1_cond_branch_out),.inst1_uncond_branch_out(inst1_uncond_branch_out),
                            .inst1_NPC_out(inst1_NPC_out),
                            .inst1_IR_out(inst1_IR_out),
+                           .inst1_PPC_out(inst1_PPC_out),
                            .inst1_pht_index_out(inst1_pht_index_out),
                            .inst1_valid_out(inst1_valid_out),
                            .inst1_dest_reg_out(inst1_dest_reg_out),
@@ -162,6 +169,7 @@ module testbench;
                            .inst2_cond_branch_out(inst2_cond_branch_out),.inst2_uncond_branch_out(inst2_uncond_branch_out),
                            .inst2_NPC_out(inst2_NPC_out),
                            .inst2_IR_out(inst2_IR_out),
+                           .inst2_PPC_out(inst2_PPC_out),
                            .inst2_pht_index_in(inst2_pht_index_in),
                            .inst2_valid_out(inst2_valid_out),
                            .inst2_dest_reg_out(inst2_dest_reg_out),
@@ -271,6 +279,7 @@ module testbench;
     inst1_uncond_branch_in = 1'b0;
     inst1_NPC_in = 64'd0;
     inst1_IR_in  = 32'd0;
+    inst1_PPC_in = 64'd0;
     inst1_pht_index_in = {`HISTORY_BITS{1'b0}};
     inst1_valid = 1'b0;
    
@@ -289,6 +298,7 @@ module testbench;
     inst2_uncond_branch_in = 1'b0;
     inst2_NPC_in = 64'd0;
     inst2_IR_in  = 32'd0;
+    inst2_PPC_in = 64'd0;
     inst2_pht_index_in = {`HISTORY_BITS{1'b0}};
     inst2_valid = 1'b0;
 

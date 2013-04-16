@@ -7,7 +7,7 @@
 // defines //
 `define SD #1
 `define RSTAG_NULL 8'hFF
-`define ZERO_REG   5'd0
+`define ZERO_REG   5'd31
 
 
 // main map table module //

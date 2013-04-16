@@ -101,7 +101,7 @@ module pipeline (// Inputs
   wire   if_id_enable, id_ex_enable, ex_mem_enable, mem_wb_enable;
 
  // Outputs from IF-Stage
-  output [63:0] proc2Imem_addr;     // Address sent to Instruction memory
+  wire [63:0] proc2Imem_addr;     // Address sent to Instruction memory
 
   wire [63:0] if_NPC_out_1;         // PC of instruction after fetched (PC+4).
   wire [31:0] if_IR_out_1;          // fetched instruction

@@ -39,7 +39,6 @@
 //Map Table
 `define SD #1
 `define RSTAG_NULL 8'hFF
-`define ZERO_REG   5'd0
 
 //Memory Arbiter
 `define BUS_NONE       2'h0
@@ -47,11 +46,9 @@
 `define BUS_STORE      2'h2
 
 //Register File
-`define ZERO_REG 5'd0
 
 //Reorder Buffer
 // parameters //
-`define ZERO_REG      5'd0
 `define RSTAG_NULL    8'hFF
 `define ROB_ENTRIES  32
 `define UNUSED_TAG_BITS 3
@@ -72,7 +69,6 @@
 `define RS_READY        3'b100
 `define RS_TEST         3'b111
 `define RSTAG_NULL      8'hFF           
-`define ZERO_REG         5'd0
 `define NOOP_INST    32'h47ff041f
 
 `define HISTORY_BITS 8

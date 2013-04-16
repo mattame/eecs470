@@ -113,9 +113,6 @@ module if_stage(// Inputs
   assign if_valid_inst_out_2 = ~(reset || stalling);
 
 
-  //assign 
-
-
    // assign predicted PC output for both instructions //
    // if branch is predicted taken, use prediciton, otherwise use the next pc
    // values // 

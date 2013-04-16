@@ -295,14 +295,22 @@ module id_stage(
   reg     [4:0] id_dest_reg_idx_out_1, id_dest_reg_idx_out_2;     // not state: behavioral mux output
    
     // instruction fields read from IF/ID pipeline register
-  output wire    [4:0] ra_idx_1 = if_id_IR_1[25:21];   // inst operand A register index
-  output wire    [4:0] rb_idx_1 = if_id_IR_1[20:16];   // inst operand B register index
-  output wire    [4:0] rc_idx_1 = if_id_IR_1[4:0];     // inst operand C register index
+  output wire    [4:0] ra_idx_1;   // inst operand A register index
+  output wire    [4:0] rb_idx_1;   // inst operand B register index
+  wire    [4:0] rc_idx_1;     // inst operand C register index
+  
+  assign ra_idx_1 = if_id_IR_1[25:21];
+  assign rb_idx_1 = if_id_IR_1[20:16];
+  assign rc_idx_1 = if_id_IR_1[4:0];
 
     // instruction fields read from IF/ID pipeline register
-  output wire    [4:0] ra_idx_2 = if_id_IR_2[25:21];   // inst operand A register index
-  output wire    [4:0] rb_idx_2 = if_id_IR_2[20:16];   // inst operand B register index
-  output wire    [4:0] rc_idx_2 = if_id_IR_2[4:0];     // inst operand C register index
+  output wire    [4:0] ra_idx_2;   // inst operand A register index
+  output wire    [4:0] rb_idx_2;   // inst operand B register index
+  wire    [4:0] rc_idx_2;     // inst operand C register index
+
+  assign ra_idx_2 = if_id_IR_2[25:21];
+  assign rb_idx_2 = if_id_IR_2[20:16];
+  assign rc_idx_2 = if_id_IR_2[4:0];
 
     // instantiate the instruction decoder
   decoder decoder_1 (// Input
@@ -345,14 +353,14 @@ module id_stage(
   always @*
     begin
       case (dest_reg_select_1)
-        `DEST_IS_REGC: id_dest_reg_idx_out_1 = rc_idx;
-        `DEST_IS_REGA: id_dest_reg_idx_out_1 = ra_idx;
+        `DEST_IS_REGC: id_dest_reg_idx_out_1 = rc_idx_1;
+        `DEST_IS_REGA: id_dest_reg_idx_out_1 = ra_idx_1;
         `DEST_NONE:    id_dest_reg_idx_out_1 = `ZERO_REG;
         default:       id_dest_reg_idx_out_1 = `ZERO_REG; 
       endcase
       case (dest_reg_select_2)
-        `DEST_IS_REGC: id_dest_reg_idx_out_2 = rc_idx;
-        `DEST_IS_REGA: id_dest_reg_idx_out_2 = ra_idx;
+        `DEST_IS_REGC: id_dest_reg_idx_out_2 = rc_idx_2;
+        `DEST_IS_REGA: id_dest_reg_idx_out_2 = ra_idx_2;
         `DEST_NONE:    id_dest_reg_idx_out_2 = `ZERO_REG;
         default:       id_dest_reg_idx_out_2 = `ZERO_REG; 
       endcase

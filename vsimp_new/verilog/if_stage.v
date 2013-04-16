@@ -9,7 +9,7 @@
 //                                                                     //
 /////////////////////////////////////////////////////////////////////////
 
-`timescale 1ns/100ps
+//`timescale 1ns/100ps
 
 module if_stage(// Inputs
                 clock,
@@ -113,7 +113,7 @@ module if_stage(// Inputs
   assign if_valid_inst_out_2 = ~(reset || stalling);
 
 
-  assign 
+  //assign 
 
 
    // assign predicted PC output for both instructions //

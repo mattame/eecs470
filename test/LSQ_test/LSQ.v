@@ -94,6 +94,7 @@ reg [4:0]  stored_tag;
 reg		   read;			//1 if it's a load, 0 if it's a store
 reg		   valid;
 reg		   complete;
+reg   		   ROB_head_met;
 
 wire store_EX_1;
 wire store_EX_2;
@@ -121,7 +122,7 @@ assign next_complete = (store_EX_1 | store_EX_2) ? 1'b1: (next_valid) ? complete
 		 assign head_1_true = (next_tag == ROB_head_1[4:0]) & !ROB_head_1[5] & !ROB_head_1[6] & !ROB_head_1[7];
 		 assign head_2_true = (next_tag == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
 
-assign next_head_met = (next_valid) ? ((head_1_true | head_2_true) ? :):;
+assign next_head_met = (next_valid & next_complete) ? ((head_1_true | head_2_true) ? 1'b1: ROB_head_met): 1'b0;
 
 assign next_read = (store_ROB_1) ? rd_mem_in_1:
 				   (store_ROB_2) ? rd_mem_in_2:
@@ -284,7 +285,7 @@ module LSQ(//Inputs
 // --------------- ENTRIES ----------------
 
  generate
- 	genvar i;
+ 	//genvar i;
  	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin : LSQENTRIES
  		LSQ_entry entries(
  						//Inputs
@@ -337,7 +338,7 @@ module LSQ(//Inputs
 		 wire head_2_true, reset_invalid; //wires to help compute valid out
 		 
 
-		 assign head_2_true = (next_tag == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
+		 assign head_2_true = (tag_out == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
 
 		 assign reset_invalid = reset & head_2_true;
 		 

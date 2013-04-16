@@ -1,6 +1,6 @@
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 12 19:49 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 15 18:07 2013
 STARTING TESTBENCH!
 
 **-----------------------------------------------------------**
@@ -58,7 +58,7 @@ EX address 1: 0000000000000100, 2: 0000000000000200
 
 >>>> Pre-Clock Output   60
 Tag: 07, Address: 0000000000000200, Value: 0000000000002220
-Read: 0, Valid: 1
+Read: 0, Valid: 0
 **-----------------------------------------------------------**
 >>>> Pre-Clock Input     70
 ROB heads 1: 02, 2: 03
@@ -71,7 +71,7 @@ EX values 1: 0000000000000000, 2: 0000000000000000
 EX address 1: 0000000000000100, 2: 0000000000000200
 
 >>>> Pre-Clock Output   70
-Tag: 00, Address: 0000000000000000, Value: 0000000000000000
+Tag: 07, Address: 0000000000000200, Value: 0000000000002220
 Read: 0, Valid: 0
 **-----------------------------------------------------------**
 >>>> Pre-Clock Input     80
@@ -85,11 +85,11 @@ EX values 1: 1234123412341234, 2: 0000000000000000
 EX address 1: 0000000000000111, 2: 0000000000000200
 
 >>>> Pre-Clock Output   80
-Tag: 00, Address: 0000000000000000, Value: 0000000000000000
+Tag: 07, Address: 0000000000000200, Value: 0000000000002220
 Read: 0, Valid: 0
 
 >>>> Pre-Clock Output   85
-Tag: 00, Address: 0000000000000000, Value: 0000000000000000
+Tag: 07, Address: 0000000000000200, Value: 0000000000002220
 Read: 0, Valid: 0
 **-----------------------------------------------------------**
 ENDING TESTBENCH : SUCCESS !
@@ -98,5 +98,5 @@ $finish called from file "test_LSQ.v", line 383.
 $finish at simulation time                  850
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 85000 ps
-CPU Time:      0.340 seconds;       Data structure size:   0.1Mb
-Fri Apr 12 19:49:37 2013
+CPU Time:      0.460 seconds;       Data structure size:   0.1Mb
+Mon Apr 15 18:07:03 2013

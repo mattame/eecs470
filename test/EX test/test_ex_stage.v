@@ -30,6 +30,8 @@ module testbench;
 	reg  [4:0] id_ex_alu_func_1;
     reg        id_ex_cond_branch_1;
     reg        id_ex_uncond_branch_1;
+    reg        id_ex_rd_mem_in_1;
+    reg        id_ex_wr_mem_in_1;
 		//bus 2
 	reg        valid_in_2;
 	reg [63:0] id_ex_NPC_2;
@@ -44,6 +46,8 @@ module testbench;
 	reg  [4:0] id_ex_alu_func_2;
     reg        id_ex_cond_branch_2;
     reg        id_ex_uncond_branch_2;
+    reg        id_ex_rd_mem_in_2;
+    reg        id_ex_wr_mem_in_2;
 
           // From Mem Access
     reg  [4:0] MEM_tag_in;
@@ -100,6 +104,8 @@ ex_stage ex_0(// Inputs
 			.id_ex_alu_func_1(id_ex_alu_func_1),
 			.id_ex_cond_branch_1(id_ex_cond_branch_1),
 			.id_ex_uncond_branch_1(id_ex_uncond_branch_1),
+            .id_ex_rd_mem_in_1(id_ex_rd_mem_in_1),
+            .id_ex_wr_mem_in_1(id_ex_wr_mem_in_1),
 			// Input Bus 2
 			.valid_in_2(valid_in_2),
 			.id_ex_NPC_2(id_ex_NPC_2),
@@ -114,6 +120,8 @@ ex_stage ex_0(// Inputs
 			.id_ex_alu_func_2(id_ex_alu_func_2),
 			.id_ex_cond_branch_2(id_ex_cond_branch_2),
 			.id_ex_uncond_branch_2(id_ex_uncond_branch_2),
+            .id_ex_rd_mem_in_2(id_ex_rd_mem_in_2),
+            .id_ex_wr_mem_in_2(id_ex_wr_mem_in_2),
 
 			// From Mem Access
 			.MEM_tag_in(MEM_tag_in),

@@ -101,7 +101,7 @@ syn:	syn_simv $(ASSEMBLED)
 	./syn_simv | tee syn_program.out
 
 syn_simv:	$(HEADERS) $(PIPELINE) $(TESTBENCH)
-	$(VCS) $^ $(LIB) -o syn_simv 
+	$(VCS) $^ $(LIB) -o syn_simv
 
 .PHONY: syn
 

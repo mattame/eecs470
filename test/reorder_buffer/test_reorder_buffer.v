@@ -4,6 +4,8 @@
 `define RSTAG_NULL      8'hFF     
 `define ZERO_REG     5'd0
 `define NUM_RSES 16
+`define HISTORY_BITS 8
+`define BRANCH_NONE 2'b00
 
 // reservation station testbench module //
 module testbench;
@@ -30,8 +32,15 @@ module testbench;
    reg [7:0]  cdb2_tag_in;
    reg [63:0] cdb1_value_in;
    reg [63:0] cdb2_value_in;
-   reg cdb1_mispredicted_in;
-   reg cdb2_mispredicted_in;
+   reg        cdb1_mispredicted_in;
+   reg        cdb2_mispredicted_in;
+   reg [1:0]  cdb1_branch_result_in;
+   reg [1:0]  cdb2_branch_result_in;
+   reg [63:0] cdb1_NPC_in;
+   reg [63:0] cdb2_NPC_in;
+   reg [(`HISTORY_BITS-1):0] cdb1_pht_index_in;
+   reg [(`HISTORY_BITS-1):0] cdb2_pht_index_in;
+
 
    // outputs //
    wire [7:0] inst1_tag_out;
@@ -46,8 +55,14 @@ module testbench;
    wire [63:0] inst1_value_out;
    wire [4:0]  inst2_dest_out;
    wire [63:0] inst2_value_out;
-   wire inst1_mispredicted_out;
-   wire inst2_mispredicted_out;
+   wire        inst1_mispredicted_out;
+   wire        inst2_mispredicted_out;
+   wire [1:0]  inst1_branch_result_out;
+   wire [1:0]  inst2_branch_result_out;
+   wire [63:0] inst1_NPC_out;
+   wire [63:0] inst2_NPC_out;
+   wire [(`HISTORY_BITS-1):0] inst1_pht_index_out;
+   wire [(`HISTORY_BITS-1):0] inst2_pht_index_out;
 
    wire rob_full,rob_empty;
 
@@ -74,6 +89,12 @@ module testbench;
       .cdb2_value_in(cdb2_value_in),
       .cdb1_mispredicted_in(cdb1_mispredicted_in),
       .cdb2_mispredicted_in(cdb2_mispredicted_in),
+      .cdb1_branch_result_in(cdb1_branch_result_in),
+      .cdb2_branch_result_in(cdb2_branch_result_in),
+      .cdb1_NPC_in(cdb1_NPC_in),
+      .cdb2_NPC_in(cdb2_NPC_in),
+      .cdb1_pht_index_in(cdb1_pht_index_in),
+      .cdb2_pht_index_in(cdb2_pht_index_in),
 
       // outputs //
       .inst1_tag_out(inst1_tag_out),
@@ -94,6 +115,14 @@ module testbench;
       // mispredicted branch outputs //
       .inst1_mispredicted_out(inst1_mispredicted_out),
       .inst2_mispredicted_out(inst2_mispredicted_out),
+
+      .inst1_branch_result_out(inst1_branch_result_out),
+      .inst1_branch_result_out(inst2_branch_result_out),
+      .inst1_NPC_out(inst1_NPC_out),
+      .inst2_NPC_out(inst2_NPC_out),
+      .inst1_pht_index_out(inst1_pht_index_out),
+      .inst2_pht_index_out(inst2_pht_index_out),
+
 
       // signals out //
       .rob_full(rob_full), .rob_empty(rob_empty)
@@ -198,6 +227,13 @@ module testbench;
    cdb2_value_in = 64'd0;
    cdb1_mispredicted_in = 1'b0;
    cdb2_mispredicted_in = 1'b0;
+   cdb1_branch_result_in = `BRANCH_NONE;
+   cdb2_branch_result_in = `BRANCH_NONE;
+   cdb1_NPC_in = 64'd0;
+   cdb2_NPC_in = 64'd0;
+   cdb1_pht_index_in = 8'd0;
+   cdb2_pht_index_in = 8'd0;
+
 
         //////////////////////
         // TRANSITION TESTS //

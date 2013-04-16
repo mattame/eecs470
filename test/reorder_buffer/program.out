@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Sun Apr 14 15:59:45 2013
+         Version E-2011.03_Full64 -- Mon Apr 15 21:18:20 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -26,6 +26,14 @@ reorder_buffer.v, 9
 
 Top Level Modules:
        testbench
+
+Warning-[DPIMI] Duplicate port in module instantiation
+test_reorder_buffer.v, 71
+"reorder_buffer rob( .clock (clock),  .reset (reset),  .inst1_valid_in (inst1_valid_in),  .inst1_dest_in (inst1_dest_in),  .inst2_valid_in (inst2_valid_in),  .inst2_dest_in (inst2_dest_in),  .inst1_rega_tag_in (inst1_rega_tag_in),  .inst1_regb_tag_in (inst1_regb_tag_in),  .inst2_rega_tag_in (inst2_rega_tag_in),  .inst2_regb_tag_in (inst2_regb_tag_in),  .cdb1_tag_in (cdb1_tag_in),  .cdb1_value_in (cdb1_value_in),  .cdb2_tag_in (cdb2_tag_in),  .cdb2_value_in (cdb2_value_in),  .cdb1_mispredicted_in (cdb1_mispredicted_in),  .cdb2_mispredicted_in (cdb2_mispredicted_in),  .cdb1_branch_result_in (cdb1_branch_result_in),  .cdb2_branch_result_in (cdb2_branch_result_in),  .cdb1_NPC_in (cdb1_NPC_in),  .cdb2_NPC_in (cdb2_NPC_in),  .cdb1_pht_index_in (cdb1_pht_index_ ... "
+  Port 'inst1_branch_result_out' is connected more than once for instance 
+  'rob' of 'reorder_buffer'.
+  Extra connection will be ignored.
+
 No TimeScale specified
 Starting vcs inline pass...
 2 modules and 0 UDP read.
@@ -39,7 +47,7 @@ g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5N
 make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reorder_buffer/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 14 15:59 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 15 21:18 2013
 
 STARTING TESTBENCH!
 
@@ -94,10 +102,10 @@ resetting
 
 ENDING TESTBENCH : SUCCESS !
 
-$finish called from file "test_reorder_buffer.v", line 261.
+$finish called from file "test_reorder_buffer.v", line 297.
 $finish at simulation time                  140
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 140
 CPU Time:      0.010 seconds;       Data structure size:   0.1Mb
-Sun Apr 14 15:59:46 2013
-CPU time: .318 seconds to compile + .068 seconds to elab + .218 seconds to link + .055 seconds in simulation
+Mon Apr 15 21:18:21 2013
+CPU time: .262 seconds to compile + .052 seconds to elab + .166 seconds to link + .053 seconds in simulation

@@ -16,6 +16,10 @@
 // defined paramters //
 `define LSQ_ENTRIES	    32
 
+`define BUS_STORE
+`define BUS_LOAD
+`
+
 /*
 ***************************
 		Entry Module

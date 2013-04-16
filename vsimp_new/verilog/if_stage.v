@@ -19,7 +19,6 @@ module if_stage(// Inputs
                 inst1_result_in,inst2_result_in,
                 inst1_write_NPC_in,inst2_write_NPC_in,
                 inst1_write_CPC_in,inst2_write_CPC_in,
-
                 inst1_pht_index_in,inst2_pht_index_in,
 
                 Imem2proc_data,
@@ -74,6 +73,8 @@ module if_stage(// Inputs
   reg    [63:0]      PC_reg;               // PC we are currently fetching
   wire   [63:0] next_PC;
 
+  wire stalling;
+
   wire inst1_branch_taken;
   wire inst2_branch_taken;
   wire [63:0] inst1_PPC_out;
@@ -103,13 +104,13 @@ module if_stage(// Inputs
     // the next sequential PC (PC+4) if no branch
     // and we're on the second word or PC+8 if not.
     // (halting is handled with the enable PC_enable;
-  assign stalling = (stall ||
-  assign next_PC  =  (inst1_valid_inst_out_1 || inst2_valid_inst_out_2 || inst1_branch_taken )   ))( inst1_branch_taken ? inst1_write_CPC_in : (inst2_branch_taken ? inst2_write_CPC_in : ( stall ? PC_reg : if_NPC_out_2)) ) ;
+  assign stalling = (stall || ~Imem_valid);
+  assign next_PC  =  ( inst1_branch_taken ? inst1_write_CPC_in : (inst2_branch_taken ? inst2_write_CPC_in : ( stalling ? PC_reg : if_NPC_out_2)) ) ;
 
     // Assign the first valid only if the PC is not the second word in the cache.
     // The second is always valid
-  assign if_valid_inst_out_1 = (PC_reg[2] | reset | stall) ? 1'b0: 1'b1;
-  assign if_valid_inst_out_2 = (reset | stall) ? 1'b0: 1'b1;
+  assign if_valid_inst_out_1 = ~(PC_reg[2] || reset || stalling);
+  assign if_valid_inst_out_2 = ~(reset || stalling);
 
 
   assign 
@@ -164,10 +165,8 @@ module if_stage(// Inputs
   begin
     if(reset)
       PC_reg          <= `SD 0;       // initial PC value is 0
-      ready_for_valid <= `SD 1'b1;
     else
       PC_reg          <= `SD next_PC; // transition to next PC
-      ready_for_valid <= `SD next_ready_for_valid;
   end  // always
 
   

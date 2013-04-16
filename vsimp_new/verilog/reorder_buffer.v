@@ -17,6 +17,7 @@
 `define ROBE_COMPLETE  2'b10
 `define ROBE_UNUSED    2'b11
 
+`define HISTORY_BITS 8
 
 /***
 *   Each ROB Entry needs:

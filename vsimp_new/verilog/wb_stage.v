@@ -12,8 +12,7 @@
 //                                                                     //
 /////////////////////////////////////////////////////////////////////////
 
-`timescale 1ns/100ps
-
+//`timescale 1ns/100ps
 
 module wb_stage(// Inputs
                 clock,

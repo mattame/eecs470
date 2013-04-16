@@ -9,6 +9,7 @@
 `define RSTAG_NULL 8'hFF
 `define ZERO_REG   5'd31
 
+//`timescale 1ns/100ps
 
 // main map table module //
 module map_table(clock,reset,clear_entries,        // signal inputs

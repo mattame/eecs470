@@ -88,7 +88,7 @@ module arbiter(
 input ex_branch_valid_out_1;
 input ex_branch_taken_1;
 input ex_branch_mispredict_1;
-input  [4:0] ex_branch_pht_idx_1;
+input [(`HISTORY_BITS-1):0] ex_branch_pht_idx_1;
 input [63:0] ex_alu_NPC_out_1;
 
 //ALU
@@ -112,7 +112,7 @@ input mem_valid_in;
 input ex_branch_valid_out_2;
 input ex_branch_taken_2;
 input ex_branch_mispredict_2;
-input  [4:0] ex_branch_pht_idx_2;
+input [(`HISTORY_BITS-1):0] ex_branch_pht_idx_2;
 input [63:0] ex_alu_NPC_out_2;
 
 //ALU
@@ -134,7 +134,7 @@ output reg  [4:0] ex_dest_reg_out_1;
 output reg [63:0] ex_result_out_1;
 output reg ex_mispredict_1;
 output reg  [1:0] ex_branch_result_1;
-output reg  [4:0] ex_pht_idx_out_1;
+output reg [(`HISTORY_BITS-1):0] ex_pht_idx_out_1;
 output reg ex_valid_out_1;
 
   //Bus 2
@@ -145,7 +145,7 @@ output reg  [4:0] ex_dest_reg_out_2;
 output reg [63:0] ex_result_out_2;
 output reg ex_mispredict_2;
 output reg  [1:0] ex_branch_result_2;
-output reg  [4:0] ex_pht_idx_out_2;
+output reg [(`HISTORY_BITS-1):0] ex_pht_idx_out_2;
 output reg ex_valid_out_2;
 
 /* ----- Logic ----- */

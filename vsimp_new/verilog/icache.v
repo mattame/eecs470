@@ -1,3 +1,4 @@
+
 // Number of cachelines. must update both on a change
 `define ICACHE_IDX_BITS       5      // log2(ICACHE_LINES)
 `define ICACHE_LINES (1<<`ICACHE_IDX_BITS)

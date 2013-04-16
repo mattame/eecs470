@@ -206,6 +206,8 @@ module decoder(// Inputs
 endmodule // decoder
 
 
+//`timescale 1ns/100ps
+
 module id_stage(
               // Inputs
               clock,

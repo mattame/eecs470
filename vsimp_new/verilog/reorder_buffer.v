@@ -19,6 +19,9 @@
 
 `define HISTORY_BITS 8
 
+//`timescale 1ns/100ps
+
+
 /***
 *   Each ROB Entry needs:
 *     State

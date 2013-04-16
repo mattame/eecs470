@@ -22,7 +22,8 @@
 *    CM  = Complete
 *     
 ***/
-`timescale 1ns/100ps
+
+//`timescale 1ns/100ps
 
 module pipeline (// Inputs
                  clock,
@@ -107,14 +108,14 @@ module pipeline (// Inputs
   wire [31:0] if_IR_out_1;          // fetched instruction
   wire        if_valid_inst_out_1;
   wire [63:0] if_PPC_out_1;
-  wire [(`HISTORY_BITS-1):0] inst1_pht_index_out;
+  wire [(`HISTORY_BITS-1):0] if_inst1_pht_index_out;
 
   wire [63:0] if_NPC_out_2;         // PC of instruction after fetched (PC+4).
   wire [31:0] if_IR_out_2;          // fetched instruction
   wire        if_valid_inst_out_2;
   wire [63:0] if_PPC_out_2;
-  wire [(`HISTORY_BITS-1):0] inst2_pht_index_out;
-  
+  wire [(`HISTORY_BITS-1):0] if_inst2_pht_index_out;
+
 
 // Outputs from IF/ID Pipeline Register
   reg [63:0] id_NPC_1;
@@ -337,7 +338,7 @@ module pipeline (// Inputs
 //Outputs from [RS/ROB] / EX Pipeline Register  
   reg  [63:0] ex_NPC_1;         // incoming instruction PC+4
   reg  [63:0] ex_PPC_1;		 // Predicted PC for branches
-  reg   [4:0] ex_pht_idx_1;
+  reg  [(`HISTORY_BITS-1):0] ex_pht_idx_1;
   reg  [31:0] ex_IR_1;          // incoming instruction
   reg   [4:0] ex_dest_reg_1;	 // destination register
   reg  [63:0] ex_rega_1;        // register A value from reg file
@@ -353,7 +354,7 @@ module pipeline (// Inputs
 
   reg  [63:0] ex_NPC_2;         // incoming instruction PC+4
   reg  [63:0] ex_PPC_2;		 // Predicted PC for branches
-  reg   [4:0] ex_pht_idx_2;
+  reg  [(`HISTORY_BITS-1):0] ex_pht_idx_2;
   reg  [31:0] ex_IR_2;          // incoming instruction
   reg   [4:0] ex_dest_reg_2;	 // destination register
   reg  [63:0] ex_rega_2;        // register A value from reg file
@@ -369,16 +370,20 @@ module pipeline (// Inputs
    
 //Outputs from EX-Stage
   wire        stall_bus_1;	     // Should input bus 1 stall?
-  wire		    stall_bus_2;	     // Should input bus 2 stall?
+  wire        stall_bus_2;	     // Should input bus 2 stall?
   wire        ex_branch_taken;  // is this a taken branch?
-  
+
+  wire   [4:0] ex_mem_tag_out;
+  wire [63:0]  ex_mem_value_out;
+  wire         ex_mem_valid_out;
+ 
   // Bus 1
   wire [63:0] ex_NPC_out_1;
   wire [4:0]  ex_dest_reg_out_1;
   wire [63:0] ex_result_out_1;
   wire        ex_mispredict_out_1;
   wire [1:0]  ex_branch_result_out_1;
-  wire [4:0]  ex_pht_idx_out_1;
+  wire [(`HISTORY_BITS-1):0]  ex_pht_idx_out_1;
   wire        ex_valid_out_1;
   
 				// Bus 2
@@ -387,7 +392,7 @@ module pipeline (// Inputs
   wire [63:0] ex_result_out_2;
   wire        ex_mispredict_out_2;
   wire [1:0]  ex_branch_result_out_2;
-  wire [4:0]  ex_pht_idx_out_2;
+  wire [(`HISTORY_BITS-1):0]  ex_pht_idx_out_2;
   wire        ex_valid_out_2;
 
 
@@ -410,7 +415,7 @@ module pipeline (// Inputs
 
 
 //Outputs from Complete Stage
-   wire [4:0]                 cm_tag_out_1;
+   wire [7:0]                 cm_tag_out_1;
    wire [63:0]                cm_value_out_1;
    wire [63:0]                cm_NPC_out_1;
    wire                       cm_mispredict_out_1;
@@ -418,7 +423,7 @@ module pipeline (// Inputs
    wire [(`HISTORY_BITS-1):0] cm_pht_index_out_1;
    wire                       cm_valid_out_1;
 
-   wire [4:0]                 cm_tag_out_2;
+   wire [7:0]                 cm_tag_out_2;
    wire [63:0]                cm_value_out_2;
    wire [63:0]                cm_NPC_out_2;
    wire                       cm_mispredict_out_2;
@@ -614,9 +619,8 @@ module pipeline (// Inputs
                         .if_NPC_out_1(if_NPC_out_1),        // PC+4 of fetched instruction
                         .if_IR_out_1(if_IR_out_1),         // fetched instruction out
                         .if_valid_inst_out_1(if_valid_inst_out_1),  // when low, instruction is garbage
-                        .if_PPC_out_1(if_PCC_out_1),	
-	                      .inst1_pht_index_out(if_inst1_pht_index_out),
-	
+                        .if_PPC_out_1(if_PPC_out_1),	
+                        .inst1_pht_index_out(if_inst1_pht_index_out),
 	
                         .if_NPC_out_2(if_NPC_out_2),
                         .if_IR_out_2(if_IR_out_2),
@@ -624,7 +628,6 @@ module pipeline (// Inputs
                         .if_PPC_out_2(if_PPC_out_2),
                         .inst2_pht_index_out(if_inst2_pht_index_out)
                       );
-
 
   //////////////////////////////////////////////////
   //                                              //
@@ -678,7 +681,7 @@ module pipeline (// Inputs
                       .if_id_IR_1(id_IR_1),
                       .if_id_valid_inst_1(id_valid_inst_1),
 
-                      .if_id_IR_2(if_IR_2),
+                      .if_id_IR_2(id_IR_2),
                       .if_id_valid_inst_2(id_valid_inst_2),
 
 
@@ -876,21 +879,21 @@ module pipeline (// Inputs
   ////////////////////////////////////////////////// 
    map_table map_table_0 (//Inputs
   
-                           .clock(clock), .reset(reset), .clear_entries(clear_entries),
+                           .clock(clock), .reset(reset), .clear_entries(reg_clear_entries_out),
 
 
                            // instruction 1 access inputs //
                            //THESE COME FROM DECODE
-                           .inst1_rega_in(mt_rega_1),
-                           .inst1_regb_in(mt_regb_1),
+                           .inst1_rega_in(mt_inst1_rega),
+                           .inst1_regb_in(mt_inst1_regb),
                            
                            //THESE COME FROM ROB
                            .inst1_dest_in(mt_inst1_dest),
                            .inst1_tag_in(mt_inst1_tag),
 
                            // instruction 2 access inputs //
-                           .inst2_rega_in(mt_rega_2),
-                           .inst2_regb_in(mt_regb_2),
+                           .inst2_rega_in(mt_inst2_rega),
+                           .inst2_regb_in(mt_inst2_regb),
                            
                            .inst2_dest_in(mt_inst2_dest),
                            .inst2_tag_in(mt_inst2_tag),
@@ -905,7 +908,6 @@ module pipeline (// Inputs
                            
                            );      
                            
-
 
   register_file register_file0(//Inputs
                       
@@ -1083,14 +1085,11 @@ module pipeline (// Inputs
                                            .inst1_regb_value_in(rs_inst1_regb_value),
                                         
                                            //Tags from Map Table
-                                           .inst1_rega_tag_in(rs_inst1_taga),
-                                           .inst1_regb_tag_in(rs_inst1_tagb),
-
+                                           .inst1_rega_tag_in(rs_inst1_rega_tag),
+                                           .inst1_regb_tag_in(rs_inst1_regb_tag),
 
                                            //Tag from ROB                           
                                            .inst1_dest_tag_in(rs_inst1_dest_tag), 
-                                           
-                                           
                                            
                                            //Instruction signals from Decode                         
                                            .inst1_dest_reg_in(rs_inst1_dest_reg),
@@ -1107,17 +1106,18 @@ module pipeline (// Inputs
                                            .inst1_pht_index_in(rs_inst1_pht_index),
                                            .inst1_valid(rs_inst1_valid),
 
+
                                            // signals and busses in for inst 2 (from id2) //
                                            //Values from DECODE
                                            .inst2_rega_value_in(rs_inst1_rega_value),
                                            .inst2_regb_value_in(rs_inst1_regb_value),
                                            
                                            //Tags from Map Table
-                                           .inst2_rega_tag_in(rs_inst2_taga_out),
-                                           .inst2_regb_tag_in(rs_inst2_tagb_out),
+                                           .inst2_rega_tag_in(rs_inst2_rega_tag),
+                                           .inst2_regb_tag_in(rs_inst2_rega_tag),
                                            
                                            //Tag from ROB
-                                           .inst2_dest_tag_in(rob_inst2_tag_out),
+                                           .inst2_dest_tag_in(rs_inst2_dest_tag),
                                            
                                            //Instruction signals from Decode
                                            .inst2_dest_reg_in(rs_inst2_dest_reg),
@@ -1154,15 +1154,15 @@ module pipeline (// Inputs
                                            
                                            .inst1_opa_select_out(rs_inst1_opa_select_out),
                                            .inst1_opb_select_out(rs_inst1_opb_select_out),
-                                           .inst1_alu_func_out(rs_alu_func_out),
+                                           .inst1_alu_func_out(rs_inst1_alu_func_out),
                                            .inst1_rd_mem_out(rs_inst1_rd_mem_out), 
                                            .inst1_wr_mem_out(rs_inst1_wr_mem_out),
                                            .inst1_cond_branch_out(rs_inst1_cond_branch_out),
                                            .inst1_uncond_branch_out(rs_inst1_uncond_branch_out),
                                            .inst1_NPC_out(rs_inst1_NPC_out),
                                            .inst1_IR_out(rs_inst1_IR_out),
-                                           .inst2_PPC_out(rs_inst2_PPC_out),
-                                           .inst2_pht_index_out(rs_inst2_pht_index_out),
+                                           .inst1_PPC_out(rs_inst1_PPC_out),
+                                           .inst1_pht_index_out(rs_inst1_pht_index_out),
                                            .inst1_valid_out(rs_inst1_valid_out),
                                            .inst1_dest_reg_out(rs_inst1_dest_reg_out),
                                            .inst1_dest_tag_out(rs_inst1_dest_tag_out),
@@ -1173,7 +1173,7 @@ module pipeline (// Inputs
                                            
                                            .inst2_opa_select_out(rs_inst2_opa_select_out),
                                            .inst2_opb_select_out(rs_inst2_opb_select_out),
-                                           .inst2_alu_func_out(rs_alu_func_out),
+                                           .inst2_alu_func_out(rs_inst2_alu_func_out),
                                            .inst2_rd_mem_out(rs_inst2_rd_mem_out), 
                                            .inst2_wr_mem_out(rs_inst2_wr_mem_out),
                                            .inst2_cond_branch_out(rs_inst2_cond_branch_out),
@@ -1353,10 +1353,10 @@ module pipeline (// Inputs
                           .clock(clock),
                           .reset(reset),
                           
-				                  // Input Bus 1 (contains branch logic)
+                          // Input Bus 1 (contains branch logic)
                           .id_ex_NPC_1(ex_NPC_1),
-				                  .id_ex_PPC_1(ex_PPC_1),
-				                  .id_ex_pht_idx_1(ex_pht_idx_1),
+                          .id_ex_PPC_1(ex_PPC_1),
+                          .id_ex_pht_idx_1(ex_pht_idx_1),
                           .id_ex_IR_1(ex_IR_1),
                           .id_ex_dest_reg_1(ex_dest_reg_1),
                           .id_ex_rega_1(ex_rega_1),
@@ -1369,17 +1369,17 @@ module pipeline (// Inputs
                           .id_ex_rd_mem_in_1(ex_rd_mem_1),
                           .id_ex_wr_mem_in_1(ex_wr_mem_1),
 
-				                  // Input Bus 2
-				                  .id_ex_NPC_2(ex_NPC_2),
-				                  .id_ex_PPC_2(ex_PPC_2),
-				                  .id_ex_pht_idx_2(ex_pht_idx_2),
-				                  .id_ex_IR_2(ex_IR_2),
-				                  .id_ex_dest_reg_2(ex_dest_reg_2),
-				                  .id_ex_rega_2(ex_rega_2),
-				                  .id_ex_regb_2(ex_regb_2),
-				                  .id_ex_opa_select_2(ex_opa_select_2),
-				                  .id_ex_opb_select_2(ex_opb_select_2),
-				                  .id_ex_alu_func_2(ex_alu_func_2),
+                          // Input Bus 2
+                          .id_ex_NPC_2(ex_NPC_2),
+                          .id_ex_PPC_2(ex_PPC_2),
+                          .id_ex_pht_idx_2(ex_pht_idx_2),
+                          .id_ex_IR_2(ex_IR_2),
+                          .id_ex_dest_reg_2(ex_dest_reg_2),
+                          .id_ex_rega_2(ex_rega_2),
+                          .id_ex_regb_2(ex_regb_2),
+                          .id_ex_opa_select_2(ex_opa_select_2),
+                          .id_ex_opb_select_2(ex_opb_select_2),
+                          .id_ex_alu_func_2(ex_alu_func_2),
                           .id_ex_cond_branch_2(ex_cond_branch_2),
                           .id_ex_uncond_branch_2(ex_uncond_branch_2),
                           .id_ex_rd_mem_in_2(ex_rd_mem_2),
@@ -1390,40 +1390,40 @@ module pipeline (// Inputs
                           .MEM_value_in(ex_mem_value_out),
                           .MEM_valid_in(ex_mem_valid_out),
                           
-			                    // Outputs
-				                  .stall_bus_1(ex_stall_bus_out_1),
-				                  .stall_bus_2(ex_stall_bus_out_2),
-				                  // Bus 1
-			                    .ex_NPC_out_1(ex_NPC_out_1),
-			                    .ex_dest_reg_out_1(ex_dest_reg_out_1),
-			                    .ex_result_out_1(ex_result_out_1),
-			                    .ex_mispredict_1(ex_mispredict_out_1),
-			                    .ex_branch_result_1(ex_branch_result_out_1),
-			                    .ex_pht_idx_out_1(ex_pht_idx_out_1),
-			                    .ex_valid_out_1(ex_valid_out_1),
-			                    // Bus 2
-			                    .ex_NPC_out_2(ex_NPC_out_2),
-			                    .ex_dest_reg_out_2(ex_dest_reg_out_2),
-			                    .ex_result_out_2(ex_result_out_2),
-			                    .ex_mispredict_2(ex_mispredict_out_2),
-			                    .ex_branch_result_2(ex_branch_result_2),
-			                    .ex_pht_idx_out_2(ex_pht_idx_out_2),
-			                    .ex_valid_out_2(ex_valid_out_2),
+	                  // Outputs
+	                  .stall_bus_1(ex_stall_bus_out_1),
+	                  .stall_bus_2(ex_stall_bus_out_2),
+	                  // Bus 1
+	                  .ex_NPC_out_1(ex_NPC_out_1),
+	                  .ex_dest_reg_out_1(ex_dest_reg_out_1),
+	                  .ex_result_out_1(ex_result_out_1),
+	                  .ex_mispredict_1(ex_mispredict_out_1),
+	                  .ex_branch_result_1(ex_branch_result_out_1),
+	                  .ex_pht_idx_out_1(ex_pht_idx_out_1),
+	                  .ex_valid_out_1(ex_valid_out_1),
+	                  // Bus 2
+	                  .ex_NPC_out_2(ex_NPC_out_2),
+	                  .ex_dest_reg_out_2(ex_dest_reg_out_2),
+	                  .ex_result_out_2(ex_result_out_2),
+	                  .ex_mispredict_2(ex_mispredict_out_2),
+	                  .ex_branch_result_2(ex_branch_result_out_2),
+	                  .ex_pht_idx_out_2(ex_pht_idx_out_2),
+	                  .ex_valid_out_2(ex_valid_out_2),
 
 
                           // To LSQ
                           .LSQ_tag_out_1(ex_LSQ_tag_out_1),
                           .LSQ_address_out_1(ex_LSQ_address_out_1),
                           .LSQ_value_out_1(ex_LSQ_value_out_1),
-		                      .LSQ_valid_out_1(ex_LSQ_valid_out_1),
+	                  .LSQ_valid_out_1(ex_LSQ_valid_out_1),
 		
-		                      // why are value and valid almost the same word!? 
-		                      // we need them both but they're hard to seperate!
+	                   // why are value and valid almost the same word!? 
+	                   // we need them both but they're hard to seperate!
 
                           .LSQ_tag_out_2(ex_LSQ_tag_out_2),
                           .LSQ_address_out_2(ex_LSQ_address_out_2),
                           .LSQ_value_out_2(ex_LSQ_value_out_2),
-		                      .LSQ_valid_out_2(ex_LSQ_valid_out_2)
+	                  .LSQ_valid_out_2(ex_LSQ_valid_out_2)
                         );
 
 
@@ -1508,16 +1508,16 @@ module pipeline (// Inputs
                       .cdb_mispredict_1(cm_mispredict_out_1),
                       .cdb_branch_result_1(cm_branch_result_out_1),
                       .cdb_pht_index_1(cm_pht_index_out_1),
-                      .cdb_valid_1(cm_valid_out_1),
 
 		                  .cdb_tag_2(cm_tag_out_2),
 		                  .cdb_value_2(cm_value_out_2),
 		                  .cdb_NPC_2(cm_NPC_out_2),
                       .cdb_mispredict_2(cm_mispredict_out_2),
                       .cdb_branch_result_2(cm_branch_result_out_2),
-                      .cdb_pht_index_2(cm_pht_index_out_2),
-                      .cdb_valid_2(cm_valid_out_2)
+                      .cdb_pht_index_2(cm_pht_index_out_2)
 		                  );   
 
 
 endmodule  // module verisimple
+
+

@@ -1,6 +1,6 @@
 // cachemem128x64
 
-`timescale 1ns/100ps
+//`timescale 1ns/100ps
 
 module cache(// inputs
                        clock,

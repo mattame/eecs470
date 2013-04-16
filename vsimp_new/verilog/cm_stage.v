@@ -42,7 +42,7 @@ module cm_stage(// Inputs
                 cdb_NPC_2,
                 cdb_mispredict_2,
                 cdb_branch_result_2,
-                cdb_pht_index_2,
+                cdb_pht_index_2
 
 		            );
 

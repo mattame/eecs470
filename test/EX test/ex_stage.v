@@ -120,6 +120,8 @@ module ex_stage(// Inputs
   input   [4:0] id_ex_alu_func_2;    // ALU function select from decoder
   input         id_ex_cond_branch_2;   // is this a cond br? from decoder
   input         id_ex_uncond_branch_2; // is this an uncond br? from decoder
+  input         id_ex_rd_mem_in_2;
+  input         id_ex_wr_mem_in_2;
  
   input   [4:0] MEM_tag_in;
   input  [63:0] MEM_value_in;

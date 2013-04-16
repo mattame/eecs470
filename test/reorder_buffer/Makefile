@@ -67,3 +67,15 @@ nuke:	clean
 	rm -rvf *.vg *.rep *.db *.chk *.log *.out DVEfiles/
 
 
+# For visual debugger
+VISFLAGS = -lncurses
+VISTESTBENCH = $(TESTBENCH:testbench.v=visual/visual_testbench.v) \
+		visual_c_hooks.c
+vis_simv:	$(HEADERS) $(SIMFILES) $(VISTESTBENCH)
+	$(VCS) $(VISFLAGS) $^ -o vis_simv
+vis:	vis_simv $(ASSEMBLED)
+	./vis_simv
+
+.PHONY: dve syn_dve vis
+
+

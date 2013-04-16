@@ -19,10 +19,10 @@ module if_stage(// Inputs
                 inst1_result_in,inst2_result_in,
                 inst1_write_NPC_in,inst2_write_NPC_in,
                 inst1_write_CPC_in,inst2_write_CPC_in,
-
                 inst1_pht_index_in,inst2_pht_index_in,
 
                 Imem2proc_data,
+                Imem_valid,
                     
                 // Outputs
                 proc2Imem_addr,
@@ -42,7 +42,7 @@ module if_stage(// Inputs
                );
 
   // inputs and outputs //
-  input wire         clock;              // system clock
+  input wire        clock;              // system clock
   input wire        reset;              // system reset
   input wire        stall;              // stalling signal in.
 
@@ -52,6 +52,7 @@ module if_stage(// Inputs
   input wire [(`HISTORY_BITS-1):0] inst1_pht_index_in,inst2_pht_index_in;
 
   input wire [63:0] Imem2proc_data;     // Data coming back from instruction-memory
+  input wire        Imem_valid;
 
   output [63:0] proc2Imem_addr;     // Address sent to Instruction memory
 
@@ -71,6 +72,8 @@ module if_stage(// Inputs
   // internal regs and wires //
   reg    [63:0]      PC_reg;               // PC we are currently fetching
   wire   [63:0] next_PC;
+
+  wire stalling;
 
   wire inst1_branch_taken;
   wire inst2_branch_taken;
@@ -101,13 +104,16 @@ module if_stage(// Inputs
     // the next sequential PC (PC+4) if no branch
     // and we're on the second word or PC+8 if not.
     // (halting is handled with the enable PC_enable;
-  assign next_PC = (stall) ? PC_reg :
-                      (inst1_branch_taken ? inst1_write_CPC_in : (inst2_branch_taken ? inst2_write_CPC_in : (       if_NPC_out_2)) ;
+  assign stalling = (stall || ~Imem_valid);
+  assign next_PC  =  ( inst1_branch_taken ? inst1_write_CPC_in : (inst2_branch_taken ? inst2_write_CPC_in : ( stalling ? PC_reg : if_NPC_out_2)) ) ;
 
     // Assign the first valid only if the PC is not the second word in the cache.
     // The second is always valid
-  assign if_valid_inst_out_1 = (PC_reg[2] | reset | stall) ? 1'b0: 1'b1;
-  assign if_valid_inst_out_2 = (reset | stall) ? 1'b0: 1'b1;
+  assign if_valid_inst_out_1 = ~(PC_reg[2] || reset || stalling);
+  assign if_valid_inst_out_2 = ~(reset || stalling);
+
+
+  assign 
 
 
    // assign predicted PC output for both instructions //
@@ -158,10 +164,13 @@ module if_stage(// Inputs
   always @(posedge clock)
   begin
     if(reset)
-      PC_reg <= `SD 0;       // initial PC value is 0
+      PC_reg          <= `SD 0;       // initial PC value is 0
     else
-      PC_reg <= `SD next_PC; // transition to next PC
+      PC_reg          <= `SD next_PC; // transition to next PC
   end  // always
 
   
 endmodule  // module if_stage
+
+
+

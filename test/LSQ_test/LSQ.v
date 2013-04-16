@@ -89,7 +89,7 @@ input EX_valid_2;
 output [4:0] stored_tag_out;
 output [63:0] stored_address_out;
 output [63:0] stored_value_out;
-output read_out;
+output  [1:0] read_out;
 output complete_out;
 
 reg [63:0] stored_address;
@@ -336,7 +336,7 @@ module LSQ(//Inputs
 
  assign tag_out = tags_out[LSQ_head];
 
- assign read_out = reads_out[LSQ_head];
+ assign read_out = (reads_out[LSQ_head]) ? `BUS_LOAD : `BUS_STORE;
  
 		 wire head_2_true, reset_invalid; //wires to help compute valid out
 		 

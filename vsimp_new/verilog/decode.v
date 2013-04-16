@@ -19,7 +19,7 @@
 /////////////////////////////////////////////////////////////////////////
 
 
-`timescale 1ns/100ps
+//`timescale 1ns/100ps
 
 
   // Decode an instruction: given instruction bits IR produce the
@@ -247,7 +247,7 @@ module id_stage(
               id_illegal_out_2,
               id_valid_inst_out_2,
               ra_idx_2,
-              rb_idx_2,
+              rb_idx_2
               );
 
 

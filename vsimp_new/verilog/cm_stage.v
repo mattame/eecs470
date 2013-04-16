@@ -8,7 +8,7 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-`timescale 1ns/100ps
+//`timescale 1ns/100ps
 
 // complete stage. purely combinational (needs latches outside)  //
 module cm_stage(// Inputs
@@ -83,14 +83,14 @@ module cm_stage(// Inputs
    assign cdb_value_1         = (ex_cm_valid_1 ? ex_cm_result_1 : 64'h0);
    assign cdb_NPC_1           = ex_cm_NPC_1;
    assign cdb_mispredict_1    = ex_cm_mispredict_1;
-   assign cdb_branch_result_1 = ex_cm_branch_predict_1;
+   assign cdb_branch_result_1 = ex_cm_branch_result_1;
    assign cdb_pht_index_1     = ex_cm_pht_index_1;
 
    assign cdb_tag_2           = (ex_cm_valid_2 ? ex_cm_tag_2    : `RSTAG_NULL);
    assign cdb_value_2         = (ex_cm_valid_2 ? ex_cm_result_2 : 64'h0);
    assign cdb_NPC_2           = ex_cm_NPC_2;
    assign cdb_mispredict_2    = ex_cm_mispredict_2;
-   assign cdb_branch_result_2 = ex_cm_branch_predict_2;
+   assign cdb_branch_result_2 = ex_cm_branch_result_2;
    assign cdb_pht_index_2     = ex_cm_pht_index_2;
 
 endmodule

@@ -223,15 +223,15 @@ module pipeline (// Inputs
    wire [31:0] reg_clear_entries_out;
 
 //Outputs from [MT/REG] / [RS/ROB] Pipeline Register
-   reg        rob_inst1_valid;
-   reg        rob_inst2_valid;
-   reg  [4:0] rob_inst1_dest;
-   reg  [4:0] rob_inst2_dest;
+   reg                       rob_inst1_valid;
+   reg                       rob_inst2_valid;
+   reg  [4:0]                rob_inst1_dest;
+   reg  [4:0]                rob_inst2_dest;
 
-   reg  [7:0] rob_inst1_rega_tag;
-   reg  [7:0] rob_inst1_regb_tag;
-   reg  [7:0] rob_inst2_rega_tag;
-   reg  [7:0] rob_inst2_regb_tag;
+   reg  [7:0]                rob_inst1_rega_tag;
+   reg  [7:0]                rob_inst1_regb_tag;
+   reg  [7:0]                rob_inst2_rega_tag;
+   reg  [7:0]                rob_inst2_regb_tag;
    
    reg [63:0]                rs_inst1_rega_value, rs_inst1_regb_value;
    reg [7:0]                 rs_inst1_rega_tag, rs_inst1_regb_tag;
@@ -261,33 +261,40 @@ module pipeline (// Inputs
    reg [(`HISTORY_BITS-1):0] rs_inst2_pht_index;
    reg                       rs_inst2_valid;
 
-   reg [63:0] inst1_rega_rob_value;
-   reg [63:0] inst1_regb_rob_value;
-   reg [63:0] inst2_rega_rob_value;
-   reg [63:0] inst2_regb_rob_value;
+   reg [63:0]                inst1_rega_rob_value;
+   reg [63:0]                inst1_regb_rob_value;
+   reg [63:0]                inst2_rega_rob_value;
+   reg [63:0]                inst2_regb_rob_value;
 
 
 //Outputs from ROB
-   wire [7:0] rob_inst1_tag_out;
-   wire [7:0] rob_inst2_tag_out;
+   wire [7:0]                 rob_inst1_tag_out;
+   wire [7:0]                 rob_inst2_tag_out;
 
-   wire [63:0] rob_inst1_rega_value_out;
-   wire [63:0] rob_inst1_regb_value_out;
-   wire [63:0] rob_inst2_rega_value_out;
-   wire [63:0] rob_inst2_regb_value_out;
+   wire [63:0]                rob_inst1_rega_value_out;
+   wire [63:0]                rob_inst1_regb_value_out;
+   wire [63:0]                rob_inst2_rega_value_out;
+   wire [63:0]                rob_inst2_regb_value_out;
 
-   wire [4:0]  rob_inst1_dest_out;
-   wire [63:0] rob_inst1_value_out;
-   wire [7:0]  rob_inst1_retire_tag_out;
-   wire [4:0]  rob_inst2_dest_out;
-   wire [63:0] rob_inst2_value_out;
-   wire [7:0]  rob_inst2_retire_tag_out;
+   wire [4:0]                 rob_inst1_dest_out;
+   wire [63:0]                rob_inst1_value_out;
+   wire [7:0]                 rob_inst1_retire_tag_out;
+   wire [4:0]                 rob_inst2_dest_out;
+   wire [63:0]                rob_inst2_value_out;
+   wire [7:0]                 rob_inst2_retire_tag_out;
 
-   wire rob_inst1_mispredicted_out;
-   wire rob_inst2_mispredicted_out;
+   wire                       rob_inst1_mispredicted_out;
+   wire [1:0]                 rob_inst1_branch_result_out;
+   wire [63:0]                rob_inst1_NPC_out;
+   wire [(`HISTORY_BITS-1):0] rob_inst1_pht_index_out;
+   
+   wire                       rob_inst2_mispredicted_out;
+   wire [1:0]                 rob_inst2_branch_result_out;
+   wire [63:0]                rob_inst2_NPC_out;
+   wire [(`HISTORY_BITS-1):0] rob_inst2_pht_index_out;
 
-   wire rob_rob_full_out;
-   wire rob_rob_empty_out;
+   wire                       rob_rob_full_out;
+   wire                       rob_rob_empty_out;
    
 //Outputs from RS
    wire [63:0]                rs_inst1_rega_value_out, rs_inst1_regb_value_out;
@@ -899,8 +906,8 @@ module pipeline (// Inputs
                            .inst2_tag_in(mt_inst2_tag),
 
                            // cdb inputs //
-                           .cdb1_tag_in(cm_tag_1),
-                           .cdb2_tag_in(cm_tag_2),
+                           .cdb1_tag_in(cm_tag_out_1),
+                           .cdb2_tag_in(cm_tag_out_2),
                           
                            // tag outputs //
                            .inst1_taga_out(mt_inst1_taga_out), .inst1_tagb_out(mt_inst1_tagb_out),
@@ -1138,10 +1145,10 @@ module pipeline (// Inputs
                                            .inst2_valid(rs_inst2_valid),
 
                                            // cdb inputs //
-                                           .cdb1_tag_in(cm_tag_1),
-                                           .cdb2_tag_in(cm_tag_2),
-                                           .cdb1_value_in(cm_value_1),
-                                           .cdb2_value_in(cm_value_2),
+                                           .cdb1_tag_in(cm_tag_out_1),
+                                           .cdb2_tag_in(cm_tag_out_2),
+                                           .cdb1_value_in(cm_value_out_1),
+                                           .cdb2_value_in(cm_value_out_2),
 
                                            // inputs from the ROB //
                                            .inst1_rega_rob_value_in(rob_inst1_rega_value_out),
@@ -1223,12 +1230,18 @@ module pipeline (// Inputs
                                           .inst2_regb_tag_in(rob_inst2_tagb),
 
                                           // cdb inputs //
-                                          .cdb1_tag_in(cm_tag_1),
-                                          .cdb1_value_in(cm_value_1),
-                                          .cdb2_tag_in(cm_tag_2),
-                                          .cdb2_value_in(cm_value_2),
-                                          .cdb1_mispredicted_in,
-                                          .cdb2_mispredicted_in, 
+                                          .cdb1_tag_in(cm_tag_out_1),
+                                          .cdb1_value_in(cm_value_out_1),
+                                          .cdb1_mispredicted_in(cm_mispredict_out_1),
+                                          .cdb1_branch_result_in(cm_branch_result_out_2),
+                                          .cdb1_NPC_in(cm_NPC_out_1),
+                                          .cdb1_pht_index_in(cm_pht_index_out_1),
+                                          .cdb2_tag_in(cm_tag_out_2),
+                                          .cdb2_value_in(cm_value_out_2),
+                                          .cdb2_mispredicted_in(cm_mispredict_out_2), 
+                                          .cdb2_branch_result_in(cm_branch_result_out_2),
+                                          .cdb2_NPC_in(cm_NPC_out_2),
+                                          .cdb2_pht_index_in(cm_pht_index_out_2),
 
                                           // outputs //
                                           
@@ -1251,6 +1264,12 @@ module pipeline (// Inputs
                                            // outputs to indicate a mispredicted branch //
                                            .inst1_mispredicted_out(rob_inst1_mispredicted_out),
                                            .inst2_mispredicted_out(rob_inst2_mispredicted_out),
+                                           .inst1_branch_result_out(rob_inst1_branch_result_out),
+                                           .inst2_branch_result_out(rob_inst2_branch_result_out),
+                                           .inst1_NPC_out(rob_inst1_NPC_out),
+                                           .inst2_NPC_out(rob_inst2_NPC_out),
+                                           .inst1_pht_index_out(rob_inst1_pht_index_out),
+                                           .inst2_pht_index_out(rob_inst2_pht_index_out),
 
 
                                           // signals out //
@@ -1473,9 +1492,7 @@ module pipeline (// Inputs
   //               Complete Stage                 //
   //                                              //
   //////////////////////////////////////////////////
-  
-  //MISPREDICT NOT ADDED YET
-  //WAITING ON SCOTT
+
   cm_stage cm_stage_0(// Inputs
 
 		                  .ex_cm_tag_1(cm_tag_1),

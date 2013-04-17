@@ -18,6 +18,8 @@
 `define ROBE_UNUSED    2'b11
 
 `define HISTORY_BITS 8
+`define BRANCH_HALT 2'b11
+
 
 //`timescale 1ns/100ps
 
@@ -315,7 +317,7 @@ module reorder_buffer( clock,reset,
 
    // combinational assignments for signals //
    assign inst1_retire   =                  (states_out[head         ]==`ROBE_COMPLETE);
-   assign inst2_retire   = (inst1_retire && (states_out[head_plus_one]==`ROBE_COMPLETE) );
+   assign inst2_retire   = ( inst1_retire && (states_out[head_plus_one]==`ROBE_COMPLETE) && (branch_results_out[head_plus_one]!=`BRANCH_HALT) );
    assign inst1_dispatch = ( ~rob_full && (inst1_valid_in || (~inst1_valid_in && inst2_valid_in)) ); 
    assign inst2_dispatch = ( ~rob_full && (inst1_valid_in && inst2_valid_in) );
 

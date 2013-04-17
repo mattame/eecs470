@@ -194,7 +194,7 @@ module testbench;
     reset = 1'b0;
     $display("@@  %t  Deasserting System reset......\n@@\n@@", $realtime);
 
-    wb_fileno = $fopen("writeback.out");
+//    wb_fileno = $fopen("writeback.out");
     
     //Open header AFTER throwing the reset otherwise the reset state is displayed
     print_header("                                                                            D-MEM Bus &\n");

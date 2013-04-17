@@ -476,18 +476,20 @@ module pipeline (// Inputs
   wire        Icache_wr_en;
   wire [63:0] Icache_data_out, proc2Icache_addr;
   wire        Icache_valid_out;
-/*
-  assign pipeline_completed_insts = {3'b0, mem_wb_valid_inst};
-  assign pipeline_error_status = 
-    mem_wb_illegal ? `HALTED_ON_ILLEGAL
-                   : mem_wb_halt ? `HALTED_ON_HALT
-                                 : `NO_ERROR;
 
+ //  assign pipeline_completed_insts = {3'b0, mem_wb_valid_inst};
+  assign pipeline_error_status =  (
+    (1'b0) ? `HALTED_ON_ILLEGAL
+                   : (rob_inst1_branch_result_out==`BRANCH_HALT) ? `HALTED_ON_HALT
+                                 : `NO_ERROR );
+/*
   assign pipeline_commit_wr_idx = wb_reg_wr_idx_out;
   assign pipeline_commit_wr_data = wb_reg_wr_data_out;
   assign pipeline_commit_wr_en = wb_reg_wr_en_out;
   assign pipeline_commit_NPC = mem_wb_NPC;
 */
+
+
   assign proc2mem_command =
            (proc2Dmem_command==`BUS_NONE)?proc2Imem_command:proc2Dmem_command;
   assign proc2mem_addr =

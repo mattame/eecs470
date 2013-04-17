@@ -46,7 +46,8 @@ module testbench;
 
 
   wire [63:0] if_NPC_out;
-  wire [31:0] if_IR_out;
+  wire [31:0] if_IR_out_1;
+  wire [31:0] if_IR_out_2;
   wire        if_valid_inst_out;
   wire [63:0] if_id_NPC;
   wire [31:0] if_id_IR;
@@ -90,7 +91,8 @@ module testbench;
                        .pipeline_commit_NPC(pipeline_commit_NPC),
 
                        .if_NPC_out(if_NPC_out),
-                       .if_IR_out(if_IR_out),
+                       .id_IR_1(if_IR_out_1),
+                       .id_IR_2(if_IR_out_2),
                        .if_valid_inst_out(if_valid_inst_out),
                        .if_id_NPC(if_id_NPC),
                        .if_id_IR(if_id_IR),
@@ -231,7 +233,9 @@ module testbench;
       
        // print the piepline stuff via c code to the pipeline.out
        print_cycles();
-       print_stage(" ", if_IR_out, if_NPC_out[31:0], {31'b0,if_valid_inst_out});
+       print_stage(" ", if_IR_out_1, if_NPC_out[31:0], {31'b0,if_valid_inst_out});
+       print_stage(" ", if_IR_out_2, if_NPC_out[31:0], {31'b0,if_valid_inst_out});
+
        print_stage("|", if_id_IR, if_id_NPC[31:0], {31'b0,if_id_valid_inst});
        print_stage("|", id_ex_IR, id_ex_NPC[31:0], {31'b0,id_ex_valid_inst});
        print_stage("|", ex_mem_IR, ex_mem_NPC[31:0], {31'b0,ex_mem_valid_inst});
@@ -286,7 +290,7 @@ module testbench;
 
   // Translate IRs into strings for opcodes (for waveform viewer)
   always @* begin
-    if_instr_str  = get_instr_string(if_IR_out, if_valid_inst_out);
+    if_instr_str  = get_instr_string(if_IR_out_1, if_valid_inst_out);
     id_instr_str  = get_instr_string(if_id_IR, if_id_valid_inst);
     ex_instr_str  = get_instr_string(id_ex_IR, id_ex_valid_inst);
     mem_instr_str = get_instr_string(ex_mem_IR, ex_mem_valid_inst);

@@ -298,7 +298,7 @@ module LSQ(//Inputs
  generate
  	genvar i;
  	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin : ASSIGNLSQINPUTS
- 		assign clears[i]   = (reset | (i == LSQ_head & (mem_tag_match | (valid & !read_cmmd_out & (Dmem2proc_response!=0)))))
+ 		assign clears[i]   = (reset | (i == LSQ_head & (mem_tag_match | (!read_cmmd_out & (Dmem2proc_response!=0)))))
 							? 1'b1: 1'b0;
  		assign stores_1[i] = (i == next_entry_1 & valid_ROB_in_1) ? 1'b1: 1'b0;
  		assign stores_2[i] = ((i == next_entry_1 & !valid_ROB_in_1 & valid_ROB_in_2) | 
@@ -397,7 +397,7 @@ module LSQ(//Inputs
  
  
 //----------- POINTER KEEPING ------------
- assign next_head = (mem_tag_match | (valid & !read_cmmd_out & (Dmem2proc_response!=0)))
+ assign next_head = (mem_tag_match | (!read_cmmd_out & (Dmem2proc_response!=0)))
 					? (LSQ_head + 1):LSQ_head;
 
  assign next_tail = (valid_ROB_in_1) ? ((valid_ROB_in_2) ? next_entry_2: next_entry_1): (valid_ROB_in_2) ? next_entry_1 : LSQ_tail;

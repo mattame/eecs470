@@ -343,6 +343,7 @@ module ex_stage(// Inputs
   assign mispredict_2 = branch_taken_2 & (ex_alu_result_out_2 != id_ex_PPC_2);
 			   
   arbiter arb_0 (//Ins
+	.ex_IR_1(id_ex_IR_1),
     .ex_branch_valid_out_1(branch_valid_out_1),
     .ex_branch_taken_1(branch_taken_1),
     .ex_branch_mispredict_1(mispredict_1),
@@ -362,6 +363,7 @@ module ex_stage(// Inputs
     .mem_value_in(MEM_value_in),
     .mem_valid_in(MEM_valid_in),
 
+	.ex_IR_2(id_ex_IR_2),
     .ex_branch_valid_out_2(branch_valid_out_2),
     .ex_branch_taken_2(branch_taken_2),
     .ex_branch_mispredict_2(mispredict_2),

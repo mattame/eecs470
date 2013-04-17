@@ -21,10 +21,13 @@
 `define BRANCH_NONE      2'b00
 `define BRANCH_TAKEN     2'b01
 `define BRANCH_NOT_TAKEN 2'b10
-`define BRANCH_UNUSED    2'b11
+`define BRANCH_HALT 	 2'b11
+
+`define HALT_INSTRUCTION 32'h0555
 
 module arbiter(
 //Ins
+	ex_IR_1,
     ex_branch_valid_out_1,
     ex_branch_taken_1,
     ex_branch_mispredict_1,
@@ -43,7 +46,8 @@ module arbiter(
         mem_tag_in,
         mem_value_in,
         mem_valid_in,
-
+		
+	ex_IR_2,
     ex_branch_valid_out_2,
     ex_branch_taken_2,
     ex_branch_mispredict_2,
@@ -84,6 +88,7 @@ module arbiter(
 
     //INPUTS
   //Bus 1
+input [63:0] ex_IR_1;
 //Branches
 input ex_branch_valid_out_1;
 input ex_branch_taken_1;
@@ -103,6 +108,7 @@ input [63:0] ex_mult_result_out_1;
 input ex_mult_valid_out_1;
 
   //Bus 2
+input [63:0] ex_IR_2;
 //Memory input 
 input  [4:0] mem_tag_in;
 input [63:0] mem_value_in;
@@ -174,8 +180,8 @@ begin
     end
     else begin
       ex_mispredict_1 = 0;
-      ex_branch_result_1 = `BRANCH_NONE;
-      ex_valid_out_1 = ex_alu_valid_out_1;
+      ex_branch_result_1 = (ex_IR_1 == `HALT_INSTRUCTION) ? `BRANCH_HALT: `BRANCH_NONE;
+      ex_valid_out_1 = (ex_IR_1 == `HALT_INSTRUCTION) | ex_alu_valid_out_1;
     end
   end
 end
@@ -216,8 +222,8 @@ begin
       end
       else begin
         ex_mispredict_2 = 0;
-        ex_branch_result_2 = `BRANCH_NONE;
-        ex_valid_out_2 = ex_alu_valid_out_2;
+        ex_branch_result_2 = (ex_IR_2 == `HALT_INSTRUCTION) ? `BRANCH_HALT: `BRANCH_NONE;
+        ex_valid_out_2 = (ex_IR_2 == `HALT_INSTRUCTION) | ex_alu_valid_out_2;
       end
     end
   end

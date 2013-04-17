@@ -11,10 +11,11 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-//`timescale 1ns/100ps
+`timescale 1ns/100ps
 
 // defined paramters //
 `define LSQ_ENTRIES	    32
+
 
 
 /*
@@ -86,7 +87,7 @@ input EX_valid_2;
 output [4:0] stored_tag_out;
 output [63:0] stored_address_out;
 output [63:0] stored_value_out;
-output  [1:0] read_out;
+output read_out;
 output complete_out;
 
 reg [63:0] stored_address;
@@ -208,14 +209,20 @@ module LSQ(//Inputs
 			address_in_2,
 			EX_valid_2,
 
+			//From MEM
+			Dmem2proc_data,
+			Dmem2proc_tag,
+			Dmem2proc_response,
+			
 			//Outputs
 			tag_out,
-			address_out,
-			value_out,
-			read_out,
-			valid_out,
+			mem_result_out,
+			proc2Dmem_command,
+			proc2Dmem_addr,
+			proc2Dmem_data,
+			LSQ_IF_stall,
+			LSQ_EX_valid
 
-			stall
 		  );
 
  input clock;
@@ -243,14 +250,27 @@ module LSQ(//Inputs
  input [63:0] value_in_2;
  input [63:0] address_in_2;
  input        EX_valid_2;
+ 
+  input  [63:0] Dmem2proc_data;
+  input   [3:0] Dmem2proc_tag, Dmem2proc_response;
 
- output [4:0]  tag_out;
- output [63:0] address_out;
- output [63:0] value_out;
- output 	   read_out;
- output        valid_out;
+  output [4:0]  tag_out;
+  output [63:0] mem_result_out;    // outgoing instruction result (to MEM/WB)
+  output [1:0]  proc2Dmem_command;
+  output [63:0] proc2Dmem_addr;     // Address sent to data-memory
+  output [63:0] proc2Dmem_data;     // Data sent to data-memory
+  
+  output LSQ_IF_stall, LSQ_EX_valid;
 
- output stall;
+  reg [3:0] mem_waiting_tag;
+
+ wire valid;
+ wire mem_tag_match;
+ wire read_cmmd_out;		 
+ wire move_head_and_clear; 
+ 
+ wire head_2_true, reset_invalid; //wires to help compute valid
+		 
 
  reg [4:0] LSQ_head;
  reg [4:0] LSQ_tail;
@@ -276,7 +296,8 @@ module LSQ(//Inputs
  generate
  	genvar i;
  	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin : ASSIGNLSQINPUTS
- 		assign clears[i]   = (reset | (i == LSQ_head & completes_out[i] == 1'b1)) ? 1'b1: 1'b0;
+ 		assign clears[i]   = (reset | (i == LSQ_head & move_head_and_clear))
+							? 1'b1: 1'b0;
  		assign stores_1[i] = (i == next_entry_1 & valid_ROB_in_1) ? 1'b1: 1'b0;
  		assign stores_2[i] = ((i == next_entry_1 & !valid_ROB_in_1 & valid_ROB_in_2) | 
  							  (i == next_entry_2 & valid_ROB_in_1 & valid_ROB_in_2)) ? 1'b1: 1'b0;
@@ -328,34 +349,62 @@ module LSQ(//Inputs
 
  
 // --------- ENTRY OUPUT LOGIC -----------
- assign address_out = addrs_out[LSQ_head];
-
- assign value_out = values_out[LSQ_head];
-
  assign tag_out = tags_out[LSQ_head];
-
- assign read_out = (reads_out[LSQ_head]) ? `BUS_LOAD : `BUS_STORE;
  
-		 wire head_2_true, reset_invalid; //wires to help compute valid out
-		 
+ assign head_2_true = (tag_out == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
 
-		 assign head_2_true = (tag_out == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
-
-		 assign reset_invalid = reset & head_2_true;
-		 
+ assign reset_invalid = reset & head_2_true; 
  
- assign valid_out = completes_out[LSQ_head] & read_out & !reset_invalid;
+ assign read_cmmd_out = reads_out[LSQ_head];
+ 
+ assign valid = completes_out[LSQ_head] & !reset_invalid;
+
+   // Determine the command that must be sent to mem
+  assign proc2Dmem_command =
+    (mem_waiting_tag!=0 | !valid) ? `BUS_NONE
+                         : !(read_cmmd_out) ? `BUS_STORE 
+                                         : (read_cmmd_out) ? `BUS_LOAD
+                                                         : `BUS_NONE;
+
+   // The memory address is calculated by the ALU
+  assign proc2Dmem_data = values_out[LSQ_head];
+
+  assign proc2Dmem_addr = addrs_out[LSQ_head];
+
+   // Assign the result-out for next stage
+  assign mem_result_out = (read_cmmd_out) ? Dmem2proc_data : addrs_out[LSQ_head];
+
+  assign mem_stall_out = 
+    (read_cmmd_out & ((mem_waiting_tag!=Dmem2proc_tag) | (Dmem2proc_tag==0))) |
+    (!read_cmmd_out & (Dmem2proc_response==0));
+
+  wire write_enable = read_cmmd_out & 
+    ((mem_waiting_tag==0) | (mem_waiting_tag==Dmem2proc_tag));
+
+  assign mem_tag_match = (mem_waiting_tag == Dmem2proc_tag) & (mem_waiting_tag != 0) & valid;
+	
+  assign LSQ_IF_stall = mem_stall_out & valid;
+	
+  assign LSQ_EX_valid = mem_tag_match;
+	
+  assign move_head_and_clear = mem_tag_match | (!read_cmmd_out & (Dmem2proc_response!=0) & valid);
+	
+  always @(posedge clock)
+    if(reset)
+      mem_waiting_tag <= `SD 0;
+    else if(write_enable)
+      mem_waiting_tag <= `SD Dmem2proc_response;
+ 
  
 //----------- POINTER KEEPING ------------
- assign next_head = (valid_out) ? (LSQ_head + 1):LSQ_head;
+ assign next_head = (mem_tag_match | move_head_and_clear)
+					? (LSQ_head + 1):LSQ_head;
 
  assign next_tail = (valid_ROB_in_1) ? ((valid_ROB_in_2) ? next_entry_2: next_entry_1): (valid_ROB_in_2) ? next_entry_1 : LSQ_tail;
 
  assign next_entry_1 = LSQ_tail + 1;
 
  assign next_entry_2 = LSQ_tail + 2;
-
- assign stall = ((LSQ_head == next_entry_1) | (LSQ_head == next_entry_2)) ? 1'b1: 1'b0;
 
 always @(posedge clock) begin
 	if(reset) begin

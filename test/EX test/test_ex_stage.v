@@ -270,6 +270,8 @@ ex_stage ex_0(// Inputs
 	id_ex_alu_func_1 = `ALU_MULQ;
     id_ex_cond_branch_1 = 0;
     id_ex_uncond_branch_1 = 0;
+	id_ex_rd_mem_in_1 = 0;
+    id_ex_wr_mem_in_1 = 0;
 		//Add Base
 	valid_in_2 = 1'b0;
 	id_ex_NPC_2 = 64'h0;
@@ -284,6 +286,8 @@ ex_stage ex_0(// Inputs
 	id_ex_alu_func_2 = `ALU_ADDQ;
     id_ex_cond_branch_2 = 0;
     id_ex_uncond_branch_2 = 0;
+	id_ex_rd_mem_in_2 = 0;
+    id_ex_wr_mem_in_2 = 0;
 		//Branch Base
 	valid_in_2 = 1'b0;
 	id_ex_NPC_2 = 64'h0;
@@ -298,6 +302,8 @@ ex_stage ex_0(// Inputs
 	id_ex_alu_func_2 = `ALU_ADDQ;
     id_ex_cond_branch_2 = 1;
     id_ex_uncond_branch_2 = 0;
+	id_ex_rd_mem_in_2 = 0;
+    id_ex_wr_mem_in_2 = 0;
 		//Unconditional Branch Base
 	valid_in_2 = 1'b0;
 	id_ex_NPC_2 = 64'h0;
@@ -312,6 +318,8 @@ ex_stage ex_0(// Inputs
 	id_ex_alu_func_2 = `ALU_ADDQ;
     id_ex_cond_branch_2 = 0;
     id_ex_uncond_branch_2 = 1;
+	id_ex_rd_mem_in_2 = 0;
+    id_ex_wr_mem_in_2 = 0;
 		//Load Base
 	valid_in_2 = 1'b0;
 	id_ex_NPC_2 = 64'h0;
@@ -326,6 +334,8 @@ ex_stage ex_0(// Inputs
 	id_ex_alu_func_2 = `ALU_ADDQ;
     id_ex_cond_branch_2 = 0;
     id_ex_uncond_branch_2 = 0;
+	id_ex_rd_mem_in_2 = 1;
+    id_ex_wr_mem_in_2 = 0;
 		//Store Base
 	valid_in_2 = 1'b0;
 	id_ex_NPC_2 = 64'h0;
@@ -340,6 +350,8 @@ ex_stage ex_0(// Inputs
 	id_ex_alu_func_2 = `ALU_ADDQ;
     id_ex_cond_branch_2 = 0;
     id_ex_uncond_branch_2 = 0;
+	id_ex_rd_mem_in_2 = 0;
+    id_ex_wr_mem_in_2 = 1;
 	
 	
 	MEM_tag_in = 5'h0;
@@ -517,6 +529,8 @@ ex_stage ex_0(// Inputs
 	id_ex_alu_func_1 = `ALU_ADDQ;
     id_ex_cond_branch_1 = 0;
     id_ex_uncond_branch_1 = 0;
+	id_ex_rd_mem_in_1 = 0;
+    id_ex_wr_mem_in_1 = 1;
 	
 	// Two stores
 	
@@ -533,6 +547,8 @@ ex_stage ex_0(// Inputs
 	id_ex_alu_func_2 = `ALU_ADDQ;
     id_ex_cond_branch_2 = 0;
     id_ex_uncond_branch_2 = 0;
+	id_ex_rd_mem_in_2 = 0;
+    id_ex_wr_mem_in_2 = 1;
 	
 
         DISPLAY_STATE(`INPUT);
@@ -553,6 +569,8 @@ ex_stage ex_0(// Inputs
 	id_ex_alu_func_1 = `ALU_ADDQ;
     id_ex_cond_branch_1 = 0;
     id_ex_uncond_branch_1 = 0;
+	id_ex_rd_mem_in_1 = 1;
+    id_ex_wr_mem_in_1 = 0;
 	
 	// Two loads
 	
@@ -569,6 +587,8 @@ ex_stage ex_0(// Inputs
 	id_ex_alu_func_2 = `ALU_ADDQ;
     id_ex_cond_branch_2 = 0;
     id_ex_uncond_branch_2 = 0;
+	id_ex_rd_mem_in_2 = 1;
+    id_ex_wr_mem_in_2 = 0;
 		
 		
         DISPLAY_STATE(`INPUT);

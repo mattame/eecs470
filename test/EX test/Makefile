@@ -23,7 +23,7 @@ all:    simv
 # Modify starting here
 #####
 
-TESTBENCH = sys_defs.vh test_ex_stage_mults.v 
+TESTBENCH = sys_defs.vh test_ex_stage.v 
 SIMFILES = ex_stage_submodules.v ex_stage.v
 SYNFILES = ex_stage.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
 

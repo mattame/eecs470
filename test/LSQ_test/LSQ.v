@@ -266,13 +266,11 @@ module LSQ(//Inputs
 
  wire valid;
  wire mem_tag_match;
- 
- wire [4:0] next_mem_tag;
- wire next_mem_tag_match;
+ wire read_cmmd_out;		 
+ wire move_head_and_clear; 
  
  wire head_2_true, reset_invalid; //wires to help compute valid
 		 
- wire read_cmmd_out;		 
 
  reg [4:0] LSQ_head;
  reg [4:0] LSQ_tail;
@@ -298,7 +296,7 @@ module LSQ(//Inputs
  generate
  	genvar i;
  	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin : ASSIGNLSQINPUTS
- 		assign clears[i]   = (reset | (i == LSQ_head & (mem_tag_match | (!read_cmmd_out & (Dmem2proc_response!=0)))))
+ 		assign clears[i]   = (reset | (i == LSQ_head & move_head_and_clear))
 							? 1'b1: 1'b0;
  		assign stores_1[i] = (i == next_entry_1 & valid_ROB_in_1) ? 1'b1: 1'b0;
  		assign stores_2[i] = ((i == next_entry_1 & !valid_ROB_in_1 & valid_ROB_in_2) | 
@@ -389,6 +387,8 @@ module LSQ(//Inputs
 	
   assign LSQ_EX_valid = mem_tag_match;
 	
+  assign move_head_and_clear = mem_tag_match | (!read_cmmd_out & (Dmem2proc_response!=0) & valid);
+	
   always @(posedge clock)
     if(reset)
       mem_waiting_tag <= `SD 0;
@@ -397,7 +397,7 @@ module LSQ(//Inputs
  
  
 //----------- POINTER KEEPING ------------
- assign next_head = (mem_tag_match | (!read_cmmd_out & (Dmem2proc_response!=0)))
+ assign next_head = (mem_tag_match | move_head_and_clear)
 					? (LSQ_head + 1):LSQ_head;
 
  assign next_tail = (valid_ROB_in_1) ? ((valid_ROB_in_2) ? next_entry_2: next_entry_1): (valid_ROB_in_2) ? next_entry_1 : LSQ_tail;

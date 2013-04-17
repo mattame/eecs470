@@ -23,7 +23,7 @@ all:    simv
 # Modify starting here
 #####
 
-TESTBENCH = sys_defs.vh test_LSQ.v 
+TESTBENCH = sys_defs.vh test_LSQ_rollover.v 
 SIMFILES = LSQ.v
 SYNFILES = LSQ.vg /afs/umich.edu/class/eecs470/lib/verilog/lec25dscc25.v
 

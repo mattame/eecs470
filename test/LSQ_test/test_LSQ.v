@@ -238,12 +238,12 @@ LSQ lsqueue(//Inputs
         @(posedge clock);
 #1
 	ROB_tag_1 = 5'h06;
-	rd_mem_in_1 = 1'b0;
+	rd_mem_in_1 = 1'b1;
 	wr_mem_in_1 = 1'b0;
 	valid_in_1 = 1'b1;
 
 	ROB_tag_2 = 5'h07;
-	rd_mem_in_2 = 1'b0;
+	rd_mem_in_2 = 1'b1;
 	wr_mem_in_2 = 1'b0;
 	valid_in_2 = 1'b1;
 
@@ -326,7 +326,26 @@ LSQ lsqueue(//Inputs
         DISPLAY_STATE(`INPUT);
         DISPLAY_STATE(`OUTPUT);
 		@(posedge clock);
-		DISPLAY_STATE(`OUTPUT);
+	
+#1
+	Dmem2proc_response = 4'h0;
+	
+	Dmem2proc_tag = 4'h2;
+	
+	Dmem2proc_data = 64'habcdeeffabcdeeff;
+	
+		@(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);
+		@(posedge clock);
+	
+#1
+	Dmem2proc_tag = 4'h0;
+
+		@(negedge clock);
+        DISPLAY_STATE(`INPUT);
+        DISPLAY_STATE(`OUTPUT);
+		@(posedge clock);
 	
 #1
 	$display("**-----------------------------------------------------------**");

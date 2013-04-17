@@ -49,7 +49,8 @@ module pipeline (// Inputs
                  // the synthesized version) data is tested by looking at
                  // the final values in memory
                  if_NPC_out,
-                 if_IR_out,
+                 id_IR_1,
+                 id_IR_2,
                  if_valid_inst_out,
                  if_id_NPC,
                  if_id_IR,
@@ -83,7 +84,6 @@ module pipeline (// Inputs
   output [63:0] pipeline_commit_NPC;
 
   output [63:0] if_NPC_out;
-  output [31:0] if_IR_out;
   output        if_valid_inst_out;
   output [63:0] if_id_NPC;
   output [31:0] if_id_IR;
@@ -119,12 +119,12 @@ module pipeline (// Inputs
 
 // Outputs from IF/ID Pipeline Register
   reg [63:0] id_NPC_1;
-  reg [31:0] id_IR_1;
+  output reg [31:0] id_IR_1;
   reg        id_valid_inst1;
   reg [63:0] id_PPC_1;
  
   reg [63:0] id_NPC_2;
-  reg [31:0] id_IR_2;
+  output reg [31:0] id_IR_2;
   reg        id_valid_inst2;
   reg [63:0] id_PPC_2;
   
@@ -476,18 +476,20 @@ module pipeline (// Inputs
   wire        Icache_wr_en;
   wire [63:0] Icache_data_out, proc2Icache_addr;
   wire        Icache_valid_out;
-/*
-  assign pipeline_completed_insts = {3'b0, mem_wb_valid_inst};
-  assign pipeline_error_status = 
-    mem_wb_illegal ? `HALTED_ON_ILLEGAL
-                   : mem_wb_halt ? `HALTED_ON_HALT
-                                 : `NO_ERROR;
 
+ //  assign pipeline_completed_insts = {3'b0, mem_wb_valid_inst};
+  assign pipeline_error_status =  (
+    (1'b0) ? `HALTED_ON_ILLEGAL
+                   : (rob_inst1_branch_result_out==`BRANCH_HALT) ? `HALTED_ON_HALT
+                                 : `NO_ERROR );
+/*
   assign pipeline_commit_wr_idx = wb_reg_wr_idx_out;
   assign pipeline_commit_wr_data = wb_reg_wr_data_out;
   assign pipeline_commit_wr_en = wb_reg_wr_en_out;
   assign pipeline_commit_NPC = mem_wb_NPC;
 */
+
+
   assign proc2mem_command =
            (proc2Dmem_command==`BUS_NONE)?proc2Imem_command:proc2Dmem_command;
   assign proc2mem_addr =

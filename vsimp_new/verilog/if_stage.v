@@ -93,8 +93,8 @@ module if_stage(// Inputs
   assign proc2Imem_addr = {next_PC[63:3], 3'b0};
 
     // Two words out of the Imem
-  assign if_IR_out_1 = Imem2proc_data[63:32];
-  assign if_IR_out_2 = Imem2proc_data[31:0];
+  assign if_IR_out_1 = Imem2proc_data[31: 0];
+  assign if_IR_out_2 = Imem2proc_data[63:32];
 
     // Pass PC+4 down pipeline w/instruction
   assign if_NPC_out_1 = PC_reg+4;

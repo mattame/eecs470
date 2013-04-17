@@ -11,8 +11,7 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-//`timescale 1ns/100ps
-
+`define HISTORY_BITS 5
 
 module ex_stage(// Inputs
 			clock,
@@ -97,7 +96,7 @@ module ex_stage(// Inputs
   input         valid_in_1;
   input  [63:0] id_ex_NPC_1;         // incoming instruction PC+4
   input  [63:0] id_ex_PPC_1;		 // Predicted PC for branches
-  input  [(`HISTORY_BITS-1):0] id_ex_pht_idx_1;
+  input   [(`HISTORY_BITS-1):0] id_ex_pht_idx_1;
   input  [31:0] id_ex_IR_1;          // incoming instruction
   input   [4:0] id_ex_dest_reg_1;	 // destination register
   input  [63:0] id_ex_rega_1;        // register A value from reg file
@@ -113,7 +112,7 @@ module ex_stage(// Inputs
   input         valid_in_2;
   input  [63:0] id_ex_NPC_2;         // incoming instruction PC+4
   input  [63:0] id_ex_PPC_2;		 // Predicted PC for branches
-  input  [(`HISTORY_BITS-1):0] id_ex_pht_idx_2;
+  input   [(`HISTORY_BITS-1):0] id_ex_pht_idx_2;
   input  [31:0] id_ex_IR_2;          // incoming instruction
   input   [4:0] id_ex_dest_reg_2;	 // destination register
   input  [63:0] id_ex_rega_2;        // register A value from reg file
@@ -130,8 +129,8 @@ module ex_stage(// Inputs
   input  [63:0] MEM_value_in;
   input         MEM_valid_in;  
 
-  output        stall_bus_1;    // Should input bus 1 stall?
-  output        stall_bus_2;    // Should input bus 2 stall?
+  output        stall_bus_1;	     // Should input bus 1 stall?
+  output		    stall_bus_2;	     // Should input bus 2 stall?
   
 				// Bus 1
   output [63:0] ex_NPC_out_1;
@@ -139,7 +138,7 @@ module ex_stage(// Inputs
   output [63:0] ex_result_out_1;
   output ex_mispredict_1;
   output  [1:0] ex_branch_result_1;
-  output [(`HISTORY_BITS-1):0] ex_pht_idx_out_1;
+  output  [(`HISTORY_BITS-1):0] ex_pht_idx_out_1;
   output ex_valid_out_1;
   
 				// Bus 2
@@ -148,7 +147,7 @@ module ex_stage(// Inputs
   output [63:0] ex_result_out_2;
   output ex_mispredict_2;
   output  [1:0] ex_branch_result_2;
-  output [(`HISTORY_BITS-1):0] ex_pht_idx_out_2;
+  output  [(`HISTORY_BITS-1):0] ex_pht_idx_out_2;
   output ex_valid_out_2;
   
   output  [4:0] LSQ_tag_out_1;
@@ -344,6 +343,7 @@ module ex_stage(// Inputs
   assign mispredict_2 = branch_taken_2 & (ex_alu_result_out_2 != id_ex_PPC_2);
 			   
   arbiter arb_0 (//Ins
+	.ex_IR_1(id_ex_IR_1),
     .ex_branch_valid_out_1(branch_valid_out_1),
     .ex_branch_taken_1(branch_taken_1),
     .ex_branch_mispredict_1(mispredict_1),
@@ -363,6 +363,7 @@ module ex_stage(// Inputs
     .mem_value_in(MEM_value_in),
     .mem_valid_in(MEM_valid_in),
 
+	.ex_IR_2(id_ex_IR_2),
     .ex_branch_valid_out_2(branch_valid_out_2),
     .ex_branch_taken_2(branch_taken_2),
     .ex_branch_mispredict_2(mispredict_2),

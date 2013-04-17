@@ -22,6 +22,8 @@
 
 `define HISTORY_BITS 8
 
+//`timescale 1ns/100ps
+
 
 /////////////////////////////////////////////////
 // individual reservation station entry module //

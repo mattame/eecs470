@@ -17,123 +17,211 @@
 //
 // This module is purely combinational
 //
-module arbiter(		  // Inputs
-				// Branch (on bus 1)
-				ex_branch_valid_out,
-				ex_branch_target,
-				// ALU 1 Bus
-				ex_alu_IR_out_1,
-				ex_alu_NPC_out_1,
-				ex_alu_dest_reg_out_1,
-				ex_alu_result_out_1,
-				ex_alu_valid_out_1,
-				// ALU 2 Bus
-				ex_alu_IR_out_2,
-				ex_alu_NPC_out_2,
-				ex_alu_dest_reg_out_2,
-				ex_alu_result_out_2,
-				ex_alu_valid_out_2,
-				// Multiplier 1 Bus
-				ex_mult_IR_out_1,
-				ex_mult_NPC_out_1,
-				ex_mult_dest_reg_out_1,
-				ex_mult_result_out_1,
-				ex_mult_valid_out_1,
-				// Multiplier 2 Bus
-				ex_mult_IR_out_2,
-				ex_mult_NPC_out_2,
-				ex_mult_dest_reg_out_2,
-				ex_mult_result_out_2,
-				ex_mult_valid_out_2,
-        // MEM bus (on bus 2)
+
+`define BRANCH_NONE      2'b00
+`define BRANCH_TAKEN     2'b01
+`define BRANCH_NOT_TAKEN 2'b10
+`define BRANCH_UNUSED    2'b11
+
+module arbiter(
+//Ins
+    ex_branch_valid_out_1,
+    ex_branch_taken_1,
+    ex_branch_mispredict_1,
+    ex_branch_pht_idx_1,
+    ex_alu_NPC_out_1,
+
+    ex_alu_dest_reg_out_1,
+    ex_alu_result_out_1,
+    ex_alu_valid_out_1,
+
+    ex_mult_NPC_out_1,
+    ex_mult_dest_reg_out_1,
+    ex_mult_result_out_1,
+    ex_mult_valid_out_1,
+
         mem_tag_in,
         mem_value_in,
         mem_valid_in,
-				
-			   // Outputs
-				stall_bus_1,
-				stall_bus_2,
-        stall_mult_2,
-				// Bus 1
-				ex_IR_out_1,
-				ex_NPC_out_1,
-				ex_dest_reg_out_1,
-				ex_result_out_1,
-				ex_valid_out_1,
-				// Bus 2
-				ex_IR_out_2,
-				ex_NPC_out_2,
-				ex_dest_reg_out_2,
-				ex_result_out_2,
-				ex_valid_out_2
-			  );
-				  
-	input 	     ex_branch_valid_out;
-	input [63:0] ex_branch_target;
 
-	input [31:0] ex_alu_IR_out_1;
-	input [63:0] ex_alu_NPC_out_1;
-	input  [4:0] ex_alu_dest_reg_out_1;
-	input [63:0] ex_alu_result_out_1;
-	input		 ex_alu_valid_out_1;
-				  
-	input [31:0] ex_alu_IR_out_2;
-	input [63:0] ex_alu_NPC_out_2;
-	input  [4:0] ex_alu_dest_reg_out_2;
-	input [63:0] ex_alu_result_out_2;
-	input		 ex_alu_valid_out_2;
-				  
-	input [31:0] ex_mult_IR_out_1;
-	input [63:0] ex_mult_NPC_out_1;
-	input  [4:0] ex_mult_dest_reg_out_1;
-	input [63:0] ex_mult_result_out_1;
-	input		 ex_mult_valid_out_1;
-				  
-	input [31:0] ex_mult_IR_out_2;
-	input [63:0] ex_mult_NPC_out_2;
-	input  [4:0] ex_mult_dest_reg_out_2;
-	input [63:0] ex_mult_result_out_2;
-	input		 ex_mult_valid_out_2;
-	
-  input  [4:0] mem_tag_in,
-  input [63:0] mem_value_in,
-  input        mem_valid_in,
+    ex_branch_valid_out_2,
+    ex_branch_taken_2,
+    ex_branch_mispredict_2,
+    ex_branch_pht_idx_2,
+    ex_alu_NPC_out_2,
 
-	output		  stall_bus_1;
-	output		  stall_bus_2;
-  output      stall_mult_2; //THIS NEEDS TO BE IMPLEMENTED!!!
+    ex_alu_dest_reg_out_2,
+    ex_alu_result_out_2,
+    ex_alu_valid_out_2,
 
-	output [31:0] ex_IR_out_1;
-	output [63:0] ex_NPC_out_1;
-	output  [4:0] ex_dest_reg_out_1;
-	output [63:0] ex_result_out_1;
-	output		  ex_valid_out_1;
-		
-	output [31:0] ex_IR_out_2;
-	output [63:0] ex_NPC_out_2;
-	output  [4:0] ex_dest_reg_out_2;
-	output [63:0] ex_result_out_2;
-	output		  ex_valid_out_2;
-	
-	//BUS 1 MUXES
-	assign ex_IR_out_1 = (ex_mult_valid_out_1) ? ex_mult_IR_out_1: ex_alu_IR_out_1;
-	assign ex_NPC_out_1 = (ex_mult_valid_out_1) ? ex_mult_NPC_out_1: ex_alu_NPC_out_1;
-	assign ex_dest_reg_out_1 = (ex_mult_valid_out_1) ? ex_mult_dest_reg_out_1: ex_alu_dest_reg_out_1;
-	assign ex_result_out_1 = (ex_mult_valid_out_1) ? ex_mult_result_out_1:
-							 ((ex_branch_valid_out) ? ex_branch_target:
-							 ex_alu_result_out_1);
-	assign ex_valid_out_1 = (ex_mult_valid_out_1 | ex_branch_valid_out) ? 1'b1: ex_alu_valid_out_1;
-	assign stall_bus_1 = ex_mult_valid_out_1;
-	
-	//BUS 2 MUXES
-	assign ex_IR_out_2 = (ex_mult_valid_out_2) ? ex_mult_IR_out_2: ex_alu_IR_out_2;
-	assign ex_NPC_out_2 = (ex_mult_valid_out_2) ? ex_mult_NPC_out_2: ex_alu_NPC_out_2;
-	assign ex_dest_reg_out_2 = (mem_valid_in) ? mem_tag_in: (ex_mult_valid_out_2) ? ex_mult_dest_reg_out_2: ex_alu_dest_reg_out_2;
-	assign ex_result_out_2 = (mem_valid_in) ? mem_value_in: (ex_mult_valid_out_2) ? ex_mult_result_out_2: ex_alu_result_out_2;
-	assign ex_valid_out_2 = (ex_mult_valid_out_2 | mem_valid_in | ex_alu_valid_out_2) ? 1'b1: 1'b0;
-	assign stall_bus_2 = (mem_valid_in | ex_mult_valid_out_2) ? 1'b1: 1'b0;
-  assign stall_mult_2 = mem_valid_in;
-		
+    ex_mult_NPC_out_2,
+    ex_mult_dest_reg_out_2,
+    ex_mult_result_out_2,
+    ex_mult_valid_out_2,
+
+//Outs
+    stall_bus_1,
+    ex_NPC_out_1,
+    ex_dest_reg_out_1,
+    ex_result_out_1,
+    ex_mispredict_1,
+    ex_branch_result_1,
+    ex_pht_idx_out_1,
+    ex_valid_out_1,
+
+    stall_bus_2,
+    stall_mult_2,
+    ex_NPC_out_2,
+    ex_dest_reg_out_2,
+    ex_result_out_2,
+    ex_mispredict_2,
+    ex_branch_result_2,
+    ex_pht_idx_out_2,
+    ex_valid_out_2
+    );
+
+/* ----- Ports ----- */
+
+    //INPUTS
+  //Bus 1
+//Branches
+input ex_branch_valid_out_1;
+input ex_branch_taken_1;
+input ex_branch_mispredict_1;
+input [(`HISTORY_BITS-1):0] ex_branch_pht_idx_1;
+input [63:0] ex_alu_NPC_out_1;
+
+//ALU
+input  [4:0] ex_alu_dest_reg_out_1;
+input [63:0] ex_alu_result_out_1;
+input ex_alu_valid_out_1;
+
+//Multiplier
+input [63:0] ex_mult_NPC_out_1;
+input  [4:0] ex_mult_dest_reg_out_1;
+input [63:0] ex_mult_result_out_1;
+input ex_mult_valid_out_1;
+
+  //Bus 2
+//Memory input 
+input  [4:0] mem_tag_in;
+input [63:0] mem_value_in;
+input mem_valid_in;
+
+//Branches
+input ex_branch_valid_out_2;
+input ex_branch_taken_2;
+input ex_branch_mispredict_2;
+input [(`HISTORY_BITS-1):0] ex_branch_pht_idx_2;
+input [63:0] ex_alu_NPC_out_2;
+
+//ALU
+input  [4:0] ex_alu_dest_reg_out_2;
+input [63:0] ex_alu_result_out_2;
+input ex_alu_valid_out_2;
+
+//Mutliplier
+input [63:0] ex_mult_NPC_out_2;
+input  [4:0] ex_mult_dest_reg_out_2;
+input [63:0] ex_mult_result_out_2;
+input ex_mult_valid_out_2;
+
+    //OUTPUTS
+  //Bus 1
+output reg stall_bus_1;
+output reg [63:0] ex_NPC_out_1;
+output reg  [4:0] ex_dest_reg_out_1;
+output reg [63:0] ex_result_out_1;
+output reg ex_mispredict_1;
+output reg  [1:0] ex_branch_result_1;
+output reg [(`HISTORY_BITS-1):0] ex_pht_idx_out_1;
+output reg ex_valid_out_1;
+
+  //Bus 2
+output reg stall_bus_2;
+output reg stall_mult_2;
+output reg [63:0] ex_NPC_out_2;
+output reg  [4:0] ex_dest_reg_out_2;
+output reg [63:0] ex_result_out_2;
+output reg ex_mispredict_2;
+output reg  [1:0] ex_branch_result_2;
+output reg [(`HISTORY_BITS-1):0] ex_pht_idx_out_2;
+output reg ex_valid_out_2;
+
+/* ----- Logic ----- */
+
+always @ * //BUS 1
+begin
+  ex_pht_idx_out_1 = ex_branch_pht_idx_1;
+  if(ex_mult_valid_out_1) begin
+    stall_bus_1 = 1;
+    ex_NPC_out_1 = ex_mult_NPC_out_1;
+    ex_dest_reg_out_1 = ex_mult_dest_reg_out_1;
+    ex_result_out_1 = ex_mult_result_out_1;
+    ex_mispredict_1 = 0;
+    ex_branch_result_1 = `BRANCH_NONE;
+    ex_valid_out_1 = 1;
+  end
+  else begin 
+    stall_bus_1 = 0;
+    ex_NPC_out_1 = ex_alu_NPC_out_1;
+    ex_dest_reg_out_1 = ex_alu_dest_reg_out_1;
+    ex_result_out_1 = ex_alu_result_out_1;
+    if (ex_branch_valid_out_1) begin
+      ex_mispredict_1 = ex_branch_mispredict_1;
+      ex_branch_result_1 = (ex_branch_taken_1) ? `BRANCH_TAKEN: `BRANCH_NOT_TAKEN;
+      ex_valid_out_1 = 1;
+    end
+    else begin
+      ex_mispredict_1 = 0;
+      ex_branch_result_1 = `BRANCH_NONE;
+      ex_valid_out_1 = ex_alu_valid_out_1;
+    end
+  end
+end
+
+always @ * //BUS 2
+begin
+  ex_pht_idx_out_2 = ex_branch_pht_idx_2;
+  if(mem_valid_in) begin 
+    stall_mult_2 = ex_mult_valid_out_2;
+    stall_bus_2 = 1;
+    ex_NPC_out_2 = ex_mult_NPC_out_2;
+    ex_dest_reg_out_2 = mem_tag_in;
+    ex_result_out_2 = mem_value_in;
+    ex_mispredict_2 = 0;
+    ex_branch_result_2 = `BRANCH_NONE;
+    ex_valid_out_2 = 1;
+  end
+  else begin 
+    stall_mult_2 = 0;
+    if(ex_mult_valid_out_2) begin
+      stall_bus_2 = 1;
+      ex_NPC_out_2 = ex_mult_NPC_out_2;
+      ex_dest_reg_out_2 = ex_mult_dest_reg_out_2;
+      ex_result_out_2 = ex_mult_result_out_2;
+      ex_mispredict_2 = 0;
+      ex_branch_result_2 = `BRANCH_NONE;
+      ex_valid_out_2 = 1;
+    end
+    else begin 
+      stall_bus_2 = 0;
+      ex_NPC_out_2 = ex_alu_NPC_out_2;
+      ex_dest_reg_out_2 = ex_alu_dest_reg_out_2;
+      ex_result_out_2 = ex_alu_result_out_2;
+      if (ex_branch_valid_out_2) begin
+        ex_mispredict_2 = ex_branch_mispredict_2;
+        ex_branch_result_2 = (ex_branch_taken_2) ? `BRANCH_TAKEN: `BRANCH_NOT_TAKEN;
+        ex_valid_out_2 = 1;
+      end
+      else begin
+        ex_mispredict_2 = 0;
+        ex_branch_result_2 = `BRANCH_NONE;
+        ex_valid_out_2 = ex_alu_valid_out_2;
+      end
+    end
+  end
+end
 endmodule
 
 //
@@ -145,25 +233,22 @@ endmodule
 // This module has sequential logic
 //
 module mult_stage(clock, reset,
-                  IR_in, NPC_in, dest_reg_in, product_in,  mplier_in,  mcand_in,  start, stall,
-                  IR_out, NPC_out, dest_reg_out, product_out, mplier_out, mcand_out, done);
+                  NPC_in, dest_reg_in, product_in,  mplier_in,  mcand_in,  start, stall,
+                  NPC_out, dest_reg_out, product_out, mplier_out, mcand_out, done);
 
   input clock, reset, start;
   input [63:0] product_in, mplier_in, mcand_in, NPC_in;
-  input [31:0] IR_in;
   input [4:0]  dest_reg_in;
-  input        stall
+  input        stall;
 
   output done;
   output [63:0] product_out, mplier_out, mcand_out, NPC_out;
-  output [31:0] IR_out;
   output [4:0]  dest_reg_out;
 
   reg  [63:0] prod_in_reg, partial_prod_reg;
   wire [63:0] partial_product, next_mplier, next_mcand;
 
   reg [63:0] mplier_out, mcand_out, NPC_out;
-  reg [31:0] IR_out;
   reg [4:0]  dest_reg_out;
   reg done;
 
@@ -181,7 +266,6 @@ module mult_stage(clock, reset,
           partial_prod_reg <= #1 partial_prod_reg;
           mplier_out       <= #1 mplier_out;
           mcand_out        <= #1 mcand_out;
-          IR_out           <= #1 IR_out;
           NPC_out          <= #1 NPC_out;
           dest_reg_out     <= #1 dest_reg_out;     
      end
@@ -192,9 +276,8 @@ module mult_stage(clock, reset,
           partial_prod_reg <= #1 partial_product;
           mplier_out       <= #1 next_mplier;
           mcand_out        <= #1 next_mcand;
-      	  IR_out	         <= #1 IR_in;
-      	  NPC_out	         <= #1 NPC_in;
-      	  dest_reg_out     <= #1 dest_reg_in;
+          NPC_out          <= #1 NPC_in;
+          dest_reg_out     <= #1 dest_reg_in;
      end
 
   end
@@ -224,41 +307,36 @@ endmodule
 //
 
 
-module mult(clock, reset, IR_in, NPC_in, dest_reg_in, mplier, mcand, valid_in, IR_out, NPC_out, dest_reg_out, product, valid_out);
+module mult(clock, reset, NPC_in, dest_reg_in, mplier, mcand, valid_in, NPC_out, dest_reg_out, product, valid_out, stall);
 
   input clock, reset, valid_in;
   input [63:0] mcand, mplier, NPC_in;
-  input [31:0] IR_in;
   input [4:0]  dest_reg_in;
   input        stall;
 
   output [63:0] product, NPC_out;
-  output [31:0] IR_out;
   output [4:0]  dest_reg_out;
   output valid_out;
 
   wire [63:0] mcand_out, mplier_out;
   wire [(3*64)-1:0] internal_products, internal_mcands, internal_mpliers, internal_NPCs;
-  wire [(3*32)-1:0] internal_IRs;
   wire [(3*5)-1:0]  internal_dest_regs;
   wire [2:0] internal_dones;
 
   mult_stage mstage [3:0]
     (//Input
-	 .clock(clock),
+   .clock(clock),
      .reset(reset),
-	 .IR_in({internal_IRs,IR_in}),
-	 .NPC_in({internal_NPCs,NPC_in}),
-	 .dest_reg_in({internal_dest_regs,dest_reg_in}),
+   .NPC_in({internal_NPCs,NPC_in}),
+   .dest_reg_in({internal_dest_regs,dest_reg_in}),
      .product_in({internal_products,64'h0}),
      .mplier_in({internal_mpliers,mplier}),
      .mcand_in({internal_mcands,mcand}),
      .start({internal_dones,valid_in}),
      .stall(stall),
-	 //Outputs
-	 .IR_out({IR_out,internal_IRs}),
-	 .NPC_out({NPC_out,internal_NPCs}),
-	 .dest_reg_out({dest_reg_out,internal_dest_regs}),
+   //Outputs
+   .NPC_out({NPC_out,internal_NPCs}),
+   .dest_reg_out({dest_reg_out,internal_dest_regs}),
      .product_out({product,internal_products}),
      .mplier_out({mplier_out,internal_mpliers}),
      .mcand_out({mcand_out,internal_mcands}),
@@ -266,7 +344,6 @@ module mult(clock, reset, IR_in, NPC_in, dest_reg_in, mplier, mcand, valid_in, I
     );
 
 endmodule
-
 //
 // The ALU
 //

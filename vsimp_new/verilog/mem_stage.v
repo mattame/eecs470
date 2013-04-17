@@ -11,7 +11,7 @@
 //                                                                     //
 /////////////////////////////////////////////////////////////////////////
 
-`timescale 1ns/100ps
+//`timescale 1ns/100ps
 
 module mem_stage(// Inputs
                  clock,
@@ -79,3 +79,5 @@ module mem_stage(// Inputs
       mem_waiting_tag <= `SD Dmem2proc_response;
 
 endmodule // module mem_stage
+
+

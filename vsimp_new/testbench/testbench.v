@@ -8,7 +8,7 @@
 //                                                                     //
 /////////////////////////////////////////////////////////////////////////
 
-`timescale 1ns/100ps
+//`timescale 1ns/100ps
 
 extern void print_header(string str);
 extern void print_cycles();

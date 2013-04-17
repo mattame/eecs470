@@ -23,8 +23,8 @@ module memory_arbiter(
 		LSQ_mem_req_addr,
 		LSQ_mem_req_value,
 		LSQ_mem_read,
-		LSQ_tag,
-		LSQ_valid,
+		LSQ_tag_in,
+		LSQ_valid_in,
 
 		//From Memory
 		MEM_value_in,
@@ -36,12 +36,12 @@ module memory_arbiter(
 
 		//To LSQ
 		EX_mem_value,
-		EX_tag,
-		EX_valid,
+		EX_tag_out,
+		EX_valid_out,
 
 		//To Memory
 		MEM_address,
-		MEM_value,
+		MEM_value_out,
 		MEM_command
 	);
 

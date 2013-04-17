@@ -9,7 +9,7 @@
 //                                                                     //
 /////////////////////////////////////////////////////////////////////////
 
-`timescale 1ns/100ps
+//`timescale 1ns/100ps
 
 module if_stage(// Inputs
                 clock,
@@ -111,9 +111,6 @@ module if_stage(// Inputs
     // The second is always valid
   assign if_valid_inst_out_1 = ~(PC_reg[2] || reset || stalling);
   assign if_valid_inst_out_2 = ~(reset || stalling);
-
-
-  assign 
 
 
    // assign predicted PC output for both instructions //

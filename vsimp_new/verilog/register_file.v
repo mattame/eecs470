@@ -5,6 +5,8 @@
 
 `define ZERO_REG 5'd0
 
+//`timescale 1ns/100ps
+
 // regfile module //
 module register_file(clock,reset,   // input signals in
 

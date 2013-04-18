@@ -435,6 +435,10 @@ module reservation_station(clock,reset,               // signals in
                            inst2_rega_rob_value_in,
                            inst2_regb_rob_value_in,
 
+                           // stall signals in //
+                           inst1_stall_in,
+                           inst2_stall_in,
+
                            // signals and busses out for inst1 to the ex stage
                            inst1_rega_value_out,inst1_regb_value_out,
                            inst1_opa_select_out,inst1_opb_select_out,
@@ -504,6 +508,9 @@ module reservation_station(clock,reset,               // signals in
    input wire [7:0]  cdb1_tag_in;
    input wire [63:0] cdb2_value_in;
    input wire [7:0]  cdb2_tag_in;
+
+   input wire inst1_stall_in;
+   input wire inst2_stall_in;
 
    input wire [63:0] inst1_rega_rob_value_in;
    input wire [63:0] inst1_regb_rob_value_in;
@@ -666,7 +673,7 @@ module reservation_station(clock,reset,               // signals in
 		 begin
 		 
 			 // pull from the first instruction slot //
-			 if ( dispatch && inst1_valid && (first_empties[i]||second_empties[i]) )
+			 if ( dispatch && inst1_valid && (first_empties[i]) )
 			 begin
 //                             fills[i]              = 1'b1;
                                if (inst1_rega_tag_in[7:6]==2'b01) begin   // ready-in-ROB: pull from the ROB versus the reg file
@@ -700,7 +707,7 @@ module reservation_station(clock,reset,               // signals in
                          end
 				
                          // pull from the second instruction slot //
-                         else if ( dispatch && inst2_valid && (first_empties[i]||second_empties[i]) )
+                         else if ( dispatch && inst2_valid && (second_empties[i]) )
                          begin
 //                             fills[i]              = 1'b1;
                                if (inst2_rega_tag_in[7:6]==2'b01) begin   // ready-in-ROB: pull from the ROB versus the reg file
@@ -757,7 +764,7 @@ module reservation_station(clock,reset,               // signals in
                          end
 
                         // assign resets for all rs entries //
-                        resets[i] = (reset || issue_first_states[i] || issue_second_states[i]);
+                        resets[i] = (reset || (issue_first_states[i] && ~inst1_stall_in) || (issue_second_states[i] && ~inst2_stall_in));
  
 	     end
 		 

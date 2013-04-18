@@ -534,13 +534,13 @@ module pipeline (// Inputs
 
 
   assign proc2mem_command =
-           (lsq_proc2Dmem_command==`BUS_NONE) ? proc2Imem_command : lsq_proc2Dmem_command;
+           (lsq_proc2Dmem_command_out==`BUS_NONE) ? proc2Imem_command : lsq_proc2Dmem_command_out;
   assign proc2mem_addr =
-           (lsq_proc2Dmem_command==`BUS_NONE) ? proc2Imem_addr : lsq_proc2Dmem_addr;
+           (lsq_proc2Dmem_command_out==`BUS_NONE) ? proc2Imem_addr : lsq_proc2Dmem_addr_out;
   assign Dmem2proc_response = 
-      (lsq_proc2Dmem_command==`BUS_NONE) ? 0 : mem2proc_response;
+           (lsq_proc2Dmem_command_out==`BUS_NONE) ? 0 : mem2proc_response;
   assign Imem2proc_response =
-      (lsq_proc2Dmem_command==`BUS_NONE) ? mem2proc_response : 0;
+           (lsq_proc2Dmem_command_out==`BUS_NONE) ? mem2proc_response : 0;
 
 
   ///***  MAKE D-CACHE  ***///
@@ -1198,7 +1198,7 @@ module pipeline (// Inputs
                                            /*** OUTPUTS ***/
                                            // signals and busses out for inst1 to the ex stage
                                            .inst1_rega_value_out(rs_inst1_rega_value_out),
-                                           .inst1_regb_value_out(rs_inst1_rega_value_out),
+                                           .inst1_regb_value_out(rs_inst1_regb_value_out),
                                            
                                            .inst1_opa_select_out(rs_inst1_opa_select_out),
                                            .inst1_opb_select_out(rs_inst1_opb_select_out),
@@ -1217,7 +1217,7 @@ module pipeline (// Inputs
 
                                            // signals and busses out for inst2 to the ex stage
                                            .inst2_rega_value_out(rs_inst2_rega_value_out),
-                                           .inst2_regb_value_out(rs_inst2_rega_value_out),
+                                           .inst2_regb_value_out(rs_inst2_regb_value_out),
                                            
                                            .inst2_opa_select_out(rs_inst2_opa_select_out),
                                            .inst2_opb_select_out(rs_inst2_opb_select_out),

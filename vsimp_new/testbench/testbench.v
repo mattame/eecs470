@@ -190,7 +190,19 @@ module testbench;
 
     @(posedge clock);
     @(posedge clock);
+    @(posedge clock);
+    @(posedge clock);
+    @(posedge clock);
+    @(posedge clock);
+    @(posedge clock);
+    @(posedge clock);
+    @(posedge clock);
+    @(posedge clock);
+    @(posedge clock);
+    @(posedge clock);
+
     `SD;
+
     // This reset is at an odd time to avoid the pos & neg clock edges
 
     reset = 1'b0;

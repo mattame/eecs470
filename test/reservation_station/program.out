@@ -6,7 +6,7 @@ Warning-[LNX_OS_VERUN] Unsupported Linux version
   Please refer to release notes for information on supported platforms.
 
                          Chronologic VCS (TM)
-         Version E-2011.03_Full64 -- Mon Apr 15 16:05:20 2013
+         Version E-2011.03_Full64 -- Wed Apr 17 23:53:15 2013
                Copyright (c) 1991-2011 by Synopsys Inc.
                          ALL RIGHTS RESERVED
 
@@ -37,7 +37,7 @@ test_reservation_station.v, 96
 No TimeScale specified
 
 Warning-[SIOB] Select index out of bounds
-reservation_station.v, 806
+reservation_station.v, 1626
 "first_empty_filleds[(0 - 1)]"
   The select index is out of declared bounds : [15:0].
   In module instance : rs 
@@ -45,7 +45,7 @@ reservation_station.v, 806
 
 
 Warning-[SIOB] Select index out of bounds
-reservation_station.v, 806
+reservation_station.v, 1626
 "second_empty_filleds[(0 - 1)]"
   The select index is out of declared bounds : [15:0].
   In module instance : rs 
@@ -64,7 +64,7 @@ g++  -o ../simv   -Wl,-whole-archive    -Wl,-no-whole-archive  _vcsobj_1_1.o  5N
 make[1]: Leaving directory `/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/test/reservation_station/csrc'
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 15 16:05 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 17 23:53 2013
 
 STARTING TESTBENCH!
 
@@ -187,5 +187,5 @@ $finish at simulation time                  320
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 320
 CPU Time:      0.010 seconds;       Data structure size:   0.1Mb
-Mon Apr 15 16:05:22 2013
-CPU time: .833 seconds to compile + .061 seconds to elab + .231 seconds to link + .054 seconds in simulation
+Wed Apr 17 23:53:17 2013
+CPU time: .584 seconds to compile + .066 seconds to elab + .181 seconds to link + .050 seconds in simulation

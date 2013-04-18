@@ -184,7 +184,7 @@ begin
     else begin
       ex_mispredict_1 = 0;
       ex_branch_result_1 = (ex_IR_1 == `HALT_INSTRUCTION) ? `BRANCH_HALT: `BRANCH_NONE;
-      ex_valid_out_1 = (ex_IR_1 == `HALT_INSTRUCTION) | ex_alu_valid_out_1;
+      ex_valid_out_1 = ex_alu_valid_out_1;
     end
   end
 end
@@ -226,7 +226,7 @@ begin
       else begin
         ex_mispredict_2 = 0;
         ex_branch_result_2 = (ex_IR_2 == `HALT_INSTRUCTION) ? `BRANCH_HALT: `BRANCH_NONE;
-        ex_valid_out_2 = (ex_IR_2 == `HALT_INSTRUCTION) | ex_alu_valid_out_2;
+        ex_valid_out_2 = ex_alu_valid_out_2;
       end
     end
   end

@@ -352,7 +352,7 @@ module ex_stage(// Inputs
 
     .ex_alu_dest_reg_out_1(id_ex_dest_reg_1),
     .ex_alu_result_out_1(ex_alu_result_out_1),
-    .ex_alu_valid_out_1(ex_alu_valid_out_1),
+    .ex_alu_valid_out_1(valid_in_1),
 
     .ex_mult_NPC_out_1(ex_mult_NPC_out_1),
     .ex_mult_dest_reg_out_1(ex_mult_dest_reg_out_1),
@@ -372,7 +372,7 @@ module ex_stage(// Inputs
 
     .ex_alu_dest_reg_out_2(id_ex_dest_reg_2),
     .ex_alu_result_out_2(ex_alu_result_out_2),
-    .ex_alu_valid_out_2(ex_alu_valid_out_2),
+    .ex_alu_valid_out_2(valid_in_2),
 
     .ex_mult_NPC_out_2(ex_mult_NPC_out_2),
     .ex_mult_dest_reg_out_2(ex_mult_dest_reg_out_2),

@@ -3,7 +3,7 @@
 	<head>
 		<title>VCS dump file for DVE debugging</title>
 		<vcsVersion>E-2011.03_Full64</vcsVersion>
-		<dateCreated>Wed Apr 17 22:30:30 2013</dateCreated>
+		<dateCreated>Thu Apr 18 00:09:28 2013</dateCreated>
 	</head>
 	<body>
 		<!-- VCS compile options -->
@@ -614,12 +614,25 @@
 			<macro name="RSTAG_NULL" module="ASSIGNRSINPUTS" sourceID="16" lineno="744" defID="16" defLine="19" value="79" />
 			<macro name="RSTAG_NULL" module="ASSIGNRSINPUTS" sourceID="16" lineno="745" defID="16" defLine="19" value="79" />
 			<macro name="HISTORY_BITS" module="ASSIGNRSINPUTS" sourceID="16" lineno="756" defID="16" defLine="23" value="4" />
-			<macro name="NUM_RSES" module="" sourceID="16" lineno="782" defID="16" defLine="11" value="9" />
-			<macro name="RS_READY" module="ASSIGNSTATESOUTERLOOP" sourceID="16" lineno="785" defID="16" defLine="17" value="82" />
-			<macro name="NUM_RSES" module="ASSIGNSTATESOUTERLOOP" sourceID="16" lineno="790" defID="16" defLine="11" value="9" />
-			<macro name="NUM_RSES" module="" sourceID="16" lineno="805" defID="16" defLine="11" value="9" />
-			<macro name="NUM_RSES" module="" sourceID="16" lineno="873" defID="16" defLine="11" value="9" />
-			<macro name="NUM_RSES" module="" sourceID="16" lineno="880" defID="16" defLine="11" value="9" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="801" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="852" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="903" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="954" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1005" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1056" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1107" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1158" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1209" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1260" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1311" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1362" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1413" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1464" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1515" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1566" defID="16" defLine="17" value="82" />
+			<macro name="NUM_RSES" module="" sourceID="16" lineno="1623" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="" sourceID="16" lineno="1691" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="" sourceID="16" lineno="1698" defID="16" defLine="11" value="9" />
 			<macro name="BUS_LOAD" module="icache" sourceID="7" lineno="76" defID="0" defLine="188" value="20" />
 			<macro name="BUS_NONE" module="icache" sourceID="7" lineno="76" defID="0" defLine="187" value="10" />
 			<macro name="SD" module="icache" sourceID="7" lineno="91" defID="2" defLine="12" value="8" />
@@ -650,19 +663,19 @@
 			<macro name="SD" module="NTAGTABLEALWAYS" sourceID="10" lineno="101" defID="10" defLine="8" value="8" />
 			<macro name="VERILOG_CLOCK_PERIOD" module="testbench" sourceID="20" lineno="129" defID="0" defLine="98" value="86" />
 			<macro name="VIRTUAL_CLOCK_PERIOD" module="show_clk_count" sourceID="20" lineno="142" defID="0" defLine="97" value="87" />
-			<macro name="SD" module="testbench" sourceID="20" lineno="193" defID="16" defLine="8" value="8" />
-			<macro name="SD" module="testbench" sourceID="20" lineno="213" defID="16" defLine="8" value="8" />
-			<macro name="SD" module="testbench" sourceID="20" lineno="214" defID="16" defLine="8" value="8" />
-			<macro name="SD" module="testbench" sourceID="20" lineno="218" defID="16" defLine="8" value="8" />
-			<macro name="SD" module="testbench" sourceID="20" lineno="219" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="204" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="225" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="226" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="230" defID="16" defLine="8" value="8" />
 			<macro name="SD" module="testbench" sourceID="20" lineno="231" defID="16" defLine="8" value="8" />
-			<macro name="SD" module="testbench" sourceID="20" lineno="232" defID="16" defLine="8" value="8" />
-			<macro name="NO_ERROR" module="testbench" sourceID="20" lineno="262" defID="0" defLine="110" value="14" />
-			<macro name="MEM_64BIT_LINES" module="testbench" sourceID="20" lineno="265" defID="0" defLine="94" value="88" />
-			<macro name="HALTED_ON_MEMORY_ERROR" module="testbench" sourceID="20" lineno="271" defID="0" defLine="111" value="89" />
-			<macro name="HALTED_ON_HALT" module="testbench" sourceID="20" lineno="273" defID="0" defLine="112" value="13" />
-			<macro name="HALTED_ON_ILLEGAL" module="testbench" sourceID="20" lineno="275" defID="0" defLine="113" value="11" />
-			<macro name="NOOP_INST" module="get_instr_string" sourceID="20" lineno="306" defID="16" defLine="21" value="15" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="243" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="244" defID="16" defLine="8" value="8" />
+			<macro name="NO_ERROR" module="testbench" sourceID="20" lineno="274" defID="0" defLine="110" value="14" />
+			<macro name="MEM_64BIT_LINES" module="testbench" sourceID="20" lineno="277" defID="0" defLine="94" value="88" />
+			<macro name="HALTED_ON_MEMORY_ERROR" module="testbench" sourceID="20" lineno="283" defID="0" defLine="111" value="89" />
+			<macro name="HALTED_ON_HALT" module="testbench" sourceID="20" lineno="285" defID="0" defLine="112" value="13" />
+			<macro name="HALTED_ON_ILLEGAL" module="testbench" sourceID="20" lineno="287" defID="0" defLine="113" value="11" />
+			<macro name="NOOP_INST" module="get_instr_string" sourceID="20" lineno="318" defID="16" defLine="21" value="15" />
 			<macro name="BUS_NONE" module="mem_stage" sourceID="12" lineno="55" defID="11" defLine="11" value="10" />
 			<macro name="BUS_STORE" module="mem_stage" sourceID="12" lineno="56" defID="11" defLine="13" value="19" />
 			<macro name="BUS_LOAD" module="mem_stage" sourceID="12" lineno="57" defID="11" defLine="12" value="20" />
@@ -726,7 +739,6 @@
 			<macro name="HALT_INSTRUCTION" module="arbiter" sourceID="5" lineno="186" defID="5" defLine="29" value="93" />
 			<macro name="BRANCH_HALT" module="arbiter" sourceID="5" lineno="186" defID="5" defLine="27" value="12" />
 			<macro name="BRANCH_NONE" module="arbiter" sourceID="5" lineno="186" defID="5" defLine="24" value="7" />
-			<macro name="HALT_INSTRUCTION" module="arbiter" sourceID="5" lineno="187" defID="5" defLine="29" value="93" />
 			<macro name="BRANCH_NONE" module="arbiter" sourceID="5" lineno="202" defID="5" defLine="24" value="7" />
 			<macro name="BRANCH_NONE" module="arbiter" sourceID="5" lineno="213" defID="5" defLine="24" value="7" />
 			<macro name="BRANCH_TAKEN" module="arbiter" sourceID="5" lineno="223" defID="5" defLine="25" value="6" />
@@ -734,7 +746,6 @@
 			<macro name="HALT_INSTRUCTION" module="arbiter" sourceID="5" lineno="228" defID="5" defLine="29" value="93" />
 			<macro name="BRANCH_HALT" module="arbiter" sourceID="5" lineno="228" defID="5" defLine="27" value="12" />
 			<macro name="BRANCH_NONE" module="arbiter" sourceID="5" lineno="228" defID="5" defLine="24" value="7" />
-			<macro name="HALT_INSTRUCTION" module="arbiter" sourceID="5" lineno="229" defID="5" defLine="29" value="93" />
 			<macro name="ALU_ADDQ" module="alu" sourceID="5" lineno="394" defID="0" defLine="149" value="27" />
 			<macro name="ALU_SUBQ" module="alu" sourceID="5" lineno="395" defID="0" defLine="150" value="29" />
 			<macro name="ALU_AND" module="alu" sourceID="5" lineno="396" defID="0" defLine="151" value="40" />

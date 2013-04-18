@@ -49,7 +49,10 @@ module testbench;
    reg [7:0]  cdb1_tag_in;
    reg [63:0] cdb2_value_in;
    reg [7:0]  cdb2_tag_in;
-  
+ 
+   reg inst1_stall_in;
+   reg inst2_stall_in;
+ 
    reg [63:0] inst1_rega_rob_value_in;
    reg [63:0] inst1_regb_rob_value_in;
    reg [63:0] inst2_rega_rob_value_in;
@@ -141,6 +144,10 @@ module testbench;
                            .cdb1_value_in(cdb1_value_in),
                            .cdb2_value_in(cdb2_value_in),
 
+                           // stall signals //
+                           .inst1_stall_in(inst1_stall_in),
+                           .inst2_stall_in(inst2_stall_in),                         
+    
                            // inputs from the ROB //
                            .inst1_rega_rob_value_in(inst1_rega_rob_value_in),
                            .inst1_regb_rob_value_in(inst1_regb_rob_value_in),
@@ -307,6 +314,9 @@ module testbench;
     cdb2_value_in = 64'd0;
     cdb2_tag_in = `RSTAG_NULL;
 
+    inst1_stall_in = 1'b0;
+    inst2_stall_in = 1'b0;
+
     inst1_rega_rob_value_in = 64'd0;
     inst1_regb_rob_value_in = 64'd0;
     inst2_rega_rob_value_in = 64'd0;
@@ -334,58 +344,74 @@ module testbench;
         $display("double dispatch 1\n");
         inst1_valid = 1'b1;
         inst2_valid = 1'b1;
-        inst1_rega_value_in = 64'd1;
+        inst1_rega_value_in = 64'h1A;
         inst1_regb_tag_in = 8'd0;
-        inst2_rega_value_in = 64'd2;
+        inst2_rega_value_in = 64'h2B;
         inst2_regb_tag_in = 8'd0;
+        inst1_stall_in = 1'b1;
         CLOCK_AND_DISPLAY();
-        ASSERT(dispatch);
+        ASSERT(dispatch && ~inst1_valid_out && ~inst2_valid_out);
 
         // dispatch again //
         $display("double dispatch 2\n");
+        inst1_stall_in = 1'b0;
         CLOCK_AND_DISPLAY();
-        ASSERT(dispatch);
+        ASSERT(dispatch && ~inst1_valid_out && ~inst2_valid_out);
 
         // and again //
         $display("double dispatch 3\n");
         CLOCK_AND_DISPLAY();
-        ASSERT(dispatch);
+        ASSERT(dispatch && ~inst1_valid_out && ~inst2_valid_out);
 
         // single dispatch //
         $display("single dispatch\n");
         inst1_valid = 1'b0;
+        inst2_valid = 1'b1;
         CLOCK_AND_DISPLAY();
-        ASSERT(dispatch);   // should not be full yet
+        ASSERT(dispatch && ~inst1_valid_out && ~inst2_valid_out);   // should not be full yet
 
         // yet again //
         $display("single dispatch, other slot\n");
         inst1_valid = 1'b1;
         inst2_valid = 1'b0;
         CLOCK_AND_DISPLAY();
-        ASSERT(dispatch);   // should not be full yet
+        ASSERT(dispatch && ~inst1_valid_out && ~inst2_valid_out);   // should not be full yet
 
 
-        // fill all voids and issue first 2 ins'ns //
-        $display("issue1\n"); 
+        // fill all voids but stall //
+        $display("stall\n"); 
         cdb1_tag_in = 8'd0;
         cdb1_value_in = 64'hDEADBEEFBAADBEEF;
         inst1_valid = 1'b0;
         inst2_valid = 1'b0;
+        inst1_stall_in = 1'b1;
+        inst2_stall_in = 1'b1;
         CLOCK_AND_DISPLAY();
-        ASSERT(inst1_valid_out && inst2_valid_out);   // first issue
+        ASSERT(inst1_valid_out && inst2_valid_out);   // wont actually issue
+
+        // stall again //
+        cdb1_tag_in = `RSTAG_NULL;
+        CLOCK_AND_DISPLAY();
+        ASSERT(inst1_valid_out && inst2_valid_out);   // wont issue 
+
+        // issue one //
+        $display("FIRST ISSUE\n");
+        inst1_stall_in = 1'b0;
+        inst2_stall_in = 1'b0;
+        CLOCK_AND_DISPLAY();
+        ASSERT(inst1_valid_out && inst2_valid_out && inst1_rega_value_out==64'h2B && inst2_rega_value_out==64'h1A);   // first issue
 
         // watch RS empty as everything gets issued 
         $display("issue2\n");
-        cdb1_tag_in = `RSTAG_NULL;
         CLOCK_AND_DISPLAY();
-        ASSERT(inst1_valid_out && inst2_valid_out);
+        ASSERT(inst1_valid_out && inst2_valid_out && inst1_rega_value_out==64'h2B && inst2_rega_value_out==64'h1A);
         $display("issue3\n");
         CLOCK_AND_DISPLAY();
-        ASSERT(inst1_valid_out && inst2_valid_out);
+        ASSERT(inst1_valid_out && inst2_valid_out && inst1_rega_value_out==64'h2B && inst2_rega_value_out==64'h1A);
         $display("issue4\n");
         CLOCK_AND_DISPLAY();
         ASSERT(inst1_valid_out && inst2_valid_out);     // this should be the last issue
-        ASSERT(inst1_rega_value_out==64'd2 && inst1_regb_value_out==64'hDEADBEEFBAADBEEF && inst2_rega_value_out==64'd1 && inst2_regb_value_out==64'hDEADBEEFBAADBEEF);
+        ASSERT(inst1_rega_value_out==64'h2B && inst1_regb_value_out==64'hDEADBEEFBAADBEEF && inst2_rega_value_out==64'h1A && inst2_regb_value_out==64'hDEADBEEFBAADBEEF);
 
         // do nothing //
         $display("nothing\n");

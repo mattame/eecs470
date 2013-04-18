@@ -7,7 +7,7 @@
 // defines //
 `define SD #1
 `define RSTAG_NULL 8'hFF
-`define ZERO_REG   5'd31
+`define ZERO_REG   5'h1f
 
 //`timescale 1ns/100ps
 
@@ -78,7 +78,7 @@ module map_table(clock,reset,clear_entries,        // signal inputs
    assign n_tag_table[`ZERO_REG]    = `RSTAG_NULL;
    genvar i;
    generate
-      for (i=1; i<32; i=i+1)
+      for (i=0; i<31; i=i+1)
       begin : NTAGTABLEASSIGN
          assign n_ready_in_rob[i] = ( tag_table[i][6] || (cdb1_tag_in==tag_table[i] && cdb1_tag_in!=`RSTAG_NULL) || (cdb2_tag_in==tag_table[i] && cdb2_tag_in!=`RSTAG_NULL) );
          assign n_tag_table[i] = ((inst2_dest_in==i) && inst2_dest_nonzero && inst2_tag_nonnull) ? inst2_tag_in :            // inst2 takes precidence here

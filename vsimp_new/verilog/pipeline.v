@@ -854,6 +854,7 @@ module pipeline (// Inputs
     begin
       ff_dest_reg_1       = 0;
       ff_opa_select_1     = 0;
+      ff_opb_select_1     = 0;
       ff_alu_func_1       = 0;
       ff_rd_mem_1         = 0;
       ff_wr_mem_1         = 0;
@@ -869,6 +870,7 @@ module pipeline (// Inputs
   
       ff_dest_reg_2       = 0;
       ff_opa_select_2     = 0;
+      ff_opb_select_2     = 0;
       ff_alu_func_2       = 0;
       ff_rd_mem_2         = 0;
       ff_wr_mem_2         = 0;
@@ -886,6 +888,7 @@ module pipeline (// Inputs
     begin
       ff_dest_reg_1       = id_dest_reg_out_1;
       ff_opa_select_1     = id_opa_select_out_1;
+      ff_opb_select_1     = id_opb_select_out_1;
       ff_alu_func_1       = id_alu_func_out_1;
       ff_rd_mem_1         = id_rd_mem_out_1;
       ff_wr_mem_1         = id_wr_mem_out_1;
@@ -901,6 +904,7 @@ module pipeline (// Inputs
       
       ff_dest_reg_2       = id_dest_reg_out_2;
       ff_opa_select_2     = id_opa_select_out_2;
+      ff_opb_select_2     = id_opb_select_out_2;
       ff_alu_func_2       = id_alu_func_out_2;
       ff_rd_mem_2         = id_rd_mem_out_2;
       ff_wr_mem_2         = id_wr_mem_out_2;
@@ -1143,7 +1147,7 @@ module pipeline (// Inputs
                                            //Instruction signals from Decode                         
                                            .inst1_dest_reg_in(rs_inst1_dest_reg),
                                            .inst1_opa_select_in(rs_inst1_opa_select),
-                                           .inst1_opb_select_in(rs_inst2_opb_select),
+                                           .inst1_opb_select_in(rs_inst1_opb_select),
                                            .inst1_alu_func_in(rs_inst1_alu_func),
                                            .inst1_rd_mem_in(rs_inst1_rd_mem),
                                            .inst1_wr_mem_in(rs_inst1_wr_mem),

@@ -1,10 +1,10 @@
 
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 18 00:11 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 18 18:03 2013
 VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
-The file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/inter.vpd' was opened successfully.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
            V C S   S i m u l a t i o n   R e p o r t 
 Time: 0
-CPU Time:      0.030 seconds;       Data structure size:   0.7Mb
-Thu Apr 18 00:11:25 2013
+CPU Time:      0.040 seconds;       Data structure size:   0.6Mb
+Thu Apr 18 18:03:21 2013

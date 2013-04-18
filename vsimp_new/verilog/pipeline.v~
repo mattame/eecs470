@@ -541,6 +541,7 @@ module pipeline (// Inputs
            (lsq_proc2Dmem_command_out==`BUS_NONE) ? 0 : mem2proc_response;
   assign Imem2proc_response =
            (lsq_proc2Dmem_command_out==`BUS_NONE) ? mem2proc_response : 0;
+  assign proc2mem_data = lsq_proc2Dmem_data_out;
 
 
   ///***  MAKE D-CACHE  ***///
@@ -853,6 +854,7 @@ module pipeline (// Inputs
     begin
       ff_dest_reg_1       = 0;
       ff_opa_select_1     = 0;
+      ff_opb_select_1     = 0;
       ff_alu_func_1       = 0;
       ff_rd_mem_1         = 0;
       ff_wr_mem_1         = 0;
@@ -868,6 +870,7 @@ module pipeline (// Inputs
   
       ff_dest_reg_2       = 0;
       ff_opa_select_2     = 0;
+      ff_opb_select_2     = 0;
       ff_alu_func_2       = 0;
       ff_rd_mem_2         = 0;
       ff_wr_mem_2         = 0;
@@ -885,6 +888,7 @@ module pipeline (// Inputs
     begin
       ff_dest_reg_1       = id_dest_reg_out_1;
       ff_opa_select_1     = id_opa_select_out_1;
+      ff_opb_select_1     = id_opb_select_out_1;
       ff_alu_func_1       = id_alu_func_out_1;
       ff_rd_mem_1         = id_rd_mem_out_1;
       ff_wr_mem_1         = id_wr_mem_out_1;
@@ -900,6 +904,7 @@ module pipeline (// Inputs
       
       ff_dest_reg_2       = id_dest_reg_out_2;
       ff_opa_select_2     = id_opa_select_out_2;
+      ff_opb_select_2     = id_opb_select_out_2;
       ff_alu_func_2       = id_alu_func_out_2;
       ff_rd_mem_2         = id_rd_mem_out_2;
       ff_wr_mem_2         = id_wr_mem_out_2;
@@ -1688,8 +1693,6 @@ module pipeline (// Inputs
 			      .LSQ_EX_valid(lsq_LSQ_EX_valid_out)
 
 		        );
-
-	assign proc2mem_data = lsq_proc2Dmem_data_out;
 
 
 endmodule  // module verisimple

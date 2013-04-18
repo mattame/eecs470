@@ -328,8 +328,8 @@ module reorder_buffer( clock,reset,
 
 
    // for tag outputs (to rs) //
-   assign inst1_tag_out = (inst1_dispatch ? tail_minus_one : `RSTAG_NULL);
-   assign inst2_tag_out = (inst2_dispatch ? tail           : `RSTAG_NULL);
+   assign inst1_tag_out = (inst1_dispatch ? tail_plus_one : `RSTAG_NULL);
+   assign inst2_tag_out = (inst2_dispatch ? tail_plus_two : `RSTAG_NULL);
 
    // assign appropriate outputs for from-rob values //
    // tags in are broken down to remove the ready-in-rob-bit //

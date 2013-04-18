@@ -1670,7 +1670,7 @@ module pipeline (// Inputs
 
 			      .EX_tag_2(lsq_EX_tag_2),
 			      .value_in_2(lsq_value_2),
-			      .address_in_2(lsq_address_i),
+			      .address_in_2(lsq_address_2),
 			      .EX_valid_2(lsq_valid_2),
 
 			      //From MEM

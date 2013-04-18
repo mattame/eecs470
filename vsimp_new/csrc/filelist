@@ -31,11 +31,11 @@ _vcsobj_1_1.o : _vcsobj_1_1.a
 		ld -r -o $@ --whole-archive $< --no-whole-archive; \
 	fi
 
-	@$(AR) -s excl_vcsobj_0_1.a
 
-VCS_INCR_OBJS=pre_vcsobj_1_1.o 
+VCS_INCR_OBJS=pre_vcsobj_0_1.o 
 
-pre_vcsobj_1_1.o : pre_vcsobj_1_1.a
+pre_vcsobj_0_1.o : pre_vcsobj_0_1.a
+	@$(AR) -s $<
 	ld -r -o $@ --whole-archive $< --no-whole-archive
 
 

@@ -541,7 +541,6 @@ module pipeline (// Inputs
            (lsq_proc2Dmem_command_out==`BUS_NONE) ? 0 : mem2proc_response;
   assign Imem2proc_response =
            (lsq_proc2Dmem_command_out==`BUS_NONE) ? mem2proc_response : 0;
-  assign proc2mem_data = lsq_proc2Dmem_data_out;
 
 
   ///***  MAKE D-CACHE  ***///
@@ -1689,6 +1688,8 @@ module pipeline (// Inputs
 			      .LSQ_EX_valid(lsq_LSQ_EX_valid_out)
 
 		        );
+
+	assign proc2mem_data = lsq_proc2Dmem_data_out;
 
 
 endmodule  // module verisimple

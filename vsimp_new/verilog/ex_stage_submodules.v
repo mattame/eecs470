@@ -19,7 +19,7 @@
 //
 
 
-`define HISTORY_BITS 5
+`define HISTORY_BITS 8
 
 `define BRANCH_NONE      2'b00
 `define BRANCH_TAKEN     2'b01

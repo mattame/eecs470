@@ -74,8 +74,8 @@ module map_table(clock,reset,clear_entries,        // signal inputs
    assign inst2_tagb_out = (reset ? `RSTAG_NULL : ((inst2_regb_in==inst1_dest_in) && inst1_dest_nonzero && inst1_tag_nonnull) ? inst1_tag_in : tag_table[inst2_regb_in] );  // forward from inst1
 
    // combinational logic for next states in tag table //
-   assign n_ready_in_rob[0] = 1'b0;
-   assign n_tag_table[0]    = `RSTAG_NULL;
+   assign n_ready_in_rob[`ZERO_REG] = 1'b0;
+   assign n_tag_table[`ZERO_REG]    = `RSTAG_NULL;
    genvar i;
    generate
       for (i=1; i<32; i=i+1)

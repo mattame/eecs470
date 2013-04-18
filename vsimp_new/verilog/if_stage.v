@@ -90,7 +90,7 @@ module if_stage(// Inputs
   assign inst2_branch_taken = (inst2_result_in==`BRANCH_TAKEN);
   
   // assign mem address // 
-  assign proc2Imem_addr = {next_PC[63:3], 3'b0};
+  assign proc2Imem_addr = { PC_reg[63:3], 3'b0 };
 
     // Two words out of the Imem
   assign if_IR_out_1 = Imem2proc_data[31: 0];

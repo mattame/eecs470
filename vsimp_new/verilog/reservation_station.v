@@ -31,9 +31,9 @@
 module reservation_station_entry(clock,reset,fill,                               // signals in
 
                            first_empty_filled_in,
-			   second_empty_filled_in,
-			   filling_first,
-			   filling_second,
+			                     second_empty_filled_in,
+			                     filling_first,
+		                  	   filling_second,
 
                            // input busses //
                            dest_reg_in,
@@ -62,12 +62,12 @@ module reservation_station_entry(clock,reset,fill,                              
 
                            // outputs //
                            status_out,                                           // signals out
-			   age_out,
-			   first_empty_filled_out,
-			   second_empty_filled_out,
-			   first_empty,
-			   second_empty,					   
-			   dest_tag_out,
+			                     age_out,
+			                     first_empty_filled_out,
+			                     second_empty_filled_out,
+			                     first_empty,
+			                     second_empty,					   
+			                     dest_tag_out,
                            dest_reg_out,
                            rega_value_out,
                            regb_value_out,

@@ -336,6 +336,7 @@ module pipeline (// Inputs
   wire [(`NUM_RSES-1):0] rs_issue_second_states_out;  // indicates whether or not this rs entry should issue next (second out)
    
 //Outputs from [RS/ROB] / EX Pipeline Register  
+  reg         ex_valid_1;
   reg  [63:0] ex_NPC_1;         // incoming instruction PC+4
   reg  [63:0] ex_PPC_1;		 // Predicted PC for branches
   reg  [(`HISTORY_BITS-1):0] ex_pht_idx_1;
@@ -351,7 +352,7 @@ module pipeline (// Inputs
   reg         ex_rd_mem_1;
   reg         ex_wr_mem_1;
 
-
+  reg         ex_valid_2;
   reg  [63:0] ex_NPC_2;         // incoming instruction PC+4
   reg  [63:0] ex_PPC_2;		 // Predicted PC for branches
   reg  [(`HISTORY_BITS-1):0] ex_pht_idx_2;
@@ -430,6 +431,44 @@ module pipeline (// Inputs
    wire [1:0]                 cm_branch_result_out_2;
    wire [(`HISTORY_BITS-1):0] cm_pht_index_out_2;
    wire                       cm_valid_out_2; 
+   
+//LSQ Inputs
+
+ reg [7:0] lsq_ROB_head_1;
+ reg [7:0] lsq_ROB_head_2;
+
+ reg [4:0] lsq_ROB_tag_1;
+ reg       lsq_rd_mem_1;
+ reg 		   lsq_wr_mem_1;
+ reg 		   lsq_valid_1;
+
+ reg [4:0]  lsq_EX_tag_1;
+ reg [63:0] lsq_value_1;
+ reg [63:0] lsq_address_1;
+ reg        lsq_EX_valid_1;
+
+ reg [4:0]  lsq_ROB_tag_2;
+ reg        lsq_rd_mem_2;
+ reg 		    lsq_wr_mem_2;
+ reg 		    lsq_valid_2;
+
+ reg [4:0]  lsq_EX_tag_2;
+ reg [63:0] lsq_value_2;
+ reg [63:0] lsq_address_2;
+ reg        lsq_EX_valid_2;
+ 
+ reg  [63:0] lsq_Dmem2proc_data;
+ reg   [3:0] lsq_Dmem2proc_tag, lsq_Dmem2proc_response;
+ 
+//LSQ outputs
+  wire [4:0]  lsq_tag_out;
+  wire [63:0] lsq_mem_result_out;    // outgoing instruction result (to MEM/WB)
+  wire [1:0]  lsq_proc2Dmem_command_out;
+  wire [63:0] lsq_proc2Dmem_addr_out;     // Address sent to data-memory
+  wire [63:0] lsq_proc2Dmem_data_out;     // Data sent to data-memory
+  
+  wire lsq_LSQ_IF_stall_out, lsq_LSQ_EX_valid_out;
+ 
   /**********************************/
   /**********************************/
   /**********************************/
@@ -466,6 +505,10 @@ module pipeline (// Inputs
   wire [1:0]  proc2Dmem_command, proc2Imem_command;
   wire [3:0]  Imem2proc_response, Dmem2proc_response;
 
+/////// TEMPORARY WHILE WE DO NOT HAVE MEMORY WRITEBACK /////////////////
+  assign proc2Dmem_command = `BUS_NONE;
+
+
   // Icache wires
   wire [63:0] cachemem_data;
   wire        cachemem_valid;
@@ -491,9 +534,9 @@ module pipeline (// Inputs
 
 
   assign proc2mem_command =
-           (proc2Dmem_command==`BUS_NONE)?proc2Imem_command:proc2Dmem_command;
+           (proc2Dmem_command==`BUS_NONE) ? proc2Imem_command : proc2Dmem_command;
   assign proc2mem_addr =
-           (proc2Dmem_command==`BUS_NONE)?proc2Imem_addr:proc2Dmem_addr;
+           (proc2Dmem_command==`BUS_NONE) ? proc2Imem_addr : proc2Dmem_addr;
   assign Dmem2proc_response = 
       (proc2Dmem_command==`BUS_NONE) ? 0 : mem2proc_response;
   assign Imem2proc_response =
@@ -590,8 +633,9 @@ module pipeline (// Inputs
                  );
 
 
-  wire LSQ_if_stall_out;
-  assign LSQ_if_stall_out = 1'b0;
+  wire if_stage_stall_signal;
+  assign if_stage_stall_signal = (rob_rob_full_out | ~rs_dispatch_out | lsq_LSQ_IF_stall_out);
+  
 
   //////////////////////////////////////////////////
   //                                              //
@@ -604,7 +648,7 @@ module pipeline (// Inputs
                        .Imem2proc_data(Icache_data_out),
                        .Imem_valid(Icache_valid_out),
                        
-                       .stall(rob_rob_full_out || ~rs_dispatch_out || LSQ_if_stall_out),
+                       .stall(if_stage_stall_signal),
 
                        .inst1_result_in(rob_inst1_branch_result_out),
                        .inst2_result_in(rob_inst2_branch_result_out),
@@ -642,13 +686,13 @@ module pipeline (// Inputs
     begin
       id_NPC_1           <= `SD 0;
       id_IR_1            <= `SD `NOOP_INST;
-      id_valid_inst1    <= `SD `FALSE;
+      id_valid_inst1     <= `SD `FALSE;
       id_PPC_1           <= `SD 0;
       id_inst1_pht_index <= `SD 0;
       
       id_NPC_2           <= `SD 0;
       id_IR_2            <= `SD `NOOP_INST;
-      id_valid_inst2    <= `SD `FALSE;
+      id_valid_inst2     <= `SD `FALSE;
       id_PPC_2           <= `SD 0;
       id_inst2_pht_index <= `SD 0;
     end // if (reset)
@@ -656,13 +700,13 @@ module pipeline (// Inputs
       begin
       id_NPC_1           <= `SD if_NPC_out_1;
       id_IR_1            <= `SD if_IR_out_1;
-      id_valid_inst1    <= `SD if_valid_inst_out_1;
+      id_valid_inst1     <= `SD if_valid_inst_out_1;
       id_PPC_1           <= `SD if_PPC_out_1;
       id_inst1_pht_index <= `SD if_inst1_pht_index_out;
       
       id_NPC_2           <= `SD if_NPC_out_2;
       id_IR_2            <= `SD if_IR_out_2;
-      id_valid_inst2    <= `SD if_valid_inst_out_2;
+      id_valid_inst2     <= `SD if_valid_inst_out_2;
       id_PPC_2           <= `SD if_PPC_out_2;
       id_inst2_pht_index <= `SD if_inst2_pht_index_out;
       end // if (if_id_enable)
@@ -681,10 +725,10 @@ module pipeline (// Inputs
                       .clock(clock),
                       .reset(reset),
                       .if_id_IR_1(id_IR_1),
-                      .if_id_valid_inst_1(id_valid_inst_1),
+                      .if_id_valid_inst_1(id_valid_inst1),
 
                       .if_id_IR_2(id_IR_2),
-                      .if_id_valid_inst_2(id_valid_inst_2),
+                      .if_id_valid_inst_2(id_valid_inst2),
 
 
 
@@ -735,49 +779,49 @@ module pipeline (// Inputs
   //////////////////////////////////////////////////
 
   //Map Table Synchonous
-  always @(posedge clock)
+  always @(*)
   begin
     if(reset)
     begin
-      mt_inst1_rega <= `SD 0;
-      mt_inst1_regb <= `SD 0;
-      mt_inst1_dest <= `SD 0;
-      mt_inst1_tag  <= `SD 0;
+      mt_inst1_rega =  0;
+      mt_inst1_regb =  0;
+      mt_inst1_dest =  0;
+      mt_inst1_tag  =  0;
       
-      mt_inst2_rega <= `SD 0;
-      mt_inst2_regb <= `SD 0;
-      mt_inst2_dest <= `SD 0;
-      mt_inst2_tag  <= `SD 0;
+      mt_inst2_rega =  0;
+      mt_inst2_regb =  0;
+      mt_inst2_dest =  0;
+      mt_inst2_tag  =  0;
     end
     else
     begin 
-      mt_inst1_rega <= `SD id_rega_out_1;
-      mt_inst1_regb <= `SD id_regb_out_1;
-      mt_inst1_dest <= `SD id_dest_reg_out_1;
-      mt_inst1_tag  <= `SD rob_inst1_tag_out;
+      mt_inst1_rega =  id_rega_out_1;
+      mt_inst1_regb =  id_regb_out_1;
+      mt_inst1_dest =  id_dest_reg_out_1;
+      mt_inst1_tag  =  rob_inst1_tag_out;
       
-      mt_inst2_rega <= `SD id_rega_out_1;
-      mt_inst2_regb <= `SD id_regb_out_1;
-      mt_inst2_dest <= `SD id_dest_reg_out_2;
-      mt_inst2_tag  <= `SD rob_inst2_tag_out;      
+      mt_inst2_rega =  id_rega_out_2;
+      mt_inst2_regb =  id_regb_out_2;
+      mt_inst2_dest =  id_dest_reg_out_2;
+      mt_inst2_tag  =  rob_inst2_tag_out;      
     end
   end
   
   //REG synchronous
-  always @(posedge clock)
+  always @(*)
   begin
     if(reset)
     begin
     
-    reg_inst1_rega  <= `SD 0;
-    reg_inst1_regb  <= `SD 0;
-    reg_inst1_dest  <= `SD 0;
-    reg_inst1_value <= `SD 0;
+    reg_inst1_rega  =  0;
+    reg_inst1_regb  =  0;
+    reg_inst1_dest  =  0;
+    reg_inst1_value =  0;
 
-    reg_inst2_rega  <= `SD 0;
-    reg_inst2_regb  <= `SD 0;
-    reg_inst2_dest  <= `SD 0;
-    reg_inst2_value <= `SD 0;
+    reg_inst2_rega  =  0;
+    reg_inst2_regb  =  0;
+    reg_inst2_dest  =  0;
+    reg_inst2_value =  0;
     
     
     end
@@ -785,89 +829,89 @@ module pipeline (// Inputs
     begin
     
     //comes from decode
-    reg_inst1_rega  <= `SD id_rega_out_1;
-    reg_inst1_regb  <= `SD id_regb_out_1;
+    reg_inst1_rega  =  id_rega_out_1;
+    reg_inst1_regb  =  id_regb_out_1;
     
     //comes from ROB
-    reg_inst1_dest  <= `SD rob_inst1_dest_out;
-    reg_inst1_value <= `SD rob_inst1_value_out;
+    reg_inst1_dest  =  rob_inst1_dest_out;
+    reg_inst1_value =  rob_inst1_value_out;
     
 
-    reg_inst2_rega  <= `SD id_rega_out_2;
-    reg_inst2_regb  <= `SD id_regb_out_2;
+    reg_inst2_rega  =  id_rega_out_2;
+    reg_inst2_regb  =  id_regb_out_2;
     
-    reg_inst2_dest  <= `SD rob_inst2_dest_out;
-    reg_inst2_value <= `SD rob_inst2_dest_out;
+    reg_inst2_dest  =  rob_inst2_dest_out;
+    reg_inst2_value =  rob_inst2_dest_out;
     
     end
   end
   
   //Fast Forward Synchonous  
-  always @(posedge clock)
+  always @(*)
   begin 
     if(reset)
     begin
-      ff_dest_reg_1       <= `SD 0;
-      ff_opa_select_1     <= `SD 0;
-      ff_alu_func_1       <= `SD 0;
-      ff_rd_mem_1         <= `SD 0;
-      ff_wr_mem_1         <= `SD 0;
-      ff_cond_branch_1    <= `SD 0;
-      ff_uncond_branch_1  <= `SD 0;
-      ff_halt_1           <= `SD 0;
-      ff_illegal_1        <= `SD 0;
-      ff_valid_inst1      <= `SD 0;
-      ff_NPC_1            <= `SD 0;
-      ff_IR_1             <= `SD 0;
-      ff_PPC_1            <= `SD 0;
-      ff_inst1_pht_index  <= `SD 0;
+      ff_dest_reg_1       = 0;
+      ff_opa_select_1     = 0;
+      ff_alu_func_1       = 0;
+      ff_rd_mem_1         = 0;
+      ff_wr_mem_1         = 0;
+      ff_cond_branch_1    = 0;
+      ff_uncond_branch_1  = 0;
+      ff_halt_1           = 0;
+      ff_illegal_1        = 0;
+      ff_valid_inst1      = 0;
+      ff_NPC_1            = 0;
+      ff_IR_1             = 0;
+      ff_PPC_1            = 0;
+      ff_inst1_pht_index  = 0;
   
-      ff_dest_reg_2       <= `SD 0;
-      ff_opa_select_2     <= `SD 0;
-      ff_alu_func_2       <= `SD 0;
-      ff_rd_mem_2         <= `SD 0;
-      ff_wr_mem_2         <= `SD 0;
-      ff_cond_branch_2    <= `SD 0;
-      ff_uncond_branch_2  <= `SD 0;
-      ff_halt_2           <= `SD 0;
-      ff_illegal_2        <= `SD 0;
-      ff_valid_inst2      <= `SD 0;      
-      ff_NPC_2            <= `SD 0;
-      ff_IR_2             <= `SD 0;
-      ff_PPC_2            <= `SD 0;
-      ff_inst2_pht_index  <= `SD 0;
+      ff_dest_reg_2       = 0;
+      ff_opa_select_2     = 0;
+      ff_alu_func_2       = 0;
+      ff_rd_mem_2         = 0;
+      ff_wr_mem_2         = 0;
+      ff_cond_branch_2    = 0;
+      ff_uncond_branch_2  = 0;
+      ff_halt_2           = 0;
+      ff_illegal_2        = 0;
+      ff_valid_inst2      = 0;      
+      ff_NPC_2            = 0;
+      ff_IR_2             = 0;
+      ff_PPC_2            = 0;
+      ff_inst2_pht_index  = 0;
     end
     else
     begin
-      ff_dest_reg_1       <= `SD id_dest_reg_out_1;
-      ff_opa_select_1     <= `SD id_opa_select_out_1;
-      ff_alu_func_1       <= `SD id_alu_func_out_1;
-      ff_rd_mem_1         <= `SD id_rd_mem_out_1;
-      ff_wr_mem_1         <= `SD id_wr_mem_out_1;
-      ff_cond_branch_1    <= `SD id_cond_branch_out_1;
-      ff_uncond_branch_1  <= `SD id_uncond_branch_out_1;
-      ff_halt_1           <= `SD id_halt_out_1;
-      ff_illegal_1        <= `SD id_illegal_out_1;
-      ff_valid_inst1     <= `SD id_valid_inst_out_1;
-      ff_NPC_1            <= `SD id_NPC_1;
-      ff_IR_1             <= `SD id_IR_1;
-      ff_PPC_1            <= `SD id_PPC_1;
-      ff_inst1_pht_index  <= `SD id_inst1_pht_index;
+      ff_dest_reg_1       = id_dest_reg_out_1;
+      ff_opa_select_1     = id_opa_select_out_1;
+      ff_alu_func_1       = id_alu_func_out_1;
+      ff_rd_mem_1         = id_rd_mem_out_1;
+      ff_wr_mem_1         = id_wr_mem_out_1;
+      ff_cond_branch_1    = id_cond_branch_out_1;
+      ff_uncond_branch_1  = id_uncond_branch_out_1;
+      ff_halt_1           = id_halt_out_1;
+      ff_illegal_1        = id_illegal_out_1;
+      ff_valid_inst1      = id_valid_inst_out_1;
+      ff_NPC_1            = id_NPC_1;
+      ff_IR_1             = id_IR_1;
+      ff_PPC_1            = id_PPC_1;
+      ff_inst1_pht_index  = id_inst1_pht_index;
       
-      ff_dest_reg_2       <= `SD id_dest_reg_out_2;
-      ff_opa_select_2     <= `SD id_opa_select_out_2;
-      ff_alu_func_2       <= `SD id_alu_func_out_2;
-      ff_rd_mem_2         <= `SD id_rd_mem_out_2;
-      ff_wr_mem_2         <= `SD id_wr_mem_out_2;
-      ff_cond_branch_2    <= `SD id_cond_branch_out_2;
-      ff_uncond_branch_2  <= `SD id_uncond_branch_out_2;
-      ff_halt_2           <= `SD id_halt_out_2;
-      ff_illegal_2        <= `SD id_illegal_out_2;
-      ff_valid_inst2     <= `SD id_valid_inst_out_2; 
-      ff_NPC_2            <= `SD id_NPC_2;
-      ff_IR_2             <= `SD id_IR_2;
-      ff_PPC_2            <= `SD id_PPC_2;
-      ff_inst2_pht_index  <= `SD id_inst2_pht_index;      
+      ff_dest_reg_2       = id_dest_reg_out_2;
+      ff_opa_select_2     = id_opa_select_out_2;
+      ff_alu_func_2       = id_alu_func_out_2;
+      ff_rd_mem_2         = id_rd_mem_out_2;
+      ff_wr_mem_2         = id_wr_mem_out_2;
+      ff_cond_branch_2    = id_cond_branch_out_2;
+      ff_uncond_branch_2  = id_uncond_branch_out_2;
+      ff_halt_2           = id_halt_out_2;
+      ff_illegal_2        = id_illegal_out_2;
+      ff_valid_inst2      = id_valid_inst_out_2; 
+      ff_NPC_2            = id_NPC_2;
+      ff_IR_2             = id_IR_2;
+      ff_PPC_2            = id_PPC_2;
+      ff_inst2_pht_index  = id_inst2_pht_index;      
     end
   end   
       
@@ -946,30 +990,30 @@ module pipeline (// Inputs
   begin
     if(reset)
     begin
-      rob_inst1_valid    = `SD 0;
-      rob_inst1_dest     = `SD 0;
-      rob_inst1_taga = `SD 0;
-      rob_inst1_tagb = `SD 0;
+      rob_inst1_valid = 0;
+      rob_inst1_dest  = 0;
+      rob_inst1_taga  = 0;
+      rob_inst1_tagb  = 0;
     
-      rob_inst2_valid    = `SD 0;
-      rob_inst2_dest     = `SD 0;
-      rob_inst2_taga = `SD 0;
-      rob_inst2_tagb = `SD 0;
+      rob_inst2_valid = 0;
+      rob_inst2_dest  = 0;
+      rob_inst2_taga  = 0;
+      rob_inst2_tagb  = 0;
     end
     else
     begin
 
-      rob_inst1_valid    = `SD ff_valid_inst1;
-      rob_inst1_dest     = `SD ff_dest_reg_1;
+      rob_inst1_valid = ff_valid_inst1;
+      rob_inst1_dest  = ff_dest_reg_1;
       
-      rob_inst1_taga = `SD mt_inst1_taga_out;
-      rob_inst1_tagb = `SD mt_inst1_tagb_out;
+      rob_inst1_taga  = mt_inst1_taga_out;
+      rob_inst1_tagb  = mt_inst1_tagb_out;
     
-      rob_inst2_valid    = `SD ff_valid_inst2;
-      rob_inst2_dest     = `SD ff_dest_reg_2;
+      rob_inst2_valid = ff_valid_inst2;
+      rob_inst2_dest  = ff_dest_reg_2;
       
-      rob_inst2_taga = `SD mt_inst2_taga_out;
-      rob_inst2_tagb = `SD mt_inst2_tagb_out;
+      rob_inst2_taga  = mt_inst2_taga_out;
+      rob_inst2_tagb  = mt_inst2_tagb_out;
     
     end
   end
@@ -980,92 +1024,92 @@ module pipeline (// Inputs
     if(reset)
     begin
     
-    rs_inst1_rega_value     = `SD 0;
-    rs_inst1_regb_value     = `SD 0;
-    rs_inst1_rega_tag       = `SD 0;
-    rs_inst1_regb_tag       = `SD 0;
-    rs_inst1_dest_reg       = `SD 0;
-    rs_inst1_dest_tag       = `SD 0;
-    rs_inst1_opa_select     = `SD 0;
-    rs_inst1_opb_select     = `SD 0;
-    rs_inst1_alu_func       = `SD 0;
-    rs_inst1_rd_mem         = `SD 0;
-    rs_inst1_wr_mem         = `SD 0;
-    rs_inst1_cond_branch    = `SD 0;
-    rs_inst1_uncond_branch  = `SD 0;
-    rs_inst1_NPC            = `SD 0;
-    rs_inst1_IR             = `SD 0;
-    rs_inst1_valid          = `SD 0;
-    rs_inst1_PPC            = `SD 0;
-    rs_inst1_pht_index      = `SD 0;
+    rs_inst1_rega_value     = 0;
+    rs_inst1_regb_value     = 0;
+    rs_inst1_rega_tag       = 0;
+    rs_inst1_regb_tag       = 0;
+    rs_inst1_dest_reg       = 0;
+    rs_inst1_dest_tag       = 0;
+    rs_inst1_opa_select     = 0;
+    rs_inst1_opb_select     = 0;
+    rs_inst1_alu_func       = 0;
+    rs_inst1_rd_mem         = 0;
+    rs_inst1_wr_mem         = 0;
+    rs_inst1_cond_branch    = 0;
+    rs_inst1_uncond_branch  = 0;
+    rs_inst1_NPC            = 0;
+    rs_inst1_IR             = 0;
+    rs_inst1_valid          = 0;
+    rs_inst1_PPC            = 0;
+    rs_inst1_pht_index      = 0;
 
-    rs_inst2_rega_value     = `SD 0;
-    rs_inst2_regb_value     = `SD 0;
-    rs_inst2_rega_tag       = `SD 0;
-    rs_inst2_regb_tag       = `SD 0;
-    rs_inst2_dest_reg       = `SD 0;
-    rs_inst2_dest_tag       = `SD 0;
-    rs_inst2_opa_select     = `SD 0;
-    rs_inst2_opb_select     = `SD 0;
-    rs_inst2_alu_func       = `SD 0;
-    rs_inst2_rd_mem         = `SD 0;
-    rs_inst2_wr_mem         = `SD 0;
-    rs_inst2_cond_branch    = `SD 0;
-    rs_inst2_uncond_branch  = `SD 0;
-    rs_inst2_NPC            = `SD 0;
-    rs_inst2_IR             = `SD 0;
-    rs_inst2_valid          = `SD 0;
-    rs_inst2_PPC            = `SD 0;
-    rs_inst2_pht_index      = `SD 0;     
+    rs_inst2_rega_value     = 0;
+    rs_inst2_regb_value     = 0;
+    rs_inst2_rega_tag       = 0;
+    rs_inst2_regb_tag       = 0;
+    rs_inst2_dest_reg       = 0;
+    rs_inst2_dest_tag       = 0;
+    rs_inst2_opa_select     = 0;
+    rs_inst2_opb_select     = 0;
+    rs_inst2_alu_func       = 0;
+    rs_inst2_rd_mem         = 0;
+    rs_inst2_wr_mem         = 0;
+    rs_inst2_cond_branch    = 0;
+    rs_inst2_uncond_branch  = 0;
+    rs_inst2_NPC            = 0;
+    rs_inst2_IR             = 0;
+    rs_inst2_valid          = 0;
+    rs_inst2_PPC            = 0;
+    rs_inst2_pht_index      = 0;     
     
     end
     else
     begin
     
-    rs_inst1_rega_value     = `SD reg_inst1_rega_out;
-    rs_inst1_regb_value     = `SD reg_inst1_regb_out;
+    rs_inst1_rega_value     = reg_inst1_rega_out;
+    rs_inst1_regb_value     = reg_inst1_regb_out;
     //
-    rs_inst1_rega_tag       = `SD mt_inst1_taga_out;   // MT
-    rs_inst1_regb_tag       = `SD mt_inst1_tagb_out;   // MT
-    rs_inst1_dest_reg       = `SD ff_dest_reg_1;   // DEC
-    rs_inst1_dest_tag       = `SD rob_inst1_tag_out;   // ROB
+    rs_inst1_rega_tag       = mt_inst1_taga_out;   // MT
+    rs_inst1_regb_tag       = mt_inst1_tagb_out;   // MT
+    rs_inst1_dest_reg       = ff_dest_reg_1;   // DEC
+    rs_inst1_dest_tag       = rob_inst1_tag_out;   // ROB
     //
-    rs_inst1_opa_select     = `SD ff_opa_select_1;
-    rs_inst1_opb_select     = `SD ff_opb_select_1;
-    rs_inst1_alu_func       = `SD ff_alu_func_1;
-    rs_inst1_rd_mem         = `SD ff_rd_mem_1;
-    rs_inst1_wr_mem         = `SD ff_wr_mem_1;
-    rs_inst1_cond_branch    = `SD ff_cond_branch_1;
-    rs_inst1_uncond_branch  = `SD ff_uncond_branch_1;
+    rs_inst1_opa_select     = ff_opa_select_1;
+    rs_inst1_opb_select     = ff_opb_select_1;
+    rs_inst1_alu_func       = ff_alu_func_1;
+    rs_inst1_rd_mem         = ff_rd_mem_1;
+    rs_inst1_wr_mem         = ff_wr_mem_1;
+    rs_inst1_cond_branch    = ff_cond_branch_1;
+    rs_inst1_uncond_branch  = ff_uncond_branch_1;
     //
-    rs_inst1_NPC            = `SD ff_NPC_1;
-    rs_inst1_IR             = `SD ff_IR_1;
-    rs_inst1_valid          = `SD ff_valid_inst1;
-    rs_inst1_PPC            = `SD ff_PPC_1;
-    rs_inst1_pht_index      = `SD ff_inst1_pht_index;
+    rs_inst1_NPC            = ff_NPC_1;
+    rs_inst1_IR             = ff_IR_1;
+    rs_inst1_valid          = ff_valid_inst1;
+    rs_inst1_PPC            = ff_PPC_1;
+    rs_inst1_pht_index      = ff_inst1_pht_index;
     //
     
-    rs_inst2_rega_value     = `SD reg_inst2_rega_out;
-    rs_inst2_regb_value     = `SD reg_inst2_regb_out;
+    rs_inst2_rega_value     = reg_inst2_rega_out;
+    rs_inst2_regb_value     = reg_inst2_regb_out;
     //
-    rs_inst2_rega_tag       = `SD mt_inst2_taga_out;
-    rs_inst2_regb_tag       = `SD mt_inst2_tagb_out;
-    rs_inst2_dest_reg       = `SD ff_dest_reg_1;
-    rs_inst2_dest_tag       = `SD rob_inst1_tag_out;
+    rs_inst2_rega_tag       = mt_inst2_taga_out;
+    rs_inst2_regb_tag       = mt_inst2_tagb_out;
+    rs_inst2_dest_reg       = ff_dest_reg_1;
+    rs_inst2_dest_tag       = rob_inst1_tag_out;
     //
-    rs_inst2_opa_select     = `SD ff_opa_select_2;
-    rs_inst2_opb_select     = `SD ff_opb_select_2;
-    rs_inst2_alu_func       = `SD ff_alu_func_2;
-    rs_inst2_rd_mem         = `SD ff_rd_mem_2;
-    rs_inst2_wr_mem         = `SD ff_wr_mem_2;
-    rs_inst2_cond_branch    = `SD ff_cond_branch_2;
-    rs_inst2_uncond_branch  = `SD ff_uncond_branch_2;
+    rs_inst2_opa_select     = ff_opa_select_2;
+    rs_inst2_opb_select     = ff_opb_select_2;
+    rs_inst2_alu_func       = ff_alu_func_2;
+    rs_inst2_rd_mem         = ff_rd_mem_2;
+    rs_inst2_wr_mem         = ff_wr_mem_2;
+    rs_inst2_cond_branch    = ff_cond_branch_2;
+    rs_inst2_uncond_branch  = ff_uncond_branch_2;
     //
-    rs_inst2_NPC            = `SD ff_NPC_2;
-    rs_inst2_IR             = `SD ff_IR_2;
-    rs_inst2_valid          = `SD ff_valid_inst2;
-    rs_inst2_PPC            = `SD ff_PPC_2;
-    rs_inst2_pht_index      = `SD ff_inst2_pht_index;  
+    rs_inst2_NPC            = ff_NPC_2;
+    rs_inst2_IR             = ff_IR_2;
+    rs_inst2_valid          = ff_valid_inst2;
+    rs_inst2_PPC            = ff_PPC_2;
+    rs_inst2_pht_index      = ff_inst2_pht_index;  
     
     
     end
@@ -1080,7 +1124,9 @@ module pipeline (// Inputs
   //////////////////////////////////////////////////             
                                       
   reservation_station reservation_station_0(//Inputs
-                  
+                                           .clock(clock),
+                                           .reset(reset),
+ 
                                            // signals and busses in for inst 1 (from id1) //
                                            //Values from ROB
                                            .inst1_rega_value_in(rs_inst1_rega_value),
@@ -1275,75 +1321,79 @@ module pipeline (// Inputs
   //        [RS/ROB] / EX Pipeline Register       //
   //                                              //
   //////////////////////////////////////////////////
-  always @* //(posedge clock)
+  always @(posedge clock)
   begin
   
     if(reset)
     begin
     
-      ex_NPC_1           = `SD 0;
-      ex_PPC_1           = `SD 0;
-      ex_pht_idx_1       = `SD 0;
-      ex_IR_1            = `SD 0;
-      ex_dest_reg_1      = `SD 0;
-      ex_rega_1          = `SD 0;
-      ex_regb_1          = `SD 0;
-      ex_opa_select_1    = `SD 0;
-      ex_opb_select_1    = `SD 0;
-      ex_alu_func_1      = `SD 0;
-      ex_cond_branch_1   = `SD 0;
-      ex_uncond_branch_1 = `SD 0;
-      ex_rd_mem_1        = `SD 0;
-      ex_wr_mem_1        = `SD 0;
+      ex_valid_1         <= `SD 0;
+      ex_NPC_1           <= `SD 0;
+      ex_PPC_1           <= `SD 0;
+      ex_pht_idx_1       <= `SD 0;
+      ex_IR_1            <= `SD 0;
+      ex_dest_reg_1      <= `SD 0;
+      ex_rega_1          <= `SD 0;
+      ex_regb_1          <= `SD 0;
+      ex_opa_select_1    <= `SD 0;
+      ex_opb_select_1    <= `SD 0;
+      ex_alu_func_1      <= `SD 0;
+      ex_cond_branch_1   <= `SD 0;
+      ex_uncond_branch_1 <= `SD 0;
+      ex_rd_mem_1        <= `SD 0;
+      ex_wr_mem_1        <= `SD 0;
       
-      ex_NPC_2           = `SD 0;
-      ex_PPC_2           = `SD 0;
-      ex_pht_idx_2       = `SD 0;
-      ex_IR_2            = `SD 0;
-      ex_dest_reg_2      = `SD 0;
-      ex_rega_2          = `SD 0;
-      ex_regb_2          = `SD 0;
-      ex_opa_select_2    = `SD 0;
-      ex_opb_select_2    = `SD 0;
-      ex_alu_func_2      = `SD 0;
-      ex_cond_branch_2   = `SD 0;
-      ex_uncond_branch_2 = `SD 0;
-      ex_rd_mem_2        = `SD 0;
-      ex_wr_mem_2        = `SD 0;
+      ex_valid_2         <= `SD 0;
+      ex_NPC_2           <= `SD 0;
+      ex_PPC_2           <= `SD 0;
+      ex_pht_idx_2       <= `SD 0;
+      ex_IR_2            <= `SD 0;
+      ex_dest_reg_2      <= `SD 0;
+      ex_rega_2          <= `SD 0;
+      ex_regb_2          <= `SD 0;
+      ex_opa_select_2    <= `SD 0;
+      ex_opb_select_2    <= `SD 0;
+      ex_alu_func_2      <= `SD 0;
+      ex_cond_branch_2   <= `SD 0;
+      ex_uncond_branch_2 <= `SD 0;
+      ex_rd_mem_2        <= `SD 0;
+      ex_wr_mem_2        <= `SD 0;
      
     end
     else
     begin
     
-      ex_NPC_1           = `SD rs_inst1_NPC_out;
-      ex_PPC_1           = `SD rs_inst1_PPC_out;
-      ex_pht_idx_1       = `SD rs_inst1_pht_index_out;
-      ex_IR_1            = `SD rs_inst1_IR_out;
-      ex_dest_reg_1      = `SD rs_inst1_dest_reg_out;
-      ex_rega_1          = `SD rs_inst1_rega_value_out;
-      ex_regb_1          = `SD rs_inst1_regb_value_out;
-      ex_opa_select_1    = `SD rs_inst1_opa_select_out;
-      ex_opb_select_1    = `SD rs_inst1_opb_select_out;
-      ex_alu_func_1      = `SD rs_inst1_alu_func_out;
-      ex_cond_branch_1   = `SD rs_inst1_cond_branch_out;
-      ex_uncond_branch_1 = `SD rs_inst1_uncond_branch_out;
-      ex_rd_mem_1        = `SD rs_inst1_rd_mem_out;
-      ex_wr_mem_1        = `SD rs_inst1_wr_mem_out;
+      ex_valid_1         <= `SD rs_inst1_valid_out;
+      ex_NPC_1           <= `SD rs_inst1_NPC_out;
+      ex_PPC_1           <= `SD rs_inst1_PPC_out;
+      ex_pht_idx_1       <= `SD rs_inst1_pht_index_out;
+      ex_IR_1            <= `SD rs_inst1_IR_out;
+      ex_dest_reg_1      <= `SD rs_inst1_dest_tag_out;
+      ex_rega_1          <= `SD rs_inst1_rega_value_out;
+      ex_regb_1          <= `SD rs_inst1_regb_value_out;
+      ex_opa_select_1    <= `SD rs_inst1_opa_select_out;
+      ex_opb_select_1    <= `SD rs_inst1_opb_select_out;
+      ex_alu_func_1      <= `SD rs_inst1_alu_func_out;
+      ex_cond_branch_1   <= `SD rs_inst1_cond_branch_out;
+      ex_uncond_branch_1 <= `SD rs_inst1_uncond_branch_out;
+      ex_rd_mem_1        <= `SD rs_inst1_rd_mem_out;
+      ex_wr_mem_1        <= `SD rs_inst1_wr_mem_out;
       
-      ex_NPC_2           = `SD rs_inst2_NPC_out;
-      ex_PPC_2           = `SD rs_inst2_PPC_out;
-      ex_pht_idx_1       = `SD rs_inst2_pht_index_out;
-      ex_IR_2            = `SD rs_inst2_IR_out;
-      ex_dest_reg_2      = `SD rs_inst2_dest_reg_out;
-      ex_rega_2          = `SD rs_inst2_rega_value_out;
-      ex_regb_2          = `SD rs_inst2_regb_value_out;
-      ex_opa_select_2    = `SD rs_inst2_opa_select_out;
-      ex_opb_select_2    = `SD rs_inst2_opb_select_out;
-      ex_alu_func_2      = `SD rs_inst2_alu_func_out;
-      ex_cond_branch_2   = `SD rs_inst2_cond_branch_out;
-      ex_uncond_branch_2 = `SD rs_inst2_uncond_branch_out;
-      ex_rd_mem_2        = `SD rs_inst2_rd_mem_out;
-      ex_wr_mem_2        = `SD rs_inst2_wr_mem_out;
+      ex_valid_2         <= `SD rs_inst2_valid_out;
+      ex_NPC_2           <= `SD rs_inst2_NPC_out;
+      ex_PPC_2           <= `SD rs_inst2_PPC_out;
+      ex_pht_idx_1       <= `SD rs_inst2_pht_index_out;
+      ex_IR_2            <= `SD rs_inst2_IR_out;
+      ex_dest_reg_2      <= `SD rs_inst2_dest_tag_out;
+      ex_rega_2          <= `SD rs_inst2_rega_value_out;
+      ex_regb_2          <= `SD rs_inst2_regb_value_out;
+      ex_opa_select_2    <= `SD rs_inst2_opa_select_out;
+      ex_opb_select_2    <= `SD rs_inst2_opb_select_out;
+      ex_alu_func_2      <= `SD rs_inst2_alu_func_out;
+      ex_cond_branch_2   <= `SD rs_inst2_cond_branch_out;
+      ex_uncond_branch_2 <= `SD rs_inst2_uncond_branch_out;
+      ex_rd_mem_2        <= `SD rs_inst2_rd_mem_out;
+      ex_wr_mem_2        <= `SD rs_inst2_wr_mem_out;
     end
   end
   //////////////////////////////////////////////////
@@ -1356,6 +1406,7 @@ module pipeline (// Inputs
                           .reset(reset),
                           
                           // Input Bus 1 (contains branch logic)
+                          .valid_in_1(ex_valid_1),
                           .id_ex_NPC_1(ex_NPC_1),
                           .id_ex_PPC_1(ex_PPC_1),
                           .id_ex_pht_idx_1(ex_pht_idx_1),
@@ -1372,6 +1423,7 @@ module pipeline (// Inputs
                           .id_ex_wr_mem_in_1(ex_wr_mem_1),
 
                           // Input Bus 2
+                          .valid_in_2(ex_valid_2),
                           .id_ex_NPC_2(ex_NPC_2),
                           .id_ex_PPC_2(ex_PPC_2),
                           .id_ex_pht_idx_2(ex_pht_idx_2),
@@ -1388,36 +1440,36 @@ module pipeline (// Inputs
                           .id_ex_wr_mem_in_2(ex_wr_mem_2),
 				
                           // From Mem Access
-                          .MEM_tag_in(ex_mem_tag_out),
-                          .MEM_value_in(ex_mem_value_out),
-                          .MEM_valid_in(ex_mem_valid_out),
+                          .MEM_tag_in(lsq_tag_out),
+                          .MEM_value_in(lsq_mem_result_out),
+                          .MEM_valid_in(lsq_LSQ_EX_valid_out),
                           
-	                  // Outputs
-	                  .stall_bus_1(ex_stall_bus_out_1),
-	                  .stall_bus_2(ex_stall_bus_out_2),
-	                  // Bus 1
-	                  .ex_NPC_out_1(ex_NPC_out_1),
-	                  .ex_dest_reg_out_1(ex_dest_reg_out_1),
-	                  .ex_result_out_1(ex_result_out_1),
-	                  .ex_mispredict_1(ex_mispredict_out_1),
-	                  .ex_branch_result_1(ex_branch_result_out_1),
-	                  .ex_pht_idx_out_1(ex_pht_idx_out_1),
-	                  .ex_valid_out_1(ex_valid_out_1),
-	                  // Bus 2
-	                  .ex_NPC_out_2(ex_NPC_out_2),
-	                  .ex_dest_reg_out_2(ex_dest_reg_out_2),
-	                  .ex_result_out_2(ex_result_out_2),
-	                  .ex_mispredict_2(ex_mispredict_out_2),
-	                  .ex_branch_result_2(ex_branch_result_out_2),
-	                  .ex_pht_idx_out_2(ex_pht_idx_out_2),
-	                  .ex_valid_out_2(ex_valid_out_2),
+	                        // Outputs
+	                        .stall_bus_1(ex_stall_bus_out_1),
+	                        .stall_bus_2(ex_stall_bus_out_2),
+	                        // Bus 1
+	                        .ex_NPC_out_1(ex_NPC_out_1),
+	                        .ex_dest_reg_out_1(ex_dest_reg_out_1),
+	                        .ex_result_out_1(ex_result_out_1),
+	                        .ex_mispredict_1(ex_mispredict_out_1),
+	                        .ex_branch_result_1(ex_branch_result_out_1),
+	                        .ex_pht_idx_out_1(ex_pht_idx_out_1),
+	                        .ex_valid_out_1(ex_valid_out_1),
+	                        // Bus 2
+	                        .ex_NPC_out_2(ex_NPC_out_2),
+	                        .ex_dest_reg_out_2(ex_dest_reg_out_2),
+	                        .ex_result_out_2(ex_result_out_2),
+	                        .ex_mispredict_2(ex_mispredict_out_2),
+	                        .ex_branch_result_2(ex_branch_result_out_2),
+	                        .ex_pht_idx_out_2(ex_pht_idx_out_2),
+	                        .ex_valid_out_2(ex_valid_out_2),
 
 
                           // To LSQ
                           .LSQ_tag_out_1(ex_LSQ_tag_out_1),
                           .LSQ_address_out_1(ex_LSQ_address_out_1),
                           .LSQ_value_out_1(ex_LSQ_value_out_1),
-	                  .LSQ_valid_out_1(ex_LSQ_valid_out_1),
+	                        .LSQ_valid_out_1(ex_LSQ_valid_out_1),
 		
 	                   // why are value and valid almost the same word!? 
 	                   // we need them both but they're hard to seperate!
@@ -1425,7 +1477,7 @@ module pipeline (// Inputs
                           .LSQ_tag_out_2(ex_LSQ_tag_out_2),
                           .LSQ_address_out_2(ex_LSQ_address_out_2),
                           .LSQ_value_out_2(ex_LSQ_value_out_2),
-	                  .LSQ_valid_out_2(ex_LSQ_valid_out_2)
+	                        .LSQ_valid_out_2(ex_LSQ_valid_out_2)
                         );
 
 
@@ -1518,6 +1570,124 @@ module pipeline (// Inputs
                       .cdb_branch_result_2(cm_branch_result_out_2),
                       .cdb_pht_index_2(cm_pht_index_out_2)
 		                  );   
+		                  
+  //////////////////////////////////////////////////
+  //                                              //
+  //               LSQ (not stage)                //
+  //                                              //
+  //////////////////////////////////////////////////
+	
+	always@*
+	begin
+  	if(reset)
+	  begin
+      lsq_ROB_head_1         = 0;
+      lsq_ROB_head_2         = 0;
+
+      lsq_ROB_tag_1          = 0;
+      lsq_rd_mem_1           = 0;
+      lsq_wr_mem_1           = 0;
+      lsq_valid_1            = 0;
+
+      lsq_EX_tag_1           = 0;
+      lsq_value_1            = 0;
+      lsq_address_1          = 0;
+      lsq_EX_valid_1         = 0;
+
+      lsq_ROB_tag_2          = 0;
+      lsq_rd_mem_2           = 0;
+      lsq_wr_mem_2           = 0;
+      lsq_valid_2            = 0;
+
+      lsq_EX_tag_2           = 0;
+      lsq_value_2            = 0;
+      lsq_address_2          = 0;
+      lsq_EX_valid_2         = 0;
+     
+      lsq_Dmem2proc_data     = 0;
+      lsq_Dmem2proc_tag      = 0;
+      lsq_Dmem2proc_response = 0;
+      
+		 end
+		 else
+		 begin
+		  lsq_ROB_head_1         = rob_inst1_retire_tag_out;
+      lsq_ROB_head_2         = rob_inst2_retire_tag_out;
+
+      lsq_ROB_tag_1          = rob_inst1_tag_out;
+      lsq_rd_mem_1           = ff_rd_mem_1;
+      lsq_wr_mem_1           = ff_wr_mem_1;
+      lsq_valid_1            = ff_valid_inst1;
+
+      lsq_EX_tag_1           = ex_LSQ_tag_out_1;
+      lsq_value_1            = ex_LSQ_value_out_1;
+      lsq_address_1          = ex_LSQ_address_out_1;
+      lsq_EX_valid_1         = ex_LSQ_valid_out_1;
+
+      lsq_ROB_tag_2          = rob_inst2_tag_out;
+      lsq_rd_mem_2           = ff_rd_mem_2;
+      lsq_wr_mem_2           = ff_rd_mem_2;
+      lsq_valid_2            = ff_valid_inst2;
+
+      lsq_EX_tag_2           = ex_LSQ_tag_out_2;
+      lsq_value_2            = ex_LSQ_value_out_2;
+      lsq_address_2          = ex_LSQ_address_out_2;
+      lsq_EX_valid_2         = ex_LSQ_valid_out_2;
+     
+      lsq_Dmem2proc_data     = mem2proc_data;
+      lsq_Dmem2proc_tag      = mem2proc_tag;
+      lsq_Dmem2proc_response = Imem2proc_response;
+		 end
+	  
+	end
+		           
+		           
+  LSQ LSQ_0(//Inputs
+			      .clock(clock),
+			      .reset(reset),
+			      //From ROB/ID
+
+			      .ROB_head_1(lsq_ROB_head_1),
+			      .ROB_head_2(lsq_ROB_head_2),
+
+			      //1
+			      .ROB_tag_1(lsq_ROB_tag_1),
+			      .rd_mem_in_1(lsq_rd_mem_1),
+			      .wr_mem_in_1(lsq_wr_mem_1),
+			      .valid_in_1(lsq_valid_1),
+
+			      //2
+			      .ROB_tag_2(lsq_ROB_tag_2),
+			      .rd_mem_in_2(lsq_rd_mem_2),
+			      .wr_mem_in_2(lsq_wr_mem_2),
+			      .valid_in_2(lsq_valid_2),
+
+			      //From EX ALU
+			      .EX_tag_1(lsq_EX_tag_1),
+			      .value_in_1(lsq_value_1),
+			      .address_in_1(lsq_address_1),
+			      .EX_valid_1(lsq_EX_valid_1),
+
+			      .EX_tag_2(lsq_EX_tag_2),
+			      .value_in_2(lsq_value_2),
+			      .address_in_2(lsq_address_i),
+			      .EX_valid_2(lsq_valid_2),
+
+			      //From MEM
+			      .Dmem2proc_data(lsq_Dmem2proc_data),
+			      .Dmem2proc_tag(lsq_Dmem2proc_tag),
+			      .Dmem2proc_response(lsq_Dmem2proc_response),
+			
+			      //Outputs
+			      .tag_out(lsq_tag_out),
+			      .mem_result_out(lsq_mem_result_out),
+			      .proc2Dmem_command(lsq_proc2Dmem_command_out),
+			      .proc2Dmem_addr(lsq_proc2Dmem_addr_out),
+			      .proc2Dmem_data(lsq_proc2Dmem_data_out),
+			      .LSQ_IF_stall(lsq_LSQ_IF_stall_out),
+			      .LSQ_EX_valid(lsq_LSQ_EX_valid_out)
+
+		        );
 
 
 endmodule  // module verisimple

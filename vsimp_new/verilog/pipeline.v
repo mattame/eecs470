@@ -884,7 +884,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     reg_inst2_regb  =  id_regb_out_2;
     
     reg_inst2_dest  =  rob_inst2_dest_out;
-    reg_inst2_value =  rob_inst2_dest_out;
+    reg_inst2_value =  rob_inst2_value_out;
     
     end
   end

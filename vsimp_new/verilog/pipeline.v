@@ -468,6 +468,7 @@ module pipeline (// Inputs
   wire [63:0] lsq_proc2Dmem_data_out;     // Data sent to data-memory
   
   wire lsq_LSQ_IF_stall_out, lsq_LSQ_EX_valid_out;
+  wire LSQ_full,LSQ_empty;
  
   /**********************************/
   /**********************************/
@@ -725,19 +726,36 @@ assign misprediciton = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out
       id_inst2_pht_index <= `SD 0;
     end // if (reset)
     else
+    begin
+      if (stall_first_half_of_pipeline)
       begin
-      id_NPC_1           <= `SD if_NPC_out_1;
-      id_IR_1            <= `SD if_IR_out_1;
-      id_valid_inst1     <= `SD if_valid_inst_out_1;
-      id_PPC_1           <= `SD if_PPC_out_1;
-      id_inst1_pht_index <= `SD if_inst1_pht_index_out;
+         id_NPC_1           <= `SD id_NPC_1;
+         id_IR_1            <= `SD id_IR_1;
+         id_valid_inst1     <= `SD id_valid_inst1;
+         id_PPC_1           <= `SD id_PPC_1;
+         id_inst1_pht_index <= `SD id_inst1_pht_index;
+
+         id_NPC_2           <= `SD id_NPC_2;
+         id_IR_2            <= `SD id_IR_2;
+         id_valid_inst2     <= `SD id_valid_inst2;
+         id_PPC_2           <= `SD id_PPC_2;
+         id_inst2_pht_index <= `SD id_inst2_pht_index;
+      end
+      else
+      begin
+         id_NPC_1           <= `SD if_NPC_out_1;
+         id_IR_1            <= `SD if_IR_out_1;
+         id_valid_inst1     <= `SD if_valid_inst_out_1;
+         id_PPC_1           <= `SD if_PPC_out_1;
+         id_inst1_pht_index <= `SD if_inst1_pht_index_out;
       
-      id_NPC_2           <= `SD if_NPC_out_2;
-      id_IR_2            <= `SD if_IR_out_2;
-      id_valid_inst2     <= `SD if_valid_inst_out_2;
-      id_PPC_2           <= `SD if_PPC_out_2;
-      id_inst2_pht_index <= `SD if_inst2_pht_index_out;
-      end // if (if_id_enable)
+         id_NPC_2           <= `SD if_NPC_out_2;
+         id_IR_2            <= `SD if_IR_out_2;
+         id_valid_inst2     <= `SD if_valid_inst_out_2;
+         id_PPC_2           <= `SD if_PPC_out_2;
+         id_inst2_pht_index <= `SD if_inst2_pht_index_out;
+      end
+    end 
   end // always
 
    
@@ -747,7 +765,6 @@ assign misprediciton = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out
   //                                              //
   //////////////////////////////////////////////////
 
-  
   id_stage id_stage0(
                       // Inputs
                       .clock(clock),
@@ -757,8 +774,6 @@ assign misprediciton = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out
 
                       .if_id_IR_2(id_IR_2),
                       .if_id_valid_inst_2(id_valid_inst2),
-
-
 
                       // Outputs
                       .id_opa_select_out_1(id_opa_select_out_1),
@@ -1687,7 +1702,6 @@ assign misprediciton = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out
                               .miss_reset(halted || mispredict),
                         
 			      //From ROB/ID
-
 			      .ROB_head_1(lsq_ROB_head_1),
 			      .ROB_head_2(lsq_ROB_head_2),
 
@@ -1726,7 +1740,9 @@ assign misprediciton = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out
 			      .proc2Dmem_addr(lsq_proc2Dmem_addr_out),
 			      .proc2Dmem_data(lsq_proc2Dmem_data_out),
 			      .LSQ_IF_stall(lsq_LSQ_IF_stall_out),
-			      .LSQ_EX_valid(lsq_LSQ_EX_valid_out)
+			      .LSQ_EX_valid(lsq_LSQ_EX_valid_out),
+                              .LSQ_full(LSQ_full),
+                              .LSQ_empty(LSQ_empty)
 
 		        );
 

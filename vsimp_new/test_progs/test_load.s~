@@ -1,6 +1,7 @@
-	lda $r0, 0
-	stq $r0, 0x20($r31)
-	nop
-	nop
-	nop
+	lda  $r0, 0
+	stq  $r0, 0x38($r31)
+	addq $r0, 15, $r0
+	stq  $r0, 0x48($r31)
+	lda  $r1, 24
+	stq  $r2, 0x40($r31)
 	call_pal 0x555

@@ -1,50 +1,29 @@
 # Begin_DVE_Session_Save_Info
 # DVE restart session
-<<<<<<< HEAD
-# Saved on Fri Apr 19 16:55:32 2013
-=======
-<<<<<<< HEAD
-# Saved on Fri Apr 19 15:04:16 2013
-# Designs open: 1
-#   Sim: /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/dve_simv
-=======
-# Saved on Fri Apr 19 15:58:03 2013
->>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
+# Saved on Fri Apr 19 19:29:48 2013
 # Designs open: 1
 #   Sim: /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/dve_simv
->>>>>>> 6214f36c699a0e891aa78c934d42633ac836393e
-# Toplevel windows open: 2
+# Toplevel windows open: 3
 # 	TopLevel.1
 # 	TopLevel.2
+# 	TopLevel.3
 #   Source.1: branch_decoder
-<<<<<<< HEAD
-#   Wave.1: 15 signals
-#   Group count = 4
-#   Group Group1 signal count = 1
-#   Group Group2 signal count = 8
-#   Group Group3 signal count = 1
-#   Group Group4 signal count = 6
-=======
-#   Wave.1: 34 signals
-<<<<<<< HEAD
-#   Group count = 3
-#   Group Group1 signal count = 18
-#   Group Group2 signal count = 14
-#   Group Group3 signal count = 2
-=======
-#   Group count = 10
-#   Group Group1 signal count = 4
-#   Group Group2 signal count = 2
-#   Group Group3 signal count = 2
-#   Group Group4 signal count = 4
-#   Group Group5 signal count = 4
-#   Group Group6 signal count = 4
-#   Group Group7 signal count = 4
-#   Group Group8 signal count = 3
-#   Group Group9 signal count = 5
-#   Group Group10 signal count = 2
->>>>>>> 6214f36c699a0e891aa78c934d42633ac836393e
->>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
+#   Wave.1: 31 signals
+#   Wave.2: 11 signals
+#   Group count = 13
+#   Group Group1 signal count = 52
+#   Group Group2 signal count = 3
+#   Group Group3 signal count = 3
+#   Group Group4 signal count = 3
+#   Group Group5 signal count = 3
+#   Group Group6 signal count = 3
+#   Group Group7 signal count = 2
+#   Group Group8 signal count = 4
+#   Group Group9 signal count = 4
+#   Group Group10 signal count = 3
+#   Group Group11 signal count = 3
+#   Group Group12 signal count = 1
+#   Group Group13 signal count = 11
 # End_DVE_Session_Save_Info
 
 # DVE version: E-2011.03_Full64
@@ -94,15 +73,21 @@ gui_sync_global -id ${TopLevel.2} -option true
 
 # MDI window settings
 set Wave.1 Wave.1
-<<<<<<< HEAD
-gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {dock_on_new_line false} {child_wave_left 329} {child_wave_right 804} {child_wave_colname 205} {child_wave_colvalue 120} {child_wave_col1 0} {child_wave_col2 1}}
-=======
-<<<<<<< HEAD
-gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {dock_on_new_line false} {child_wave_left 537} {child_wave_right 1311} {child_wave_colname 266} {child_wave_colvalue 267} {child_wave_col1 0} {child_wave_col2 1}}
-=======
-gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {dock_on_new_line false} {child_wave_left 535} {child_wave_right 1306} {child_wave_colname 265} {child_wave_colvalue 265} {child_wave_col1 0} {child_wave_col2 1}}
->>>>>>> 6214f36c699a0e891aa78c934d42633ac836393e
->>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
+gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {dock_on_new_line false} {child_wave_left 532} {child_wave_right 1298} {child_wave_colname 264} {child_wave_colvalue 264} {child_wave_col1 0} {child_wave_col2 1}}
+
+# End MDI window settings
+
+
+# Create and position top-level windows :TopLevel.3
+
+set TopLevel.3 TopLevel.3
+
+# Docked window settings
+gui_sync_global -id ${TopLevel.3} -option true
+
+# MDI window settings
+set Wave.2 Wave.2
+gui_update_layout -id ${Wave.2} {{show_state maximized} {dock_state undocked} {dock_on_new_line false} {child_wave_left 532} {child_wave_right 1297} {child_wave_colname 264} {child_wave_colvalue 264} {child_wave_col1 0} {child_wave_col2 1}}
 
 # End MDI window settings
 
@@ -130,74 +115,120 @@ gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {d
 
 set Group1 Group1
 gui_sg_create ${Group1}
-<<<<<<< HEAD
-gui_sg_addsignal -group ${Group1} { testbench.pipeline_0.LSQ_0.next_entry_2 }
-=======
-<<<<<<< HEAD
-gui_sg_addsignal -group ${Group1} { testbench.pipeline_0.ex_stage_0.clock testbench.pipeline_0.ex_stage_0.reset testbench.pipeline_0.ex_stage_0.ex_NPC_out_1 testbench.pipeline_0.ex_stage_0.ex_dest_reg_out_1 testbench.pipeline_0.ex_stage_0.ex_result_out_1 testbench.pipeline_0.ex_stage_0.ex_pht_idx_out_1 testbench.pipeline_0.ex_stage_0.ex_valid_out_1 testbench.pipeline_0.ex_stage_0.ex_NPC_out_2 testbench.pipeline_0.ex_stage_0.ex_dest_reg_out_2 testbench.pipeline_0.ex_stage_0.ex_result_out_2 testbench.pipeline_0.ex_stage_0.ex_pht_idx_out_2 testbench.pipeline_0.ex_stage_0.ex_valid_out_2 testbench.pipeline_0.ex_stage_0.id_ex_cond_branch_1 testbench.pipeline_0.ex_stage_0.id_ex_uncond_branch_1 testbench.pipeline_0.ex_stage_0.id_ex_cond_branch_2 testbench.pipeline_0.ex_stage_0.id_ex_uncond_branch_2 testbench.pipeline_0.ex_stage_0.ex_branch_result_1 testbench.pipeline_0.ex_stage_0.ex_branch_result_2 }
+gui_sg_addsignal -group ${Group1} { testbench.pipeline_0.LSQ_0.Dmem2proc_data testbench.pipeline_0.LSQ_0.Dmem2proc_tag testbench.pipeline_0.LSQ_0.Dmem2proc_response testbench.pipeline_0.LSQ_0.proc2Dmem_command testbench.pipeline_0.LSQ_0.proc2Dmem_addr testbench.pipeline_0.LSQ_0.proc2Dmem_data testbench.pipeline_0.LSQ_0.LSQ_IF_stall testbench.pipeline_0.LSQ_0.LSQ_empty testbench.pipeline_0.LSQ_0.LSQ_full testbench.pipeline_0.register_file0.values testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory testbench.memory.unified_memory }
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
+gui_set_radix -radix {unsigned} -signals {Sim:testbench.memory.unified_memory}
 set Group2 Group2
 gui_sg_create ${Group2}
-gui_sg_addsignal -group ${Group2} { testbench.pipeline_0.reorder_buffer_0.inst1_dest_out testbench.pipeline_0.reorder_buffer_0.inst2_dest_out testbench.pipeline_0.reorder_buffer_0.inst1_value_out testbench.pipeline_0.reorder_buffer_0.inst2_value_out testbench.pipeline_0.reorder_buffer_0.inst1_retire_tag_out testbench.pipeline_0.reorder_buffer_0.inst2_retire_tag_out testbench.pipeline_0.reorder_buffer_0.inst1_mispredicted_out testbench.pipeline_0.reorder_buffer_0.inst2_mispredicted_out testbench.pipeline_0.reorder_buffer_0.inst1_branch_result_out testbench.pipeline_0.reorder_buffer_0.inst2_branch_result_out testbench.pipeline_0.reorder_buffer_0.inst1_NPC_out testbench.pipeline_0.reorder_buffer_0.inst2_NPC_out testbench.pipeline_0.reorder_buffer_0.inst1_pht_index_out testbench.pipeline_0.reorder_buffer_0.inst2_pht_index_out }
+gui_sg_addsignal -group ${Group2} { testbench.pipeline_0.LSQ_0.clock testbench.pipeline_0.LSQ_0.reset testbench.pipeline_0.LSQ_0.miss_reset }
 set Group3 Group3
 gui_sg_create ${Group3}
-gui_sg_addsignal -group ${Group3} { testbench.pipeline_0.ex_stage_0.id_ex_IR_1 testbench.pipeline_0.ex_stage_0.id_ex_IR_2 }
-=======
-gui_sg_addsignal -group ${Group1} { testbench.pipeline_0.LSQ_0.LSQ_IF_stall testbench.pipeline_0.LSQ_0.LSQ_EX_valid testbench.pipeline_0.LSQ_0.LSQ_empty testbench.pipeline_0.LSQ_0.LSQ_full }
->>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
-set Group2 Group2
-gui_sg_create ${Group2}
-gui_sg_addsignal -group ${Group2} { testbench.pipeline_0.LSQ_0.clock testbench.pipeline_0.LSQ_0.reset testbench.pipeline_0.LSQ_0.Dmem2proc_data testbench.pipeline_0.LSQ_0.Dmem2proc_tag testbench.pipeline_0.LSQ_0.Dmem2proc_response testbench.pipeline_0.LSQ_0.proc2Dmem_command testbench.pipeline_0.LSQ_0.proc2Dmem_addr testbench.pipeline_0.LSQ_0.proc2Dmem_data }
-set Group3 Group3
-gui_sg_create ${Group3}
-gui_sg_addsignal -group ${Group3} { testbench.memory.valid_address }
+gui_sg_addsignal -group ${Group3} { testbench.pipeline_0.LSQ_0.Dmem2proc_data testbench.pipeline_0.LSQ_0.Dmem2proc_response testbench.pipeline_0.LSQ_0.Dmem2proc_tag }
 set Group4 Group4
 gui_sg_create ${Group4}
-<<<<<<< HEAD
-gui_sg_addsignal -group ${Group4} { testbench.memory.proc2mem_addr testbench.memory.proc2mem_data testbench.memory.proc2mem_command testbench.memory.mem2proc_response testbench.memory.mem2proc_data testbench.memory.mem2proc_tag }
-=======
-gui_sg_addsignal -group ${Group4} { testbench.pipeline_0.LSQ_0.ROB_tag_1 testbench.pipeline_0.LSQ_0.rd_mem_in_1 testbench.pipeline_0.LSQ_0.wr_mem_in_1 testbench.pipeline_0.LSQ_0.valid_in_1 }
+gui_sg_addsignal -group ${Group4} { testbench.pipeline_0.LSQ_0.proc2Dmem_addr testbench.pipeline_0.LSQ_0.proc2Dmem_command testbench.pipeline_0.LSQ_0.proc2Dmem_data }
 set Group5 Group5
 gui_sg_create ${Group5}
-gui_sg_addsignal -group ${Group5} { testbench.pipeline_0.LSQ_0.EX_tag_1 testbench.pipeline_0.LSQ_0.value_in_1 testbench.pipeline_0.LSQ_0.address_in_1 testbench.pipeline_0.LSQ_0.EX_valid_1 }
+gui_sg_addsignal -group ${Group5} { testbench.pipeline_0.LSQ_0.LSQ_empty testbench.pipeline_0.LSQ_0.LSQ_full testbench.pipeline_0.LSQ_0.LSQ_EX_valid }
 set Group6 Group6
 gui_sg_create ${Group6}
-gui_sg_addsignal -group ${Group6} { testbench.pipeline_0.LSQ_0.ROB_tag_2 testbench.pipeline_0.LSQ_0.rd_mem_in_2 testbench.pipeline_0.LSQ_0.wr_mem_in_2 testbench.pipeline_0.LSQ_0.valid_in_2 }
+gui_sg_addsignal -group ${Group6} { testbench.pipeline_0.LSQ_0.LSQ_head testbench.pipeline_0.LSQ_0.LSQ_tail testbench.pipeline_0.LSQ_0.clear_tail }
 set Group7 Group7
 gui_sg_create ${Group7}
-gui_sg_addsignal -group ${Group7} { testbench.pipeline_0.LSQ_0.EX_tag_2 testbench.pipeline_0.LSQ_0.value_in_2 testbench.pipeline_0.LSQ_0.address_in_2 testbench.pipeline_0.LSQ_0.EX_valid_2 }
+gui_sg_addsignal -group ${Group7} { testbench.pipeline_0.LSQ_0.ROB_head_1 testbench.pipeline_0.LSQ_0.ROB_head_2 }
 set Group8 Group8
 gui_sg_create ${Group8}
-gui_sg_addsignal -group ${Group8} { testbench.pipeline_0.LSQ_0.Dmem2proc_data testbench.pipeline_0.LSQ_0.Dmem2proc_tag testbench.pipeline_0.LSQ_0.Dmem2proc_response }
+gui_sg_addsignal -group ${Group8} { testbench.pipeline_0.reorder_buffer_0.inst1_dest_out testbench.pipeline_0.reorder_buffer_0.inst1_value_out testbench.pipeline_0.reorder_buffer_0.inst1_retire_tag_out testbench.pipeline_0.reorder_buffer_0.inst1_branch_result_out }
 set Group9 Group9
 gui_sg_create ${Group9}
-gui_sg_addsignal -group ${Group9} { testbench.pipeline_0.LSQ_0.tag_out testbench.pipeline_0.LSQ_0.mem_result_out testbench.pipeline_0.LSQ_0.proc2Dmem_command testbench.pipeline_0.LSQ_0.proc2Dmem_addr testbench.pipeline_0.LSQ_0.proc2Dmem_data }
+gui_sg_addsignal -group ${Group9} { testbench.pipeline_0.reorder_buffer_0.inst2_dest_out testbench.pipeline_0.reorder_buffer_0.inst2_value_out testbench.pipeline_0.reorder_buffer_0.inst2_retire_tag_out testbench.pipeline_0.reorder_buffer_0.inst2_branch_result_out }
 set Group10 Group10
 gui_sg_create ${Group10}
-gui_sg_addsignal -group ${Group10} { testbench.pipeline_0.ex_stage_0.stall_bus_1 testbench.pipeline_0.ex_stage_0.stall_bus_2 }
->>>>>>> 6214f36c699a0e891aa78c934d42633ac836393e
->>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
+gui_sg_addsignal -group ${Group10} { testbench.pipeline_0.cm_stage_0.cdb_tag_1 testbench.pipeline_0.cm_stage_0.cdb_value_1 testbench.pipeline_0.cm_stage_0.cdb_branch_result_1 }
+set Group11 Group11
+gui_sg_create ${Group11}
+gui_sg_addsignal -group ${Group11} { testbench.pipeline_0.cm_stage_0.cdb_tag_2 testbench.pipeline_0.cm_stage_0.cdb_value_2 testbench.pipeline_0.cm_stage_0.cdb_branch_result_2 }
+set Group12 Group12
+gui_sg_create ${Group12}
+gui_sg_addsignal -group ${Group12} { testbench.pipeline_0.register_file0.values }
+set Group13 Group13
+gui_sg_create ${Group13}
+gui_sg_addsignal -group ${Group13} { {testbench.memory.unified_memory[0]} {testbench.memory.unified_memory[1]} {testbench.memory.unified_memory[2]} {testbench.memory.unified_memory[3]} {testbench.memory.unified_memory[4]} {testbench.memory.unified_memory[5]} {testbench.memory.unified_memory[6]} {testbench.memory.unified_memory[7]} {testbench.memory.unified_memory[8]} {testbench.memory.unified_memory[9]} {testbench.memory.unified_memory[10]} }
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[0]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[0]}}
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[1]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[1]}}
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[2]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[2]}}
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[3]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[3]}}
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[4]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[4]}}
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[5]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[5]}}
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[6]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[6]}}
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[7]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[7]}}
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[8]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[8]}}
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[9]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[9]}}
+gui_set_radix -radix {hex} -signals {{Sim:testbench.memory.unified_memory[10]}}
+gui_set_radix -radix {unsigned} -signals {{Sim:testbench.memory.unified_memory[10]}}
 
 # Global: Highlighting
 
 # Post database loading setting...
 
 # Restore C1 time
-<<<<<<< HEAD
-gui_set_time -C1_only 1095822
-=======
-<<<<<<< HEAD
-gui_set_time -C1_only 174
-=======
-gui_set_time -C1_only 12829432
->>>>>>> 6214f36c699a0e891aa78c934d42633ac836393e
->>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
+gui_set_time -C1_only 582
 
 
 
 # Save global setting...
 
 # Wave/List view global setting
-gui_list_create_group_when_add -wave -enable
 gui_cov_show_value -switch false
 
 # Close all empty TopLevel windows
@@ -217,48 +248,26 @@ gui_list_set_filter -id ${Hier.1} -text {*}
 gui_change_design -id ${Hier.1} -design Sim
 catch {gui_list_expand -id ${Hier.1} testbench}
 catch {gui_list_select -id ${Hier.1} {testbench.memory}}
-gui_view_scroll -id ${Hier.1} -vertical -set 101
+gui_view_scroll -id ${Hier.1} -vertical -set 0
 gui_view_scroll -id ${Hier.1} -horizontal -set 0
 
 # Data 'Data.1'
 gui_list_set_filter -id ${Data.1} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {Parameter 1} {All 1} {Aggregate 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
-<<<<<<< HEAD
-gui_list_set_filter -id ${Data.1} -text {*IR*}
-gui_list_show_data -id ${Data.1} {testbench.pipeline_0.ex_stage_0}
-gui_show_window -window ${Data.1}
-catch { gui_list_select -id ${Data.1} {testbench.pipeline_0.ex_stage_0.id_ex_IR_1 testbench.pipeline_0.ex_stage_0.id_ex_IR_2 }}
-gui_view_scroll -id ${Data.1} -vertical -set 0
-=======
 gui_list_set_filter -id ${Data.1} -text {*}
 gui_list_show_data -id ${Data.1} {testbench.memory}
-gui_show_window -window ${Data.1}
-<<<<<<< HEAD
-catch { gui_list_select -id ${Data.1} {testbench.memory.proc2mem_addr testbench.memory.proc2mem_data testbench.memory.proc2mem_command testbench.memory.mem2proc_response testbench.memory.mem2proc_data testbench.memory.mem2proc_tag }}
-gui_view_scroll -id ${Data.1} -vertical -set 0
-=======
-catch { gui_list_select -id ${Data.1} {testbench.pipeline_0.ex_stage_0.stall_bus_1 testbench.pipeline_0.ex_stage_0.stall_bus_2 }}
-gui_view_scroll -id ${Data.1} -vertical -set 380
->>>>>>> 6214f36c699a0e891aa78c934d42633ac836393e
->>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
+gui_list_expand -id ${Data.1} testbench.memory.unified_memory
+gui_view_scroll -id ${Data.1} -vertical -set 147078
 gui_view_scroll -id ${Data.1} -horizontal -set 0
-gui_view_scroll -id ${Hier.1} -vertical -set 101
+gui_view_scroll -id ${Hier.1} -vertical -set 0
 gui_view_scroll -id ${Hier.1} -horizontal -set 0
 
 # Source 'Source.1'
 gui_src_value_annotate -id ${Source.1} -switch false
 gui_set_env TOGGLE::VALUEANNOTATE 0
-<<<<<<< HEAD
-gui_open_source -id ${Source.1}  -replace -active branch_decoder /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/branch_predictor.v
-=======
 gui_open_source -id ${Source.1}  -replace -active branch_decoder /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/branch_predictor.v
 gui_src_value_annotate -id ${Source.1} -switch true
 gui_set_env TOGGLE::VALUEANNOTATE 1
-<<<<<<< HEAD
 gui_view_scroll -id ${Source.1} -vertical -set 165
-=======
->>>>>>> 6214f36c699a0e891aa78c934d42633ac836393e
-gui_view_scroll -id ${Source.1} -vertical -set 0
->>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 gui_src_set_reusable -id ${Source.1}
 
 # View 'Wave.1'
@@ -269,22 +278,7 @@ set origWaveHeight [gui_get_pref_value -category Wave -key waveRowHeight]
 gui_list_set_height -id Wave -height 25
 set origGroupCreationState [gui_list_create_group_when_add -wave]
 gui_list_create_group_when_add -wave -disable
-<<<<<<< HEAD
-gui_wv_zoom_timerange -id ${Wave.1} 0 606
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group2}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group3}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group4}
-gui_list_select -id ${Wave.1} {testbench.pipeline_0.LSQ_0.Dmem2proc_response }
-=======
-<<<<<<< HEAD
-gui_wv_zoom_timerange -id ${Wave.1} 21 453
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group1}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group2}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group3}
-gui_list_select -id ${Wave.1} {testbench.pipeline_0.ex_stage_0.id_ex_cond_branch_2 }
-=======
-gui_wv_zoom_timerange -id ${Wave.1} 12829428 12829437
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group1}
+gui_wv_zoom_timerange -id ${Wave.1} 329 834
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group2}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group3}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group4}
@@ -294,14 +288,11 @@ gui_list_add_group -id ${Wave.1} -after {New Group} {Group7}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group8}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group9}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group10}
-gui_list_select -id ${Wave.1} {testbench.pipeline_0.LSQ_0.value_in_1 }
->>>>>>> 6214f36c699a0e891aa78c934d42633ac836393e
->>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
+gui_list_add_group -id ${Wave.1} -after {New Group} {Group11}
+gui_list_select -id ${Wave.1} {testbench.pipeline_0.LSQ_0.LSQ_head }
 gui_seek_criteria -id ${Wave.1} {Any Edge}
 
 
-
-gui_set_env TOGGLE::DEFAULT_WAVE_WINDOW ${Wave.1}
 gui_set_pref_value -category Wave -key exclusiveSG -value $groupExD
 gui_list_set_height -id Wave -height $origWaveHeight
 if {$origGroupCreationState} {
@@ -312,25 +303,42 @@ if { $groupExD } {
 }
 gui_list_set_filter -id ${Wave.1} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {Parameter 1} {All 1} {Aggregate 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
 gui_list_set_filter -id ${Wave.1} -text {*}
-<<<<<<< HEAD
-gui_list_set_insertion_bar  -id ${Wave.1} -group Group4  -position in
+gui_list_set_insertion_bar  -id ${Wave.1} -group Group5  -item testbench.pipeline_0.LSQ_0.LSQ_EX_valid -position below
 
-gui_marker_move -id ${Wave.1} {C1} 1095822
-gui_view_scroll -id ${Wave.1} -vertical -set 0
-=======
-<<<<<<< HEAD
-gui_list_set_insertion_bar  -id ${Wave.1} -group Group3  -position in
-
-gui_marker_move -id ${Wave.1} {C1} 174
-gui_view_scroll -id ${Wave.1} -vertical -set 45
-=======
-gui_list_set_insertion_bar  -id ${Wave.1} -group Group10  -position in
-
-gui_marker_move -id ${Wave.1} {C1} 12829432
-gui_view_scroll -id ${Wave.1} -vertical -set 227
->>>>>>> 6214f36c699a0e891aa78c934d42633ac836393e
->>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
+gui_marker_move -id ${Wave.1} {C1} 582
+gui_view_scroll -id ${Wave.1} -vertical -set 163
 gui_show_grid -id ${Wave.1} -enable false
+
+# View 'Wave.2'
+gui_wv_sync -id ${Wave.2} -switch false
+set groupExD [gui_get_pref_value -category Wave -key exclusiveSG]
+gui_set_pref_value -category Wave -key exclusiveSG -value {false}
+set origWaveHeight [gui_get_pref_value -category Wave -key waveRowHeight]
+gui_list_set_height -id Wave -height 25
+set origGroupCreationState [gui_list_create_group_when_add -wave]
+gui_list_create_group_when_add -wave -disable
+gui_wv_zoom_timerange -id ${Wave.2} 369 796
+gui_list_add_group -id ${Wave.2} -after {New Group} {Group13}
+gui_seek_criteria -id ${Wave.2} {Any Edge}
+
+
+
+gui_set_env TOGGLE::DEFAULT_WAVE_WINDOW ${Wave.2}
+gui_set_pref_value -category Wave -key exclusiveSG -value $groupExD
+gui_list_set_height -id Wave -height $origWaveHeight
+if {$origGroupCreationState} {
+	gui_list_create_group_when_add -wave -enable
+}
+if { $groupExD } {
+ gui_msg_report -code DVWW028
+}
+gui_list_set_filter -id ${Wave.2} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {Parameter 1} {All 1} {Aggregate 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
+gui_list_set_filter -id ${Wave.2} -text {*}
+gui_list_set_insertion_bar  -id ${Wave.2} -group Group13  -position in
+
+gui_marker_move -id ${Wave.2} {C1} 582
+gui_view_scroll -id ${Wave.2} -vertical -set 0
+gui_show_grid -id ${Wave.2} -enable false
 # Restore toplevel window zorder
 # The toplevel window could be closed if it has no view/pane
 if {[gui_exist_window -window ${TopLevel.1}]} {
@@ -341,6 +349,10 @@ if {[gui_exist_window -window ${TopLevel.1}]} {
 if {[gui_exist_window -window ${TopLevel.2}]} {
 	gui_set_active_window -window ${TopLevel.2}
 	gui_set_active_window -window ${Wave.1}
+}
+if {[gui_exist_window -window ${TopLevel.3}]} {
+	gui_set_active_window -window ${TopLevel.3}
+	gui_set_active_window -window ${Wave.2}
 }
 #</Session>
 

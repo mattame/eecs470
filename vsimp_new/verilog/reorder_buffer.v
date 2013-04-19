@@ -316,20 +316,21 @@ module reorder_buffer( clock,reset,
    assign tail_minus_one = (tail==8'd0) ? (`ROB_ENTRIES-1) : tail-8'd1;
 
    // combinational assignments for signals //
-   assign inst1_retire   =                  (states_out[head         ]==`ROBE_COMPLETE);
+   assign inst1_retire   =                   (states_out[head         ]==`ROBE_COMPLETE);
    assign inst2_retire   = ( inst1_retire && (states_out[head_plus_one]==`ROBE_COMPLETE) && (branch_results_out[head_plus_one]!=`BRANCH_HALT) );
-   assign inst1_dispatch = ( ~rob_full && (inst1_valid_in || (~inst1_valid_in && inst2_valid_in)) ); 
-   assign inst2_dispatch = ( ~rob_full && (inst1_valid_in && inst2_valid_in) );
-
+   assign dispatch_from_inst1 = (~rob_full && inst1_valid_in);
+   assign dispatch_from_inst2 = (~rob_full && inst2_valid_in);
+   assign dispatch_at_least_one = (dispatch_from_inst1 || dispatch_from_inst2);
+   assign dispatch_one = ((dispatch_from_inst1 && ~dispatch_from_inst2) || (~dispatch_from_inst1 && dispatch_from_inst2));
+   assign dispatch_two = (dispatch_from_inst1 && dispatch_from_inst2); 
 
    // combinational assignments for next state signals //
-   assign n_head = ( inst1_retire   ? (inst2_retire   ? head_plus_two : head_plus_one) : head );   // if retiring one inst, inc by one. if two, inc by two
-   assign n_tail = ( inst1_dispatch ? (inst2_dispatch ? tail_plus_two : tail_plus_one) : tail );   // if dispatching one inst, inc by one. if two, inc by two
-
+   assign n_head = ( inst1_retire          ? (inst2_retire ? head_plus_two : head_plus_one) : head );   // if retiring one inst, inc by one. if two, inc by two
+   assign n_tail = ( dispatch_at_least_one ? (dispatch_two ? tail_plus_two : tail_plus_one) : tail );   // if dispatching one inst, inc by one. if two, inc by two
 
    // for tag outputs (to rs) //
-   assign inst1_tag_out = (inst1_dispatch ? tail_plus_one : `RSTAG_NULL);
-   assign inst2_tag_out = (inst2_dispatch ? tail_plus_two : `RSTAG_NULL);
+   assign inst1_tag_out = (dispatch_at_least_one ? tail_plus_one : `RSTAG_NULL); 
+   assign inst2_tag_out = (dispatch_two          ? tail_plus_two : (dispatch_at_least_one ? tail_plus_one : `RSTAG_NULL) );
 
    // assign appropriate outputs for from-rob values //
    // tags in are broken down to remove the ready-in-rob-bit //
@@ -367,8 +368,8 @@ module reorder_buffer( clock,reset,
       for (i=0; i<`ROB_ENTRIES; i=i+1)
       begin : ASSIGNROBEINPUTS
          assign resets[i]       = (reset || (head==i && inst1_retire) || (head_plus_one==i && inst2_retire));
-         assign writes[i]       = (tail_plus_one==i && inst1_dispatch) || (tail_plus_two==i && inst2_dispatch); 
-         assign registers_in[i] = (tail_plus_one==i) ? inst1_dest_in : ((tail_plus_two==i) ? inst2_dest_in : `ZERO_REG);
+         assign writes[i]       = (tail_plus_one==i && dispatch_at_least_one) || (tail_plus_two==i && dispatch_two); 
+         assign registers_in[i] = (tail_plus_one==i && dispatch_from_inst1) ? inst1_dest_in : ( ((tail_plus_two==i && dispatch_two) || (tail_plus_one==i && dispatch_one)) ? inst2_dest_in : `ZERO_REG );
       end
    endgenerate
    

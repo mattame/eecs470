@@ -164,7 +164,7 @@ module decoder(// Inputs
             alu_func = `ALU_ADDQ;
             dest_reg = `DEST_IS_REGA;
             case (inst[31:26])
-              `LDA_INST:  /* defaults are OK */;
+              `LDA_INST:  rd_mem = `TRUE;
               `LDQ_INST:
                 begin
                   rd_mem = `TRUE;
@@ -359,13 +359,13 @@ module id_stage(
     begin
       case (dest_reg_select_1)
         `DEST_IS_REGC: id_dest_reg_idx_out_1 = rc_idx_1;
-        `DEST_IS_REGA: id_dest_reg_idx_out_1 = ra_idx_1;
+        `DEST_IS_REGA: id_dest_reg_idx_out_1 = if_id_IR_1[25:21];
         `DEST_NONE:    id_dest_reg_idx_out_1 = `ZERO_REG;
         default:       id_dest_reg_idx_out_1 = `ZERO_REG; 
       endcase
       case (dest_reg_select_2)
         `DEST_IS_REGC: id_dest_reg_idx_out_2 = rc_idx_2;
-        `DEST_IS_REGA: id_dest_reg_idx_out_2 = ra_idx_2;
+        `DEST_IS_REGA: id_dest_reg_idx_out_2 = if_id_IR_2[25:21];
         `DEST_NONE:    id_dest_reg_idx_out_2 = `ZERO_REG;
         default:       id_dest_reg_idx_out_2 = `ZERO_REG; 
       endcase

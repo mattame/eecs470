@@ -508,6 +508,7 @@ module pipeline (// Inputs
 
 
 /////// TEMPORARY WHILE WE DO NOT HAVE MEMORY WRITEBACK /////////////////
+  assign proc2Dmem_command = `BUS_NONE;
 
 
   // Icache wires

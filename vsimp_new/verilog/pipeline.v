@@ -1769,7 +1769,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 			      .EX_tag_2(lsq_EX_tag_2),
 			      .value_in_2(lsq_value_2),
 			      .address_in_2(lsq_address_2),
-			      .EX_valid_2(lsq_valid_2),
+			      .EX_valid_2(lsq_EX_valid_2),
 
 			      //From MEM
 			      .Dmem2proc_data(mem2proc_data),

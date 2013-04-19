@@ -304,18 +304,18 @@ module id_stage(
   output wire    [4:0] rb_idx_1;   // inst operand B register index
   wire    [4:0] rc_idx_1;     // inst operand C register index
   
-  assign ra_idx_1 = (id_opa_select_out_1 == `ALU_OPA_IS_REGA) ? if_id_IR_1[4:0]   : `ZERO_REG;
+  assign ra_idx_1 = (id_opa_select_out_1 == `ALU_OPA_IS_REGA) ? if_id_IR_1[25:21] : `ZERO_REG;
   assign rb_idx_1 = (id_opb_select_out_1 == `ALU_OPB_IS_REGB) ? if_id_IR_1[20:16] : `ZERO_REG;
-  assign rc_idx_1 = if_id_IR_1[25:21];
+  assign rc_idx_1 = if_id_IR_1[4:0];
 
     // instruction fields read from IF/ID pipeline register
   output wire    [4:0] ra_idx_2;   // inst operand A register index
   output wire    [4:0] rb_idx_2;   // inst operand B register index
   wire           [4:0] rc_idx_2;     // inst operand C register index
 
-  assign ra_idx_2 = (id_opa_select_out_2 == `ALU_OPA_IS_REGA) ? if_id_IR_2[4:0]   : `ZERO_REG;
+  assign ra_idx_2 = (id_opa_select_out_2 == `ALU_OPA_IS_REGA) ? if_id_IR_2[25:21]   : `ZERO_REG;
   assign rb_idx_2 = (id_opb_select_out_2 == `ALU_OPB_IS_REGB) ? if_id_IR_2[20:16] : `ZERO_REG;
-  assign rc_idx_2 = if_id_IR_2[25:21];
+  assign rc_idx_2 = if_id_IR_2[4:0];
 
     // instantiate the instruction decoder
   decoder decoder_1 (// Input

@@ -1,2 +1,6 @@
 	lda $r0, 0
+	stq $r0, 0x20($r31)
+	nop
+	nop
+	nop
 	call_pal 0x555

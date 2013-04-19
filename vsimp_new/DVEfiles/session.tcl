@@ -1,5 +1,6 @@
 # Begin_DVE_Session_Save_Info
 # DVE full session
+<<<<<<< HEAD
 # Saved on Fri Apr 19 17:18:30 2013
 # Designs open: 1
 #   Sim: /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/dve_simv
@@ -8,13 +9,26 @@
 #   Source.1: branch_decoder
 #   Group count = 1
 #   Group Group1 signal count = 8
+=======
+# Saved on Fri Apr 19 16:05:30 2013
+# Designs open: 1
+#   Sim: /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/dve_simv
+# Toplevel windows open: 1
+# 	TopLevel.1
+#   Source.1: testbench.pipeline_0.register_file0
+#   Group count = 0
+>>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 # End_DVE_Session_Save_Info
 
 # DVE version: E-2011.03_Full64
 # DVE build date: Feb 23 2011 21:10:05
 
 
+<<<<<<< HEAD
 #<Session mode="Full" path="/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/DVEfiles/session.tcl" type="Debug">
+=======
+#<Session mode="Full" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/DVEfiles/session.tcl" type="Debug">
+>>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 
 gui_set_loading_session_type Post
 gui_continuetime_set
@@ -68,7 +82,11 @@ if {![gui_exist_window -window TopLevel.1]} {
 } else { 
     set TopLevel.1 TopLevel.1
 }
+<<<<<<< HEAD
 gui_show_window -window ${TopLevel.1} -show_state normal -rect {{53 102} {1917 1170}}
+=======
+gui_show_window -window ${TopLevel.1} -show_state normal -rect {{543 162} {1786 1170}}
+>>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 
 # ToolBar settings
 gui_set_toolbar_attributes -toolbar {TimeOperations} -dock_state top
@@ -114,6 +132,7 @@ gui_show_toolbar -toolbar {Grid}
 # End ToolBar settings
 
 # Docked window settings
+<<<<<<< HEAD
 set HSPane.1 [gui_create_window -type HSPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 232]
 set Hier.1 [gui_share_window -id ${HSPane.1} -type Hier]
 gui_set_window_pref_key -window ${HSPane.1} -key dock_width -value_type integer -value 232
@@ -131,6 +150,25 @@ gui_set_window_pref_key -window ${Console.1} -key dock_width -value_type integer
 gui_set_window_pref_key -window ${Console.1} -key dock_height -value_type integer -value 147
 gui_set_window_pref_key -window ${Console.1} -key dock_offset -value_type integer -value 0
 gui_update_layout -id ${Console.1} {{left 0} {top 0} {width 1864} {height 146} {dock_state bottom} {dock_on_new_line true}}
+=======
+set HSPane.1 [gui_create_window -type HSPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 234]
+set Hier.1 [gui_share_window -id ${HSPane.1} -type Hier]
+gui_set_window_pref_key -window ${HSPane.1} -key dock_width -value_type integer -value 234
+gui_set_window_pref_key -window ${HSPane.1} -key dock_height -value_type integer -value -1
+gui_set_window_pref_key -window ${HSPane.1} -key dock_offset -value_type integer -value 0
+gui_update_layout -id ${HSPane.1} {{left 0} {top 0} {width 233} {height 718} {dock_state left} {dock_on_new_line true} {child_hier_colhier 218} {child_hier_coltype 100} {child_hier_col1 0} {child_hier_col2 1}}
+set DLPane.1 [gui_create_window -type DLPane -parent ${TopLevel.1} -dock_state left -dock_on_new_line true -dock_extent 478]
+set Data.1 [gui_share_window -id ${DLPane.1} -type Data]
+gui_set_window_pref_key -window ${DLPane.1} -key dock_width -value_type integer -value 478
+gui_set_window_pref_key -window ${DLPane.1} -key dock_height -value_type integer -value 718
+gui_set_window_pref_key -window ${DLPane.1} -key dock_offset -value_type integer -value 0
+gui_update_layout -id ${DLPane.1} {{left 0} {top 0} {width 477} {height 718} {dock_state left} {dock_on_new_line true} {child_data_colvariable 236} {child_data_colvalue 126} {child_data_coltype 116} {child_data_col1 0} {child_data_col2 1} {child_data_col3 2}}
+set Console.1 [gui_create_window -type Console -parent ${TopLevel.1} -dock_state bottom -dock_on_new_line true -dock_extent 169]
+gui_set_window_pref_key -window ${Console.1} -key dock_width -value_type integer -value 1244
+gui_set_window_pref_key -window ${Console.1} -key dock_height -value_type integer -value 169
+gui_set_window_pref_key -window ${Console.1} -key dock_offset -value_type integer -value 0
+gui_update_layout -id ${Console.1} {{left 0} {top 0} {width 1243} {height 168} {dock_state bottom} {dock_on_new_line true}}
+>>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 #### Start - Readjusting docked view's offset / size
 set dockAreaList { top left right bottom }
 foreach dockArea $dockAreaList {
@@ -174,11 +212,19 @@ gui_update_statusbar_target_frame ${TopLevel.1}
 # DVE Open design session: 
 
 if { [llength [lindex [gui_get_db -design Sim] 0]] == 0 } {
+<<<<<<< HEAD
 gui_set_env SIMSETUP::SIMARGS {{}}
 gui_set_env SIMSETUP::SIMEXE {./dve_simv}
 gui_set_env SIMSETUP::ALLOW_POLL {0}
 if { ![gui_is_db_opened -db {/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/dve_simv}] } {
 gui_sim_run Ucli -exe dve_simv -args {-ucligui } -dir /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new -nosource
+=======
+gui_set_env SIMSETUP::SIMARGS {{+v2k +vc +memcbk}}
+gui_set_env SIMSETUP::SIMEXE {dve_simv}
+gui_set_env SIMSETUP::ALLOW_POLL {0}
+if { ![gui_is_db_opened -db {/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/dve_simv}] } {
+gui_sim_run Ucli -exe dve_simv -args {-ucligui  +v2k +vc +memcbk} -dir /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new -nosource
+>>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 }
 }
 if { ![gui_sim_state -check active] } {error "Simulator did not start correctly" error}
@@ -201,16 +247,23 @@ gui_set_time_units 1s
 
 # Global: Signal Groups
 
+<<<<<<< HEAD
 set Group1 Group1
 gui_sg_create ${Group1}
 gui_sg_addsignal -group ${Group1} { testbench.pipeline_0.LSQ_0.clock testbench.pipeline_0.LSQ_0.reset testbench.pipeline_0.LSQ_0.Dmem2proc_data testbench.pipeline_0.LSQ_0.Dmem2proc_tag testbench.pipeline_0.LSQ_0.Dmem2proc_response testbench.pipeline_0.LSQ_0.proc2Dmem_command testbench.pipeline_0.LSQ_0.proc2Dmem_addr testbench.pipeline_0.LSQ_0.proc2Dmem_data }
+=======
+>>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 
 # Global: Highlighting
 
 # Post database loading setting...
 
 # Restore C1 time
+<<<<<<< HEAD
 gui_set_time -C1_only 522
+=======
+gui_set_time -C1_only 0
+>>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 
 
 
@@ -237,16 +290,26 @@ gui_hier_list_init -id ${Hier.1}
 gui_change_design -id ${Hier.1} -design Sim
 catch {gui_list_expand -id ${Hier.1} testbench}
 catch {gui_list_expand -id ${Hier.1} testbench.pipeline_0}
+<<<<<<< HEAD
 catch {gui_list_select -id ${Hier.1} {testbench.pipeline_0.LSQ_0}}
+=======
+catch {gui_list_select -id ${Hier.1} {testbench.pipeline_0.register_file0}}
+>>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 gui_view_scroll -id ${Hier.1} -vertical -set 0
 gui_view_scroll -id ${Hier.1} -horizontal -set 0
 
 # Data 'Data.1'
 gui_list_set_filter -id ${Data.1} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {Parameter 1} {All 1} {Aggregate 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
 gui_list_set_filter -id ${Data.1} -text {*}
+<<<<<<< HEAD
 gui_list_show_data -id ${Data.1} {testbench.pipeline_0.LSQ_0}
 gui_show_window -window ${Data.1}
 catch { gui_list_select -id ${Data.1} {testbench.pipeline_0.LSQ_0.clock testbench.pipeline_0.LSQ_0.reset testbench.pipeline_0.LSQ_0.Dmem2proc_data testbench.pipeline_0.LSQ_0.Dmem2proc_tag testbench.pipeline_0.LSQ_0.Dmem2proc_response testbench.pipeline_0.LSQ_0.proc2Dmem_command testbench.pipeline_0.LSQ_0.proc2Dmem_addr testbench.pipeline_0.LSQ_0.proc2Dmem_data }}
+=======
+gui_list_show_data -id ${Data.1} {testbench.pipeline_0.register_file0}
+gui_show_window -window ${Data.1}
+catch { gui_list_select -id ${Data.1} {testbench.pipeline_0.register_file0.inst2_regb_out }}
+>>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 gui_view_scroll -id ${Data.1} -vertical -set 0
 gui_view_scroll -id ${Data.1} -horizontal -set 0
 gui_view_scroll -id ${Hier.1} -vertical -set 0
@@ -255,10 +318,15 @@ gui_view_scroll -id ${Hier.1} -horizontal -set 0
 # Source 'Source.1'
 gui_src_value_annotate -id ${Source.1} -switch false
 gui_set_env TOGGLE::VALUEANNOTATE 0
+<<<<<<< HEAD
 gui_open_source -id ${Source.1}  -replace -active branch_decoder /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/branch_predictor.v
 gui_src_value_annotate -id ${Source.1} -switch true
 gui_set_env TOGGLE::VALUEANNOTATE 1
 gui_view_scroll -id ${Source.1} -vertical -set 165
+=======
+gui_open_source -id ${Source.1}  -replace -active testbench.pipeline_0.register_file0 /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/register_file.v
+gui_view_scroll -id ${Source.1} -vertical -set 150
+>>>>>>> d9003ef458f1a8fbda790ad5061746fb7224f705
 gui_src_set_reusable -id ${Source.1}
 # Restore toplevel window zorder
 # The toplevel window could be closed if it has no view/pane

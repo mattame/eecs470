@@ -1017,7 +1017,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 
                                // output busses: register values out //
                                .inst1_rega_out(reg_inst1_rega_out), .inst1_regb_out(reg_inst1_regb_out),
-                               .inst2_rega_out(reg_inst2_regb_out), .inst2_regb_out(reg_inst2_regb_out),
+                               .inst2_rega_out(reg_inst2_rega_out), .inst2_regb_out(reg_inst2_regb_out),
 
                                // ouput signals: tell the map table when to clear //
                                .clear_entries(reg_clear_entries_out)
@@ -1204,12 +1204,12 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 
                                            // signals and busses in for inst 2 (from id2) //
                                            //Values from DECODE
-                                           .inst2_rega_value_in(rs_inst1_rega_value),
-                                           .inst2_regb_value_in(rs_inst1_regb_value),
+                                           .inst2_rega_value_in(rs_inst2_rega_value),
+                                           .inst2_regb_value_in(rs_inst2_regb_value),
                                            
                                            //Tags from Map Table
                                            .inst2_rega_tag_in(rs_inst2_rega_tag),
-                                           .inst2_regb_tag_in(rs_inst2_rega_tag),
+                                           .inst2_regb_tag_in(rs_inst2_regb_tag),
                                            
                                            //Tag from ROB
                                            .inst2_dest_tag_in(rs_inst2_dest_tag),

@@ -3,7 +3,7 @@
 	<head>
 		<title>VCS dump file for DVE debugging</title>
 		<vcsVersion>E-2011.03_Full64</vcsVersion>
-		<dateCreated>Fri Apr 19 14:49:49 2013</dateCreated>
+		<dateCreated>Fri Apr 19 15:56:19 2013</dateCreated>
 	</head>
 	<body>
 		<!-- VCS compile options -->
@@ -306,14 +306,6 @@
 			<macro name="DEST_IS_REGA" module="decoder" sourceID="4" lineno="197" defID="0" defLine="141" value="10" />
 			<macro name="TRUE" module="decoder" sourceID="4" lineno="198" defID="0" defLine="195" value="33" />
 			<macro name="TRUE" module="decoder" sourceID="4" lineno="202" defID="0" defLine="195" value="33" />
-			<macro name="ALU_OPA_IS_REGA" module="id_stage" sourceID="4" lineno="307" defID="0" defLine="125" value="8" />
-			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="307" defID="0" defLine="182" value="1" />
-			<macro name="ALU_OPB_IS_REGB" module="id_stage" sourceID="4" lineno="308" defID="0" defLine="133" value="8" />
-			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="308" defID="0" defLine="182" value="1" />
-			<macro name="ALU_OPA_IS_REGA" module="id_stage" sourceID="4" lineno="316" defID="0" defLine="125" value="8" />
-			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="316" defID="0" defLine="182" value="1" />
-			<macro name="ALU_OPB_IS_REGB" module="id_stage" sourceID="4" lineno="317" defID="0" defLine="133" value="8" />
-			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="317" defID="0" defLine="182" value="1" />
 			<macro name="DEST_IS_REGC" module="id_stage" sourceID="4" lineno="361" defID="0" defLine="140" value="8" />
 			<macro name="DEST_IS_REGA" module="id_stage" sourceID="4" lineno="362" defID="0" defLine="141" value="10" />
 			<macro name="DEST_NONE" module="id_stage" sourceID="4" lineno="363" defID="0" defLine="142" value="9" />

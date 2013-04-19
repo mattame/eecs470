@@ -48,8 +48,8 @@ verilog/wb_stage.v
 68
 _LMFILES_=/usr/caen/misc/modules/vcs/2011.03
 XMODIFIERS=@im=none
-XDG_SESSION_COOKIE=49e6f2dc767a1b6603971a2d0000002a-1366390380.130575-2121249822
-XAUTHORITY=/var/run/gdm/auth-for-scottmel-SfFFjI/database
+XDG_SESSION_COOKIE=49e6f2dc767a1b6603971a2d0000002a-1366400332.424039-107472813
+XAUTHORITY=/var/run/gdm/auth-for-scottmel-WrzN2c/database
 WINDOWPATH=7
 VMR_MODE_FLAG=64
 VENDOR=unknown
@@ -62,11 +62,11 @@ USERNAME=scottmel
 UNAME=/bin/uname
 TOOL_HOME=/usr/caen/vcs-2011.03/amd64
 SW_VCS=2011.03
-SSH_AUTH_SOCK=/tmp/keyring-21APiM/socket.ssh
+SSH_AUTH_SOCK=/tmp/keyring-CKMaKa/socket.ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
-SSH_AGENT_PID=5869
+SSH_AGENT_PID=26898
 SNPSLMD_LICENSE_FILE=/usr/caen/vcs-2011.03/license.dat:/usr/caen/vcs-2011.03/flexlm//license.dat
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/5888,unix/unix:/tmp/.ICE-unix/5888
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/26917,unix/unix:/tmp/.ICE-unix/26917
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 RESET_NET_NAME=reset
@@ -89,7 +89,7 @@ MAILSERVER=mail.umich.edu
 LOADEDMODULES=vcs/2011.03
 LIBGL_DRIVERS_PATH=/usr/lib64/dri:/usr/lib/dri
 LESSOPEN=|/usr/bin/lesspipe.sh %s
-KRB5CCNAME=FILE:/tmp/krb5cc_928452_aO8w8l
+KRB5CCNAME=FILE:/tmp/krb5cc_928452_9XkJmX
 KDE_IS_PRELINKED=1
 KDEDIRS=/usr
 IMSETTINGS_MODULE=none
@@ -101,14 +101,14 @@ HEADERS=sys_defs.vh
 G_BROKEN_FILENAMES=1
 GTK_RC_FILES=/etc/gtk/gtkrc:/afs/umich.edu/user/s/c/scottmel/.gtkrc-1.2-gnome2
 GROUP=users
-GNOME_KEYRING_SOCKET=/tmp/keyring-21APiM/socket
-GNOME_KEYRING_PID=5769
+GNOME_KEYRING_SOCKET=/tmp/keyring-CKMaKa/socket
+GNOME_KEYRING_PID=26793
 GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 GDM_LANG=en_US.UTF-8
 GDM_KEYBOARD_LAYOUT=us
 GDMSESSION=gnome
 DESKTOP_SESSION=gnome
-DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-XHy63HK9o5,guid=01a1e417cf9187c14c83adb8000009db
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-KdXZTcBwmm,guid=68fa16f327be5ec54d0ad4df000030b3
 COLORTERM=gnome-terminal
 CLOCK_PERIOD=50	
 CLOCK_NET_NAME=clock
@@ -123,16 +123,16 @@ CACHEFILES=verilog/cache/cachemem.v
 1366393870 verilog/reservation_station.v
 1366393870 verilog/reorder_buffer.v
 1366390468 verilog/register_file.v
-1366394062 verilog/pipeline.v
+1366398089 verilog/pipeline.v
 1366157015 verilog/mem_stage.v
 1366157015 verilog/memory_arbiter.v
 1366314714 verilog/map_table.v
 1366394324 verilog/LSQ.v
 1366390468 verilog/if_stage.v
 1366157015 verilog/icache.v
-1366308985 verilog/ex_stage.v
+1366398747 verilog/ex_stage.v
 1366308986 verilog/ex_stage_submodules.v
-1366396918 verilog/decode.v
+1366399852 verilog/decode.v
 1366157015 verilog/cm_stage.v
 1365974508 verilog/branch_target_buffer.v
 1365974508 verilog/branch_predictor.v
@@ -143,4 +143,4 @@ CACHEFILES=verilog/cache/cachemem.v
 1298523545 /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so
 1298523345 /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so
 1298523150 /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so
-1366397459 simv.daidir
+1366401372 simv.daidir

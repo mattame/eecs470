@@ -547,8 +547,8 @@ module pipeline (// Inputs
 
 
 //////////// STUFF FOR BRANCH MISPREDICTIONS ///////////////////////
-wire misprediciton;
-assign misprediciton = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
+wire mispredict;
+assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 
 
 

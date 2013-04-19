@@ -492,8 +492,8 @@ module pipeline (// Inputs
   wire [63:0] ex_LSQ_value_out_2;
   wire        ex_LSQ_valid_out_2;
   
-  wire        ex_stall_bus_out_1;
-  wire		    ex_stall_bus_out_2;
+  wire    ex_stall_bus_out_1;
+  wire	  ex_stall_bus_out_2;
 
   
   /**********************************/
@@ -504,6 +504,7 @@ module pipeline (// Inputs
   wire [63:0] proc2Dmem_addr, proc2Imem_addr;
   wire [1:0]  proc2Dmem_command, proc2Imem_command;
   wire [3:0]  Imem2proc_response, Dmem2proc_response;
+
 
 /////// TEMPORARY WHILE WE DO NOT HAVE MEMORY WRITEBACK /////////////////
   assign proc2Dmem_command = `BUS_NONE;
@@ -520,18 +521,42 @@ module pipeline (// Inputs
   wire [63:0] Icache_data_out, proc2Icache_addr;
   wire        Icache_valid_out;
 
+
+/////////// STUFF FOR HALTING ///////////////
+  reg    halted;
+  wire n_halted;
+
+  // set pipeline error status //
  //  assign pipeline_completed_insts = {3'b0, mem_wb_valid_inst};
-  assign pipeline_error_status =  (
-    (1'b0) ? `HALTED_ON_ILLEGAL
-                   : (rob_inst1_branch_result_out==`BRANCH_HALT) ? `HALTED_ON_HALT
-                                 : `NO_ERROR );
+  assign pipeline_error_status =  
+    (1'b0) ? `HALTED_ON_ILLEGAL : ((halted && LSQ_empty) ? `HALTED_ON_HALT : `NO_ERROR );
+
+  // assign next halted signal //
+  assign n_halted = (rob_inst1_branch_result_out==`BRANCH_HALT) || (rob_inst2_branch_result_out==`BRANCH_HALT) || halted;
+
+  // assign next halted state //
+  always@(posedge clock)
+  begin
+     if (reset)
+        halted <= `SD 1'b0;
+     else
+        halted <= n_halted;
+  end
+////////////////////////////////////////////////
+
+
+//////////// STUFF FOR BRANCH MISPREDICTIONS ///////////////////////
+wire misprediciton;
+assign misprediciton = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
+
+
+
 /*
   assign pipeline_commit_wr_idx = wb_reg_wr_idx_out;
   assign pipeline_commit_wr_data = wb_reg_wr_data_out;
   assign pipeline_commit_wr_en = wb_reg_wr_en_out;
   assign pipeline_commit_NPC = mem_wb_NPC;
 */
-
 
   assign proc2mem_command =
            (lsq_proc2Dmem_command_out==`BUS_NONE) ? proc2Imem_command : lsq_proc2Dmem_command_out;
@@ -593,7 +618,7 @@ module pipeline (// Inputs
   // Actual cache (data and tag RAMs)
   cache cachememory (// inputs
                               .clock(clock),
-                              .reset(reset),
+                              .reset(reset || halted),
                               .wr1_en(Icache_wr_en),
                               .wr1_idx(Icache_wr_idx),
                               .wr1_tag(Icache_wr_tag),
@@ -610,7 +635,7 @@ module pipeline (// Inputs
   // Cache controller
   icache icache_0(// inputs 
                   .clock(clock),
-                  .reset(reset),
+                  .reset(reset || halted),
 
                   .Imem2proc_response(Imem2proc_response),
                   .Imem2proc_data(mem2proc_data),
@@ -635,8 +660,9 @@ module pipeline (// Inputs
 
 
   wire if_stage_stall_signal;
-  assign if_stage_stall_signal = (rob_rob_full_out | ~rs_dispatch_out | lsq_LSQ_IF_stall_out);
-  
+  wire stall_first_half_of_pipeline;
+  assign stall_first_half_of_pipeline = (rob_rob_full_out || ~rs_dispatch_out || LSQ_full || halted);
+  assign if_stage_stall_signal = (stall_first_half_of_pipeline || lsq_LSQ_IF_stall_out);
 
   //////////////////////////////////////////////////
   //                                              //
@@ -645,12 +671,13 @@ module pipeline (// Inputs
   //////////////////////////////////////////////////
   if_stage if_stage_0 (// Inputs
                        .clock (clock),
-                       .reset (reset),
+                       .reset (reset || halted),
                        .Imem2proc_data(Icache_data_out),
                        .Imem_valid(Icache_valid_out),
                        
                        .stall(if_stage_stall_signal),
-
+                       .inst1_mispredict_in(rob_inst1_mispredicted_out),
+                       .inst2_mispredict_in(rob_inst2_mispredicted_out),
                        .inst1_result_in(rob_inst1_branch_result_out),
                        .inst2_result_in(rob_inst2_branch_result_out),
                        .inst1_write_NPC_in(rob_inst1_NPC_out),
@@ -683,7 +710,7 @@ module pipeline (// Inputs
   //////////////////////////////////////////////////
   always @(posedge clock)
   begin
-    if(reset)
+    if(reset || mispredict)
     begin
       id_NPC_1           <= `SD 0;
       id_IR_1            <= `SD `NOOP_INST;
@@ -724,7 +751,7 @@ module pipeline (// Inputs
   id_stage id_stage0(
                       // Inputs
                       .clock(clock),
-                      .reset(reset),
+                      .reset(reset || halted || mispredict),
                       .if_id_IR_1(id_IR_1),
                       .if_id_valid_inst_1(id_valid_inst1),
 
@@ -782,7 +809,7 @@ module pipeline (// Inputs
   //Map Table Synchonous
   always @(*)
   begin
-    if(reset)
+    if(reset || mispredict)
     begin
       mt_inst1_rega =  0;
       mt_inst1_regb =  0;
@@ -850,7 +877,7 @@ module pipeline (// Inputs
   //Fast Forward Synchonous  
   always @(*)
   begin 
-    if(reset)
+    if(reset || mispredict)
     begin
       ff_dest_reg_1       = 0;
       ff_opa_select_1     = 0;
@@ -930,7 +957,7 @@ module pipeline (// Inputs
   ////////////////////////////////////////////////// 
    map_table map_table_0 (//Inputs
   
-                           .clock(clock), .reset(reset), .clear_entries(reg_clear_entries_out),
+                           .clock(clock), .reset(reset || halted || mispredict), .clear_entries(reg_clear_entries_out),
 
 
                            // instruction 1 access inputs //
@@ -962,7 +989,7 @@ module pipeline (// Inputs
 
   register_file register_file0(//Inputs
                       
-                               .clock(clock), .reset(reset),
+                               .clock(clock), .reset(reset || halted),
 
                                //COMES FROM DECODE
                                // input busses: register indexes and values in // 
@@ -993,7 +1020,7 @@ module pipeline (// Inputs
   //ROB Synchronous
   always @* //(posedge clock)
   begin
-    if(reset)
+    if(reset || mispredict)
     begin
       rob_inst1_valid = 0;
       rob_inst1_dest  = 0;
@@ -1026,7 +1053,7 @@ module pipeline (// Inputs
   //RS Synchronous
   always @* //(posedge clock)
   begin
-    if(reset)
+    if(reset || mispredict)
     begin
     
     rs_inst1_rega_value     = 0;
@@ -1130,7 +1157,7 @@ module pipeline (// Inputs
                                       
   reservation_station reservation_station_0(//Inputs
                                            .clock(clock),
-                                           .reset(reset),
+                                           .reset(reset || halted || mispredict),
  
                                            // signals and busses in for inst 1 (from id1) //
                                            //Values from ROB
@@ -1192,6 +1219,11 @@ module pipeline (// Inputs
                                            .cdb2_tag_in(cm_tag_out_2),
                                            .cdb1_value_in(cm_value_out_1),
                                            .cdb2_value_in(cm_value_out_2),
+
+                                           // inputs from the EX to stall //
+                                           .inst1_stall_in(ex_stall_bus_out_1),
+                                           .inst2_stall_in(ex_stall_bus_out_2),
+
 
                                            // inputs from the ROB //
                                            .inst1_rega_rob_value_in(rob_inst1_rega_value_out),
@@ -1257,7 +1289,7 @@ module pipeline (// Inputs
   
   reorder_buffer reorder_buffer_0 (//Inputs
   
-                                          .clock(clock), .reset(reset),
+                                          .clock(clock), .reset(reset || halted || mispredict),
                                           
                                           /*these will come from decode*/
                                           .inst1_valid_in(rob_inst1_valid),
@@ -1329,7 +1361,7 @@ module pipeline (// Inputs
   always @(posedge clock)
   begin
   
-    if(reset)
+    if(reset || mispredict)
     begin
     
       ex_valid_1         <= `SD 0;
@@ -1408,7 +1440,7 @@ module pipeline (// Inputs
   //////////////////////////////////////////////////
    ex_stage ex_stage_0(// Inputs
                           .clock(clock),
-                          .reset(reset),
+                          .reset(reset || halted || mispredict),
                           
                           // Input Bus 1 (contains branch logic)
                           .valid_in_1(ex_valid_1),
@@ -1495,7 +1527,7 @@ module pipeline (// Inputs
   //Synchronous Execute to Complete Register  
   always @(posedge clock)
   begin
-    if(reset)
+    if(reset || mispredict)
     begin
       cm_tag_1           <= `SD 0;
       cm_result_1        <= `SD 0;
@@ -1584,8 +1616,9 @@ module pipeline (// Inputs
 	
 	always@*
 	begin
-  	if(reset)
-	  begin
+  	if(reset || mispredict)
+        begin
+
       lsq_ROB_head_1         = 0;
       lsq_ROB_head_2         = 0;
 
@@ -1613,10 +1646,11 @@ module pipeline (// Inputs
       lsq_Dmem2proc_tag      = 0;
       lsq_Dmem2proc_response = 0;
       
-		 end
-		 else
-		 begin
-		  lsq_ROB_head_1         = rob_inst1_retire_tag_out;
+        end
+        else
+        begin
+
+      lsq_ROB_head_1         = rob_inst1_retire_tag_out;
       lsq_ROB_head_2         = rob_inst2_retire_tag_out;
 
       lsq_ROB_tag_1          = rob_inst1_tag_out;
@@ -1642,14 +1676,16 @@ module pipeline (// Inputs
       lsq_Dmem2proc_data     = mem2proc_data;
       lsq_Dmem2proc_tag      = mem2proc_tag;
       lsq_Dmem2proc_response = Imem2proc_response;
-		 end
+        end
 	  
-	end
+   end
 		           
 		           
   LSQ LSQ_0(//Inputs
 			      .clock(clock),
 			      .reset(reset),
+                              .miss_reset(halted || mispredict),
+                        
 			      //From ROB/ID
 
 			      .ROB_head_1(lsq_ROB_head_1),

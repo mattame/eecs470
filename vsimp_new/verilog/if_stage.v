@@ -20,6 +20,7 @@ module if_stage(// Inputs
                 inst1_write_NPC_in,inst2_write_NPC_in,
                 inst1_write_CPC_in,inst2_write_CPC_in,
                 inst1_pht_index_in,inst2_pht_index_in,
+                inst1_mispredict_in,inst2_mispredict_in,
 
                 Imem2proc_data,
                 Imem_valid,
@@ -50,7 +51,8 @@ module if_stage(// Inputs
   input wire [63:0] inst1_write_NPC_in,inst2_write_NPC_in;
   input wire [63:0] inst1_write_CPC_in,inst2_write_CPC_in;
   input wire [(`HISTORY_BITS-1):0] inst1_pht_index_in,inst2_pht_index_in;
-
+  input wire inst1_mispredict_in,inst2_mispredict_in;
+ 
   input wire [63:0] Imem2proc_data;     // Data coming back from instruction-memory
   input wire        Imem_valid;
 

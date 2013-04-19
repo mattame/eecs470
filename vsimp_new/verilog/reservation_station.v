@@ -552,7 +552,7 @@ module reservation_station(clock,reset,               // signals in
    
    // internal wires for directly interfacing the rs entries //
    output wire [(`NUM_RSES-1):0] fills;
-   output reg  [(`NUM_RSES-1):0]      resets;
+   output wire  [(`NUM_RSES-1):0]      resets;
    //reg  [(`NUM_RSES-1):0] next_resets;
 
    wire [(`NUM_RSES-1):0] first_empty_filleds;     // first/second empty links between rses
@@ -668,7 +668,16 @@ module reservation_station(clock,reset,               // signals in
       for (i=0; i<`NUM_RSES; i=i+1)
 	  begin : ASSIGNRSINPUTS
 
+                 // assign current fill states for all entries //
                  assign fills[i] = ( dispatch && ((inst1_valid&&first_empties[i]) || (inst2_valid&&second_empties[i])) ); 
+                 
+                 // assign the dispatch availabilities //
+                 assign dispatch_available1 = first_empties[i];   // note this is a wor, so it accumulates
+                 assign dispatch_available2 = second_empties[i];   // note this is a wor, so it accumulates 
+
+                 // assign resets for all rs entries //
+                 assign resets[i] = (reset || (issue_first_states[i] && ~inst1_stall_in) || (issue_second_states[i] && ~inst2_stall_in));
+
 
 		 always@*
 		 begin
@@ -676,7 +685,6 @@ module reservation_station(clock,reset,               // signals in
 			 // pull from the first instruction slot //
 			 if ( dispatch && inst1_valid && (first_empties[i]) )
 			 begin
-//                             fills[i]              = 1'b1;
                                if (inst1_rega_tag_in[7:6]==2'b01) begin   // ready-in-ROB: pull from the ROB versus the reg file
                                   rega_values_in[i]     = inst1_rega_rob_value_in;
                                   waiting_tagas_in[i]   = `RSTAG_NULL;
@@ -710,7 +718,6 @@ module reservation_station(clock,reset,               // signals in
                          // pull from the second instruction slot //
                          else if ( dispatch && inst2_valid && (second_empties[i]) )
                          begin
-//                             fills[i]              = 1'b1;
                                if (inst2_rega_tag_in[7:6]==2'b01) begin   // ready-in-ROB: pull from the ROB versus the reg file
                                   rega_values_in[i]     = inst2_rega_rob_value_in;
                                   waiting_tagas_in[i]   = `RSTAG_NULL;
@@ -744,7 +751,6 @@ module reservation_station(clock,reset,               // signals in
                          // default case: no instruction being dispatched/ no rs entries being filled //
                          else
                          begin
-//				fills[i]              = 1'b0;
 				dest_regs_in[i]       = `ZERO_REG;
 				dest_tags_in[i]       = `RSTAG_NULL;
 				rega_values_in[i]     = 64'd0;
@@ -764,14 +770,7 @@ module reservation_station(clock,reset,               // signals in
                                 pht_indices_in[i]     = {`HISTORY_BITS{1'b0}};
                          end
 
-                        // assign resets for all rs entries //
-                        resets[i] = (reset || (issue_first_states[i] && ~inst1_stall_in) || (issue_second_states[i] && ~inst2_stall_in));
- 
 	     end
-		 
-             // assign the dispatch availabilities //
-             assign dispatch_available1 = first_empties[i];    // note this is a wor, so it accumulates
-             assign dispatch_available2 = second_empties[i];   // note this is a wor, so it accumulates		
 		 
       end
    endgenerate

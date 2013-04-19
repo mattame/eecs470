@@ -1126,8 +1126,8 @@ assign misprediciton = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out
     //
     rs_inst2_rega_tag       = mt_inst2_taga_out;
     rs_inst2_regb_tag       = mt_inst2_tagb_out;
-    rs_inst2_dest_reg       = ff_dest_reg_1;
-    rs_inst2_dest_tag       = rob_inst1_tag_out;
+    rs_inst2_dest_reg       = ff_dest_reg_2;
+    rs_inst2_dest_tag       = rob_inst2_tag_out;
     //
     rs_inst2_opa_select     = ff_opa_select_2;
     rs_inst2_opb_select     = ff_opb_select_2;

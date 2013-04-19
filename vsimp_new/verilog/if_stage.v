@@ -107,9 +107,9 @@ module if_stage(// Inputs
     // and we're on the second word or PC+8 if not.
     // (halting is handled with the enable PC_enable;
   assign stalling = (stall || ~Imem_valid);
-  assign next_PC = (inst1_mispredict_in) ? ((inst1_branch_taken) ? inst1_CPC_in : inst1_NPC_in) :
-     ((inst2_mispredict_in) ? ((inst2_branch_taken) ? inst2_CPC_in : inst2_NPC_in) :
-          (stalling ? PC_reg : if_NPC_out_2) );
+  assign next_PC = (inst1_mispredict_in) ? ((inst1_branch_taken) ? inst1_write_CPC_in : inst1_write_NPC_in) :
+                  ((inst2_mispredict_in) ? ((inst2_branch_taken) ? inst2_write_CPC_in : inst2_write_NPC_in) :
+                           (stalling ? PC_reg : if_NPC_out_2) );
 
     // Assign the first valid only if the PC is not the second word in the cache.
     // The second is always valid

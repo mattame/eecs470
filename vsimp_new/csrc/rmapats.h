@@ -1107,6 +1107,7 @@ void  hsF0_23_2_(UB  * I597);
 void  hsF0_25_0_(UB  * I597, scalar  val);
 void  hsF0_25_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
 void  hsF0_25_2_(UB  * I597);
+<<<<<<< HEAD
 void  hsF0_27_0_(UB  * I597, scalar  val);
 void  hsF0_27_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
 void  hsF0_27_2_(UB  * I597);
@@ -1143,6 +1144,44 @@ void  hsF0_59_0_(UB  * I597, scalar  val);
 void  hsF0_66_0_(UB  * I597, scalar  val);
 void  hsF0_66_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
 void  hsF0_66_2_(UB  * I597);
+=======
+void  hsF0_26_0_(UB  * I597, scalar  val);
+void  hsF0_26_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_26_2_(UB  * I597);
+void  hsF0_26_8_(UB  * I597, scalar  val);
+void  hsF0_28_0_(UB  * I597, scalar  val);
+void  hsF0_28_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_28_2_(UB  * I597);
+void  hsF0_30_0_(UB  * I597, scalar  val);
+void  hsF0_30_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_30_2_(UB  * I597);
+void  hsF0_32_0_(UB  * I597, scalar  val);
+void  hsF0_32_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_32_2_(UB  * I597);
+void  hsF0_44_0_(UB  * I597, scalar  val);
+void  hsF0_44_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_44_2_(UB  * I597);
+void  hsF0_45_0_(UB  * I597, scalar  val);
+void  hsF0_45_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_45_2_(UB  * I597);
+void  hsF0_53_0_(UB  * I597, scalar  val);
+void  hsF0_53_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_53_2_(UB  * I597);
+void  hsF0_54_0_(UB  * I597, scalar  val);
+void  hsF0_54_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_54_2_(UB  * I597);
+void  hsF0_56_0_(UB  * I597, scalar  val);
+void  hsF0_56_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_56_2_(UB  * I597);
+void  hsF0_56_5_(UB  * I597, UB  val);
+void  hsF0_57_0_(UB  * I597, scalar  val);
+void  hsF0_57_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_57_2_(UB  * I597);
+void  hsF0_58_0_(UB  * I597, scalar  val);
+void  hsF0_65_0_(UB  * I597, scalar  val);
+void  hsF0_65_1_(UB  * I597, scalar  val, U  I665, scalar  * I664);
+void  hsF0_65_2_(UB  * I597);
+>>>>>>> 6214f36c699a0e891aa78c934d42633ac836393e
 void  schedNewEvent(struct dummyq_struct * I651, EBLK  * I652, U  I509);
 #ifdef __cplusplus
 }

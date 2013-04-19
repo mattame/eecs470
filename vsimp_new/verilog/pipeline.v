@@ -1723,7 +1723,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 
       lsq_ROB_tag_2          = rob_inst2_tag_out;
       lsq_rd_mem_2           = ff_rd_mem_2;
-      lsq_wr_mem_2           = ff_rd_mem_2;
+      lsq_wr_mem_2           = ff_wr_mem_2;
       lsq_valid_2            = ff_valid_inst2;
 
       lsq_EX_tag_2           = ex_LSQ_tag_out_2;

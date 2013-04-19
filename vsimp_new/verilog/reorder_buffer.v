@@ -5,7 +5,7 @@
 ////////////////////////////////////////////////////////////////
 
 // parameters //
-`define ZERO_REG      5'd0
+`define ZERO_REG      5'd31
 `define RSTAG_NULL    8'hFF
 `define ROB_ENTRIES  32
 `define UNUSED_TAG_BITS 3

@@ -1,0 +1,81 @@
+
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 19 03:22 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/inter.vpd' was opened successfully.
+branch_predictor.v, 12 : module branch_decoder(
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+@@@ Unified Memory contents hex on left, decimal on right: 
+@@@
+@@@ mem[    0] = 4000040140003400 : 4611690421842621440
+@@@ mem[    8] = 4041040340010402 : 4629986303918801922
+@@@ mem[   16] = 400035204c40f400 : 4611744431261938688
+@@@ mem[   24] = 4800569e40000400 : 5188242008409375744
+@@@ mem[   32] = 0000000000000555 : 1365
+@@@
+@@@
+@@                   542 : System halted
+@@
+@@@ System halted on HALT instruction
+@@@
+@@
+@@  41 cycles / x instrs = inf CPI
+@@
+@@  1200.00 ns total time to execute
+@@
+ 
+$finish called from file "testbench/testbench.v", line 297.
+$finish at simulation time                  642
+Simulation complete, time is 642.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 642
+CPU Time:      0.440 seconds;       Data structure size:   0.7Mb
+Fri Apr 19 03:22:50 2013

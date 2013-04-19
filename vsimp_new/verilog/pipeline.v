@@ -1772,9 +1772,9 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 			      .EX_valid_2(lsq_valid_2),
 
 			      //From MEM
-			      .Dmem2proc_data(lsq_Dmem2proc_data),
-			      .Dmem2proc_tag(lsq_Dmem2proc_tag),
-			      .Dmem2proc_response(lsq_Dmem2proc_response),
+			      .Dmem2proc_data(mem2proc_data),
+			      .Dmem2proc_tag(mem2proc_tag),
+			      .Dmem2proc_response(mem2proc_response),
 			
 			      //Outputs
 			      .tag_out(lsq_tag_out),

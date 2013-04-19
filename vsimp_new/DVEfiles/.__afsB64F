@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
@@ -113,5 +112,3 @@ The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_ne
 @@
 @@
 branch_predictor.v, 12 : module branch_decoder(
-=======
->>>>>>> bcf242fcc9e3403eb7b420a9605c340e0977a849

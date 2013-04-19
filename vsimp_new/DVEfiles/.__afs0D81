@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Preference setting overrides
 gui_set_pref_value -category {Data} -key {showValueAnnotation} -value {true}
 gui_create_pref_key -category {Globals} -key {load_detail_for_funcov} -value_type {bool} -value {false}
@@ -269,5 +268,3 @@ gui_list_select -id Wave.1 -selected  { {testbench.pipeline_0.LSQ_0.proc2Dmem_co
 gui_list_select -id Wave.1 -selected  { {testbench.pipeline_0.LSQ_0.proc2Dmem_addr[63:0]}   }
 gui_list_select -id Wave.1 -selected  { {testbench.pipeline_0.LSQ_0.proc2Dmem_data[63:0]}   }
 gui_list_select -id Wave.1 -selected  { {testbench.pipeline_0.LSQ_0.tag_out[4:0]}   }
-=======
->>>>>>> bcf242fcc9e3403eb7b420a9605c340e0977a849

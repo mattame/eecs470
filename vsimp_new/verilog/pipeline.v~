@@ -1147,7 +1147,7 @@ module pipeline (// Inputs
                                            //Instruction signals from Decode                         
                                            .inst1_dest_reg_in(rs_inst1_dest_reg),
                                            .inst1_opa_select_in(rs_inst1_opa_select),
-                                           .inst1_opb_select_in(rs_inst2_opb_select),
+                                           .inst1_opb_select_in(rs_inst1_opb_select),
                                            .inst1_alu_func_in(rs_inst1_alu_func),
                                            .inst1_rd_mem_in(rs_inst1_rd_mem),
                                            .inst1_wr_mem_in(rs_inst1_wr_mem),

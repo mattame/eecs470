@@ -55,7 +55,8 @@ module LSQ_entry(//Inputs
 				 	stored_address_out,
 				 	stored_value_out,
 				 	read_out,
-				 	complete_out
+				 	complete_out,
+				 	valid_out
 				);
 
 input clock;
@@ -89,6 +90,7 @@ output [63:0] stored_address_out;
 output [63:0] stored_value_out;
 output read_out;
 output complete_out;
+output valid_out;
 
 reg [63:0] stored_address;
 reg [63:0] stored_value;
@@ -170,6 +172,7 @@ assign stored_value_out = stored_value;
 assign stored_tag_out = stored_tag;
 assign read_out = read;
 assign complete_out = complete & (read_out | ROB_head_met);
+assign valid_out = valid;
 
 endmodule
 
@@ -181,6 +184,7 @@ endmodule
 module LSQ(//Inputs
 			clock,
 			reset,
+			miss_reset,
 			//From ROB/ID
 
 			ROB_head_1,
@@ -221,12 +225,15 @@ module LSQ(//Inputs
 			proc2Dmem_addr,
 			proc2Dmem_data,
 			LSQ_IF_stall,
-			LSQ_EX_valid
+			LSQ_EX_valid,
+			LSQ_empty,
+			LSQ_full
 
 		  );
 
  input clock;
  input reset;
+ input miss_reset;
 
  input [7:0] ROB_head_1;
  input [7:0] ROB_head_2;
@@ -261,6 +268,8 @@ module LSQ(//Inputs
   output [63:0] proc2Dmem_data;     // Data sent to data-memory
   
   output LSQ_IF_stall, LSQ_EX_valid;
+  
+  output LSQ_empty, LSQ_full;
 
   reg [3:0] mem_waiting_tag;
 
@@ -274,19 +283,21 @@ module LSQ(//Inputs
 
  reg [4:0] LSQ_head;
  reg [4:0] LSQ_tail;
+ reg [4:0] clear_tail;
 
  wire valid_ROB_in_1, valid_ROB_in_2;
 
  assign valid_ROB_in_1 = ((rd_mem_in_1 | wr_mem_in_1) & valid_in_1) ? 1'b1: 1'b0;
  assign valid_ROB_in_2 = ((rd_mem_in_2 | wr_mem_in_2) & valid_in_2) ? 1'b1: 1'b0;
 
- wire [4:0] next_head, next_tail, next_entry_1, next_entry_2;
+ wire [4:0] next_head, next_tail, next_entry_1, next_entry_2, next_clear_tail;
 
  wire [4:0]  tags_out [(`LSQ_ENTRIES-1):0];
  wire [63:0] addrs_out [(`LSQ_ENTRIES-1):0];
  wire [63:0] values_out [(`LSQ_ENTRIES-1):0];
  wire 	     reads_out [(`LSQ_ENTRIES-1):0];
  wire 		 completes_out [(`LSQ_ENTRIES-1):0];
+ wire        valids_out [(`LSQ_ENTRIES-1):0];
 
 // ----------- ENTRY INPUT LOGIC ----------
  wire clears [(`LSQ_ENTRIES-1):0];
@@ -296,7 +307,8 @@ module LSQ(//Inputs
  generate
  	genvar i;
  	for(i=0; i<`LSQ_ENTRIES; i=i+1) begin : ASSIGNLSQINPUTS
- 		assign clears[i]   = (reset | (i == LSQ_head & move_head_and_clear))
+ 		assign clears[i]   = ((reset | (i == LSQ_head & move_head_and_clear)) | 
+ 							((miss_reset) & (completes_out[i] == 1'b0 | reads_out[i] == 1'b1)))
 							? 1'b1: 1'b0;
  		assign stores_1[i] = (i == next_entry_1 & valid_ROB_in_1) ? 1'b1: 1'b0;
  		assign stores_2[i] = ((i == next_entry_1 & !valid_ROB_in_1 & valid_ROB_in_2) | 
@@ -342,7 +354,8 @@ module LSQ(//Inputs
 						.stored_address_out(addrs_out[i]),
 						.stored_value_out(values_out[i]),
 						.read_out(reads_out[i]),
-						.complete_out(completes_out[i])
+						.complete_out(completes_out[i]),
+						.valid_out(valids_out[i])
 					    );
  	end
  endgenerate
@@ -397,8 +410,15 @@ module LSQ(//Inputs
  
  
 //----------- POINTER KEEPING ------------
- assign next_head = (mem_tag_match | move_head_and_clear)
+ assign next_head = (move_head_and_clear)
 					? (LSQ_head + 1):LSQ_head;
+				
+			wire clear_is_before_head = ((clear_tail == (LSQ_head - 1)) & (!valids_out[clear_tail] | reads_out[clear_tail]));
+			
+			wire next_is_completed_read = (completes_out[(clear_tail + 1)] & !reads_out[(clear_tail + 1)]);
+				
+				
+ assign next_clear_tail = (next_is_completed_read | (clear_is_before_head & move_head_and_clear)) ? clear_tail + 1 : clear_tail;
 
  assign next_tail = (valid_ROB_in_1) ? ((valid_ROB_in_2) ? next_entry_2: next_entry_1): (valid_ROB_in_2) ? next_entry_1 : LSQ_tail;
 
@@ -407,16 +427,28 @@ module LSQ(//Inputs
  assign next_entry_2 = LSQ_tail + 2;
 
 always @(posedge clock) begin
+	
 	if(reset) begin
-		LSQ_head <= `SD 5'h1; //so that it matches up with next_entry_1
-		LSQ_tail <= `SD 5'h0;
+		LSQ_head <= `SD 5'b1; //so that it matches up with next_entry_1
+		LSQ_tail <= `SD 5'b0;
+		clear_tail <= `SD 5'b0;
+	end
+	
+	else if(miss_reset) begin
+		LSQ_head <= `SD next_head; //so that it matches up with next_entry_1
+		LSQ_tail <= `SD next_clear_tail;
+		clear_tail <= `SD next_clear_tail;
 	end
 	else begin
 		LSQ_head <= `SD next_head;
-		LSQ_tail <= `SD next_tail;	
+		LSQ_tail <= `SD next_tail;
+		clear_tail <= `SD next_clear_tail;	
 	end
 
 end
 
+ assign LSQ_empty = !valids_out[LSQ_head];
+ 
+ assign LSQ_full = (next_entry_1 == next_head) | (next_entry_2 == next_head);
 
 endmodule

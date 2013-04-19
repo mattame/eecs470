@@ -1,0 +1,106 @@
+
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 18 21:30 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/inter.vpd' was opened successfully.
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+ 
+Warning-[STASKW_CO1] Cannot open file
+  The file 'program.mem' could not be opened. No such file or directory.
+  Please ensure that the file exists with proper permissions.
+ 
+ 
+Warning-[STASKW_RMCOF] Cannot open file
+testbench/testbench.v, 189
+  Cannot open file 'program.mem' passed as argument to $readmem.
+  Please verify that the first argument to $readmem is a file that exists with
+  proper permissions.
+ 
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+branch_predictor.v, 12 : module branch_decoder(
+{{ testbench.pipeline_0.cm_mispredict_2 'b0 } { testbench.pipeline_0.cm_mispredict_out_1 'b0 } { testbench.pipeline_0.cm_mispredict_out_2 'b0 } { testbench.pipeline_0.cm_pht_index_1[7:0] 'h00 } { testbench.pipeline_0.cm_pht_index_2[7:0] 'h00 } { testbench.pipeline_0.cm_pht_index_out_1[7:0] 'h00 } { testbench.pipeline_0.cm_pht_index_out_2[7:0] 'h00 } { testbench.pipeline_0.cm_result_1[63:0] 'h0000000000000000 } { testbench.pipeline_0.cm_result_2[63:0] 'h0000000000000000 } { testbench.pipeline_0.cm_tag_1[4:0] 'h00 } { testbench.pipeline_0.cm_tag_2[4:0] 'h00 } { testbench.pipeline_0.cm_tag_out_2[7:0] 'hff } { testbench.pipeline_0.cm_valid_1 'b0 } { testbench.pipeline_0.cm_valid_2 'b0 } { testbench.pipeline_0.cm_valid_out_1 'bz } { testbench.pipeline_0.cm_valid_out_2 'bz } { testbench.pipeline_0.cm_value_out_1[63:0] 'h0000000000000000 } { testbench.pipeline_0.cm_value_out_2[63:0] 'h0000000000000000 } { testbench.pipeline_0.ex_IR_1[31:0] 'h00000000 } { testbench.pipeline_0.ex_IR_2[31:0] 'h00000000 } { testbench.pipeline_0.ex_LSQ_address_out_1[63:0] 'h0000000000000000 } { testbench.pipeline_0.ex_LSQ_address_out_2[63:0] 'h0000000000000000 } { testbench.pipeline_0.ex_LSQ_tag_out_1[4:0] 'h00 } { testbench.pipeline_0.ex_LSQ_tag_out_2[4:0] 'h00 } { testbench.pipeline_0.ex_LSQ_valid_out_1 'b0 } { testbench.pipeline_0.ex_LSQ_valid_out_2 'b0 } { testbench.pipeline_0.ex_LSQ_value_out_1[63:0] 'h0000000000000000 } { testbench.pipeline_0.ex_LSQ_value_out_2[63:0] 'h0000000000000000 } { testbench.pipeline_0.ex_MEM_tag_in[4:0] 'hzz } { testbench.pipeline_0.ex_MEM_valid_in 'bz } { testbench.pipeline_0.ex_MEM_value_in[63:0] 'hzzzzzzzzzzzzzzzz } { testbench.pipeline_0.ex_NPC_1[63:0] 'h0000000000000000 } { testbench.pipeline_0.ex_NPC_2[63:0] 'h0000000000000000 } { testbench.pipeline_0.ex_PPC_1[63:0] 'h0000000000000000 } { testbench.pipeline_0.ex_PPC_2[63:0] 'h0000000000000000 } { testbench.pipeline_0.ex_alu_func_1[4:0] 'h00 } { testbench.pipeline_0.ex_alu_func_2[4:0] 'h00 }}
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2950272
+CPU Time:      1.630 seconds;       Data structure size:   0.7Mb
+Thu Apr 18 21:31:45 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 18 21:31 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/inter.vpd' was opened successfully.
+=========== Call stack: ============
+_ZN2ag10printStackERK7QStringi
+_ZN2ag16utilCrashHandlerD1Ev
+_ZN2ag10wndConsole23slotExecuteCmdWithFlagsERK7QStringbbbb
+_ZN2ag11utilFastTcl6invokeEbbbbbb
+_ZN2ag11utilFastTcl10evalAndLogEb
+_ZN2ag18wvMarkerHeaderView13moveMarkerCmdER7QStringRNS_10mathUInt64Ej
+_ZN2ag12wvScrollView24completeMouseEventsCycleEiib
+_ZN2ag12wvScrollView25contentsMouseReleaseEventEP11QMouseEvent
+_ZN11QScrollView25viewportMouseReleaseEventEP11QMouseEvent
+_ZN11QScrollView11eventFilterEP7QObjectP6QEvent
+_ZN7QObject16activate_filtersEP6QEvent
+_ZN7QObject5eventEP6QEvent
+_ZN7QWidget5eventEP6QEvent
+_ZN12QApplication14internalNotifyEP7QObjectP6QEvent
+_ZN12QApplication6notifyEP7QObjectP6QEvent
+_ZN10EkExtQtApp6notifyEP7QObjectP6QEvent
+_ZN2ag9baseQtApp6notifyEP7QObjectP6QEvent
+_ZN9QETWidget19translateMouseEventEPK7_XEvent
+_ZN12QApplication15x11ProcessEventEP7_XEvent
+_ZN10QEventLoop13processEventsEj
+_ZN2ag12ovaEventLoop13processEventsEj
+_ZN10QEventLoop9enterLoopEv
+_ZN10QEventLoop4execEv
+run_cci_event_loop
+_ZN2ag10ovaAppInst14enterEventLoopEiPPc
+main
+====================================
+

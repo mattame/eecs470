@@ -1,0 +1,65 @@
+# Preference setting overrides
+gui_set_pref_value -category {Data} -key {showValueAnnotation} -value {true}
+gui_create_pref_key -category {Globals} -key {load_detail_for_funcov} -value_type {bool} -value {false}
+gui_set_pref_value -category {Source} -key {value_annotate} -value {true}
+gui_create_pref_category -category {schem_obj_name}
+gui_create_pref_key -category {schem_obj_name} -key {show_cell_and_pin_with_symbol_name} -value_type {bool} -value {false}
+gui_create_pref_key -category {schem_pin_hc} -key {textExtFont} -value_type {string} -value {Helvetica,10,-1,5,50,0,0,0,0,0}
+
+# State setting overrides
+gui_state_default_create -off -ini
+gui_set_state_value -category Globals -key recent_sessions -value {{gui_load_session -file /afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/DVEfiles/crash_04.18:21.31/dve_session04.18:21.31.tcl}}
+gui_set_state_value -category Layout -key child_console_size_x -value 1662
+gui_set_state_value -category Layout -key child_console_size_y -value 150
+gui_set_state_value -category Layout -key child_data_coltype -value 117
+gui_set_state_value -category Layout -key child_data_colvalue -value 186
+gui_set_state_value -category Layout -key child_data_colvariable -value 233
+gui_set_state_value -category Layout -key child_data_size_x -value 529
+gui_set_state_value -category Layout -key child_data_size_y -value 776
+gui_set_state_value -category Layout -key child_driver_size_x -value 1396
+gui_set_state_value -category Layout -key child_driver_size_y -value 179
+gui_set_state_value -category Layout -key child_hier_colhier -value 201
+gui_set_state_value -category Layout -key child_hier_coltype -value 107
+gui_set_state_value -category Layout -key child_hier_size_x -value 277
+gui_set_state_value -category Layout -key child_hier_size_y -value 776
+gui_set_state_value -category Layout -key child_memory_docknewline -value false
+gui_set_state_value -category Layout -key child_memory_pos_x -value {-2}
+gui_set_state_value -category Layout -key child_memory_pos_y -value {-15}
+gui_set_state_value -category Layout -key child_memory_size_x -value 859
+gui_set_state_value -category Layout -key child_memory_size_y -value 771
+gui_set_state_value -category Layout -key child_schematic_docknewline -value false
+gui_set_state_value -category Layout -key child_schematic_pos_x -value {-2}
+gui_set_state_value -category Layout -key child_schematic_pos_y -value {-15}
+gui_set_state_value -category Layout -key child_schematic_size_x -value 1182
+gui_set_state_value -category Layout -key child_schematic_size_y -value 790
+gui_set_state_value -category Layout -key child_source_docknewline -value false
+gui_set_state_value -category Layout -key child_source_pos_x -value {-2}
+gui_set_state_value -category Layout -key child_source_pos_y -value {-15}
+gui_set_state_value -category Layout -key child_source_size_x -value 859
+gui_set_state_value -category Layout -key child_source_size_y -value 771
+gui_set_state_value -category Layout -key child_wave_colname -value 210
+gui_set_state_value -category Layout -key child_wave_colvalue -value 211
+gui_set_state_value -category Layout -key child_wave_left -value 425
+gui_set_state_value -category Layout -key child_wave_right -value 1036
+gui_set_state_value -category Layout -key main_pos_x -value 84
+gui_set_state_value -category Layout -key main_pos_y -value 145
+gui_set_state_value -category Layout -key main_size_x -value 1746
+gui_set_state_value -category Layout -key main_size_y -value 1170
+gui_set_state_value -category Layout -key stand_wave_child_docknewline -value false
+gui_set_state_value -category Layout -key stand_wave_child_pos_x -value {-2}
+gui_set_state_value -category Layout -key stand_wave_child_pos_y -value {-15}
+gui_set_state_value -category Layout -key stand_wave_child_size_x -value 1471
+gui_set_state_value -category Layout -key stand_wave_child_size_y -value 832
+gui_set_state_value -category Layout -key stand_wave_top_pos_x -value 409
+gui_set_state_value -category Layout -key stand_wave_top_pos_y -value 234
+gui_set_state_value -category Layout -key stand_wave_top_size_x -value 1875
+gui_set_state_value -category Layout -key stand_wave_top_size_y -value 1170
+gui_create_state_key -category FindDialog -key m_pMatchCase -value_type bool -value false
+gui_create_state_key -category FindDialog -key m_pMatchWord -value_type bool -value false
+gui_create_state_key -category FindDialog -key m_pUseCombo -value_type string -value {}
+gui_create_state_key -category FindDialog -key m_pWrapAround -value_type bool -value true
+gui_create_state_key -category Widget_History -key TopLevel.1|qt_left_dock|DockWnd2|DLPane.1|pages|Data.1|hbox|textfilter -value_type string -value {*value* *cdb* *out* *status*}
+gui_state_default_create -off
+
+# Begin command logging
+gui_sim_run Ucli -exe ./dve_simv -args {-ucligui  } -dir .

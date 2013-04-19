@@ -1361,7 +1361,6 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                                            .inst1_pht_index_out(rob_inst1_pht_index_out),
                                            .inst2_pht_index_out(rob_inst2_pht_index_out),
 
-
                                           // signals out //
                                           .rob_full(rob_rob_full_out), .rob_empty(rob_rob_empty_out)
                                       );
@@ -1414,7 +1413,27 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     end
     else
     begin
-    
+   
+     if (ex_stall_bus_out_1)
+     begin 
+      ex_valid_1         <= `SD ex_valid_1;
+      ex_NPC_1           <= `SD ex_NPC_1;
+      ex_PPC_1           <= `SD ex_PPC_1;
+      ex_pht_idx_1       <= `SD ex_pht_idx_1;
+      ex_IR_1            <= `SD ex_IR_1;
+      ex_dest_reg_1      <= `SD ex_dest_reg_1;
+      ex_rega_1          <= `SD ex_rega_1;
+      ex_regb_1          <= `SD ex_regb_1;
+      ex_opa_select_1    <= `SD ex_opa_select_1;
+      ex_opb_select_1    <= `SD ex_opb_select_1;
+      ex_alu_func_1      <= `SD ex_alu_func_1;
+      ex_cond_branch_1   <= `SD ex_cond_branch_1;
+      ex_uncond_branch_1 <= `SD ex_uncond_branch_1;
+      ex_rd_mem_1        <= `SD ex_rd_mem_1;
+      ex_wr_mem_1        <= `SD ex_wr_mem_1;
+    end
+    else
+    begin 
       ex_valid_1         <= `SD rs_inst1_valid_out;
       ex_NPC_1           <= `SD rs_inst1_NPC_out;
       ex_PPC_1           <= `SD rs_inst1_PPC_out;
@@ -1430,11 +1449,33 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
       ex_uncond_branch_1 <= `SD rs_inst1_uncond_branch_out;
       ex_rd_mem_1        <= `SD rs_inst1_rd_mem_out;
       ex_wr_mem_1        <= `SD rs_inst1_wr_mem_out;
-      
+    end
+
+
+    if (ex_stall_bus_out_2)
+    begin  
+      ex_valid_2         <= `SD ex_valid_2;
+      ex_NPC_2           <= `SD ex_NPC_2;
+      ex_PPC_2           <= `SD ex_PPC_2;
+      ex_pht_idx_2       <= `SD ex_pht_idx_2;
+      ex_IR_2            <= `SD ex_IR_2;
+      ex_dest_reg_2      <= `SD ex_dest_reg_2;
+      ex_rega_2          <= `SD ex_rega_2;
+      ex_regb_2          <= `SD ex_regb_2;
+      ex_opa_select_2    <= `SD ex_opa_select_2;
+      ex_opb_select_2    <= `SD ex_opb_select_2;
+      ex_alu_func_2      <= `SD ex_alu_func_2;
+      ex_cond_branch_2   <= `SD ex_cond_branch_2;
+      ex_uncond_branch_2 <= `SD ex_uncond_branch_2;
+      ex_rd_mem_2        <= `SD ex_rd_mem_2;
+      ex_wr_mem_2        <= `SD ex_wr_mem_2;
+   end
+   else
+   begin
       ex_valid_2         <= `SD rs_inst2_valid_out;
       ex_NPC_2           <= `SD rs_inst2_NPC_out;
       ex_PPC_2           <= `SD rs_inst2_PPC_out;
-      ex_pht_idx_1       <= `SD rs_inst2_pht_index_out;
+      ex_pht_idx_2       <= `SD rs_inst2_pht_index_out;
       ex_IR_2            <= `SD rs_inst2_IR_out;
       ex_dest_reg_2      <= `SD rs_inst2_dest_tag_out;
       ex_rega_2          <= `SD rs_inst2_rega_value_out;
@@ -1448,6 +1489,8 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
       ex_wr_mem_2        <= `SD rs_inst2_wr_mem_out;
     end
   end
+ end
+
   //////////////////////////////////////////////////
   //                                              //
   //                  EX-Stage                    //

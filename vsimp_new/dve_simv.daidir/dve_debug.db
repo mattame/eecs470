@@ -1,0 +1,921 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<opml version="1.0">
+	<head>
+		<title>VCS dump file for DVE debugging</title>
+		<vcsVersion>E-2011.03_Full64</vcsVersion>
+		<dateCreated>Fri Apr 19 03:08:48 2013</dateCreated>
+	</head>
+	<body>
+		<!-- VCS compile options -->
+		<vcsCompileOptions text="/usr/caen/vcs-2011.03/amd64/bin/vcs1 -Mcc=gcc -Mcplusplus=g++ -Masflags= -Mcfl= -pipe -O -I/usr/caen/vcs-2011.03/include  -Mldflags=  -Mout=dve_simv -Mamsrun= -Mvcsaceobjs= -Mcmodrun= -Mobjects= /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so  -Msaverestoreobj=/usr/caen/vcs-2011.03/amd64/lib/vcs_save_restore_new.o -Mcrt0= -Mcrtn= -Mcsrc=testbench/pipe_print.c  -Mupdate -Msyslibs=-ldl -lm  +v2k +vc -line -full64 +memcbk -o dve_simv -gui -cm_xmldb -ucli +cli+4 +vcsd +itf+/usr/caen/vcs-2011.03/amd64/lib/vcsd.tab +vpi -debug=4 +memcbk +vpi -gen_obj sys_defs.vh verilog/branch_predictor.v verilog/branch_target_buffer.v verilog/cm_stage.v verilog/decode.v verilog/ex_stage_submodules.v verilog/ex_stage.v verilog/icache.v verilog/if_stage.v verilog/LSQ.v verilog/map_table.v verilog/memory_arbiter.v verilog/mem_stage.v verilog/pipeline.v verilog/register_file.v verilog/reorder_buffer.v verilog/reservation_station.v verilog/wb_stage.v verilog/cache/cachemem.v testbench/mem.v testbench/testbench.v "/>
+		<!-- File list for the whole design -->
+		<fileList>
+			<file fid="1" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/branch_predictor.v" />
+			<file fid="13" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/pipeline.v" />
+			<file fid="17" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/wb_stage.v" />
+			<file fid="8" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/if_stage.v" />
+			<file fid="0" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/sys_defs.vh" />
+			<file fid="9" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/LSQ.v" />
+			<file fid="4" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/decode.v" />
+			<file fid="15" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/reorder_buffer.v" />
+			<file fid="3" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/cm_stage.v" />
+			<file fid="2" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/branch_target_buffer.v" />
+			<file fid="16" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/reservation_station.v" />
+			<file fid="7" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/icache.v" />
+			<file fid="10" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/map_table.v" />
+			<file fid="20" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/testbench/testbench.v" />
+			<file fid="12" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/mem_stage.v" />
+			<file fid="18" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/cache/cachemem.v" />
+			<file fid="11" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/memory_arbiter.v" />
+			<file fid="14" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/register_file.v" />
+			<file fid="6" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/ex_stage.v" />
+			<file fid="19" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/testbench/mem.v" />
+			<file fid="5" path="/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/ex_stage_submodules.v" />
+		</fileList>
+		<!-- Include file list for the whole design -->
+		<includeFileList>
+		</includeFileList>
+		<!-- Encrypted codes list for the whole design -->
+		<encryptedCodesList>
+		</encryptedCodesList>
+		<!-- Inactive codes list for the whole design -->
+		<inactiveCodesList>
+			<inactiveCodes fid="20" lineno="175:177" />
+		</inactiveCodesList>
+		<!-- Compile options UUM based -->
+		<langKeywords>
+			<v2kFiles fid="0-20" />
+		</langKeywords>
+		<!--  Case insensitive file list -->
+		<caseInsensitiveFiles fid="" />
+		<!-- Macro definition list for the whole design --> 
+		<macroDefinitionList>
+			<macro name="JSR_GRP" module="branch_decoder" sourceID="1" lineno="34" defID="0" defLine="224" value="1" />
+			<macro name="BR_INST" module="branch_decoder" sourceID="1" lineno="39" defID="0" defLine="242" value="2" />
+			<macro name="BSR_INST" module="branch_decoder" sourceID="1" lineno="39" defID="0" defLine="246" value="3" />
+			<macro name="HISTORY_BITS" module="branch_predictor" sourceID="1" lineno="81" defID="1" defLine="3" value="4" />
+			<macro name="HISTORY_BITS" module="branch_predictor" sourceID="1" lineno="84" defID="1" defLine="3" value="4" />
+			<macro name="PHT_ENTRIES" module="branch_predictor" sourceID="1" lineno="87" defID="1" defLine="4" value="5" />
+			<macro name="PHT_ENTRIES" module="branch_predictor" sourceID="1" lineno="88" defID="1" defLine="4" value="5" />
+			<macro name="HISTORY_BITS" module="branch_predictor" sourceID="1" lineno="89" defID="1" defLine="3" value="4" />
+			<macro name="HISTORY_BITS" module="branch_predictor" sourceID="1" lineno="90" defID="1" defLine="3" value="4" />
+			<macro name="HISTORY_BITS" module="branch_predictor" sourceID="1" lineno="97" defID="1" defLine="3" value="4" />
+			<macro name="HISTORY_BITS" module="branch_predictor" sourceID="1" lineno="98" defID="1" defLine="3" value="4" />
+			<macro name="BRANCH_TAKEN" module="branch_predictor" sourceID="1" lineno="104" defID="1" defLine="6" value="6" />
+			<macro name="BRANCH_TAKEN" module="branch_predictor" sourceID="1" lineno="105" defID="1" defLine="6" value="6" />
+			<macro name="BRANCH_NONE" module="branch_predictor" sourceID="1" lineno="116" defID="1" defLine="5" value="7" />
+			<macro name="BRANCH_NONE" module="branch_predictor" sourceID="1" lineno="116" defID="1" defLine="5" value="7" />
+			<macro name="HISTORY_BITS" module="branch_predictor" sourceID="1" lineno="118" defID="1" defLine="3" value="4" />
+			<macro name="BRANCH_NONE" module="branch_predictor" sourceID="1" lineno="124" defID="1" defLine="5" value="7" />
+			<macro name="HISTORY_BITS" module="branch_predictor" sourceID="1" lineno="126" defID="1" defLine="3" value="4" />
+			<macro name="BRANCH_NONE" module="branch_predictor" sourceID="1" lineno="131" defID="1" defLine="5" value="7" />
+			<macro name="HISTORY_BITS" module="branch_predictor" sourceID="1" lineno="133" defID="1" defLine="3" value="4" />
+			<macro name="SD" module="branch_predictor" sourceID="1" lineno="145" defID="1" defLine="9" value="8" />
+			<macro name="HISTORY_BITS" module="branch_predictor" sourceID="1" lineno="145" defID="1" defLine="3" value="4" />
+			<macro name="SD" module="branch_predictor" sourceID="1" lineno="146" defID="1" defLine="9" value="8" />
+			<macro name="PHT_ENTRIES" module="branch_predictor" sourceID="1" lineno="146" defID="1" defLine="4" value="5" />
+			<macro name="SD" module="branch_predictor" sourceID="1" lineno="150" defID="1" defLine="9" value="8" />
+			<macro name="SD" module="branch_predictor" sourceID="1" lineno="151" defID="1" defLine="9" value="8" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="111" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="117" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="131" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="209" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="245" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="259" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="287" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="292" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="306" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="319" defID="6" defLine="14" value="4" />
+			<macro name="NUM_RSES" module="pipeline" sourceID="13" lineno="327" defID="0" defLine="65" value="9" />
+			<macro name="NUM_RSES" module="pipeline" sourceID="13" lineno="328" defID="0" defLine="65" value="9" />
+			<macro name="NUM_RSES" module="pipeline" sourceID="13" lineno="330" defID="0" defLine="65" value="9" />
+			<macro name="NUM_RSES" module="pipeline" sourceID="13" lineno="331" defID="0" defLine="65" value="9" />
+			<macro name="NUM_RSES" module="pipeline" sourceID="13" lineno="333" defID="0" defLine="65" value="9" />
+			<macro name="NUM_RSES" module="pipeline" sourceID="13" lineno="335" defID="0" defLine="65" value="9" />
+			<macro name="NUM_RSES" module="pipeline" sourceID="13" lineno="336" defID="0" defLine="65" value="9" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="342" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="358" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="387" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="396" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="406" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="414" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="424" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="pipeline" sourceID="13" lineno="432" defID="6" defLine="14" value="4" />
+			<macro name="BUS_NONE" module="pipeline" sourceID="13" lineno="511" defID="11" defLine="11" value="10" />
+			<macro name="HALTED_ON_ILLEGAL" module="pipeline" sourceID="13" lineno="533" defID="0" defLine="113" value="11" />
+			<macro name="HALTED_ON_HALT" module="pipeline" sourceID="13" lineno="533" defID="0" defLine="112" value="12" />
+			<macro name="NO_ERROR" module="pipeline" sourceID="13" lineno="533" defID="0" defLine="110" value="13" />
+			<macro name="BRANCH_HALT" module="pipeline" sourceID="13" lineno="536" defID="5" defLine="27" value="14" />
+			<macro name="BRANCH_HALT" module="pipeline" sourceID="13" lineno="536" defID="5" defLine="27" value="14" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="542" defID="11" defLine="9" value="8" />
+			<macro name="BUS_NONE" module="pipeline" sourceID="13" lineno="563" defID="11" defLine="11" value="10" />
+			<macro name="BUS_NONE" module="pipeline" sourceID="13" lineno="565" defID="11" defLine="11" value="10" />
+			<macro name="BUS_NONE" module="pipeline" sourceID="13" lineno="567" defID="11" defLine="11" value="10" />
+			<macro name="BUS_NONE" module="pipeline" sourceID="13" lineno="569" defID="11" defLine="11" value="10" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="716" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="717" defID="11" defLine="9" value="8" />
+			<macro name="NOOP_INST" module="pipeline" sourceID="13" lineno="717" defID="0" defLine="201" value="15" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="718" defID="11" defLine="9" value="8" />
+			<macro name="FALSE" module="pipeline" sourceID="13" lineno="718" defID="0" defLine="194" value="16" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="719" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="720" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="722" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="723" defID="11" defLine="9" value="8" />
+			<macro name="NOOP_INST" module="pipeline" sourceID="13" lineno="723" defID="0" defLine="201" value="15" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="724" defID="11" defLine="9" value="8" />
+			<macro name="FALSE" module="pipeline" sourceID="13" lineno="724" defID="0" defLine="194" value="16" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="725" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="726" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="732" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="733" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="734" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="735" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="736" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="738" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="739" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="740" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="741" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="742" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="746" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="747" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="748" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="749" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="750" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="752" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="753" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="754" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="755" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="756" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1381" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1382" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1383" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1384" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1385" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1386" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1387" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1388" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1389" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1390" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1391" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1392" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1393" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1394" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1395" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1397" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1398" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1399" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1400" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1401" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1402" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1403" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1404" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1405" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1406" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1407" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1408" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1409" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1410" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1411" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1419" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1420" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1421" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1422" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1423" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1424" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1425" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1426" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1427" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1428" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1429" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1430" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1431" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1432" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1433" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1437" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1438" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1439" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1440" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1441" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1442" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1443" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1444" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1445" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1446" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1447" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1448" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1449" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1450" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1451" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1457" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1458" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1459" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1460" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1461" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1462" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1463" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1464" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1465" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1466" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1467" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1468" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1469" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1470" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1471" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1475" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1476" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1477" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1478" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1479" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1480" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1481" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1482" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1483" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1484" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1485" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1486" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1487" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1488" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1489" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1590" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1591" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1592" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1593" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1594" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1595" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1596" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1598" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1599" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1600" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1601" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1602" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1603" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1604" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1609" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1610" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1611" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1612" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1613" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1614" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1615" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1617" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1618" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1619" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1620" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1621" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1622" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="pipeline" sourceID="13" lineno="1623" defID="11" defLine="9" value="8" />
+			<macro name="ZERO_REG" module="wb_stage" sourceID="17" lineno="57" defID="16" defLine="20" value="17" />
+			<macro name="HISTORY_BITS" module="if_stage" sourceID="8" lineno="53" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="if_stage" sourceID="8" lineno="71" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="if_stage" sourceID="8" lineno="87" defID="6" defLine="14" value="4" />
+			<macro name="BRANCH_TAKEN" module="if_stage" sourceID="8" lineno="91" defID="5" defLine="25" value="6" />
+			<macro name="BRANCH_TAKEN" module="if_stage" sourceID="8" lineno="92" defID="5" defLine="25" value="6" />
+			<macro name="SD" module="if_stage" sourceID="8" lineno="168" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="if_stage" sourceID="8" lineno="170" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="150" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="151" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="152" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="153" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="154" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="155" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="156" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="159" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="160" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="161" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="162" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="163" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="164" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ_entry" sourceID="9" lineno="165" defID="2" defLine="12" value="8" />
+			<macro name="LSQ_ENTRIES" module="LSQ" sourceID="9" lineno="295" defID="9" defLine="17" value="18" />
+			<macro name="LSQ_ENTRIES" module="LSQ" sourceID="9" lineno="296" defID="9" defLine="17" value="18" />
+			<macro name="LSQ_ENTRIES" module="LSQ" sourceID="9" lineno="297" defID="9" defLine="17" value="18" />
+			<macro name="LSQ_ENTRIES" module="LSQ" sourceID="9" lineno="298" defID="9" defLine="17" value="18" />
+			<macro name="LSQ_ENTRIES" module="LSQ" sourceID="9" lineno="299" defID="9" defLine="17" value="18" />
+			<macro name="LSQ_ENTRIES" module="LSQ" sourceID="9" lineno="300" defID="9" defLine="17" value="18" />
+			<macro name="LSQ_ENTRIES" module="LSQ" sourceID="9" lineno="303" defID="9" defLine="17" value="18" />
+			<macro name="LSQ_ENTRIES" module="LSQ" sourceID="9" lineno="304" defID="9" defLine="17" value="18" />
+			<macro name="LSQ_ENTRIES" module="LSQ" sourceID="9" lineno="305" defID="9" defLine="17" value="18" />
+			<macro name="LSQ_ENTRIES" module="" sourceID="9" lineno="309" defID="9" defLine="17" value="18" />
+			<macro name="LSQ_ENTRIES" module="" sourceID="9" lineno="323" defID="9" defLine="17" value="18" />
+			<macro name="BUS_NONE" module="LSQ" sourceID="9" lineno="377" defID="0" defLine="187" value="10" />
+			<macro name="BUS_STORE" module="LSQ" sourceID="9" lineno="378" defID="0" defLine="189" value="19" />
+			<macro name="BUS_LOAD" module="LSQ" sourceID="9" lineno="379" defID="0" defLine="188" value="20" />
+			<macro name="BUS_NONE" module="LSQ" sourceID="9" lineno="380" defID="0" defLine="187" value="10" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="407" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="409" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="432" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="433" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="434" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="438" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="439" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="440" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="443" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="444" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="LSQ" sourceID="9" lineno="445" defID="2" defLine="12" value="8" />
+			<macro name="DEST_NONE" module="decoder" sourceID="4" lineno="76" defID="0" defLine="142" value="19" />
+			<macro name="FALSE" module="decoder" sourceID="4" lineno="77" defID="0" defLine="194" value="16" />
+			<macro name="FALSE" module="decoder" sourceID="4" lineno="78" defID="0" defLine="194" value="16" />
+			<macro name="FALSE" module="decoder" sourceID="4" lineno="79" defID="0" defLine="194" value="16" />
+			<macro name="FALSE" module="decoder" sourceID="4" lineno="80" defID="0" defLine="194" value="16" />
+			<macro name="FALSE" module="decoder" sourceID="4" lineno="81" defID="0" defLine="194" value="16" />
+			<macro name="FALSE" module="decoder" sourceID="4" lineno="82" defID="0" defLine="194" value="16" />
+			<macro name="PAL_INST" module="decoder" sourceID="4" lineno="88" defID="0" defLine="206" value="21" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="92" defID="0" defLine="195" value="22" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="95" defID="0" defLine="195" value="22" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="96" defID="0" defLine="195" value="22" />
+			<macro name="ALU_OPA_IS_REGA" module="decoder" sourceID="4" lineno="101" defID="0" defLine="125" value="10" />
+			<macro name="ALU_OPB_IS_ALU_IMM" module="decoder" sourceID="4" lineno="102" defID="0" defLine="134" value="20" />
+			<macro name="ALU_OPB_IS_REGB" module="decoder" sourceID="4" lineno="102" defID="0" defLine="133" value="10" />
+			<macro name="DEST_IS_REGC" module="decoder" sourceID="4" lineno="103" defID="0" defLine="140" value="10" />
+			<macro name="INTA_GRP" module="decoder" sourceID="4" lineno="105" defID="0" defLine="215" value="23" />
+			<macro name="CMPULT_INST" module="decoder" sourceID="4" lineno="107" defID="0" defLine="271" value="24" />
+			<macro name="ALU_CMPULT" module="decoder" sourceID="4" lineno="107" defID="0" defLine="164" value="25" />
+			<macro name="ADDQ_INST" module="decoder" sourceID="4" lineno="108" defID="0" defLine="272" value="26" />
+			<macro name="ALU_ADDQ" module="decoder" sourceID="4" lineno="108" defID="0" defLine="149" value="27" />
+			<macro name="SUBQ_INST" module="decoder" sourceID="4" lineno="109" defID="0" defLine="274" value="28" />
+			<macro name="ALU_SUBQ" module="decoder" sourceID="4" lineno="109" defID="0" defLine="150" value="29" />
+			<macro name="CMPEQ_INST" module="decoder" sourceID="4" lineno="110" defID="0" defLine="276" value="30" />
+			<macro name="ALU_CMPEQ" module="decoder" sourceID="4" lineno="110" defID="0" defLine="161" value="31" />
+			<macro name="CMPULE_INST" module="decoder" sourceID="4" lineno="111" defID="0" defLine="279" value="32" />
+			<macro name="ALU_CMPULE" module="decoder" sourceID="4" lineno="111" defID="0" defLine="165" value="33" />
+			<macro name="CMPLT_INST" module="decoder" sourceID="4" lineno="112" defID="0" defLine="282" value="34" />
+			<macro name="ALU_CMPLT" module="decoder" sourceID="4" lineno="112" defID="0" defLine="162" value="35" />
+			<macro name="CMPLE_INST" module="decoder" sourceID="4" lineno="113" defID="0" defLine="285" value="36" />
+			<macro name="ALU_CMPLE" module="decoder" sourceID="4" lineno="113" defID="0" defLine="163" value="37" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="114" defID="0" defLine="195" value="22" />
+			<macro name="INTL_GRP" module="decoder" sourceID="4" lineno="116" defID="0" defLine="216" value="38" />
+			<macro name="AND_INST" module="decoder" sourceID="4" lineno="118" defID="0" defLine="288" value="39" />
+			<macro name="ALU_AND" module="decoder" sourceID="4" lineno="118" defID="0" defLine="151" value="40" />
+			<macro name="BIC_INST" module="decoder" sourceID="4" lineno="119" defID="0" defLine="289" value="41" />
+			<macro name="ALU_BIC" module="decoder" sourceID="4" lineno="119" defID="0" defLine="152" value="42" />
+			<macro name="BIS_INST" module="decoder" sourceID="4" lineno="120" defID="0" defLine="292" value="26" />
+			<macro name="ALU_BIS" module="decoder" sourceID="4" lineno="120" defID="0" defLine="153" value="43" />
+			<macro name="ORNOT_INST" module="decoder" sourceID="4" lineno="121" defID="0" defLine="295" value="44" />
+			<macro name="ALU_ORNOT" module="decoder" sourceID="4" lineno="121" defID="0" defLine="154" value="45" />
+			<macro name="XOR_INST" module="decoder" sourceID="4" lineno="122" defID="0" defLine="296" value="46" />
+			<macro name="ALU_XOR" module="decoder" sourceID="4" lineno="122" defID="0" defLine="155" value="47" />
+			<macro name="EQV_INST" module="decoder" sourceID="4" lineno="123" defID="0" defLine="299" value="48" />
+			<macro name="ALU_EQV" module="decoder" sourceID="4" lineno="123" defID="0" defLine="156" value="49" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="124" defID="0" defLine="195" value="22" />
+			<macro name="INTS_GRP" module="decoder" sourceID="4" lineno="126" defID="0" defLine="217" value="50" />
+			<macro name="SRL_INST" module="decoder" sourceID="4" lineno="128" defID="0" defLine="318" value="51" />
+			<macro name="ALU_SRL" module="decoder" sourceID="4" lineno="128" defID="0" defLine="157" value="52" />
+			<macro name="SLL_INST" module="decoder" sourceID="4" lineno="129" defID="0" defLine="320" value="53" />
+			<macro name="ALU_SLL" module="decoder" sourceID="4" lineno="129" defID="0" defLine="158" value="54" />
+			<macro name="SRA_INST" module="decoder" sourceID="4" lineno="130" defID="0" defLine="322" value="55" />
+			<macro name="ALU_SRA" module="decoder" sourceID="4" lineno="130" defID="0" defLine="159" value="56" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="131" defID="0" defLine="195" value="22" />
+			<macro name="INTM_GRP" module="decoder" sourceID="4" lineno="133" defID="0" defLine="218" value="57" />
+			<macro name="MULQ_INST" module="decoder" sourceID="4" lineno="135" defID="0" defLine="335" value="26" />
+			<macro name="ALU_MULQ" module="decoder" sourceID="4" lineno="135" defID="0" defLine="160" value="58" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="136" defID="0" defLine="195" value="22" />
+			<macro name="ITFP_GRP" module="decoder" sourceID="4" lineno="138" defID="0" defLine="219" value="59" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="138" defID="0" defLine="195" value="22" />
+			<macro name="FLTV_GRP" module="decoder" sourceID="4" lineno="139" defID="0" defLine="220" value="60" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="139" defID="0" defLine="195" value="22" />
+			<macro name="FLTI_GRP" module="decoder" sourceID="4" lineno="140" defID="0" defLine="221" value="61" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="140" defID="0" defLine="195" value="22" />
+			<macro name="FLTL_GRP" module="decoder" sourceID="4" lineno="141" defID="0" defLine="222" value="62" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="141" defID="0" defLine="195" value="22" />
+			<macro name="MISC_GRP" module="decoder" sourceID="4" lineno="147" defID="0" defLine="223" value="63" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="147" defID="0" defLine="195" value="22" />
+			<macro name="JSR_GRP" module="decoder" sourceID="4" lineno="148" defID="0" defLine="224" value="1" />
+			<macro name="ALU_OPA_IS_NOT3" module="decoder" sourceID="4" lineno="151" defID="0" defLine="128" value="64" />
+			<macro name="ALU_OPB_IS_REGB" module="decoder" sourceID="4" lineno="152" defID="0" defLine="133" value="10" />
+			<macro name="ALU_AND" module="decoder" sourceID="4" lineno="153" defID="0" defLine="151" value="40" />
+			<macro name="DEST_IS_REGA" module="decoder" sourceID="4" lineno="154" defID="0" defLine="141" value="20" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="155" defID="0" defLine="195" value="22" />
+			<macro name="FTPI_GRP" module="decoder" sourceID="4" lineno="157" defID="0" defLine="225" value="65" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="157" defID="0" defLine="195" value="22" />
+			<macro name="ALU_OPA_IS_MEM_DISP" module="decoder" sourceID="4" lineno="162" defID="0" defLine="126" value="20" />
+			<macro name="ALU_OPB_IS_REGB" module="decoder" sourceID="4" lineno="163" defID="0" defLine="133" value="10" />
+			<macro name="ALU_ADDQ" module="decoder" sourceID="4" lineno="164" defID="0" defLine="149" value="27" />
+			<macro name="DEST_IS_REGA" module="decoder" sourceID="4" lineno="165" defID="0" defLine="141" value="20" />
+			<macro name="LDA_INST" module="decoder" sourceID="4" lineno="167" defID="0" defLine="207" value="66" />
+			<macro name="LDQ_INST" module="decoder" sourceID="4" lineno="168" defID="0" defLine="235" value="67" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="170" defID="0" defLine="195" value="22" />
+			<macro name="DEST_IS_REGA" module="decoder" sourceID="4" lineno="171" defID="0" defLine="141" value="20" />
+			<macro name="STQ_INST" module="decoder" sourceID="4" lineno="173" defID="0" defLine="239" value="68" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="175" defID="0" defLine="195" value="22" />
+			<macro name="DEST_NONE" module="decoder" sourceID="4" lineno="176" defID="0" defLine="142" value="19" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="178" defID="0" defLine="195" value="22" />
+			<macro name="ALU_OPA_IS_NPC" module="decoder" sourceID="4" lineno="184" defID="0" defLine="127" value="19" />
+			<macro name="ALU_OPB_IS_BR_DISP" module="decoder" sourceID="4" lineno="185" defID="0" defLine="135" value="19" />
+			<macro name="ALU_ADDQ" module="decoder" sourceID="4" lineno="186" defID="0" defLine="149" value="27" />
+			<macro name="FBEQ_INST" module="decoder" sourceID="4" lineno="188" defID="0" defLine="243" value="69" />
+			<macro name="FBLT_INST" module="decoder" sourceID="4" lineno="188" defID="0" defLine="244" value="70" />
+			<macro name="FBLE_INST" module="decoder" sourceID="4" lineno="188" defID="0" defLine="245" value="71" />
+			<macro name="FBNE_INST" module="decoder" sourceID="4" lineno="189" defID="0" defLine="247" value="72" />
+			<macro name="FBGE_INST" module="decoder" sourceID="4" lineno="189" defID="0" defLine="248" value="73" />
+			<macro name="FBGT_INST" module="decoder" sourceID="4" lineno="189" defID="0" defLine="249" value="74" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="192" defID="0" defLine="195" value="22" />
+			<macro name="BR_INST" module="decoder" sourceID="4" lineno="195" defID="0" defLine="242" value="2" />
+			<macro name="BSR_INST" module="decoder" sourceID="4" lineno="195" defID="0" defLine="246" value="3" />
+			<macro name="DEST_IS_REGA" module="decoder" sourceID="4" lineno="197" defID="0" defLine="141" value="20" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="198" defID="0" defLine="195" value="22" />
+			<macro name="TRUE" module="decoder" sourceID="4" lineno="202" defID="0" defLine="195" value="22" />
+			<macro name="ALU_OPA_IS_REGA" module="id_stage" sourceID="4" lineno="307" defID="0" defLine="125" value="10" />
+			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="307" defID="0" defLine="182" value="75" />
+			<macro name="ALU_OPB_IS_REGB" module="id_stage" sourceID="4" lineno="308" defID="0" defLine="133" value="10" />
+			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="308" defID="0" defLine="182" value="75" />
+			<macro name="ALU_OPA_IS_REGA" module="id_stage" sourceID="4" lineno="316" defID="0" defLine="125" value="10" />
+			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="316" defID="0" defLine="182" value="75" />
+			<macro name="ALU_OPB_IS_REGB" module="id_stage" sourceID="4" lineno="317" defID="0" defLine="133" value="10" />
+			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="317" defID="0" defLine="182" value="75" />
+			<macro name="DEST_IS_REGC" module="id_stage" sourceID="4" lineno="361" defID="0" defLine="140" value="10" />
+			<macro name="DEST_IS_REGA" module="id_stage" sourceID="4" lineno="362" defID="0" defLine="141" value="20" />
+			<macro name="DEST_NONE" module="id_stage" sourceID="4" lineno="363" defID="0" defLine="142" value="19" />
+			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="363" defID="0" defLine="182" value="75" />
+			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="364" defID="0" defLine="182" value="75" />
+			<macro name="DEST_IS_REGC" module="id_stage" sourceID="4" lineno="367" defID="0" defLine="140" value="10" />
+			<macro name="DEST_IS_REGA" module="id_stage" sourceID="4" lineno="368" defID="0" defLine="141" value="20" />
+			<macro name="DEST_NONE" module="id_stage" sourceID="4" lineno="369" defID="0" defLine="142" value="19" />
+			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="369" defID="0" defLine="182" value="75" />
+			<macro name="ZERO_REG" module="id_stage" sourceID="4" lineno="370" defID="0" defLine="182" value="75" />
+			<macro name="HISTORY_BITS" module="reorder_buffer_entry" sourceID="15" lineno="69" defID="15" defLine="20" value="4" />
+			<macro name="HISTORY_BITS" module="reorder_buffer_entry" sourceID="15" lineno="78" defID="15" defLine="20" value="4" />
+			<macro name="HISTORY_BITS" module="reorder_buffer_entry" sourceID="15" lineno="87" defID="15" defLine="20" value="4" />
+			<macro name="ROBE_INUSE" module="reorder_buffer_entry" sourceID="15" lineno="97" defID="15" defLine="16" value="6" />
+			<macro name="HISTORY_BITS" module="reorder_buffer_entry" sourceID="15" lineno="103" defID="15" defLine="20" value="4" />
+			<macro name="ROBE_COMPLETE" module="reorder_buffer_entry" sourceID="15" lineno="109" defID="15" defLine="17" value="76" />
+			<macro name="ROBE_COMPLETE" module="reorder_buffer_entry" sourceID="15" lineno="119" defID="15" defLine="17" value="76" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="147" defID="15" defLine="12" value="8" />
+			<macro name="ROBE_EMPTY" module="reorder_buffer_entry" sourceID="15" lineno="147" defID="15" defLine="15" value="7" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="148" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="149" defID="15" defLine="12" value="8" />
+			<macro name="RSTAG_NULL" module="reorder_buffer_entry" sourceID="15" lineno="149" defID="15" defLine="9" value="77" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="150" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="151" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="152" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="153" defID="15" defLine="12" value="8" />
+			<macro name="HISTORY_BITS" module="reorder_buffer_entry" sourceID="15" lineno="153" defID="15" defLine="20" value="4" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="157" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="158" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="159" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="160" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="161" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="162" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer_entry" sourceID="15" lineno="163" defID="15" defLine="12" value="8" />
+			<macro name="HISTORY_BITS" module="reorder_buffer" sourceID="15" lineno="259" defID="15" defLine="20" value="4" />
+			<macro name="HISTORY_BITS" module="reorder_buffer" sourceID="15" lineno="260" defID="15" defLine="20" value="4" />
+			<macro name="HISTORY_BITS" module="reorder_buffer" sourceID="15" lineno="278" defID="15" defLine="20" value="4" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="297" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="298" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="299" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="300" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="301" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="302" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="303" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="304" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="305" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="306" defID="15" defLine="10" value="18" />
+			<macro name="HISTORY_BITS" module="reorder_buffer" sourceID="15" lineno="307" defID="15" defLine="20" value="4" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="307" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="312" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="313" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="313" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="314" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="315" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="315" defID="15" defLine="10" value="18" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="316" defID="15" defLine="10" value="18" />
+			<macro name="ROBE_COMPLETE" module="reorder_buffer" sourceID="15" lineno="319" defID="15" defLine="17" value="76" />
+			<macro name="ROBE_COMPLETE" module="reorder_buffer" sourceID="15" lineno="320" defID="15" defLine="17" value="76" />
+			<macro name="BRANCH_HALT" module="reorder_buffer" sourceID="15" lineno="320" defID="15" defLine="21" value="14" />
+			<macro name="RSTAG_NULL" module="reorder_buffer" sourceID="15" lineno="331" defID="15" defLine="9" value="77" />
+			<macro name="RSTAG_NULL" module="reorder_buffer" sourceID="15" lineno="332" defID="15" defLine="9" value="77" />
+			<macro name="UNUSED_TAG_BITS" module="reorder_buffer" sourceID="15" lineno="336" defID="15" defLine="11" value="78" />
+			<macro name="UNUSED_TAG_BITS" module="reorder_buffer" sourceID="15" lineno="336" defID="15" defLine="11" value="78" />
+			<macro name="UNUSED_TAG_BITS" module="reorder_buffer" sourceID="15" lineno="337" defID="15" defLine="11" value="78" />
+			<macro name="UNUSED_TAG_BITS" module="reorder_buffer" sourceID="15" lineno="337" defID="15" defLine="11" value="78" />
+			<macro name="UNUSED_TAG_BITS" module="reorder_buffer" sourceID="15" lineno="338" defID="15" defLine="11" value="78" />
+			<macro name="UNUSED_TAG_BITS" module="reorder_buffer" sourceID="15" lineno="338" defID="15" defLine="11" value="78" />
+			<macro name="UNUSED_TAG_BITS" module="reorder_buffer" sourceID="15" lineno="339" defID="15" defLine="11" value="78" />
+			<macro name="UNUSED_TAG_BITS" module="reorder_buffer" sourceID="15" lineno="339" defID="15" defLine="11" value="78" />
+			<macro name="ZERO_REG" module="reorder_buffer" sourceID="15" lineno="343" defID="15" defLine="8" value="75" />
+			<macro name="RSTAG_NULL" module="reorder_buffer" sourceID="15" lineno="345" defID="15" defLine="9" value="77" />
+			<macro name="HISTORY_BITS" module="reorder_buffer" sourceID="15" lineno="349" defID="15" defLine="20" value="4" />
+			<macro name="ZERO_REG" module="reorder_buffer" sourceID="15" lineno="351" defID="15" defLine="8" value="75" />
+			<macro name="RSTAG_NULL" module="reorder_buffer" sourceID="15" lineno="353" defID="15" defLine="9" value="77" />
+			<macro name="HISTORY_BITS" module="reorder_buffer" sourceID="15" lineno="357" defID="15" defLine="20" value="4" />
+			<macro name="ROBE_EMPTY" module="reorder_buffer" sourceID="15" lineno="361" defID="15" defLine="15" value="7" />
+			<macro name="ROBE_EMPTY" module="reorder_buffer" sourceID="15" lineno="361" defID="15" defLine="15" value="7" />
+			<macro name="ROB_ENTRIES" module="" sourceID="15" lineno="367" defID="15" defLine="10" value="18" />
+			<macro name="ZERO_REG" module="ASSIGNROBEINPUTS" sourceID="15" lineno="371" defID="15" defLine="8" value="75" />
+			<macro name="ROB_ENTRIES" module="" sourceID="15" lineno="378" defID="15" defLine="10" value="18" />
+			<macro name="ROBE_EMPTY" module="ASSIGNEMPTYFULLSTATES" sourceID="15" lineno="380" defID="15" defLine="15" value="7" />
+			<macro name="ROB_ENTRIES" module="" sourceID="15" lineno="386" defID="15" defLine="10" value="18" />
+			<macro name="SD" module="reorder_buffer" sourceID="15" lineno="420" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer" sourceID="15" lineno="421" defID="15" defLine="12" value="8" />
+			<macro name="ROB_ENTRIES" module="reorder_buffer" sourceID="15" lineno="421" defID="15" defLine="10" value="18" />
+			<macro name="SD" module="reorder_buffer" sourceID="15" lineno="425" defID="15" defLine="12" value="8" />
+			<macro name="SD" module="reorder_buffer" sourceID="15" lineno="426" defID="15" defLine="12" value="8" />
+			<macro name="HISTORY_BITS" module="cm_stage" sourceID="3" lineno="55" defID="1" defLine="3" value="4" />
+			<macro name="HISTORY_BITS" module="cm_stage" sourceID="3" lineno="63" defID="1" defLine="3" value="4" />
+			<macro name="HISTORY_BITS" module="cm_stage" sourceID="3" lineno="72" defID="1" defLine="3" value="4" />
+			<macro name="HISTORY_BITS" module="cm_stage" sourceID="3" lineno="79" defID="1" defLine="3" value="4" />
+			<macro name="RSTAG_NULL" module="cm_stage" sourceID="3" lineno="82" defID="0" defLine="73" value="79" />
+			<macro name="RSTAG_NULL" module="cm_stage" sourceID="3" lineno="89" defID="0" defLine="73" value="79" />
+			<macro name="BTB_ENTRIES" module="branch_target_buffer" sourceID="2" lineno="39" defID="2" defLine="7" value="80" />
+			<macro name="BTB_ENTRIES" module="branch_target_buffer" sourceID="2" lineno="40" defID="2" defLine="7" value="80" />
+			<macro name="BTB_ENTRIES" module="branch_target_buffer" sourceID="2" lineno="43" defID="2" defLine="7" value="80" />
+			<macro name="BTB_ENTRIES" module="branch_target_buffer" sourceID="2" lineno="44" defID="2" defLine="7" value="80" />
+			<macro name="BTB_PC_BITS" module="branch_target_buffer" sourceID="2" lineno="47" defID="2" defLine="6" value="4" />
+			<macro name="BTB_PC_BITS" module="branch_target_buffer" sourceID="2" lineno="48" defID="2" defLine="6" value="4" />
+			<macro name="BRANCH_TAKEN" module="branch_target_buffer" sourceID="2" lineno="49" defID="2" defLine="9" value="6" />
+			<macro name="BRANCH_NOT_TAKEN" module="branch_target_buffer" sourceID="2" lineno="49" defID="2" defLine="10" value="76" />
+			<macro name="BRANCH_TAKEN" module="branch_target_buffer" sourceID="2" lineno="50" defID="2" defLine="9" value="6" />
+			<macro name="BRANCH_NOT_TAKEN" module="branch_target_buffer" sourceID="2" lineno="50" defID="2" defLine="10" value="76" />
+			<macro name="BTB_ENTRIES" module="" sourceID="2" lineno="55" defID="2" defLine="7" value="80" />
+			<macro name="BTB_PC_BITS" module="ASSIGNNBRANCHPCS" sourceID="2" lineno="59" defID="2" defLine="6" value="4" />
+			<macro name="BTB_PC_BITS" module="ASSIGNNBRANCHPCS" sourceID="2" lineno="60" defID="2" defLine="6" value="4" />
+			<macro name="BTB_ENTRIES" module="" sourceID="2" lineno="70" defID="2" defLine="7" value="80" />
+			<macro name="SD" module="ASSIGNBRANCHPCS" sourceID="2" lineno="75" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="ASSIGNBRANCHPCS" sourceID="2" lineno="77" defID="2" defLine="12" value="8" />
+			<macro name="HISTORY_BITS" module="reservation_station_entry" sourceID="16" lineno="124" defID="16" defLine="23" value="4" />
+			<macro name="HISTORY_BITS" module="reservation_station_entry" sourceID="16" lineno="150" defID="16" defLine="23" value="4" />
+			<macro name="HISTORY_BITS" module="reservation_station_entry" sourceID="16" lineno="174" defID="16" defLine="23" value="4" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="191" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="192" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="193" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="194" defID="16" defLine="19" value="79" />
+			<macro name="RS_EMPTY" module="reservation_station_entry" sourceID="16" lineno="203" defID="16" defLine="13" value="81" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="221" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="222" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="223" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="224" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="229" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="229" defID="16" defLine="19" value="79" />
+			<macro name="RS_READY" module="reservation_station_entry" sourceID="16" lineno="230" defID="16" defLine="17" value="82" />
+			<macro name="RS_WAITING_B" module="reservation_station_entry" sourceID="16" lineno="231" defID="16" defLine="15" value="83" />
+			<macro name="RS_WAITING_A" module="reservation_station_entry" sourceID="16" lineno="232" defID="16" defLine="14" value="84" />
+			<macro name="RS_WAITING_BOTH" module="reservation_station_entry" sourceID="16" lineno="233" defID="16" defLine="16" value="85" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="257" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="258" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="259" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="260" defID="16" defLine="19" value="79" />
+			<macro name="RS_EMPTY" module="reservation_station_entry" sourceID="16" lineno="267" defID="16" defLine="13" value="81" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="272" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="272" defID="16" defLine="19" value="79" />
+			<macro name="RS_READY" module="reservation_station_entry" sourceID="16" lineno="273" defID="16" defLine="17" value="82" />
+			<macro name="RS_WAITING_B" module="reservation_station_entry" sourceID="16" lineno="274" defID="16" defLine="15" value="83" />
+			<macro name="RS_WAITING_A" module="reservation_station_entry" sourceID="16" lineno="275" defID="16" defLine="14" value="84" />
+			<macro name="RS_WAITING_BOTH" module="reservation_station_entry" sourceID="16" lineno="276" defID="16" defLine="16" value="85" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="306" defID="16" defLine="8" value="8" />
+			<macro name="RS_EMPTY" module="reservation_station_entry" sourceID="16" lineno="306" defID="16" defLine="13" value="81" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="307" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="308" defID="16" defLine="8" value="8" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="308" defID="16" defLine="19" value="79" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="309" defID="16" defLine="8" value="8" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="309" defID="16" defLine="19" value="79" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="310" defID="16" defLine="8" value="8" />
+			<macro name="RSTAG_NULL" module="reservation_station_entry" sourceID="16" lineno="310" defID="16" defLine="19" value="79" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="311" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="312" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="313" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="314" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="315" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="316" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="317" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="318" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="319" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="320" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="321" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="322" defID="16" defLine="8" value="8" />
+			<macro name="NOOP_INST" module="reservation_station_entry" sourceID="16" lineno="322" defID="16" defLine="21" value="15" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="323" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="324" defID="16" defLine="8" value="8" />
+			<macro name="HISTORY_BITS" module="reservation_station_entry" sourceID="16" lineno="324" defID="16" defLine="23" value="4" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="328" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="329" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="330" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="331" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="332" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="333" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="334" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="335" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="336" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="337" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="338" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="339" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="340" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="341" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="342" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="343" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="344" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="345" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="reservation_station_entry" sourceID="16" lineno="346" defID="16" defLine="8" value="8" />
+			<macro name="HISTORY_BITS" module="reservation_station" sourceID="16" lineno="490" defID="16" defLine="23" value="4" />
+			<macro name="HISTORY_BITS" module="reservation_station" sourceID="16" lineno="504" defID="16" defLine="23" value="4" />
+			<macro name="HISTORY_BITS" module="reservation_station" sourceID="16" lineno="532" defID="16" defLine="23" value="4" />
+			<macro name="HISTORY_BITS" module="reservation_station" sourceID="16" lineno="545" defID="16" defLine="23" value="4" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="550" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="554" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="555" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="558" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="559" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="561" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="562" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="563" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="564" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="565" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="566" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="568" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="569" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="570" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="571" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="572" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="573" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="574" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="575" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="576" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="577" defID="16" defLine="11" value="9" />
+			<macro name="HISTORY_BITS" module="reservation_station" sourceID="16" lineno="578" defID="16" defLine="23" value="4" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="578" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="581" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="583" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="584" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="585" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="586" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="588" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="589" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="590" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="591" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="593" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="594" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="595" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="596" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="597" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="598" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="599" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="600" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="601" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="602" defID="16" defLine="11" value="9" />
+			<macro name="HISTORY_BITS" module="reservation_station" sourceID="16" lineno="603" defID="16" defLine="23" value="4" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="603" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="610" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="611" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="612" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="613" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="reservation_station" sourceID="16" lineno="613" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="" sourceID="16" lineno="622" defID="16" defLine="11" value="9" />
+			<macro name="HISTORY_BITS" module="ASSIGNOUTPUTS" sourceID="16" lineno="637" defID="16" defLine="23" value="4" />
+			<macro name="HISTORY_BITS" module="ASSIGNOUTPUTS" sourceID="16" lineno="654" defID="16" defLine="23" value="4" />
+			<macro name="NUM_RSES" module="" sourceID="16" lineno="668" defID="16" defLine="11" value="9" />
+			<macro name="RSTAG_NULL" module="ASSIGNRSINPUTS" sourceID="16" lineno="682" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="ASSIGNRSINPUTS" sourceID="16" lineno="689" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="ASSIGNRSINPUTS" sourceID="16" lineno="716" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="ASSIGNRSINPUTS" sourceID="16" lineno="723" defID="16" defLine="19" value="79" />
+			<macro name="ZERO_REG" module="ASSIGNRSINPUTS" sourceID="16" lineno="748" defID="16" defLine="20" value="17" />
+			<macro name="RSTAG_NULL" module="ASSIGNRSINPUTS" sourceID="16" lineno="749" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="ASSIGNRSINPUTS" sourceID="16" lineno="752" defID="16" defLine="19" value="79" />
+			<macro name="RSTAG_NULL" module="ASSIGNRSINPUTS" sourceID="16" lineno="753" defID="16" defLine="19" value="79" />
+			<macro name="HISTORY_BITS" module="ASSIGNRSINPUTS" sourceID="16" lineno="764" defID="16" defLine="23" value="4" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="809" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="860" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="911" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="962" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1013" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1064" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1115" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1166" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1217" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1268" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1319" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1370" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1421" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1472" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1523" defID="16" defLine="17" value="82" />
+			<macro name="RS_READY" module="reservation_station" sourceID="16" lineno="1574" defID="16" defLine="17" value="82" />
+			<macro name="NUM_RSES" module="" sourceID="16" lineno="1631" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="" sourceID="16" lineno="1714" defID="16" defLine="11" value="9" />
+			<macro name="NUM_RSES" module="" sourceID="16" lineno="1721" defID="16" defLine="11" value="9" />
+			<macro name="BUS_LOAD" module="icache" sourceID="7" lineno="76" defID="0" defLine="188" value="20" />
+			<macro name="BUS_NONE" module="icache" sourceID="7" lineno="76" defID="0" defLine="187" value="10" />
+			<macro name="SD" module="icache" sourceID="7" lineno="91" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="icache" sourceID="7" lineno="92" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="icache" sourceID="7" lineno="93" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="icache" sourceID="7" lineno="94" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="icache" sourceID="7" lineno="98" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="icache" sourceID="7" lineno="99" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="icache" sourceID="7" lineno="100" defID="2" defLine="12" value="8" />
+			<macro name="SD" module="icache" sourceID="7" lineno="102" defID="2" defLine="12" value="8" />
+			<macro name="ZERO_REG" module="map_table" sourceID="10" lineno="65" defID="10" defLine="10" value="86" />
+			<macro name="ZERO_REG" module="map_table" sourceID="10" lineno="66" defID="10" defLine="10" value="86" />
+			<macro name="RSTAG_NULL" module="map_table" sourceID="10" lineno="67" defID="10" defLine="9" value="77" />
+			<macro name="RSTAG_NULL" module="map_table" sourceID="10" lineno="68" defID="10" defLine="9" value="77" />
+			<macro name="RSTAG_NULL" module="map_table" sourceID="10" lineno="71" defID="10" defLine="9" value="77" />
+			<macro name="RSTAG_NULL" module="map_table" sourceID="10" lineno="72" defID="10" defLine="9" value="77" />
+			<macro name="RSTAG_NULL" module="map_table" sourceID="10" lineno="73" defID="10" defLine="9" value="77" />
+			<macro name="RSTAG_NULL" module="map_table" sourceID="10" lineno="74" defID="10" defLine="9" value="77" />
+			<macro name="ZERO_REG" module="map_table" sourceID="10" lineno="77" defID="10" defLine="10" value="86" />
+			<macro name="ZERO_REG" module="map_table" sourceID="10" lineno="78" defID="10" defLine="10" value="86" />
+			<macro name="RSTAG_NULL" module="map_table" sourceID="10" lineno="78" defID="10" defLine="9" value="77" />
+			<macro name="RSTAG_NULL" module="NTAGTABLEASSIGN" sourceID="10" lineno="83" defID="10" defLine="9" value="77" />
+			<macro name="RSTAG_NULL" module="NTAGTABLEASSIGN" sourceID="10" lineno="83" defID="10" defLine="9" value="77" />
+			<macro name="RSTAG_NULL" module="NTAGTABLEASSIGN" sourceID="10" lineno="86" defID="10" defLine="9" value="77" />
+			<macro name="RSTAG_NULL" module="NTAGTABLEASSIGN" sourceID="10" lineno="86" defID="10" defLine="9" value="77" />
+			<macro name="SD" module="NTAGTABLEALWAYS" sourceID="10" lineno="99" defID="10" defLine="8" value="8" />
+			<macro name="RSTAG_NULL" module="NTAGTABLEALWAYS" sourceID="10" lineno="99" defID="10" defLine="9" value="77" />
+			<macro name="SD" module="NTAGTABLEALWAYS" sourceID="10" lineno="101" defID="10" defLine="8" value="8" />
+			<macro name="VERILOG_CLOCK_PERIOD" module="testbench" sourceID="20" lineno="129" defID="0" defLine="98" value="87" />
+			<macro name="VIRTUAL_CLOCK_PERIOD" module="show_clk_count" sourceID="20" lineno="142" defID="0" defLine="97" value="88" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="204" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="225" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="226" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="230" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="231" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="243" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="testbench" sourceID="20" lineno="244" defID="16" defLine="8" value="8" />
+			<macro name="NO_ERROR" module="testbench" sourceID="20" lineno="274" defID="0" defLine="110" value="13" />
+			<macro name="MEM_64BIT_LINES" module="testbench" sourceID="20" lineno="277" defID="0" defLine="94" value="89" />
+			<macro name="HALTED_ON_MEMORY_ERROR" module="testbench" sourceID="20" lineno="283" defID="0" defLine="111" value="90" />
+			<macro name="HALTED_ON_HALT" module="testbench" sourceID="20" lineno="285" defID="0" defLine="112" value="12" />
+			<macro name="HALTED_ON_ILLEGAL" module="testbench" sourceID="20" lineno="287" defID="0" defLine="113" value="11" />
+			<macro name="NOOP_INST" module="get_instr_string" sourceID="20" lineno="318" defID="16" defLine="21" value="15" />
+			<macro name="BUS_NONE" module="mem_stage" sourceID="12" lineno="55" defID="11" defLine="11" value="10" />
+			<macro name="BUS_STORE" module="mem_stage" sourceID="12" lineno="56" defID="11" defLine="13" value="19" />
+			<macro name="BUS_LOAD" module="mem_stage" sourceID="12" lineno="57" defID="11" defLine="12" value="20" />
+			<macro name="BUS_NONE" module="mem_stage" sourceID="12" lineno="58" defID="11" defLine="11" value="10" />
+			<macro name="SD" module="mem_stage" sourceID="12" lineno="77" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="mem_stage" sourceID="12" lineno="79" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="cache" sourceID="18" lineno="36" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="cache" sourceID="18" lineno="38" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="cache" sourceID="18" lineno="45" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="cache" sourceID="18" lineno="46" defID="16" defLine="8" value="8" />
+			<macro name="BUS_LOAD" module="memory_arbiter" sourceID="11" lineno="87" defID="11" defLine="12" value="20" />
+			<macro name="BUS_STORE" module="memory_arbiter" sourceID="11" lineno="87" defID="11" defLine="13" value="19" />
+			<macro name="SD" module="memory_arbiter" sourceID="11" lineno="99" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="memory_arbiter" sourceID="11" lineno="100" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="memory_arbiter" sourceID="11" lineno="103" defID="11" defLine="9" value="8" />
+			<macro name="SD" module="memory_arbiter" sourceID="11" lineno="104" defID="11" defLine="9" value="8" />
+			<macro name="ZERO_REG" module="register_file" sourceID="14" lineno="53" defID="14" defLine="6" value="75" />
+			<macro name="ZERO_REG" module="register_file" sourceID="14" lineno="54" defID="14" defLine="6" value="75" />
+			<macro name="ZERO_REG" module="register_file" sourceID="14" lineno="73" defID="14" defLine="6" value="75" />
+			<macro name="HISTORY_BITS" module="ex_stage" sourceID="6" lineno="99" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="ex_stage" sourceID="6" lineno="115" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="ex_stage" sourceID="6" lineno="141" defID="6" defLine="14" value="4" />
+			<macro name="HISTORY_BITS" module="ex_stage" sourceID="6" lineno="150" defID="6" defLine="14" value="4" />
+			<macro name="ALU_MULQ" module="ex_stage" sourceID="6" lineno="197" defID="0" defLine="160" value="58" />
+			<macro name="ALU_MULQ" module="ex_stage" sourceID="6" lineno="200" defID="0" defLine="160" value="58" />
+			<macro name="ALU_OPA_IS_REGA" module="ex_stage" sourceID="6" lineno="234" defID="0" defLine="125" value="10" />
+			<macro name="ALU_OPA_IS_MEM_DISP" module="ex_stage" sourceID="6" lineno="235" defID="0" defLine="126" value="20" />
+			<macro name="ALU_OPA_IS_NPC" module="ex_stage" sourceID="6" lineno="236" defID="0" defLine="127" value="19" />
+			<macro name="ALU_OPA_IS_NOT3" module="ex_stage" sourceID="6" lineno="237" defID="0" defLine="128" value="64" />
+			<macro name="ALU_OPA_IS_REGA" module="ex_stage" sourceID="6" lineno="240" defID="0" defLine="125" value="10" />
+			<macro name="ALU_OPA_IS_MEM_DISP" module="ex_stage" sourceID="6" lineno="241" defID="0" defLine="126" value="20" />
+			<macro name="ALU_OPA_IS_NPC" module="ex_stage" sourceID="6" lineno="242" defID="0" defLine="127" value="19" />
+			<macro name="ALU_OPA_IS_NOT3" module="ex_stage" sourceID="6" lineno="243" defID="0" defLine="128" value="64" />
+			<macro name="ALU_OPB_IS_REGB" module="ex_stage" sourceID="6" lineno="256" defID="0" defLine="133" value="10" />
+			<macro name="ALU_OPB_IS_ALU_IMM" module="ex_stage" sourceID="6" lineno="257" defID="0" defLine="134" value="20" />
+			<macro name="ALU_OPB_IS_BR_DISP" module="ex_stage" sourceID="6" lineno="258" defID="0" defLine="135" value="19" />
+			<macro name="ALU_OPB_IS_REGB" module="ex_stage" sourceID="6" lineno="262" defID="0" defLine="133" value="10" />
+			<macro name="ALU_OPB_IS_ALU_IMM" module="ex_stage" sourceID="6" lineno="263" defID="0" defLine="134" value="20" />
+			<macro name="ALU_OPB_IS_BR_DISP" module="ex_stage" sourceID="6" lineno="264" defID="0" defLine="135" value="19" />
+			<macro name="MEM_64BIT_LINES" module="mem" sourceID="19" lineno="40" defID="0" defLine="94" value="89" />
+			<macro name="NUM_MEM_TAGS" module="mem" sourceID="19" lineno="41" defID="0" defLine="91" value="91" />
+			<macro name="NUM_MEM_TAGS" module="mem" sourceID="19" lineno="42" defID="0" defLine="91" value="91" />
+			<macro name="NUM_MEM_TAGS" module="mem" sourceID="19" lineno="43" defID="0" defLine="91" value="91" />
+			<macro name="MEM_SIZE_IN_BYTES" module="mem" sourceID="19" lineno="49" defID="0" defLine="93" value="92" />
+			<macro name="BUS_LOAD" module="mem" sourceID="19" lineno="60" defID="11" defLine="12" value="20" />
+			<macro name="BUS_STORE" module="mem" sourceID="19" lineno="61" defID="11" defLine="13" value="19" />
+			<macro name="NUM_MEM_TAGS" module="mem" sourceID="19" lineno="63" defID="0" defLine="91" value="91" />
+			<macro name="MEM_LATENCY_IN_CYCLES" module="mem" sourceID="19" lineno="73" defID="0" defLine="100" value="93" />
+			<macro name="BUS_LOAD" module="mem" sourceID="19" lineno="78" defID="11" defLine="12" value="20" />
+			<macro name="SD" module="mem" sourceID="19" lineno="97" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="mem" sourceID="19" lineno="98" defID="16" defLine="8" value="8" />
+			<macro name="SD" module="mem" sourceID="19" lineno="99" defID="16" defLine="8" value="8" />
+			<macro name="MEM_64BIT_LINES" module="mem" sourceID="19" lineno="105" defID="0" defLine="94" value="89" />
+			<macro name="NUM_MEM_TAGS" module="mem" sourceID="19" lineno="112" defID="0" defLine="91" value="91" />
+			<macro name="HISTORY_BITS" module="arbiter" sourceID="5" lineno="99" defID="5" defLine="22" value="4" />
+			<macro name="HISTORY_BITS" module="arbiter" sourceID="5" lineno="124" defID="5" defLine="22" value="4" />
+			<macro name="HISTORY_BITS" module="arbiter" sourceID="5" lineno="146" defID="5" defLine="22" value="4" />
+			<macro name="HISTORY_BITS" module="arbiter" sourceID="5" lineno="157" defID="5" defLine="22" value="4" />
+			<macro name="BRANCH_NONE" module="arbiter" sourceID="5" lineno="171" defID="5" defLine="24" value="7" />
+			<macro name="BRANCH_TAKEN" module="arbiter" sourceID="5" lineno="181" defID="5" defLine="25" value="6" />
+			<macro name="BRANCH_NOT_TAKEN" module="arbiter" sourceID="5" lineno="181" defID="5" defLine="26" value="76" />
+			<macro name="HALT_INSTRUCTION" module="arbiter" sourceID="5" lineno="186" defID="5" defLine="29" value="94" />
+			<macro name="BRANCH_HALT" module="arbiter" sourceID="5" lineno="186" defID="5" defLine="27" value="14" />
+			<macro name="BRANCH_NONE" module="arbiter" sourceID="5" lineno="186" defID="5" defLine="24" value="7" />
+			<macro name="BRANCH_NONE" module="arbiter" sourceID="5" lineno="202" defID="5" defLine="24" value="7" />
+			<macro name="BRANCH_NONE" module="arbiter" sourceID="5" lineno="213" defID="5" defLine="24" value="7" />
+			<macro name="BRANCH_TAKEN" module="arbiter" sourceID="5" lineno="223" defID="5" defLine="25" value="6" />
+			<macro name="BRANCH_NOT_TAKEN" module="arbiter" sourceID="5" lineno="223" defID="5" defLine="26" value="76" />
+			<macro name="HALT_INSTRUCTION" module="arbiter" sourceID="5" lineno="228" defID="5" defLine="29" value="94" />
+			<macro name="BRANCH_HALT" module="arbiter" sourceID="5" lineno="228" defID="5" defLine="27" value="14" />
+			<macro name="BRANCH_NONE" module="arbiter" sourceID="5" lineno="228" defID="5" defLine="24" value="7" />
+			<macro name="ALU_ADDQ" module="alu" sourceID="5" lineno="394" defID="0" defLine="149" value="27" />
+			<macro name="ALU_SUBQ" module="alu" sourceID="5" lineno="395" defID="0" defLine="150" value="29" />
+			<macro name="ALU_AND" module="alu" sourceID="5" lineno="396" defID="0" defLine="151" value="40" />
+			<macro name="ALU_BIC" module="alu" sourceID="5" lineno="397" defID="0" defLine="152" value="42" />
+			<macro name="ALU_BIS" module="alu" sourceID="5" lineno="398" defID="0" defLine="153" value="43" />
+			<macro name="ALU_ORNOT" module="alu" sourceID="5" lineno="399" defID="0" defLine="154" value="45" />
+			<macro name="ALU_XOR" module="alu" sourceID="5" lineno="400" defID="0" defLine="155" value="47" />
+			<macro name="ALU_EQV" module="alu" sourceID="5" lineno="401" defID="0" defLine="156" value="49" />
+			<macro name="ALU_SRL" module="alu" sourceID="5" lineno="402" defID="0" defLine="157" value="52" />
+			<macro name="ALU_SLL" module="alu" sourceID="5" lineno="403" defID="0" defLine="158" value="54" />
+			<macro name="ALU_SRA" module="alu" sourceID="5" lineno="404" defID="0" defLine="159" value="56" />
+			<macro name="ALU_CMPULT" module="alu" sourceID="5" lineno="407" defID="0" defLine="164" value="25" />
+			<macro name="ALU_CMPEQ" module="alu" sourceID="5" lineno="408" defID="0" defLine="161" value="31" />
+			<macro name="ALU_CMPULE" module="alu" sourceID="5" lineno="409" defID="0" defLine="165" value="33" />
+			<macro name="ALU_CMPLT" module="alu" sourceID="5" lineno="410" defID="0" defLine="162" value="35" />
+			<macro name="ALU_CMPLE" module="alu" sourceID="5" lineno="411" defID="0" defLine="163" value="37" />
+		</macroDefinitionList>
+		<!-- Macro value list for the whole design --> 
+		<macroValueList>
+			<mv i="37" n="5&apos;h0e" />
+			<mv i="25" n="5&apos;h0f" />
+			<mv i="30" n="7&apos;h2d" />
+			<mv i="77" n="8&apos;hFF" />
+			<mv i="67" n="6&apos;h29" />
+			<mv i="16" n="1&apos;h0" />
+			<mv i="36" n="7&apos;h6d" />
+			<mv i="10" n="2&apos;h0" />
+			<mv i="22" n="1&apos;h1" />
+			<mv i="17" n="5&apos;d0" />
+			<mv i="20" n="2&apos;h1" />
+			<mv i="13" n="4&apos;h0" />
+			<mv i="19" n="2&apos;h2" />
+			<mv i="62" n="6&apos;h17	" />
+			<mv i="27" n="5&apos;h00" />
+			<mv i="29" n="5&apos;h01" />
+			<mv i="64" n="2&apos;h3" />
+			<mv i="75" n="5&apos;d31" />
+			<mv i="90" n="4&apos;h1" />
+			<mv i="12" n="4&apos;h2" />
+			<mv i="7" n="2&apos;b00" />
+			<mv i="40" n="5&apos;h02" />
+			<mv i="11" n="4&apos;h3" />
+			<mv i="6" n="2&apos;b01" />
+			<mv i="2" n="6&apos;h30" />
+			<mv i="26" n="7&apos;h20" />
+			<mv i="42" n="5&apos;h03" />
+			<mv i="43" n="5&apos;h04" />
+			<mv i="18" n="32" />
+			<mv i="69" n="6&apos;h31" />
+			<mv i="45" n="5&apos;h05" />
+			<mv i="70" n="6&apos;h32" />
+			<mv i="47" n="5&apos;h06" />
+			<mv i="71" n="6&apos;h33" />
+			<mv i="3" n="6&apos;h34" />
+			<mv i="49" n="5&apos;h07" />
+			<mv i="89" n="((64*1024)/8)" />
+			<mv i="52" n="5&apos;h08" />
+			<mv i="72" n="6&apos;h35" />
+			<mv i="81" n="3&apos;b000" />
+			<mv i="55" n="7&apos;h3c" />
+			<mv i="54" n="5&apos;h09" />
+			<mv i="73" n="6&apos;h36" />
+			<mv i="84" n="3&apos;b001" />
+			<mv i="86" n="5&apos;h1f" />
+			<mv i="32" n="7&apos;h3d" />
+			<mv i="74" n="6&apos;h37" />
+			<mv i="44" n="7&apos;h28" />
+			<mv i="28" n="7&apos;h29" />
+			<mv i="59" n="6&apos;h14	" />
+			<mv i="94" n="32&apos;h0555" />
+			<mv i="21" n="6&apos;h00" />
+			<mv i="33" n="5&apos;h10" />
+			<mv i="15" n="32&apos;h47ff041f" />
+			<mv i="76" n="2&apos;b10" />
+			<mv i="14" n="2&apos;b11" />
+			<mv i="1" n="6&apos;h1a" />
+			<mv i="82" n="3&apos;b100" />
+			<mv i="65" n="6&apos;h1c" />
+			<mv i="80" n="256 " />
+			<mv i="92" n="(64*1024)" />
+			<mv i="51" n="7&apos;h34" />
+			<mv i="66" n="6&apos;h08" />
+			<mv i="83" n="3&apos;b010" />
+			<mv i="85" n="3&apos;b011" />
+			<mv i="34" n="7&apos;h4d" />
+			<mv i="53" n="7&apos;h39" />
+			<mv i="60" n="6&apos;h15	" />
+			<mv i="5" n="256" />
+			<mv i="88" n="30.0 " />
+			<mv i="23" n="6&apos;h10" />
+			<mv i="39" n="7&apos;h00" />
+			<mv i="38" n="6&apos;h11" />
+			<mv i="50" n="6&apos;h12" />
+			<mv i="46" n="7&apos;h40" />
+			<mv i="57" n="6&apos;h13" />
+			<mv i="91" n="15" />
+			<mv i="9" n="16" />
+			<mv i="24" n="7&apos;h1d" />
+			<mv i="68" n="6&apos;h2d" />
+			<mv i="41" n="7&apos;h08" />
+			<mv i="63" n="6&apos;h18" />
+			<mv i="48" n="7&apos;h48" />
+			<mv i="78" n="3" />
+			<mv i="93" n="(100.0/30.0 +0.49999)" />
+			<mv i="79" n="8&apos;hFF           " />
+			<mv i="61" n="6&apos;h16	" />
+			<mv i="4" n="8" />
+			<mv i="87" n="10.0 " />
+			<mv i="56" n="5&apos;h0a" />
+			<mv i="58" n="5&apos;h0b" />
+			<mv i="31" n="5&apos;h0c" />
+			<mv i="35" n="5&apos;h0d" />
+			<mv i="8" n="#1" />
+		</macroValueList>
+	</body>
+</opml>

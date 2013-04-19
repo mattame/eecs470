@@ -469,7 +469,7 @@ module reservation_station(clock,reset,               // signals in
                            dispatch,
                          
                            // outputs for debugging //
-                           first_empties,second_empties,states_out,fills,issue_first_states,issue_second_states,ages_out);
+                           first_empties,second_empties,states_out,fills,issue_first_states,issue_second_states,ages_out,resets);
 
 
    // inputs //
@@ -552,7 +552,8 @@ module reservation_station(clock,reset,               // signals in
    
    // internal wires for directly interfacing the rs entries //
    output wire [(`NUM_RSES-1):0] fills;
-   reg  [(`NUM_RSES-1):0] resets;
+   output reg  [(`NUM_RSES-1):0]      resets;
+   //reg  [(`NUM_RSES-1):0] next_resets;
 
    wire [(`NUM_RSES-1):0] first_empty_filleds;     // first/second empty links between rses
    wire [(`NUM_RSES-1):0] second_empty_filleds;
@@ -1691,7 +1692,22 @@ module reservation_station(clock,reset,               // signals in
 									  
       end
    endgenerate
-   
+
+/*   
+   // state for resets on next clock cycle //
+   generate
+      for (i=0; i<`NUM_RSES; i=i+1)
+      begin : SETNEXTRESETS
+         always@(posedge clock)
+         begin
+            if (reset)
+               resets[i]    <=   `SD 1'b1;
+            else
+               resets[i]    <=   `SD next_resets[i];
+         end
+      end
+   endgenerate
+  */ 
    
    // state debug output //
    generate

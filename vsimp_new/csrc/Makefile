@@ -8,7 +8,7 @@ VSRC=..
 TARGET_ARCH=
 
 # Choose name of executable 
-PRODUCTBASE=$(VSRC)/simv
+PRODUCTBASE=$(VSRC)/dve_simv
 
 PRODUCT=$(PRODUCTBASE)
 
@@ -40,7 +40,7 @@ CRT0=
 # C run time startup
 CRTN=
 # Machine specific libraries
-SYSLIBS=-ldl  -lc -lm -lpthread -ldl
+SYSLIBS=-ldl -lm  -lc -lpthread -ldl
 
 # Default defines
 SHELL=/bin/sh

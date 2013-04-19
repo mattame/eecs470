@@ -58,8 +58,8 @@ verilog/wb_stage.v
 68
 _LMFILES_=/usr/caen/misc/modules/vcs/2011.03
 XMODIFIERS=@im=none
-XDG_SESSION_COOKIE=49e6f2dc767a1b6603971a2d0000002a-1366390380.130575-2121249822
-XAUTHORITY=/var/run/gdm/auth-for-scottmel-SfFFjI/database
+XDG_SESSION_COOKIE=15c4176a503a5cd797fd10800000002d-1366399930.381652-1091973542
+XAUTHORITY=/var/run/gdm/auth-for-nowakmr-02TJS8/database
 WINDOWPATH=7
 VMR_MODE_FLAG=64
 VENDOR=unknown
@@ -68,15 +68,15 @@ VCS_HOME=/usr/caen/vcs-2011.03
 VCS_DEPTH=0
 VCS_ARG_ADDED_FOR_TMP=1
 VCS_ARCH=amd64
-USERNAME=scottmel
+USERNAME=nowakmr
 UNAME=/bin/uname
 TOOL_HOME=/usr/caen/vcs-2011.03/amd64
 SW_VCS=2011.03
-SSH_AUTH_SOCK=/tmp/keyring-21APiM/socket.ssh
+SSH_AUTH_SOCK=/tmp/keyring-Zuwhv4/socket.ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
-SSH_AGENT_PID=5869
+SSH_AGENT_PID=28204
 SNPSLMD_LICENSE_FILE=/usr/caen/vcs-2011.03/license.dat:/usr/caen/vcs-2011.03/flexlm//license.dat
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/5888,unix/unix:/tmp/.ICE-unix/5888
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/28223,unix/unix:/tmp/.ICE-unix/28223
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 RESET_NET_NAME=reset
@@ -88,7 +88,7 @@ PIPELINE_NAME=pipeline
 PIPEFILES=verilog/branch_predictor.v verilog/branch_target_buffer.v verilog/cm_stage.v verilog/decode.v verilog/ex_stage_submodules.v verilog/ex_stage.v verilog/icache.v verilog/if_stage.v verilog/LSQ.v verilog/map_table.v verilog/memory_arbiter.v verilog/mem_stage.v verilog/pipeline.v verilog/register_file.v verilog/reorder_buffer.v verilog/reservation_station.v verilog/wb_stage.v
 OVA_UUM=0
 OSTYPE=linux
-ORBIT_SOCKETDIR=/tmp/orbit-scottmel
+ORBIT_SOCKETDIR=/tmp/orbit-nowakmr
 MODULESHOME=/usr/share/Modules
 MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/caen/misc/modules:/afs/umich.edu/class/coe/modules
 MFLAGS=
@@ -99,26 +99,26 @@ MAILSERVER=mail.umich.edu
 LOADEDMODULES=vcs/2011.03
 LIBGL_DRIVERS_PATH=/usr/lib64/dri:/usr/lib/dri
 LESSOPEN=|/usr/bin/lesspipe.sh %s
-KRB5CCNAME=FILE:/tmp/krb5cc_928452_aO8w8l
+KRB5CCNAME=FILE:/tmp/krb5cc_877473_p4NiBt
 KDE_IS_PRELINKED=1
 KDEDIRS=/usr
 IMSETTINGS_MODULE=none
 IMSETTINGS_INTEGRATE_DESKTOP=yes
 HOSTTYPE=x86_64-linux
-HOSTNAME=pierb521p03.engin.umich.edu
-HOST=pierb521p03.engin.umich.edu
+HOSTNAME=pierb521p07.engin.umich.edu
+HOST=pierb521p07.engin.umich.edu
 HEADERS=sys_defs.vh
 G_BROKEN_FILENAMES=1
-GTK_RC_FILES=/etc/gtk/gtkrc:/afs/umich.edu/user/s/c/scottmel/.gtkrc-1.2-gnome2
+GTK_RC_FILES=/etc/gtk/gtkrc:/afs/umich.edu/user/n/o/nowakmr/.gtkrc-1.2-gnome2
 GROUP=users
-GNOME_KEYRING_SOCKET=/tmp/keyring-21APiM/socket
-GNOME_KEYRING_PID=5769
+GNOME_KEYRING_SOCKET=/tmp/keyring-Zuwhv4/socket
+GNOME_KEYRING_PID=28100
 GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 GDM_LANG=en_US.UTF-8
 GDM_KEYBOARD_LAYOUT=us
 GDMSESSION=gnome
 DESKTOP_SESSION=gnome
-DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-XHy63HK9o5,guid=01a1e417cf9187c14c83adb8000009db
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-FzuzleHQzd,guid=a9b3250275c96b545e4d3a68000026a9
 COLORTERM=gnome-terminal
 CLOCK_PERIOD=50	
 CLOCK_NET_NAME=clock
@@ -126,30 +126,30 @@ CACHE_NAME=cache
 CACHEFILES=verilog/cache/cachemem.v
 0
 22
-1366308985 testbench/testbench.v
-1366157015 testbench/mem.v
-1366254298 verilog/cache/cachemem.v
-1366157015 verilog/wb_stage.v
-1366393870 verilog/reservation_station.v
-1366393870 verilog/reorder_buffer.v
-1366390468 verilog/register_file.v
-1366394062 verilog/pipeline.v
-1366157015 verilog/mem_stage.v
-1366157015 verilog/memory_arbiter.v
-1366314714 verilog/map_table.v
-1366394324 verilog/LSQ.v
-1366390468 verilog/if_stage.v
-1366157015 verilog/icache.v
-1366308985 verilog/ex_stage.v
-1366308986 verilog/ex_stage_submodules.v
-1366396918 verilog/decode.v
-1366157015 verilog/cm_stage.v
-1365974508 verilog/branch_target_buffer.v
-1365974508 verilog/branch_predictor.v
-1366170117 sys_defs.vh
+1366253986 testbench/testbench.v
+1366150446 testbench/mem.v
+1366250042 verilog/cache/cachemem.v
+1366152064 verilog/wb_stage.v
+1366354652 verilog/reservation_station.v
+1366353119 verilog/reorder_buffer.v
+1366348919 verilog/register_file.v
+1366397457 verilog/pipeline.v
+1366147002 verilog/mem_stage.v
+1366146831 verilog/memory_arbiter.v
+1366322740 verilog/map_table.v
+1366397457 verilog/LSQ.v
+1366334442 verilog/if_stage.v
+1366151053 verilog/icache.v
+1366399209 verilog/ex_stage.v
+1366398949 verilog/ex_stage_submodules.v
+1366397457 verilog/decode.v
+1366329741 verilog/cm_stage.v
+1365967896 verilog/branch_target_buffer.v
+1365973222 verilog/branch_predictor.v
+1366158813 sys_defs.vh
 1298522796 /usr/caen/vcs-2011.03/amd64/lib/vcsd.tab
 5
-1365801159 testbench/pipe_print.c
+1366160866 testbench/pipe_print.c
 0 
 1298523545 /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so
 1298523345 /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so

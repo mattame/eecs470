@@ -3,7 +3,7 @@
 // this will hold the modules for our processor's register file //
 //////////////////////////////////////////////////////////////////
 
-`define ZERO_REG 5'd0
+`define ZERO_REG 5'd31
 
 //`timescale 1ns/100ps
 
@@ -70,11 +70,11 @@ module register_file(clock,reset,   // input signals in
 
 
    // combinational logic for n_values and clear_entries //
-   assign n_values[0] = 64'd0;
-   assign clear_entries[0] = 0;
+   assign n_values[`ZERO_REG] = 64'd0;
+   assign clear_entries[31] = 0;
    genvar j;
    generate
-      for (j=1; j<32; j=j+1)
+      for (j=0; j<31; j=j+1)
       begin : NVALUESASSIGN
          assign n_values[j] = ((inst2_dest_in==j) && inst2_dest_nonzero) ? inst2_value_in :                       // inst2 takes precidence here because it comes second
                                ( ((inst1_dest_in==j) && inst1_dest_nonzero) ? inst1_value_in : values[j] );

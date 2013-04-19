@@ -86,11 +86,10 @@ module decoder(// Inputs
         6'h0:
           case (inst[31:26])
             `PAL_INST:
-               if (inst[25:0] == 26'h0555) begin
+               if (inst[25:0] == 26'h0555)
                   opa_select = 1;
                   opb_select = 1;
                  halt = `TRUE;
-               end
                else
                  illegal = `TRUE;
             default: illegal = `TRUE;

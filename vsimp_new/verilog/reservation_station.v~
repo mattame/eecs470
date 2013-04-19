@@ -181,10 +181,10 @@ module reservation_station_entry(clock,reset,fill,                              
    wire taga_in_match_cdb2_in;
    wire tagb_in_match_cdb1_in;
    wire tagb_in_match_cdb2_in;
-   wire taga_cur_match_cdb1_in;
-   wire taga_cur_match_cdb2_in;
-   wire tagb_cur_match_cdb1_in;
-   wire tagb_cur_match_cdb2_in;
+   wire taga_cur_match_cdb1_cur;
+   wire taga_cur_match_cdb2_cur;
+   wire tagb_cur_match_cdb1_cur;
+   wire tagb_cur_match_cdb2_cur;
    wire status_currently_empty;
    
    // combinational assignments for stuff used for next states //

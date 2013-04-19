@@ -449,6 +449,6 @@ end
 
  assign LSQ_empty = !valids_out[LSQ_head];
  
- assign LSQ_full = (next_entry_1 == next_head) | (next_entry_2 == next_head);
+ assign LSQ_full = !LSQ_empty & ((next_entry_1 == next_head) | (next_entry_2 == next_head));
 
 endmodule

@@ -1004,7 +1004,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 
   register_file register_file0(//Inputs
                       
-                               .clock(clock), .reset(reset || halted),
+                               .clock(clock), .reset(reset),
 
                                //COMES FROM DECODE
                                // input busses: register indexes and values in // 
@@ -1323,7 +1323,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                                           .cdb1_tag_in(cm_tag_out_1),
                                           .cdb1_value_in(cm_value_out_1),
                                           .cdb1_mispredicted_in(cm_mispredict_out_1),
-                                          .cdb1_branch_result_in(cm_branch_result_out_2),
+                                          .cdb1_branch_result_in(cm_branch_result_out_1),
                                           .cdb1_NPC_in(cm_NPC_out_1),
                                           .cdb1_pht_index_in(cm_pht_index_out_1),
                                           .cdb2_tag_in(cm_tag_out_2),

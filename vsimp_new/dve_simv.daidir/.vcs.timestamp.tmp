@@ -133,14 +133,14 @@ CACHEFILES=verilog/cache/cachemem.v
 1366393870 verilog/reservation_station.v
 1366393870 verilog/reorder_buffer.v
 1366390468 verilog/register_file.v
-1366398089 verilog/pipeline.v
+1366403400 verilog/pipeline.v
 1366157015 verilog/mem_stage.v
 1366157015 verilog/memory_arbiter.v
 1366314714 verilog/map_table.v
 1366394324 verilog/LSQ.v
 1366390468 verilog/if_stage.v
 1366157015 verilog/icache.v
-1366398747 verilog/ex_stage.v
+1366401870 verilog/ex_stage.v
 1366308986 verilog/ex_stage_submodules.v
 1366399852 verilog/decode.v
 1366157015 verilog/cm_stage.v

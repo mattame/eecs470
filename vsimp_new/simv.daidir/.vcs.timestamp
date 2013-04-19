@@ -48,9 +48,8 @@ verilog/wb_stage.v
 68
 _LMFILES_=/usr/caen/misc/modules/vcs/2011.03
 XMODIFIERS=@im=none
-XDG_SESSION_COOKIE=49e6f2dc767a1b6603971a2d0000002a-1366400332.424039-107472813
-XAUTHORITY=/var/run/gdm/auth-for-scottmel-WrzN2c/database
-WINDOWPATH=7
+XDG_SESSION_COOKIE=76e4e1592a13e0eaa0f401020000001d-1366404547.822160-443628105
+XAUTHORITY=/var/run/gdm/auth-for-scottmel-PvPWOK/database
 VMR_MODE_FLAG=64
 VENDOR=unknown
 VCS_MODE_FLAG=64
@@ -62,14 +61,15 @@ USERNAME=scottmel
 UNAME=/bin/uname
 TOOL_HOME=/usr/caen/vcs-2011.03/amd64
 SW_VCS=2011.03
-SSH_AUTH_SOCK=/tmp/keyring-CKMaKa/socket.ssh
+SSH_AUTH_SOCK=/tmp/keyring-v6MahC/socket.ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
-SSH_AGENT_PID=26898
+SSH_AGENT_PID=4311
 SNPSLMD_LICENSE_FILE=/usr/caen/vcs-2011.03/license.dat:/usr/caen/vcs-2011.03/flexlm//license.dat
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/26917,unix/unix:/tmp/.ICE-unix/26917
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/4337,unix/unix:/tmp/.ICE-unix/4337
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 RESET_NET_NAME=reset
+REMOTEHOST=127.0.0.1
 QT_IM_MODULE=xim
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
@@ -87,31 +87,31 @@ MAKELEVEL=1
 MAKEFLAGS=
 MAILSERVER=mail.umich.edu
 LOADEDMODULES=vcs/2011.03
-LIBGL_DRIVERS_PATH=/usr/lib64/dri:/usr/lib/dri
 LESSOPEN=|/usr/bin/lesspipe.sh %s
-KRB5CCNAME=FILE:/tmp/krb5cc_928452_9XkJmX
+KRB5CCNAME=FILE:/tmp/krb5cc_928452_XNO3I2
 KDE_IS_PRELINKED=1
 KDEDIRS=/usr
 IMSETTINGS_MODULE=none
 IMSETTINGS_INTEGRATE_DESKTOP=yes
 HOSTTYPE=x86_64-linux
-HOSTNAME=pierb521p03.engin.umich.edu
-HOST=pierb521p03.engin.umich.edu
+HOSTNAME=caen-vnc02.engin.umich.edu
+HOST=caen-vnc02.engin.umich.edu
 HEADERS=sys_defs.vh
 G_BROKEN_FILENAMES=1
 GTK_RC_FILES=/etc/gtk/gtkrc:/afs/umich.edu/user/s/c/scottmel/.gtkrc-1.2-gnome2
 GROUP=users
-GNOME_KEYRING_SOCKET=/tmp/keyring-CKMaKa/socket
-GNOME_KEYRING_PID=26793
+GNOME_KEYRING_SOCKET=/tmp/keyring-v6MahC/socket
+GNOME_KEYRING_PID=4205
 GNOME_DESKTOP_SESSION_ID=this-is-deprecated
 GDM_LANG=en_US.UTF-8
 GDM_KEYBOARD_LAYOUT=us
 GDMSESSION=gnome
 DESKTOP_SESSION=gnome
-DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-KdXZTcBwmm,guid=68fa16f327be5ec54d0ad4df000030b3
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-SR6Yun32zq,guid=37dd9a68ed29e83d8c95adc30054da74
 COLORTERM=gnome-terminal
 CLOCK_PERIOD=50	
 CLOCK_NET_NAME=clock
+CAENVNCSTART=1
 CACHE_NAME=cache
 CACHEFILES=verilog/cache/cachemem.v
 0
@@ -123,14 +123,14 @@ CACHEFILES=verilog/cache/cachemem.v
 1366393870 verilog/reservation_station.v
 1366393870 verilog/reorder_buffer.v
 1366390468 verilog/register_file.v
-1366398089 verilog/pipeline.v
+1366403400 verilog/pipeline.v
 1366157015 verilog/mem_stage.v
 1366157015 verilog/memory_arbiter.v
 1366314714 verilog/map_table.v
 1366394324 verilog/LSQ.v
 1366390468 verilog/if_stage.v
 1366157015 verilog/icache.v
-1366398747 verilog/ex_stage.v
+1366401870 verilog/ex_stage.v
 1366308986 verilog/ex_stage_submodules.v
 1366399852 verilog/decode.v
 1366157015 verilog/cm_stage.v
@@ -143,4 +143,4 @@ CACHEFILES=verilog/cache/cachemem.v
 1298523545 /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so
 1298523345 /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so
 1298523150 /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so
-1366401372 simv.daidir
+1366405262 simv.daidir

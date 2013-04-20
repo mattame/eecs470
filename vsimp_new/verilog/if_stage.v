@@ -16,6 +16,11 @@ module if_stage(// Inputs
                 clock,
                 reset,
                 stall,
+ 
+                inst1_cond_in,
+                inst1_uncond_in,
+                inst2_cond_in,
+                inst2_uncond_in,
 
                 inst1_result_in,inst2_result_in,
                 inst1_write_NPC_in,inst2_write_NPC_in,
@@ -47,6 +52,9 @@ module if_stage(// Inputs
   input wire        clock;              // system clock
   input wire        reset;              // system reset
   input wire        stall;              // stalling signal in.
+
+  input wire inst1_cond_in,inst2_cond_in;
+  input wire inst1_uncond_in,inst2_uncond_in;
 
   input wire [1:0]  inst1_result_in,inst2_result_in;
   input wire [63:0] inst1_write_NPC_in,inst2_write_NPC_in;
@@ -84,13 +92,19 @@ module if_stage(// Inputs
   wire [63:0] inst2_PPC_out;
   wire inst1_prediction_out;
   wire inst2_prediction_out;
+  wire inst1_predicted_taken;
+  wire inst2_predicted_taken;
 
   wire [(`HISTORY_BITS-1):0] ghr;
 
   // assign branching state //
   assign inst1_branch_taken = (inst1_result_in==`BRANCH_TAKEN);
   assign inst2_branch_taken = (inst2_result_in==`BRANCH_TAKEN);
-  
+ 
+  // assign branch predicitons //
+  assign inst1_predicted_taken = (inst1_uncond_in || (inst1_cond_in && inst1_prediction_out) );
+  assign inst2_predicted_taken = (inst2_uncond_in || (inst2_cond_in && inst2_prediction_out) );
+ 
   // assign mem address // 
   assign proc2Imem_addr = { PC_reg[63:3], 3'b0 };
 
@@ -109,12 +123,13 @@ module if_stage(// Inputs
   assign stalling = (stall || ~Imem_valid);
   assign next_PC = (inst1_mispredict_in) ? ((inst1_branch_taken) ? inst1_write_CPC_in : inst1_write_NPC_in) :
                   ((inst2_mispredict_in) ? ((inst2_branch_taken) ? inst2_write_CPC_in : inst2_write_NPC_in) :
-                           (stalling ? PC_reg : if_PPC_out_1 if_NPC_out_2) );
+                           (stalling ? PC_reg :
+                            /* if_NPC_out_2 */  (inst1_predicted_taken ? inst1_PPC_out : (inst2_predicted_taken ? inst2_PPC_out : if_NPC_out_2) ) );
 
     // Assign the first valid only if the PC is not the second word in the cache.
     // The second is always valid
   assign if_valid_inst_out_1 = ~(PC_reg[2] || reset || stalling);
-  assign if_valid_inst_out_2 = ~(reset || stalling);
+  assign if_valid_inst_out_2 = ~(reset || stalling || (if_valid_inst_out_1 && inst1_predicted_taken));
 
 
    // assign predicted PC output for both instructions //

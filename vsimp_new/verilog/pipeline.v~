@@ -676,6 +676,11 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                        .Imem2proc_data(Icache_data_out),
                        .Imem_valid(Icache_valid_out),
                        
+                       .inst1_cond_in(id_cond_branch_out_1),
+                       .inst1_uncond_in(id_uncond_branch_out_1),
+                       .inst2_cond_in(id_cond_branch_out_2),
+                       .inst2_uncond_in(id_uncond_branch_out_2),
+                       
                        .stall(if_stage_stall_signal),
                        .inst1_mispredict_in(rob_inst1_mispredicted_out),
                        .inst2_mispredict_in(rob_inst2_mispredicted_out),
@@ -709,51 +714,51 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
   //            IF/ID Pipeline Register           //
   //                                              //
   //////////////////////////////////////////////////
-  always @(posedge clock)
+  always @* //(posedge clock)
   begin
     if(reset || mispredict)
     begin
-      id_NPC_1           <= `SD 0;
-      id_IR_1            <= `SD `NOOP_INST;
-      id_valid_inst1     <= `SD `FALSE;
-      id_PPC_1           <= `SD 0;
-      id_inst1_pht_index <= `SD 0;
+      id_NPC_1           = 0;
+      id_IR_1            = `NOOP_INST;
+      id_valid_inst1     = `FALSE;
+      id_PPC_1           = 0;
+      id_inst1_pht_index = 0;
       
-      id_NPC_2           <= `SD 0;
-      id_IR_2            <= `SD `NOOP_INST;
-      id_valid_inst2     <= `SD `FALSE;
-      id_PPC_2           <= `SD 0;
-      id_inst2_pht_index <= `SD 0;
+      id_NPC_2           = 0;
+      id_IR_2            = `NOOP_INST;
+      id_valid_inst2     = `FALSE;
+      id_PPC_2           = 0;
+      id_inst2_pht_index = 0;
     end // if (reset)
     else
     begin
       if (stall_first_half_of_pipeline)
       begin
-         id_NPC_1           <= `SD id_NPC_1;
-         id_IR_1            <= `SD id_IR_1;
-         id_valid_inst1     <= `SD id_valid_inst1;
-         id_PPC_1           <= `SD id_PPC_1;
-         id_inst1_pht_index <= `SD id_inst1_pht_index;
+         id_NPC_1           = id_NPC_1;
+         id_IR_1            = id_IR_1;
+         id_valid_inst1     = id_valid_inst1;
+         id_PPC_1           = id_PPC_1;
+         id_inst1_pht_index = id_inst1_pht_index;
 
-         id_NPC_2           <= `SD id_NPC_2;
-         id_IR_2            <= `SD id_IR_2;
-         id_valid_inst2     <= `SD id_valid_inst2;
-         id_PPC_2           <= `SD id_PPC_2;
-         id_inst2_pht_index <= `SD id_inst2_pht_index;
+         id_NPC_2           = id_NPC_2;
+         id_IR_2            = id_IR_2;
+         id_valid_inst2     = id_valid_inst2;
+         id_PPC_2           = id_PPC_2;
+         id_inst2_pht_index = id_inst2_pht_index;
       end
       else
       begin
-         id_NPC_1           <= `SD if_NPC_out_1;
-         id_IR_1            <= `SD if_IR_out_1;
-         id_valid_inst1     <= `SD if_valid_inst_out_1;
-         id_PPC_1           <= `SD if_PPC_out_1;
-         id_inst1_pht_index <= `SD if_inst1_pht_index_out;
+         id_NPC_1           = if_NPC_out_1;
+         id_IR_1            = if_IR_out_1;
+         id_valid_inst1     = if_valid_inst_out_1;
+         id_PPC_1           = if_PPC_out_1;
+         id_inst1_pht_index = if_inst1_pht_index_out;
       
-         id_NPC_2           <= `SD if_NPC_out_2;
-         id_IR_2            <= `SD if_IR_out_2;
-         id_valid_inst2     <= `SD if_valid_inst_out_2;
-         id_PPC_2           <= `SD if_PPC_out_2;
-         id_inst2_pht_index <= `SD if_inst2_pht_index_out;
+         id_NPC_2           = if_NPC_out_2;
+         id_IR_2            = if_IR_out_2;
+         id_valid_inst2     = if_valid_inst_out_2;
+         id_PPC_2           = if_PPC_out_2;
+         id_inst2_pht_index = if_inst2_pht_index_out;
       end
     end 
   end // always
@@ -884,7 +889,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     reg_inst2_regb  =  id_regb_out_2;
     
     reg_inst2_dest  =  rob_inst2_dest_out;
-    reg_inst2_value =  rob_inst2_dest_out;
+    reg_inst2_value =  rob_inst2_value_out;
     
     end
   end
@@ -1769,7 +1774,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 			      .EX_tag_2(lsq_EX_tag_2),
 			      .value_in_2(lsq_value_2),
 			      .address_in_2(lsq_address_2),
-			      .EX_valid_2(lsq_valid_2),
+			      .EX_valid_2(lsq_EX_valid_2),
 
 			      //From MEM
 			      .Dmem2proc_data(mem2proc_data),

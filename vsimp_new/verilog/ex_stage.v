@@ -342,8 +342,8 @@ module ex_stage(// Inputs
   assign mispredict_1 = (branch_taken_1 & (ex_alu_result_out_1 != id_ex_PPC_1)) | (~branch_taken_1 & (id_ex_PPC_1 != id_ex_NPC_1));
   assign mispredict_2 = (branch_taken_2 & (ex_alu_result_out_2 != id_ex_PPC_2)) | (~branch_taken_2 & (id_ex_PPC_2 != id_ex_NPC_2));
   
-  wire alu_result_in_1 = (branch_valid_out_1 & ~branch_taken_1) ? id_ex_NPC_1: ex_alu_result_out_1;
-  wire alu_result_in_2 = (branch_valid_out_2 & ~branch_taken_2) ? id_ex_NPC_2: ex_alu_result_out_2;
+  wire [63:0] alu_result_in_1 = ex_alu_result_out_1;
+  wire [63:0] alu_result_in_2 = ex_alu_result_out_2;
 			   
   arbiter arb_0 (//Ins
 	.ex_IR_1(id_ex_IR_1),

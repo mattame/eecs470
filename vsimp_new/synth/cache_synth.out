@@ -1,0 +1,642 @@
+
+                      Design Compiler Graphical
+                            DC Ultra (TM)
+                             DFTMAX (TM)
+                         Power Compiler (TM)
+                           DesignWare (R)
+                           DC Expert (TM)
+                         Design Vision (TM)
+                          HDL Compiler (TM)
+                         VHDL Compiler (TM)
+                            DFT Compiler
+                        Library Compiler (TM)
+                         Design Compiler(R)
+
+            Version G-2012.06 for RHEL64 -- May 30, 2012
+               Copyright (c) 1988-2012 Synopsys, Inc.
+
+This software and the associated documentation are confidential and 
+proprietary to Synopsys, Inc. Your use or disclosure of this software 
+is subject to the terms and conditions of a written license agreement 
+between you, or your company, and Synopsys, Inc.
+
+Initializing...
+################################################################################
+## DO NOT EDIT THESE FILES BY HAND
+##
+## CONFIGURATION HAS BEEN MOVED TO THE MAKEFILE
+################################################################################
+set search_path [ list "./" "/usr/caen/generic/mentor_lib-D.1/public/eecs470/synopsys/" ]
+./ /usr/caen/generic/mentor_lib-D.1/public/eecs470/synopsys/
+set target_library "lec25dscc25_TT.db"
+lec25dscc25_TT.db
+set link_library [concat  "*" $target_library]
+* lec25dscc25_TT.db
+#/***********************************************************/
+#/* Set some flags to suppress warnings we don't care about */
+set suppress_errors [concat $suppress_errors "UID-401"]
+UID-401
+suppress_message {"VER-130"}
+#/***********************************************************/
+#/* The following lines are set from environment variables
+#/* automatically by the Makefile
+#/***********************************************************/
+lappend search_path ../
+./ /usr/caen/generic/mentor_lib-D.1/public/eecs470/synopsys/ ../
+set headers [getenv HEADERS]
+sys_defs.vh
+set sources [getenv CACHEFILES]
+verilog/cache/cachemem.v
+read_file -f verilog [list ${headers} ${sources}]
+Loading db file '/usr/caen/generic/mentor_lib-D.1/public/eecs470/synopsys/lec25dscc25_TT.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/gtech.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/standard.sldb'
+  Loading link library 'lec25dscc25_TT'
+  Loading link library 'gtech'
+Loading verilog files: '/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/sys_defs.vh' '/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/verilog/cache/cachemem.v' 
+Detecting input file type automatically (-rtl or -netlist).
+Running DC verilog reader
+Reading with Presto HDL Compiler (equivalent to -rtl option).
+Running PRESTO HDLC
+Compiling source file /afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/sys_defs.vh
+Compiling source file /afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/verilog/cache/cachemem.v
+
+Inferred memory devices in process
+	in routine cache line 34 in file
+		'/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/verilog/cache/cachemem.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|     valids_reg      | Flip-flop |  128  |  N  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+
+Inferred memory devices in process
+	in routine cache line 41 in file
+		'/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/verilog/cache/cachemem.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      data_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      tags_reg       | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+===============================================================================
+Statistics for MUX_OPs
+===========================================================
+| block name/line  | Inputs | Outputs | # sel inputs | MB |
+===========================================================
+|     cache/31     |  128   |   64    |      7       | N  |
+|     cache/32     |  128   |    1    |      7       | N  |
+|     cache/32     |  128   |   22    |      7       | N  |
+===========================================================
+Presto compilation completed successfully.
+Current design is now '/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/verilog/cache/cache.db:cache'
+Loaded 1 design.
+Current design is 'cache'.
+cache
+set design_name [getenv CACHE_NAME]
+cache
+set clock_name [getenv CLOCK_NET_NAME]
+clock
+set reset_name [getenv RESET_NET_NAME]
+reset
+set CLK_PERIOD [getenv CLOCK_PERIOD]
+50	
+#/***********************************************************/
+#/* The rest of this file may be left alone for most small  */
+#/* to moderate sized designs.  You may need to alter it    */
+#/* when synthesizing your final project.                   */
+#/***********************************************************/
+set SYN_DIR ./
+./
+#/***********************************************************/
+#/* Set some flags for optimisation */
+set compile_top_all_paths "true"
+true
+set auto_wire_load_selection "false"
+false
+set compile_seqmap_synchronous_extraction "true"
+true
+# uncomment this and change number appropriately if on multi-core machine
+#set_host_options -max_cores 2
+#/***********************************************************/
+#/*  Clk Periods/uncertainty/transition                     */
+set CLK_TRANSITION 0.1
+0.1
+set CLK_UNCERTAINTY 0.1
+0.1
+set CLK_LATENCY 0.1
+0.1
+#/* Input/output Delay values */
+set AVG_INPUT_DELAY 0.1
+0.1
+set AVG_OUTPUT_DELAY 0.1
+0.1
+#/* Critical Range (ns) */
+set CRIT_RANGE 1.0
+1.0
+#/***********************************************************/
+#/* Design Constrains: Not all used                         */
+set MAX_TRANSITION 1.0
+1.0
+set FAST_TRANSITION 0.1
+0.1
+set MAX_FANOUT 32
+32
+set MID_FANOUT 8
+8
+set LOW_FANOUT 1
+1
+set HIGH_DRIVE 0
+0
+set HIGH_LOAD 1.0
+1.0
+set AVG_LOAD 0.1
+0.1
+set AVG_FANOUT_LOAD 10
+10
+#/***********************************************************/
+#/*BASIC_INPUT = cb18os120_tsmc_max/nd02d1/A1
+#BASIC_OUTPUT = cb18os120_tsmc_max/nd02d1/ZN*/
+set DRIVING_CELL dffacs1
+dffacs1
+#/* DONT_USE_LIST = {   } */
+#/*************operation cons**************/
+#/*OP_WCASE = WCCOM;
+#OP_BCASE = BCCOM;*/
+set WIRE_LOAD "tsmcwire"
+tsmcwire
+set LOGICLIB lec25dscc25_TT
+lec25dscc25_TT
+#/*****************************/
+#/* Sourcing the file that sets the Search path and the libraries(target,link) */
+set sys_clk $clock_name
+clock
+set netlist_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".vg"]
+./cache.vg
+set ddc_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".ddc"]
+./cache.ddc
+set rep_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".rep"]
+./cache.rep
+set dc_shell_status [ set chk_file [format "%s%s"  [format "%s%s"  $SYN_DIR $design_name] ".chk"] ]
+./cache.chk
+#/* if we didnt find errors at this point, run */
+if {  $dc_shell_status != [list] } {
+   current_design $design_name
+  link
+  set_wire_load_model -name $WIRE_LOAD -lib $LOGICLIB $design_name
+  set_wire_load_mode top
+  set_fix_multiple_port_nets -outputs -buffer_constants
+  create_clock -period $CLK_PERIOD -name $sys_clk [find port $sys_clk]
+  set_clock_uncertainty $CLK_UNCERTAINTY $sys_clk
+  set_fix_hold $sys_clk
+  group_path -from [all_inputs] -name input_grp
+  group_path -to [all_outputs] -name output_grp
+  set_driving_cell  -lib_cell $DRIVING_CELL [all_inputs]
+  remove_driving_cell [find port $sys_clk]
+  set_fanout_load $AVG_FANOUT_LOAD [all_outputs]
+  set_load $AVG_LOAD [all_outputs]
+  set_input_delay $AVG_INPUT_DELAY -clock $sys_clk [all_inputs]
+  remove_input_delay -clock $sys_clk [find port $sys_clk]
+  set_output_delay $AVG_OUTPUT_DELAY -clock $sys_clk [all_outputs]
+  set_dont_touch $reset_name
+  set_resistance 0 $reset_name
+  set_drive 0 $reset_name
+  set_critical_range $CRIT_RANGE [current_design]
+  set_max_delay $CLK_PERIOD [all_outputs]
+  set MAX_FANOUT $MAX_FANOUT
+  set MAX_TRANSITION $MAX_TRANSITION
+  uniquify
+  ungroup -all -flatten
+  redirect $chk_file { check_design }
+  compile -map_effort medium
+  write -hier -format verilog -output $netlist_file $design_name
+  write -hier -format ddc -output $ddc_file $design_name
+  redirect $rep_file { report_design -nosplit }
+  redirect -append $rep_file { report_area }
+  redirect -append $rep_file { report_timing -max_paths 2 -input_pins -nets -transition_time -nosplit }
+  redirect -append $rep_file { report_constraint -max_delay -verbose -nosplit }
+  remove_design -all
+  read_file -format verilog $netlist_file
+  current_design $design_name
+  redirect -append $rep_file { report_reference -nosplit }
+  quit
+} else {
+   quit
+}
+Current design is 'cache'.
+
+  Linking design 'cache'
+  Using the following designs and libraries:
+  --------------------------------------------------------------------------
+  cache                       /afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/verilog/cache/cache.db
+  lec25dscc25_TT (library)    /usr/caen/generic/mentor_lib-D.1/public/eecs470/synopsys/lec25dscc25_TT.db
+
+Current design is 'cache'.
+Warning: Design has no hierarchy.  No cells can be ungrouped. (UID-228)
+Information: Evaluating DesignWare library utilization. (UISN-27)
+
+============================================================================
+| DesignWare Building Block Library  |         Version         | Available |
+============================================================================
+| Basic DW Building Blocks           | G-2012.06-DWBB_201206.0 |     *     |
+| Licensed DW Building Blocks        |                         |           |
+============================================================================
+
+
+
+  Beginning Pass 1 Mapping
+  ------------------------
+  Processing 'cache'
+
+  Updating timing information
+Information: Updating design information... (UID-85)
+
+  Beginning Implementation Selection
+  ----------------------------------
+  Processing 'cache_DW01_cmp6_0'
+
+  Beginning Mapping Optimizations  (Medium effort)
+  -------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:00:50 4030449.3      0.00       0.0      25.3                                0.00
+    0:00:51 4030449.3      0.00       0.0      25.3                                0.00
+    0:00:51 4030449.3      0.00       0.0      25.3                                0.00
+    0:00:51 4030449.3      0.00       0.0      25.3                                0.00
+    0:00:51 4030449.3      0.00       0.0      25.3                                0.00
+    0:00:51 4030449.3      0.00       0.0      25.3                                0.00
+    0:01:10 2934087.8      0.00       0.0      15.7                                0.00
+    0:01:11 2923719.8      0.00       0.0      15.7                                0.00
+    0:01:14 2923719.8      0.00       0.0      15.7                                0.00
+    0:01:14 2923719.8      0.00       0.0      15.7                                0.00
+    0:01:14 2923719.8      0.00       0.0      15.7                                0.00
+    0:01:14 2923719.8      0.00       0.0      15.7                                0.00
+    0:01:14 2923719.8      0.00       0.0      15.7                                0.00
+    0:01:14 2923719.8      0.00       0.0      15.7                                0.00
+    0:01:14 2923719.8      0.00       0.0      15.7                                0.00
+    0:01:15 2923719.8      0.00       0.0      15.7                                0.00
+
+
+
+  Beginning Delay Optimization Phase
+  ----------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:15 2923719.8      0.00       0.0      15.7                                0.00
+    0:01:15 2923719.8      0.00       0.0      15.7                                0.00
+    0:01:16 2905386.6      0.00       0.0      42.8                                0.00
+
+
+  Beginning Design Rule Fixing  (max_transition)
+  ----------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:17 2905386.6      0.00       0.0      42.8                                0.00
+    0:01:18 2907106.3      0.00       0.0       0.0                                0.00
+
+
+  Beginning Critical Range Optimization
+  -------------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:18 2907106.3      0.00       0.0       0.0                                0.00
+
+
+  Beginning Area-Recovery Phase  (cleanup)
+  -----------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:18 2907106.3      0.00       0.0       0.0                                0.00
+    0:01:18 2907106.3      0.00       0.0       0.0                                0.00
+    0:01:18 2907106.3      0.00       0.0       0.0                                0.00
+    0:01:19 2899210.6      0.00       0.0       0.0                                0.00
+    0:01:20 2891534.8      0.00       0.0       0.0                                0.00
+    0:01:22 2884637.5      0.00       0.0       0.0                                0.00
+    0:01:23 2877228.1      0.00       0.0       0.0                                0.00
+    0:01:26 2875849.6      0.00       0.0       0.0                                0.00
+    0:01:26 2873936.2      0.00       0.0       0.0                                0.00
+    0:01:27 2872866.1      0.00       0.0       0.0                                0.00
+    0:01:28 2872665.5      0.00       0.0       0.0                                0.00
+    0:01:28 2872464.7      0.00       0.0       0.0                                0.00
+    0:01:28 2872264.4      0.00       0.0       0.0                                0.00
+    0:01:29 2872063.9      0.00       0.0       0.0                                0.00
+    0:01:29 2871863.0      0.00       0.0       0.0                                0.00
+    0:01:29 2871662.7      0.00       0.0       0.0                                0.00
+    0:01:30 2871462.2      0.00       0.0       0.0                                0.00
+    0:01:30 2871295.1      0.00       0.0       0.0                                0.00
+    0:01:30 2871161.3      0.00       0.0       0.0                                0.00
+    0:01:30 2871161.3      0.00       0.0       0.0                                0.00
+    0:01:30 2871161.3      0.00       0.0       0.0                                0.00
+    0:01:30 2871161.3      0.00       0.0       0.0                                0.00
+    0:01:31 2871161.3      0.00       0.0       0.0                                0.00
+    0:01:31 2870779.7      0.00       0.0       0.0                                0.00
+    0:01:31 2870779.7      0.00       0.0       0.0                                0.00
+    0:01:31 2870779.7      0.00       0.0       0.0                                0.00
+    0:01:31 2870779.7      0.00       0.0       0.0                                0.00
+    0:01:31 2870779.7      0.00       0.0       0.0                                0.00
+    0:01:31 2870779.7      0.00       0.0       0.0                                0.00
+    0:01:31 2870779.7      0.00       0.0       0.0                                0.00
+
+
+  Beginning Critical Range Optimization
+  -------------------------------------
+
+   ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
+    TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
+  --------- --------- --------- --------- --------- ------------------------- ---------
+    0:01:31 2870779.7      0.00       0.0       0.0                                0.00
+    0:01:32 2870779.7      0.00       0.0       0.0                                0.00
+Loading db file '/usr/caen/generic/mentor_lib-D.1/public/eecs470/synopsys/lec25dscc25_TT.db'
+
+  Optimization Complete
+  ---------------------
+Warning: Design 'cache' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+     Net 'clock': 11136 load(s), 1 driver(s)
+Writing verilog file '/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/synth/cache.vg'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+Writing ddc file './cache.ddc'.
+Removing design 'cache'
+Removing library 'lec25dscc25_TT'
+Removing library 'gtech'
+Removing library 'standard.sldb'
+Loading db file '/usr/caen/generic/mentor_lib-D.1/public/eecs470/synopsys/lec25dscc25_TT.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/gtech.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/standard.sldb'
+  Loading link library 'lec25dscc25_TT'
+  Loading link library 'gtech'
+Loading verilog file '/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/synth/cache.vg'
+Detecting input file type automatically (-rtl or -netlist).
+Running DC verilog reader
+Performing 'read' command.
+Compiling source file /afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/synth/cache.vg
+Reading with netlist reader (equivalent to -netlist option).
+Verilog netlist reader completed successfully.
+Current design is now '/afs/umich.edu/user/m/a/mattnick/eecs470/P4/eecs470/vsimp_new/synth/cache.db:cache'
+Loaded 1 design.
+Current design is 'cache'.
+Current design is 'cache'.
+
+Thank you...

@@ -1,3 +1,4 @@
+
 /////////////////////////////////////////////////////////////////////////
 //                                                                     //
 //   Modulename :  if_stage.v                                          //
@@ -86,7 +87,6 @@ module if_stage(// Inputs
 
   wire [(`HISTORY_BITS-1):0] ghr;
 
-
   // assign branching state //
   assign inst1_branch_taken = (inst1_result_in==`BRANCH_TAKEN);
   assign inst2_branch_taken = (inst2_result_in==`BRANCH_TAKEN);
@@ -109,7 +109,7 @@ module if_stage(// Inputs
   assign stalling = (stall || ~Imem_valid);
   assign next_PC = (inst1_mispredict_in) ? ((inst1_branch_taken) ? inst1_write_CPC_in : inst1_write_NPC_in) :
                   ((inst2_mispredict_in) ? ((inst2_branch_taken) ? inst2_write_CPC_in : inst2_write_NPC_in) :
-                           (stalling ? PC_reg : if_NPC_out_2) );
+                           (stalling ? PC_reg : if_PPC_out_1 if_NPC_out_2) );
 
     // Assign the first valid only if the PC is not the second word in the cache.
     // The second is always valid

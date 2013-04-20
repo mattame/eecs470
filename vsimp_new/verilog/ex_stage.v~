@@ -204,7 +204,7 @@ module ex_stage(// Inputs
   assign branch_valid_out_2 = (valid_in_2 & (id_ex_uncond_branch_2 | id_ex_cond_branch_2)) ? 1'b1: 1'b0;
 
    // Set the outputs to the LSQ
-  assign LSQ_tag_out_1 = id_ex_dest_reg_2;
+  assign LSQ_tag_out_1 = id_ex_dest_reg_1;
   assign LSQ_address_out_1 = ex_alu_result_out_1;
   assign LSQ_value_out_1 = id_ex_rega_1;
   
@@ -323,7 +323,7 @@ module ex_stage(// Inputs
    //
   brcond brcond_1 (// Inputs
                 .opa(id_ex_rega_1),       // always check regA value
-                .func(id_ex_IR_2[28:26]), // inst bits to determine check
+                .func(id_ex_IR_1[28:26]), // inst bits to determine check
 
                 // Output
                 .cond(brcond_result_1)

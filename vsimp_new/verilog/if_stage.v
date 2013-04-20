@@ -124,7 +124,7 @@ module if_stage(// Inputs
   assign next_PC = (inst1_mispredict_in) ? ((inst1_branch_taken) ? inst1_write_CPC_in : inst1_write_NPC_in) :
                   ((inst2_mispredict_in) ? ((inst2_branch_taken) ? inst2_write_CPC_in : inst2_write_NPC_in) :
                            (stalling ? PC_reg :
-                            /* if_NPC_out_2 */  (inst1_predicted_taken ? inst1_PPC_out : (inst2_predicted_taken ? inst2_PPC_out : if_NPC_out_2) ) );
+                            /* if_NPC_out_2 */  (inst1_predicted_taken ? inst1_PPC_out : (inst2_predicted_taken ? inst2_PPC_out : if_NPC_out_2) ) ) );
 
     // Assign the first valid only if the PC is not the second word in the cache.
     // The second is always valid

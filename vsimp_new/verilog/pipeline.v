@@ -732,7 +732,8 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     end // if (reset)
     else
     begin
-      if (stall_first_half_of_pipeline)
+ /* 
+     if (stall_first_half_of_pipeline)
       begin
          id_NPC_1           = id_NPC_1;
          id_IR_1            = id_IR_1;
@@ -746,7 +747,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
          id_PPC_2           = id_PPC_2;
          id_inst2_pht_index = id_inst2_pht_index;
       end
-      else
+      else*/
       begin
          id_NPC_1           = if_NPC_out_1;
          id_IR_1            = if_IR_out_1;
@@ -826,7 +827,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
   //                                              //
   //////////////////////////////////////////////////
   //ROB Asynchronous hacks
-  always @*()
+  always @*
   begin
   
     mt_inst1_tag = rob_inst1_tag_out;
@@ -837,7 +838,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     reg_inst2_value = rob_inst2_value_out;
 
 
-  endx
+  end
 
   //Map Table Synchonous
   always @(posedge clock)
@@ -847,15 +848,28 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
       mt_inst1_rega <= `SD  0;
       mt_inst1_regb <= `SD  0;
       mt_inst1_dest <= `SD  0;
-      mt_inst1_tag  <= `SD  0;
+   //   mt_inst1_tag  <= `SD  0;
       
       mt_inst2_rega <= `SD  0;
       mt_inst2_regb <= `SD  0;
       mt_inst2_dest <= `SD  0;
-      mt_inst2_tag  <= `SD  0;
+    //  mt_inst2_tag  <= `SD  0;
     end
     else
     begin 
+     if (stall_first_half_of_pipeline)
+     begin
+      mt_inst1_rega <= `SD  mt_inst1_rega;
+      mt_inst1_regb <= `SD  mt_inst1_regb;
+      mt_inst1_dest <= `SD  mt_inst1_dest;
+  
+      mt_inst2_rega <= `SD  mt_inst2_rega;
+      mt_inst2_regb <= `SD  mt_inst2_regb;
+      mt_inst2_dest <= `SD  mt_inst2_dest;
+    
+     end
+     else
+     begin
       mt_inst1_rega <= `SD  id_rega_out_1;
       mt_inst1_regb <= `SD  id_regb_out_1;
       mt_inst1_dest <= `SD  id_dest_reg_out_1;
@@ -865,6 +879,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
       mt_inst2_regb <= `SD  id_regb_out_2;
       mt_inst2_dest <= `SD  id_dest_reg_out_2;
       //mt_inst2_tag  <= `SD  rob_inst2_tag_out;      
+     end
     end
   end
   
@@ -876,37 +891,50 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     
     reg_inst1_rega  <= `SD  0;
     reg_inst1_regb  <= `SD  0;
-    reg_inst1_dest  <= `SD  0;
-    reg_inst1_value <= `SD  0;
+  //  reg_inst1_dest  <= `SD  0;
+  //  reg_inst1_value <= `SD  0;
 
     reg_inst2_rega  <= `SD  0;
     reg_inst2_regb  <= `SD  0;
-    reg_inst2_dest  <= `SD  0;
-    reg_inst2_value <= `SD  0;
+  //  reg_inst2_dest  <= `SD  0;
+  //  reg_inst2_value <= `SD  0;
     
     
     end
     else
     begin
-    
+   
+    if (stall_first_half_of_pipeline)
+    begin
+      reg_inst1_rega  <= `SD  reg_inst1_rega;
+      reg_inst1_regb  <= `SD  reg_inst1_regb;
+
+      reg_inst2_rega  <= `SD  reg_inst2_rega;
+      reg_inst2_regb  <= `SD  reg_inst2_regb;
+    end
+    else
+    begin
+ 
     //comes from decode
-    reg_inst1_rega  <= `SD  id_rega_out_1;
-    reg_inst1_regb  <= `SD  id_regb_out_1;
+      reg_inst1_rega  <= `SD  id_rega_out_1;
+      reg_inst1_regb  <= `SD  id_regb_out_1;
     
     //comes from ROB
     //reg_inst1_dest  <= `SD  rob_inst1_dest_out;
     //reg_inst1_value <= `SD  rob_inst1_value_out;
     
 
-    reg_inst2_rega  <= `SD  id_rega_out_2;
-    reg_inst2_regb  <= `SD  id_regb_out_2;
+      reg_inst2_rega  <= `SD  id_rega_out_2;
+      reg_inst2_regb  <= `SD  id_regb_out_2;
     
     //reg_inst2_dest  <= `SD  rob_inst2_dest_out;
     //reg_inst2_value <= `SD  rob_inst2_value_out;
+    end
     
     end
   end
-  
+ 
+ 
   //Fast Forward Synchonous  
   always @(posedge clock)
   begin 
@@ -946,6 +974,45 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     end
     else
     begin
+
+     if (stall_first_half_of_pipeline)
+     begin
+      ff_dest_reg_1       <= `SD ff_dest_reg_1;
+      ff_opa_select_1     <= `SD ff_opa_select_1;
+      ff_opb_select_1     <= `SD ff_opb_select_1;
+      ff_alu_func_1       <= `SD ff_alu_func_1;
+      ff_rd_mem_1         <= `SD ff_rd_mem_1;
+      ff_wr_mem_1         <= `SD ff_wr_mem_1;
+      ff_cond_branch_1    <= `SD ff_cond_branch_1;
+      ff_uncond_branch_1  <= `SD ff_uncond_branch_1;
+      ff_halt_1           <= `SD ff_halt_1;
+      ff_illegal_1        <= `SD ff_illegal_1;
+      ff_valid_inst1      <= `SD ff_valid_inst1;
+      ff_NPC_1            <= `SD ff_NPC_1;
+      ff_IR_1             <= `SD ff_IR_1;
+      ff_PPC_1            <= `SD ff_PPC_1;
+      ff_inst1_pht_index  <= `SD ff_inst1_pht_index;
+
+      ff_dest_reg_2       <= `SD ff_dest_reg_2;
+      ff_opa_select_2     <= `SD ff_opa_select_2;
+      ff_opb_select_2     <= `SD ff_opb_select_2;
+      ff_alu_func_2       <= `SD ff_alu_func_2;
+      ff_rd_mem_2         <= `SD ff_rd_mem_2;
+      ff_wr_mem_2         <= `SD ff_wr_mem_2;
+      ff_cond_branch_2    <= `SD ff_cond_branch_2;
+      ff_uncond_branch_2  <= `SD ff_uncond_branch_2;
+      ff_halt_2           <= `SD ff_halt_2;
+      ff_illegal_2        <= `SD ff_illegal_2;
+      ff_valid_inst2      <= `SD ff_valid_inst2;
+      ff_NPC_2            <= `SD ff_NPC_2;
+      ff_IR_2             <= `SD ff_IR_2;
+      ff_PPC_2            <= `SD ff_PPC_2;
+      ff_inst2_pht_index  <= `SD ff_inst2_pht_index;
+
+
+    end
+    else
+    begin
       ff_dest_reg_1       <= `SD id_dest_reg_out_1;
       ff_opa_select_1     <= `SD id_opa_select_out_1;
       ff_opb_select_1     <= `SD id_opb_select_out_1;
@@ -977,6 +1044,8 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
       ff_IR_2             <= `SD id_IR_2;
       ff_PPC_2            <= `SD id_PPC_2;
       ff_inst2_pht_index  <= `SD id_inst2_pht_index;      
+     end
+
     end
   end   
       

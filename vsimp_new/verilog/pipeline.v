@@ -825,6 +825,19 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
   //         ID/[MT/REG] Pipeline Register        //
   //                                              //
   //////////////////////////////////////////////////
+  //ROB Asynchronous hacks
+  always @*()
+  begin
+  
+    mt_inst1_tag = rob_inst1_tag_out;
+    mt_inst2_tag = rob_inst2_tag_out;
+    reg_inst1_dest  = rob_inst1_dest_out;
+    reg_inst1_value = rob_inst1_value_out;
+    reg_inst2_dest  = rob_inst2_dest_out;
+    reg_inst2_value = rob_inst2_value_out;
+
+
+  endx
 
   //Map Table Synchonous
   always @(posedge clock)
@@ -846,12 +859,12 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
       mt_inst1_rega <= `SD  id_rega_out_1;
       mt_inst1_regb <= `SD  id_regb_out_1;
       mt_inst1_dest <= `SD  id_dest_reg_out_1;
-      mt_inst1_tag  <= `SD  rob_inst1_tag_out;
+      //mt_inst1_tag  <= `SD  rob_inst1_tag_out;
       
       mt_inst2_rega <= `SD  id_rega_out_2;
       mt_inst2_regb <= `SD  id_regb_out_2;
       mt_inst2_dest <= `SD  id_dest_reg_out_2;
-      mt_inst2_tag  <= `SD  rob_inst2_tag_out;      
+      //mt_inst2_tag  <= `SD  rob_inst2_tag_out;      
     end
   end
   
@@ -881,15 +894,15 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     reg_inst1_regb  <= `SD  id_regb_out_1;
     
     //comes from ROB
-    reg_inst1_dest  <= `SD  rob_inst1_dest_out;
-    reg_inst1_value <= `SD  rob_inst1_value_out;
+    //reg_inst1_dest  <= `SD  rob_inst1_dest_out;
+    //reg_inst1_value <= `SD  rob_inst1_value_out;
     
 
     reg_inst2_rega  <= `SD  id_rega_out_2;
     reg_inst2_regb  <= `SD  id_regb_out_2;
     
-    reg_inst2_dest  <= `SD  rob_inst2_dest_out;
-    reg_inst2_value <= `SD  rob_inst2_value_out;
+    //reg_inst2_dest  <= `SD  rob_inst2_dest_out;
+    //reg_inst2_value <= `SD  rob_inst2_value_out;
     
     end
   end

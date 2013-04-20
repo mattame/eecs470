@@ -317,7 +317,7 @@ module reorder_buffer( clock,reset,
 
    // combinational assignments for signals //
    assign inst1_retire   =                   (states_out[head         ]==`ROBE_COMPLETE);
-   assign inst2_retire   = ( inst1_retire && (states_out[head_plus_one]==`ROBE_COMPLETE) && (branch_results_out[head_plus_one]!=`BRANCH_HALT) );
+   assign inst2_retire   = ( inst1_retire && (states_out[head_plus_one]==`ROBE_COMPLETE) && (branch_results_out[head]==`BRANCH_NONE ) & (branch_results_out[head_plus_one]!=`BRANCH_HALT) && (~mispredicteds_out[head_plus_one]) );
    assign dispatch_from_inst1 = (~rob_full && inst1_valid_in);
    assign dispatch_from_inst2 = (~rob_full && inst2_valid_in);
    assign dispatch_at_least_one = (dispatch_from_inst1 || dispatch_from_inst2);

@@ -9,12 +9,8 @@ if (len(sys.argv)!=2):
 
 os.system("./vs-asm test_progs/"+sys.argv[1]+" > program.mem")
 os.system("make > /dev/null")
-os.system("./simv > /dev/null")
-os.system("cp writeback.out pwbt.out")
-os.system("cp pipeline.out pplt.out")
-os.system("./simv_gold > /dev/null")
-os.system("cp writeback.out pwbg.out")
-os.system("cp pipeline.out pplg.out")
-print "diff:"
-os.system("diff pwbt.out pwbg.out")
+os.system("./simv > test_out")
+os.system("./simv_gold > gold_out")
+print "diff: "
+os.system("diff test_out gold_out")
 

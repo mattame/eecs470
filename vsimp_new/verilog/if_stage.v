@@ -109,7 +109,7 @@ module if_stage(// Inputs
   assign stalling = (stall || ~Imem_valid);
   assign next_PC = (inst1_mispredict_in) ? ((inst1_branch_taken) ? inst1_write_CPC_in : inst1_write_NPC_in) :
                   ((inst2_mispredict_in) ? ((inst2_branch_taken) ? inst2_write_CPC_in : inst2_write_NPC_in) :
-                           (stalling ? PC_reg : if_PPC_out_1 if_NPC_out_2) );
+                           (stalling ? PC_reg : if_NPC_out_2) );
 
     // Assign the first valid only if the PC is not the second word in the cache.
     // The second is always valid
@@ -120,8 +120,8 @@ module if_stage(// Inputs
    // assign predicted PC output for both instructions //
    // if branch is predicted taken, use prediciton, otherwise use the next pc
    // values // 
-   assign if_PPC_out_1 = (inst1_prediction_out ? inst1_PPC_out : if_NPC_out_1);  
-   assign if_PPC_out_2 = (inst2_prediction_out ? inst2_PPC_out : if_NPC_out_2);
+   assign if_PPC_out_1 = if_NPC_out_1;  //(inst1_prediction_out ? inst1_PPC_out : if_NPC_out_1);  
+   assign if_PPC_out_2 = if_NPC_out_2;  //(inst2_prediction_out ? inst2_PPC_out : if_NPC_out_2);
 
 
    // branch target buffer internal module //

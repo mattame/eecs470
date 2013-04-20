@@ -413,9 +413,15 @@ module LSQ(//Inputs
  assign next_head = (move_head_and_clear)
 					? (LSQ_head + 1):LSQ_head;
 				
-			wire clear_is_before_head = ((clear_tail == (LSQ_head - 1)) & (!valids_out[clear_tail] | reads_out[clear_tail]));
+         wire [4:0] clear_plus_one = clear_tail +1;
+
+
+         wire [4:0] head_minus_one = (LSQ_head==5'd0) ? 5'd31 : LSQ_head-1;
+
+
+			wire clear_is_before_head = ((clear_tail == (head_minus_one)) & (!valids_out[clear_tail] | reads_out[clear_tail]));
 			
-			wire next_is_completed_read = (completes_out[(clear_tail + 1)] & !reads_out[(clear_tail + 1)]);
+			wire next_is_completed_read = (completes_out[clear_plus_one] & !reads_out[clear_plus_one]);
 				
 				
  assign next_clear_tail = (next_is_completed_read | (clear_is_before_head & move_head_and_clear)) ? clear_tail + 1 : clear_tail;

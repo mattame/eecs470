@@ -339,8 +339,8 @@ module ex_stage(// Inputs
   assign branch_taken_1 = (id_ex_uncond_branch_1 | (brcond_result_1 & id_ex_cond_branch_1));
   assign branch_taken_2 = (id_ex_uncond_branch_2 | (brcond_result_2 & id_ex_cond_branch_2));
   
-  assign mispredict_1 = branch_taken_1 & (ex_alu_result_out_1 != id_ex_PPC_1);
-  assign mispredict_2 = branch_taken_2 & (ex_alu_result_out_2 != id_ex_PPC_2);
+  assign mispredict_1 = (branch_taken_1 & (ex_alu_result_out_1 != id_ex_PPC_1)) | (~branch_taken_1 & (id_ex_PPC_1 != id_ex_NPC_1));
+  assign mispredict_2 = (branch_taken_2 & (ex_alu_result_out_2 != id_ex_PPC_2)) | (~branch_taken_2 & (id_ex_PPC_2 != id_ex_NPC_2));
 			   
   arbiter arb_0 (//Ins
 	.ex_IR_1(id_ex_IR_1),

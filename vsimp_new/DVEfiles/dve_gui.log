@@ -1,9 +1,9 @@
 
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 00:44 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 17:54 2013
 VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
-The file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/inter.vpd' was opened successfully.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
 @@
 @@
 @@                     0  Asserting System reset......
@@ -52,4 +52,366 @@ The file '/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/inter.vpd' w
 @@                   136  Deasserting System reset......
 @@
 @@
+@@@ Unified Memory contents hex on left, decimal on right: 
+@@@
+@@@ mem[    0] = 4021540140a6f405 : 4621067057015223301
+@@@ mem[    8] = b4a100004c2c9401 : 13015684399355433985
+@@@ mem[   16] = 40a605bea4c10000 : 4658417180927393792
+@@@ mem[   24] = c3e0000bf7c00001 : 14114281283580329985
+@@@ mem[   32] = 40803404409ff404 : 4647772008315089924
+@@@ mem[   40] = 47ff041fb4810000 : 5187869829972951040
+@@@ mem[   48] = 43ec940940211401 : 4894449662496412673
+@@@ mem[   56] = 412a14094d215409 : 4695587591668454409
+@@@ mem[   64] = f7c0000b412107be : 17852268971233970110
+@@@ mem[   72] = 40955404c3fffff6 : 4653718169402212342
+@@@ mem[   80] = b48100004c205401 : 13006677200099890177
+@@@ mem[   88] = 43ec940940211401 : 4894449662496412673
+@@@ mem[   96] = 412a14094d229409 : 4695587591668536329
+@@@ mem[  104] = f7c00001412107be : 17852268928284297150
+@@@ mem[  112] = b4bf0fa0c3fffff8 : 13024145830536282104
+@@@ mem[  120] = 0000000000000555 : 1365
+@@@
+@@@ mem[ 1000] = 0000000000000100 : 256
+@@@ mem[ 1008] = 0000000000000101 : 257
+@@@ mem[ 1016] = 0000000000000102 : 258
+@@@ mem[ 1024] = 0000000000000103 : 259
+@@@ mem[ 1032] = 0000000000000104 : 260
+@@@ mem[ 1040] = 0000000000000105 : 261
+@@@ mem[ 1048] = 0000000000000106 : 262
+@@@ mem[ 1056] = 0000000000000107 : 263
+@@@ mem[ 1064] = 0000000000000108 : 264
+@@@ mem[ 1072] = 0000000000000109 : 265
+@@@
+@@@ mem[ 4000] = 0000000000000037 : 55
+@@@
+@@@
+@@                  2472 : System halted
+@@
+@@@ System halted on HALT instruction
+@@@
+@@
+@@  234 cycles / 109 instrs = 2.146789 CPI
+@@
+@@  6990.00 ns total time to execute
+@@
+ 
+$finish called from file "testbench/testbench.v", line 297.
 branch_predictor.v, 12 : module branch_decoder(
+$finish at simulation time                 2572
+Simulation complete, time is 2572.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2572
+CPU Time:      1.140 seconds;       Data structure size:   0.8Mb
+Sun Apr 21 17:56:36 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 17:58 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+@@@ Unified Memory contents hex on left, decimal on right: 
+branch_predictor.v, 12 : module branch_decoder(
+@@@
+@@@ mem[    0] = 4021540140a6f405 : 4621067057015223301
+@@@ mem[    8] = b4a100004c2c9401 : 13015684399355433985
+@@@ mem[   16] = 40a605bea4c10000 : 4658417180927393792
+@@@ mem[   24] = c3e0000af7c00001 : 14114281279285362689
+@@@ mem[   32] = 40803404409ff404 : 4647772008315089924
+@@@ mem[   40] = 40211401b4810000 : 4620996690214715392
+@@@ mem[   48] = 4d21540943ec9409 : 5557815813922919433
+@@@ mem[   56] = 412107be412a1409 : 4693040800415224841
+@@@ mem[   64] = c3fffff7f7c0000b : 14123288396935725067
+@@@ mem[   72] = 4c20540140955404 : 5485476710492492804
+@@@ mem[   80] = 40211401b4810000 : 4620996690214715392
+@@@ mem[   88] = 4d22940943ec9409 : 5558167657643807753
+@@@ mem[   96] = 412107be412a1409 : 4693040800415224841
+@@@ mem[  104] = c3fffff8f7c00001 : 14123288401230692353
+@@@ mem[  112] = 00000555b4bf0fa0 : 5865662779296
+@@@
+@@@ mem[ 1000] = 0000000000000037 : 55
+@@@ mem[ 1008] = 0000000000000100 : 256
+@@@ mem[ 1016] = 0000000000000101 : 257
+@@@ mem[ 1024] = 0000000000000102 : 258
+@@@ mem[ 1032] = 0000000000000103 : 259
+@@@ mem[ 1040] = 0000000000000104 : 260
+@@@ mem[ 1048] = 0000000000000105 : 261
+@@@ mem[ 1056] = 0000000000000106 : 262
+@@@ mem[ 1064] = 0000000000000107 : 263
+@@@ mem[ 1072] = 0000000000000108 : 264
+@@@ mem[ 1080] = 0000000000000109 : 265
+@@@
+@@@ mem[ 4000] = 0000000000000037 : 55
+@@@
+@@@
+@@                  2422 : System halted
+@@
+@@@ System halted on HALT instruction
+@@@
+@@
+@@  229 cycles / 99 instrs = 2.313131 CPI
+@@
+@@  6840.00 ns total time to execute
+@@
+ 
+$finish called from file "testbench/testbench.v", line 297.
+$finish at simulation time                 2522
+Simulation complete, time is 2522.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2522
+CPU Time:      0.450 seconds;       Data structure size:   0.7Mb
+Sun Apr 21 17:58:24 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 17:59 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+@@@ Unified Memory contents hex on left, decimal on right: 
+branch_predictor.v, 12 : module branch_decoder(
+@@@
+@@@ mem[    0] = 4021540140a6f405 : 4621067057015223301
+@@@ mem[    8] = b4a100004c2c9401 : 13015684399355433985
+@@@ mem[   16] = 40a605bea4c10000 : 4658417180927393792
+@@@ mem[   24] = c3e0000af7c00001 : 14114281279285362689
+@@@ mem[   32] = 40803404409ff404 : 4647772008315089924
+@@@ mem[   40] = 40211401b4810000 : 4620996690214715392
+@@@ mem[   48] = 4d21540943ec9409 : 5557815813922919433
+@@@ mem[   56] = 412107be412a1409 : 4693040800415224841
+@@@ mem[   64] = c3fffff7f7c0000b : 14123288396935725067
+@@@ mem[   72] = 4c20540140955404 : 5485476710492492804
+@@@ mem[   80] = 40211401b4810000 : 4620996690214715392
+@@@ mem[   88] = 4d22940943ec9409 : 5558167657643807753
+@@@ mem[   96] = 412107be412a1409 : 4693040800415224841
+@@@ mem[  104] = c3fffff8f7c00001 : 14123288401230692353
+@@@ mem[  112] = 00000555b4bf0fa0 : 5865662779296
+@@@
+@@@ mem[ 1000] = 0000000000000037 : 55
+@@@ mem[ 1008] = 0000000000000100 : 256
+@@@ mem[ 1016] = 0000000000000101 : 257
+@@@ mem[ 1024] = 0000000000000102 : 258
+@@@ mem[ 1032] = 0000000000000103 : 259
+@@@ mem[ 1040] = 0000000000000104 : 260
+@@@ mem[ 1048] = 0000000000000105 : 261
+@@@ mem[ 1056] = 0000000000000106 : 262
+@@@ mem[ 1064] = 0000000000000107 : 263
+@@@ mem[ 1072] = 0000000000000108 : 264
+@@@ mem[ 1080] = 0000000000000109 : 265
+@@@
+@@@ mem[ 4000] = 0000000000000037 : 55
+@@@
+@@@
+@@                  2422 : System halted
+@@
+@@@ System halted on HALT instruction
+@@@
+@@
+@@  229 cycles / 99 instrs = 2.313131 CPI
+@@
+@@  6840.00 ns total time to execute
+@@
+ 
+$finish called from file "testbench/testbench.v", line 297.
+$finish at simulation time                 2522
+Simulation complete, time is 2522.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2522
+CPU Time:      0.450 seconds;       Data structure size:   0.7Mb
+Sun Apr 21 18:00:01 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 18:04 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+@@@ Unified Memory contents hex on left, decimal on right: 
+@@@
+@@@ mem[    0] = 4021540140a6f405 : 4621067057015223301
+@@@ mem[    8] = b4a100004c2c9401 : 13015684399355433985
+@@@ mem[   16] = 40a605bea4c10000 : 4658417180927393792
+@@@ mem[   24] = c3e0000af7c00001 : 14114281279285362689
+@@@ mem[   32] = 40803404409ff404 : 4647772008315089924
+@@@ mem[   40] = 40211401b4810000 : 4620996690214715392
+@@@ mem[   48] = 4d21540943ec9409 : 5557815813922919433
+@@@ mem[   56] = 412107be412a1409 : 4693040800415224841
+@@@ mem[   64] = c3fffff7f7c0000b : 14123288396935725067
+@@@ mem[   72] = 4c20540140955404 : 5485476710492492804
+@@@ mem[   80] = 40211401b4810000 : 4620996690214715392
+@@@ mem[   88] = 4d22940943ec9409 : 5558167657643807753
+@@@ mem[   96] = 412107be412a1409 : 4693040800415224841
+@@@ mem[  104] = c3fffff8f7c00001 : 14123288401230692353
+@@@ mem[  112] = 00000555b4bf0fa0 : 5865662779296
+@@@
+@@@ mem[ 1000] = 0000000000000037 : 55
+@@@ mem[ 1008] = 0000000000000100 : 256
+@@@ mem[ 1016] = 0000000000000101 : 257
+@@@ mem[ 1024] = 0000000000000102 : 258
+@@@ mem[ 1032] = 0000000000000103 : 259
+@@@ mem[ 1040] = 0000000000000104 : 260
+@@@ mem[ 1048] = 0000000000000105 : 261
+@@@ mem[ 1056] = 0000000000000106 : 262
+@@@ mem[ 1064] = 0000000000000107 : 263
+@@@ mem[ 1072] = 0000000000000108 : 264
+@@@ mem[ 1080] = 0000000000000109 : 265
+@@@
+@@@ mem[ 4000] = 0000000000000037 : 55
+@@@
+@@@
+@@                  2422 : System halted
+@@
+@@@ System halted on HALT instruction
+@@@
+@@
+@@  229 cycles / 99 instrs = 2.313131 CPI
+@@
+@@  6840.00 ns total time to execute
+@@
+ 
+$finish called from file "testbench/testbench.v", line 297.
+branch_predictor.v, 12 : module branch_decoder(
+$finish at simulation time                 2522
+Simulation complete, time is 2522.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 2522
+CPU Time:      0.440 seconds;       Data structure size:   0.7Mb
+Sun Apr 21 18:04:46 2013

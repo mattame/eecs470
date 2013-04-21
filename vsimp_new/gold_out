@@ -1,6 +1,6 @@
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 04:43 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 18:37 2013
 @@
 @@
 @@                     0  Asserting System reset......
@@ -21,24 +21,25 @@ Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 04:
 @@
 @@@ Unified Memory contents hex on left, decimal on right: 
 @@@
-@@@ mem[    0] = 205f0064203f0001 : 2332583562038935553
-@@@ mem[    8] = 404035224c210401 : 4629758838359262209
-@@@ mem[   16] = 00000555f45ffffd : 5866730291197
+@@@ mem[    0] = b41f0020a41f0000 : 12979092791297507328
+@@@ mem[    8] = 0000000000000555 : 1365
+@@@
+@@@ mem[   32] = b41f0020a41f0000 : 12979092791297507328
 @@@
 @@@
-@@                151820 : System halted
+@@                  1820 : System halted
 @@
 @@@ System halted on HALT instruction
 @@@
 @@
-@@  1515 cycles / 302 instrs = 5.016556 CPI
+@@  15 cycles / 2 instrs = 7.500000 CPI
 @@
-@@  45420.00 ns total time to execute
+@@  420.00 ns total time to execute
 @@
 
 $finish called from file "testbench/testbench.v", line 269.
-$finish at simulation time               152820
+$finish at simulation time                 2820
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 15282000 ps
-CPU Time:      0.270 seconds;       Data structure size:   0.1Mb
-Sun Apr 21 04:43:20 2013
+Time: 282000 ps
+CPU Time:      0.250 seconds;       Data structure size:   0.1Mb
+Sun Apr 21 18:37:55 2013

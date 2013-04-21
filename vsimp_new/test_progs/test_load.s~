@@ -1,7 +1,17 @@
-	lda  $r0, 0
-	stq  $r0, 0x38($r31)
-	addq $r0, 15, $r0
-	stq  $r0, 0x48($r31)
-	lda  $r1, 24
-	stq  $r2, 0x40($r31)
+	ldq  $r0, 0x00($r31)
+	ldq  $r1, 0x00($r31)
+	ldq  $r2, 0x08($r31)
+	ldq  $r3, 0x08($r31)
+	ldq  $r4, 0x10($r31)
+	ldq  $r5, 0x10($r31)
+	ldq  $r6, 0x18($r31)
+	ldq  $r7, 0x18($r31)
+	ldq  $r8, 0x20($r31)
+	ldq  $r9, 0x20($r31)
+	ldq  $r10, 0x28($r31)
 	call_pal 0x555
+	
+	
+	
+	
+	

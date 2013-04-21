@@ -69,6 +69,7 @@ module reorder_buffer_entry(
   input wire [(`HISTORY_BITS-1):0] cdb1_pht_index_in,cdb2_pht_index_in;
 
   /***  internals  ***/
+  reg [63:0]    value;
   reg [63:0]  n_value;
   reg  [4:0]  n_register;
   reg  [1:0]  n_state;
@@ -76,15 +77,23 @@ module reorder_buffer_entry(
   reg [1:0]   n_branch_result;
   reg [63:0]  n_NPC;
   reg [(`HISTORY_BITS-1):0] n_pht_index;
+  wire cdb1_match;
+  wire cdb2_match;
 
   /***  outputs  ***/
-  output reg [63:0] value_out;
+  output wire [63:0] value_out;
   output reg  [4:0] register_out;
   output reg  [1:0] state_out;
   output reg        mispredicted_out;
   output reg [1:0]  branch_result_out;
   output reg [63:0] NPC_out;
   output reg [(`HISTORY_BITS-1):0] pht_index_out;
+
+
+  // combinationali cdb match and assignment out //
+  assign cdb1_match = (~write && (tag_in==cdb1_tag_in));
+  assign cdb2_match = (~write && (tag_in==cdb2_tag_in));
+  assign value_out = (cdb1_match ? cdb1_value_in : (cdb2_match ? cdb2_value_in : value) );
 
 
   // combinational assignments //  
@@ -104,7 +113,7 @@ module reorder_buffer_entry(
     end
 
     //determine whether to latch complete 
-    else if (~write && (tag_in==cdb1_tag_in))
+    else if (cdb1_match)
     begin 
       n_state          = `ROBE_COMPLETE;
       n_value          = cdb1_value_in;
@@ -114,7 +123,7 @@ module reorder_buffer_entry(
       n_NPC            = cdb1_NPC_in;
       n_pht_index      = cdb1_pht_index_in;
     end
-    else if (~write && (tag_in==cdb2_tag_in))
+    else if (cdb2_match)
     begin
       n_state          = `ROBE_COMPLETE;
       n_value          = cdb2_value_in;
@@ -145,7 +154,7 @@ module reorder_buffer_entry(
      if (reset)
      begin
         state_out         <= `SD `ROBE_EMPTY;
-        value_out         <= `SD 64'h0;
+        value             <= `SD 64'h0;
         register_out      <= `SD `RSTAG_NULL;
         mispredicted_out  <= `SD 1'b0;
         branch_result_out <= `SD 2'b00;
@@ -155,7 +164,7 @@ module reorder_buffer_entry(
      else
      begin
         state_out         <= `SD n_state;
-        value_out         <= `SD n_value;
+        value             <= `SD n_value;
         register_out      <= `SD n_register;
         mispredicted_out  <= `SD n_mispredicted;
         branch_result_out <= `SD n_branch_result;

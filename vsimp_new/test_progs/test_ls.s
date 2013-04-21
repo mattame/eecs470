@@ -8,8 +8,6 @@
    this will write the the value 0xFF to the location 1000 and beyond if correct,
    and 0xAA (or something else random) if incorrect
 */
-
-
         addq	$r5,55,$r5
 	addq	$r1,10,$r1
         mulq    $r1,100,$r1
@@ -20,7 +18,8 @@
         br	bad
 
 good: 	addq	$r4,255,$r4
-loop1:	stq	$r4,0($r1)
+loop1:  addq    $r4,1,$r4 
+  	stq	$r4,0($r1)
         addq 	$r1,8,$r1
         addq    $r31,100,$r9
         mulq    $r9,10,$r9
@@ -40,6 +39,6 @@ loop2:  stq     $r4,0($r1)
         bne     $r30,done
         br	loop2
 	
-done:
+done:  stq   $r5,4000($r31) 
 	call_pal 0x555
      

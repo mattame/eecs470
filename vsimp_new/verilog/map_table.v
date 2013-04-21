@@ -81,12 +81,12 @@ module map_table(clock,reset,clear_entries,        // signal inputs
    assign inst2_tag_nonnull = (inst2_tag_in!=`RSTAG_NULL);
 
    // combinational assignments for the tag outputs //
-   assign inst1_taga_out = (reset ? `RSTAG_NULL : ((inst1_dest_in==inst1_rega_in) ? tag_table[inst1_rega_in] : n_tag_table[inst1_rega_in]));
-   assign inst1_tagb_out = (reset ? `RSTAG_NULL : ((inst1_dest_in==inst1_regb_in) ? tag_table[inst2_regb_in] : n_tag_table[inst1_regb_in]));
-   assign inst2_taga_out = (reset ? `RSTAG_NULL : ((inst2_rega_in==inst1_dest_in) && inst1_dest_nonzero && inst1_tag_nonnull) ? inst1_tag_in : 
-                                                        ((inst2_dest_in==inst2_rega_in) ? tag_table[inst2_rega_in] : n_tag_table[inst2_rega_in]) );  // forward from inst1
-   assign inst2_tagb_out = (reset ? `RSTAG_NULL : ((inst2_regb_in==inst1_dest_in) && inst1_dest_nonzero && inst1_tag_nonnull) ? inst1_tag_in :
-                                                        ((inst2_dest_in==inst2_regb_in) ? tag_table[inst2_regb_in] : n_tag_table[inst2_regb_in]) );  // forward from inst1
+   assign inst1_taga_out = (reset ? `RSTAG_NULL : ((inst1_dest_in==inst1_rega_in && inst1_dest_nonzero) ? tag_table[inst1_rega_in] : tag_table[inst1_rega_in]));
+   assign inst1_tagb_out = (reset ? `RSTAG_NULL : ((inst1_dest_in==inst1_regb_in && inst1_dest_nonzero) ? tag_table[inst1_regb_in] : tag_table[inst1_regb_in]));
+   assign inst2_taga_out = (reset ? `RSTAG_NULL : (inst2_rega_in==inst1_dest_in && inst1_dest_nonzero && inst1_tag_nonnull) ? inst1_tag_in : 
+                                                        (((inst2_dest_in==inst2_rega_in && inst2_dest_nonzero)) ? tag_table[inst2_rega_in] : tag_table[inst2_rega_in]) );  // forward from inst1
+   assign inst2_tagb_out = (reset ? `RSTAG_NULL : (inst2_regb_in==inst1_dest_in && inst1_dest_nonzero && inst1_tag_nonnull) ? inst1_tag_in : 
+                                                        (((inst2_dest_in==inst2_regb_in && inst2_dest_nonzero)) ? tag_table[inst2_regb_in] : tag_table[inst2_regb_in]) );  // forward from inst1
 
    // combinational logic for next states in tag table //
    assign n_ready_in_rob[`ZERO_REG] = 1'b0;

@@ -742,7 +742,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     else
     begin
  /* 
-     if (stall_first_half_of_pipeline)
+     if (stall_first_half_of_pi                 inst1_cur_dest_in,peline)
       begin
          id_NPC_1           = id_NPC_1;
          id_IR_1            = id_IR_1;
@@ -1069,22 +1069,32 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
   
                            .clock(clock), .reset(reset || halted || mispredict), .clear_entries(reg_clear_entries_out),
 
-
                            // instruction 1 access inputs //
                            //THESE COME FROM DECODE
                            .inst1_rega_in(mt_inst1_rega),
                            .inst1_regb_in(mt_inst1_regb),
                            
-                           //THESE COME FROM ROB
+                           // DEST COMES FROM ID (AFTER LATCH) //
                            .inst1_dest_in(mt_inst1_dest),
+      
+                           // TAG COMES FROM THE ROB //
                            .inst1_tag_in(mt_inst1_tag),
+
+                           // RETIRE TAG FROM ROB //
+                           .inst1_retire_tag_in(rob_inst1_retire_tag_out),
 
                            // instruction 2 access inputs //
                            .inst2_rega_in(mt_inst2_rega),
                            .inst2_regb_in(mt_inst2_regb),
-                           
+ 
+                           // DEST COMES FROM ID (AFTER LATCH) //                          
                            .inst2_dest_in(mt_inst2_dest),
+
+                           // TAG COMES FROM ROB //
                            .inst2_tag_in(mt_inst2_tag),
+
+                           // RETIRE TAG FROM ROB //
+                           .inst2_retire_tag_in(rob_inst2_retire_tag_out),
 
                            // cdb inputs //
                            .cdb1_tag_in(cm_tag_out_1),
@@ -1294,7 +1304,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                                            .inst1_IR_in(rs_inst1_IR),
                                            .inst1_PPC_in(rs_inst1_PPC),
                                            .inst1_pht_index_in(rs_inst1_pht_index),
-                                           .inst1_valid(rs_inst1_valid),
+                                           .inst1_valid(rs_inst1_valid && ~stall_first_half_of_pipeline),
 
 
                                            // signals and busses in for inst 2 (from id2) //
@@ -1322,7 +1332,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                                            .inst2_IR_in(rs_inst2_IR),
                                            .inst2_PPC_in(rs_inst2_PPC),
                                            .inst2_pht_index_in(rs_inst2_pht_index),
-                                           .inst2_valid(rs_inst2_valid),
+                                           .inst2_valid(rs_inst2_valid && ~stall_first_half_of_pipeline),
 
                                            // cdb inputs //
                                            .cdb1_tag_in(cm_tag_out_1),
@@ -1402,10 +1412,10 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                                           .clock(clock), .reset(reset || halted || mispredict),
                                           
                                           /*these will come from decode*/
-                                          .inst1_valid_in(rob_inst1_valid),
+                                          .inst1_valid_in(rob_inst1_valid && ~stall_first_half_of_pipeline),
                                           .inst1_dest_in(rob_inst1_dest),
 
-                                          .inst2_valid_in(rob_inst2_valid),
+                                          .inst2_valid_in(rob_inst2_valid && ~stall_first_half_of_pipeline),
                                           .inst2_dest_in(rob_inst2_dest),
 
                                           // tags for reading from the MT // 

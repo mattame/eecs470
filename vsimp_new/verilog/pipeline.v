@@ -1857,13 +1857,13 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 			      .ROB_tag_1(lsq_ROB_tag_1),
 			      .rd_mem_in_1(lsq_rd_mem_1),
 			      .wr_mem_in_1(lsq_wr_mem_1),
-			      .valid_in_1(lsq_valid_1),
+			      .valid_in_1(lsq_valid_1 && ~stall_first_half_of_pipeline),
 
 			      //2
 			      .ROB_tag_2(lsq_ROB_tag_2),
 			      .rd_mem_in_2(lsq_rd_mem_2),
 			      .wr_mem_in_2(lsq_wr_mem_2),
-			      .valid_in_2(lsq_valid_2),
+			      .valid_in_2(lsq_valid_2 && ~stall_first_half_of_pipeline),
 
 			      //From EX ALU
 			      .EX_tag_1(lsq_EX_tag_1),

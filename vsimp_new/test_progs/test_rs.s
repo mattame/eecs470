@@ -1,3 +1,4 @@
+	nop
 	lda $r1,1
         lda $r2,100
 loop:	mulq $r1,$r1,$r1

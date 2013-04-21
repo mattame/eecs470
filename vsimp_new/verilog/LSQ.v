@@ -171,7 +171,7 @@ assign stored_address_out = stored_address;
 assign stored_value_out = stored_value;
 assign stored_tag_out = stored_tag;
 assign read_out = read;
-assign complete_out = complete & (read_out | ROB_head_met);
+assign complete_out = complete & (read_out | next_head_met);
 assign valid_out = valid;
 
 endmodule
@@ -415,16 +415,10 @@ module LSQ(//Inputs
 				
          wire [4:0] clear_plus_one = clear_tail +1;
 
-
-         wire [4:0] head_minus_one = (LSQ_head==5'd0) ? 5'd31 : LSQ_head-1;
-
-
-			wire clear_is_before_head = ((clear_tail == (head_minus_one)) & (!valids_out[clear_tail] | reads_out[clear_tail]));
-			
 			wire next_is_completed_read = (completes_out[clear_plus_one] & !reads_out[clear_plus_one]);
 				
 				
- assign next_clear_tail = (next_is_completed_read | (clear_is_before_head & move_head_and_clear)) ? clear_tail + 1 : clear_tail;
+ assign next_clear_tail = (next_is_completed_read | ( move_head_and_clear)) ? clear_tail + 1 : clear_tail;
 
  assign next_tail = (valid_ROB_in_1) ? ((valid_ROB_in_2) ? next_entry_2: next_entry_1): (valid_ROB_in_2) ? next_entry_1 : LSQ_tail;
 

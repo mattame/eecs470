@@ -291,7 +291,10 @@ module reorder_buffer( clock,reset,
    reg  [7:0]   tail;
    wire [7:0] n_tail;
    output wand    rob_empty;
-
+   wire inst1_retire,inst2_retire;
+   wire dispatch_from_inst1,dispatch_from_inst2;
+   wire dispatch_at_least_one;
+   wire dispatch_one,dispatch_two;
 
    // regs/wires for talking directly to the reorder buffer entries //
    wire [(`ROB_ENTRIES-1):0] resets;

@@ -164,7 +164,7 @@ module decoder(// Inputs
             alu_func = `ALU_ADDQ;
             dest_reg = `DEST_IS_REGA;
             case (inst[31:26])
-              `LDA_INST:  rd_mem = `TRUE;
+              `LDA_INST: ;  //  rd_mem = `TRUE;
               `LDQ_INST:
                 begin
                   rd_mem = `TRUE;

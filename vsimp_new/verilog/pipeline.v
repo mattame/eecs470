@@ -510,7 +510,6 @@ module pipeline (// Inputs
 /////// TEMPORARY WHILE WE DO NOT HAVE MEMORY WRITEBACK /////////////////
   assign proc2Dmem_command = `BUS_NONE;
 
-
   // Icache wires
   wire [63:0] cachemem_data;
   wire        cachemem_valid;
@@ -521,6 +520,7 @@ module pipeline (// Inputs
   wire        Icache_wr_en;
   wire [63:0] Icache_data_out, proc2Icache_addr;
   wire        Icache_valid_out;
+////////////////////////////////////////////////////
 
 
 /////////// STUFF FOR HALTING ///////////////
@@ -528,7 +528,12 @@ module pipeline (// Inputs
   wire n_halted;
 
   // set pipeline error status //
- //  assign pipeline_completed_insts = {3'b0, mem_wb_valid_inst};
+  wire inst1_retiring,inst2_retiring;
+  assign inst1_retiring = (rob_inst1_retire_tag_out!=`RSTAG_NULL);
+  assign inst2_retiring = (rob_inst2_retire_tag_out!=`RSTAG_NULL);
+
+  // error status and completed instructions out //
+  assign pipeline_completed_insts = {2'b0, (inst1_retiring&&inst2_retiring), (inst1_retiring^inst2_retiring) };
   assign pipeline_error_status =  
     (1'b0) ? `HALTED_ON_ILLEGAL : ((halted && LSQ_empty) ? `HALTED_ON_HALT : `NO_ERROR );
 
@@ -550,8 +555,10 @@ module pipeline (// Inputs
 wire mispredict;
 assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 
+/////////////////////////////////////////////////////////////////////
 
 
+///////////////// MEMORY ARBITER ///////////////////////////////////
 /*
   assign pipeline_commit_wr_idx = wb_reg_wr_idx_out;
   assign pipeline_commit_wr_data = wb_reg_wr_data_out;
@@ -568,6 +575,8 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
   assign Imem2proc_response =
            (lsq_proc2Dmem_command_out==`BUS_NONE) ? mem2proc_response : 0;
   assign proc2mem_data = lsq_proc2Dmem_data_out;
+
+//////////////////////////////////////////////////////////////////
 
 
   ///***  MAKE D-CACHE  ***///
@@ -837,7 +846,6 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     reg_inst2_dest  = rob_inst2_dest_out;
     reg_inst2_value = rob_inst2_value_out;
 
-
   end
 
   //Map Table Synchonous
@@ -1095,8 +1103,8 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 
                                //COMES FROM DECODE
                                // input busses: register indexes and values in // 
-                               .inst1_rega_in(id_rega_out_1), .inst1_regb_in(id_regb_out_1), 
-                               .inst2_rega_in(id_rega_out_2), .inst2_regb_in(id_regb_out_2),
+                               .inst1_rega_in(reg_inst1_rega), .inst1_regb_in(reg_inst1_regb), 
+                               .inst2_rega_in(reg_inst2_rega), .inst2_regb_in(reg_inst2_regb),
                                
                                //Destination and Value to write
                                .inst1_dest_in(reg_inst1_dest), .inst1_value_in(reg_inst1_value),

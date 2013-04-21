@@ -1,32 +1,24 @@
 # Begin_DVE_Session_Save_Info
 # DVE restart session
-# Saved on Fri Apr 19 23:44:43 2013
+# Saved on Sat Apr 20 22:48:30 2013
 # Designs open: 1
 #   Sim: /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/dve_simv
 # Toplevel windows open: 2
 # 	TopLevel.1
 # 	TopLevel.2
 #   Source.1: branch_decoder
-#   Wave.1: 23 signals
-#   Group count = 18
-#   Group Group1 signal count = 3
+#   Memory.1: testbench.memory.unified_memory[8191:0]
+#   Wave.1: 33 signals
+#   Group count = 9
+#   Group Group1 signal count = 14
 #   Group Group2 signal count = 1
 #   Group Group3 signal count = 1
 #   Group Group4 signal count = 1
-#   Group Group5 signal count = 2
-#   Group Group6 signal count = 1
+#   Group Group5 signal count = 1
+#   Group Group6 signal count = 8
 #   Group Group7 signal count = 1
-#   Group Group8 signal count = 2
-#   Group Group9 signal count = 1
-#   Group Group10 signal count = 1
-#   Group Group11 signal count = 2
-#   Group Group12 signal count = 1
-#   Group Group13 signal count = 1
-#   Group Group14 signal count = 1
-#   Group Group15 signal count = 1
-#   Group Group16 signal count = 1
-#   Group Group17 signal count = 1
-#   Group Group18 signal count = 1
+#   Group Group8 signal count = 3
+#   Group Group9 signal count = 3
 # End_DVE_Session_Save_Info
 
 # DVE version: E-2011.03_Full64
@@ -58,12 +50,13 @@ set Hier.1 Hier.1
 set DLPane.1 DLPane.1
 set Data.1 Data.1
 set Console.1 Console.1
-set DriverLoad.1 DriverLoad.1
 gui_sync_global -id ${TopLevel.1} -option true
 
 # MDI window settings
 set Source.1 Source.1
 gui_update_layout -id ${Source.1} {{show_state maximized} {dock_state undocked} {dock_on_new_line false}}
+set Memory.1 Memory.1
+gui_update_layout -id ${Memory.1} {{show_state maximized} {dock_state undocked} {dock_on_new_line false}}
 
 # End MDI window settings
 
@@ -77,7 +70,7 @@ gui_sync_global -id ${TopLevel.2} -option true
 
 # MDI window settings
 set Wave.1 Wave.1
-gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {dock_on_new_line false} {child_wave_left 533} {child_wave_right 1300} {child_wave_colname 264} {child_wave_colvalue 265} {child_wave_col1 0} {child_wave_col2 1}}
+gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {dock_on_new_line false} {child_wave_left 532} {child_wave_right 1297} {child_wave_colname 264} {child_wave_colvalue 264} {child_wave_col1 0} {child_wave_col2 1}}
 
 # End MDI window settings
 
@@ -105,65 +98,38 @@ gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {d
 
 set Group1 Group1
 gui_sg_create ${Group1}
-gui_sg_addsignal -group ${Group1} { testbench.pipeline_0.LSQ_0.proc2Dmem_command testbench.pipeline_0.LSQ_0.proc2Dmem_addr testbench.pipeline_0.LSQ_0.proc2Dmem_data }
+gui_sg_addsignal -group ${Group1} { testbench.pipeline_0.reorder_buffer_0.inst1_dest_out testbench.pipeline_0.reorder_buffer_0.inst2_dest_out testbench.pipeline_0.reorder_buffer_0.inst1_value_out testbench.pipeline_0.reorder_buffer_0.inst2_value_out testbench.pipeline_0.reorder_buffer_0.inst1_retire_tag_out testbench.pipeline_0.reorder_buffer_0.inst2_retire_tag_out testbench.pipeline_0.reorder_buffer_0.inst1_mispredicted_out testbench.pipeline_0.reorder_buffer_0.inst2_mispredicted_out testbench.pipeline_0.reorder_buffer_0.inst1_branch_result_out testbench.pipeline_0.reorder_buffer_0.inst2_branch_result_out testbench.pipeline_0.reorder_buffer_0.inst1_NPC_out testbench.pipeline_0.reorder_buffer_0.inst2_NPC_out testbench.pipeline_0.reorder_buffer_0.inst1_pht_index_out testbench.pipeline_0.reorder_buffer_0.inst2_pht_index_out }
 set Group2 Group2
 gui_sg_create ${Group2}
-gui_sg_addsignal -group ${Group2} { testbench.pipeline_0.stall_first_half_of_pipeline }
+gui_sg_addsignal -group ${Group2} { testbench.pipeline_0.map_table_0.tag_table }
 set Group3 Group3
 gui_sg_create ${Group3}
-gui_sg_addsignal -group ${Group3} { testbench.pipeline_0.n_halted }
+gui_sg_addsignal -group ${Group3} { testbench.pipeline_0.register_file0.values }
 set Group4 Group4
 gui_sg_create ${Group4}
-gui_sg_addsignal -group ${Group4} { testbench.pipeline_0.halted }
+gui_sg_addsignal -group ${Group4} { testbench.pipeline_0.reservation_station_0.statuses }
 set Group5 Group5
 gui_sg_create ${Group5}
-gui_sg_addsignal -group ${Group5} { testbench.pipeline_0.LSQ_full testbench.pipeline_0.rob_rob_full_out }
+gui_sg_addsignal -group ${Group5} { testbench.pipeline_0.reorder_buffer_0.states_out }
 set Group6 Group6
 gui_sg_create ${Group6}
-gui_sg_addsignal -group ${Group6} { testbench.pipeline_0.rs_dispatch_out }
+gui_sg_addsignal -group ${Group6} { testbench.pipeline_0.LSQ_0.EX_tag_1 testbench.pipeline_0.LSQ_0.value_in_1 testbench.pipeline_0.LSQ_0.address_in_1 testbench.pipeline_0.LSQ_0.EX_valid_1 testbench.pipeline_0.LSQ_0.EX_tag_2 testbench.pipeline_0.LSQ_0.value_in_2 testbench.pipeline_0.LSQ_0.address_in_2 testbench.pipeline_0.LSQ_0.EX_valid_2 }
 set Group7 Group7
 gui_sg_create ${Group7}
-gui_sg_addsignal -group ${Group7} { testbench.pipeline_0.LSQ_0.LSQ_empty }
+gui_sg_addsignal -group ${Group7} { testbench.memory.unified_memory }
 set Group8 Group8
 gui_sg_create ${Group8}
-gui_sg_addsignal -group ${Group8} { testbench.pipeline_0.LSQ_0.next_entry_1 testbench.pipeline_0.LSQ_0.next_entry_2 }
+gui_sg_addsignal -group ${Group8} { testbench.pipeline_0.LSQ_0.Dmem2proc_data testbench.pipeline_0.LSQ_0.Dmem2proc_response testbench.pipeline_0.LSQ_0.Dmem2proc_tag }
 set Group9 Group9
 gui_sg_create ${Group9}
-gui_sg_addsignal -group ${Group9} { testbench.pipeline_0.LSQ_0.LSQ_head }
-set Group10 Group10
-gui_sg_create ${Group10}
-gui_sg_addsignal -group ${Group10} { testbench.pipeline_0.LSQ_0.LSQ_tail }
-set Group11 Group11
-gui_sg_create ${Group11}
-gui_sg_addsignal -group ${Group11} { testbench.pipeline_0.LSQ_0.next_tail testbench.pipeline_0.LSQ_0.next_clear_tail }
-set Group12 Group12
-gui_sg_create ${Group12}
-gui_sg_addsignal -group ${Group12} { testbench.pipeline_0.LSQ_0.next_is_completed_read }
-set Group13 Group13
-gui_sg_create ${Group13}
-gui_sg_addsignal -group ${Group13} { testbench.pipeline_0.LSQ_0.clear_is_before_head }
-set Group14 Group14
-gui_sg_create ${Group14}
-gui_sg_addsignal -group ${Group14} { testbench.pipeline_0.LSQ_0.move_head_and_clear }
-set Group15 Group15
-gui_sg_create ${Group15}
-gui_sg_addsignal -group ${Group15} { testbench.pipeline_0.LSQ_0.clear_tail }
-set Group16 Group16
-gui_sg_create ${Group16}
-gui_sg_addsignal -group ${Group16} { testbench.pipeline_0.LSQ_0.completes_out }
-set Group17 Group17
-gui_sg_create ${Group17}
-gui_sg_addsignal -group ${Group17} { testbench.pipeline_0.LSQ_0.reads_out }
-set Group18 Group18
-gui_sg_create ${Group18}
-gui_sg_addsignal -group ${Group18} { testbench.pipeline_0.LSQ_0.miss_reset }
+gui_sg_addsignal -group ${Group9} { testbench.pipeline_0.LSQ_0.proc2Dmem_addr testbench.pipeline_0.LSQ_0.proc2Dmem_command testbench.pipeline_0.LSQ_0.proc2Dmem_data }
 
 # Global: Highlighting
 
 # Post database loading setting...
 
 # Restore C1 time
-gui_set_time -C1_only 2926
+gui_set_time -C1_only 529
 
 
 
@@ -196,11 +162,11 @@ gui_view_scroll -id ${Hier.1} -horizontal -set 0
 
 # Data 'Data.1'
 gui_list_set_filter -id ${Data.1} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {Parameter 1} {All 1} {Aggregate 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
-gui_list_set_filter -id ${Data.1} -text {*reset}
+gui_list_set_filter -id ${Data.1} -text {*}
 gui_list_show_data -id ${Data.1} {testbench.pipeline_0.LSQ_0}
 gui_show_window -window ${Data.1}
-catch { gui_list_select -id ${Data.1} {testbench.pipeline_0.LSQ_0.miss_reset }}
-gui_view_scroll -id ${Data.1} -vertical -set 0
+catch { gui_list_select -id ${Data.1} {testbench.pipeline_0.LSQ_0.proc2Dmem_addr testbench.pipeline_0.LSQ_0.proc2Dmem_command testbench.pipeline_0.LSQ_0.proc2Dmem_data }}
+gui_view_scroll -id ${Data.1} -vertical -set 240
 gui_view_scroll -id ${Data.1} -horizontal -set 0
 gui_view_scroll -id ${Hier.1} -vertical -set 0
 gui_view_scroll -id ${Hier.1} -horizontal -set 0
@@ -209,7 +175,7 @@ gui_view_scroll -id ${Hier.1} -horizontal -set 0
 gui_src_value_annotate -id ${Source.1} -switch false
 gui_set_env TOGGLE::VALUEANNOTATE 0
 gui_open_source -id ${Source.1}  -replace -active branch_decoder /afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/verilog/branch_predictor.v
-gui_view_scroll -id ${Source.1} -vertical -set 30
+gui_view_scroll -id ${Source.1} -vertical -set 0
 gui_src_set_reusable -id ${Source.1}
 
 # View 'Wave.1'
@@ -220,7 +186,7 @@ set origWaveHeight [gui_get_pref_value -category Wave -key waveRowHeight]
 gui_list_set_height -id Wave -height 25
 set origGroupCreationState [gui_list_create_group_when_add -wave]
 gui_list_create_group_when_add -wave -disable
-gui_wv_zoom_timerange -id ${Wave.1} 2833 2975
+gui_wv_zoom_timerange -id ${Wave.1} 128 555
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group1}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group2}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group3}
@@ -230,20 +196,8 @@ gui_list_add_group -id ${Wave.1} -after {New Group} {Group6}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group7}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group8}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group9}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group10}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group11}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group12}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group13}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group14}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group15}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group16}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group17}
-gui_list_add_group -id ${Wave.1} -after {New Group} {Group18}
-gui_list_collapse -id ${Wave.1} Group16
-gui_list_collapse -id ${Wave.1} Group17
-gui_list_expand -id ${Wave.1} testbench.pipeline_0.LSQ_0.next_clear_tail
-gui_list_expand -id ${Wave.1} testbench.pipeline_0.LSQ_0.clear_tail
-gui_list_select -id ${Wave.1} {testbench.pipeline_0.LSQ_0.next_is_completed_read }
+gui_list_expand -id ${Wave.1} testbench.pipeline_0.register_file0.values
+gui_list_select -id ${Wave.1} {testbench.memory.unified_memory }
 gui_seek_criteria -id ${Wave.1} {Any Edge}
 
 
@@ -259,24 +213,24 @@ if { $groupExD } {
 }
 gui_list_set_filter -id ${Wave.1} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {Parameter 1} {All 1} {Aggregate 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
 gui_list_set_filter -id ${Wave.1} -text {*}
-gui_list_set_insertion_bar  -id ${Wave.1} -group Group18  -position in
+gui_list_set_insertion_bar  -id ${Wave.1} -group Group9  -position in
 
-gui_marker_move -id ${Wave.1} {C1} 2926
-gui_view_scroll -id ${Wave.1} -vertical -set 235
+gui_marker_move -id ${Wave.1} {C1} 529
+gui_view_scroll -id ${Wave.1} -vertical -set 989
 gui_show_grid -id ${Wave.1} -enable false
 
-# DriverLoad 'DriverLoad.1'
-gui_get_drivers -session -id ${DriverLoad.1} -signal testbench.pipeline_0.LSQ_full -time 3662228
-gui_get_drivers -session -id ${DriverLoad.1} -signal {testbench.pipeline_0.LSQ_0.next_entry_1[4:0]} -time 1191372
-gui_get_drivers -session -id ${DriverLoad.1} -signal {testbench.pipeline_0.LSQ_0.LSQ_tail[4:0]} -time 1191372
-gui_get_drivers -session -id ${DriverLoad.1} -signal {testbench.pipeline_0.LSQ_0.next_clear_tail[4:0]} -time 1130792
-gui_get_drivers -session -id ${DriverLoad.1} -signal testbench.pipeline_0.LSQ_0.next_is_completed_read -time 2976
-gui_get_drivers -session -id ${DriverLoad.1} -signal testbench.pipeline_0.LSQ_0.next_is_completed_read -time 850172
+# View 'Memory.1'
+gui_show_memory -window ${Memory.1} -memory {testbench.memory.unified_memory[8191:0][63:0]}
+gui_set_memory_properties -window ${Memory.1} -columns 1 -address_factor -1 -address_offset 8191 -start_address 8191 -end_address 0 -address_radix 10
+gui_set_radix -radix {hex} -signals {{testbench.memory.unified_memory[8191:0][63:0]}}
+gui_set_radix -radix {unsigned} -signals {{testbench.memory.unified_memory[8191:0][63:0]}}
+gui_view_scroll -id ${Memory.1} -vertical -set 163200
+gui_view_scroll -id ${Memory.1} -horizontal -set 0
 # Restore toplevel window zorder
 # The toplevel window could be closed if it has no view/pane
 if {[gui_exist_window -window ${TopLevel.1}]} {
 	gui_set_active_window -window ${TopLevel.1}
-	gui_set_active_window -window ${Source.1}
+	gui_set_active_window -window ${Memory.1}
 	gui_set_active_window -window ${DLPane.1}
 }
 if {[gui_exist_window -window ${TopLevel.2}]} {

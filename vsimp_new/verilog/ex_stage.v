@@ -190,18 +190,18 @@ module ex_stage(// Inputs
 
 // To do: use rd/wr mem inputs for each bus
 
-  assign LSQ_valid_out_1 = (id_ex_wr_mem_in_1 | id_ex_rd_mem_in_1);
-  assign LSQ_valid_out_2 = (id_ex_wr_mem_in_2 | id_ex_rd_mem_in_2);
+  assign LSQ_valid_out_1 = (id_ex_wr_mem_in_1 | id_ex_rd_mem_in_1) & !stall_bus_1;
+  assign LSQ_valid_out_2 = (id_ex_wr_mem_in_2 | id_ex_rd_mem_in_2) & !stall_bus_2;
    
    // Check if we use the ALU or the Multiplier for each channel
-  assign ex_mult_valid_in_1  =  (valid_in_1 & id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1:  1'b0;
-  assign ex_alu_valid_out_1  = (valid_in_1 & !ex_mult_valid_in_1 & (!id_ex_rd_mem_in_1)) ? 1'b1: 1'b0;
+  assign ex_mult_valid_in_1  =  (valid_in_1  & !stall_bus_1 & id_ex_alu_func_1 == `ALU_MULQ) ? 1'b1:  1'b0;
+  assign ex_alu_valid_out_1  = (valid_in_1 & !stall_bus_1 & !ex_mult_valid_in_1 & (!id_ex_rd_mem_in_1)) ? 1'b1: 1'b0;
   
-  assign ex_mult_valid_in_2 =  (valid_in_2 & id_ex_alu_func_2 == `ALU_MULQ) ?  1'b1:  1'b0;
-  assign ex_alu_valid_out_2  = (valid_in_2 & !ex_mult_valid_in_2 & (!id_ex_rd_mem_in_2)) ? 1'b1: 1'b0;
+  assign ex_mult_valid_in_2 =  (valid_in_2 & !stall_bus_2 & id_ex_alu_func_2 == `ALU_MULQ) ?  1'b1:  1'b0;
+  assign ex_alu_valid_out_2  = (valid_in_2 & !stall_bus_2 & !ex_mult_valid_in_2 & (!id_ex_rd_mem_in_2)) ? 1'b1: 1'b0;
    
-  assign branch_valid_out_1 = (valid_in_1 & (id_ex_uncond_branch_1 | id_ex_cond_branch_1)) ? 1'b1: 1'b0;
-  assign branch_valid_out_2 = (valid_in_2 & (id_ex_uncond_branch_2 | id_ex_cond_branch_2)) ? 1'b1: 1'b0;
+  assign branch_valid_out_1 = (valid_in_1 & !stall_bus_1 & (id_ex_uncond_branch_1 | id_ex_cond_branch_1)) ? 1'b1: 1'b0;
+  assign branch_valid_out_2 = (valid_in_2 & !stall_bus_2 & (id_ex_uncond_branch_2 | id_ex_cond_branch_2)) ? 1'b1: 1'b0;
 
    // Set the outputs to the LSQ
   assign LSQ_tag_out_1 = id_ex_dest_reg_1;

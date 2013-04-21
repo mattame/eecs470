@@ -223,7 +223,7 @@ module reorder_buffer( clock,reset,
                       inst1_NPC_out,inst2_NPC_out,
                       inst1_pht_index_out,inst2_pht_index_out,
 
-                      // outputs for LSQ //
+                      // outputs for LSQ and RS //
                       inst1_retire_tag_out,
                       inst2_retire_tag_out,
 

@@ -57,16 +57,16 @@ module register_file(clock,reset,   // input signals in
    // combinational logic for reg value outputs (includes internal register forwarding) // 
    assign inst1_rega_out = (reset ? 64'd0 : 
                             ((inst2_dest_in==inst1_rega_in) && inst2_dest_nonzero) ? inst2_value_in :
-                             ( ((inst1_dest_in==inst1_rega_in) && inst1_dest_nonzero) ? inst1_value_in : values[inst1_rega_in] )); 
+                             ( ((inst1_dest_in==inst1_rega_in) && inst1_dest_nonzero) ? inst1_value_in : n_values[inst1_rega_in] )); 
    assign inst1_regb_out = (reset ? 64'd0 :
                             ((inst2_dest_in==inst1_regb_in) && inst2_dest_nonzero) ? inst2_value_in :
-                             ( ((inst1_dest_in==inst1_regb_in) && inst1_dest_nonzero) ? inst1_value_in : values[inst1_regb_in] ));
+                             ( ((inst1_dest_in==inst1_regb_in) && inst1_dest_nonzero) ? inst1_value_in : n_values[inst1_regb_in] ));
    assign inst2_rega_out = (reset ? 64'd0 :
                             ((inst2_dest_in==inst2_rega_in) && inst2_dest_nonzero) ? inst2_value_in :
-                             ( ((inst1_dest_in==inst2_rega_in) && inst1_dest_nonzero) ? inst1_value_in : values[inst2_rega_in] )); 
+                             ( ((inst1_dest_in==inst2_rega_in) && inst1_dest_nonzero) ? inst1_value_in : n_values[inst2_rega_in] )); 
    assign inst2_regb_out = (reset ? 64'd0 :
                              ((inst2_dest_in==inst2_regb_in) && inst2_dest_nonzero) ? inst2_value_in : 
-                             ( ((inst1_dest_in==inst2_regb_in) && inst1_dest_nonzero) ? inst1_value_in : values[inst2_regb_in] ));
+                             ( ((inst1_dest_in==inst2_regb_in) && inst1_dest_nonzero) ? inst1_value_in : n_values[inst2_regb_in] ));
 
 
    // combinational logic for n_values and clear_entries //

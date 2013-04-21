@@ -742,7 +742,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     else
     begin
  /* 
-     if (stall_first_half_of_pipeline)
+     if (stall_first_half_of_pi                 inst1_cur_dest_in,peline)
       begin
          id_NPC_1           = id_NPC_1;
          id_IR_1            = id_IR_1;
@@ -1074,6 +1074,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                            //THESE COME FROM DECODE
                            .inst1_rega_in(mt_inst1_rega),
                            .inst1_regb_in(mt_inst1_regb),
+                           .inst1_cur_dest_in(ff_dest_reg_1),
                            
                            //THESE COME FROM ROB
                            .inst1_dest_in(mt_inst1_dest),
@@ -1082,6 +1083,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                            // instruction 2 access inputs //
                            .inst2_rega_in(mt_inst2_rega),
                            .inst2_regb_in(mt_inst2_regb),
+                           .inst2_cur_dest_in(ff_dest_reg_2),
                            
                            .inst2_dest_in(mt_inst2_dest),
                            .inst2_tag_in(mt_inst2_tag),

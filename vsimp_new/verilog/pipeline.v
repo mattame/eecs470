@@ -559,6 +559,7 @@ module pipeline (// Inputs
 ////////////////////////////////////////////////
 
 
+
 //////////// STUFF FOR BRANCH MISPREDICTIONS ///////////////////////
 wire mispredict;
 assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
@@ -750,7 +751,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     else
     begin
  /* 
-     if (stall_first_half_of_pi                 inst1_cur_dest_in,peline)
+     if (stall_first_half_of_pipeline)
       begin
          id_NPC_1           = id_NPC_1;
          id_IR_1            = id_IR_1;
@@ -1350,7 +1351,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 
                                            // inputs from the EX to stall //
                                            .inst1_stall_in(ex_stall_bus_out_1),
-                                           .inst2_stall_in(ex_stall_bus_out_2),
+                                           .inst2_stall_in(ex_stall_bus_out_2 || `NO_SUPERSCALAR),
 
 
                                            // inputs from the ROB //
@@ -1570,7 +1571,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
     end
 
 
-    if (ex_stall_bus_out_2)
+    if (ex_stall_bus_out_2 || `NO_SUPERSCALAR)
     begin  
       ex_valid_2         <= `SD ex_valid_2;
       ex_NPC_2           <= `SD ex_NPC_2;

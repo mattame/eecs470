@@ -1,6 +1,5 @@
 
-NUM_RSES = 16
-
+NUM_RSES = 4
 
 # make assignments #
 for i in range(NUM_RSES):

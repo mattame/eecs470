@@ -11,6 +11,9 @@
 *   Here are our sys defs from various files
 **********************************************/
 
+`define NO_SUPERSCALAR 1'b1
+
+
 //Branch Predictor
 `define HISTORY_BITS 3
 `define PHT_ENTRIES 8

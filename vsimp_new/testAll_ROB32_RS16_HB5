@@ -1,6 +1,6 @@
 Test test_rs.s:
 
-< @@  749 cycles / 306 instrs = 2.447712 CPI
+< @@  757 cycles / 306 instrs = 2.473856 CPI
 > @@  1530 cycles / 305 instrs = 5.016393 CPI
 
 
@@ -30,37 +30,37 @@ Test btest2.s:
 
 Test copy_long.s:
 
-< @@  584 cycles / 591 instrs = 0.988156 CPI
+< @@  602 cycles / 591 instrs = 1.018613 CPI
 > @@  2955 cycles / 590 instrs = 5.008475 CPI
 
 
 Test copy.s:
 
-< @@  312 cycles / 131 instrs = 2.381679 CPI
+< @@  336 cycles / 131 instrs = 2.564885 CPI
 > @@  655 cycles / 130 instrs = 5.038462 CPI
 
 
 Test evens_long.s:
 
-< @@  365 cycles / 319 instrs = 1.144201 CPI
+< @@  341 cycles / 319 instrs = 1.068966 CPI
 > @@  1595 cycles / 318 instrs = 5.015723 CPI
 
 
 Test evens.s:
 
-< @@  254 cycles / 83 instrs = 3.060241 CPI
+< @@  251 cycles / 83 instrs = 3.024096 CPI
 > @@  415 cycles / 82 instrs = 5.060976 CPI
 
 
 Test fib_long.s:
 
-< @@  704 cycles / 628 instrs = 1.121019 CPI
+< @@  716 cycles / 628 instrs = 1.140127 CPI
 > @@  3140 cycles / 627 instrs = 5.007974 CPI
 
 
 Test fib.s:
 
-< @@  343 cycles / 148 instrs = 2.317568 CPI
+< @@  351 cycles / 148 instrs = 2.371622 CPI
 > @@  740 cycles / 147 instrs = 5.034014 CPI
 
 
@@ -72,19 +72,19 @@ Test nop.s:
 
 Test parallel_long.s:
 
-< @@  711 cycles / 911 instrs = 0.780461 CPI
+< @@  723 cycles / 911 instrs = 0.793633 CPI
 > @@  4555 cycles / 910 instrs = 5.005495 CPI
 
 
 Test parallel.s:
 
-< @@  207 cycles / 195 instrs = 1.061538 CPI
+< @@  231 cycles / 195 instrs = 1.184615 CPI
 > @@  975 cycles / 194 instrs = 5.025773 CPI
 
 
 Test saxpy.s:
 
-< @@  454 cycles / 186 instrs = 2.440860 CPI
+< @@  466 cycles / 186 instrs = 2.505376 CPI
 > @@  930 cycles / 185 instrs = 5.027027 CPI
 
 

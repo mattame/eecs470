@@ -3,13 +3,13 @@
 
 // parameter definitions. note that if you change PC_bits you should //
 // also change BTB_ENTRIES accordingly. BTB_ENTRIES = 2^PC_BITS //
-`define BTB_PC_BITS 8
-`define BTB_ENTRIES 256 
-`define BRANCH_NONE      2'b00
-`define BRANCH_TAKEN     2'b01
-`define BRANCH_NOT_TAKEN 2'b10
-`define BRANCH_UNUSED    2'b11
-`define SD #1
+//`define BTB_PC_BITS 8
+//`define BTB_ENTRIES 256 
+//`define BRANCH_NONE      2'b00
+//`define BRANCH_TAKEN     2'b01
+//`define BRANCH_NOT_TAKEN 2'b10
+//`define BRANCH_UNUSED    2'b11
+//`define SD #1
 
 // branch target buffer module //
 module branch_target_buffer( clock,reset,

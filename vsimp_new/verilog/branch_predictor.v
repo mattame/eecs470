@@ -1,13 +1,14 @@
 
 // defines //
-`define HISTORY_BITS 8
-`define PHT_ENTRIES 256
-`define BRANCH_NONE      2'b00
-`define BRANCH_TAKEN     2'b01
-`define BRANCH_NOT_TAKEN 2'b10
-`define BRANCH_UNUSED    2'b11
-`define SD #1
+//`define HISTORY_BITS 8
+//`define PHT_ENTRIES 256
+//`define BRANCH_NONE      2'b00
+//`define BRANCH_TAKEN     2'b01
+//`define BRANCH_NOT_TAKEN 2'b10
+//`define BRANCH_UNUSED    2'b11
+//`define SD #1
 
+/*
 // simple branch decoder module (combinational) //
 module branch_decoder(
         IR_in,
@@ -45,7 +46,7 @@ module branch_decoder(
    end
    
 endmodule
-
+*/
 
 // branch predictor module //
 module branch_predictor (

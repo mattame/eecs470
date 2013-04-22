@@ -5,22 +5,22 @@
 // The main module utilizes multiple individual reservation station modules. //
 ///////////////////////////////////////////////////////////////////////////////
 
-`define SD #1
+//`define SD #1
 
 // defined paramters //
-`define NUM_RSES 16
-`define NUM_RSES_MINUS_ONE 7
-`define RS_EMPTY        3'b000
-`define RS_WAITING_A    3'b001
-`define RS_WAITING_B    3'b010
-`define RS_WAITING_BOTH 3'b011
-`define RS_READY        3'b100
-`define RS_TEST         3'b111
-`define RSTAG_NULL      8'hFF           
-`define ZERO_REG         5'd0
-`define NOOP_INST    32'h47ff041f
+//`define NUM_RSES 16
+//`define NUM_RSES_MINUS_ONE 7
+//`define RS_EMPTY        3'b000
+//`define RS_WAITING_A    3'b001
+//`define RS_WAITING_B    3'b010
+//`define RS_WAITING_BOTH 3'b011
+//`define RS_READY        3'b100
+//`define RS_TEST         3'b111
+//`define RSTAG_NULL      8'hFF           
+//`define ZERO_REG         5'd0
+//`define NOOP_INST    32'h47ff041f
 
-`define HISTORY_BITS 8
+//`define HISTORY_BITS 8
 
 //`timescale 1ns/100ps
 

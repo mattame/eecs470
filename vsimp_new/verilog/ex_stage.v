@@ -11,7 +11,7 @@
 //                                                                      //
 //////////////////////////////////////////////////////////////////////////
 
-`define HISTORY_BITS 8
+//`define HISTORY_BITS 8
 
 module ex_stage(// Inputs
 			clock,

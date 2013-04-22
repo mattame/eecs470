@@ -12,7 +12,7 @@
 **********************************************/
 
 //Branch Predictor
-`define HISTORY_BITS 5
+`define HISTORY_BITS 8
 `define PHT_ENTRIES 256
 `define BRANCH_NONE      2'b00
 `define BRANCH_TAKEN     2'b01
@@ -73,7 +73,6 @@
 `define RSTAG_NULL      8'hFF           
 `define NOOP_INST    32'h47ff041f
 
-`define HISTORY_BITS 8
 
 
 

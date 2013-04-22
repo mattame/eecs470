@@ -1,0 +1,615 @@
+
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 23:33 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+branch_predictor.v, 12 : module branch_decoder(
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+@@@ Unified Memory contents hex on left, decimal on right: 
+@@@
+@@@ mem[    0] = 221f000223df1000 : 2458683930759335936
+@@@ mem[    8] = 203f0400d3400003 : 2323580334337163267
+@@@ mem[   16] = 00000555b4010000 : 5865650323456
+@@@ mem[   24] = 420035a1e6000010 : 4755860175968010256
+@@@ mem[   32] = 43c4153ef420000e : 4883051256104353806
+@@@ mem[   40] = b61e0000b75e0018 : 13122926367280594968
+@@@ mem[   48] = d35ffff842003530 : 15231173906514588976
+@@@ mem[   56] = a61e0000b41e0008 : 11970004862619222024
+@@@ mem[   64] = d35ffff442005530 : 15231173889334727984
+@@@ mem[   72] = 40200400a43e0008 : 4620697618484166664
+@@@ mem[   80] = 43c4141ea75e0018 : 4883050017865990168
+@@@ mem[   88] = 47e034006bfa8001 : 5179196747892293633
+@@@ mem[   96] = 000000006bfa8001 : 1811578881
+@@@
+@@@ mem[ 1024] = 0000000000000002 : 2
+@@@
+@@@ mem[ 4064] = 0000000000000002 : 2
+@@@ mem[ 4072] = 0000000000000001 : 1
+@@@
+@@@ mem[ 4088] = 000000000000000c : 12
+@@@
+@@@
+@@                  1772 : System halted
+@@
+@@@ System halted on HALT instruction
+@@@
+@@
+@@  164 cycles / 32 instrs = 5.125000 CPI
+@@
+@@  4890.00 ns total time to execute
+@@
+ 
+$finish called from file "testbench/testbench.v", line 297.
+$finish at simulation time                 1872
+Simulation complete, time is 1872.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 1872
+CPU Time:      0.610 seconds;       Data structure size:   0.7Mb
+Sun Apr 21 23:35:02 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 23:35 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+branch_predictor.v, 12 : module branch_decoder(
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+@@@ Unified Memory contents hex on left, decimal on right: 
+@@@
+@@@ mem[    0] = 221f000223df1000 : 2458683930759335936
+@@@ mem[    8] = 203f0400d3400003 : 2323580334337163267
+@@@ mem[   16] = 00000555b4010000 : 5865650323456
+@@@ mem[   24] = 420035a1e6000010 : 4755860175968010256
+@@@ mem[   32] = 43c4153ef420000e : 4883051256104353806
+@@@ mem[   40] = b61e0000b75e0018 : 13122926367280594968
+@@@ mem[   48] = d35ffff842003530 : 15231173906514588976
+@@@ mem[   56] = a61e0000b41e0008 : 11970004862619222024
+@@@ mem[   64] = d35ffff442005530 : 15231173889334727984
+@@@ mem[   72] = 40200400a43e0008 : 4620697618484166664
+@@@ mem[   80] = 43c4141ea75e0018 : 4883050017865990168
+@@@ mem[   88] = 47e034006bfa8001 : 5179196747892293633
+@@@ mem[   96] = 000000006bfa8001 : 1811578881
+@@@
+@@@ mem[ 1024] = 0000000000000002 : 2
+@@@
+@@@ mem[ 4064] = 0000000000000002 : 2
+@@@ mem[ 4072] = 0000000000000001 : 1
+@@@
+@@@ mem[ 4088] = 000000000000000c : 12
+@@@
+@@@
+@@                  1772 : System halted
+@@
+@@@ System halted on HALT instruction
+@@@
+@@
+@@  164 cycles / 32 instrs = 5.125000 CPI
+@@
+@@  4890.00 ns total time to execute
+@@
+ 
+$finish called from file "testbench/testbench.v", line 297.
+$finish at simulation time                 1872
+Simulation complete, time is 1872.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 1872
+CPU Time:      0.240 seconds;       Data structure size:   0.7Mb
+Sun Apr 21 23:35:13 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 23:41 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+branch_predictor.v, 12 : module branch_decoder(
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+@@@ Unified Memory contents hex on left, decimal on right: 
+@@@
+@@@ mem[    0] = 221f000223df1000 : 2458683930759335936
+@@@ mem[    8] = 203f0400d3400003 : 2323580334337163267
+@@@ mem[   16] = 00000555b4010000 : 5865650323456
+@@@ mem[   24] = 420035a1e6000010 : 4755860175968010256
+@@@ mem[   32] = 43c4153ef420000e : 4883051256104353806
+@@@ mem[   40] = b61e0000b75e0018 : 13122926367280594968
+@@@ mem[   48] = d35ffff842003530 : 15231173906514588976
+@@@ mem[   56] = a61e0000b41e0008 : 11970004862619222024
+@@@ mem[   64] = d35ffff442005530 : 15231173889334727984
+@@@ mem[   72] = 40200400a43e0008 : 4620697618484166664
+@@@ mem[   80] = 43c4141ea75e0018 : 4883050017865990168
+@@@ mem[   88] = 47e034006bfa8001 : 5179196747892293633
+@@@ mem[   96] = 000000006bfa8001 : 1811578881
+@@@
+@@@ mem[ 1024] = 0000000000000002 : 2
+@@@
+@@@ mem[ 4064] = 0000000000000002 : 2
+@@@ mem[ 4072] = 0000000000000001 : 1
+@@@
+@@@ mem[ 4088] = 000000000000000c : 12
+@@@
+@@@
+@@                  1772 : System halted
+@@
+@@@ System halted on HALT instruction
+@@@
+@@
+@@  164 cycles / 32 instrs = 5.125000 CPI
+@@
+@@  4890.00 ns total time to execute
+@@
+ 
+$finish called from file "testbench/testbench.v", line 297.
+$finish at simulation time                 1872
+Simulation complete, time is 1872.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 1872
+CPU Time:      0.250 seconds;       Data structure size:   0.7Mb
+Sun Apr 21 23:41:58 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 23:42 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+branch_predictor.v, 12 : module branch_decoder(
+branch_predictor.v, 12 : module branch_decoder(
+branch_predictor.v, 12 : module branch_decoder(
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 28727852
+CPU Time:      9.080 seconds;       Data structure size:   0.7Mb
+Sun Apr 21 23:54:14 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 23:54 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+branch_predictor.v, 12 : module branch_decoder(
+branch_predictor.v, 12 : module branch_decoder(
+branch_predictor.v, 12 : module branch_decoder(
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 11870020
+CPU Time:      4.250 seconds;       Data structure size:   0.7Mb
+Mon Apr 22 00:05:52 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 22 00:05 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+branch_predictor.v, 12 : module branch_decoder(
+branch_predictor.v, 12 : module branch_decoder(
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 7329172
+CPU Time:      2.390 seconds;       Data structure size:   0.7Mb
+Mon Apr 22 00:42:00 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 22 00:42 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+branch_predictor.v, 12 : module branch_decoder(
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 6147462
+CPU Time:      2.480 seconds;       Data structure size:   0.7Mb
+Mon Apr 22 00:44:54 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 22 00:44 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+branch_predictor.v, 12 : module branch_decoder(
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 4290742
+CPU Time:      1.510 seconds;       Data structure size:   0.7Mb
+Mon Apr 22 00:51:13 2013
+Chronologic VCS simulator copyright 1991-2011
+Contains Synopsys proprietary information.
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 22 00:51 2013
+VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
+The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+=========== Call stack: ============
+_ZN2ag10printStackERK7QStringi
+_ZN2ag16utilCrashHandlerD1Ev
+_ZN2ag10wndConsole23slotExecuteCmdWithFlagsERK7QStringbbbb
+_ZN2ag11utilFastTcl6invokeEbbbbbb
+_ZN2ag11utilFastTcl10evalAndLogEb
+_ZN2ag18wvMarkerHeaderView13moveMarkerCmdER7QStringRNS_10mathUInt64Ej
+_ZN2ag12wvScrollView24completeMouseEventsCycleEiib
+_ZN2ag12wvScrollView25contentsMouseReleaseEventEP11QMouseEvent
+_ZN11QScrollView25viewportMouseReleaseEventEP11QMouseEvent
+_ZN11QScrollView11eventFilterEP7QObjectP6QEvent
+_ZN7QObject16activate_filtersEP6QEvent
+_ZN7QObject5eventEP6QEvent
+_ZN7QWidget5eventEP6QEvent
+_ZN12QApplication14internalNotifyEP7QObjectP6QEvent
+_ZN12QApplication6notifyEP7QObjectP6QEvent
+_ZN10EkExtQtApp6notifyEP7QObjectP6QEvent
+_ZN2ag9baseQtApp6notifyEP7QObjectP6QEvent
+_ZN9QETWidget19translateMouseEventEPK7_XEvent
+_ZN12QApplication15x11ProcessEventEP7_XEvent
+_ZN10QEventLoop13processEventsEj
+_ZN2ag12ovaEventLoop13processEventsEj
+_ZN10QEventLoop9enterLoopEv
+_ZN10QEventLoop4execEv
+run_cci_event_loop
+_ZN2ag10ovaAppInst14enterEventLoopEiPPc
+main
+====================================
+

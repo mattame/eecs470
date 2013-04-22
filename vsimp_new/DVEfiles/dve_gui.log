@@ -1,10 +1,85 @@
 
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 22:53 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 22 01:58 2013
 VCD+ Writer E-2011.03_Full64 Copyright (c) 1991-2011 by Synopsys Inc.
 The file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/inter.vpd' was opened successfully.
+branch_predictor.v, 12 : module branch_decoder(
+@@
+@@
+@@                     0  Asserting System reset......
+@@
+@@                     0 : System STILL at reset, can't show anything
+@@
+@@
+@@                    10 : System STILL at reset, can't show anything
+@@
+@@
+@@                    20 : System STILL at reset, can't show anything
+@@
+@@
+@@                    30 : System STILL at reset, can't show anything
+@@
+@@
+@@                    40 : System STILL at reset, can't show anything
+@@
+@@
+@@                    50 : System STILL at reset, can't show anything
+@@
+@@
+@@                    60 : System STILL at reset, can't show anything
+@@
+@@
+@@                    70 : System STILL at reset, can't show anything
+@@
+@@
+@@                    80 : System STILL at reset, can't show anything
+@@
+@@
+@@                    90 : System STILL at reset, can't show anything
+@@
+@@
+@@                   100 : System STILL at reset, can't show anything
+@@
+@@
+@@                   110 : System STILL at reset, can't show anything
+@@
+@@
+@@                   120 : System STILL at reset, can't show anything
+@@
+@@
+@@                   130 : System STILL at reset, can't show anything
+@@
+@@                   136  Deasserting System reset......
+@@
+@@
+@@@ Unified Memory contents hex on left, decimal on right: 
+@@@
+@@@ mem[    0] = 40210401203f0001 : 4620979095541317633
+@@@ mem[    8] = 4021040140210401 : 4620979096076223489
+@@@ mem[   16] = 4021040140210401 : 4620979096076223489
+@@@ mem[   24] = 4021040140210401 : 4620979096076223489
+@@@ mem[   32] = 4021040140210401 : 4620979096076223489
+@@@ mem[   40] = 4021040140210401 : 4620979096076223489
+@@@ mem[   48] = 4021040140210401 : 4620979096076223489
+@@@ mem[   56] = 4021040140210401 : 4620979096076223489
+@@@ mem[   64] = 0000000000000555 : 1365
+@@@
+@@@
+@@                   822 : System halted
+@@
+@@@ System halted on HALT instruction
+@@@
+@@
+@@  69 cycles / 17 instrs = 4.058824 CPI
+@@
+@@  2040.00 ns total time to execute
+@@
+ 
+$finish called from file "testbench/testbench.v", line 297.
+$finish at simulation time                  922
+Simulation complete, time is 922.
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 0
-CPU Time:      0.120 seconds;       Data structure size:   0.7Mb
-Sun Apr 21 22:53:08 2013
+Time: 922
+CPU Time:      0.490 seconds;       Data structure size:   0.7Mb
+Mon Apr 22 01:59:12 2013

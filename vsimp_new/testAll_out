@@ -1,0 +1,36 @@
+
+Test test_rs.s:
+
+< @@  769 cycles / 306 instrs = 2.513072 CPI
+> @@  1530 cycles / 305 instrs = 5.016393 CPI
+
+
+
+Test halt.s:
+
+< @@  13 cycles / 1 instrs = 13.000000 CPI
+> @@  5 cycles / 0 instrs = inf CPI
+
+
+
+Test test_rs.s:
+
+< @@  769 cycles / 306 instrs = 2.513072 CPI
+> @@  1530 cycles / 305 instrs = 5.016393 CPI
+
+
+Test halt.s:
+
+< @@  13 cycles / 1 instrs = 13.000000 CPI
+> @@  5 cycles / 0 instrs = inf CPI
+
+
+Test test_rs.s:
+
+
+
+Test halt.s:
+
+> @@  5 cycles / 0 instrs = inf CPI
+
+

@@ -1,5 +1,5 @@
 psSimBaseName                      	simv
-pDaiDir                            	/afs/umich.edu/user/n/o/nowakmr/eecs470/eecs470/vsimp_new/simv.daidir
+pDaiDir                            	/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/simv.daidir
 destPath                           	csrc/
 hsMainFileCount                    	0
 hsMainFileName                     	dummy

@@ -1,17 +1,20 @@
 # Begin_DVE_Session_Save_Info
 # DVE restart session
-# Saved on Sun Apr 21 22:51:16 2013
+# Saved on Mon Apr 22 00:51:13 2013
 # Designs open: 1
 #   Sim: /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/dve_simv
 # Toplevel windows open: 2
 # 	TopLevel.1
 # 	TopLevel.2
-#   Source.1: branch_decoder
-#   Wave.1: 45 signals
-#   Group count = 3
-#   Group Group1 signal count = 17
-#   Group Group2 signal count = 14
-#   Group Group3 signal count = 14
+#   Source.1: testbench.pipeline_0
+#   Wave.1: 36 signals
+#   Group count = 6
+#   Group Group1 signal count = 1
+#   Group Group2 signal count = 10
+#   Group Group3 signal count = 11
+#   Group Group4 signal count = 1
+#   Group Group5 signal count = 4
+#   Group Group6 signal count = 9
 # End_DVE_Session_Save_Info
 
 # DVE version: E-2011.03_Full64
@@ -61,7 +64,7 @@ gui_sync_global -id ${TopLevel.2} -option true
 
 # MDI window settings
 set Wave.1 Wave.1
-gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {dock_on_new_line false} {child_wave_left 537} {child_wave_right 1309} {child_wave_colname 266} {child_wave_colvalue 267} {child_wave_col1 0} {child_wave_col2 1}}
+gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {dock_on_new_line false} {child_wave_left 536} {child_wave_right 1309} {child_wave_colname 266} {child_wave_colvalue 266} {child_wave_col1 0} {child_wave_col2 1}}
 
 # End MDI window settings
 
@@ -89,20 +92,29 @@ gui_update_layout -id ${Wave.1} {{show_state maximized} {dock_state undocked} {d
 
 set Group1 Group1
 gui_sg_create ${Group1}
-gui_sg_addsignal -group ${Group1} { testbench.pipeline_0.register_file0.values testbench.pipeline_0.reorder_buffer_0.inst1_dest_out testbench.pipeline_0.reorder_buffer_0.inst2_dest_out testbench.pipeline_0.reorder_buffer_0.inst1_value_out testbench.pipeline_0.reorder_buffer_0.inst2_value_out testbench.pipeline_0.reorder_buffer_0.inst1_retire_tag_out testbench.pipeline_0.reorder_buffer_0.inst2_retire_tag_out testbench.pipeline_0.reorder_buffer_0.inst1_mispredicted_out testbench.pipeline_0.reorder_buffer_0.inst2_mispredicted_out testbench.pipeline_0.reorder_buffer_0.inst1_branch_result_out testbench.pipeline_0.reorder_buffer_0.inst2_branch_result_out testbench.pipeline_0.reorder_buffer_0.inst1_NPC_out testbench.pipeline_0.reorder_buffer_0.inst2_NPC_out testbench.pipeline_0.reorder_buffer_0.inst1_pht_index_out testbench.pipeline_0.reorder_buffer_0.inst2_pht_index_out testbench.pipeline_0.reorder_buffer_0.inst1_CPC_out testbench.pipeline_0.reorder_buffer_0.inst2_CPC_out }
+gui_sg_addsignal -group ${Group1} { testbench.pipeline_0.register_file0.values }
 set Group2 Group2
 gui_sg_create ${Group2}
-gui_sg_addsignal -group ${Group2} { testbench.pipeline_0.cm_stage_0.cdb_tag_1 testbench.pipeline_0.cm_stage_0.cdb_value_1 testbench.pipeline_0.cm_stage_0.cdb_NPC_1 testbench.pipeline_0.cm_stage_0.cdb_mispredict_1 testbench.pipeline_0.cm_stage_0.cdb_branch_result_1 testbench.pipeline_0.cm_stage_0.cdb_pht_index_1 testbench.pipeline_0.cm_stage_0.cdb_CPC_1 testbench.pipeline_0.cm_stage_0.cdb_tag_2 testbench.pipeline_0.cm_stage_0.cdb_value_2 testbench.pipeline_0.cm_stage_0.cdb_NPC_2 testbench.pipeline_0.cm_stage_0.cdb_mispredict_2 testbench.pipeline_0.cm_stage_0.cdb_branch_result_2 testbench.pipeline_0.cm_stage_0.cdb_pht_index_2 testbench.pipeline_0.cm_stage_0.cdb_CPC_2 }
+gui_sg_addsignal -group ${Group2} { testbench.pipeline_0.reorder_buffer_0.inst1_rega_value_out testbench.pipeline_0.reorder_buffer_0.inst1_regb_value_out testbench.pipeline_0.reorder_buffer_0.inst1_dest_out testbench.pipeline_0.reorder_buffer_0.inst1_value_out testbench.pipeline_0.reorder_buffer_0.inst1_retire_tag_out testbench.pipeline_0.reorder_buffer_0.inst1_mispredicted_out testbench.pipeline_0.reorder_buffer_0.inst1_branch_result_out testbench.pipeline_0.reorder_buffer_0.inst1_NPC_out testbench.pipeline_0.reorder_buffer_0.inst1_pht_index_out testbench.pipeline_0.reorder_buffer_0.inst1_CPC_out }
 set Group3 Group3
 gui_sg_create ${Group3}
-gui_sg_addsignal -group ${Group3} { testbench.pipeline_0.reorder_buffer_0.cdb2_value_in testbench.pipeline_0.reorder_buffer_0.cdb2_pht_index_in testbench.pipeline_0.reorder_buffer_0.cdb2_mispredicted_in testbench.pipeline_0.reorder_buffer_0.cdb1_NPC_in testbench.pipeline_0.reorder_buffer_0.cdb1_branch_result_in testbench.pipeline_0.reorder_buffer_0.cdb2_tag_in testbench.pipeline_0.reorder_buffer_0.cdb1_mispredicted_in testbench.pipeline_0.reorder_buffer_0.cdb2_CPC_in testbench.pipeline_0.reorder_buffer_0.cdb2_branch_result_in testbench.pipeline_0.reorder_buffer_0.cdb1_tag_in testbench.pipeline_0.reorder_buffer_0.cdb2_NPC_in testbench.pipeline_0.reorder_buffer_0.cdb1_CPC_in testbench.pipeline_0.reorder_buffer_0.cdb1_value_in testbench.pipeline_0.reorder_buffer_0.cdb1_pht_index_in }
+gui_sg_addsignal -group ${Group3} { testbench.pipeline_0.reorder_buffer_0.inst2_tag_out testbench.pipeline_0.reorder_buffer_0.inst2_rega_value_out testbench.pipeline_0.reorder_buffer_0.inst2_regb_value_out testbench.pipeline_0.reorder_buffer_0.inst2_dest_out testbench.pipeline_0.reorder_buffer_0.inst2_value_out testbench.pipeline_0.reorder_buffer_0.inst2_retire_tag_out testbench.pipeline_0.reorder_buffer_0.inst2_mispredicted_out testbench.pipeline_0.reorder_buffer_0.inst2_branch_result_out testbench.pipeline_0.reorder_buffer_0.inst2_NPC_out testbench.pipeline_0.reorder_buffer_0.inst2_pht_index_out testbench.pipeline_0.reorder_buffer_0.inst2_CPC_out }
+set Group4 Group4
+gui_sg_create ${Group4}
+gui_sg_addsignal -group ${Group4} { testbench.pipeline_0.if_stage_0.PC_reg }
+set Group5 Group5
+gui_sg_create ${Group5}
+gui_sg_addsignal -group ${Group5} { testbench.pipeline_0.stall_bus_1 testbench.pipeline_0.stall_bus_2 testbench.pipeline_0.if_stage_stall_signal testbench.pipeline_0.stall_first_half_of_pipeline }
+set Group6 Group6
+gui_sg_create ${Group6}
+gui_sg_addsignal -group ${Group6} { testbench.pipeline_0.proc2Dmem_addr testbench.pipeline_0.lsq_Dmem2proc_tag testbench.pipeline_0.lsq_Dmem2proc_data testbench.pipeline_0.proc2Dmem_command testbench.pipeline_0.lsq_proc2Dmem_addr_out testbench.pipeline_0.lsq_proc2Dmem_command_out testbench.pipeline_0.lsq_Dmem2proc_response testbench.pipeline_0.lsq_proc2Dmem_data_out testbench.pipeline_0.Dmem2proc_response }
 
 # Global: Highlighting
 
 # Post database loading setting...
 
 # Restore C1 time
-gui_set_time -C1_only 517
+gui_set_time -C1_only 656
 
 
 
@@ -128,17 +140,16 @@ gui_list_set_filter -id ${Hier.1} -list { {Package 1} {All 1} {Process 1} {Unnam
 gui_list_set_filter -id ${Hier.1} -text {*}
 gui_change_design -id ${Hier.1} -design Sim
 catch {gui_list_expand -id ${Hier.1} testbench}
-catch {gui_list_expand -id ${Hier.1} testbench.pipeline_0}
-catch {gui_list_select -id ${Hier.1} {testbench.pipeline_0.reorder_buffer_0}}
+catch {gui_list_select -id ${Hier.1} {testbench.pipeline_0}}
 gui_view_scroll -id ${Hier.1} -vertical -set 0
 gui_view_scroll -id ${Hier.1} -horizontal -set 0
 
 # Data 'Data.1'
 gui_list_set_filter -id ${Data.1} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {Parameter 1} {All 1} {Aggregate 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
-gui_list_set_filter -id ${Data.1} -text {*cdb*}
-gui_list_show_data -id ${Data.1} {testbench.pipeline_0.reorder_buffer_0}
+gui_list_set_filter -id ${Data.1} -text {*Dmem*}
+gui_list_show_data -id ${Data.1} {testbench.pipeline_0}
 gui_show_window -window ${Data.1}
-catch { gui_list_select -id ${Data.1} {testbench.pipeline_0.reorder_buffer_0.cdb2_value_in testbench.pipeline_0.reorder_buffer_0.cdb2_pht_index_in testbench.pipeline_0.reorder_buffer_0.cdb2_mispredicted_in testbench.pipeline_0.reorder_buffer_0.cdb1_NPC_in testbench.pipeline_0.reorder_buffer_0.cdb1_branch_result_in testbench.pipeline_0.reorder_buffer_0.cdb2_tag_in testbench.pipeline_0.reorder_buffer_0.cdb1_mispredicted_in testbench.pipeline_0.reorder_buffer_0.cdb2_CPC_in testbench.pipeline_0.reorder_buffer_0.cdb2_branch_result_in testbench.pipeline_0.reorder_buffer_0.cdb1_tag_in testbench.pipeline_0.reorder_buffer_0.cdb2_NPC_in testbench.pipeline_0.reorder_buffer_0.cdb1_CPC_in testbench.pipeline_0.reorder_buffer_0.cdb1_value_in testbench.pipeline_0.reorder_buffer_0.cdb1_pht_index_in }}
+catch { gui_list_select -id ${Data.1} {testbench.pipeline_0.proc2Dmem_addr testbench.pipeline_0.lsq_Dmem2proc_tag testbench.pipeline_0.lsq_Dmem2proc_data testbench.pipeline_0.proc2Dmem_command testbench.pipeline_0.lsq_proc2Dmem_addr_out testbench.pipeline_0.lsq_proc2Dmem_command_out testbench.pipeline_0.lsq_Dmem2proc_response testbench.pipeline_0.lsq_proc2Dmem_data_out testbench.pipeline_0.Dmem2proc_response }}
 gui_view_scroll -id ${Data.1} -vertical -set 0
 gui_view_scroll -id ${Data.1} -horizontal -set 0
 gui_view_scroll -id ${Hier.1} -vertical -set 0
@@ -147,10 +158,10 @@ gui_view_scroll -id ${Hier.1} -horizontal -set 0
 # Source 'Source.1'
 gui_src_value_annotate -id ${Source.1} -switch false
 gui_set_env TOGGLE::VALUEANNOTATE 0
-gui_open_source -id ${Source.1}  -replace -active branch_decoder /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/branch_predictor.v
+gui_open_source -id ${Source.1}  -replace -active testbench.pipeline_0 /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/pipeline.v
 gui_src_value_annotate -id ${Source.1} -switch true
 gui_set_env TOGGLE::VALUEANNOTATE 1
-gui_view_scroll -id ${Source.1} -vertical -set 0
+gui_view_scroll -id ${Source.1} -vertical -set 405
 gui_src_set_reusable -id ${Source.1}
 
 # View 'Wave.1'
@@ -161,12 +172,15 @@ set origWaveHeight [gui_get_pref_value -category Wave -key waveRowHeight]
 gui_list_set_height -id Wave -height 25
 set origGroupCreationState [gui_list_create_group_when_add -wave]
 gui_list_create_group_when_add -wave -disable
-gui_wv_zoom_timerange -id ${Wave.1} 150 582
+gui_wv_zoom_timerange -id ${Wave.1} 0 1761
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group1}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group2}
 gui_list_add_group -id ${Wave.1} -after {New Group} {Group3}
+gui_list_add_group -id ${Wave.1} -after {New Group} {Group4}
+gui_list_add_group -id ${Wave.1} -after {New Group} {Group5}
+gui_list_add_group -id ${Wave.1} -after {New Group} {Group6}
 gui_list_expand -id ${Wave.1} testbench.pipeline_0.register_file0.values
-gui_list_select -id ${Wave.1} {testbench.pipeline_0.reorder_buffer_0.inst1_NPC_out }
+gui_list_select -id ${Wave.1} {testbench.pipeline_0.reorder_buffer_0.inst1_CPC_out }
 gui_seek_criteria -id ${Wave.1} {Any Edge}
 
 
@@ -182,10 +196,10 @@ if { $groupExD } {
 }
 gui_list_set_filter -id ${Wave.1} -list { {Buffer 1} {Input 1} {Others 1} {Linkage 1} {Output 1} {Parameter 1} {All 1} {Aggregate 1} {Event 1} {Assertion 1} {Constant 1} {Interface 1} {Signal 1} {$unit 1} {Inout 1} {Variable 1} }
 gui_list_set_filter -id ${Wave.1} -text {*}
-gui_list_set_insertion_bar  -id ${Wave.1} -group Group3  -position in
+gui_list_set_insertion_bar  -id ${Wave.1} -group Group6  -position in
 
-gui_marker_move -id ${Wave.1} {C1} 517
-gui_view_scroll -id ${Wave.1} -vertical -set 747
+gui_marker_move -id ${Wave.1} {C1} 656
+gui_view_scroll -id ${Wave.1} -vertical -set 723
 gui_show_grid -id ${Wave.1} -enable false
 # Restore toplevel window zorder
 # The toplevel window could be closed if it has no view/pane

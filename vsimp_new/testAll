@@ -1,0 +1,14 @@
+
+import os
+
+os.system("make nuke > /dev/null")
+os.system("make > /dev/null")
+os.system("rm -rf testAll_out")
+
+for file in os.listdir("test_p"):
+   os.system("python checkTestProg "+file+" > CTP_out")
+   os.system("echo \'Test "+file+":\n\' >> testAll_out")
+   os.system("grep CPI CTP_out >> testAll_out")
+   os.system("echo '\n' >> testAll_out")
+
+

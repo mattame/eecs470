@@ -66,6 +66,7 @@ module ex_stage(// Inputs
 			ex_branch_result_1,
 			ex_pht_idx_out_1,
 			ex_valid_out_1,
+			ex_CPC_out_1,
 			// Bus 2
       ex_NPC_out_2,
 			ex_dest_reg_out_2,
@@ -74,6 +75,7 @@ module ex_stage(// Inputs
 			ex_branch_result_2,
 			ex_pht_idx_out_2,
 			ex_valid_out_2,
+			ex_CPC_out_2,
 
 			// To LSQ
 			LSQ_tag_out_1,
@@ -140,6 +142,7 @@ module ex_stage(// Inputs
   output  [1:0] ex_branch_result_1;
   output  [(`HISTORY_BITS-1):0] ex_pht_idx_out_1;
   output ex_valid_out_1;
+  output [63:0] ex_CPC_out_1;
   
 				// Bus 2
   output [63:0] ex_NPC_out_2;
@@ -149,6 +152,7 @@ module ex_stage(// Inputs
   output  [1:0] ex_branch_result_2;
   output  [(`HISTORY_BITS-1):0] ex_pht_idx_out_2;
   output ex_valid_out_2;
+  output [63:0] ex_CPC_out_2;
   
   output  [4:0] LSQ_tag_out_1;
   output [63:0] LSQ_address_out_1;
@@ -391,6 +395,7 @@ module ex_stage(// Inputs
     .ex_branch_result_1(ex_branch_result_1),
     .ex_pht_idx_out_1(ex_pht_idx_out_1),
     .ex_valid_out_1(ex_valid_out_1),
+    .ex_CPC_out_1(ex_CPC_out_1),
 
     .stall_bus_2(stall_bus_2),
     .stall_mult_2(stall_mult_2),
@@ -400,7 +405,8 @@ module ex_stage(// Inputs
     .ex_mispredict_2(ex_mispredict_2),
     .ex_branch_result_2(ex_branch_result_2),
     .ex_pht_idx_out_2(ex_pht_idx_out_2),
-    .ex_valid_out_2(ex_valid_out_2)
+    .ex_valid_out_2(ex_valid_out_2),
+    .ex_CPC_out_2(ex_CPC_out_2)
 				  );
 	
 	

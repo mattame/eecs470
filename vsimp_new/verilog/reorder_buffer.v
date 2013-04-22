@@ -42,13 +42,15 @@ module reorder_buffer_entry(
                   cdb1_branch_result_in, cdb2_branch_result_in,
                   cdb1_NPC_in, cdb2_NPC_in,
                   cdb1_pht_index_in, cdb2_pht_index_in,
+                  cdb1_CPC_in,cdb2_CPC_in,
 
                   //outputs
                   value_out, register_out, state_out,
                   mispredicted_out,
                   branch_result_out,
                   NPC_out,
-                  pht_index_out
+                  pht_index_out,
+                  CPC_out
 
                   );
 
@@ -67,6 +69,7 @@ module reorder_buffer_entry(
   input wire [1:0]  cdb1_branch_result_in,cdb2_branch_result_in;
   input wire [63:0] cdb1_NPC_in,cdb2_NPC_in;
   input wire [(`HISTORY_BITS-1):0] cdb1_pht_index_in,cdb2_pht_index_in;
+  input wire [63:0] cdb1_CPC_in,cdb2_CPC_in;
 
   /***  internals  ***/
   reg [63:0]    value;
@@ -77,6 +80,7 @@ module reorder_buffer_entry(
   reg [1:0]   n_branch_result;
   reg [63:0]  n_NPC;
   reg [(`HISTORY_BITS-1):0] n_pht_index;
+  reg [63:0]  n_CPC;
   wire cdb1_match;
   wire cdb2_match;
 
@@ -88,7 +92,7 @@ module reorder_buffer_entry(
   output reg [1:0]  branch_result_out;
   output reg [63:0] NPC_out;
   output reg [(`HISTORY_BITS-1):0] pht_index_out;
-
+  output reg [63:0] CPC_out;
 
   // combinationali cdb match and assignment out //
   assign cdb1_match = (~write && (tag_in==cdb1_tag_in));
@@ -110,6 +114,7 @@ module reorder_buffer_entry(
       n_branch_result  = 2'b00;
       n_NPC            = 64'd0;
       n_pht_index      = {`HISTORY_BITS{1'b0}};
+      n_CPC            = 64'd0;
     end
 
     //determine whether to latch complete 
@@ -122,6 +127,7 @@ module reorder_buffer_entry(
       n_branch_result  = cdb1_branch_result_in;
       n_NPC            = cdb1_NPC_in;
       n_pht_index      = cdb1_pht_index_in;
+      n_CPC            = cdb1_CPC_in;
     end
     else if (cdb2_match)
     begin
@@ -132,6 +138,7 @@ module reorder_buffer_entry(
       n_branch_result  = cdb2_branch_result_in;
       n_NPC            = cdb2_NPC_in;
       n_pht_index      = cdb2_pht_index_in;
+      n_CPC            = cdb2_CPC_in;
     end
 
     //default case
@@ -144,6 +151,7 @@ module reorder_buffer_entry(
       n_branch_result = branch_result_out;
       n_NPC           = NPC_out;
       n_pht_index     = pht_index_out;
+      n_CPC           = CPC_out;
     end
   end
 
@@ -160,6 +168,7 @@ module reorder_buffer_entry(
         branch_result_out <= `SD 2'b00;
         NPC_out           <= `SD 64'd0;
         pht_index_out     <= `SD {`HISTORY_BITS{1'b0}};
+        CPC_out           <= `SD 64'd0;
      end
      else
      begin
@@ -170,6 +179,7 @@ module reorder_buffer_entry(
         branch_result_out <= `SD n_branch_result;
         NPC_out           <= `SD n_NPC;
         pht_index_out     <= `SD n_pht_index;
+        CPC_out           <= `SD n_CPC;
      end
   end
 
@@ -203,13 +213,14 @@ module reorder_buffer( clock,reset,
                       cdb1_branch_result_in,
                       cdb1_NPC_in,
                       cdb1_pht_index_in,
+                      cdb1_CPC_in,
                       cdb2_tag_in,
                       cdb2_value_in, 
                       cdb2_mispredicted_in,
                       cdb2_branch_result_in,
                       cdb2_NPC_in,
                       cdb2_pht_index_in,
-
+                      cdb2_CPC_in,
 
                       // outputs //
                       inst1_tag_out,
@@ -231,6 +242,7 @@ module reorder_buffer( clock,reset,
                       inst1_branch_result_out,inst2_branch_result_out,
                       inst1_NPC_out,inst2_NPC_out,
                       inst1_pht_index_out,inst2_pht_index_out,
+                      inst1_CPC_out,inst2_CPC_out,
 
                       // outputs for LSQ and RS //
                       inst1_retire_tag_out,
@@ -267,7 +279,8 @@ module reorder_buffer( clock,reset,
    input wire [63:0] cdb2_NPC_in;
    input wire [(`HISTORY_BITS-1):0] cdb1_pht_index_in;
    input wire [(`HISTORY_BITS-1):0] cdb2_pht_index_in;
-
+   input wire [63:0] cdb1_CPC_in;
+   input wire [63:0] cdb2_CPC_in;
 
    // outputs //
    output wire [7:0] inst1_tag_out;
@@ -285,6 +298,7 @@ module reorder_buffer( clock,reset,
    output wire [1:0]  inst1_branch_result_out,inst2_branch_result_out;
    output wire [63:0] inst1_NPC_out,inst2_NPC_out;
    output wire [(`HISTORY_BITS-1):0] inst1_pht_index_out,inst2_pht_index_out;
+   output wire [63:0] inst1_CPC_out,inst2_CPC_out;
 
    output wire rob_full;
 
@@ -317,7 +331,7 @@ module reorder_buffer( clock,reset,
    wire [1:0]  branch_results_out [(`ROB_ENTRIES-1):0];
    wire [63:0] NPCs_out           [(`ROB_ENTRIES-1):0];
    wire [(`HISTORY_BITS-1):0] pht_indices_out [(`ROB_ENTRIES-1):0]; 
-
+   wire [63:0] CPCs_out           [(`ROB_ENTRIES-1):0];
 
    // combinational assignments for head/tail plus one and two. accounts //
    // for overflow  //
@@ -358,8 +372,9 @@ module reorder_buffer( clock,reset,
    assign inst1_retire_tag_out    = (inst1_retire ?                    head  : `RSTAG_NULL);
    assign inst1_mispredicted_out  = (inst1_retire ? mispredicteds_out [head] : 1'b0);
    assign inst1_branch_result_out = (inst1_retire ? branch_results_out[head] : 2'b00);
-   assign inst1_NPC_out           = (inst1_retire ? NPCs_out          [head] : 64'd00);
+   assign inst1_NPC_out           = (inst1_retire ? NPCs_out          [head] : 64'd0);
    assign inst1_pht_index_out     = (inst1_retire ? pht_indices_out   [head] : {`HISTORY_BITS{1'b0}} );
+   assign inst1_CPC_out           = (inst1_retire ? CPCs_out          [head] : 64'd0);
 
    assign inst2_dest_out          = (inst2_retire ? registers_out     [head_plus_one] : `ZERO_REG);
    assign inst2_value_out         = (inst2_retire ? values_out        [head_plus_one] : 64'd0);
@@ -368,7 +383,7 @@ module reorder_buffer( clock,reset,
    assign inst2_branch_result_out = (inst2_retire ? branch_results_out[head_plus_one] : 2'b00);
    assign inst2_NPC_out           = (inst2_retire ? NPCs_out          [head_plus_one] : 64'd00);
    assign inst2_pht_index_out     = (inst2_retire ? pht_indices_out   [head_plus_one] : {`HISTORY_BITS{1'b0}} );
-
+   assign inst2_CPC_out           = (inst2_retire ? CPCs_out          [head_plus_one] : 64'd0);
 
    // assignment for rob full state //
    assign rob_full = ~(states_out[tail_plus_one]==`ROBE_EMPTY && states_out[tail_plus_two]==`ROBE_EMPTY);
@@ -410,6 +425,7 @@ module reorder_buffer( clock,reset,
                     .cdb1_branch_result_in(cdb1_branch_result_in), .cdb2_branch_result_in(cdb2_branch_result_in),
                     .cdb1_NPC_in(cdb1_NPC_in), .cdb2_NPC_in(cdb2_NPC_in),
                     .cdb1_pht_index_in(cdb1_pht_index_in), .cdb2_pht_index_in(cdb2_pht_index_in),
+                    .cdb1_CPC_in(cdb1_CPC_in), .cdb2_CPC_in(cdb2_CPC_in),
 
                     .value_out(values_out[i]),
                     .register_out(registers_out[i]),
@@ -417,8 +433,9 @@ module reorder_buffer( clock,reset,
                     .mispredicted_out(mispredicteds_out[i]),
                     .branch_result_out(branch_results_out[i]),
                     .NPC_out(NPCs_out[i]),
-                    .pht_index_out(pht_indices_out[i])
-
+                    .pht_index_out(pht_indices_out[i]),
+                    .CPC_out(CPCs_out[i])
+                    
                          );
 
       end

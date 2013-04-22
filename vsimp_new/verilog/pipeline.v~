@@ -285,11 +285,13 @@ module pipeline (// Inputs
    wire [1:0]                 rob_inst1_branch_result_out;
    wire [63:0]                rob_inst1_NPC_out;
    wire [(`HISTORY_BITS-1):0] rob_inst1_pht_index_out;
+   wire [63:0]                rob_inst1_CPC_out;
    
    wire                       rob_inst2_mispredicted_out;
    wire [1:0]                 rob_inst2_branch_result_out;
    wire [63:0]                rob_inst2_NPC_out;
    wire [(`HISTORY_BITS-1):0] rob_inst2_pht_index_out;
+   wire                       rob_inst2_CPC_out;
 
    wire                       rob_rob_full_out;
    wire                       rob_rob_empty_out;
@@ -386,6 +388,7 @@ module pipeline (// Inputs
   wire [1:0]  ex_branch_result_out_1;
   wire [(`HISTORY_BITS-1):0]  ex_pht_idx_out_1;
   wire        ex_valid_out_1;
+  wire [63:0] ex_CPC_out_1;
   
 				// Bus 2
   wire [63:0] ex_NPC_out_2;
@@ -395,6 +398,7 @@ module pipeline (// Inputs
   wire [1:0]  ex_branch_result_out_2;
   wire [(`HISTORY_BITS-1):0]  ex_pht_idx_out_2;
   wire        ex_valid_out_2;
+  wire [63:0] ex_CPC_out_2;
 
 
 //Outputs from EX / CM Pipline Register
@@ -405,6 +409,7 @@ module pipeline (// Inputs
    reg [1:0]                 cm_branch_result_1;
    reg [(`HISTORY_BITS-1):0] cm_pht_index_1;
    reg                       cm_valid_1;
+   reg [63:0]                cm_CPC_1;
 
    reg [4:0]                 cm_tag_2;
    reg [63:0]                cm_result_2;
@@ -413,6 +418,7 @@ module pipeline (// Inputs
    reg [1:0]                 cm_branch_result_2;
    reg [(`HISTORY_BITS-1):0] cm_pht_index_2;
    reg                       cm_valid_2;
+   reg [63:0]                cm_CPC_2;
 
 
 //Outputs from Complete Stage
@@ -423,6 +429,7 @@ module pipeline (// Inputs
    wire [1:0]                 cm_branch_result_out_1;
    wire [(`HISTORY_BITS-1):0] cm_pht_index_out_1;
    wire                       cm_valid_out_1;
+   wire [63:0]                cm_CPC_out_1;
 
    wire [7:0]                 cm_tag_out_2;
    wire [63:0]                cm_value_out_2;
@@ -430,7 +437,8 @@ module pipeline (// Inputs
    wire                       cm_mispredict_out_2;
    wire [1:0]                 cm_branch_result_out_2;
    wire [(`HISTORY_BITS-1):0] cm_pht_index_out_2;
-   wire                       cm_valid_out_2; 
+   wire                       cm_valid_out_2;
+   wire [63:0]                cm_CPC_out_2;
    
 //LSQ Inputs
 
@@ -697,8 +705,8 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                        .inst2_result_in(rob_inst2_branch_result_out),
                        .inst1_write_NPC_in(rob_inst1_NPC_out),
                        .inst2_write_NPC_in(rob_inst2_NPC_out),
-                       .inst1_write_CPC_in(rob_inst1_value_out),
-                       .inst2_write_CPC_in(rob_inst2_value_out),
+                       .inst1_write_CPC_in(rob_inst1_CPC_out),
+                       .inst2_write_CPC_in(rob_inst2_CPC_out),
                        .inst1_pht_index_in(rob_inst1_pht_index_out),
                        .inst2_pht_index_in(rob_inst2_pht_index_out),
                        
@@ -1431,12 +1439,15 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                                           .cdb1_branch_result_in(cm_branch_result_out_1),
                                           .cdb1_NPC_in(cm_NPC_out_1),
                                           .cdb1_pht_index_in(cm_pht_index_out_1),
+                                          .cdb1_CPC_in(cm_CPC_out_1),
                                           .cdb2_tag_in(cm_tag_out_2),
                                           .cdb2_value_in(cm_value_out_2),
                                           .cdb2_mispredicted_in(cm_mispredict_out_2), 
                                           .cdb2_branch_result_in(cm_branch_result_out_2),
                                           .cdb2_NPC_in(cm_NPC_out_2),
                                           .cdb2_pht_index_in(cm_pht_index_out_2),
+                                          .cdb2_CPC_in(cm_CPC_out_2),
+
 
                                           // outputs //
                                           
@@ -1465,6 +1476,8 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                                            .inst2_NPC_out(rob_inst2_NPC_out),
                                            .inst1_pht_index_out(rob_inst1_pht_index_out),
                                            .inst2_pht_index_out(rob_inst2_pht_index_out),
+                                           .inst1_CPC_out(rob_inst1_CPC_out),
+                                           .inst2_CPC_out(rob_inst2_CPC_out),
 
                                           // signals out //
                                           .rob_full(rob_rob_full_out), .rob_empty(rob_rob_empty_out)
@@ -1655,6 +1668,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 	                        .ex_branch_result_1(ex_branch_result_out_1),
 	                        .ex_pht_idx_out_1(ex_pht_idx_out_1),
 	                        .ex_valid_out_1(ex_valid_out_1),
+	                        .ex_CPC_out_1(ex_CPC_out_1),
 	                        // Bus 2
 	                        .ex_NPC_out_2(ex_NPC_out_2),
 	                        .ex_dest_reg_out_2(ex_dest_reg_out_2),
@@ -1663,6 +1677,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 	                        .ex_branch_result_2(ex_branch_result_out_2),
 	                        .ex_pht_idx_out_2(ex_pht_idx_out_2),
 	                        .ex_valid_out_2(ex_valid_out_2),
+	                        .ex_CPC_out_2(ex_CPC_out_2),
 
 
                           // To LSQ
@@ -1699,6 +1714,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
       cm_branch_result_1 <= `SD 0;
       cm_pht_index_1     <= `SD 0;
       cm_valid_1         <= `SD 0;
+      cm_CPC_1           <= `SD 0;
 
       cm_tag_2           <= `SD 0;
       cm_result_2        <= `SD 0;
@@ -1707,6 +1723,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
       cm_branch_result_2 <= `SD 0;
       cm_pht_index_2     <= `SD 0;
       cm_valid_2         <= `SD 0;
+      cm_CPC_2           <= `SD 0;
 
     end
     else
@@ -1718,6 +1735,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
       cm_branch_result_1 <= `SD ex_branch_result_out_1;
       cm_pht_index_1     <= `SD ex_pht_idx_out_1;
       cm_valid_1         <= `SD ex_valid_out_1;
+      cm_CPC_1           <= `SD ex_CPC_out_1;
 
       cm_tag_2           <= `SD ex_dest_reg_out_2;
       cm_result_2        <= `SD ex_result_out_2;
@@ -1726,6 +1744,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
       cm_branch_result_2 <= `SD ex_branch_result_out_2;
       cm_pht_index_2     <= `SD ex_pht_idx_out_2;
       cm_valid_2         <= `SD ex_valid_out_2;
+      cm_CPC_2           <= `SD ex_CPC_out_2;
       
     end
     
@@ -1746,6 +1765,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                       .ex_cm_branch_result_1(cm_branch_result_1),
                       .ex_cm_pht_index_1(cm_pht_index_1),
 		                  .ex_cm_valid_1(cm_valid_1),
+		                  .ex_cm_CPC_1(cm_CPC_1),
 
 		                  .ex_cm_tag_2(cm_tag_2),
 		                  .ex_cm_result_2(cm_result_2),
@@ -1754,6 +1774,7 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                       .ex_cm_branch_result_2(cm_branch_result_2),
                       .ex_cm_pht_index_2(cm_pht_index_2),
 		                  .ex_cm_valid_2(cm_valid_2),
+		                  .ex_cm_CPC_2(cm_CPC_2),
 		  
 		                  // Outputs
 		                  .cdb_tag_1(cm_tag_out_1),
@@ -1762,13 +1783,15 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
                       .cdb_mispredict_1(cm_mispredict_out_1),
                       .cdb_branch_result_1(cm_branch_result_out_1),
                       .cdb_pht_index_1(cm_pht_index_out_1),
+                      .cdb_CPC_1(cm_CPC_out_1),
 
 		                  .cdb_tag_2(cm_tag_out_2),
 		                  .cdb_value_2(cm_value_out_2),
 		                  .cdb_NPC_2(cm_NPC_out_2),
                       .cdb_mispredict_2(cm_mispredict_out_2),
                       .cdb_branch_result_2(cm_branch_result_out_2),
-                      .cdb_pht_index_2(cm_pht_index_out_2)
+                      .cdb_pht_index_2(cm_pht_index_out_2),
+                      .cdb_CPC_2(cm_CPC_out_2)
 		                  );   
 		                  
   //////////////////////////////////////////////////
@@ -1857,13 +1880,13 @@ assign mispredict = (rob_inst1_mispredicted_out || rob_inst2_mispredicted_out);
 			      .ROB_tag_1(lsq_ROB_tag_1),
 			      .rd_mem_in_1(lsq_rd_mem_1),
 			      .wr_mem_in_1(lsq_wr_mem_1),
-			      .valid_in_1(lsq_valid_1),
+			      .valid_in_1(lsq_valid_1 && ~stall_first_half_of_pipeline),
 
 			      //2
 			      .ROB_tag_2(lsq_ROB_tag_2),
 			      .rd_mem_in_2(lsq_rd_mem_2),
 			      .wr_mem_in_2(lsq_wr_mem_2),
-			      .valid_in_2(lsq_valid_2),
+			      .valid_in_2(lsq_valid_2 && ~stall_first_half_of_pipeline),
 
 			      //From EX ALU
 			      .EX_tag_1(lsq_EX_tag_1),

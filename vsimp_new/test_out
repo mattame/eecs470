@@ -1,6 +1,6 @@
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 18:38 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 22:56 2013
 @@
 @@
 @@                     0  Asserting System reset......
@@ -49,3 +49,23 @@ Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 21 18:
 @@                   136  Deasserting System reset......
 @@
 @@
+Received SIGHUP (signal 1), exiting.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 30437222
+CPU Time:      7.250 seconds;       Data structure size:   0.6Mb
+Sun Apr 21 22:57:31 2013
+ interrupt support.
+         Simulator was abruptly terminated at time 15657432.
+em halted on HALT instruction
+@@@
+@@
+@@  38 cycles / 5 instrs = 7.600000 CPI
+@@
+@@  1110.00 ns total time to execute
+@@
+
+Received SIGHUP (signal 1), exiting.
+           V C S   S i m u l a t i o n   R e p o r t 
+Time: 512
+CPU Time:      0.280 seconds;       Data structure size:   0.6Mb
+Sun Apr 21 22:57:31 2013

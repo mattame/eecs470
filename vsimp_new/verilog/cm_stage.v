@@ -20,6 +20,7 @@ module cm_stage(// Inputs
                 ex_cm_branch_result_1,
                 ex_cm_pht_index_1,
                 ex_cm_valid_1,
+                ex_cm_CPC_1,
 
                 ex_cm_tag_2,
                 ex_cm_result_2,
@@ -28,6 +29,7 @@ module cm_stage(// Inputs
                 ex_cm_branch_result_2,
                 ex_cm_pht_index_2,
                 ex_cm_valid_2,
+                ex_cm_CPC_2,
 		
                 // Outputs
                 cdb_tag_1,
@@ -36,13 +38,15 @@ module cm_stage(// Inputs
                 cdb_mispredict_1,
                 cdb_branch_result_1,
                 cdb_pht_index_1,
+                cdb_CPC_1,
 
                 cdb_tag_2,
                 cdb_value_2,
                 cdb_NPC_2,
                 cdb_mispredict_2,
                 cdb_branch_result_2,
-                cdb_pht_index_2
+                cdb_pht_index_2,
+                cdb_CPC_2
 
 		            );
 
@@ -54,6 +58,7 @@ module cm_stage(// Inputs
    input wire [1:0]  ex_cm_branch_result_1;
    input wire [(`HISTORY_BITS-1):0] ex_cm_pht_index_1;
    input wire        ex_cm_valid_1;
+   input wire [63:0] ex_cm_CPC_1;
 
    input wire  [4:0] ex_cm_tag_2;
    input wire [63:0] ex_cm_result_2;
@@ -62,6 +67,7 @@ module cm_stage(// Inputs
    input wire [1:0]  ex_cm_branch_result_2;
    input wire [(`HISTORY_BITS-1):0] ex_cm_pht_index_2;
    input wire        ex_cm_valid_2;
+   input wire [63:0] ex_cm_CPC_2;
 
    // outputs //
    output wire  [7:0] cdb_tag_1;
@@ -70,6 +76,7 @@ module cm_stage(// Inputs
    output wire        cdb_mispredict_1;
    output wire [1:0]  cdb_branch_result_1;
    output wire [(`HISTORY_BITS-1):0] cdb_pht_index_1;
+   output wire [63:0] cdb_CPC_1;
 
    output wire  [7:0] cdb_tag_2;
    output wire [63:0] cdb_value_2;
@@ -77,6 +84,7 @@ module cm_stage(// Inputs
    output wire        cdb_mispredict_2;
    output wire [1:0]  cdb_branch_result_2;
    output wire [(`HISTORY_BITS-1):0] cdb_pht_index_2;
+   output wire [63:0] cdb_CPC_2;
 
    // assigns //
    assign cdb_tag_1           = (ex_cm_valid_1 ? {3'b000,ex_cm_tag_1}    : `RSTAG_NULL);
@@ -85,6 +93,7 @@ module cm_stage(// Inputs
    assign cdb_mispredict_1    = ex_cm_mispredict_1;
    assign cdb_branch_result_1 = ex_cm_branch_result_1;
    assign cdb_pht_index_1     = ex_cm_pht_index_1;
+   assign cdb_CPC_1           = ex_cm_CPC_1;
 
    assign cdb_tag_2           = (ex_cm_valid_2 ? {3'b000,ex_cm_tag_2}    : `RSTAG_NULL);
    assign cdb_value_2         = (ex_cm_valid_2 ? ex_cm_result_2 : 64'h0);
@@ -92,6 +101,7 @@ module cm_stage(// Inputs
    assign cdb_mispredict_2    = ex_cm_mispredict_2;
    assign cdb_branch_result_2 = ex_cm_branch_result_2;
    assign cdb_pht_index_2     = ex_cm_pht_index_2;
+   assign cdb_CPC_2           = ex_cm_CPC_2;
 
 endmodule
 

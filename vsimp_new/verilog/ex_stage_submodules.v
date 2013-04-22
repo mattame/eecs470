@@ -75,6 +75,7 @@ module arbiter(
     ex_branch_result_1,
     ex_pht_idx_out_1,
     ex_valid_out_1,
+    ex_CPC_out_1,
 
     stall_bus_2,
     stall_mult_2,
@@ -84,7 +85,8 @@ module arbiter(
     ex_mispredict_2,
     ex_branch_result_2,
     ex_pht_idx_out_2,
-    ex_valid_out_2
+    ex_valid_out_2,
+    ex_CPC_out_2
     );
 
 /* ----- Ports ----- */
@@ -145,6 +147,7 @@ output reg ex_mispredict_1;
 output reg  [1:0] ex_branch_result_1;
 output reg  [(`HISTORY_BITS-1):0] ex_pht_idx_out_1;
 output reg ex_valid_out_1;
+output reg [63:0] ex_CPC_out_1;
 
   //Bus 2
 output reg stall_bus_2;
@@ -156,6 +159,7 @@ output reg ex_mispredict_2;
 output reg  [1:0] ex_branch_result_2;
 output reg  [(`HISTORY_BITS-1):0] ex_pht_idx_out_2;
 output reg ex_valid_out_2;
+output reg [63:0] ex_CPC_out_2;
 
 /* ----- Logic ----- */
 
@@ -170,21 +174,25 @@ begin
     ex_mispredict_1 = 0;
     ex_branch_result_1 = `BRANCH_NONE;
     ex_valid_out_1 = 1;
+    ex_CPC_out_1 = ex_mult_result_out_1;
   end
   else begin 
     stall_bus_1 = 0;
     ex_NPC_out_1 = ex_alu_NPC_out_1;
     ex_dest_reg_out_1 = ex_alu_dest_reg_out_1;
-    ex_result_out_1 = ex_alu_result_out_1;
     if (ex_branch_valid_out_1) begin
       ex_mispredict_1 = ex_branch_mispredict_1;
       ex_branch_result_1 = (ex_branch_taken_1) ? `BRANCH_TAKEN: `BRANCH_NOT_TAKEN;
       ex_valid_out_1 = 1;
+      ex_CPC_out_1 = ex_alu_result_out_1;
+      ex_result_out_1 = (ex_IR_1[31:26] == `JSR_GRP | ex_IR_1[31:26] == `BSR_INST) ? ex_NPC_out_1 : ex_alu_result_out_1;
     end
     else begin
       ex_mispredict_1 = 0;
       ex_branch_result_1 = (ex_IR_1 == `HALT_INSTRUCTION) ? `BRANCH_HALT: `BRANCH_NONE;
       ex_valid_out_1 = ex_alu_valid_out_1;
+      ex_CPC_out_1 = ex_alu_result_out_1;
+      ex_result_out_1 = ex_alu_result_out_1;
     end
   end
 end
@@ -201,6 +209,7 @@ begin
     ex_mispredict_2 = 0;
     ex_branch_result_2 = `BRANCH_NONE;
     ex_valid_out_2 = 1;
+    ex_CPC_out_2 = mem_value_in;
   end
   else begin 
     stall_mult_2 = 0;
@@ -212,21 +221,25 @@ begin
       ex_mispredict_2 = 0;
       ex_branch_result_2 = `BRANCH_NONE;
       ex_valid_out_2 = 1;
+      ex_CPC_out_2 = ex_mult_result_out_2;
     end
     else begin 
       stall_bus_2 = 0;
       ex_NPC_out_2 = ex_alu_NPC_out_2;
       ex_dest_reg_out_2 = ex_alu_dest_reg_out_2;
-      ex_result_out_2 = ex_alu_result_out_2;
       if (ex_branch_valid_out_2) begin
         ex_mispredict_2 = ex_branch_mispredict_2;
         ex_branch_result_2 = (ex_branch_taken_2) ? `BRANCH_TAKEN: `BRANCH_NOT_TAKEN;
         ex_valid_out_2 = 1;
+        ex_CPC_out_2 = ex_alu_result_out_2;
+        ex_result_out_2 = (ex_IR_2[31:26] == `JSR_GRP | ex_IR_2[31:26] == `BSR_INST) ? ex_NPC_out_2 : ex_alu_result_out_2;
       end
       else begin
         ex_mispredict_2 = 0;
         ex_branch_result_2 = (ex_IR_2 == `HALT_INSTRUCTION) ? `BRANCH_HALT: `BRANCH_NONE;
         ex_valid_out_2 = ex_alu_valid_out_2;
+        ex_CPC_out_2 = ex_alu_result_out_2;
+        ex_result_out_2 = ex_alu_result_out_2;
       end
     end
   end

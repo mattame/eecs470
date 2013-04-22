@@ -36,7 +36,7 @@ Test copy_long.s:
 
 Test copy.s:
 
-< @@  373 cycles / 131 instrs = 2.847328 CPI
+< @@  372 cycles / 131 instrs = 2.839695 CPI
 > @@  655 cycles / 130 instrs = 5.038462 CPI
 
 
@@ -78,7 +78,7 @@ Test parallel_long.s:
 
 Test parallel.s:
 
-< @@  271 cycles / 195 instrs = 1.389744 CPI
+< @@  267 cycles / 195 instrs = 1.369231 CPI
 > @@  975 cycles / 194 instrs = 5.025773 CPI
 
 
@@ -114,7 +114,7 @@ Test test_load.s:
 
 Test test_ls.s:
 
-< @@  236 cycles / 102 instrs = 2.313725 CPI
+< @@  229 cycles / 102 instrs = 2.245098 CPI
 > @@  34 cycles / 6 instrs = 5.666667 CPI
 
 

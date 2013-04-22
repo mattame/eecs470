@@ -61,10 +61,10 @@
 > $finish at simulation time                 9820
 78,80c48,50
 < Time: 922
-< CPU Time:      0.320 seconds;       Data structure size:   0.6Mb
-< Mon Apr 22 03:41:06 2013
+< CPU Time:      0.310 seconds;       Data structure size:   0.5Mb
+< Mon Apr 22 04:10:57 2013
 ---
 > Time: 982000 ps
 > CPU Time:      0.250 seconds;       Data structure size:   0.1Mb
-> Mon Apr 22 03:41:07 2013
+> Mon Apr 22 04:10:58 2013
 diff: 

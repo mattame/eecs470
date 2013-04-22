@@ -62,8 +62,7 @@
 `define ROBE_UNUSED    2'b11
 
 //Reservation Station
-`define NUM_RSES 16
-`define NUM_RSES_MINUS_ONE 7
+`define NUM_RSES 4
 `define RS_EMPTY        3'b000
 `define RS_WAITING_A    3'b001
 `define RS_WAITING_B    3'b010

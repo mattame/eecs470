@@ -1,6 +1,6 @@
 Chronologic VCS simulator copyright 1991-2011
 Contains Synopsys proprietary information.
-Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 22 03:41 2013
+Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 22 04:24 2013
 @@
 @@
 @@                     0  Asserting System reset......
@@ -21,30 +21,28 @@ Compiler version E-2011.03_Full64; Runtime version E-2011.03_Full64;  Apr 22 03:
 @@
 @@@ Unified Memory contents hex on left, decimal on right: 
 @@@
-@@@ mem[    0] = 40210401203f0001 : 4620979095541317633
-@@@ mem[    8] = 4021040140210401 : 4620979096076223489
-@@@ mem[   16] = 4021040140210401 : 4620979096076223489
-@@@ mem[   24] = 4021040140210401 : 4620979096076223489
-@@@ mem[   32] = 4021040140210401 : 4620979096076223489
-@@@ mem[   40] = 4021040140210401 : 4620979096076223489
-@@@ mem[   48] = 4021040140210401 : 4620979096076223489
-@@@ mem[   56] = 4021040140210401 : 4620979096076223489
-@@@ mem[   64] = 0000000000000555 : 1365
+@@@ mem[    0] = 203f000147ff041f : 2323575938249327647
+@@@ mem[    8] = 4c210401205f0064 : 5485670223998550116
+@@@ mem[   16] = f45ffffd40403522 : 17609074531211687202
+@@@ mem[   24] = b425000020bf0100 : 12980781501514711296
+@@@ mem[   32] = 0000000000000555 : 1365
+@@@
+@@@ mem[  256] = 0000000000000001 : 1
 @@@
 @@@
-@@                  8820 : System halted
+@@                153320 : System halted
 @@
 @@@ System halted on HALT instruction
 @@@
 @@
-@@  85 cycles / 16 instrs = 5.312500 CPI
+@@  1530 cycles / 305 instrs = 5.016393 CPI
 @@
-@@  2520.00 ns total time to execute
+@@  45870.00 ns total time to execute
 @@
 
 $finish called from file "testbench/testbench.v", line 269.
-$finish at simulation time                 9820
+$finish at simulation time               154320
            V C S   S i m u l a t i o n   R e p o r t 
-Time: 982000 ps
-CPU Time:      0.250 seconds;       Data structure size:   0.1Mb
-Mon Apr 22 03:41:07 2013
+Time: 15432000 ps
+CPU Time:      0.270 seconds;       Data structure size:   0.1Mb
+Mon Apr 22 04:24:25 2013

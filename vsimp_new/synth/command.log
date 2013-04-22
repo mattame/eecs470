@@ -1,7 +1,7 @@
 #@ # 
 #@ # Running dc_shell Version G-2012.06 for amd64 -- May 30, 2012
-#@ # Date:   Mon Apr 22 02:19:41 2013
-#@ # Run by: scottmel@caen-vnc05.engin.umich.edu
+#@ # Date:   Mon Apr 22 05:02:15 2013
+#@ # Run by: scottmel@dc3swp69.dc.umich.edu
 #@ 
 
 source /usr/caen/synopsys-synth-2012.06/admin/setup/.synopsys_dc.setup

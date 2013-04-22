@@ -1,52 +1,43 @@
-11,37d10
-< @@                    10 : System STILL at reset, can't show anything
+19,49c19
+< @@
+< @@                   400 : System STILL at reset, can't show anything
 < @@
 < @@
-< @@                    20 : System STILL at reset, can't show anything
+< @@                   500 : System STILL at reset, can't show anything
 < @@
 < @@
-< @@                    30 : System STILL at reset, can't show anything
+< @@                   600 : System STILL at reset, can't show anything
 < @@
 < @@
-< @@                    40 : System STILL at reset, can't show anything
+< @@                   700 : System STILL at reset, can't show anything
 < @@
 < @@
-< @@                    50 : System STILL at reset, can't show anything
+< @@                   800 : System STILL at reset, can't show anything
 < @@
 < @@
-< @@                    60 : System STILL at reset, can't show anything
+< @@                   900 : System STILL at reset, can't show anything
 < @@
 < @@
-< @@                    70 : System STILL at reset, can't show anything
+< @@                  1000 : System STILL at reset, can't show anything
 < @@
 < @@
-< @@                    80 : System STILL at reset, can't show anything
+< @@                  1100 : System STILL at reset, can't show anything
 < @@
 < @@
-< @@                    90 : System STILL at reset, can't show anything
+< @@                  1200 : System STILL at reset, can't show anything
 < @@
 < @@
-41,44c14
-< @@                   110 : System STILL at reset, can't show anything
+< @@                  1300 : System STILL at reset, can't show anything
 < @@
-< @@
-< @@                   120 : System STILL at reset, can't show anything
----
-> @@                   200 : System STILL at reset, can't show anything
-47c17
-< @@                   130 : System STILL at reset, can't show anything
----
-> @@                   300 : System STILL at reset, can't show anything
-49c19
-< @@                   136  Deasserting System reset......
+< @@                  1360  Deasserting System reset......
 ---
 > @@                   360  Deasserting System reset......
 65c35
-< @@                   822 : System halted
+< @@                  8220 : System halted
 ---
 > @@                  8820 : System halted
 70c40
-< @@  69 cycles / 17 instrs = 4.058824 CPI
+< @@  69 cycles / 16 instrs = 4.312500 CPI
 ---
 > @@  85 cycles / 16 instrs = 5.312500 CPI
 72c42
@@ -55,16 +46,14 @@
 > @@  2520.00 ns total time to execute
 75,76c45,46
 < $finish called from file "testbench/testbench.v", line 297.
-< $finish at simulation time                  922
+< $finish at simulation time                 9220
 ---
 > $finish called from file "testbench/testbench.v", line 269.
 > $finish at simulation time                 9820
-78,80c48,50
-< Time: 922
-< CPU Time:      0.310 seconds;       Data structure size:   0.5Mb
-< Mon Apr 22 04:10:57 2013
+78,79c48,49
+< Time: 922000 ps
+< CPU Time:      0.830 seconds;       Data structure size: 108.0Mb
 ---
 > Time: 982000 ps
 > CPU Time:      0.250 seconds;       Data structure size:   0.1Mb
-> Mon Apr 22 04:10:58 2013
 diff: 

@@ -94,25 +94,23 @@ Compiling source file /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs
 Warning:  /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/register_file.v:6: Redefining macro 'ZERO_REG' with value '5'h1f' to '5'd31'. (VER-540)
 Compiling source file /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/reorder_buffer.v
 Compiling source file /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/reservation_station.v
-Warning:  /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/reservation_station.v:20: Redefining macro 'ZERO_REG' with value '5'd31' to '5'd0'. (VER-540)
 Compiling source file /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/wb_stage.v
 
 Inferred memory devices in process
-	in routine branch_predictor line 141 in file
+	in routine branch_predictor line 142 in file
 		'/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/branch_predictor.v'.
 ===============================================================================
 |    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 ===============================================================================
-|       ghr_reg       | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
-|       pht_reg       | Flip-flop |  91   |  Y  | N  | N  | N  | N  | N  | N  |
-|       pht_reg       | Flip-flop |  165  |  Y  | N  | N  | N  | N  | N  | N  |
+|       ghr_reg       | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
+|       pht_reg       | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
 ===============================================================================
 Statistics for MUX_OPs
 ===============================================================
 |   block name/line    | Inputs | Outputs | # sel inputs | MB |
 ===============================================================
-| branch_predictor/100 |  256   |    1    |      8       | N  |
-| branch_predictor/101 |  256   |    1    |      8       | N  |
+| branch_predictor/101 |   8    |    1    |      3       | N  |
+| branch_predictor/102 |   8    |    1    |      3       | N  |
 ===============================================================
 Warning:  Starting with the 2000.11-1 release, the Presto Verilog reader treats Verilog 'integer' types as signed; synthesized result may not match earlier versions of HDL Compiler. (VER-314)
 
@@ -420,7 +418,7 @@ Inferred memory devices in process
 |    Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 ================================================================================
 |     NPC_out_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
-|   dest_reg_out_reg   | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|   dest_reg_out_reg   | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
 |   prod_in_reg_reg    | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 | partial_prod_reg_reg | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |    mplier_out_reg    | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
@@ -505,7 +503,7 @@ Inferred memory devices in process
 |      read_reg       | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
 |      valid_reg      | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
 |    complete_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
-|   stored_tag_reg    | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|   stored_tag_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
 ===============================================================================
 Warning:  Starting with the 2000.11-1 release, the Presto Verilog reader treats Verilog 'integer' types as signed; synthesized result may not match earlier versions of HDL Compiler. (VER-314)
 
@@ -532,7 +530,7 @@ Statistics for MUX_OPs
 ===========================================================
 | block name/line  | Inputs | Outputs | # sel inputs | MB |
 ===========================================================
-|     LSQ/365      |   32   |    5    |      5       | N  |
+|     LSQ/365      |   32   |    8    |      5       | N  |
 |     LSQ/371      |   32   |    3    |      5       | N  |
 |     LSQ/381      |   32   |   128   |      5       | N  |
 |     LSQ/414      |   32   |    2    |      5       | N  |
@@ -621,7 +619,7 @@ Inferred memory devices in process
 ==================================================================================
 |     Register Name      |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 ==================================================================================
-| ff_inst2_pht_index_reg | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+| ff_inst2_pht_index_reg | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
 |   ff_dest_reg_1_reg    | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
 |  ff_opa_select_1_reg   | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
 |  ff_opb_select_1_reg   | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
@@ -634,7 +632,7 @@ Inferred memory devices in process
 |      ff_NPC_1_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |      ff_IR_1_reg       | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
 |      ff_PPC_1_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
-| ff_inst1_pht_index_reg | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+| ff_inst1_pht_index_reg | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
 |   ff_dest_reg_2_reg    | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
 |  ff_opa_select_2_reg   | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
 |  ff_opb_select_2_reg   | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
@@ -661,9 +659,9 @@ Inferred memory devices in process
 |     ex_valid_1_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
 |      ex_NPC_1_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |      ex_PPC_1_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
-|    ex_pht_idx_1_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|    ex_pht_idx_1_reg    | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
 |      ex_IR_1_reg       | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
-|   ex_dest_reg_1_reg    | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|   ex_dest_reg_1_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
 |     ex_rega_1_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |     ex_regb_1_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |  ex_opa_select_1_reg   | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
@@ -676,9 +674,9 @@ Inferred memory devices in process
 |     ex_valid_2_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
 |      ex_NPC_2_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |      ex_PPC_2_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
-|    ex_pht_idx_2_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|    ex_pht_idx_2_reg    | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
 |      ex_IR_2_reg       | Flip-flop |  32   |  Y  | N  | N  | N  | N  | N  | N  |
-|   ex_dest_reg_2_reg    | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|   ex_dest_reg_2_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
 |     ex_rega_2_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |     ex_regb_2_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |  ex_opa_select_2_reg   | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
@@ -694,20 +692,20 @@ Inferred memory devices in process
 |     Register Name      |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 ==================================================================================
 |      cm_CPC_2_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
-|      cm_tag_1_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      cm_tag_1_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
 |    cm_result_1_reg     | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |      cm_NPC_1_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |  cm_mispredict_1_reg   | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
 | cm_branch_result_1_reg | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
-|   cm_pht_index_1_reg   | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|   cm_pht_index_1_reg   | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
 |     cm_valid_1_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
 |      cm_CPC_1_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
-|      cm_tag_2_reg      | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
+|      cm_tag_2_reg      | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
 |    cm_result_2_reg     | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |      cm_NPC_2_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |  cm_mispredict_2_reg   | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
 | cm_branch_result_2_reg | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
-|   cm_pht_index_2_reg   | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|   cm_pht_index_2_reg   | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
 |     cm_valid_2_reg     | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
 ==================================================================================
 Warning:  Starting with the 2000.11-1 release, the Presto Verilog reader treats Verilog 'integer' types as signed; synthesized result may not match earlier versions of HDL Compiler. (VER-314)
@@ -767,15 +765,15 @@ Inferred memory devices in process
 =================================================================================
 |     Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 =================================================================================
-|   pht_index_out_reg   | Flip-flop |   8   |  Y  | N  | N  | N  | N  | N  | N  |
+|   pht_index_out_reg   | Flip-flop |   3   |  Y  | N  | N  | N  | N  | N  | N  |
 |      CPC_out_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |     state_out_reg     | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
 |       value_reg       | Flip-flop |  64   |  Y  | N  | N  | N  | N  | N  | N  |
 |   register_out_reg    | Flip-flop |   5   |  Y  | N  | N  | N  | N  | N  | N  |
 | mispredicted_out_reg  | Flip-flop |   1   |  N  | N  | N  | N  | N  | N  | N  |
 | branch_result_out_reg | Flip-flop |   2   |  Y  | N  | N  | N  | N  | N  | N  |
-|      NPC_out_reg      | Flip-flop |  17   |  Y  | N  | N  | N  | N  | N  | N  |
-|      NPC_out_reg      | Flip-flop |  47   |  Y  | N  | N  | N  | N  | N  | N  |
+|      NPC_out_reg      | Flip-flop |  22   |  Y  | N  | N  | N  | N  | N  | N  |
+|      NPC_out_reg      | Flip-flop |  42   |  Y  | N  | N  | N  | N  | N  | N  |
 =================================================================================
 Warning:  Starting with the 2000.11-1 release, the Presto Verilog reader treats Verilog 'integer' types as signed; synthesized result may not match earlier versions of HDL Compiler. (VER-314)
 Warning:  /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/reorder_buffer.v:338: signed to unsigned conversion occurs. (VER-318)
@@ -798,41 +796,41 @@ Statistics for MUX_OPs
 =============================================================
 |  block name/line   | Inputs | Outputs | # sel inputs | MB |
 =============================================================
-| reorder_buffer/345 |   32   |    4    |      5       | N  |
-| reorder_buffer/346 |   32   |    4    |      5       | N  |
-| reorder_buffer/346 |   32   |    1    |      5       | N  |
-| reorder_buffer/363 |   32   |   64    |      5       | N  |
-| reorder_buffer/364 |   32   |   64    |      5       | N  |
-| reorder_buffer/365 |   32   |   64    |      5       | N  |
-| reorder_buffer/366 |   32   |   64    |      5       | N  |
-| reorder_buffer/370 |   32   |    5    |      5       | N  |
-| reorder_buffer/371 |   32   |   192   |      5       | N  |
-| reorder_buffer/373 |   32   |    1    |      5       | N  |
-| reorder_buffer/376 |   32   |    8    |      5       | N  |
-| reorder_buffer/379 |   32   |    5    |      5       | N  |
-| reorder_buffer/380 |   32   |   192   |      5       | N  |
-| reorder_buffer/385 |   32   |    8    |      5       | N  |
-| reorder_buffer/389 |   32   |    2    |      5       | N  |
-| reorder_buffer/389 |   32   |    2    |      5       | N  |
+| reorder_buffer/345 |   16   |    4    |      4       | N  |
+| reorder_buffer/346 |   16   |    4    |      4       | N  |
+| reorder_buffer/346 |   16   |    1    |      4       | N  |
+| reorder_buffer/363 |   16   |   64    |      4       | N  |
+| reorder_buffer/364 |   16   |   64    |      4       | N  |
+| reorder_buffer/365 |   16   |   64    |      4       | N  |
+| reorder_buffer/366 |   16   |   64    |      4       | N  |
+| reorder_buffer/370 |   16   |    5    |      4       | N  |
+| reorder_buffer/371 |   16   |   192   |      4       | N  |
+| reorder_buffer/373 |   16   |    1    |      4       | N  |
+| reorder_buffer/376 |   16   |    3    |      4       | N  |
+| reorder_buffer/379 |   16   |    5    |      4       | N  |
+| reorder_buffer/380 |   16   |   192   |      4       | N  |
+| reorder_buffer/385 |   16   |    3    |      4       | N  |
+| reorder_buffer/389 |   16   |    2    |      4       | N  |
+| reorder_buffer/389 |   16   |    2    |      4       | N  |
 =============================================================
 
-Statistics for case statements in always block at line 214 in file
+Statistics for case statements in always block at line 213 in file
 	'/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/reservation_station.v'
 ===============================================
 |           Line           |  full/ parallel  |
 ===============================================
-|           229            |    auto/auto     |
-|           272            |    auto/auto     |
+|           228            |    auto/auto     |
+|           271            |    auto/auto     |
 ===============================================
 
 Inferred memory devices in process
-	in routine reservation_station_entry line 302 in file
+	in routine reservation_station_entry line 301 in file
 		'/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/reservation_station.v'.
 =================================================================================
 |     Register Name     |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
 =================================================================================
 |      PPC_out_reg      | Flip-flop |  64   |  Y  | N  | N  | N  | Y  | N  | N  |
-|   pht_index_out_reg   | Flip-flop |   8   |  Y  | N  | N  | N  | Y  | N  | N  |
+|   pht_index_out_reg   | Flip-flop |   3   |  Y  | N  | N  | N  | Y  | N  | N  |
 |    status_out_reg     | Flip-flop |   3   |  Y  | N  | N  | N  | Y  | N  | N  |
 |   dest_reg_out_reg    | Flip-flop |   5   |  Y  | N  | N  | N  | Y  | N  | N  |
 |   dest_tag_out_reg    | Flip-flop |   8   |  Y  | N  | N  | N  | N  | Y  | N  |
@@ -854,10 +852,10 @@ Inferred memory devices in process
 =================================================================================
 Warning:  Starting with the 2000.11-1 release, the Presto Verilog reader treats Verilog 'integer' types as signed; synthesized result may not match earlier versions of HDL Compiler. (VER-314)
 Presto compilation completed successfully.
-Current design is now '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/branch_decoder.db:branch_decoder'
-Loaded 26 designs.
-Current design is 'branch_decoder'.
-branch_decoder branch_predictor branch_target_buffer cm_stage decoder id_stage arbiter mult_stage mult alu brcond ex_stage icache if_stage LSQ_entry LSQ map_table memory_arbiter mem_stage pipeline register_file reorder_buffer_entry reorder_buffer reservation_station_entry reservation_station wb_stage
+Current design is now '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/branch_predictor.db:branch_predictor'
+Loaded 25 designs.
+Current design is 'branch_predictor'.
+branch_predictor branch_target_buffer cm_stage decoder id_stage arbiter mult_stage mult alu brcond ex_stage icache if_stage LSQ_entry LSQ map_table memory_arbiter mem_stage pipeline register_file reorder_buffer_entry reorder_buffer reservation_station_entry reservation_station wb_stage
 set design_name [getenv PIPELINE_NAME]
 pipeline
 set clock_name [getenv CLOCK_NET_NAME]
@@ -993,7 +991,7 @@ Current design is 'pipeline'.
   Linking design 'pipeline'
   Using the following designs and libraries:
   --------------------------------------------------------------------------
-  * (27 designs)              /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/pipeline.db, etc
+  * (26 designs)              /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/verilog/pipeline.db, etc
   lec25dscc25_TT (library)    /usr/caen/generic/mentor_lib-D.1/public/eecs470/synopsys/lec25dscc25_TT.db
 
 Current design is 'pipeline'.
@@ -1003,10 +1001,10 @@ Information: Uniquified 8 instances of design 'mult_stage'. (OPT-1056)
 Information: Uniquified 2 instances of design 'alu'. (OPT-1056)
 Information: Uniquified 2 instances of design 'brcond'. (OPT-1056)
 Information: Uniquified 32 instances of design 'LSQ_entry'. (OPT-1056)
-Information: Uniquified 32 instances of design 'reorder_buffer_entry'. (OPT-1056)
+Information: Uniquified 16 instances of design 'reorder_buffer_entry'. (OPT-1056)
 Information: Uniquified 16 instances of design 'reservation_station_entry'. (OPT-1056)
 Information: Updating graph... (UID-83)
-Warning: Design 'pipeline' contains 96 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+Warning: Design 'pipeline' contains 79 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
 Information: Evaluating DesignWare library utilization. (UISN-27)
 
 ============================================================================
@@ -1017,7 +1015,7 @@ Information: Evaluating DesignWare library utilization. (UISN-27)
 ============================================================================
 
 
-Information: There are 979 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
+Information: There are 981 potential problems in your design. Please run 'check_design' for more information. (LINT-99)
 
 
 
@@ -1554,54 +1552,26 @@ Information: The register 'reservation_station_0/RSEMODULES[0].entries/dest_reg_
 Information: The register 'reservation_station_0/RSEMODULES[0].entries/dest_reg_out_reg[2]' will be removed. (OPT-1207)
 Information: The register 'reservation_station_0/RSEMODULES[0].entries/dest_reg_out_reg[1]' will be removed. (OPT-1207)
 Information: The register 'reservation_station_0/RSEMODULES[0].entries/dest_reg_out_reg[0]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[9].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[9].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[9].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[8].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[8].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[8].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[7].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[7].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[7].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[6].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[6].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[6].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[5].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[5].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[5].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[4].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[4].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[4].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[3].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[3].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[3].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[2].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[2].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[2].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[1].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[1].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[1].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[15].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[15].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[15].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[14].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[14].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[14].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[13].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[13].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[13].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[12].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[12].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[12].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[11].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[11].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[11].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[10].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[10].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[10].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[0].entries/dest_tag_out_reg[7]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[0].entries/dest_tag_out_reg[6]' will be removed. (OPT-1207)
-Information: The register 'reservation_station_0/RSEMODULES[0].entries/dest_tag_out_reg[5]' will be removed. (OPT-1207)
+Information: The register 'cm_tag_2_reg[6]' will be removed. (OPT-1207)
+Information: The register 'cm_tag_2_reg[7]' will be removed. (OPT-1207)
+Information: The register 'cm_tag_1_reg[6]' will be removed. (OPT-1207)
+Information: The register 'cm_tag_1_reg[7]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_1/mstage[3]/dest_reg_out_reg[7]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_1/mstage[2]/dest_reg_out_reg[7]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_1/mstage[1]/dest_reg_out_reg[7]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_1/mstage[0]/dest_reg_out_reg[7]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_1/mstage[3]/dest_reg_out_reg[6]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_1/mstage[2]/dest_reg_out_reg[6]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_1/mstage[1]/dest_reg_out_reg[6]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_1/mstage[0]/dest_reg_out_reg[6]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_2/mstage[3]/dest_reg_out_reg[7]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_2/mstage[2]/dest_reg_out_reg[7]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_2/mstage[1]/dest_reg_out_reg[7]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_2/mstage[0]/dest_reg_out_reg[7]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_2/mstage[3]/dest_reg_out_reg[6]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_2/mstage[2]/dest_reg_out_reg[6]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_2/mstage[1]/dest_reg_out_reg[6]' will be removed. (OPT-1207)
+Information: The register 'ex_stage_0/mult_2/mstage[0]/dest_reg_out_reg[6]' will be removed. (OPT-1207)
 Information: The register 'map_table_0/tag_table_reg[31][0]' is a constant and will be removed. (OPT-1206)
 Information: The register 'map_table_0/tag_table_reg[31][1]' is a constant and will be removed. (OPT-1206)
 Information: The register 'map_table_0/tag_table_reg[31][2]' is a constant and will be removed. (OPT-1206)
@@ -2169,6 +2139,9 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_195'
   Processing 'pipeline_DW01_cmp6_196'
   Processing 'pipeline_DW01_cmp6_197'
+  Processing 'pipeline_DW01_add_10'
+  Processing 'pipeline_DW01_inc_1'
+  Processing 'pipeline_DW01_add_11'
   Processing 'pipeline_DW01_cmp6_198'
   Processing 'pipeline_DW01_cmp6_199'
   Processing 'pipeline_DW01_cmp6_200'
@@ -2177,6 +2150,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_203'
   Processing 'pipeline_DW01_cmp6_204'
   Processing 'pipeline_DW01_cmp6_205'
+  Processing 'pipeline_DW01_inc_2'
+  Processing 'pipeline_DW01_add_12'
   Processing 'pipeline_DW01_cmp6_206'
   Processing 'pipeline_DW01_cmp6_207'
   Processing 'pipeline_DW01_cmp6_208'
@@ -2185,6 +2160,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_211'
   Processing 'pipeline_DW01_cmp6_212'
   Processing 'pipeline_DW01_cmp6_213'
+  Processing 'pipeline_DW01_inc_3'
+  Processing 'pipeline_DW01_add_13'
   Processing 'pipeline_DW01_cmp6_214'
   Processing 'pipeline_DW01_cmp6_215'
   Processing 'pipeline_DW01_cmp6_216'
@@ -2193,6 +2170,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_219'
   Processing 'pipeline_DW01_cmp6_220'
   Processing 'pipeline_DW01_cmp6_221'
+  Processing 'pipeline_DW01_inc_4'
+  Processing 'pipeline_DW01_add_14'
   Processing 'pipeline_DW01_cmp6_222'
   Processing 'pipeline_DW01_cmp6_223'
   Processing 'pipeline_DW01_cmp6_224'
@@ -2201,9 +2180,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_227'
   Processing 'pipeline_DW01_cmp6_228'
   Processing 'pipeline_DW01_cmp6_229'
-  Processing 'pipeline_DW01_add_10'
-  Processing 'pipeline_DW01_inc_1'
-  Processing 'pipeline_DW01_add_11'
+  Processing 'pipeline_DW01_inc_5'
+  Processing 'pipeline_DW01_add_15'
   Processing 'pipeline_DW01_cmp6_230'
   Processing 'pipeline_DW01_cmp6_231'
   Processing 'pipeline_DW01_cmp6_232'
@@ -2212,8 +2190,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_235'
   Processing 'pipeline_DW01_cmp6_236'
   Processing 'pipeline_DW01_cmp6_237'
-  Processing 'pipeline_DW01_inc_2'
-  Processing 'pipeline_DW01_add_12'
+  Processing 'pipeline_DW01_inc_6'
+  Processing 'pipeline_DW01_add_16'
   Processing 'pipeline_DW01_cmp6_238'
   Processing 'pipeline_DW01_cmp6_239'
   Processing 'pipeline_DW01_cmp6_240'
@@ -2222,8 +2200,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_243'
   Processing 'pipeline_DW01_cmp6_244'
   Processing 'pipeline_DW01_cmp6_245'
-  Processing 'pipeline_DW01_inc_3'
-  Processing 'pipeline_DW01_add_13'
+  Processing 'pipeline_DW01_inc_7'
+  Processing 'pipeline_DW01_add_17'
   Processing 'pipeline_DW01_cmp6_246'
   Processing 'pipeline_DW01_cmp6_247'
   Processing 'pipeline_DW01_cmp6_248'
@@ -2232,8 +2210,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_251'
   Processing 'pipeline_DW01_cmp6_252'
   Processing 'pipeline_DW01_cmp6_253'
-  Processing 'pipeline_DW01_inc_4'
-  Processing 'pipeline_DW01_add_14'
+  Processing 'pipeline_DW01_inc_8'
+  Processing 'pipeline_DW01_add_18'
   Processing 'pipeline_DW01_cmp6_254'
   Processing 'pipeline_DW01_cmp6_255'
   Processing 'pipeline_DW01_cmp6_256'
@@ -2242,8 +2220,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_259'
   Processing 'pipeline_DW01_cmp6_260'
   Processing 'pipeline_DW01_cmp6_261'
-  Processing 'pipeline_DW01_inc_5'
-  Processing 'pipeline_DW01_add_15'
+  Processing 'pipeline_DW01_inc_9'
+  Processing 'pipeline_DW01_add_19'
   Processing 'pipeline_DW01_cmp6_262'
   Processing 'pipeline_DW01_cmp6_263'
   Processing 'pipeline_DW01_cmp6_264'
@@ -2252,8 +2230,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_267'
   Processing 'pipeline_DW01_cmp6_268'
   Processing 'pipeline_DW01_cmp6_269'
-  Processing 'pipeline_DW01_inc_6'
-  Processing 'pipeline_DW01_add_16'
+  Processing 'pipeline_DW01_inc_10'
+  Processing 'pipeline_DW01_add_20'
   Processing 'pipeline_DW01_cmp6_270'
   Processing 'pipeline_DW01_cmp6_271'
   Processing 'pipeline_DW01_cmp6_272'
@@ -2262,8 +2240,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_275'
   Processing 'pipeline_DW01_cmp6_276'
   Processing 'pipeline_DW01_cmp6_277'
-  Processing 'pipeline_DW01_inc_7'
-  Processing 'pipeline_DW01_add_17'
+  Processing 'pipeline_DW01_inc_11'
+  Processing 'pipeline_DW01_add_21'
   Processing 'pipeline_DW01_cmp6_278'
   Processing 'pipeline_DW01_cmp6_279'
   Processing 'pipeline_DW01_cmp6_280'
@@ -2272,8 +2250,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_283'
   Processing 'pipeline_DW01_cmp6_284'
   Processing 'pipeline_DW01_cmp6_285'
-  Processing 'pipeline_DW01_inc_8'
-  Processing 'pipeline_DW01_add_18'
+  Processing 'pipeline_DW01_inc_12'
+  Processing 'pipeline_DW01_add_22'
   Processing 'pipeline_DW01_cmp6_286'
   Processing 'pipeline_DW01_cmp6_287'
   Processing 'pipeline_DW01_cmp6_288'
@@ -2282,8 +2260,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_291'
   Processing 'pipeline_DW01_cmp6_292'
   Processing 'pipeline_DW01_cmp6_293'
-  Processing 'pipeline_DW01_inc_9'
-  Processing 'pipeline_DW01_add_19'
+  Processing 'pipeline_DW01_inc_13'
+  Processing 'pipeline_DW01_add_23'
   Processing 'pipeline_DW01_cmp6_294'
   Processing 'pipeline_DW01_cmp6_295'
   Processing 'pipeline_DW01_cmp6_296'
@@ -2292,8 +2270,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_299'
   Processing 'pipeline_DW01_cmp6_300'
   Processing 'pipeline_DW01_cmp6_301'
-  Processing 'pipeline_DW01_inc_10'
-  Processing 'pipeline_DW01_add_20'
+  Processing 'pipeline_DW01_inc_14'
+  Processing 'pipeline_DW01_add_24'
   Processing 'pipeline_DW01_cmp6_302'
   Processing 'pipeline_DW01_cmp6_303'
   Processing 'pipeline_DW01_cmp6_304'
@@ -2302,8 +2280,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_307'
   Processing 'pipeline_DW01_cmp6_308'
   Processing 'pipeline_DW01_cmp6_309'
-  Processing 'pipeline_DW01_inc_11'
-  Processing 'pipeline_DW01_add_21'
+  Processing 'pipeline_DW01_inc_15'
+  Processing 'pipeline_DW01_add_25'
   Processing 'pipeline_DW01_cmp6_310'
   Processing 'pipeline_DW01_cmp6_311'
   Processing 'pipeline_DW01_cmp6_312'
@@ -2312,8 +2290,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_315'
   Processing 'pipeline_DW01_cmp6_316'
   Processing 'pipeline_DW01_cmp6_317'
-  Processing 'pipeline_DW01_inc_12'
-  Processing 'pipeline_DW01_add_22'
+  Processing 'pipeline_DW01_inc_16'
+  Processing 'pipeline_DW01_add_26'
   Processing 'pipeline_DW01_cmp6_318'
   Processing 'pipeline_DW01_cmp6_319'
   Processing 'pipeline_DW01_cmp6_320'
@@ -2322,18 +2300,18 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_323'
   Processing 'pipeline_DW01_cmp6_324'
   Processing 'pipeline_DW01_cmp6_325'
-  Processing 'pipeline_DW01_inc_13'
-  Processing 'pipeline_DW01_add_23'
   Processing 'pipeline_DW01_cmp6_326'
+  Processing 'pipeline_DW01_add_27'
   Processing 'pipeline_DW01_cmp6_327'
+  Processing 'pipeline_DW01_inc_17'
   Processing 'pipeline_DW01_cmp6_328'
+  Processing 'pipeline_DW01_add_28'
+  Processing 'pipeline_DW01_inc_18'
   Processing 'pipeline_DW01_cmp6_329'
   Processing 'pipeline_DW01_cmp6_330'
   Processing 'pipeline_DW01_cmp6_331'
   Processing 'pipeline_DW01_cmp6_332'
   Processing 'pipeline_DW01_cmp6_333'
-  Processing 'pipeline_DW01_inc_14'
-  Processing 'pipeline_DW01_add_24'
   Processing 'pipeline_DW01_cmp6_334'
   Processing 'pipeline_DW01_cmp6_335'
   Processing 'pipeline_DW01_cmp6_336'
@@ -2342,8 +2320,6 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_339'
   Processing 'pipeline_DW01_cmp6_340'
   Processing 'pipeline_DW01_cmp6_341'
-  Processing 'pipeline_DW01_inc_15'
-  Processing 'pipeline_DW01_add_25'
   Processing 'pipeline_DW01_cmp6_342'
   Processing 'pipeline_DW01_cmp6_343'
   Processing 'pipeline_DW01_cmp6_344'
@@ -2352,8 +2328,6 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_347'
   Processing 'pipeline_DW01_cmp6_348'
   Processing 'pipeline_DW01_cmp6_349'
-  Processing 'pipeline_DW01_inc_16'
-  Processing 'pipeline_DW01_add_26'
   Processing 'pipeline_DW01_cmp6_350'
   Processing 'pipeline_DW01_cmp6_351'
   Processing 'pipeline_DW01_cmp6_352'
@@ -2363,12 +2337,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_356'
   Processing 'pipeline_DW01_cmp6_357'
   Processing 'pipeline_DW01_cmp6_358'
-  Processing 'pipeline_DW01_add_27'
   Processing 'pipeline_DW01_cmp6_359'
-  Processing 'pipeline_DW01_inc_17'
   Processing 'pipeline_DW01_cmp6_360'
-  Processing 'pipeline_DW01_add_28'
-  Processing 'pipeline_DW01_inc_18'
   Processing 'pipeline_DW01_cmp6_361'
   Processing 'pipeline_DW01_cmp6_362'
   Processing 'pipeline_DW01_cmp6_363'
@@ -2471,6 +2441,9 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_460'
   Processing 'pipeline_DW01_cmp6_461'
   Processing 'pipeline_DW01_cmp6_462'
+  Processing 'pipeline_DW01_inc_19'
+  Processing 'pipeline_DW01_add_29'
+  Processing 'pipeline_DW01_add_30'
   Processing 'pipeline_DW01_cmp6_463'
   Processing 'pipeline_DW01_cmp6_464'
   Processing 'pipeline_DW01_cmp6_465'
@@ -2503,13 +2476,13 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_492'
   Processing 'pipeline_DW01_cmp6_493'
   Processing 'pipeline_DW01_cmp6_494'
-  Processing 'pipeline_DW01_inc_19'
-  Processing 'pipeline_DW01_add_29'
-  Processing 'pipeline_DW01_add_30'
   Processing 'pipeline_DW01_cmp6_495'
   Processing 'pipeline_DW01_cmp6_496'
+  Processing 'pipeline_DW01_inc_20'
   Processing 'pipeline_DW01_cmp6_497'
+  Processing 'pipeline_DW_rash_0'
   Processing 'pipeline_DW01_cmp6_498'
+  Processing 'pipeline_DW_rash_1'
   Processing 'pipeline_DW01_cmp6_499'
   Processing 'pipeline_DW01_cmp6_500'
   Processing 'pipeline_DW01_cmp6_501'
@@ -2540,11 +2513,8 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_526'
   Processing 'pipeline_DW01_cmp6_527'
   Processing 'pipeline_DW01_cmp6_528'
-  Processing 'pipeline_DW01_inc_20'
   Processing 'pipeline_DW01_cmp6_529'
-  Processing 'pipeline_DW_rash_0'
   Processing 'pipeline_DW01_cmp6_530'
-  Processing 'pipeline_DW_rash_1'
   Processing 'pipeline_DW01_cmp6_531'
   Processing 'pipeline_DW01_cmp6_532'
   Processing 'pipeline_DW01_cmp6_533'
@@ -2633,38 +2603,6 @@ Information: Updating design information... (UID-85)
   Processing 'pipeline_DW01_cmp6_616'
   Processing 'pipeline_DW01_cmp6_617'
   Processing 'pipeline_DW01_cmp6_618'
-  Processing 'pipeline_DW01_cmp6_619'
-  Processing 'pipeline_DW01_cmp6_620'
-  Processing 'pipeline_DW01_cmp6_621'
-  Processing 'pipeline_DW01_cmp6_622'
-  Processing 'pipeline_DW01_cmp6_623'
-  Processing 'pipeline_DW01_cmp6_624'
-  Processing 'pipeline_DW01_cmp6_625'
-  Processing 'pipeline_DW01_cmp6_626'
-  Processing 'pipeline_DW01_cmp6_627'
-  Processing 'pipeline_DW01_cmp6_628'
-  Processing 'pipeline_DW01_cmp6_629'
-  Processing 'pipeline_DW01_cmp6_630'
-  Processing 'pipeline_DW01_cmp6_631'
-  Processing 'pipeline_DW01_cmp6_632'
-  Processing 'pipeline_DW01_cmp6_633'
-  Processing 'pipeline_DW01_cmp6_634'
-  Processing 'pipeline_DW01_cmp6_635'
-  Processing 'pipeline_DW01_cmp6_636'
-  Processing 'pipeline_DW01_cmp6_637'
-  Processing 'pipeline_DW01_cmp6_638'
-  Processing 'pipeline_DW01_cmp6_639'
-  Processing 'pipeline_DW01_cmp6_640'
-  Processing 'pipeline_DW01_cmp6_641'
-  Processing 'pipeline_DW01_cmp6_642'
-  Processing 'pipeline_DW01_cmp6_643'
-  Processing 'pipeline_DW01_cmp6_644'
-  Processing 'pipeline_DW01_cmp6_645'
-  Processing 'pipeline_DW01_cmp6_646'
-  Processing 'pipeline_DW01_cmp6_647'
-  Processing 'pipeline_DW01_cmp6_648'
-  Processing 'pipeline_DW01_cmp6_649'
-  Processing 'pipeline_DW01_cmp6_650'
   Processing 'pipeline_DW02_mult_0'
   Processing 'pipeline_DW01_add_31'
   Processing 'pipeline_DW02_mult_1'
@@ -2685,9 +2623,9 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:09:44 21063567.7 198589.27 1618579584.0 37078524.0                                0.00
-    0:09:44 21063567.7 198589.27 1618579584.0 37078524.0                                0.00
-    0:09:48 21445483.4  91149.33 1605044224.0 14297519.0                                0.00
+    0:05:02 19342613.3 198265.83 51901008.0 35180864.0                                0.00
+    0:05:02 19342613.3 198265.83 51901008.0 35180864.0                                0.00
+    0:05:04 19724570.4  91303.95 38575452.0 12457135.0                                0.00
 
   Beginning Mapping Optimizations  (Medium effort)
   -------------------------------
@@ -2696,19 +2634,18 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:11:39 22175918.8  37449.71 1597830528.0 14022592.0                                0.00
-    0:11:39 22175918.8  37449.71 1597830528.0 14022592.0                                0.00
-    0:11:53 23515478.1   2730.14 30315018.0 12176329.0                                0.00
-    0:11:56 23739520.0   2730.14  903706.8 12073689.0                                0.00
-    0:12:08 24971681.3   2757.23  818729.6 12232742.0                                0.00
-    0:12:20 25982697.8   2757.23  554260.3 12222628.0                                0.00
-    0:12:37 26992993.2   2757.23  474270.2 12203999.0                                0.00
-    0:12:50 29183410.8   2757.23  454658.8 12156181.0                                0.00
-    0:13:00 29942375.2   2757.23  454658.8 12143268.0                                0.00
-    0:13:11 30637348.7   2757.23  454658.8 12131797.0                                0.00
-    0:13:20 31323492.5   2757.23  454658.8 12121064.0                                0.00
-    0:13:29 31938499.0      5.68   37520.1   25102.0                                0.00
-    0:13:44 33198030.3      1.15    2485.6    5837.9                                0.00
+    0:05:58 20510561.1   2704.89 26845514.0 12185227.0                                0.00
+    0:05:58 20510561.1   2704.89 26845514.0 12185227.0                                0.00
+    0:06:07 21619966.7   2704.89 26549988.0 12165524.0                                0.00
+    0:06:14 23234538.4   2729.40 1476664.2 12213003.0                                0.00
+    0:06:21 24175992.0   2729.40  588469.1 12200015.0                                0.00
+    0:06:27 25543944.3   2729.40  524980.2 12180089.0                                0.00
+    0:06:33 27532318.2   2729.40  524980.2 12142375.0                                0.00
+    0:06:34 28227756.4   2729.40  524980.2 12130611.0                                0.00
+    0:06:35 28913900.1   2729.40  524980.2 12119520.0                                0.00
+    0:06:40 29488189.4      8.31   75091.4   20425.6                                0.00
+    0:06:43 30460140.1      7.05   37633.4   10397.3                                0.00
+    0:06:51 31189791.9      1.96    9774.9    1963.5                                0.00
 Information: The register 'ex_stage_0/mult_1/mstage[3]/partial_prod_reg_reg[47]' is a constant and will be removed. (OPT-1206)
 Information: The register 'ex_stage_0/mult_1/mstage[3]/partial_prod_reg_reg[46]' is a constant and will be removed. (OPT-1206)
 Information: The register 'ex_stage_0/mult_1/mstage[3]/partial_prod_reg_reg[45]' is a constant and will be removed. (OPT-1206)
@@ -2805,45 +2742,45 @@ Information: The register 'ex_stage_0/mult_1/mstage[1]/partial_prod_reg_reg[3]' 
 Information: The register 'ex_stage_0/mult_1/mstage[1]/partial_prod_reg_reg[2]' is a constant and will be removed. (OPT-1206)
 Information: The register 'ex_stage_0/mult_1/mstage[1]/partial_prod_reg_reg[1]' is a constant and will be removed. (OPT-1206)
 Information: The register 'ex_stage_0/mult_1/mstage[1]/partial_prod_reg_reg[0]' is a constant and will be removed. (OPT-1206)
-    0:15:33 29746321.4      0.00       0.0    1537.5                                0.00
-    0:15:36 29746321.4      0.00       0.0    1537.5                                0.00
-    0:15:36 29746321.4      0.00       0.0    1537.5                                0.00
-    0:15:39 29746321.4      0.00       0.0    1537.5                                0.00
-    0:15:39 29746321.4      0.00       0.0    1537.5                                0.00
-    0:15:44 29746321.4      0.00       0.0    1537.5                                0.00
-    0:17:44 20094170.7      2.52     352.8      27.1                                0.00
-    0:18:04 20000049.7      2.08     256.2      26.9                                0.00
-    0:18:33 20002637.5      1.62     155.2      26.4                                0.00
-    0:18:39 20002771.7      1.60     158.7      26.4                                0.00
-    0:18:59 20002722.4      1.56     142.3      26.4                                0.00
-    0:19:04 20003087.6      1.56     145.2      26.4                                0.00
-    0:19:09 20003561.0      1.35     131.8      26.4                                0.00
-    0:19:14 20003768.8      1.30     124.2      26.4                                0.00
-    0:19:19 20004326.2      1.62     182.6      26.4                                0.00
-    0:19:24 20004575.7      1.37     135.0      26.4                                0.00
-    0:19:26 20004791.6      1.26     119.2      26.4                                0.00
-    0:19:29 20005058.0      1.16     106.5      26.4                                0.00
-    0:19:32 20005232.8      1.13     102.3      26.4                                0.00
-    0:19:34 20006083.6      1.03      83.9      26.4                                0.00
-    0:19:37 20006258.1      1.02      82.7      26.4                                0.00
-    0:19:40 20006615.9      1.08      71.7      26.4                                0.00
-    0:19:43 20007565.1      1.06      62.1      26.4                                0.00
-    0:19:46 20008373.3      1.00      59.9      26.4                                0.00
-    0:19:48 20008315.0      0.96      59.1      26.4                                0.00
-    0:19:52 20004615.9      0.96      59.1      26.4                                0.00
-    0:19:52 20004615.9      0.96      59.1      26.4                                0.00
-    0:19:55 20004009.1      0.96      59.1       5.6                                0.00
-    0:19:57 20004227.4      0.96      59.1       4.8                                0.00
-    0:19:59 20004445.7      0.96      59.1       4.0                                0.00
-    0:20:01 20004664.0      0.96      59.1       3.4                                0.00
-    0:20:03 20004781.8      0.96      59.1       2.9                                0.00
-    0:20:05 20004899.6      0.96      59.1       2.5                                0.00
-    0:20:07 20005017.4      0.96      59.1       2.1                                0.00
-    0:20:08 20005135.2      0.96      59.1       1.6                                0.00
-    0:20:10 20005269.9      0.96      59.1       1.2                                0.00
-    0:20:10 20005269.9      0.96      59.1       1.2                                0.00
-    0:20:12 20007810.1      0.37      16.4      59.2 cm_mispredict_2_reg/DIN        0.00
-    0:20:13 20009386.1      0.00       0.0      59.2                                0.00
+    0:07:41 27543062.6      0.00       0.0    1006.9                                0.00
+    0:07:43 27543062.6      0.00       0.0    1006.9                                0.00
+    0:07:43 27543062.6      0.00       0.0    1006.9                                0.00
+    0:07:44 27543062.6      0.00       0.0    1006.9                                0.00
+    0:07:44 27543062.6      0.00       0.0    1006.9                                0.00
+    0:07:47 27543062.6      0.00       0.0    1006.9                                0.00
+    0:08:45 18435928.9      2.04     226.4      26.4                                0.00
+    0:08:55 18350116.1      1.74     197.4      25.0                                0.00
+    0:09:10 18352140.3      1.56     167.3      25.0                                0.00
+    0:09:13 18352954.8      1.56     167.7      25.0                                0.00
+    0:09:22 18352498.3      1.46     153.8      25.0                                0.00
+    0:09:25 18352963.5      1.71     185.5      25.0                                0.00
+    0:09:27 18352963.7      1.30     111.5      25.0                                0.00
+    0:09:30 18353861.0      1.27     113.5      25.0                                0.00
+    0:09:33 18353862.2      1.37     122.8      25.0                                0.00
+    0:09:35 18354144.5      1.11      85.8      25.0                                0.00
+    0:09:37 18355316.4      0.98      69.7      25.0                                0.00
+    0:09:38 18356065.3      0.83      62.4      25.0                                0.00
+    0:09:40 18356398.1      0.80      61.5      25.0                                0.00
+    0:09:41 18356790.2      0.79      59.0      25.0                                0.00
+    0:09:43 18357463.2      0.77      56.8      25.0                                0.00
+    0:09:44 18357772.1      0.74      48.7      25.0                                0.00
+    0:09:46 18358114.8      0.67      43.7      25.0                                0.00
+    0:09:47 18358471.7      0.90      49.8      25.0                                0.00
+    0:09:48 18358438.5      0.66      41.7      25.0                                0.00
+    0:09:50 18354689.6      0.66      41.7      25.0                                0.00
+    0:09:50 18354689.6      0.66      41.7      25.0                                0.00
+    0:09:53 18353475.9      0.66      41.7       3.5                                0.00
+    0:09:54 18353578.1      0.66      41.7       2.7                                0.00
+    0:09:55 18353713.2      0.66      41.7       2.0                                0.00
+    0:09:57 18353932.0      0.66      41.7       1.4                                0.00
+    0:09:58 18353982.5      0.66      41.7       1.2                                0.00
+    0:09:59 18354033.0      0.66      41.7       1.0                                0.00
+    0:10:00 18354083.5      0.66      41.7       0.9                                0.00
+    0:10:01 18354150.8      0.66      41.7       0.7                                0.00
+    0:10:02 18354251.8      0.66      41.7       0.5                                0.00
+    0:10:02 18354251.8      0.66      41.7       0.5                                0.00
+    0:10:03 18357212.9      0.17       0.3       0.5 cm_mispredict_2_reg/DIN        0.00
+    0:10:03 18357785.7      0.00       0.0      17.5                                0.00
 
 
 
@@ -2853,10 +2790,10 @@ Information: The register 'ex_stage_0/mult_1/mstage[1]/partial_prod_reg_reg[0]' 
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:20:13 20009386.1      0.00       0.0      59.2                                0.00
-    0:20:13 20009386.1      0.00       0.0      59.2                                0.00
-    0:20:58 19983784.5      0.00       0.0      97.0                                0.00
-    0:21:03 19983517.5      0.00       0.0      97.0                                0.00
+    0:10:03 18357785.7      0.00       0.0      17.5                                0.00
+    0:10:03 18357785.7      0.00       0.0      17.5                                0.00
+    0:10:20 18356586.8      0.00       0.0      17.5                                0.00
+    0:10:22 18351800.4      0.00       0.0      27.5                                0.00
 
 
   Beginning Design Rule Fixing  (min_path)  (max_transition)  (max_fanout)
@@ -2865,36 +2802,27 @@ Information: The register 'ex_stage_0/mult_1/mstage[1]/partial_prod_reg_reg[0]' 
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:21:19 19983517.5      0.00       0.0      97.0                              -75.76
-    0:21:25 19983634.6      0.00       0.0      96.6 map_table_0/tag_table[4][5]    -75.76
-    0:21:26 19984539.0      0.00       0.0      95.7 map_table_0/tag_table[26][2]    -75.76
-    0:21:30 19984891.4      0.00       0.0      90.8 n42709                       -75.76
-    0:21:34 19986950.5      0.00       0.0      57.4 ex_stage_0/mult_1/mstage[1]/NPC_out_reg[53]/DIN    -73.39
-    0:21:35 19989918.2      0.00       0.0      57.4 ex_stage_0/mult_1/mstage[3]/dest_reg_out_reg[3]/DIN    -67.86
-    0:21:35 19993342.8      0.00       0.0      57.4 ex_stage_0/mult_1/mstage[1]/mcand_out_reg[40]/DIN    -60.63
-    0:21:36 19997320.1      0.00       0.0      57.4 ex_stage_0/mult_2/mstage[2]/mcand_out_reg[51]/DIN    -55.16
-    0:21:37 20000838.5      0.00       0.0      57.4 ex_stage_0/mult_2/mstage[2]/mcand_out_reg[36]/DIN    -49.27
-    0:21:37 20004198.7      0.00       0.0      57.4 ex_stage_0/mult_2/mstage[1]/NPC_out_reg[34]/DIN    -44.14
-    0:21:38 20007967.9      0.00       0.0      57.4 ex_stage_0/mult_2/mstage[1]/NPC_out_reg[15]/DIN    -38.50
-    0:21:38 20011127.5      0.00       0.0      57.4 ex_stage_0/mult_1/mstage[2]/NPC_out_reg[5]/DIN    -33.59
-    0:21:38 20013109.7      0.00       0.0      57.4 ex_stage_0/mult_1/mstage[2]/NPC_out_reg[28]/DIN    -28.98
-    0:21:39 20015092.0      0.00       0.0      57.4 ex_stage_0/mult_1/mstage[1]/mplier_out_reg[29]/DIN    -24.36
-    0:21:39 20017491.8      0.00       0.0      57.4 ex_stage_0/mult_1/mstage[1]/prod_in_reg_reg[15]/DIN    -19.55
-    0:21:39 20020167.0      0.00       0.0      57.4 ex_stage_0/mult_1/mstage[3]/NPC_out_reg[42]/DIN    -14.65
-    0:21:40 20022241.2      0.00       0.0      57.4 ex_stage_0/mult_2/mstage[1]/prod_in_reg_reg[24]/DIN    -10.10
-    0:21:40 20024707.8      0.00       0.0      57.4 ex_stage_0/mult_1/mstage[1]/NPC_out_reg[61]/DIN     -5.27
-    0:21:40 20028176.5      0.00       0.0      57.4 LSQ_0/LSQENTRIES[30].entries/read_reg/EB      0.00
-    0:21:41 20028292.6      0.00       0.0      54.2 net1002830                     0.00
-    0:21:41 20028408.7      0.00       0.0      51.1 net1002746                     0.00
-    0:21:42 20028524.8      0.00       0.0      48.0 net1002146                     0.00
-    0:21:42 20028641.0      0.00       0.0      44.8 net1002242                     0.00
-    0:21:43 20028757.1      0.00       0.0      41.7 net1002338                     0.00
-    0:21:43 20028873.2      0.00       0.0      38.6 net1002422                     0.00
-    0:21:43 20028989.3      0.00       0.0      35.4 net1002518                     0.00
-    0:21:44 20029105.4      0.00       0.0      32.3 net1002614                     0.00
-    0:21:45 20029171.8      0.00       0.0      29.7 net961081                      0.00
-    0:21:49 20029005.9      0.01       0.0       0.0 net998853                      0.00
-    0:21:50 20029428.9      0.00       0.0       0.0                                0.00
+    0:10:30 18351800.4      0.00       0.0      27.5                              -77.27
+    0:10:33 18352316.8      0.00       0.0      23.3 rs_ages_out[93]              -77.27
+    0:10:34 18352598.8      0.00       0.0      20.5 rs_ages_out[123]             -77.27
+    0:10:34 18352847.6      0.00       0.0      18.6 net837303                    -77.27
+    0:10:35 18353247.2      0.00       0.0      17.3 map_table_0/tag_table[26][4]    -77.27
+    0:10:37 18353908.5      0.00       0.0      17.0 ex_stage_0/mult_2/mstage[3]/NPC_out_reg[38]/DIN    -77.24
+    0:10:37 18357543.5      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[1]/NPC_out_reg[46]/DIN    -70.88
+    0:10:37 18360393.6      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[1]/mplier_out_reg[7]/DIN    -65.02
+    0:10:37 18363336.2      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[1]/prod_in_reg_reg[19]/DIN    -60.36
+    0:10:37 18367197.3      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[1]/prod_in_reg_reg[27]/DIN    -55.50
+    0:10:38 18370089.6      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[1]/prod_in_reg_reg[61]/DIN    -50.30
+    0:10:38 18373341.2      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[3]/NPC_out_reg[21]/DIN    -45.82
+    0:10:38 18376526.0      0.00       0.0      17.0 ex_stage_0/mult_2/mstage[1]/NPC_out_reg[11]/DIN    -41.35
+    0:10:38 18379318.3      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[2]/NPC_out_reg[50]/DIN    -36.26
+    0:10:38 18381325.6      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[2]/NPC_out_reg[19]/DIN    -31.65
+    0:10:38 18383767.2      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[1]/NPC_out_reg[14]/DIN    -26.54
+    0:10:39 18386267.0      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[2]/mcand_out_reg[57]/DIN    -21.31
+    0:10:39 18388374.3      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[1]/mplier_out_reg[19]/DIN    -16.61
+    0:10:39 18391233.5      0.00       0.0      17.0 ex_stage_0/mult_2/mstage[3]/dest_reg_out_reg[2]/DIN    -11.60
+    0:10:39 18394125.8      0.00       0.0      17.0 ex_stage_0/mult_1/mstage[1]/dest_reg_out_reg[1]/DIN     -6.38
+    0:10:40 18397217.9      0.00       0.0       0.0 net880865                     -0.04
 
 
   Beginning Critical Range Optimization
@@ -2903,7 +2831,7 @@ Information: The register 'ex_stage_0/mult_1/mstage[1]/partial_prod_reg_reg[0]' 
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:21:50 20029428.9      0.00       0.0       0.0                                0.00
+    0:10:40 18397217.9      0.00       0.0       0.0                               -0.04
 
 
   Beginning Area-Recovery Phase  (cleanup)
@@ -2912,40 +2840,40 @@ Information: The register 'ex_stage_0/mult_1/mstage[1]/partial_prod_reg_reg[0]' 
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:21:51 20029428.9      0.00       0.0       0.0                                0.00
-    0:21:51 20029428.9      0.00       0.0       0.0                                0.00
-    0:21:53 20029428.9      0.00       0.0       0.0                                0.00
-    0:22:23 19912348.7      0.21       5.8       0.0                                0.00
-    0:22:49 19844932.9      0.12       1.6       0.0                                0.00
-    0:23:15 19798289.0      0.12       1.6       0.0                                0.00
-    0:23:41 19769994.3      0.12       1.6       0.0                                0.00
-    0:24:03 19746886.7      0.12       1.6       0.0                                0.00
-    0:24:20 19729200.9      0.12       1.6       0.0                                0.00
-    0:24:36 19713345.6      0.12       1.6       0.0                                0.00
-    0:24:50 19699099.2      0.12       1.6       0.0                                0.00
-    0:25:06 19686590.1      0.12       1.6       0.0                                0.00
-    0:25:20 19676628.6      0.12       1.6       0.0                                0.00
-    0:25:32 19667183.2      0.12       1.6       0.0                                0.00
-    0:25:43 19658289.7      0.12       1.6       0.0                                0.00
-    0:25:55 19650420.1      0.12       1.6       0.0                                0.00
-    0:26:07 19642741.3      0.12       1.6       0.0                                0.00
-    0:26:17 19635017.6      0.12       1.6       0.0                                0.00
-    0:26:27 19627361.0      0.12       1.6       0.0                                0.00
-    0:26:27 19627361.0      0.12       1.6       0.0                                0.00
-    0:26:31 19624986.8      0.12       1.6       0.0 net965285                      0.00
-    0:26:32 19625436.1      0.00       0.0       0.0                                0.00
-    0:26:32 19625436.1      0.00       0.0       0.0                                0.00
-    0:26:36 19625436.1      0.00       0.0       0.0                                0.00
-    0:27:06 19222493.4      1.41      97.8       0.0                               -0.75
-    0:27:07 19222427.1      1.41      97.8       0.0                               -0.75
-    0:27:08 19222427.1      1.41      97.8       0.0                               -0.75
-    0:27:08 19222427.1      1.41      97.8       0.0                               -0.75
-    0:27:08 19222427.1      1.41      97.8       0.0                               -0.75
-    0:27:09 19222427.1      1.41      97.8       0.0                               -0.75
-    0:27:09 19222427.1      1.41      97.8       0.0                               -0.75
-    0:27:12 19225704.1      0.00       0.0       0.0                               -0.75
-    0:27:13 19226467.2      0.00       0.0       0.0 ex_stage_0/mult_1/mstage[1]/mcand_out_reg[33]/DIN     -0.07
-    0:27:13 19226583.3      0.00       0.0       0.0                                0.00
+    0:10:41 18397217.9      0.00       0.0       0.0                               -0.04
+    0:10:41 18397217.9      0.00       0.0       0.0                               -0.04
+    0:10:42 18397217.9      0.00       0.0       0.0                               -0.04
+    0:10:56 18284541.8      0.02       0.0       0.0                               -0.04
+    0:11:08 18223941.3      0.01       0.0       0.0                               -0.04
+    0:11:21 18179706.1      0.04       0.1       0.0                               -0.04
+    0:11:31 18143310.5      0.05       0.1       0.0                               -0.04
+    0:11:43 18121963.8      0.05       0.1       0.0                               -0.04
+    0:11:51 18103828.7      0.05       0.1       0.0                               -0.04
+    0:11:58 18090912.3      0.05       0.1       0.0                               -0.04
+    0:12:05 18079173.1      0.05       0.1       0.0                               -0.04
+    0:12:11 18065968.7      0.05       0.1       0.0                               -0.04
+    0:12:18 18056374.4      0.05       0.1       0.0                               -0.04
+    0:12:24 18047279.8      0.05       0.1       0.0                               -0.04
+    0:12:29 18038661.5      0.05       0.1       0.0                               -0.04
+    0:12:35 18030443.6      0.06      18.4       0.0                               -0.04
+    0:12:41 18022719.5      0.05       6.2       0.0                               -0.04
+    0:12:46 18014554.9      0.05       6.2       0.0                               -0.04
+    0:12:52 18007007.4      0.07      18.6       0.0                               -0.04
+    0:12:52 18007007.4      0.07      18.6       0.0                               -0.04
+    0:12:53 18004699.3      0.00       0.0       0.0                               -0.04
+    0:12:53 18004699.3      0.00       0.0       0.0                               -0.04
+    0:12:56 18004699.3      0.00       0.0       0.0                               -0.04
+    0:13:10 17660645.4      0.74      45.4       0.0                               -1.02
+    0:13:11 17660421.4      0.74      45.1       0.0                               -1.02
+    0:13:11 17660421.4      0.74      45.1       0.0                               -1.02
+    0:13:11 17660421.4      0.74      45.1       0.0                               -1.02
+    0:13:11 17660421.4      0.74      45.1       0.0                               -1.02
+    0:13:12 17660421.4      0.74      45.1       0.0                               -1.02
+    0:13:12 17660421.4      0.74      45.1       0.0                               -1.02
+    0:13:13 17663159.6      0.02       0.0       0.0 cm_mispredict_2_reg/DIN       -1.02
+    0:13:14 17663383.8      0.00       0.0       0.0                               -1.02
+    0:13:14 17664146.8      0.00       0.0       0.0 ex_stage_0/mult_1/mstage[2]/mcand_out_reg[62]/DIN     -0.33
+    0:13:14 17664528.4      0.00       0.0       0.0                               -0.04
 
 
   Beginning Critical Range Optimization
@@ -2954,4 +2882,105 @@ Information: The register 'ex_stage_0/mult_1/mstage[1]/partial_prod_reg_reg[0]' 
    ELAPSED            WORST NEG TOTAL NEG  DESIGN                             MIN DELAY
     TIME      AREA      SLACK     SLACK   RULE COST         ENDPOINT            COST   
   --------- --------- --------- --------- --------- ------------------------- ---------
-    0:27:13 19226583.3      0.00       0.0       0.0                                0.00
+    0:13:14 17664528.4      0.00       0.0       0.0                               -0.04
+    0:13:17 17656799.6      0.00       0.0       0.0                               -0.04
+Loading db file '/usr/caen/generic/mentor_lib-D.1/public/eecs470/synopsys/lec25dscc25_TT.db'
+
+  Optimization Complete
+  ---------------------
+Warning: Design 'pipeline' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
+     Net 'clock': 46331 load(s), 1 driver(s)
+Writing verilog file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/synth/pipeline.vg'.
+Warning: Verilog 'assign' or 'tran' statements are written out. (VO-4)
+Warning: Verilog writer has added 16 nets to module pipeline_DW02_mult_6 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 16 nets to module pipeline_DW02_mult_7 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 30 nets to module pipeline_DW02_mult_2 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 46 nets to module pipeline_DW02_mult_1 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 30 nets to module pipeline_DW02_mult_3 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 30 nets to module pipeline_DW02_mult_5 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 30 nets to module pipeline_DW02_mult_4 using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Warning: Verilog writer has added 272 nets to module pipeline using SYNOPSYS_UNCONNECTED_ as prefix.  Please use the change_names command to make the correct changes before invoking the verilog writer.  (VO-11)
+Writing ddc file './pipeline.ddc'.
+Removing design 'cache'
+Removing design 'memory_arbiter'
+Removing design 'mem_stage'
+Removing design 'pipeline'
+Removing design 'pipeline_DW01_add_0'
+Removing design 'pipeline_DW01_add_1'
+Removing design 'pipeline_DW01_add_2'
+Removing design 'pipeline_DW01_add_4'
+Removing design 'pipeline_DW01_add_5'
+Removing design 'pipeline_DW01_add_6'
+Removing design 'pipeline_DW01_cmp6_160'
+Removing design 'pipeline_DW01_cmp6_161'
+Removing design 'pipeline_DW01_cmp6_162'
+Removing design 'pipeline_DW01_ash_1'
+Removing design 'pipeline_DW01_sub_1'
+Removing design 'pipeline_DW01_add_8'
+Removing design 'pipeline_DW01_cmp6_163'
+Removing design 'pipeline_DW01_cmp6_164'
+Removing design 'pipeline_DW01_cmp6_165'
+Removing design 'pipeline_DW01_ash_3'
+Removing design 'pipeline_DW01_sub_3'
+Removing design 'pipeline_DW01_add_9'
+Removing design 'pipeline_DW01_inc_1'
+Removing design 'pipeline_DW01_inc_2'
+Removing design 'pipeline_DW01_inc_3'
+Removing design 'pipeline_DW01_inc_4'
+Removing design 'pipeline_DW01_inc_5'
+Removing design 'pipeline_DW01_inc_6'
+Removing design 'pipeline_DW01_inc_7'
+Removing design 'pipeline_DW01_inc_8'
+Removing design 'pipeline_DW01_inc_9'
+Removing design 'pipeline_DW01_inc_10'
+Removing design 'pipeline_DW01_inc_11'
+Removing design 'pipeline_DW01_inc_12'
+Removing design 'pipeline_DW01_inc_13'
+Removing design 'pipeline_DW01_inc_14'
+Removing design 'pipeline_DW01_inc_15'
+Removing design 'pipeline_DW01_inc_16'
+Removing design 'pipeline_DW01_inc_18'
+Removing design 'pipeline_DW01_inc_19'
+Removing design 'pipeline_DW01_add_29'
+Removing design 'pipeline_DW01_add_30'
+Removing design 'pipeline_DW01_cmp6_497'
+Removing design 'pipeline_DW_rash_0'
+Removing design 'pipeline_DW01_cmp6_498'
+Removing design 'pipeline_DW_rash_1'
+Removing design 'pipeline_DW02_mult_0'
+Removing design 'pipeline_DW02_mult_1'
+Removing design 'pipeline_DW01_add_32'
+Removing design 'pipeline_DW02_mult_2'
+Removing design 'pipeline_DW01_add_33'
+Removing design 'pipeline_DW02_mult_3'
+Removing design 'pipeline_DW01_add_34'
+Removing design 'pipeline_DW02_mult_4'
+Removing design 'pipeline_DW01_add_35'
+Removing design 'pipeline_DW02_mult_5'
+Removing design 'pipeline_DW01_add_36'
+Removing design 'pipeline_DW02_mult_6'
+Removing design 'pipeline_DW01_add_37'
+Removing design 'pipeline_DW02_mult_7'
+Removing design 'pipeline_DW01_add_38'
+Removing design 'wb_stage'
+Removing library 'lec25dscc25_TT'
+Removing library 'gtech'
+Removing library 'standard.sldb'
+Loading db file '/usr/caen/generic/mentor_lib-D.1/public/eecs470/synopsys/lec25dscc25_TT.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/gtech.db'
+Loading db file '/usr/caen/synopsys-synth-2012.06/libraries/syn/standard.sldb'
+  Loading link library 'lec25dscc25_TT'
+  Loading link library 'gtech'
+Loading verilog file '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/synth/pipeline.vg'
+Detecting input file type automatically (-rtl or -netlist).
+Running DC verilog reader
+Performing 'read' command.
+Compiling source file /afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/synth/pipeline.vg
+Reading with netlist reader (equivalent to -netlist option).
+Verilog netlist reader completed successfully.
+Current design is now '/afs/umich.edu/user/s/c/scottmel/EECS470/FinalProject/eecs470/vsimp_new/synth/cache.db:cache'
+Loaded 59 designs.
+Current design is 'cache'.
+Current design is 'pipeline'.
+
+Thank you...

@@ -9,7 +9,7 @@ if (len(sys.argv)!=2):
 
 os.system("./vs-asm test_progs/"+sys.argv[1]+" > program.mem")
 #os.system("make > /dev/null")
-os.system("./simv > test_out")
+os.system("./syn_simv > test_out")
 os.system("./simv_gold > gold_out")
 print "diff: "
 os.system("diff test_out gold_out")

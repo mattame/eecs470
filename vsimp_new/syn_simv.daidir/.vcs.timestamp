@@ -29,8 +29,12 @@ synth/pipeline.vg
 sys_defs.vh
 testbench/mem.v
 testbench/testbench.v
-52
+67
 _LMFILES_=/usr/caen/misc/modules/vcs/2011.03
+XMODIFIERS=@im=none
+XDG_SESSION_COOKIE=7190c902a9a4e0e685b6467e00000016-1366570327.369930-1564145765
+XAUTHORITY=/var/run/gdm/auth-for-scottmel-3q0edP/database
+WINDOWPATH=1
 VMR_MODE_FLAG=64
 VENDOR=unknown
 VCS_MODE_FLAG=64
@@ -38,21 +42,19 @@ VCS_HOME=/usr/caen/vcs-2011.03
 VCS_DEPTH=0
 VCS_ARG_ADDED_FOR_TMP=1
 VCS_ARCH=amd64
+USERNAME=scottmel
 UNAME=/bin/uname
 TOOL_HOME=/usr/caen/vcs-2011.03/amd64
 SW_VCS=2011.03
-SSH_TTY=/dev/pts/119
-SSH_CONNECTION=67.194.198.192 63282 141.213.74.41 22
-SSH_CLIENT=67.194.198.192 63282 22
+SSH_AUTH_SOCK=/tmp/keyring-UJ9dmB/socket.ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+SSH_AGENT_PID=3099
 SNPSLMD_LICENSE_FILE=/usr/caen/vcs-2011.03/license.dat:/usr/caen/vcs-2011.03/flexlm//license.dat
-SELINUX_USE_CURRENT_RANGE=
-SELINUX_ROLE_REQUESTED=
-SELINUX_LEVEL_REQUESTED=
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3117,unix/unix:/tmp/.ICE-unix/3117
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 RESET_NET_NAME=reset
-REMOTEHOST=67-194-198-192.wireless.umnet.umich.edu
+QT_IM_MODULE=xim
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
 QTDIR=/usr/lib64/qt-3.3
@@ -60,6 +62,7 @@ PIPELINE_NAME=pipeline
 PIPEFILES=verilog/branch_predictor.v verilog/branch_target_buffer.v verilog/cm_stage.v verilog/decode.v verilog/ex_stage_submodules.v verilog/ex_stage.v verilog/icache.v verilog/if_stage.v verilog/LSQ.v verilog/map_table.v verilog/memory_arbiter.v verilog/mem_stage.v verilog/pipeline.v verilog/register_file.v verilog/reorder_buffer.v verilog/reservation_station.v verilog/wb_stage.v
 OVA_UUM=0
 OSTYPE=linux
+ORBIT_SOCKETDIR=/tmp/orbit-scottmel
 MODULESHOME=/usr/share/Modules
 MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles:/usr/caen/misc/modules:/afs/umich.edu/class/coe/modules
 MFLAGS=
@@ -69,16 +72,28 @@ MAKEFLAGS=
 MAILSERVER=mail.umich.edu
 LOADEDMODULES=vcs/2011.03
 LESSOPEN=|/usr/bin/lesspipe.sh %s
-KRB5CCNAME=FILE:/tmp/krb5cc_928452_DGwNFl
+KRB5CCNAME=FILE:/tmp/krb5cc_928452_zVYptt
 KDE_IS_PRELINKED=1
 KDEDIRS=/usr
+IMSETTINGS_MODULE=none
+IMSETTINGS_INTEGRATE_DESKTOP=yes
 HOSTTYPE=x86_64-linux
-HOSTNAME=caen-vnc05.engin.umich.edu
-HOST=caen-vnc05.engin.umich.edu
+HOSTNAME=dc3swp69.dc.umich.edu
+HOST=dc3swp69.dc.umich.edu
 HEADERS=sys_defs.vh
 G_BROKEN_FILENAMES=1
+GTK_RC_FILES=/etc/gtk/gtkrc:/afs/umich.edu/user/s/c/scottmel/.gtkrc-1.2-gnome2
 GROUP=users
-CLOCK_PERIOD=22.73	
+GNOME_KEYRING_SOCKET=/tmp/keyring-UJ9dmB/socket
+GNOME_KEYRING_PID=3000
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GDM_LANG=en_US.UTF-8
+GDM_KEYBOARD_LAYOUT=us
+GDMSESSION=gnome
+DESKTOP_SESSION=gnome
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-bd9nFWcxlt,guid=bff94d8dde8b2b18ea5cdb4500000048
+COLORTERM=gnome-terminal
+CLOCK_PERIOD=20	
 CLOCK_NET_NAME=clock
 CACHE_NAME=cache
 CACHEFILES=verilog/cache/cachemem.v
@@ -87,12 +102,12 @@ CACHEFILES=verilog/cache/cachemem.v
 1062689876 /usr/caen/generic/mentor_lib-D.1/public/eecs470/verilog/lec25dscc25.v
 1366308985 testbench/testbench.v
 1366157015 testbench/mem.v
-1366586788 synth/pipeline.vg
-1366170117 sys_defs.vh
+1366622205 synth/pipeline.vg
+1366620945 sys_defs.vh
 5
 1365801159 testbench/pipe_print.c
 0 
 1298523545 /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so
 1298523345 /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so
 1298523150 /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so
-1366586833 syn_simv.daidir
+1366622247 syn_simv.daidir

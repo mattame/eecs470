@@ -805,7 +805,6 @@ module reservation_station(clock,reset,               // signals in
 //      end
 //   endgenerate
 
-/*
    // START 16 //
    assign ready_states[0]     = (statuses[0]==`RS_READY);
    assign issue_first_states[0]  = ready_states[0]
@@ -1624,7 +1623,6 @@ module reservation_station(clock,reset,               // signals in
    assign comp_table[15][14]       = (ages[15]<ages[14]); 
    assign comp_table[15][15]       = (ages[15]<ages[15]); 
   // END 16 //
-*/
 
 /*
    // START 32 //
@@ -5020,6 +5018,7 @@ module reservation_station(clock,reset,               // signals in
    // STOP 8 //
 */
 
+/*
    // START 4 //
       assign ready_states[0]     = (statuses[0]==`RS_READY);
    assign issue_first_states[0]  = ready_states[0]
@@ -5082,7 +5081,7 @@ module reservation_station(clock,reset,               // signals in
    assign comp_table[3][2]       = (ages[3]<ages[2]); 
    assign comp_table[3][3]       = (ages[3]<ages[3]);
    // STOP 4 //
-
+*/
    
    ////////////////////////////////////////////////////
    // internal modules (reservation station entries) //

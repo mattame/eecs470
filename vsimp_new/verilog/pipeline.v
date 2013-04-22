@@ -541,7 +541,7 @@ module pipeline (// Inputs
   assign inst2_retiring = (rob_inst2_retire_tag_out!=`RSTAG_NULL);
 
   // error status and completed instructions out //
-  assign pipeline_completed_insts = {2'b0, (pipeline_error_status!=`HALTED_ON_HALT)&& (inst1_retiring&&inst2_retiring), (inst1_retiring^inst2_retiring) };
+  assign pipeline_completed_insts = {2'b0, (~n_halted)&&(inst1_retiring&&inst2_retiring), (~n_halted)&&(inst1_retiring^inst2_retiring) };
   assign pipeline_error_status =  
     (1'b0) ? `HALTED_ON_ILLEGAL : ((halted && LSQ_empty) ? `HALTED_ON_HALT : `NO_ERROR );
 

@@ -12,8 +12,8 @@
 **********************************************/
 
 //Branch Predictor
-`define HISTORY_BITS 8
-`define PHT_ENTRIES 256
+`define HISTORY_BITS 3
+`define PHT_ENTRIES 8
 `define BRANCH_NONE      2'b00
 `define BRANCH_TAKEN     2'b01
 `define BRANCH_NOT_TAKEN 2'b10
@@ -52,7 +52,7 @@
 //Reorder Buffer
 // parameters //
 `define RSTAG_NULL    8'hFF
-`define ROB_ENTRIES  32
+`define ROB_ENTRIES  16
 `define UNUSED_TAG_BITS 3
 `define SD #1
 
@@ -62,7 +62,7 @@
 `define ROBE_UNUSED    2'b11
 
 //Reservation Station
-`define NUM_RSES 4
+`define NUM_RSES 16
 `define RS_EMPTY        3'b000
 `define RS_WAITING_A    3'b001
 `define RS_WAITING_B    3'b010
@@ -71,9 +71,6 @@
 `define RS_TEST         3'b111
 `define RSTAG_NULL      8'hFF           
 `define NOOP_INST    32'h47ff041f
-
-
-
 
 
 

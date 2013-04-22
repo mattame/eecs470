@@ -102,20 +102,20 @@ input  [(`HISTORY_BITS-1):0] ex_branch_pht_idx_1;
 input [63:0] ex_alu_NPC_out_1;
 
 //ALU
-input  [4:0] ex_alu_dest_reg_out_1;
+input  [7:0] ex_alu_dest_reg_out_1;
 input [63:0] ex_alu_result_out_1;
 input ex_alu_valid_out_1;
 
 //Multiplier
 input [63:0] ex_mult_NPC_out_1;
-input  [4:0] ex_mult_dest_reg_out_1;
+input  [7:0] ex_mult_dest_reg_out_1;
 input [63:0] ex_mult_result_out_1;
 input ex_mult_valid_out_1;
 
   //Bus 2
 input [31:0] ex_IR_2;
 //Memory input 
-input  [4:0] mem_tag_in;
+input  [7:0] mem_tag_in;
 input [63:0] mem_value_in;
 input mem_valid_in;
 
@@ -127,13 +127,13 @@ input  [(`HISTORY_BITS-1):0] ex_branch_pht_idx_2;
 input [63:0] ex_alu_NPC_out_2;
 
 //ALU
-input  [4:0] ex_alu_dest_reg_out_2;
+input  [7:0] ex_alu_dest_reg_out_2;
 input [63:0] ex_alu_result_out_2;
 input ex_alu_valid_out_2;
 
 //Mutliplier
 input [63:0] ex_mult_NPC_out_2;
-input  [4:0] ex_mult_dest_reg_out_2;
+input  [7:0] ex_mult_dest_reg_out_2;
 input [63:0] ex_mult_result_out_2;
 input ex_mult_valid_out_2;
 
@@ -141,7 +141,7 @@ input ex_mult_valid_out_2;
   //Bus 1
 output reg stall_bus_1;
 output reg [63:0] ex_NPC_out_1;
-output reg  [4:0] ex_dest_reg_out_1;
+output reg  [7:0] ex_dest_reg_out_1;
 output reg [63:0] ex_result_out_1;
 output reg ex_mispredict_1;
 output reg  [1:0] ex_branch_result_1;
@@ -153,7 +153,7 @@ output reg [63:0] ex_CPC_out_1;
 output reg stall_bus_2;
 output reg stall_mult_2;
 output reg [63:0] ex_NPC_out_2;
-output reg  [4:0] ex_dest_reg_out_2;
+output reg  [7:0] ex_dest_reg_out_2;
 output reg [63:0] ex_result_out_2;
 output reg ex_mispredict_2;
 output reg  [1:0] ex_branch_result_2;
@@ -260,18 +260,18 @@ module mult_stage(clock, reset,
 
   input clock, reset, start;
   input [63:0] product_in, mplier_in, mcand_in, NPC_in;
-  input [4:0]  dest_reg_in;
+  input [7:0]  dest_reg_in;
   input        stall;
 
   output done;
   output [63:0] product_out, mplier_out, mcand_out, NPC_out;
-  output [4:0]  dest_reg_out;
+  output [7:0]  dest_reg_out;
 
   reg  [63:0] prod_in_reg, partial_prod_reg;
   wire [63:0] partial_product, next_mplier, next_mcand;
 
   reg [63:0] mplier_out, mcand_out, NPC_out;
-  reg [4:0]  dest_reg_out;
+  reg [7:0]  dest_reg_out;
   reg done;
 
   assign product_out = prod_in_reg + partial_prod_reg;
@@ -333,16 +333,16 @@ module mult(clock, reset, NPC_in, dest_reg_in, mplier, mcand, valid_in, NPC_out,
 
   input clock, reset, valid_in;
   input [63:0] mcand, mplier, NPC_in;
-  input [4:0]  dest_reg_in;
+  input [7:0]  dest_reg_in;
   input        stall;
 
   output [63:0] product, NPC_out;
-  output [4:0]  dest_reg_out;
+  output [7:0]  dest_reg_out;
   output valid_out;
 
   wire [63:0] mcand_out, mplier_out;
   wire [(3*64)-1:0] internal_products, internal_mcands, internal_mpliers, internal_NPCs;
-  wire [(3*5)-1:0]  internal_dest_regs;
+  wire [(3*8)-1:0]  internal_dest_regs;
   wire [2:0] internal_dones;
 
   mult_stage mstage [3:0]

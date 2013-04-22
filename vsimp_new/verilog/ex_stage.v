@@ -100,7 +100,7 @@ module ex_stage(// Inputs
   input  [63:0] id_ex_PPC_1;		 // Predicted PC for branches
   input   [(`HISTORY_BITS-1):0] id_ex_pht_idx_1;
   input  [31:0] id_ex_IR_1;          // incoming instruction
-  input   [4:0] id_ex_dest_reg_1;	 // destination register
+  input   [7:0] id_ex_dest_reg_1;	 // destination register
   input  [63:0] id_ex_rega_1;        // register A value from reg file
   input  [63:0] id_ex_regb_1;        // register B value from reg file
   input   [1:0] id_ex_opa_select_1;  // opA mux select from decoder
@@ -116,7 +116,7 @@ module ex_stage(// Inputs
   input  [63:0] id_ex_PPC_2;		 // Predicted PC for branches
   input   [(`HISTORY_BITS-1):0] id_ex_pht_idx_2;
   input  [31:0] id_ex_IR_2;          // incoming instruction
-  input   [4:0] id_ex_dest_reg_2;	 // destination register
+  input   [7:0] id_ex_dest_reg_2;	 // destination register
   input  [63:0] id_ex_rega_2;        // register A value from reg file
   input  [63:0] id_ex_regb_2;        // register B value from reg file
   input   [1:0] id_ex_opa_select_2;  // opA mux select from decoder
@@ -127,7 +127,7 @@ module ex_stage(// Inputs
   input         id_ex_rd_mem_in_2;
   input         id_ex_wr_mem_in_2;
  
-  input   [4:0] MEM_tag_in;
+  input   [7:0] MEM_tag_in;
   input  [63:0] MEM_value_in;
   input         MEM_valid_in;  
 
@@ -136,7 +136,7 @@ module ex_stage(// Inputs
   
 				// Bus 1
   output [63:0] ex_NPC_out_1;
-  output  [4:0] ex_dest_reg_out_1;
+  output  [7:0] ex_dest_reg_out_1;
   output [63:0] ex_result_out_1;
   output ex_mispredict_1;
   output  [1:0] ex_branch_result_1;
@@ -146,7 +146,7 @@ module ex_stage(// Inputs
   
 				// Bus 2
   output [63:0] ex_NPC_out_2;
-  output  [4:0] ex_dest_reg_out_2;
+  output  [7:0] ex_dest_reg_out_2;
   output [63:0] ex_result_out_2;
   output ex_mispredict_2;
   output  [1:0] ex_branch_result_2;
@@ -154,12 +154,12 @@ module ex_stage(// Inputs
   output ex_valid_out_2;
   output [63:0] ex_CPC_out_2;
   
-  output  [4:0] LSQ_tag_out_1;
+  output  [7:0] LSQ_tag_out_1;
   output [63:0] LSQ_address_out_1;
   output [63:0] LSQ_value_out_1;
   output        LSQ_valid_out_1;
 
-  output  [4:0] LSQ_tag_out_2;
+  output  [7:0] LSQ_tag_out_2;
   output [63:0] LSQ_address_out_2;
   output [63:0] LSQ_value_out_2;
   output        LSQ_valid_out_2;
@@ -171,11 +171,11 @@ module ex_stage(// Inputs
   wire [63:0] ex_alu_result_out_2;   // ALU result
   wire		  ex_alu_valid_out_2;	 // Valid Output
   
-  wire  [4:0] ex_mult_dest_reg_out_1;// Destination Reg
+  wire  [7:0] ex_mult_dest_reg_out_1;// Destination Reg
   wire [63:0] ex_mult_result_out_1;  // Mult result
   wire 		  ex_mult_valid_out_1;   // Valid Output
   
-  wire  [4:0] ex_mult_dest_reg_out_2;// Destination Reg
+  wire  [7:0] ex_mult_dest_reg_out_2;// Destination Reg
   wire [63:0] ex_mult_result_out_2;  // Mult result
   wire 		  ex_mult_valid_out_2;   // Valid Output
   

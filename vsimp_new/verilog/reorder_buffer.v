@@ -5,20 +5,20 @@
 ////////////////////////////////////////////////////////////////
 
 // parameters //
-`define ZERO_REG      5'd31
-`define RSTAG_NULL    8'hFF
-`define ROB_ENTRIES  32
-`define UNUSED_TAG_BITS 3
-`define SD #1
+//`define ZERO_REG      5'd31
+//`define RSTAG_NULL    8'hFF
+//`define ROB_ENTRIES  32
+//`define UNUSED_TAG_BITS 3
+//`define SD #1
 
 // rob entry states //
-`define ROBE_EMPTY     2'b00
-`define ROBE_INUSE     2'b01
-`define ROBE_COMPLETE  2'b10
-`define ROBE_UNUSED    2'b11
+//`define ROBE_EMPTY     2'b00
+//`define ROBE_INUSE     2'b01
+//`define ROBE_COMPLETE  2'b10
+//`define ROBE_UNUSED    2'b11
 
-`define HISTORY_BITS 8
-`define BRANCH_HALT 2'b11
+//`define HISTORY_BITS 8
+//`define BRANCH_HALT 2'b11
 
 
 //`timescale 1ns/100ps

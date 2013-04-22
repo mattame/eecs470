@@ -343,7 +343,7 @@ module pipeline (// Inputs
   reg  [63:0] ex_PPC_1;		 // Predicted PC for branches
   reg  [(`HISTORY_BITS-1):0] ex_pht_idx_1;
   reg  [31:0] ex_IR_1;          // incoming instruction
-  reg   [4:0] ex_dest_reg_1;	 // destination register
+  reg   [7:0] ex_dest_reg_1;	 // destination register
   reg  [63:0] ex_rega_1;        // register A value from reg file
   reg  [63:0] ex_regb_1;        // register B value from reg file
   reg   [1:0] ex_opa_select_1;  // opA mux select from decoder
@@ -359,7 +359,7 @@ module pipeline (// Inputs
   reg  [63:0] ex_PPC_2;		 // Predicted PC for branches
   reg  [(`HISTORY_BITS-1):0] ex_pht_idx_2;
   reg  [31:0] ex_IR_2;          // incoming instruction
-  reg   [4:0] ex_dest_reg_2;	 // destination register
+  reg   [7:0] ex_dest_reg_2;	 // destination register
   reg  [63:0] ex_rega_2;        // register A value from reg file
   reg  [63:0] ex_regb_2;        // register B value from reg file
   reg   [1:0] ex_opa_select_2;  // opA mux select from decoder
@@ -376,13 +376,13 @@ module pipeline (// Inputs
   wire        stall_bus_2;	     // Should input bus 2 stall?
   wire        ex_branch_taken;  // is this a taken branch?
 
-  wire   [4:0] ex_mem_tag_out;
+  wire   [7:0] ex_mem_tag_out;
   wire [63:0]  ex_mem_value_out;
   wire         ex_mem_valid_out;
  
   // Bus 1
   wire [63:0] ex_NPC_out_1;
-  wire [4:0]  ex_dest_reg_out_1;
+  wire [7:0]  ex_dest_reg_out_1;
   wire [63:0] ex_result_out_1;
   wire        ex_mispredict_out_1;
   wire [1:0]  ex_branch_result_out_1;
@@ -392,7 +392,7 @@ module pipeline (// Inputs
   
 				// Bus 2
   wire [63:0] ex_NPC_out_2;
-  wire [4:0]  ex_dest_reg_out_2;
+  wire [7:0]  ex_dest_reg_out_2;
   wire [63:0] ex_result_out_2;
   wire        ex_mispredict_out_2;
   wire [1:0]  ex_branch_result_out_2;
@@ -402,7 +402,7 @@ module pipeline (// Inputs
 
 
 //Outputs from EX / CM Pipline Register
-   reg [4:0]                 cm_tag_1;
+   reg [7:0]                 cm_tag_1;
    reg [63:0]                cm_result_1;
    reg [63:0]                cm_NPC_1;
    reg                       cm_mispredict_1;
@@ -411,7 +411,7 @@ module pipeline (// Inputs
    reg                       cm_valid_1;
    reg [63:0]                cm_CPC_1;
 
-   reg [4:0]                 cm_tag_2;
+   reg [7:0]                 cm_tag_2;
    reg [63:0]                cm_result_2;
    reg [63:0]                cm_NPC_2;
    reg                       cm_mispredict_2;
@@ -445,22 +445,22 @@ module pipeline (// Inputs
  reg [7:0] lsq_ROB_head_1;
  reg [7:0] lsq_ROB_head_2;
 
- reg [4:0] lsq_ROB_tag_1;
+ reg [7:0] lsq_ROB_tag_1;
  reg       lsq_rd_mem_1;
  reg 		   lsq_wr_mem_1;
  reg 		   lsq_valid_1;
 
- reg [4:0]  lsq_EX_tag_1;
+ reg [7:0]  lsq_EX_tag_1;
  reg [63:0] lsq_value_1;
  reg [63:0] lsq_address_1;
  reg        lsq_EX_valid_1;
 
- reg [4:0]  lsq_ROB_tag_2;
+ reg [7:0]  lsq_ROB_tag_2;
  reg        lsq_rd_mem_2;
  reg 		    lsq_wr_mem_2;
  reg 		    lsq_valid_2;
 
- reg [4:0]  lsq_EX_tag_2;
+ reg [7:0]  lsq_EX_tag_2;
  reg [63:0] lsq_value_2;
  reg [63:0] lsq_address_2;
  reg        lsq_EX_valid_2;
@@ -469,7 +469,7 @@ module pipeline (// Inputs
  reg   [3:0] lsq_Dmem2proc_tag, lsq_Dmem2proc_response;
  
 //LSQ outputs
-  wire [4:0]  lsq_tag_out;
+  wire [7:0]  lsq_tag_out;
   wire [63:0] lsq_mem_result_out;    // outgoing instruction result (to MEM/WB)
   wire [1:0]  lsq_proc2Dmem_command_out;
   wire [63:0] lsq_proc2Dmem_addr_out;     // Address sent to data-memory
@@ -486,17 +486,17 @@ module pipeline (// Inputs
   
   
 //from ex stage  
-  wire   [4:0] ex_MEM_tag_in;
+  wire   [7:0] ex_MEM_tag_in;
   wire  [63:0] ex_MEM_value_in;
   wire         ex_MEM_valid_in;
   
    
-  wire  [4:0] ex_LSQ_tag_out_1;
+  wire  [7:0] ex_LSQ_tag_out_1;
   wire [63:0] ex_LSQ_address_out_1;
   wire [63:0] ex_LSQ_value_out_1;
   wire        ex_LSQ_valid_out_1;
 
-  wire  [4:0] ex_LSQ_tag_out_2;
+  wire  [7:0] ex_LSQ_tag_out_2;
   wire [63:0] ex_LSQ_address_out_2;
   wire [63:0] ex_LSQ_value_out_2;
   wire        ex_LSQ_valid_out_2;

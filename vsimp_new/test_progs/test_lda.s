@@ -1,0 +1,5 @@
+
+
+lda  $r5, 0xf013
+
+call_pal 0x555

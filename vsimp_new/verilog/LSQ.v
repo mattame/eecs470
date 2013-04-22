@@ -67,25 +67,25 @@ input [7:0] ROB_head_2;
 
 input clear;
 
-input [4:0] ROB_tag_1;
+input [7:0] ROB_tag_1;
 input rd_mem_in_1;
 input store_ROB_1;
 
 input [63:0] addr_in_1;
 input [63:0] value_in_1;
-input [4:0] EX_tag_1;
+input [7:0] EX_tag_1;
 input EX_valid_1;
 
-input [4:0] ROB_tag_2;
+input [7:0] ROB_tag_2;
 input rd_mem_in_2;
 input store_ROB_2;
 
 input [63:0] addr_in_2;
 input [63:0] value_in_2;
-input [4:0] EX_tag_2;
+input [7:0] EX_tag_2;
 input EX_valid_2;
 
-output [4:0] stored_tag_out;
+output [7:0] stored_tag_out;
 output [63:0] stored_address_out;
 output [63:0] stored_value_out;
 output read_out;
@@ -94,7 +94,7 @@ output valid_out;
 
 reg [63:0] stored_address;
 reg [63:0] stored_value;
-reg [4:0] stored_tag;
+reg [7:0] stored_tag;
 reg read; //1 if it's a load, 0 if it's a store
 reg valid;
 reg complete;
@@ -110,7 +110,7 @@ wire head_1_true, head_2_true;
 
 wire [63:0] next_address;
 wire [63:0] next_value;
-wire [4:0] next_tag;
+wire [7:0] next_tag;
 
 assign store_EX_1 = (EX_valid_1 & (next_valid) & (EX_tag_1 == next_tag))
 ? 1'b1 : 1'b0;
@@ -123,8 +123,8 @@ assign next_valid = (clear) ? 1'b0: (store_ROB_1 | store_ROB_2) ? 1'b1: valid;
 
 assign next_complete = (store_EX_1 | store_EX_2) ? 1'b1: (next_valid) ? complete: 1'b0;
 
-assign head_1_true = (next_tag == ROB_head_1[4:0]) & !ROB_head_1[5] & !ROB_head_1[6] & !ROB_head_1[7];
-assign head_2_true = (next_tag == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
+assign head_1_true = (next_tag == ROB_head_1) & ROB_head_1!=`RSTAG_NULL;
+assign head_2_true = (next_tag == ROB_head_2) & ROB_head_2!=`RSTAG_NULL;
 
 assign next_head_met = (next_valid & next_complete) ? ((head_1_true | head_2_true) ? 1'b1: ROB_head_met): 1'b0;
 
@@ -238,22 +238,22 @@ LSQ_full
  input [7:0] ROB_head_1;
  input [7:0] ROB_head_2;
 
- input [4:0] ROB_tag_1;
+ input [7:0] ROB_tag_1;
  input rd_mem_in_1;
  input wr_mem_in_1;
  input valid_in_1;
 
- input [4:0] EX_tag_1;
+ input [7:0] EX_tag_1;
  input [63:0] value_in_1;
  input [63:0] address_in_1;
  input EX_valid_1;
 
- input [4:0] ROB_tag_2;
+ input [7:0] ROB_tag_2;
  input rd_mem_in_2;
  input wr_mem_in_2;
  input valid_in_2;
 
- input [4:0] EX_tag_2;
+ input [7:0] EX_tag_2;
  input [63:0] value_in_2;
  input [63:0] address_in_2;
  input EX_valid_2;
@@ -261,7 +261,7 @@ LSQ_full
   input [63:0] Dmem2proc_data;
   input [3:0] Dmem2proc_tag, Dmem2proc_response;
 
-  output [4:0] tag_out;
+  output [7:0] tag_out;
   output [63:0] mem_result_out; // outgoing instruction result (to MEM/WB)
   output [1:0] proc2Dmem_command;
   output [63:0] proc2Dmem_addr; // Address sent to data-memory
@@ -292,7 +292,7 @@ LSQ_full
 
  wire [4:0] next_head, next_tail, next_entry_1, next_entry_2, next_clear_tail;
 
- wire [4:0] tags_out [(`LSQ_ENTRIES-1):0];
+ wire [7:0] tags_out [(`LSQ_ENTRIES-1):0];
  wire [63:0] addrs_out [(`LSQ_ENTRIES-1):0];
  wire [63:0] values_out [(`LSQ_ENTRIES-1):0];
  wire reads_out [(`LSQ_ENTRIES-1):0];
@@ -364,7 +364,7 @@ LSQ_full
 // --------- ENTRY OUPUT LOGIC -----------
  assign tag_out = tags_out[LSQ_head];
  
- assign head_2_true = (tag_out == ROB_head_2[4:0]) & !ROB_head_2[5] & !ROB_head_2[6] & !ROB_head_2[7];
+ assign head_2_true = (tag_out == ROB_head_2) & ROB_head_2!=`RSTAG_NULL;
 
  assign reset_invalid = miss_reset & head_2_true;
  

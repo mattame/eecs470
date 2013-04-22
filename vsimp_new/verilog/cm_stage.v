@@ -51,7 +51,7 @@ module cm_stage(// Inputs
 		            );
 
    // inputs //
-   input wire [4:0]  ex_cm_tag_1;
+   input wire [7:0]  ex_cm_tag_1;
    input wire [63:0] ex_cm_result_1;
    input wire [63:0] ex_cm_NPC_1;
    input wire        ex_cm_mispredict_1;
@@ -60,7 +60,7 @@ module cm_stage(// Inputs
    input wire        ex_cm_valid_1;
    input wire [63:0] ex_cm_CPC_1;
 
-   input wire  [4:0] ex_cm_tag_2;
+   input wire  [7:0] ex_cm_tag_2;
    input wire [63:0] ex_cm_result_2;
    input wire [63:0] ex_cm_NPC_2;
    input wire        ex_cm_mispredict_2;
@@ -87,7 +87,7 @@ module cm_stage(// Inputs
    output wire [63:0] cdb_CPC_2;
 
    // assigns //
-   assign cdb_tag_1           = (ex_cm_valid_1 ? {3'b000,ex_cm_tag_1}    : `RSTAG_NULL);
+   assign cdb_tag_1           = (ex_cm_valid_1 ? {2'b00,ex_cm_tag_1[5:0]}    : `RSTAG_NULL);
    assign cdb_value_1         = (ex_cm_valid_1 ? ex_cm_result_1 : 64'h0);
    assign cdb_NPC_1           = ex_cm_NPC_1;
    assign cdb_mispredict_1    = ex_cm_mispredict_1;
@@ -95,7 +95,7 @@ module cm_stage(// Inputs
    assign cdb_pht_index_1     = ex_cm_pht_index_1;
    assign cdb_CPC_1           = ex_cm_CPC_1;
 
-   assign cdb_tag_2           = (ex_cm_valid_2 ? {3'b000,ex_cm_tag_2}    : `RSTAG_NULL);
+   assign cdb_tag_2           = (ex_cm_valid_2 ? {2'b00,ex_cm_tag_2[5:0]}    : `RSTAG_NULL);
    assign cdb_value_2         = (ex_cm_valid_2 ? ex_cm_result_2 : 64'h0);
    assign cdb_NPC_2           = ex_cm_NPC_2;
    assign cdb_mispredict_2    = ex_cm_mispredict_2;

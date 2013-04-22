@@ -1,0 +1,9 @@
+	addq    $r0,1,$r0
+        addq    $r0,$r0,$r1
+        addq    $r0,$r1,$r2
+        addq    $r2,$r1,$r3
+        mulq    $r2,7,$r0
+        subq    $r0,1,$r0
+        addq    $r0,$r0,$r0
+        srl     $r0,2,$r30  
+        call_pal 0x555 

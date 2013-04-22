@@ -1,0 +1,138 @@
+Test test_rs.s:
+
+< @@  769 cycles / 306 instrs = 2.513072 CPI
+> @@  1530 cycles / 305 instrs = 5.016393 CPI
+
+
+Test halt.s:
+
+< @@  13 cycles / 1 instrs = 13.000000 CPI
+> @@  5 cycles / 0 instrs = inf CPI
+
+
+Test anti_nop.s:
+
+< @@  35 cycles / 8 instrs = 4.375000 CPI
+> @@  40 cycles / 7 instrs = 5.714286 CPI
+
+
+Test btest1.s:
+
+< @@  1500 cycles / 230 instrs = 6.521739 CPI
+> @@  1150 cycles / 229 instrs = 5.021834 CPI
+
+
+Test btest2.s:
+
+< @@  2531 cycles / 456 instrs = 5.550439 CPI
+> @@  2280 cycles / 455 instrs = 5.010989 CPI
+
+
+Test copy_long.s:
+
+< @@  723 cycles / 591 instrs = 1.223350 CPI
+> @@  2955 cycles / 590 instrs = 5.008475 CPI
+
+
+Test copy.s:
+
+< @@  372 cycles / 131 instrs = 2.839695 CPI
+> @@  655 cycles / 130 instrs = 5.038462 CPI
+
+
+Test evens_long.s:
+
+< @@  391 cycles / 319 instrs = 1.225705 CPI
+> @@  1595 cycles / 318 instrs = 5.015723 CPI
+
+
+Test evens.s:
+
+< @@  243 cycles / 83 instrs = 2.927711 CPI
+> @@  415 cycles / 82 instrs = 5.060976 CPI
+
+
+Test fib_long.s:
+
+< @@  800 cycles / 628 instrs = 1.273885 CPI
+> @@  3140 cycles / 627 instrs = 5.007974 CPI
+
+
+Test fib.s:
+
+< @@  372 cycles / 148 instrs = 2.513514 CPI
+> @@  740 cycles / 147 instrs = 5.034014 CPI
+
+
+Test nop.s:
+
+< @@  62 cycles / 15 instrs = 4.133333 CPI
+> @@  75 cycles / 14 instrs = 5.357143 CPI
+
+
+Test parallel_long.s:
+
+< @@  843 cycles / 911 instrs = 0.925357 CPI
+> @@  4555 cycles / 910 instrs = 5.005495 CPI
+
+
+Test parallel.s:
+
+< @@  317 cycles / 195 instrs = 1.625641 CPI
+> @@  975 cycles / 194 instrs = 5.025773 CPI
+
+
+Test saxpy.s:
+
+< @@  484 cycles / 186 instrs = 2.602151 CPI
+> @@  930 cycles / 185 instrs = 5.027027 CPI
+
+
+Test simple.s:
+
+< @@  41 cycles / 9 instrs = 4.555556 CPI
+> @@  45 cycles / 8 instrs = 5.625000 CPI
+
+
+Test test_branch2.s:
+
+< @@  54 cycles / 10 instrs = 5.400000 CPI
+> @@  70 cycles / 13 instrs = 5.384615 CPI
+
+
+Test test_branch.s:
+
+< @@  30 cycles / 6 instrs = 5.000000 CPI
+> @@  20 cycles / 3 instrs = 6.666667 CPI
+
+
+Test test_load.s:
+
+< @@  22 cycles / 3 instrs = 7.333333 CPI
+> @@  15 cycles / 2 instrs = 7.500000 CPI
+
+
+Test test_ls.s:
+
+< @@  272 cycles / 102 instrs = 2.666667 CPI
+> @@  34 cycles / 6 instrs = 5.666667 CPI
+
+
+Test test_mov.s:
+
+< @@  38 cycles / 5 instrs = 7.600000 CPI
+> @@  25 cycles / 4 instrs = 6.250000 CPI
+
+
+Test test_multiply.s:
+
+< @@  25 cycles / 4 instrs = 6.250000 CPI
+> @@  20 cycles / 3 instrs = 6.666667 CPI
+
+
+Test test_reg_ret.s:
+
+< @@  69 cycles / 17 instrs = 4.058824 CPI
+> @@  85 cycles / 16 instrs = 5.312500 CPI
+
+

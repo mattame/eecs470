@@ -109,7 +109,7 @@ GDMSESSION=gnome
 DESKTOP_SESSION=gnome
 DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-bd9nFWcxlt,guid=bff94d8dde8b2b18ea5cdb4500000048
 COLORTERM=gnome-terminal
-CLOCK_PERIOD=22.73	
+CLOCK_PERIOD=20	
 CLOCK_NET_NAME=clock
 CACHE_NAME=cache
 CACHEFILES=verilog/cache/cachemem.v
@@ -119,27 +119,27 @@ CACHEFILES=verilog/cache/cachemem.v
 1366157015 testbench/mem.v
 1366254298 verilog/cache/cachemem.v
 1366157015 verilog/wb_stage.v
-1366414263 verilog/reservation_station.v
-1366599175 verilog/reorder_buffer.v
+1366613040 verilog/reservation_station.v
+1366613185 verilog/reorder_buffer.v
 1366589371 verilog/register_file.v
-1366598504 verilog/pipeline.v
+1366613014 verilog/pipeline.v
 1366157015 verilog/mem_stage.v
 1366157015 verilog/memory_arbiter.v
 1366590431 verilog/map_table.v
-1366578688 verilog/LSQ.v
+1366612727 verilog/LSQ.v
 1366512913 verilog/if_stage.v
 1366157015 verilog/icache.v
-1366596744 verilog/ex_stage.v
-1366598254 verilog/ex_stage_submodules.v
+1366612314 verilog/ex_stage.v
+1366612409 verilog/ex_stage_submodules.v
 1366512913 verilog/decode.v
-1366598177 verilog/cm_stage.v
+1366613109 verilog/cm_stage.v
 1365974508 verilog/branch_target_buffer.v
 1365974508 verilog/branch_predictor.v
-1366170117 sys_defs.vh
+1366614703 sys_defs.vh
 5
 1365801159 testbench/pipe_print.c
 0 
 1298523545 /usr/caen/vcs-2011.03/amd64/lib/libvirsim.so
 1298523345 /usr/caen/vcs-2011.03/amd64/lib/liberrorinf.so
 1298523150 /usr/caen/vcs-2011.03/amd64/lib/libsnpsmalloc.so
-1366610317 simv.daidir
+1366614721 simv.daidir

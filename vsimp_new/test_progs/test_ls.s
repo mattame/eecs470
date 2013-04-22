@@ -11,6 +11,10 @@
         addq	$r5,55,$r5
 	addq	$r1,10,$r1
         mulq    $r1,100,$r1
+ 
+      nop
+      nop
+      nop
 	stq	$r5,0($r1)
 	ldq	$r6,0($r1)
         cmpeq   $r5,$r6,$r30

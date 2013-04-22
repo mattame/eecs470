@@ -1,0 +1,27 @@
+*  btest1.s
+*  copy_long.s  
+*  evens_long.s
+*  fib_long.s  
+*  fib.s
+ x insertion.s
+ x objsort.s
+*  parallel.s
+*  saxpy.s
+*  btest2.s
+*  copy.s
+*  evens.s  
+ x fib_rec.s
+*  halt.s 
+ x mult.s
+*  parallel_long.s
+ x parsort.s
+*  simple.s
+ x sort.s
+  
+*  test_branch2.s 
+*  test_load.s
+*  test_ls.s     
+*  test_rs.s
+*  test_branch.s
+*  test_multiply.s
+*  test_mov.s

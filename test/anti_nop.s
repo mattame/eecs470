@@ -1,5 +1,5 @@
 //test program without nops
-
+// same as nop, but no nops
   
   
       lda $r5, 10
@@ -16,3 +16,5 @@ loop:
       bge $r7, loop
       
       addq $r3, $r3, $r3    
+
+      call_pal 0x555
